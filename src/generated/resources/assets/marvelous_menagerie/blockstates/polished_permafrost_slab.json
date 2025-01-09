@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "marvelous_menagerie:block/polished_permafrost_slab"
+    },
+    "type=double": {
+      "model": "marvelous_menagerie:block/polished_permafrost"
+    },
+    "type=top": {
+      "model": "marvelous_menagerie:block/polished_permafrost_slab_top"
+    }
+  }
+}

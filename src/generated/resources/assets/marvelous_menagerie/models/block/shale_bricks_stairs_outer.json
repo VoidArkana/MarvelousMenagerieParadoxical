@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/shale_bricks",
+    "side": "marvelous_menagerie:block/shale_bricks",
+    "top": "marvelous_menagerie:block/shale_bricks"
+  }
+}

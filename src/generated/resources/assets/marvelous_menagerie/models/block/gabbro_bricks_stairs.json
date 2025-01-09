@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/gabbro_bricks",
+    "side": "marvelous_menagerie:block/gabbro_bricks",
+    "top": "marvelous_menagerie:block/gabbro_bricks"
+  }
+}

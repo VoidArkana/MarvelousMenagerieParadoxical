@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/polished_chalk",
+    "side": "marvelous_menagerie:block/polished_chalk",
+    "top": "marvelous_menagerie:block/polished_chalk"
+  }
+}

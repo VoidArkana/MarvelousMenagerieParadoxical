@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "marvelous_menagerie:item/paleo_toolkit"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 70, 100, 0 ],
+      "translation": [ 0, -3, -4],
+      "scale": [ 0.75, 0.75, 0.75 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 100, 0 ],
+      "translation": [ 0, 1, 0],
+      "scale": [ 0.8, 0.8, 0.8 ]
+    }
+  }
+}

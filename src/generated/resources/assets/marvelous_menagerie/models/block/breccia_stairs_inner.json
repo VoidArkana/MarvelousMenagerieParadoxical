@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/breccia",
+    "side": "marvelous_menagerie:block/breccia",
+    "top": "marvelous_menagerie:block/breccia"
+  }
+}

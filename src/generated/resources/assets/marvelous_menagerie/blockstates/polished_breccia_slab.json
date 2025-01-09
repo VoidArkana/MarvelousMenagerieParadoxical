@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "marvelous_menagerie:block/polished_breccia_slab"
+    },
+    "type=double": {
+      "model": "marvelous_menagerie:block/polished_breccia"
+    },
+    "type=top": {
+      "model": "marvelous_menagerie:block/polished_breccia_slab_top"
+    }
+  }
+}

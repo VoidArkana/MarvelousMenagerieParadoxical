@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/limestone",
+    "side": "marvelous_menagerie:block/limestone",
+    "top": "marvelous_menagerie:block/limestone"
+  }
+}

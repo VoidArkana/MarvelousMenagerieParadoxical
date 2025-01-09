@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/polished_siltstone",
+    "side": "marvelous_menagerie:block/polished_siltstone",
+    "top": "marvelous_menagerie:block/polished_siltstone"
+  }
+}

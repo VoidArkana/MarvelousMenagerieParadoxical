@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "marvelous_menagerie:block/shale_bricks"
+  }
+}

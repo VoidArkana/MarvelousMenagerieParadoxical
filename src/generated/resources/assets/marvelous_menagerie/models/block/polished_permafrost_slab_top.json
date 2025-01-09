@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "marvelous_menagerie:block/polished_permafrost",
+    "side": "marvelous_menagerie:block/polished_permafrost",
+    "top": "marvelous_menagerie:block/polished_permafrost"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "marvelous_menagerie:block/mudstone_bricks_slab"
+    },
+    "type=double": {
+      "model": "marvelous_menagerie:block/mudstone_bricks"
+    },
+    "type=top": {
+      "model": "marvelous_menagerie:block/mudstone_bricks_slab_top"
+    }
+  }
+}
