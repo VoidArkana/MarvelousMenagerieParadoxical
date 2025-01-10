@@ -42,7 +42,7 @@ public class PaleoToolkit extends Item {
             }
 
             if (pContext.getLevel().isClientSide) {
-                MarvelousMenagerie.PROXY.openToolkitGUI(pContext.getPlayer());
+                MarvelousMenagerie.PROXY.openToolkitGUI(pContext.getPlayer(), blockpos);
             }
 
             return InteractionResult.sidedSuccess(level.isClientSide);

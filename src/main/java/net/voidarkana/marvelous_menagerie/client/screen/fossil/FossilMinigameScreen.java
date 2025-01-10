@@ -2,22 +2,26 @@ package net.voidarkana.marvelous_menagerie.client.screen.fossil;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.datafixers.kinds.IdF;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 public class FossilMinigameScreen extends Screen {
+
+    //private final ContainerLevelAccess access;
 
     public static final ResourceLocation GUI =
             new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame.png");
@@ -29,6 +33,8 @@ public class FossilMinigameScreen extends Screen {
     int topPos;
 
     Player player;
+
+    BlockPos clickedPos;
 
     private boolean draggingChisel = false;
     private boolean draggingHammer = false;
@@ -85,13 +91,14 @@ public class FossilMinigameScreen extends Screen {
     public int[][] tileHasFossil = new int[7][7];
     public int[][] tileSoilLevel = new int[7][7];
 
-    public FossilMinigameScreen(Player pPlayer) {
+    public FossilMinigameScreen(Player pPlayer, BlockPos clicked) {
         super(Component.translatable("encyclopedia.title"));
         this.player = pPlayer;
         this.imageWidth = 241;
         this.imageHeight = dirtSize;
         this.plantFalseEvidence();
         this.currentHits = 0;
+        this.clickedPos = clicked;
     }
 
     protected void plantFalseEvidence(){
@@ -464,10 +471,12 @@ public class FossilMinigameScreen extends Screen {
         if (this.currentHits>=this.maxHits){
             this.minecraft.player.closeContainer();
             this.player.playSound(SoundEvents.ITEM_BREAK);
+            this.breakFossils();
         }
         if (this.successLevel>=3){
             this.minecraft.player.closeContainer();
             this.player.playSound(SoundEvents.PLAYER_LEVELUP);
+            this.breakFossils();
         }
         if (this.minecraft.player.isAlive() && !this.minecraft.player.isRemoved()) {
             this.containerTick();
@@ -755,7 +764,19 @@ public class FossilMinigameScreen extends Screen {
     @Override
     public void onClose() {
         super.onClose();
+        if (this.currentHits>0){
+            breakFossils();
+        }
         this.player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
+    }
+
+    public void breakFossils(){
+        System.out.println(clickedPos);
+        
+        if (player.level().getBlockState(clickedPos).getBlock() instanceof FossilBlock fossilBlock){
+            fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
+        }
+
     }
 
 }
