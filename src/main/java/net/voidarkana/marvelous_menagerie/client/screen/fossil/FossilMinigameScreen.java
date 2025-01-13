@@ -1,27 +1,37 @@
 package net.voidarkana.marvelous_menagerie.client.screen.fossil;
 
+import com.google.common.collect.ImmutableMap;
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.util.Mathf;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 public class FossilMinigameScreen extends Screen {
 
-    //private final ContainerLevelAccess access;
+
+    public GUIParticleSystem particles;
+    ParticleAttractor attractionPoint;
+    ParticleAttractor repulsionPoint;
 
     public static final ResourceLocation GUI =
             new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame.png");
@@ -90,6 +100,9 @@ public class FossilMinigameScreen extends Screen {
 
     public int[][] tileHasFossil = new int[7][7];
     public int[][] tileSoilLevel = new int[7][7];
+    public int[][] dirtParticleTicks = new int[7][7];
+    public int[][] stoneParticleTicks = new int[7][7];
+    public int[][] deepslateParticleTicks = new int[7][7];
 
     public FossilMinigameScreen(Player pPlayer, BlockPos clicked) {
         super(Component.translatable("encyclopedia.title"));
@@ -99,6 +112,8 @@ public class FossilMinigameScreen extends Screen {
         this.plantFalseEvidence();
         this.currentHits = 0;
         this.clickedPos = clicked;
+        particles = new GUIParticleSystem();
+
     }
 
     protected void plantFalseEvidence(){
@@ -115,6 +130,9 @@ public class FossilMinigameScreen extends Screen {
         for (int x = 0; x<7; x++){
             for (int y = 0; y<7; y++){
                 tileHasFossil[x][y] = 0;
+                dirtParticleTicks[x][y] = 0;
+                stoneParticleTicks[x][y] = 0;
+                deepslateParticleTicks[x][y] = 0;
             }
         }
 
@@ -229,6 +247,15 @@ public class FossilMinigameScreen extends Screen {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 
+//        attractionPoint = (ParticleAttractor)new ParticleAttractor(200,this.leftPos+88, this.topPos+176,0.1f).setStartTime(5).setToLayer(1);
+//        //repulsionPoint = (ParticleAttractor)new ParticleAttractor(40,leftPos+88,this.topPos+88+50,-0.1f).setEndTime(50).setToLayer(1);
+//        particles.addAffector(attractionPoint);
+        //particles.addAffector(ParticleDeleter.create(85,this.leftPos+88,this.topPos+88).setInvert(true).setToLayer(1));
+        //particles.addAffector(repulsionPoint);
+//        particles.addAffector(new ParticleAccelerator(100,this.leftPos+88,this.topPos+50,0.90f).setEndTime(50).setToLayer(1));
+//        particles.addAffector(new ParticleAttractor(100,this.leftPos+88,this.topPos+50,0.15f));
+//        particles.addAffector(new ParticleAccelerator(100,this.leftPos+88,this.topPos+50,0.97f));
+
         chiselPosX = this.leftPos + 185;
         chiselPosXInit = prevChiselPosX = chiselPosX;
         chiselPosY = this.topPos + 63;
@@ -251,6 +278,10 @@ public class FossilMinigameScreen extends Screen {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+
+        particles.update();
+        this.updateLogic();
+
         this.renderBackground(pGuiGraphics);
         this.setFocused(null);
         int i = this.leftPos;
@@ -258,13 +289,31 @@ public class FossilMinigameScreen extends Screen {
         this.lastMouseX = pMouseX;
         this.lastMouseY = pMouseY;
         this.renderBG(pGuiGraphics, i, j);
-        this.renderClockArm(pGuiGraphics, i, j);
+        this.renderClockArm(pGuiGraphics);
         this.renderBones(pGuiGraphics);
         this.renderSoil(pGuiGraphics);
         this.renderTools(pGuiGraphics);
         this.renderSelection(pGuiGraphics, pMouseX, pMouseY);
+        this.renderParticles(pGuiGraphics);
+
+
+        pGuiGraphics.pose().pushPose();
+        pGuiGraphics.pose().translate((float)i, (float)j, 0.0F);
+        RenderSystem.enableBlend();
+        RenderSystem.setShaderTexture(0, GUI);
+        pGuiGraphics.pose().popPose();
+
+        RenderSystem.disableDepthTest();
+        pGuiGraphics.pose().pushPose();
+        pGuiGraphics.pose().translate((float)i, (float)j, 0.0F);
+        pGuiGraphics.pose().popPose();
+        RenderSystem.enableDepthTest();
 
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+    }
+
+    public void updateLogic(){
+
     }
 
     //13 x 13
@@ -368,27 +417,35 @@ public class FossilMinigameScreen extends Screen {
 
     public void renderBG(GuiGraphics pGuiGraphics, int i, int j){
         pGuiGraphics.blit(GUI, i, j, 0, 0, this.imageWidth, this.imageHeight);
+
+    }
+    public void renderParticles(GuiGraphics pGuiGraphics){
+        PoseStack poseStack = pGuiGraphics.pose();
+
+        RenderSystem.setShaderTexture(0, GUI);
+
+        pGuiGraphics.pose().pushPose();
+            particles.draw(poseStack, this);
+            //additiveBlendMode();
+
+//            pGuiGraphics.pose().pushPose();
+//                pGuiGraphics.pose().translate(89,50,0);
+//            //rotate(matrices,rotate?180:0);
+//            pGuiGraphics.pose().popPose();
+
+        pGuiGraphics.pose().popPose();
     }
 
-    public void renderClockArm(GuiGraphics pGuiGraphics, int i, int j){
+    public void renderClockArm(GuiGraphics pGuiGraphics){
         PoseStack poseStack = pGuiGraphics.pose();
         poseStack.pushPose();
         float centerX = this.leftPos+208.5f;
         float centerY = this.topPos+119.5f;
-        //float radius = 12f;
-//        double x = radius * Math.cos(-(currentHits*24 / 180d) * Math.PI);
-//        double y = radius * Math.sin(-(currentHits*24 / 180d) * Math.PI);
         poseStack.translate(centerX, centerY, 0);
         poseStack.mulPose(Axis.ZP.rotationDegrees(currentHits*24));
         pGuiGraphics.blit(GUI, -3, -13, 169, 194, 6, 26);
         poseStack.popPose();
     }
-
-//        private void drawFish(GuiGraphics guiGraphics, int centerX, int centerY, float radius) {
-//        double x = radius * Math.cos(-(fishDeg / 180d) * Math.PI);
-//        double y = radius * Math.sin(-(fishDeg / 180d) * Math.PI);
-//        //guiGraphics.blit(TEX, -2, -5, 326, fishSpeed < 0 ? 0 : 6, 11, 6, 512, 512);
-//    }
 
     public void renderChisel(GuiGraphics guiGraphics){
         float actualPartialTick = Minecraft.getInstance().getFrameTime();
@@ -468,7 +525,7 @@ public class FossilMinigameScreen extends Screen {
 
     public final void tick() {
         super.tick();
-        if (this.currentHits>=this.maxHits){
+        if (this.currentHits>this.maxHits){
             this.minecraft.player.closeContainer();
             this.player.playSound(SoundEvents.ITEM_BREAK);
             this.breakFossils();
@@ -487,6 +544,18 @@ public class FossilMinigameScreen extends Screen {
 
     protected void containerTick() {
 
+        for (int x = 0; x<7; x++){
+            for (int y = 0; y<7; y++){
+                if (dirtParticleTicks[x][y]>0)
+                    dirtParticleTicks[x][y]--;
+
+                if (stoneParticleTicks[x][y]>0)
+                    stoneParticleTicks[x][y]--;
+
+                if (deepslateParticleTicks[x][y]>0)
+                    deepslateParticleTicks[x][y]--;
+            }
+        }
 
         this.prevChiselPosX = chiselPosX;
         this.prevChiselPosY = chiselPosY;
@@ -540,97 +609,160 @@ public class FossilMinigameScreen extends Screen {
         this.pickPosY += (float) pickVec3.y;
     }
 
+
+
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean prev = super.mouseClicked(mouseX, mouseY, button);
         if (!prev) {
-            //selecting or unselecting tools
-            if (this.lastMouseX >= this.chiselPosXInit && this.lastMouseX <= this.chiselPosXInit + 16 && this.lastMouseY >= this.chiselPosYInit && this.lastMouseY <= this.chiselPosYInit + 16) {
-                this.draggingChisel= !this.draggingChisel;
-
-                if (this.draggingChisel){
-                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
-                }else {
-                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
-                }
-
-                if (this.draggingHammer)
-                    this.draggingHammer = false;
-                if (this.draggingPick)
-                    this.draggingPick = false;
-            }
-            if (this.lastMouseX >= this.hammerPosXInit && this.lastMouseX <= this.hammerPosXInit + 16 && this.lastMouseY >= this.hammerPosYInit && this.lastMouseY <= this.hammerPosYInit + 16) {
-                this.draggingHammer = !this.draggingHammer;
-
-                if (this.draggingHammer){
-                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
-                }else {
-                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
-                }
-
-                if (this.draggingPick)
-                    this.draggingPick = false;
-                if (this.draggingChisel)
-                    this.draggingChisel = false;
-            }
-            if (this.lastMouseX >= this.pickPosXInit && this.lastMouseX <= this.pickPosXInit + 16 && this.lastMouseY >= this.pickPosYInit && this.lastMouseY <= this.pickPosYInit + 16) {
-                this.draggingPick = !this.draggingPick;
-
+            if (button == 1){
                 if (this.draggingPick){
-                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
-                }else {
+                    this.draggingPick = false;
                     GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
                 }
-
-                if (this.draggingChisel)
-                    this.draggingChisel = false;
-                if (this.draggingHammer)
+                if (this.draggingHammer){
                     this.draggingHammer = false;
-            }
-
-            //destroying blocks
-            if (this.draggingChisel && mouseX > this.leftPos+33 && mouseX < this.leftPos+144 && mouseY > this.topPos+32 && mouseY < this.topPos+140){
-                if (tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]>0){
-                    switch (tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
-                        case 1:
-                            player.playSound(SoundEvents.GRAVEL_BREAK);
-                            break;
-                        case 2:
-                            player.playSound(SoundEvents.STONE_BREAK);
-                            break;
-                        default:
-                            player.playSound(SoundEvents.DEEPSLATE_BREAK);
-                    }
-                    tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]--;
-                    currentHits++;
-                } else if (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]>0) {
-                    switch (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
-                        case 1:
-                            if (bone1Undiscovered)
-                                bone1Damage++;
-                            break;
-                        case 2:
-                            if (bone2Undiscovered)
-                                bone2Damage++;
-                            break;
-                        default:
-                            if (bone3Undiscovered)
-                                bone3Damage++;
-                    }
-                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
                 }
-            }
-            hasAppliedDamage = false;
+                if (this.draggingChisel){
+                    this.draggingChisel = false;
+                    GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
+                }
+            }else {
 
-            if (this.draggingPick && mouseX > this.leftPos+33+16 && mouseX < this.leftPos+144-16
-                    && mouseY > this.topPos+32+16 && mouseY < this.topPos+140-16){
-                for (int x = -1; x<2; x++){
-                    for (int y = -1; y<2; y++){
-                        if (x==y && x==0){
-                            hasAppliedDamage = false;
+                //selecting or unselecting tools
+                if (this.lastMouseX >= this.chiselPosXInit && this.lastMouseX <= this.chiselPosXInit + 16 && this.lastMouseY >= this.chiselPosYInit && this.lastMouseY <= this.chiselPosYInit + 16) {
+                    this.draggingChisel= !this.draggingChisel;
+
+                    if (this.draggingChisel){
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
+                    }else {
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
+                    }
+
+                    if (this.draggingHammer)
+                        this.draggingHammer = false;
+                    if (this.draggingPick)
+                        this.draggingPick = false;
+                }
+                if (this.lastMouseX >= this.hammerPosXInit && this.lastMouseX <= this.hammerPosXInit + 16 && this.lastMouseY >= this.hammerPosYInit && this.lastMouseY <= this.hammerPosYInit + 16) {
+                    this.draggingHammer = !this.draggingHammer;
+
+                    if (this.draggingHammer){
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
+                    }else {
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
+                    }
+
+                    if (this.draggingPick)
+                        this.draggingPick = false;
+                    if (this.draggingChisel)
+                        this.draggingChisel = false;
+                }
+                if (this.lastMouseX >= this.pickPosXInit && this.lastMouseX <= this.pickPosXInit + 16 && this.lastMouseY >= this.pickPosYInit && this.lastMouseY <= this.pickPosYInit + 16) {
+                    this.draggingPick = !this.draggingPick;
+
+                    if (this.draggingPick){
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212995);
+                    }else {
+                        GLFW.glfwSetInputMode(this.minecraft.getWindow().getWindow(), 208897, 212993);
+                    }
+
+                    if (this.draggingChisel)
+                        this.draggingChisel = false;
+                    if (this.draggingHammer)
+                        this.draggingHammer = false;
+                }
+
+                //destroying blocks
+                if (this.draggingChisel && mouseX > this.leftPos+33 && mouseX < this.leftPos+144 && mouseY > this.topPos+32 && mouseY < this.topPos+140){
+                    if (tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]>0){
+                        switch (tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
+                            case 1:
+                                player.playSound(SoundEvents.GRAVEL_BREAK);
+                                break;
+                            case 2:
+                                player.playSound(SoundEvents.STONE_BREAK);
+                                break;
+                            default:
+                                player.playSound(SoundEvents.DEEPSLATE_BREAK);
                         }
-                        if ((x == 0 && y == 0) || (x!=0 && y==0) || (x==0 && y!=0)){
-                            if (tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]>0){
-                                switch (tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]){
+                        makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY),
+                                tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]);
+
+                        tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]--;
+                        currentHits++;
+                    } else if (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]>0) {
+                        switch (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
+                            case 1:
+                                if (bone1Undiscovered)
+                                    bone1Damage++;
+                                break;
+                            case 2:
+                                if (bone2Undiscovered)
+                                    bone2Damage++;
+                                break;
+                            default:
+                                if (bone3Undiscovered)
+                                    bone3Damage++;
+                        }
+                        player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                    }
+                }
+                hasAppliedDamage = false;
+
+                if (this.draggingPick && mouseX > this.leftPos+33+16 && mouseX < this.leftPos+144-16
+                        && mouseY > this.topPos+32+16 && mouseY < this.topPos+140-16){
+                    for (int x = -1; x<2; x++){
+                        for (int y = -1; y<2; y++){
+                            if (x==y && x==0){
+                                hasAppliedDamage = false;
+                            }
+                            if ((x == 0 && y == 0) || (x!=0 && y==0) || (x==0 && y!=0)){
+                                if (tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]>0){
+                                    switch (tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]){
+                                        case 1:
+                                            player.playSound(SoundEvents.GRAVEL_BREAK);
+                                            break;
+                                        case 2:
+                                            player.playSound(SoundEvents.STONE_BREAK);
+                                            break;
+                                        default:
+                                            player.playSound(SoundEvents.DEEPSLATE_BREAK);
+                                    }
+
+                                    makeBlockParticles(getUnevenSlotX((int) mouseX)+x, getUnevenSlotY((int) mouseY)+y,
+                                            tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]);
+
+                                    tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]--;
+                                }else if (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]>0 && !hasAppliedDamage){
+                                    switch (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]){
+                                        case 1:
+                                            if (bone1Undiscovered)
+                                                bone1Damage++;
+                                            break;
+                                        case 2:
+                                            if (bone2Undiscovered)
+                                                bone2Damage++;
+                                            break;
+                                        default:
+                                            if (bone3Undiscovered)
+                                                bone3Damage++;
+                                    }
+                                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                    hasAppliedDamage = true;
+                                }
+                            }
+                        }
+                    }
+                    currentHits++;
+                }
+
+                if (this.draggingHammer && mouseX > this.leftPos+33+8 && mouseX < this.leftPos+144-8
+                        && mouseY > this.topPos+32+8 && mouseY < this.topPos+140-8 ){
+                    for (int x = 0; x<2; x++){
+                        for (int y = 0; y<2; y++){
+                            if (tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]>0){
+                                switch (tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]){
                                     case 1:
                                         player.playSound(SoundEvents.GRAVEL_BREAK);
                                         break;
@@ -640,9 +772,13 @@ public class FossilMinigameScreen extends Screen {
                                     default:
                                         player.playSound(SoundEvents.DEEPSLATE_BREAK);
                                 }
-                                tileSoilLevel[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]--;
-                            }else if (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]>0 && !hasAppliedDamage){
-                                switch (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]){
+
+                                makeBlockParticles(getEvenSlotX((int) mouseX)+x-1, getEvenSlotY((int) mouseY)+y-1,
+                                        tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]);
+
+                                tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]--;
+                            }else if (tileHasFossil[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]>0 && !hasAppliedDamage){
+                                switch (tileHasFossil[getEvenSlotX((int)mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]){
                                     case 1:
                                         if (bone1Undiscovered)
                                             bone1Damage++;
@@ -660,105 +796,83 @@ public class FossilMinigameScreen extends Screen {
                             }
                         }
                     }
+                    currentHits++;
                 }
-                currentHits++;
-            }
 
-            if (this.draggingHammer && mouseX > this.leftPos+33+8 && mouseX < this.leftPos+144-8
-                    && mouseY > this.topPos+32+8 && mouseY < this.topPos+140-8 ){
-                for (int x = 0; x<2; x++){
-                    for (int y = 0; y<2; y++){
-                        if (tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]>0){
-                            switch (tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]){
-                                case 1:
-                                    player.playSound(SoundEvents.GRAVEL_BREAK);
-                                    break;
-                                case 2:
-                                    player.playSound(SoundEvents.STONE_BREAK);
-                                    break;
-                                default:
-                                    player.playSound(SoundEvents.DEEPSLATE_BREAK);
-                            }
-                            tileSoilLevel[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]--;
-                        }else if (tileHasFossil[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]>0 && !hasAppliedDamage){
-                            switch (tileHasFossil[getEvenSlotX((int)mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]){
-                                case 1:
-                                    if (bone1Undiscovered)
-                                        bone1Damage++;
-                                    break;
-                                case 2:
-                                    if (bone2Undiscovered)
-                                        bone2Damage++;
-                                    break;
-                                default:
-                                    if (bone3Undiscovered)
-                                        bone3Damage++;
-                            }
-                            player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
-                            hasAppliedDamage = true;
+                //collecting fossils
+                if (!draggingChisel && !draggingHammer && !draggingPick &&
+                        mouseX > this.leftPos+33 && mouseX < this.leftPos+144 && mouseY > this.topPos+32 && mouseY < this.topPos+140){
+
+                    boolean isCovered = false;
+                    if (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)] >0
+                            && tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]<=0){
+
+                        switch (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
+                            case 1:
+                                for (int x = bone1TileX; x<bone1TileX+2; x++){
+                                    for (int y = bone1TileY; y<bone1TileY+2; y++){
+                                        if (tileSoilLevel[x][y] > 0) {
+                                            isCovered = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!isCovered && bone1Undiscovered){
+                                    bone1Undiscovered = false;
+                                    successLevel++;
+                                    player.playSound(SoundEvents.ITEM_PICKUP);
+                                }
+                                break;
+                            case 2:
+                                for (int y = bone2TileY; y<bone2TileY+2; y++){
+                                    if (tileSoilLevel[bone2TileX][y] > 0) {
+                                        isCovered = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!isCovered && bone2Undiscovered){
+                                    bone2Undiscovered = false;
+                                    successLevel++;
+                                    player.playSound(SoundEvents.ITEM_PICKUP);
+                                }
+                                break;
+                            default:
+                                for (int x = bone3TileX; x<bone3TileX+3; x++){
+                                    for (int y = bone3TileY; y<bone3TileY+2; y++){
+                                        if (tileSoilLevel[x][y] > 0) {
+                                            isCovered = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!isCovered && bone3Undiscovered){
+                                    bone3Undiscovered = false;
+                                    successLevel++;
+                                    player.playSound(SoundEvents.ITEM_PICKUP);
+                                }
                         }
                     }
                 }
-                currentHits++;
             }
 
-
-
-            //collecting fossils
-            if (!draggingChisel && !draggingHammer && !draggingPick &&
-                    mouseX > this.leftPos+33 && mouseX < this.leftPos+144 && mouseY > this.topPos+32 && mouseY < this.topPos+140){
-
-                boolean isCovered = false;
-                if (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)] >0
-                        && tileSoilLevel[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]<=0){
-
-                    switch (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
-                        case 1:
-                            for (int x = bone1TileX; x<bone1TileX+2; x++){
-                                for (int y = bone1TileY; y<bone1TileY+2; y++){
-                                    if (tileSoilLevel[x][y] > 0) {
-                                        isCovered = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!isCovered){
-                                bone1Undiscovered = false;
-                                successLevel++;
-                            }
-                            break;
-                        case 2:
-                            for (int y = bone2TileY; y<bone2TileY+2; y++){
-                                if (tileSoilLevel[bone2TileX][y] > 0) {
-                                    isCovered = true;
-                                    break;
-                                }
-                            }
-
-                            if (!isCovered){
-                                bone2Undiscovered = false;
-                                successLevel++;
-                            }
-                            break;
-                        default:
-                            for (int x = bone3TileX; x<bone3TileX+3; x++){
-                                for (int y = bone3TileY; y<bone3TileY+2; y++){
-                                    if (tileSoilLevel[x][y] > 0) {
-                                        isCovered = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!isCovered){
-                                bone3Undiscovered = false;
-                                successLevel++;
-                            }
-                    }
-                }
-            }
         }
 
         return prev;
+    }
+
+    public void makeBlockParticles(int tilex, int tiley, int soilLevel){
+        int tileCenterX = this.leftPos + (tilex*16) + 32 + 12;
+        int tileCenterY = this.topPos + (tiley*16) + 32 + 8;
+        for (int i = 0; i<10; i++){
+            Vec2 randp = Mathf.randVec2().scale(6);
+            int life = player.getRandom().nextInt(5, 30);
+            particles.add(new DistortableGUIParticle(6, life,tileCenterX + randp.x, tileCenterY + randp.y, 4+player.getRandom().nextInt(-1, 2),
+                            randp.x/25, 1f, 208+ Mathf.randInt(12) + (16*(soilLevel-1)), 224 + Mathf.randInt(12) , 256, 256,
+                            DistortableGUIParticle.distortTowardsPoint(88, 50, 1,60)))
+                    .setLayer(0, false).setLayer(1, true).renderAffectors
+                    = new GUIParticle.RenderAffectors[]{GUIParticle.RenderAffectors.FADE_IN, GUIParticle.RenderAffectors.ADD_BLEND};
+        }
     }
 
     @Override
@@ -777,6 +891,18 @@ public class FossilMinigameScreen extends Screen {
             fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
         }
 
+    }
+
+    public void drawTexturedQuad(Matrix4f matrices, float[][] pos, float u0, float u1, float v0, float v1) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
+        bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        //Matrix4f matrices = guiGraphics.pose().last().pose();
+        bufferBuilder.vertex(matrices, pos[0][0], pos[0][1], 0).uv(u0, v1).endVertex();
+        bufferBuilder.vertex(matrices, pos[1][0], pos[1][1], 0).uv(u1, v1).endVertex();
+        bufferBuilder.vertex(matrices, pos[2][0], pos[2][1], 0).uv(u1, v0).endVertex();
+        bufferBuilder.vertex(matrices, pos[3][0], pos[3][1], 0).uv(u0, v0).endVertex();
+        BufferUploader.drawWithShader(bufferBuilder.end());
     }
 
 }

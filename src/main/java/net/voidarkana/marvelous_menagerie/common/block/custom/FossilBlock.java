@@ -29,7 +29,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameMenu;
+//import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameMenu;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -143,10 +143,10 @@ public class FossilBlock extends Block {
 
     private static final Component CONTAINER_TITLE = Component.translatable("marvelous_menagerie.container.fossil_minigame");
 
-    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider((i, inv, player) -> {
-            return new FossilMinigameMenu(i, inv, ContainerLevelAccess.create(level, pos));
-        }, CONTAINER_TITLE);
-    }
+//    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+//        return new SimpleMenuProvider((i, inv, player) -> {
+//            return new FossilMinigameMenu(i, inv, ContainerLevelAccess.create(level, pos));
+//        }, CONTAINER_TITLE);
+//    }
 
 }
