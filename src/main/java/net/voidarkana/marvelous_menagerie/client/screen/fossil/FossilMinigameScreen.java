@@ -36,6 +36,9 @@ public class FossilMinigameScreen extends Screen {
     public static final ResourceLocation GUI =
             new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame.png");
 
+    public static final ResourceLocation VIGNETTE =
+            new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame_2.png");
+
     final int dirtSize = 176;
     int imageWidth;
     int imageHeight;
@@ -280,7 +283,7 @@ public class FossilMinigameScreen extends Screen {
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
 
         particles.update();
-        this.updateLogic();
+        //this.updateLogic();
 
         this.renderBackground(pGuiGraphics);
         this.setFocused(null);
@@ -292,6 +295,11 @@ public class FossilMinigameScreen extends Screen {
         this.renderClockArm(pGuiGraphics);
         this.renderBones(pGuiGraphics);
         this.renderSoil(pGuiGraphics);
+
+        this.drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32, this.leftPos+32+112,
+                this.topPos+32, this.topPos+32+112, 0, 0, (float) 112 /256, 0, (float) 112 /256,
+                0, 0, 0, 0.8f);
+
         this.renderTools(pGuiGraphics);
         this.renderSelection(pGuiGraphics, pMouseX, pMouseY);
         this.renderParticles(pGuiGraphics);
@@ -299,7 +307,6 @@ public class FossilMinigameScreen extends Screen {
 
         pGuiGraphics.pose().pushPose();
         pGuiGraphics.pose().translate((float)i, (float)j, 0.0F);
-        RenderSystem.enableBlend();
         RenderSystem.setShaderTexture(0, GUI);
         pGuiGraphics.pose().popPose();
 
@@ -312,34 +319,41 @@ public class FossilMinigameScreen extends Screen {
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
 
-    public void updateLogic(){
-
-    }
+//    public void updateLogic(){
+//
+//    }
 
     //13 x 13
     //7 x 7 uneven
     //6 x 6 even
 
     public void renderSoil(GuiGraphics pGuiGraphics){
-
         for (int x = 0; x<7; x++){
             for (int y = 0; y<7; y++){
                 //dirt
                 if (tileSoilLevel[x][y]>0){
                     pGuiGraphics.blit(GUI, this.leftPos+32+(x*16),
-                            this.topPos+32+(y*16), 208, 224, 16, 16);
+                            this.topPos+32+(y*16), 208, 224-16, 16, y == 6 ? 16 : 20);
                 }
+            }
+        }
+        for (int x = 0; x<7; x++){
+            for (int y = 0; y<7; y++){
                 //stone
                 if (tileSoilLevel[x][y]>1){
                     pGuiGraphics.blit(GUI, this.leftPos+32+(x*16),
-                            this.topPos+32+(y*16), 208+16, 224, 16, 16);
+                            this.topPos+32+(y*16), 208+16, 224-16, 16, y == 6 ? 16 : 20);
                 }
+
+            }
+        }
+        for (int x = 0; x<7; x++){
+            for (int y = 0; y<7; y++){
                 //deepslate
                 if (tileSoilLevel[x][y]>2){
                     pGuiGraphics.blit(GUI, this.leftPos+32+(x*16),
-                            this.topPos+32+(y*16), 208+32, 224, 16, 16);
+                            this.topPos+32+(y*16), 208+32, 224-16, 16, y == 6 ? 16 : 20);
                 }
-
             }
         }
     }
@@ -471,7 +485,7 @@ public class FossilMinigameScreen extends Screen {
         this.renderTool(guiGraphics, lerpX, lerpY, zOffset, 208+32);
     }
 
-    public  void renderTool(GuiGraphics guiGraphics, float lerpX, float lerpY, float zOffset, float u0){
+    public void renderTool(GuiGraphics guiGraphics, float lerpX, float lerpY, float zOffset, float u0){
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, GUI);
         BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
@@ -488,11 +502,27 @@ public class FossilMinigameScreen extends Screen {
         float maxu = (u + size);
         float minV = v;
         float maxV = (v + size);
+        //bufferbuilder.color(0, 0,0, 0.5f);
         bufferbuilder.vertex(matrix4f, minX, minY, zOffset).uv(minU, minV).endVertex();
         bufferbuilder.vertex(matrix4f, minX, maxY, zOffset).uv(minU, maxV).endVertex();
         bufferbuilder.vertex(matrix4f, maxX, maxY, zOffset).uv(maxu, maxV).endVertex();
         bufferbuilder.vertex(matrix4f, maxX, minY, zOffset).uv(maxu, minV).endVertex();
         BufferUploader.drawWithShader(bufferbuilder.end());
+    }
+
+    public void drawTexturedQuadColor(GuiGraphics pGuiGraphics, ResourceLocation pAtlasLocation, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, float pMinU, float pMaxU, float pMinV, float pMaxV, float pRed, float pGreen, float pBlue, float pAlpha) {
+        RenderSystem.setShaderTexture(0, pAtlasLocation);
+        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
+        RenderSystem.enableBlend();
+        Matrix4f matrix4f = pGuiGraphics.pose().last().pose();
+        BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
+        bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMinV).endVertex();
+        bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMaxV).endVertex();
+        bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMaxV).endVertex();
+        bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMinV).endVertex();
+        BufferUploader.drawWithShader(bufferbuilder.end());
+        RenderSystem.disableBlend();
     }
 
     public float getChiselPosX(float f) {
@@ -694,18 +724,26 @@ public class FossilMinigameScreen extends Screen {
                     } else if (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]>0) {
                         switch (tileHasFossil[getUnevenSlotX((int) mouseX)][getUnevenSlotY((int) mouseY)]){
                             case 1:
-                                if (bone1Undiscovered)
+                                if (bone1Undiscovered && bone1Damage<3){
                                     bone1Damage++;
+                                    makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                }
                                 break;
                             case 2:
-                                if (bone2Undiscovered)
+                                if (bone2Undiscovered && bone2Damage<3){
                                     bone2Damage++;
+                                    makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                }
                                 break;
                             default:
-                                if (bone3Undiscovered)
+                                if (bone3Undiscovered && bone3Damage<3){
                                     bone3Damage++;
+                                    makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                }
                         }
-                        player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
                     }
                 }
                 hasAppliedDamage = false;
@@ -737,18 +775,26 @@ public class FossilMinigameScreen extends Screen {
                                 }else if (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]>0 && !hasAppliedDamage){
                                     switch (tileHasFossil[getUnevenSlotX((int) mouseX)+x][getUnevenSlotY((int) mouseY)+y]){
                                         case 1:
-                                            if (bone1Undiscovered)
+                                            if (bone1Undiscovered && bone1Damage<3){
                                                 bone1Damage++;
+                                                makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                                player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                            }
                                             break;
                                         case 2:
-                                            if (bone2Undiscovered)
+                                            if (bone2Undiscovered && bone2Damage<3){
                                                 bone2Damage++;
+                                                makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                                player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                            }
                                             break;
                                         default:
-                                            if (bone3Undiscovered)
+                                            if (bone3Undiscovered && bone3Damage<3){
                                                 bone3Damage++;
+                                                makeBlockParticles(getUnevenSlotX((int) mouseX), getUnevenSlotY((int) mouseY), 0);
+                                                player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                            }
                                     }
-                                    player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
                                     hasAppliedDamage = true;
                                 }
                             }
@@ -780,18 +826,26 @@ public class FossilMinigameScreen extends Screen {
                             }else if (tileHasFossil[getEvenSlotX((int) mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]>0 && !hasAppliedDamage){
                                 switch (tileHasFossil[getEvenSlotX((int)mouseX)+x-1][getEvenSlotY((int) mouseY)+y-1]){
                                     case 1:
-                                        if (bone1Undiscovered)
+                                        if (bone1Undiscovered && bone1Damage<3){
                                             bone1Damage++;
+                                            makeBlockParticles(getEvenSlotX((int) mouseX), getEvenSlotY((int) mouseY), 0);
+                                            player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                        }
                                         break;
                                     case 2:
-                                        if (bone2Undiscovered)
+                                        if (bone2Undiscovered && bone2Damage<3){
                                             bone2Damage++;
+                                            makeBlockParticles(getEvenSlotX((int) mouseX), getEvenSlotY((int) mouseY), 0);
+                                            player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                        }
                                         break;
                                     default:
-                                        if (bone3Undiscovered)
+                                        if (bone3Undiscovered && bone3Damage<3){
                                             bone3Damage++;
+                                            makeBlockParticles(getEvenSlotX((int) mouseX), getEvenSlotY((int) mouseY), 0);
+                                            player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+                                        }
                                 }
-                                player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
                                 hasAppliedDamage = true;
                             }
                         }
@@ -868,7 +922,7 @@ public class FossilMinigameScreen extends Screen {
             Vec2 randp = Mathf.randVec2().scale(6);
             int life = player.getRandom().nextInt(5, 30);
             particles.add(new DistortableGUIParticle(6, life,tileCenterX + randp.x, tileCenterY + randp.y, 4+player.getRandom().nextInt(-1, 2),
-                            randp.x/25, 1f, 208+ Mathf.randInt(12) + (16*(soilLevel-1)), 224 + Mathf.randInt(12) , 256, 256,
+                            randp.x/25, 1f, 208+ Mathf.randInt(12) + (16*(soilLevel-1)), 224 + Mathf.randInt(12) - 16 , 256, 256,
                             DistortableGUIParticle.distortTowardsPoint(88, 50, 1,60)))
                     .setLayer(0, false).setLayer(1, true).renderAffectors
                     = new GUIParticle.RenderAffectors[]{GUIParticle.RenderAffectors.FADE_IN, GUIParticle.RenderAffectors.ADD_BLEND};
@@ -904,5 +958,6 @@ public class FossilMinigameScreen extends Screen {
         bufferBuilder.vertex(matrices, pos[3][0], pos[3][1], 0).uv(u0, v0).endVertex();
         BufferUploader.drawWithShader(bufferBuilder.end());
     }
+
 
 }
