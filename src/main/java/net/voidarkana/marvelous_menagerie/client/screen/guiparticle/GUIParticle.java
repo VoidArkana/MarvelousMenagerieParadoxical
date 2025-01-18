@@ -28,7 +28,9 @@ public abstract class GUIParticle {
             y-=prevVY;
             prevVY = prevVY/1.1f;
         }else{
-            prevVY = prevVY*1.1f;
+            if (turnPoint>0){
+                prevVY = prevVY*1.1f;
+            }
             y+=prevVY;
         }
         x+=vx;
