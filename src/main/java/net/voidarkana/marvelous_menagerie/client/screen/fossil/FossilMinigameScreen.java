@@ -1063,7 +1063,7 @@ public class FossilMinigameScreen extends Screen {
 
     public void breakFossils(){
        //System.out.println(clickedPos);
-        
+
         if (player.level().getBlockState(clickedPos).getBlock() instanceof FossilBlock fossilBlock){
             fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
         }

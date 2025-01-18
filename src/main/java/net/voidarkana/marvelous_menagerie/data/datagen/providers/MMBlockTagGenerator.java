@@ -7,6 +7,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -66,6 +67,18 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.POLISHED_PERMAFROST_WALL.get(),
                 MMBlocks.PERMAFROST_MOSAIC_WALL.get(),
                 MMBlocks.PERMAFROST_BRICKS_WALL.get()
+        );
+
+        this.tag(MMTags.Blocks.FOSSIL_BLOCKS).add(
+                MMBlocks.SHALE_FOSSIL_BLOCK.get(),
+                MMBlocks.GABBRO_FOSSIL_BLOCK.get(),
+                MMBlocks.SILTSTONE_FOSSIL_BLOCK.get(),
+                MMBlocks.MUDSTONE_FOSSIL_BLOCK.get(),
+                MMBlocks.LIMESTONE_FOSSIL_BLOCK.get(),
+                MMBlocks.CHALK_FOSSIL_BLOCK.get(),
+                MMBlocks.DIATOMITE_FOSSIL_BLOCK.get(),
+                MMBlocks.BRECCIA_FOSSIL_BLOCK.get(),
+                MMBlocks.PERMAFROST_FOSSIL_BLOCK.get()
         );
     }
 }
