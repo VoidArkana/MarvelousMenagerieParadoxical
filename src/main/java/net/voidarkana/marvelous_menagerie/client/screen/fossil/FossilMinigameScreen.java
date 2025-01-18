@@ -107,6 +107,19 @@ public class FossilMinigameScreen extends Screen {
     public int[][] stoneParticleTicks = new int[7][7];
     public int[][] deepslateParticleTicks = new int[7][7];
 
+    int fossilProgress1;
+    int fossilProgress2;
+    int fossilProgress3;
+
+    double lastClicked1X;
+    double lastClicked1Y;
+
+    double lastClicked2X;
+    double lastClicked2Y;
+
+    double lastClicked3X;
+    double lastClicked3Y;
+
     public FossilMinigameScreen(Player pPlayer, BlockPos clicked) {
         super(Component.translatable("encyclopedia.title"));
         this.player = pPlayer;
@@ -116,7 +129,6 @@ public class FossilMinigameScreen extends Screen {
         this.currentHits = 0;
         this.clickedPos = clicked;
         particles = new GUIParticleSystem();
-
     }
 
     protected void plantFalseEvidence(){
@@ -362,46 +374,65 @@ public class FossilMinigameScreen extends Screen {
 
     public void renderBones(GuiGraphics pGuiGraphics){
         //medium bone
-//        if (bone1Damage<3 && bone1Undiscovered){
-//            pGuiGraphics.blit(GUI, this.leftPos+32+(bone1TileX*16),
-//                    this.topPos+32+(bone1TileY*16), isDud ? 0 : 48, 224, 32, 32);
-//        }
-//
-//        //small bone
-//        if (bone2Damage<3 && bone2Undiscovered){
-//            pGuiGraphics.blit(GUI, this.leftPos+32+(bone2TileX*16),
-//                    this.topPos+32+(bone2TileY*16), 32, 224, 16, 32);
-//        }
-//
-//        //big bone
-//        if (bone3Damage<3 && bone3Undiscovered){
-//            pGuiGraphics.blit(GUI, this.leftPos+32+(bone3TileX*16),
-//                    this.topPos+32+(bone3TileY*16), 80, 224, 48, 32);
-//        }
+        if (bone1Damage<3 && (bone1Undiscovered || fossilProgress1>0)){
 
-        //medium bone
-        if (bone1Damage<2 && bone1Undiscovered){
-            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone1TileX*16), this.leftPos+32+(bone1TileX*16)+32,
-                    this.topPos+32+(bone1TileY*16), this.topPos+32+(bone1TileY*16)+32, 0,
-                    isDud ? 0 : 48/256F, isDud ? 32/256F : (48+32)/256F, (192+(32*bone1Damage))/256F,
-                    (192+32+(32*bone1Damage))/256F, 1, 1, 1, 1f);
+            PoseStack poseStack = pGuiGraphics.pose();
+            poseStack.pushPose();
+            poseStack.translate(this.leftPos+32+(bone1TileX*16)+16, this.topPos+32+(bone1TileY*16)+16, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress1*(360/10f)));
+            if (fossilProgress1>0)
+                poseStack.scale(((float) fossilProgress1/10), ((float) fossilProgress1/10), ((float) fossilProgress1/10));
+            pGuiGraphics.blit(VIGNETTE, -16, -16, isDud ? 0 : 48, 192+(32*bone1Damage), 32, 32);
+            poseStack.popPose();
         }
 
         //small bone
-        if (bone2Damage<2 && bone2Undiscovered){
-            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone2TileX*16), this.leftPos+32+(bone2TileX*16)+16,
-                    this.topPos+32+(bone2TileY*16), this.topPos+32+(bone2TileY*16)+32, 0,
-                    32/256F, (32+16)/256F, (192+(32*bone2Damage))/256F,
-                    (192+32+(32*bone2Damage))/256F, 1, 1, 1, 1f);
+        if (bone2Damage<3 && (bone2Undiscovered || fossilProgress2>0)){
+            PoseStack poseStack = pGuiGraphics.pose();
+            poseStack.pushPose();
+            poseStack.translate(this.leftPos+32+(bone2TileX*16)+8, this.topPos+32+(bone2TileY*16)+16, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress2*(360/10f)));
+            if (fossilProgress2>0)
+                poseStack.scale(((float) fossilProgress2/10), ((float) fossilProgress2/10), ((float) fossilProgress2/10));
+            pGuiGraphics.blit(VIGNETTE, -8, -16, 32, 192+(32*bone2Damage), 16, 32);
+            poseStack.popPose();
         }
 
         //big bone
-        if (bone3Damage<2 && bone3Undiscovered){
-            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone3TileX*16), this.leftPos+32+(bone3TileX*16)+48,
-                    this.topPos+32+(bone3TileY*16), this.topPos+32+(bone3TileY*16)+32, 0,
-                    80/256F, (80+48)/256F, (192+(32*bone3Damage))/256F,
-                    (192+32+(32*bone3Damage))/256F, 1, 1, 1, 1f);
+        if (bone3Damage<3 && (bone3Undiscovered || fossilProgress3>0)){
+            PoseStack poseStack = pGuiGraphics.pose();
+            poseStack.pushPose();
+            poseStack.translate(this.leftPos+32+(bone3TileX*16)+16+8, this.topPos+32+(bone3TileY*16)+16, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress3*(360/10f)));
+            if (fossilProgress3>0)
+                poseStack.scale(((float) fossilProgress3/10), ((float) fossilProgress3/10), ((float) fossilProgress3/10));
+            pGuiGraphics.blit(VIGNETTE, -16-8, -16, 80, 192+(32*bone3Damage), 48, 32);
+            poseStack.popPose();
         }
+
+        //medium bone
+//        if (bone1Damage<2 && (bone1Undiscovered || fossilProgress1 > 0)){
+//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone1TileX*16), this.leftPos+32+(bone1TileX*16)+32,
+//                    this.topPos+32+(bone1TileY*16), this.topPos+32+(bone1TileY*16)+32, 0,
+//                    isDud ? 0 : 48/256F, isDud ? 32/256F : (48+32)/256F, (192+(32*bone1Damage))/256F,
+//                    (192+32+(32*bone1Damage))/256F, 1, 1, 1, 1f);
+//        }
+//
+//        //small bone
+//        if (bone2Damage<2 && (bone2Undiscovered || fossilProgress2 > 0)){
+//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone2TileX*16), this.leftPos+32+(bone2TileX*16)+16,
+//                    this.topPos+32+(bone2TileY*16), this.topPos+32+(bone2TileY*16)+32, 0,
+//                    32/256F, (32+16)/256F, (192+(32*bone2Damage))/256F,
+//                    (192+32+(32*bone2Damage))/256F, 1, 1, 1, 1f);
+//        }
+//
+//        //big bone
+//        if (bone3Damage<2 && (bone3Undiscovered || fossilProgress3 > 0)){
+//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone3TileX*16), this.leftPos+32+(bone3TileX*16)+48,
+//                    this.topPos+32+(bone3TileY*16), this.topPos+32+(bone3TileY*16)+32, 0,
+//                    80/256F, (80+48)/256F, (192+(32*bone3Damage))/256F,
+//                    (192+32+(32*bone3Damage))/256F, 1, 1, 1, 1f);
+//        }
     }
 
     public void renderSelection(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY){
@@ -463,6 +494,38 @@ public class FossilMinigameScreen extends Screen {
         pGuiGraphics.pose().pushPose();
             particles.draw(poseStack, this);
         pGuiGraphics.pose().popPose();
+
+
+        if (fossilProgress1>0){
+            pGuiGraphics.pose().pushPose();
+            poseStack.translate(lastClicked1X, lastClicked1Y, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress1*(360/10f)));
+            poseStack.scale(((float) 1/fossilProgress1)+0.5f, ((float) 1/fossilProgress1)+0.5f, ((float) 1/fossilProgress1)+0.5f);
+            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, -16, 16, -16, 16, 1,
+                    0, 32/256F, 112/256F, (112+32)/256F, 1, 1, 1, ((float) fossilProgress1 /10));
+            pGuiGraphics.pose().popPose();
+        }
+
+        if (fossilProgress2>0){
+            pGuiGraphics.pose().pushPose();
+            poseStack.translate(lastClicked2X, lastClicked2Y, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress2*(360/10f)));
+            poseStack.scale(((float) 1/fossilProgress2)+0.5f, ((float) 1/fossilProgress2)+0.5f, ((float) 1/fossilProgress2)+0.5f);
+            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, -16, 16, -16, 16, 1,
+                    0, 32/256F, 112/256F, (112+32)/256F, 1, 1, 1, ((float) fossilProgress2 /10));
+            pGuiGraphics.pose().popPose();
+        }
+
+        if (fossilProgress3>0){
+            pGuiGraphics.pose().pushPose();
+            poseStack.translate(lastClicked3X, lastClicked3Y, 0);
+            poseStack.mulPose(Axis.ZP.rotationDegrees(fossilProgress3*(360/10f)));
+            poseStack.scale(((float) 1/fossilProgress3)+0.5f, ((float) 1/fossilProgress3)+0.5f, ((float) 1/fossilProgress3)+0.5f);
+            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, -16, 16, -16, 16, 1,
+                    0, 32/256F, 112/256F, (112+32)/256F, 1, 1, 1, ((float) fossilProgress3 /10));
+            pGuiGraphics.pose().popPose();
+        }
+
     }
 
     public void renderClockArm(GuiGraphics pGuiGraphics){
@@ -519,31 +582,6 @@ public class FossilMinigameScreen extends Screen {
         RenderSystem.disableBlend();
     }
 
-//    public void renderTool(GuiGraphics guiGraphics, float lerpX, float lerpY, float zOffset, float u0){
-//        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-//        RenderSystem.setShaderTexture(0, GUI);
-//        BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
-//        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-//        Matrix4f matrix4f = guiGraphics.pose().last().pose();
-//        float size = 16 / 256F;
-//        float u = u0 / 256F;
-//        float v = 240 / 256F;
-//        float minX = lerpX;
-//        float maxX = (lerpX + 16);
-//        float minY = lerpY;
-//        float maxY = (lerpY + 16);
-//        float minU = u;
-//        float maxu = (u + size);
-//        float minV = v;
-//        float maxV = (v + size);
-//        //bufferbuilder.color(0, 0,0, 0.5f);
-//        bufferbuilder.vertex(matrix4f, minX, minY, zOffset).uv(minU, minV).endVertex();
-//        bufferbuilder.vertex(matrix4f, minX, maxY, zOffset).uv(minU, maxV).endVertex();
-//        bufferbuilder.vertex(matrix4f, maxX, maxY, zOffset).uv(maxu, maxV).endVertex();
-//        bufferbuilder.vertex(matrix4f, maxX, minY, zOffset).uv(maxu, minV).endVertex();
-//        BufferUploader.drawWithShader(bufferbuilder.end());
-//    }
-
     public float getChiselPosX(float f) {
         return prevChiselPosX + (chiselPosX - prevChiselPosX) * f;
     }
@@ -592,6 +630,15 @@ public class FossilMinigameScreen extends Screen {
     }
 
     protected void containerTick() {
+
+        if (fossilProgress1>0)
+            fossilProgress1--;
+
+        if (fossilProgress2>0)
+            fossilProgress2--;
+
+        if (fossilProgress3>0)
+            fossilProgress3--;
 
         for (int x = 0; x<7; x++){
             for (int y = 0; y<7; y++){
@@ -893,8 +940,12 @@ public class FossilMinigameScreen extends Screen {
                                 }
                                 if (!isCovered && bone1Undiscovered){
                                     bone1Undiscovered = false;
+                                    fossilProgress1 = 10;
                                     successLevel++;
                                     player.playSound(SoundEvents.ITEM_PICKUP);
+                                    this.lastClicked1X = mouseX;
+                                    this.lastClicked1Y = mouseY;
+                                    this.makeSparks(mouseX, mouseY);
                                 }
                                 break;
                             case 2:
@@ -907,8 +958,12 @@ public class FossilMinigameScreen extends Screen {
 
                                 if (!isCovered && bone2Undiscovered){
                                     bone2Undiscovered = false;
+                                    fossilProgress2 = 10;
                                     successLevel++;
                                     player.playSound(SoundEvents.ITEM_PICKUP);
+                                    this.lastClicked2X = mouseX;
+                                    this.lastClicked2Y = mouseY;
+                                    this.makeSparks(mouseX, mouseY);
                                 }
                                 break;
                             default:
@@ -922,8 +977,12 @@ public class FossilMinigameScreen extends Screen {
                                 }
                                 if (!isCovered && bone3Undiscovered){
                                     bone3Undiscovered = false;
+                                    fossilProgress3 = 10;
                                     successLevel++;
                                     player.playSound(SoundEvents.ITEM_PICKUP);
+                                    this.lastClicked3X = mouseX;
+                                    this.lastClicked3Y = mouseY;
+                                    this.makeSparks(mouseX, mouseY);
                                 }
                         }
                     }
@@ -943,6 +1002,19 @@ public class FossilMinigameScreen extends Screen {
             int life = player.getRandom().nextInt(5, 30);
             particles.add(new DistortableGUIParticle(6, life,tileCenterX + randp.x, tileCenterY + randp.y, 4+player.getRandom().nextInt(-1, 2),
                             randp.x/25, 1f, 208+ Mathf.randInt(12) + (16*(soilLevel-1)), 224 + Mathf.randInt(12) - 16 , 256, 256,
+                            DistortableGUIParticle.distortTowardsPoint(88, 50, 1,60)))
+                    .setLayer(0, false).setLayer(1, true).renderAffectors
+                    = new GUIParticle.RenderAffectors[]{GUIParticle.RenderAffectors.FADE_IN, GUIParticle.RenderAffectors.ADD_BLEND};
+        }
+    }
+
+    public void makeSparks(double mouseX, double mouseY){
+        for (int i = 0; i<10; i++){
+            Vec2 randp = Mathf.randVec2();
+            int life = player.getRandom().nextInt(5, 20);
+            particles.add(new DistortableGUIParticle(0, life, (float) (mouseX + randp.x), (float) (mouseY + randp.y), 7,
+                            randp.x/1.75f, (player.getRandom().nextBoolean() && randp.y<0) ? randp.y/1.75f : -randp.y/1.75f,
+                            0+(Mathf.randInt(5)*7), 240, 256, 256,
                             DistortableGUIParticle.distortTowardsPoint(88, 50, 1,60)))
                     .setLayer(0, false).setLayer(1, true).renderAffectors
                     = new GUIParticle.RenderAffectors[]{GUIParticle.RenderAffectors.FADE_IN, GUIParticle.RenderAffectors.ADD_BLEND};
