@@ -43,6 +43,9 @@ public class MMItems {
     public static final RegistryObject<Item> PERMAFROST_FOSSIL = ITEMS.register("permafrost_fossil",
             ()-> new Item(new Item.Properties()));
 
+    public static final RegistryObject<Item> CHRONOTITE = ITEMS.register("chronotite",
+            ()-> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

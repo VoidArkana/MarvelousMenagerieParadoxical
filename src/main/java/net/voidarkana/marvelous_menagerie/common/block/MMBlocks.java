@@ -9,7 +9,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.block.custom.AltarBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.PedestalBlock;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.function.Supplier;
@@ -597,6 +599,14 @@ public class MMBlocks {
     public static final RegistryObject<Block> CHISELED_PERMAFROST = registerBlock("chiseled_permafrost",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.MUD_BRICKS)));
 
+    public static final RegistryObject<Block> CHRONOTITE = registerBlock("chronotite_block",
+            ()-> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
+
+    public static final RegistryObject<Block> CHRONO_PEDESTAL = registerBlock("chrono_pedestal",
+            ()-> new PedestalBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
+
+    public static final RegistryObject<Block> CHRONO_ALTAR = registerBlock("chrono_altar",
+            ()-> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
 
     private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block){
         return MMItems.ITEMS.register(name, ()-> new BlockItem(block.get(), new Item.Properties()));

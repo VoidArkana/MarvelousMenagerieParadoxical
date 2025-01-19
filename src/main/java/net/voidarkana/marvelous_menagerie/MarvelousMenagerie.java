@@ -14,10 +14,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
-import net.voidarkana.marvelous_menagerie.util.MMNetworkHandler;
+import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -42,6 +43,7 @@ public class MarvelousMenagerie
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setupClient);
 
+        MMBlockEntities.register(modEventBus);
         MMBlocks.register(modEventBus);
         MMItems.register(modEventBus);
         MMMenuTypes.register(modEventBus);
@@ -72,13 +74,12 @@ public class MarvelousMenagerie
     {
 
     }
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-
+        public static void onClientSetup(FMLClientSetupEvent event) {
         }
     }
 }

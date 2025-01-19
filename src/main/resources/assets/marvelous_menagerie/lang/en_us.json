@@ -182,5 +182,10 @@
   "block.marvelous_menagerie.permafrost_mosaic_stairs": "Permafrost Mosaic Stairs",
   "block.marvelous_menagerie.permafrost_mosaic_slab": "Permafrost Mosaic Slab",
   "block.marvelous_menagerie.permafrost_mosaic_wall": "Permafrost Mosaic Wall",
-  "block.marvelous_menagerie.chiseled_permafrost": "Chiseled Permafrost"
+  "block.marvelous_menagerie.chiseled_permafrost": "Chiseled Permafrost",
+
+  "item.marvelous_menagerie.chronotite": "Chronotite",
+  "block.marvelous_menagerie.chronotite_block": "Chronotite Block",
+  "block.marvelous_menagerie.chrono_pedestal": "Chronotite Pedestal",
+  "block.marvelous_menagerie.chrono_altar": "Chronotite Altar"
 }

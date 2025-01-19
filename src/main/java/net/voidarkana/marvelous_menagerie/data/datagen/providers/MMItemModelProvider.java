@@ -22,6 +22,9 @@ public class MMItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
+        evenSimplerBlockItem(MMBlocks.CHRONOTITE);
+
+        simpleItem(MMItems.CHRONOTITE);
         simpleItem(MMItems.SHALE_FOSSIL);
         simpleItem(MMItems.SILTSTONE_FOSSIL);
         simpleItem(MMItems.GABBRO_FOSSIL);

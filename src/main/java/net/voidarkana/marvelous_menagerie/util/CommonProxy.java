@@ -1,10 +1,13 @@
 package net.voidarkana.marvelous_menagerie.util;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
@@ -18,6 +21,10 @@ public class CommonProxy {
     }
 
     public void clientInit() {
+    }
+
+    public Level getWorld() {
+        return ServerLifecycleHooks.getCurrentServer().overworld();
     }
 
     public void openToolkitGUI(Player player, BlockPos clicked) {

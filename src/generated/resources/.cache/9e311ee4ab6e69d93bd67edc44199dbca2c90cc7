@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-06T12:06:26.82851	Item Models: marvelous_menagerie
+// 1.20.1	2025-01-19T01:21:06.5010529	Item Models: marvelous_menagerie
 940f2ee162b1522d9bb53661c3e84dbd89bd6e85 assets/marvelous_menagerie/models/item/breccia_bricks_slab.json
 3c0f6b737c43be837d054de3a71996169de9280b assets/marvelous_menagerie/models/item/breccia_bricks_stairs.json
 3d07dbc0596a2226e0f706d056e7092426f15b1a assets/marvelous_menagerie/models/item/breccia_bricks_wall.json
@@ -19,6 +19,8 @@ de82f2c9b469e4d698effb627935b15a345f60f0 assets/marvelous_menagerie/models/item/
 80b836d478bafcf41d66f479ffd120a42e6d542f assets/marvelous_menagerie/models/item/chalk_slab.json
 c6dcec6df8edbc14ae5cfe2724044013cea8280a assets/marvelous_menagerie/models/item/chalk_stairs.json
 5b1caba0db59e9ec6b041dc5b8a0fd2a7c28167b assets/marvelous_menagerie/models/item/chalk_wall.json
+6f6943a67a09eb82691abfad9c53ece5c80f524c assets/marvelous_menagerie/models/item/chronotite.json
+9143577b91276ad1870b5c415c4c19606a9adde0 assets/marvelous_menagerie/models/item/chronotite_block.json
 edd9c7ef41c33468043eb703dc7e2258ed54c634 assets/marvelous_menagerie/models/item/diatomite_bricks_slab.json
 18ad7919ea83b101b83f9b60da43716c0059b704 assets/marvelous_menagerie/models/item/diatomite_bricks_stairs.json
 78b9b42ad59402abd7890fd1f13b480dea365c0b assets/marvelous_menagerie/models/item/diatomite_bricks_wall.json

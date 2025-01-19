@@ -18,9 +18,9 @@ version="${mod_version}" #mandatory
 # A display name for the mod
 displayName="${mod_name}"
 
-logoFile=""
+logoFile="logo.png"
 
-credits=""
+credits= "Animations by TheIndominator; Russian translations by Ivan_3539 and GoldZombie"
 
 authors="${mod_authors}"
 

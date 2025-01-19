@@ -1,15 +1,17 @@
 package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallBlock;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+
+import static net.minecraft.data.models.model.TextureMapping.cubeBottomTop;
 
 public class MMBlockStateProvider extends BlockStateProvider {
 
@@ -19,6 +21,13 @@ public class MMBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+
+//        nonRotateablePillarBlock(MMBlocks.CHRONO_PEDESTAL, "chrono_pedestal_top",
+//                "chronotite_block_end", "chrono_pedestal_side");
+
+        axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),
+                new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_side"),
+                new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_end"));
 
         blockWithItem(MMBlocks.SHALE);
         stairsBlock(((StairBlock) MMBlocks.SHALE_STAIRS.get()), blockTexture(MMBlocks.SHALE.get()));
@@ -193,7 +202,24 @@ public class MMBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){
-        simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject
-                .get()));
+        simpleBlockWithItem(blockRegistryObject.get(),
+                cubeAll(blockRegistryObject.get()));
+    }
+
+    private void nonRotateablePillarBlock(RegistryObject<Block> blockRegistryObject, String top, String bottom, String side){
+        ResourceLocation rSide = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + side);
+        ResourceLocation rTop = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + top);
+        ResourceLocation rBottom = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + bottom);
+
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().cubeBottomTop(name(blockRegistryObject.get()), rSide, rBottom, rTop));
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
     }
 }

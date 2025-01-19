@@ -20,7 +20,21 @@ public class MMCreativeTab {
 
                         output.accept(MMItems.PALEO_TOOLKIT.get());
 
+                        output.accept(MMItems.CHRONOTITE.get());
+                        output.accept(MMBlocks.CHRONOTITE.get());
+                        output.accept(MMBlocks.CHRONO_ALTAR.get());
+                        output.accept(MMBlocks.CHRONO_PEDESTAL.get());
+
                         output.accept(MMItems.SHALE_FOSSIL.get());
+                        output.accept(MMItems.SILTSTONE_FOSSIL.get());
+                        output.accept(MMItems.GABBRO_FOSSIL.get());
+                        output.accept(MMItems.MUDSTONE_FOSSIL.get());
+                        output.accept(MMItems.LIMESTONE_FOSSIL.get());
+                        output.accept(MMItems.CHALK_FOSSIL.get());
+                        output.accept(MMItems.BRECCIA_FOSSIL.get());
+                        output.accept(MMItems.DIATOMITE_FOSSIL.get());
+                        output.accept(MMItems.PERMAFROST_FOSSIL.get());
+
                         output.accept(MMBlocks.SHALE.get());
                         output.accept(MMBlocks.SHALE_SLAB.get());
                         output.accept(MMBlocks.SHALE_STAIRS.get());
@@ -40,7 +54,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.SHALE_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_SHALE.get());
 
-                        output.accept(MMItems.SILTSTONE_FOSSIL.get());
                         output.accept(MMBlocks.SILTSTONE.get());
                         output.accept(MMBlocks.SILTSTONE_SLAB.get());
                         output.accept(MMBlocks.SILTSTONE_STAIRS.get());
@@ -60,7 +73,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.SILTSTONE_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_SILTSTONE.get());
 
-                        output.accept(MMItems.GABBRO_FOSSIL.get());
                         output.accept(MMBlocks.GABBRO.get());
                         output.accept(MMBlocks.GABBRO_SLAB.get());
                         output.accept(MMBlocks.GABBRO_STAIRS.get());
@@ -80,7 +92,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.GABBRO_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_GABBRO.get());
 
-                        output.accept(MMItems.MUDSTONE_FOSSIL.get());
                         output.accept(MMBlocks.MUDSTONE.get());
                         output.accept(MMBlocks.MUDSTONE_SLAB.get());
                         output.accept(MMBlocks.MUDSTONE_STAIRS.get());
@@ -100,7 +111,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.MUDSTONE_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_MUDSTONE.get());
 
-                        output.accept(MMItems.LIMESTONE_FOSSIL.get());
                         output.accept(MMBlocks.LIMESTONE.get());
                         output.accept(MMBlocks.LIMESTONE_SLAB.get());
                         output.accept(MMBlocks.LIMESTONE_STAIRS.get());
@@ -120,7 +130,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.LIMESTONE_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_LIMESTONE.get());
 
-                        output.accept(MMItems.CHALK_FOSSIL.get());
                         output.accept(MMBlocks.CHALK.get());
                         output.accept(MMBlocks.CHALK_SLAB.get());
                         output.accept(MMBlocks.CHALK_STAIRS.get());
@@ -140,7 +149,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.CHALK_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_CHALK.get());
 
-                        output.accept(MMItems.BRECCIA_FOSSIL.get());
                         output.accept(MMBlocks.BRECCIA.get());
                         output.accept(MMBlocks.BRECCIA_SLAB.get());
                         output.accept(MMBlocks.BRECCIA_STAIRS.get());
@@ -160,7 +168,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.BRECCIA_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_BRECCIA.get());
 
-                        output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMBlocks.DIATOMITE.get());
                         output.accept(MMBlocks.DIATOMITE_SLAB.get());
                         output.accept(MMBlocks.DIATOMITE_STAIRS.get());
@@ -180,7 +187,6 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.DIATOMITE_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_DIATOMITE.get());
 
-                        output.accept(MMItems.PERMAFROST_FOSSIL.get());
                         output.accept(MMBlocks.PERMAFROST.get());
                         output.accept(MMBlocks.PERMAFROST_SLAB.get());
                         output.accept(MMBlocks.PERMAFROST_STAIRS.get());

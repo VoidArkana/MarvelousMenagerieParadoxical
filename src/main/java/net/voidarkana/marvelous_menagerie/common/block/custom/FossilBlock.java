@@ -55,7 +55,6 @@ public class FossilBlock extends Block {
 
     private @NotNull ResourceLocation getFossilLoottable(int successLevel) {
         String path = "fossil/success_"+ successLevel +"/"+getDescriptionId();
-        System.out.println(path);
         return new ResourceLocation(MarvelousMenagerie.MODID, path);
     }
 
