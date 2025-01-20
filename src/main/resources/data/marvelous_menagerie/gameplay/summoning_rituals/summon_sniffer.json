@@ -1,0 +1,7 @@
+{
+  "input1": "minecraft:wheat_seeds",
+  "input2": "minecraft:egg",
+  "input3": "minecraft:moss_block",
+  "input4": "marvelous_menagerie:sniffer_fossil",
+  "output": "minecraft:sniffer"
+}

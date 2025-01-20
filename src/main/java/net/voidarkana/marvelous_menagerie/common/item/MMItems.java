@@ -46,6 +46,11 @@ public class MMItems {
     public static final RegistryObject<Item> CHRONOTITE = ITEMS.register("chronotite",
             ()-> new Item(new Item.Properties()));
 
+
+
+    public static final RegistryObject<Item> SNIFFER_FOSSIL = ITEMS.register("sniffer_fossil",
+            ()-> new Item(new Item.Properties()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

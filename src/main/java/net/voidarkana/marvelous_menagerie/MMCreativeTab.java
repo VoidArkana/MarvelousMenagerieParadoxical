@@ -35,6 +35,8 @@ public class MMCreativeTab {
                         output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
+                        output.accept(MMItems.SNIFFER_FOSSIL.get());
+
                         output.accept(MMBlocks.SHALE.get());
                         output.accept(MMBlocks.SHALE_SLAB.get());
                         output.accept(MMBlocks.SHALE_STAIRS.get());

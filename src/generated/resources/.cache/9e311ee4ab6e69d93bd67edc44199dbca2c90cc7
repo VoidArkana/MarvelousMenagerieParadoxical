@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-19T01:21:06.5010529	Item Models: marvelous_menagerie
+// 1.20.1	2025-01-20T13:03:51.4740474	Item Models: marvelous_menagerie
 940f2ee162b1522d9bb53661c3e84dbd89bd6e85 assets/marvelous_menagerie/models/item/breccia_bricks_slab.json
 3c0f6b737c43be837d054de3a71996169de9280b assets/marvelous_menagerie/models/item/breccia_bricks_stairs.json
 3d07dbc0596a2226e0f706d056e7092426f15b1a assets/marvelous_menagerie/models/item/breccia_bricks_wall.json
@@ -118,3 +118,4 @@ ebf12f1fe2fa5596b9a479babeb8dbe6f9568ccc assets/marvelous_menagerie/models/item/
 4724488f8107e6334d5af3249d9c462469ae85a3 assets/marvelous_menagerie/models/item/siltstone_slab.json
 e65325da2b0630ddbc365e45ef58a5f508562bbc assets/marvelous_menagerie/models/item/siltstone_stairs.json
 54a1a840253dfea6fae8fb42539c47ff13cc441d assets/marvelous_menagerie/models/item/siltstone_wall.json
+38732374ecc0188f0216fb5f97becb9645f14dcf assets/marvelous_menagerie/models/item/sniffer_fossil.json

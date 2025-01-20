@@ -16,6 +16,7 @@ import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.event.ModEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
 import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
@@ -39,6 +40,7 @@ public class MarvelousMenagerie
     public MarvelousMenagerie()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus eventBus = MinecraftForge.EVENT_BUS;
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setupClient);
@@ -52,6 +54,9 @@ public class MarvelousMenagerie
         MinecraftForge.EVENT_BUS.register(this);
 
         PROXY.init();
+
+        eventBus.register(new ModEvents());
+
         modEventBus.addListener(this::addCreative);
     }
 

@@ -50,12 +50,6 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
                 float f2 = pBlockEntity.oRot + f1 * pPartialTick;
                 pPoseStack.mulPose(Axis.YP.rotation(f2));
                 pPoseStack.mulPose(Axis.YP.rotationDegrees(90));
-                //pPoseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
-                //float f3 = Mth.lerp(pPartialTick, pBlockEntity.oFlip, pBlockEntity.flip);
-                // f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
-                //float f5 = Mth.frac(f3 + 0.75F) * 1.6F - 0.3F;
-                //float f6 = Mth.lerp(pPartialTick, pBlockEntity.oOpen, pBlockEntity.open);
-                //this.bookModel.setupAnim(f, Mth.clamp(f4, 0.0F, 1.0F), Mth.clamp(f5, 0.0F, 1.0F), f6);
                 VertexConsumer vertexconsumer = SKULL_LOCATION.buffer(pBuffer, RenderType::entityCutoutNoCull);
                 this.skullModel.render(pPoseStack, vertexconsumer, pPackedLight, pPackedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
             pPoseStack.popPose();

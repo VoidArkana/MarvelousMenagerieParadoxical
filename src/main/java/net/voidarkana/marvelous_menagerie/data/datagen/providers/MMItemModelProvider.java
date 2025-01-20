@@ -25,6 +25,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
 
         simpleItem(MMItems.CHRONOTITE);
+
+        simpleItem(MMItems.SNIFFER_FOSSIL);
+
         simpleItem(MMItems.SHALE_FOSSIL);
         simpleItem(MMItems.SILTSTONE_FOSSIL);
         simpleItem(MMItems.GABBRO_FOSSIL);
