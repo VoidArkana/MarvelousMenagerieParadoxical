@@ -23,10 +23,22 @@ public class MMItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
 
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
-
         simpleItem(MMItems.CHRONOTITE);
 
         simpleItem(MMItems.SNIFFER_FOSSIL);
+
+        simpleItem(MMItems.ARANDASPIS_FOSSIL);
+        simpleItem(MMItems.ARANDASPIS_BUCKET);
+        withExistingParent(MMItems.ARANDASPIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        simpleItem(MMItems.SACABAMBASPIS);
+        simpleItem(MMItems.GOLDEN_SACA);
+        simpleItem(MMItems.COOKED_SACA);
+        simpleItem(MMItems.SACA_FOSSIL);
+        simpleItem(MMItems.SACA_BUCKET);
+        withExistingParent(MMItems.SACA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        withExistingParent(MMItems.CHUD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.SHALE_FOSSIL);
         simpleItem(MMItems.SILTSTONE_FOSSIL);

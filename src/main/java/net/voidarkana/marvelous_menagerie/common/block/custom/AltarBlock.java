@@ -23,6 +23,7 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.AltarBlockEntity;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.PedestalBlockEntity;
+import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,10 +68,9 @@ public class AltarBlock extends BaseEntityBlock {
 
                 boolean[] itemChecked = new boolean[4];
 
-                EntityType<?> entitytype = EntityType.HORSE;  //this.getType(itemstack.getTag());
+                EntityType<?> entitytype = MMEntities.CHUD.get();
 
                 for (RitualManager.RitualProcessData data : RitualManager.DATA) {
-                    System.out.println("checking");
                     int itemCount = 0;
 
                     Item[] inputs = new Item[4];
@@ -83,7 +83,6 @@ public class AltarBlock extends BaseEntityBlock {
                         for (int s = 0; s<4; s++){
                             if (!itemUsed[i] && !itemChecked[s]){
                                 if (ingredients[i] == inputs[s]) {
-                                    System.out.println("Item Found");
                                     itemUsed[i] = true;
                                     itemChecked[s] = true;
                                     itemCount++;

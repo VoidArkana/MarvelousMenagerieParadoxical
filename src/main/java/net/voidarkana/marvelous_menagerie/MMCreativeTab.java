@@ -35,7 +35,21 @@ public class MMCreativeTab {
                         output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
+                        output.accept(MMItems.ARANDASPIS_FOSSIL.get());
+                        output.accept(MMItems.ARANDASPIS_BUCKET.get());
+
+                        output.accept(MMItems.SACA_FOSSIL.get());
+                        output.accept(MMItems.SACA_BUCKET.get());
+                        output.accept(MMItems.SACABAMBASPIS.get());
+                        output.accept(MMItems.COOKED_SACA.get());
+                        output.accept(MMItems.GOLDEN_SACA.get());
+
                         output.accept(MMItems.SNIFFER_FOSSIL.get());
+
+
+                        output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
+                        output.accept(MMItems.CHUD_SPAWN_EGG.get());
+                        output.accept(MMItems.SACA_SPAWN_EGG.get());
 
                         output.accept(MMBlocks.SHALE.get());
                         output.accept(MMBlocks.SHALE_SLAB.get());

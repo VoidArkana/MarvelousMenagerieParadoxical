@@ -33,7 +33,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.SHALE_STAIRS.get()), blockTexture(MMBlocks.SHALE.get()));
         slabBlock(((SlabBlock) MMBlocks.SHALE_SLAB.get()), blockTexture(MMBlocks.SHALE.get()), blockTexture(MMBlocks.SHALE.get()));
         wallBlock((WallBlock) MMBlocks.SHALE_WALL.get(), blockTexture(MMBlocks.SHALE.get()));
-        blockWithItem(MMBlocks.SHALE_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.SHALE_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_SHALE);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_SHALE_STAIRS.get()), blockTexture(MMBlocks.POLISHED_SHALE.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_SHALE_SLAB.get()), blockTexture(MMBlocks.POLISHED_SHALE.get()), blockTexture(MMBlocks.POLISHED_SHALE.get()));
@@ -52,7 +52,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.SILTSTONE_STAIRS.get()), blockTexture(MMBlocks.SILTSTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.SILTSTONE_SLAB.get()), blockTexture(MMBlocks.SILTSTONE.get()), blockTexture(MMBlocks.SILTSTONE.get()));
         wallBlock((WallBlock) MMBlocks.SILTSTONE_WALL.get(), blockTexture(MMBlocks.SILTSTONE.get()));
-        blockWithItem(MMBlocks.SILTSTONE_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.SILTSTONE_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_SILTSTONE);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_SILTSTONE_STAIRS.get()), blockTexture(MMBlocks.POLISHED_SILTSTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_SILTSTONE_SLAB.get()), blockTexture(MMBlocks.POLISHED_SILTSTONE.get()), blockTexture(MMBlocks.POLISHED_SILTSTONE.get()));
@@ -71,7 +71,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.GABBRO_STAIRS.get()), blockTexture(MMBlocks.GABBRO.get()));
         slabBlock(((SlabBlock) MMBlocks.GABBRO_SLAB.get()), blockTexture(MMBlocks.GABBRO.get()), blockTexture(MMBlocks.GABBRO.get()));
         wallBlock((WallBlock) MMBlocks.GABBRO_WALL.get(), blockTexture(MMBlocks.GABBRO.get()));
-        blockWithItem(MMBlocks.GABBRO_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.GABBRO_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_GABBRO);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_GABBRO_STAIRS.get()), blockTexture(MMBlocks.POLISHED_GABBRO.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_GABBRO_SLAB.get()), blockTexture(MMBlocks.POLISHED_GABBRO.get()), blockTexture(MMBlocks.POLISHED_GABBRO.get()));
@@ -90,7 +90,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.MUDSTONE_STAIRS.get()), blockTexture(MMBlocks.MUDSTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.MUDSTONE_SLAB.get()), blockTexture(MMBlocks.MUDSTONE.get()), blockTexture(MMBlocks.MUDSTONE.get()));
         wallBlock((WallBlock) MMBlocks.MUDSTONE_WALL.get(), blockTexture(MMBlocks.MUDSTONE.get()));
-        blockWithItem(MMBlocks.MUDSTONE_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.MUDSTONE_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_MUDSTONE);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_MUDSTONE_STAIRS.get()), blockTexture(MMBlocks.POLISHED_MUDSTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_MUDSTONE_SLAB.get()), blockTexture(MMBlocks.POLISHED_MUDSTONE.get()), blockTexture(MMBlocks.POLISHED_MUDSTONE.get()));
@@ -109,7 +109,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.LIMESTONE_STAIRS.get()), blockTexture(MMBlocks.LIMESTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.LIMESTONE_SLAB.get()), blockTexture(MMBlocks.LIMESTONE.get()), blockTexture(MMBlocks.LIMESTONE.get()));
         wallBlock((WallBlock) MMBlocks.LIMESTONE_WALL.get(), blockTexture(MMBlocks.LIMESTONE.get()));
-        blockWithItem(MMBlocks.LIMESTONE_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.LIMESTONE_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_LIMESTONE);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_LIMESTONE_STAIRS.get()), blockTexture(MMBlocks.POLISHED_LIMESTONE.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_LIMESTONE_SLAB.get()), blockTexture(MMBlocks.POLISHED_LIMESTONE.get()), blockTexture(MMBlocks.POLISHED_LIMESTONE.get()));
@@ -128,7 +128,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.CHALK_STAIRS.get()), blockTexture(MMBlocks.CHALK.get()));
         slabBlock(((SlabBlock) MMBlocks.CHALK_SLAB.get()), blockTexture(MMBlocks.CHALK.get()), blockTexture(MMBlocks.CHALK.get()));
         wallBlock((WallBlock) MMBlocks.CHALK_WALL.get(), blockTexture(MMBlocks.CHALK.get()));
-        blockWithItem(MMBlocks.CHALK_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.CHALK_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_CHALK);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_CHALK_STAIRS.get()), blockTexture(MMBlocks.POLISHED_CHALK.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_CHALK_SLAB.get()), blockTexture(MMBlocks.POLISHED_CHALK.get()), blockTexture(MMBlocks.POLISHED_CHALK.get()));
@@ -147,7 +147,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.BRECCIA_STAIRS.get()), blockTexture(MMBlocks.BRECCIA.get()));
         slabBlock(((SlabBlock) MMBlocks.BRECCIA_SLAB.get()), blockTexture(MMBlocks.BRECCIA.get()), blockTexture(MMBlocks.BRECCIA.get()));
         wallBlock((WallBlock) MMBlocks.BRECCIA_WALL.get(), blockTexture(MMBlocks.BRECCIA.get()));
-        blockWithItem(MMBlocks.BRECCIA_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.BRECCIA_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_BRECCIA);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_BRECCIA_STAIRS.get()), blockTexture(MMBlocks.POLISHED_BRECCIA.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_BRECCIA_SLAB.get()), blockTexture(MMBlocks.POLISHED_BRECCIA.get()), blockTexture(MMBlocks.POLISHED_BRECCIA.get()));
@@ -166,7 +166,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.DIATOMITE_STAIRS.get()), blockTexture(MMBlocks.DIATOMITE.get()));
         slabBlock(((SlabBlock) MMBlocks.DIATOMITE_SLAB.get()), blockTexture(MMBlocks.DIATOMITE.get()), blockTexture(MMBlocks.DIATOMITE.get()));
         wallBlock((WallBlock) MMBlocks.DIATOMITE_WALL.get(), blockTexture(MMBlocks.DIATOMITE.get()));
-        blockWithItem(MMBlocks.DIATOMITE_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.DIATOMITE_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_DIATOMITE);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_DIATOMITE_STAIRS.get()), blockTexture(MMBlocks.POLISHED_DIATOMITE.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_DIATOMITE_SLAB.get()), blockTexture(MMBlocks.POLISHED_DIATOMITE.get()), blockTexture(MMBlocks.POLISHED_DIATOMITE.get()));
@@ -185,7 +185,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         stairsBlock(((StairBlock) MMBlocks.PERMAFROST_STAIRS.get()), blockTexture(MMBlocks.PERMAFROST.get()));
         slabBlock(((SlabBlock) MMBlocks.PERMAFROST_SLAB.get()), blockTexture(MMBlocks.PERMAFROST.get()), blockTexture(MMBlocks.PERMAFROST.get()));
         wallBlock((WallBlock) MMBlocks.PERMAFROST_WALL.get(), blockTexture(MMBlocks.PERMAFROST.get()));
-        blockWithItem(MMBlocks.PERMAFROST_FOSSIL_BLOCK);
+        //blockWithItem(MMBlocks.PERMAFROST_FOSSIL_BLOCK);
         blockWithItem(MMBlocks.POLISHED_PERMAFROST);
         stairsBlock(((StairBlock) MMBlocks.POLISHED_PERMAFROST_STAIRS.get()), blockTexture(MMBlocks.POLISHED_PERMAFROST.get()));
         slabBlock(((SlabBlock) MMBlocks.POLISHED_PERMAFROST_SLAB.get()), blockTexture(MMBlocks.POLISHED_PERMAFROST.get()), blockTexture(MMBlocks.POLISHED_PERMAFROST.get()));

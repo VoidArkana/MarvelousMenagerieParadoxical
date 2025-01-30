@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "marvelous_menagerie:block/limestone_fossil_block"
+      },
+      {
+        "model": "marvelous_menagerie:block/limestone_fossil_block_2"
+      },
+      {
+        "model": "marvelous_menagerie:block/limestone_fossil_block_3"
+      },
+      {
+        "model": "marvelous_menagerie:block/limestone_fossil_block_4"
+      }
+    ]
+  }
+}

@@ -15,12 +15,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.event.ModEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
 import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MarvelousMenagerie.MODID)
@@ -37,6 +41,8 @@ public class MarvelousMenagerie
         return CommonProxy::new;
     });
 
+    public static final List<Runnable> CALLBACKS = new ArrayList<>();
+
     public MarvelousMenagerie()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -45,9 +51,12 @@ public class MarvelousMenagerie
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setupClient);
 
-        MMBlockEntities.register(modEventBus);
+        MMEntities.register(modEventBus);
+
         MMBlocks.register(modEventBus);
+        MMBlockEntities.register(modEventBus);
         MMItems.register(modEventBus);
+
         MMMenuTypes.register(modEventBus);
         MMCreativeTab.register(modEventBus);
 
