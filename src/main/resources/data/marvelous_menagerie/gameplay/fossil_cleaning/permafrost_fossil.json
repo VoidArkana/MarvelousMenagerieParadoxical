@@ -1,0 +1,29 @@
+{
+  "input": ["marvelous_menagerie:permafrost_fossil"],
+  "entries": [
+    {
+      "weight": 5,
+      "item": "marvelous_menagerie:josepho_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:dodo_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:thylacine_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:steller_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:elebird_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:doedicurus_fossil"
+    }
+  ]
+}

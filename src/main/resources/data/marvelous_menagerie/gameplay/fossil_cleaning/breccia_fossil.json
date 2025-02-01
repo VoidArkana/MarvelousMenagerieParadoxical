@@ -1,0 +1,21 @@
+{
+  "input": ["marvelous_menagerie:breccia_fossil"],
+  "entries": [
+    {
+      "weight": 5,
+      "item": "marvelous_menagerie:daeodon_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:dawn_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:lepti_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:eolactoria_fossil"
+    }
+  ]
+}

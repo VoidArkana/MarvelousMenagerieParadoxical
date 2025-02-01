@@ -2,8 +2,20 @@
   "input": ["marvelous_menagerie:chalk_fossil"],
   "entries": [
     {
-      "weight": 15,
+      "weight": 9,
       "item": "marvelous_menagerie:sniffer_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:tlato_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:theri_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:pelta_fossil"
     }
   ]
 }

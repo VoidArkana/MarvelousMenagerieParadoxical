@@ -2,8 +2,12 @@
   "input": ["marvelous_menagerie:mudstone_fossil"],
   "entries": [
     {
-      "weight": 15,
+      "weight": 10,
       "item": "marvelous_menagerie:sniffer_fossil"
+    },
+    {
+      "weight": 10,
+      "item": "marvelous_menagerie:lystro_fossil"
     }
   ]
 }

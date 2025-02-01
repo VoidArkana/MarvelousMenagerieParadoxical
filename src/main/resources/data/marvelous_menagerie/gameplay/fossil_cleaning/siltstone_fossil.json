@@ -1,0 +1,17 @@
+{
+  "input": ["marvelous_menagerie:siltstone_fossil"],
+  "entries": [
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:falca_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:roach_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:trilo_fossil"
+    }
+  ]
+}

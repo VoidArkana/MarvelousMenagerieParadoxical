@@ -1,0 +1,25 @@
+{
+  "input": ["marvelous_menagerie:diatomite_fossil"],
+  "entries": [
+    {
+      "weight": 2,
+      "item": "marvelous_menagerie:daeodon_fossil"
+    },
+    {
+      "weight": 5,
+      "item": "marvelous_menagerie:thylacine_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:kelenken_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:josepho_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:slov_fossil"
+    }
+  ]
+}

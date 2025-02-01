@@ -37,16 +37,39 @@ public class MMCreativeTab {
                         output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
-                        output.accept(MMItems.ARANDASPIS_FOSSIL.get());
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
 
-                        output.accept(MMItems.SACA_FOSSIL.get());
                         output.accept(MMItems.SACA_BUCKET.get());
                         output.accept(MMItems.SACABAMBASPIS.get());
                         output.accept(MMItems.COOKED_SACA.get());
                         output.accept(MMItems.GOLDEN_SACA.get());
 
+                        output.accept(MMItems.CARIS_FOSSIL.get());
+                        output.accept(MMItems.ROACH_FOSSIL.get());
+                        output.accept(MMItems.ARANDASPIS_FOSSIL.get());
+                        output.accept(MMItems.PELTA_FOSSIL.get());
+                        output.accept(MMItems.DAEODON_FOSSIL.get());
+                        output.accept(MMItems.DAWN_FOSSIL.get());
+                        output.accept(MMItems.DODO_FOSSIL.get());
+                        output.accept(MMItems.DOEDICURUS_FOSSIL.get());
+                        output.accept(MMItems.ELEBIRD_FOSSIL.get());
+                        output.accept(MMItems.EOLACTORIA_FOSSIL.get());
+                        output.accept(MMItems.FALCA_FOSSIL.get());
+                        output.accept(MMItems.HALLU_FOSSIL.get());
+                        output.accept(MMItems.GORGON_FOSSIL.get());
+                        output.accept(MMItems.JOSEPHO_FOSSIL.get());
+                        output.accept(MMItems.KELENKEN_FOSSIL.get());
+                        output.accept(MMItems.LEPTI_FOSSIL.get());
+                        output.accept(MMItems.LYSTRO_FOSSIL.get());
+                        output.accept(MMItems.OPHTHALMO_FOSSIL.get());
+                        output.accept(MMItems.PIKAIA_FOSSIL.get());
+                        output.accept(MMItems.SACA_FOSSIL.get());
+                        output.accept(MMItems.SLOV_FOSSIL.get());
                         output.accept(MMItems.SNIFFER_FOSSIL.get());
+                        output.accept(MMItems.STELLER_FOSSIL.get());
+                        output.accept(MMItems.THERI_FOSSIL.get());
+                        output.accept(MMItems.THYLACINE_FOSSIL.get());
+                        output.accept(MMItems.TLATO_FOSSIL.get());
 
 
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());

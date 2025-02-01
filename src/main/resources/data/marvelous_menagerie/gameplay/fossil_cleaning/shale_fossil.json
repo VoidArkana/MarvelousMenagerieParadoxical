@@ -8,6 +8,22 @@
     {
       "weight": 15,
       "item": "marvelous_menagerie:saca_fossil"
+    },
+    {
+      "weight": 13,
+      "item": "marvelous_menagerie:trilo_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:hallu_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:pikaia_fossil"
+    },
+    {
+      "weight": 9,
+      "item": "marvelous_menagerie:caris_fossil"
     }
   ]
 }

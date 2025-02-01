@@ -26,15 +26,40 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.CHRONOTITE);
 
         simpleItem(MMItems.SNIFFER_FOSSIL);
-
+        simpleItem(MMItems.SACA_FOSSIL);
         simpleItem(MMItems.ARANDASPIS_FOSSIL);
+        simpleItem(MMItems.CARIS_FOSSIL);
+        simpleItem(MMItems.HALLU_FOSSIL);
+        simpleItem(MMItems.TRILO_FOSSIL);
+        simpleItem(MMItems.PIKAIA_FOSSIL);
+        simpleItem(MMItems.FALCA_FOSSIL);
+        simpleItem(MMItems.ROACH_FOSSIL);
+        simpleItem(MMItems.GORGON_FOSSIL);
+        simpleItem(MMItems.LYSTRO_FOSSIL);
+        simpleItem(MMItems.OPHTHALMO_FOSSIL);
+        simpleItem(MMItems.THERI_FOSSIL);
+        simpleItem(MMItems.TLATO_FOSSIL);
+        simpleItem(MMItems.PELTA_FOSSIL);
+        simpleItem(MMItems.DAEODON_FOSSIL);
+        simpleItem(MMItems.DAWN_FOSSIL);
+        simpleItem(MMItems.LEPTI_FOSSIL);
+        simpleItem(MMItems.EOLACTORIA_FOSSIL);
+        simpleItem(MMItems.KELENKEN_FOSSIL);
+        simpleItem(MMItems.JOSEPHO_FOSSIL);
+        simpleItem(MMItems.SLOV_FOSSIL);
+        simpleItem(MMItems.FALCA_FOSSIL);
+        simpleItem(MMItems.DODO_FOSSIL);
+        simpleItem(MMItems.THYLACINE_FOSSIL);
+        simpleItem(MMItems.STELLER_FOSSIL);
+        simpleItem(MMItems.ELEBIRD_FOSSIL);
+        simpleItem(MMItems.DOEDICURUS_FOSSIL);
+
         simpleItem(MMItems.ARANDASPIS_BUCKET);
         withExistingParent(MMItems.ARANDASPIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.SACABAMBASPIS);
         simpleItem(MMItems.GOLDEN_SACA);
         simpleItem(MMItems.COOKED_SACA);
-        simpleItem(MMItems.SACA_FOSSIL);
         simpleItem(MMItems.SACA_BUCKET);
         withExistingParent(MMItems.SACA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
