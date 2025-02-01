@@ -1,0 +1,9 @@
+{
+  "input": ["marvelous_menagerie:limestone_fossil"],
+  "entries": [
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:sniffer_fossil"
+    }
+  ]
+}

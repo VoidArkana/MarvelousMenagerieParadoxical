@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.voidarkana.marvelous_menagerie.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "marvelous_menagerie.refmap.json",
+  "mixins": [
+    "common.BrushItemMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

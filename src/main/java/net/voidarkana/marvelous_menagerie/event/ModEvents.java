@@ -10,6 +10,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
+import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
@@ -65,6 +66,7 @@ public class ModEvents {
     public void register(AddReloadListenerEvent event) {
         event.addListener(new PikaiaCoralManager());
         event.addListener(new RitualManager());
+        event.addListener(new FossilCleaningManager());
     }
 
 }

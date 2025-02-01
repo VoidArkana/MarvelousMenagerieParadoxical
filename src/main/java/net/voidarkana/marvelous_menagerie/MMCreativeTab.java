@@ -20,6 +20,8 @@ public class MMCreativeTab {
 
                         output.accept(MMItems.PALEO_TOOLKIT.get());
 
+                        output.accept(MMBlocks.PALEO_TABLE.get());
+
                         output.accept(MMItems.CHRONOTITE.get());
                         output.accept(MMBlocks.CHRONOTITE.get());
                         output.accept(MMBlocks.CHRONO_ALTAR.get());

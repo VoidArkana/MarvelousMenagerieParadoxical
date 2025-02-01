@@ -18,10 +18,13 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.event.ModEvents;
+import net.voidarkana.marvelous_menagerie.event.ServerEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
+import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +36,7 @@ public class MarvelousMenagerie
     // Define mod id in a common place for everything to reference
     public static final String MODID = "marvelous_menagerie";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public static CommonProxy PROXY = (CommonProxy) DistExecutor.runForDist(() -> {
         return ClientProxy::new;
@@ -65,6 +68,7 @@ public class MarvelousMenagerie
         PROXY.init();
 
         eventBus.register(new ModEvents());
+        eventBus.register(new ServerEvents());
 
         modEventBus.addListener(this::addCreative);
     }
@@ -72,6 +76,7 @@ public class MarvelousMenagerie
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         MMNetworkHandler.init();
+        MMMessages.register();
     }
 
     private void setupClient(FMLClientSetupEvent event) {

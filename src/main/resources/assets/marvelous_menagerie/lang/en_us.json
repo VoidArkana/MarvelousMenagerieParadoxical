@@ -94,11 +94,11 @@
   "item.marvelous_menagerie.trilo_bucket": "Bucket of Trilobite",
   "block.marvelous_menagerie.trilo_eggs": "Trilobite Egg",
 
-  "entity.marvelous_menagerie.raw_saca": "Sacabambaspis",
+  "entity.marvelous_menagerie.sacabambaspis": "Sacabambaspis",
   "item.marvelous_menagerie.saca_bucket": "Bucket of Sacabambaspis",
   "block.marvelous_menagerie.saca_eggs": "Sacabambaspis Egg",
   "item.marvelous_menagerie.saca_spawn_egg": "Sacabambaspis Spawn Egg",
-  "item.marvelous_menagerie.sacabambaspis": "Sacabambaspis",
+  "item.marvelous_menagerie.raw_saca": "Sacabambaspis",
   "item.marvelous_menagerie.cooked_saca": "Cooked Sacabambaspis",
   "item.marvelous_menagerie.golden_saca": "Golden Sacabambaspis",
 
@@ -503,6 +503,8 @@
   "block.marvelous_menagerie.permafrost_mosaic_slab": "Permafrost Mosaic Slab",
   "block.marvelous_menagerie.permafrost_mosaic_wall": "Permafrost Mosaic Wall",
   "block.marvelous_menagerie.chiseled_permafrost": "Chiseled Permafrost",
+
+  "block.marvelous_menagerie.paleo_table": "Paleontology Table",
 
   "item.marvelous_menagerie.chronotite": "Chronotite",
   "block.marvelous_menagerie.chronotite_block": "Chronotite Block",

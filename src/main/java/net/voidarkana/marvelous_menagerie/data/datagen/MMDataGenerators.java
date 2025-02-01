@@ -11,6 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMBlockStateProvider;
 import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMBlockTagGenerator;
 import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMItemModelProvider;
+import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMItemTagGenerator;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -33,7 +34,7 @@ public class MMDataGenerators {
         MMBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new MMBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-        //generator.addProvider(event.includeServer(),new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(),new MMItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
         //generator.addProvider(true, new ModEntityTagsGenerator(packOutput, lookupProvider, existingFileHelper));
 

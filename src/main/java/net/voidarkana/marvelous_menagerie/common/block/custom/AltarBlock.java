@@ -64,13 +64,14 @@ public class AltarBlock extends BaseEntityBlock {
             if (!(pLevel instanceof ServerLevel)) {
                 return InteractionResult.SUCCESS;
             } else {
-                boolean[] itemUsed = new boolean[4];;
-
-                boolean[] itemChecked = new boolean[4];
 
                 EntityType<?> entitytype = MMEntities.CHUD.get();
 
                 for (RitualManager.RitualProcessData data : RitualManager.DATA) {
+                    boolean[] itemUsed = new boolean[4];;
+
+                    boolean[] itemChecked = new boolean[4];
+
                     int itemCount = 0;
 
                     Item[] inputs = new Item[4];
@@ -79,10 +80,12 @@ public class AltarBlock extends BaseEntityBlock {
                     inputs[2] = data.input3();
                     inputs[3] = data.input4();
 
+
                     for (int i = 0; i<4; i++){
                         for (int s = 0; s<4; s++){
                             if (!itemUsed[i] && !itemChecked[s]){
                                 if (ingredients[i] == inputs[s]) {
+                                    System.out.println(ingredients[i]);
                                     itemUsed[i] = true;
                                     itemChecked[s] = true;
                                     itemCount++;
@@ -90,6 +93,8 @@ public class AltarBlock extends BaseEntityBlock {
                             }
                         }
                     }
+
+                    System.out.println(itemCount);
 
                     if (itemCount == 4){
                         entitytype = data.output();

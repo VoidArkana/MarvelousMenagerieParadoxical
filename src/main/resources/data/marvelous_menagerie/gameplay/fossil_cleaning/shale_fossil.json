@@ -1,0 +1,13 @@
+{
+  "input": ["marvelous_menagerie:shale_fossil"],
+  "entries": [
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:arandaspis_fossil"
+    },
+    {
+      "weight": 15,
+      "item": "marvelous_menagerie:saca_fossil"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.block;
 
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -11,6 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.AltarBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.PaleontologyTableBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.PedestalBlock;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
@@ -607,6 +610,10 @@ public class MMBlocks {
 
     public static final RegistryObject<Block> CHRONO_ALTAR = registerBlock("chrono_altar",
             ()-> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
+
+    public static final RegistryObject<Block> PALEO_TABLE = registerBlock("paleo_table",
+            ()-> new PaleontologyTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), SoundEvents.BRUSH_SAND,
+                    SoundEvents.BRUSH_SAND_COMPLETED));
 
     private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block){
         return MMItems.ITEMS.register(name, ()-> new BlockItem(block.get(), new Item.Properties()));

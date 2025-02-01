@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.event;
+package net.voidarkana.marvelous_menagerie.client.events;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
