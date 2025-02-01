@@ -55,8 +55,8 @@ public class BrushItemMixin extends Item {
                     if (flag) {
                         BlockPos blockpos = blockhitresult.getBlockPos();
                         BlockState blockstate = pLevel.getBlockState(blockpos);
-                        HumanoidArm humanoidarm = pLivingEntity.getUsedItemHand() == InteractionHand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
-                        this.spawnDustParticles(pLevel, blockhitresult, blockstate, pLivingEntity.getViewVector(0.0F), humanoidarm);
+                        //HumanoidArm humanoidarm = pLivingEntity.getUsedItemHand() == InteractionHand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
+                        //this.spawnDustParticles(pLevel, blockhitresult, blockstate, pLivingEntity.getViewVector(0.0F), humanoidarm);
                         Block $$18 = blockstate.getBlock();
                         SoundEvent soundevent;
                         if ($$18 instanceof PaleontologyTableBlock) {
@@ -93,18 +93,18 @@ public class BrushItemMixin extends Item {
         }, MAX_BRUSH_DISTANCE);
     }
 
-    public void spawnDustParticles(Level pLevel, BlockHitResult pHitResult, BlockState pState, Vec3 pPos, HumanoidArm pArm) {
-        double d0 = 3.0D;
-        int i = pArm == HumanoidArm.RIGHT ? 1 : -1;
-        int j = pLevel.getRandom().nextInt(7, 12);
-        BlockParticleOption blockparticleoption = new BlockParticleOption(ParticleTypes.BLOCK, pState);
-        Direction direction = pHitResult.getDirection();
-        DustParticlesDelta brushitem$dustparticlesdelta = DustParticlesDelta.fromDirection(pPos, direction);
-        Vec3 vec3 = pHitResult.getLocation();
-
-        for(int k = 0; k < j; ++k) {
-            pLevel.addParticle(blockparticleoption, vec3.x - (double)(direction == Direction.WEST ? 1.0E-6F : 0.0F), vec3.y, vec3.z - (double)(direction == Direction.NORTH ? 1.0E-6F : 0.0F), brushitem$dustparticlesdelta.xd() * (double)i * 3.0D * pLevel.getRandom().nextDouble(), 0.0D, brushitem$dustparticlesdelta.zd() * (double)i * 3.0D * pLevel.getRandom().nextDouble());
-        }
-
-    }
+//    public void spawnDustParticles(Level pLevel, BlockHitResult pHitResult, BlockState pState, Vec3 pPos, HumanoidArm pArm) {
+//        double d0 = 3.0D;
+//        int i = pArm == HumanoidArm.RIGHT ? 1 : -1;
+//        int j = pLevel.getRandom().nextInt(7, 12);
+//        BlockParticleOption blockparticleoption = new BlockParticleOption(ParticleTypes.BLOCK, pState);
+//        Direction direction = pHitResult.getDirection();
+//        DustParticlesDelta brushitem$dustparticlesdelta = DustParticlesDelta.fromDirection(pPos, direction);
+//        Vec3 vec3 = pHitResult.getLocation();
+//
+//        for(int k = 0; k < j; ++k) {
+//            pLevel.addParticle(blockparticleoption, vec3.x - (double)(direction == Direction.WEST ? 1.0E-6F : 0.0F), vec3.y, vec3.z - (double)(direction == Direction.NORTH ? 1.0E-6F : 0.0F), brushitem$dustparticlesdelta.xd() * (double)i * 3.0D * pLevel.getRandom().nextDouble(), 0.0D, brushitem$dustparticlesdelta.zd() * (double)i * 3.0D * pLevel.getRandom().nextDouble());
+//        }
+//
+//    }
 }

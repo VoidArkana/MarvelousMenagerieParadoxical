@@ -8,6 +8,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -43,7 +44,7 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
     }
 
     public InteractionResult onActivated(BlockState state, BlockPos pos, Player player, InteractionHand hand) {
-        if (hand == InteractionHand.MAIN_HAND && level != null && !level.isClientSide) {
+        if (level != null && !level.isClientSide) {
             ItemStack itemInHand = player.getItemInHand(hand);
             boolean flag = itemInHand.is(MMTags.Items.NATURAL_FOSSILS);
             if (itemInHand.isEmpty() && !stack.isEmpty()) {
@@ -108,6 +109,9 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
             this.dropContent();
             BlockState blockstate = this.getBlockState();
             this.level.levelEvent(3008, this.getBlockPos(), Block.getId(blockstate));
+            this.brushCountResetsAtTick = 0;
+            this.coolDownEndsAtTick = 0;
+            this.brushCount=0;
         }
     }
 
@@ -136,6 +140,7 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
                 ItemEntity itementity = new ItemEntity(this.level, d3, d4, d5, result);
                 itementity.setDeltaMovement(Vec3.ZERO);
                 this.level.addFreshEntity(itementity);
+                ExperienceOrb.award((ServerLevel) this.level, new Vec3(d3, d4, d5), 1);
                 this.stack = ItemStack.EMPTY;
             }
 
