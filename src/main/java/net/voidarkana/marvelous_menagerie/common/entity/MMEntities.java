@@ -11,6 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 
 public class MMEntities {
 
@@ -35,6 +36,10 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Sacabambaspis::new, MobCategory.WATER_AMBIENT)
                             .sized(1.1f, 0.5f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "sacabambaspis").toString()));
+
+    public static final RegistryObject<EntityType<Fracture>> FRACTURE =
+            ENTITY_TYPES.register("fracture", () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)
+                    .sized(1.5f, 1.5f).build("fracture"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

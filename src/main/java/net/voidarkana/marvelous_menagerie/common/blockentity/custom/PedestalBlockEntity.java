@@ -42,13 +42,17 @@ public class PedestalBlockEntity extends BlockEntityBase implements IRitualItemP
                 if (!level.isClientSide) sync();
                 return InteractionResult.SUCCESS;
             } else if (!itemInHand.isEmpty() && stack.isEmpty()) {
-                stack = itemInHand.split(1);
+                stack = player.isCreative() ? itemInHand.copyWithCount(1) : itemInHand.split(1);
                 if (!level.isClientSide) sync();
                 return InteractionResult.SUCCESS;
             } else if (!itemInHand.isEmpty() && !stack.isEmpty()) {
-                ItemStack oldstack = stack.copy();
-                stack = itemInHand.split(1);
-                ItemHandlerHelper.giveItemToPlayer(player, oldstack);
+                if (player.isCreative()){
+                    stack = itemInHand.copyWithCount(1);
+                }else {
+                    ItemStack oldstack = stack.copy();
+                    stack = itemInHand.split(1);
+                    ItemHandlerHelper.giveItemToPlayer(player, oldstack);
+                }
                 if (!level.isClientSide) sync();
                 return InteractionResult.SUCCESS;
             }

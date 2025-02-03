@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.event;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
@@ -49,6 +50,8 @@ public class ModEvents {
 //        event.put(MMEntities.HALLUCIGENIA.get(), HallucigeniaEntity.createAttributes().build());
 //
 //        event.put(MMEntities.CHARNIA_ENTITY.get(), PlantEntity.createAttributes().build());
+
+        event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
     }
 
     @SubscribeEvent

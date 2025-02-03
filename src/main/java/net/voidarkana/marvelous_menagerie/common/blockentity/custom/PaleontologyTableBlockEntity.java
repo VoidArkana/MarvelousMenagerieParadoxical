@@ -44,7 +44,7 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
     }
 
     public InteractionResult onActivated(BlockState state, BlockPos pos, Player player, InteractionHand hand) {
-        if (level != null && !level.isClientSide) {
+        if (hand == InteractionHand.MAIN_HAND && level != null && !level.isClientSide) {
             ItemStack itemInHand = player.getItemInHand(hand);
             boolean flag = itemInHand.is(MMTags.Items.NATURAL_FOSSILS);
             if (itemInHand.isEmpty() && !stack.isEmpty()) {

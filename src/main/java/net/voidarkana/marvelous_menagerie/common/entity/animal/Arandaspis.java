@@ -94,8 +94,17 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         return Bucketable.bucketMobPickup(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
     }
 
-    public void saveToBucketTag(ItemStack pStack) {
-        Bucketable.saveDefaultDataToBucketTag(this, pStack);
+    public void saveToBucketTag(ItemStack bucket) {
+        CompoundTag compoundnbt = bucket.getOrCreateTag();
+        Bucketable.saveDefaultDataToBucketTag(this, bucket);
+        compoundnbt.putFloat("Health", this.getHealth());
+
+        compoundnbt.putInt("Age", this.getAge());
+        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+
+        if (this.hasCustomName()) {
+            bucket.setHoverName(this.getCustomName());
+        }
     }
 
     public void loadFromBucketTag(CompoundTag pTag) {
@@ -180,7 +189,6 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
                 this.schoolSize = 1;
             }
         }
-
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }
@@ -202,7 +210,6 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         } else {
             f = 0f;
         }
-
         this.walkAnimation.update(f, 0.2f);
     }
 
@@ -218,7 +225,6 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         if (this.isFollower()) {
             this.getNavigation().moveTo(this.leader, 1.0D);
         }
-
     }
 
     public void addFollowers(Stream<? extends Arandaspis> pFollowers) {
@@ -239,8 +245,10 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
             this.startFollowing(((Arandaspis.SchoolSpawnGroupData)pSpawnData).leader);
         }
 
-        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("FromBucket", 3)) {
-            this.setFromBucket(pDataTag.getBoolean("FromBucket"));
+        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("Age", 3)) {
+            if (pDataTag.contains("Age")) {
+                this.setAge(pDataTag.getInt("Age"));}
+            this.setFromBucket(pDataTag.getBoolean("CanGrowUp"));
             this.setFromBucket(true);
         }
 

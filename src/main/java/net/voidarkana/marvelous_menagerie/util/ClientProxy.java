@@ -13,6 +13,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.AltarRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.FractureRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.ArandaspisRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.SacaRenderer;
@@ -39,6 +40,8 @@ public class ClientProxy extends CommonProxy{
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.PALEO_TABLE_ENTITY.get(), PaleoTableRenderer::new);
+
+        EntityRenderers.register(MMEntities.FRACTURE.get(), FractureRenderer::new);
         //MenuScreens.register(MMMenuTypes.FOSSIL_MINIGAME_CONTAINER.get(), FossilMinigameScreen::new);
     }
 
