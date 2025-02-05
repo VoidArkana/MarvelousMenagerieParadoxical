@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.entity.misc;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -93,6 +94,24 @@ public class Fracture extends LivingEntity {
 //    public boolean isInvulnerable() {
 //        return true;
 //    }
+
+
+    @Override
+    public void tick() {
+
+        if (this.getRandom().nextInt(4) == 0) {
+            this.level().addParticle(ParticleTypes.ENCHANT, this.blockPosition().getX() + 0.5D,
+                    this.blockPosition().getY() + 2.5D, this.blockPosition().getZ() + 0.5D,
+                    this.getRandom().nextInt(-2, 3),
+                    this.getRandom().nextInt(-4, 3),
+                    this.getRandom().nextInt(-2, 3));
+        }
+
+        super.tick();
+
+//        if (this.level().isClientSide){
+//        }
+    }
 
     public void push(Entity pEntity) {
         if (pEntity instanceof Boat) {

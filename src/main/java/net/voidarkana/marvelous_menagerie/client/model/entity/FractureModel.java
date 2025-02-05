@@ -71,18 +71,22 @@ public class FractureModel<T extends Fracture> extends EntityModel<T> {
 		this.slice_3.yRot = f / 6.0F;
 		this.slice_4.yRot = f / 8.0F;
 
+		this.slice_1.y = -Mth.cos(f/2)*2;
 		this.slice_1.xScale = 1+Mth.sin(f)/8;
 		this.slice_1.yScale = 1+Mth.sin(f)/8;
 		this.slice_1.zScale = 1+Mth.sin(f)/8;
 
+		this.slice_2.y = -Mth.sin(f/2)*2;
 		this.slice_2.xScale = 1+Mth.cos(f)/8;
 		this.slice_2.yScale = 1+Mth.cos(f)/8;
 		this.slice_2.zScale = 1+Mth.cos(f)/8;
 
+		this.slice_3.y = Mth.cos(f/2)*2;
 		this.slice_3.xScale = 1-Mth.sin(f)/8;
 		this.slice_3.yScale = 1-Mth.sin(f)/8;
 		this.slice_3.zScale = 1-Mth.sin(f)/8;
 
+		this.slice_4.y = Mth.sin(f/2)*2;
 		this.slice_4.xScale = 1-Mth.cos(f)/8;
 		this.slice_4.yScale = 1-Mth.cos(f)/8;
 		this.slice_4.zScale = 1-Mth.cos(f)/8;
