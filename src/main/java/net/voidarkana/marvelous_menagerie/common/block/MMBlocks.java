@@ -609,7 +609,9 @@ public class MMBlocks {
             ()-> new PedestalBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
 
     public static final RegistryObject<Block> CHRONO_ALTAR = registerBlock("chrono_altar",
-            ()-> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER)));
+            ()-> new AltarBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.COPPER).lightLevel((p_187437_) -> {
+                return 7;
+            })));
 
     public static final RegistryObject<Block> PALEO_TABLE = registerBlock("paleo_table",
             ()-> new PaleontologyTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), SoundEvents.BRUSH_SAND,

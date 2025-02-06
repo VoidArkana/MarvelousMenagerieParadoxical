@@ -5,26 +5,30 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.events.ClientEvents;
 import net.voidarkana.marvelous_menagerie.client.events.ForgeClientEvents;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.FractureEmmissive;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 
 public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureModel<Fracture>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture.png");
+
     private static final float HALF_SQRT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
 
     public FractureRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_LAYER)), 0);
+        this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
+                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_emmissive.png")));
     }
 
     @Override
@@ -32,46 +36,62 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         return TEXTURE;
     }
 
-
     @Override
     public void render(Fracture pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-
-        float f5 = 0.5F;
-        float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
-        RandomSource randomsource = RandomSource.create(432L);
-        VertexConsumer vertexconsumer2 = pBuffer.getBuffer(RenderType.lightning());
-
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0F, 0.7F, 0F);
-        pPoseStack.scale(0.05f, 0.05f, 0.05f);
 
-        float rotation = ForgeClientEvents.getClientTicks() / 300;
+        float scaleClosing;
+        float scaleOpeningLag;
+        float scaleOpening;
 
-        for(int i = 0; (float)i < (f5 + f5 * f5) / 2.0F * 60.0F; ++i) {
-            pPoseStack.mulPose(Axis.XP.rotationDegrees(randomsource.nextFloat() * 360.0F));
-            pPoseStack.mulPose(Axis.YP.rotationDegrees(randomsource.nextFloat() * 360.0F));
-            pPoseStack.mulPose(Axis.ZP.rotationDegrees(randomsource.nextFloat() * 360.0F));
-            pPoseStack.mulPose(Axis.XP.rotationDegrees(randomsource.nextFloat() * 360.0F));
-            pPoseStack.mulPose(Axis.YP.rotationDegrees(randomsource.nextFloat() * 360.0F));
-            pPoseStack.mulPose(Axis.ZP.rotationDegrees(randomsource.nextFloat() * 360.0F + rotation * 90.0F));
-            float f3 = randomsource.nextFloat() * 20.0F + 5.0F + f7 * 10.0F;
-            float f4 = randomsource.nextFloat() * 2.0F + 1.0F + f7 * 2.0F;
-            Matrix4f matrix4f = pPoseStack.last().pose();
-            int j = (int)(255.0F * (1.0F - f7));
-            vertex01(vertexconsumer2, matrix4f, j);
-            vertex2(vertexconsumer2, matrix4f, f3, f4);
-            vertex3(vertexconsumer2, matrix4f, f3, f4);
-            vertex01(vertexconsumer2, matrix4f, j);
-            vertex3(vertexconsumer2, matrix4f, f3, f4);
-            vertex4(vertexconsumer2, matrix4f, f3, f4);
-            vertex01(vertexconsumer2, matrix4f, j);
-            vertex4(vertexconsumer2, matrix4f, f3, f4);
-            vertex2(vertexconsumer2, matrix4f, f3, f4);
+        if (pEntity.getClosingTime()>0){
+            scaleClosing = (float) ((float) 1-Math.cos((double) pEntity.getClosingTime()/4));
+        } else {
+            scaleClosing = 1;
         }
 
-        pPoseStack.popPose();
+        scaleOpening = (float) ((Math.sin((double) pEntity.getOpeningTime()/13)));
+        scaleOpeningLag = (float) ((Math.sin((double) pEntity.getOpeningTimeLag()/13)));
 
-        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+
+        pPoseStack.scale(scaleOpening * scaleClosing, scaleOpening * scaleClosing, scaleOpening * scaleClosing);
+            float f5 = 0.5F;
+            float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
+            RandomSource randomsource = RandomSource.create(432L);
+            VertexConsumer vertexconsumer2 = pBuffer.getBuffer(RenderType.lightning());
+
+            pPoseStack.pushPose();
+            pPoseStack.translate(0.0F, 0.7F, 0F);
+            pPoseStack.scale(0.05f, 0.05f, 0.05f);
+            pPoseStack.scale(scaleOpeningLag, scaleOpeningLag, scaleOpeningLag);
+
+            float rotation = ForgeClientEvents.getClientTicks() / 300;
+
+            for(int i = 0; (float)i < (f5 + f5 * f5) / 2.0F * 60.0F; ++i) {
+                pPoseStack.mulPose(Axis.XP.rotationDegrees(randomsource.nextFloat() * 360.0F));
+                pPoseStack.mulPose(Axis.YP.rotationDegrees(randomsource.nextFloat() * 360.0F));
+                pPoseStack.mulPose(Axis.ZP.rotationDegrees(randomsource.nextFloat() * 360.0F));
+                pPoseStack.mulPose(Axis.XP.rotationDegrees(randomsource.nextFloat() * 360.0F));
+                pPoseStack.mulPose(Axis.YP.rotationDegrees(randomsource.nextFloat() * 360.0F));
+                pPoseStack.mulPose(Axis.ZP.rotationDegrees(randomsource.nextFloat() * 360.0F + rotation * 90.0F));
+                float f3 = randomsource.nextFloat() * 20.0F + 5.0F + f7 * 10.0F;
+                float f4 = randomsource.nextFloat() * 2.0F + 1.0F + f7 * 2.0F;
+                Matrix4f matrix4f = pPoseStack.last().pose();
+                int j = (int)(255.0F * (1.0F - f7));
+                vertex01(vertexconsumer2, matrix4f, j);
+                vertex2(vertexconsumer2, matrix4f, f3, f4);
+                vertex3(vertexconsumer2, matrix4f, f3, f4);
+                vertex01(vertexconsumer2, matrix4f, j);
+                vertex3(vertexconsumer2, matrix4f, f3, f4);
+                vertex4(vertexconsumer2, matrix4f, f3, f4);
+                vertex01(vertexconsumer2, matrix4f, j);
+                vertex4(vertexconsumer2, matrix4f, f3, f4);
+                vertex2(vertexconsumer2, matrix4f, f3, f4);
+            }
+            pPoseStack.popPose();
+
+            super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+        pPoseStack.popPose();
     }
 
     private static void vertex01(VertexConsumer pConsumer, Matrix4f pMatrix, int pAlpha) {

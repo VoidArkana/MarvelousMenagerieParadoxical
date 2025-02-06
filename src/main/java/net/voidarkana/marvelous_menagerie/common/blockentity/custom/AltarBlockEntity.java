@@ -7,16 +7,13 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -58,7 +55,7 @@ public class AltarBlockEntity extends BlockEntityBase {
         System.out.println("discarding");
         if (this.getFracture(pos) != null){
             System.out.println("discarded!");
-            this.getFracture(pos).discard();
+            this.getFracture(pos).closeFracture();
         }
     }
 
@@ -106,7 +103,6 @@ public class AltarBlockEntity extends BlockEntityBase {
                 }else {
                     Fracture fracture = new Fracture(this.level, pos.getCenter().x(), pos.getCenter().y()+2, pos.getCenter().z());
                     fracture.setIsNatural(true);
-                    System.out.println(pos);
                     this.level.addFreshEntity(fracture);
                     this.hasFracture = true;
                 }

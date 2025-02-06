@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
@@ -55,6 +56,7 @@ public class MarvelousMenagerie
         modEventBus.addListener(this::setupClient);
 
         MMEntities.register(modEventBus);
+        MMParticles.register(modEventBus);
 
         MMBlocks.register(modEventBus);
         MMBlockEntities.register(modEventBus);

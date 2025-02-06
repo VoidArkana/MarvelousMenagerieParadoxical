@@ -54,4 +54,5 @@ public class ClientProxy extends CommonProxy{
     public void openToolkitGUI(Player player, BlockPos clicked) {
         Minecraft.getInstance().setScreen(new FossilMinigameScreen(player, clicked));
     }
+
 }

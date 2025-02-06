@@ -37,6 +37,7 @@ public class FractureModel<T extends Fracture> extends EntityModel<T> {
 
 		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(),
 				PartPose.offset(0.0F, 24.0F, 0.0F));
+
 		PartDefinition fracture = root.addOrReplaceChild("fracture", CubeListBuilder.create(),
 				PartPose.offset(0.0F, -20.5F, 0.0F));
 		PartDefinition slice_1 = fracture.addOrReplaceChild("slice_1", CubeListBuilder.create()
@@ -64,12 +65,19 @@ public class FractureModel<T extends Fracture> extends EntityModel<T> {
 	public void setupAnim(Fracture entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = (ageInTicks * (float)Math.PI * -0.1F)/2;
 
-		this.fracture.y = -12.5f;
+		this.fracture.y = -12.5f+Mth.cos(f/2)*2;
 
 		this.slice_1.yRot = f / 2.0F;
+		this.slice_1.xRot = Mth.sin(f*10)/75;
+
 		this.slice_2.yRot = f / 4.0F;
+		this.slice_2.xRot = -Mth.sin(f*10)/75;
+
 		this.slice_3.yRot = f / 6.0F;
+		this.slice_3.xRot = Mth.cos(f*10)/75;
+
 		this.slice_4.yRot = f / 8.0F;
+		this.slice_4.xRot = -Mth.cos(f*10)/75;
 
 		this.slice_1.y = -Mth.cos(f/2)*2;
 		this.slice_1.xScale = 1+Mth.sin(f)/8;
