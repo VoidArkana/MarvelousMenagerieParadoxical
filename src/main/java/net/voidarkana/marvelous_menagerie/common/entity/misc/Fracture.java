@@ -214,16 +214,16 @@ public class Fracture extends LivingEntity {
     public boolean hurt(DamageSource pSource, float pAmount) {
         if (this.isInvulnerableTo(pSource)) {
             return false;
-        } else if (!this.level().isClientSide && !this.isRemoved()) {
+        } else if (!this.level().isClientSide && !this.isRemoved() && this.getClosingTime()==0) {
             this.markHurt();
             this.gameEvent(GameEvent.ENTITY_DAMAGE, pSource.getEntity());
             boolean flag = pSource.getEntity() instanceof Player && ((Player)pSource.getEntity()).getAbilities().instabuild;
             if (flag) {
-                this.discard();
+                this.closeFracture();
             }
-            return true;
+            return false;
         } else {
-            return true;
+            return false;
         }
     }
 

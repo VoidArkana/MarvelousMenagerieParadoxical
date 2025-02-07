@@ -45,14 +45,14 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         float scaleOpening;
 
         if (pEntity.getClosingTime()>0){
-            scaleClosing = (float) ((float) 1-Math.cos((double) pEntity.getClosingTime()/4));
+            scaleClosing = 1 + ((float) (20 - pEntity.getClosingTime()) /30);
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(((ForgeClientEvents.getClientTicks() / 300)*scaleClosing)*(20 - pEntity.getClosingTime())/5));
         } else {
             scaleClosing = 1;
         }
 
         scaleOpening = (float) ((Math.sin((double) pEntity.getOpeningTime()/13)));
         scaleOpeningLag = (float) ((Math.sin((double) pEntity.getOpeningTimeLag()/13)));
-
 
         pPoseStack.scale(scaleOpening * scaleClosing, scaleOpening * scaleClosing, scaleOpening * scaleClosing);
             float f5 = 0.5F;
@@ -64,6 +64,9 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
             pPoseStack.translate(0.0F, 0.7F, 0F);
             pPoseStack.scale(0.05f, 0.05f, 0.05f);
             pPoseStack.scale(scaleOpeningLag, scaleOpeningLag, scaleOpeningLag);
+
+            if (pEntity.getClosingTime()>0)
+                pPoseStack.mulPose(Axis.YP.rotationDegrees(((ForgeClientEvents.getClientTicks() / 300)*scaleClosing)*(20 - pEntity.getClosingTime())/5));
 
             float rotation = ForgeClientEvents.getClientTicks() / 300;
 
