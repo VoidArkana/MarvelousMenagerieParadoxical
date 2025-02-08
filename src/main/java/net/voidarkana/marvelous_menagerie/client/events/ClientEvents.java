@@ -11,8 +11,7 @@ import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.block.AltarSkullModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ArandaspisModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.SacaModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParticle;
 
@@ -29,6 +28,9 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.CHUD_LAYER, ChudModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SACA_LAYER, SacaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.ARANDASPIS_LAYER, ArandaspisModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.FALCATUS_LAYER, FalcatusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.EOLACTORIA_LAYER, EolactoriaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.SLOVENICUS_LAYER, SlovenicusModel::createBodyLayer);
     }
 
     @SubscribeEvent

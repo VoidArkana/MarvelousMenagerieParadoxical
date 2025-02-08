@@ -543,5 +543,17 @@
   "item.marvelous_menagerie.theri_fossil": "Therizinosaurus Fossil",
   "item.marvelous_menagerie.daeodon_fossil": "Daeodon Fossil",
   "item.marvelous_menagerie.kelenken_fossil": "Kelenken Fossil",
-  "item.marvelous_menagerie.pelta_fossil": "Borealopelta Fossil"
+  "item.marvelous_menagerie.pelta_fossil": "Borealopelta Fossil",
+
+  "entity.marvelous_menagerie.falcatus": "Falcatus",
+  "item.marvelous_menagerie.falcatus_bucket": "Bucket of Falcatus",
+  "item.marvelous_menagerie.falcatus_spawn_egg": "Falcatus Spawn Egg",
+
+  "entity.marvelous_menagerie.eolactoria": "Eolactoria",
+  "item.marvelous_menagerie.eolactoria_bucket": "Bucket of Eolactoria",
+  "item.marvelous_menagerie.eolactoria_spawn_egg": "Eolactoria Spawn Egg",
+
+  "entity.marvelous_menagerie.slovenicus": "Slovenicus",
+  "item.marvelous_menagerie.slovenicus_bucket": "Bucket of Slovenicus",
+  "item.marvelous_menagerie.slovenicus_spawn_egg": "Slovenicus Spawn Egg"
 }

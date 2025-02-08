@@ -68,6 +68,11 @@ public class MMItems {
     //Falcatus
     public static final RegistryObject<Item> FALCA_FOSSIL = ITEMS.register("falca_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FALCA_SPAWN_EGG = ITEMS.register("falcatus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.FALCATUS, 0x9bcbaf, 0xc0d3ca, new Item.Properties()));
+    public static final RegistryObject<Item> FALCA_BUCKET = ITEMS.register("falcatus_bucket",
+            () -> new FishBucketItem(MMEntities.FALCATUS, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Apthoroblattina
     public static final RegistryObject<Item> ROACH_FOSSIL = ITEMS.register("roach_fossil",
@@ -116,6 +121,11 @@ public class MMItems {
     //Eolactoria
     public static final RegistryObject<Item> EOLACTORIA_FOSSIL = ITEMS.register("eolactoria_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EOLACTORIA_SPAWN_EGG = ITEMS.register("eolactoria_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.EOLACTORIA, 0xa86640, 0xf1d87f, new Item.Properties()));
+    public static final RegistryObject<Item> EOLACTORIA_BUCKET = ITEMS.register("eolactoria_bucket",
+            () -> new FishBucketItem(MMEntities.EOLACTORIA, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Kelenken
     public static final RegistryObject<Item> KELENKEN_FOSSIL = ITEMS.register("kelenken_fossil",
@@ -128,6 +138,11 @@ public class MMItems {
     //Slovenicus
     public static final RegistryObject<Item> SLOV_FOSSIL = ITEMS.register("slov_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SLOVENICUS_SPAWN_EGG = ITEMS.register("slovenicus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.SLOVENICUS, 0x713126, 0x9de444, new Item.Properties()));
+    public static final RegistryObject<Item> SLOVENICUS_BUCKET = ITEMS.register("slovenicus_bucket",
+            () -> new FishBucketItem(MMEntities.SLOVENICUS, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Dodo
     public static final RegistryObject<Item> DODO_FOSSIL = ITEMS.register("dodo_fossil",

@@ -13,6 +13,7 @@ import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 public class MMCreativeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MarvelousMenagerie.MODID);
+
     public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_TAB =
             CREATIVE_MODE_TABS.register("marvelous_menagerie_tab", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMItems.SHALE_FOSSIL.get()))
                     .title(Component.translatable("creativetab.marvelous_menagerie_tab"))
@@ -39,10 +40,16 @@ public class MMCreativeTab {
 
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
 
+                        output.accept(MMItems.EOLACTORIA_BUCKET.get());
+
+                        output.accept(MMItems.FALCA_BUCKET.get());
+
                         output.accept(MMItems.SACA_BUCKET.get());
                         output.accept(MMItems.SACABAMBASPIS.get());
                         output.accept(MMItems.COOKED_SACA.get());
                         output.accept(MMItems.GOLDEN_SACA.get());
+
+                        output.accept(MMItems.SLOVENICUS_BUCKET.get());
 
                         output.accept(MMItems.CARIS_FOSSIL.get());
                         output.accept(MMItems.ROACH_FOSSIL.get());
@@ -74,7 +81,10 @@ public class MMCreativeTab {
 
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
+                        output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
+                        output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
+                        output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
 
                         output.accept(MMBlocks.SHALE.get());
                         output.accept(MMBlocks.SHALE_SLAB.get());

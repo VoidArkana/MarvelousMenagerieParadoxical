@@ -54,8 +54,17 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.ELEBIRD_FOSSIL);
         simpleItem(MMItems.DOEDICURUS_FOSSIL);
 
+        simpleItem(MMItems.SLOVENICUS_BUCKET);
+        withExistingParent(MMItems.SLOVENICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.ARANDASPIS_BUCKET);
         withExistingParent(MMItems.ARANDASPIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        simpleItem(MMItems.FALCA_BUCKET);
+        withExistingParent(MMItems.FALCA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        simpleItem(MMItems.EOLACTORIA_BUCKET);
+        withExistingParent(MMItems.EOLACTORIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.SACABAMBASPIS);
         simpleItem(MMItems.GOLDEN_SACA);

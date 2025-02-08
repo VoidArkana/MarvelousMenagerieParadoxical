@@ -15,6 +15,12 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "sacabambaspis"), "main");
     public static final ModelLayerLocation ARANDASPIS_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "arandaspis"), "main");
+    public static final ModelLayerLocation FALCATUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "falcatus"), "main");
+    public static final ModelLayerLocation EOLACTORIA_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "eolactoria"), "main");
+    public static final ModelLayerLocation SLOVENICUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "slovenicus"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");

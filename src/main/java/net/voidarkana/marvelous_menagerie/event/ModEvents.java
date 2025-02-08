@@ -9,8 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
@@ -20,7 +19,13 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event){
+
         event.put(MMEntities.CHUD.get(), Chud.createAttributes().build());
+        event.put(MMEntities.SACABAMBASPIS.get(), Sacabambaspis.createAttributes().build());
+        event.put(MMEntities.ARANDASPIS.get(), Arandaspis.createAttributes().build());
+        event.put(MMEntities.FALCATUS.get(), Falcatus.createAttributes().build());
+        event.put(MMEntities.EOLACTORIA.get(), Eolactoria.createAttributes().build());
+        event.put(MMEntities.SLOVENICUS.get(), Slovenicus.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());
@@ -29,26 +34,17 @@ public class ModEvents {
 //        event.put(MMEntities.BABY_STELLER_SEA_COW.get(), BabyStellerEntity.createAttributes().build());
 //        event.put(MMEntities.SIGILLARIA_SAPLING_ENTITY.get(), PlantEntity.createAttributes().build());
 //        event.put(MMEntities.COOKSONIA_ENTITY.get(), PlantEntity.createAttributes().build());
-//
 //        event.put(MMEntities.TRILOBITE.get(), TrilobiteEntity.createAttributes().build());
-        event.put(MMEntities.SACABAMBASPIS.get(), Sacabambaspis.createAttributes().build());
 //        event.put(MMEntities.PROTOTAXITES_ENTITY.get(), PlantEntity.createAttributes().build());
 //        event.put(MMEntities.DICKINSONIA_ENTITY.get(), PlantEntity.createAttributes().build());
 //        event.put(MMEntities.ANOMALOCARIS.get(), AnomalocarisEntity.createAttributes().build());
 //        event.put(MMEntities.BABY_ANOMALOCARIS.get(), BabyAnomalocarisEntity.createAttributes().build());
-//
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());
 //        event.put(MMEntities.BABY_OPHTHALMO.get(), BabyOphthalmoEntity.createAttributes().build());
-//
 //        event.put(MMEntities.JOSEPHO.get(), JosephoEntity.createAttributes().build());
-//
 //        event.put(MMEntities.PIKAIA.get(), PikaiaEntity.createAttributes().build());
-//
 //        event.put(MMEntities.WIWAXIA_ENTITY.get(), PlantEntity.createAttributes().build());
-//
-        event.put(MMEntities.ARANDASPIS.get(), Arandaspis.createAttributes().build());
 //        event.put(MMEntities.HALLUCIGENIA.get(), HallucigeniaEntity.createAttributes().build());
-//
 //        event.put(MMEntities.CHARNIA_ENTITY.get(), PlantEntity.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());

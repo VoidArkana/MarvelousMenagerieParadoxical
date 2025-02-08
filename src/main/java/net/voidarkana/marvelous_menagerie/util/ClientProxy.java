@@ -15,8 +15,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRender
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.FractureRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.ArandaspisRenderer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.SacaRenderer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -36,6 +35,9 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.CHUD.get(), ChudRenderer::new);
         EntityRenderers.register(MMEntities.SACABAMBASPIS.get(), SacaRenderer::new);
         EntityRenderers.register(MMEntities.ARANDASPIS.get(), ArandaspisRenderer::new);
+        EntityRenderers.register(MMEntities.FALCATUS.get(), FalcatusRenderer::new);
+        EntityRenderers.register(MMEntities.EOLACTORIA.get(), EolactoriaRenderer::new);
+        EntityRenderers.register(MMEntities.SLOVENICUS.get(), SlovenicusRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);

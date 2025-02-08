@@ -9,8 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 
 public class MMEntities {
@@ -36,6 +35,24 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Sacabambaspis::new, MobCategory.WATER_AMBIENT)
                             .sized(1.1f, 0.5f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "sacabambaspis").toString()));
+
+    public static final RegistryObject<EntityType<Falcatus>> FALCATUS =
+            ENTITY_TYPES.register("falcatus",
+                    () -> EntityType.Builder.of(Falcatus::new, MobCategory.WATER_AMBIENT)
+                            .sized(1.1f, 0.5f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "falcatus").toString()));
+
+    public static final RegistryObject<EntityType<Eolactoria>> EOLACTORIA =
+            ENTITY_TYPES.register("eolactoria",
+                    () -> EntityType.Builder.of(Eolactoria::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.5f, 0.35f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "eolactoria").toString()));
+
+    public static final RegistryObject<EntityType<Slovenicus>> SLOVENICUS =
+            ENTITY_TYPES.register("slovenicus",
+                    () -> EntityType.Builder.of(Slovenicus::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.35f, 0.75f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "slovenicus").toString()));
 
     public static final RegistryObject<EntityType<Fracture>> FRACTURE =
             ENTITY_TYPES.register("fracture", () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)
