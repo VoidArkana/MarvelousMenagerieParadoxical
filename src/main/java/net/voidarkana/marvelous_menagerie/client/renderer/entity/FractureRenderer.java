@@ -40,6 +40,7 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
     public void render(Fracture pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
 
+        pPoseStack.translate(0.0F, 0.1F, 0F);
         float scaleClosing;
         float scaleOpeningLag;
         float scaleOpening;
@@ -47,12 +48,14 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         if (pEntity.getClosingTime()>0){
             scaleClosing = 1 + ((float) (20 - pEntity.getClosingTime()) /30);
             pPoseStack.mulPose(Axis.YP.rotationDegrees(((ForgeClientEvents.getClientTicks() / 300)*scaleClosing)*(20 - pEntity.getClosingTime())/5));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.sin((ForgeClientEvents.getClientTicks() / 300)*scaleClosing)*(20 - pEntity.getClosingTime())/2)));
+            pPoseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.cos((ForgeClientEvents.getClientTicks() / 300)*scaleClosing)*(20 - pEntity.getClosingTime())/2)));
         } else {
             scaleClosing = 1;
         }
 
-        scaleOpening = (float) ((Math.sin((double) pEntity.getOpeningTime()/13)));
-        scaleOpeningLag = (float) ((Math.sin((double) pEntity.getOpeningTimeLag()/13)));
+        scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/13)));
+        scaleOpeningLag = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTimeLag()-20)/13)));
 
         pPoseStack.scale(scaleOpening * scaleClosing, scaleOpening * scaleClosing, scaleOpening * scaleClosing);
             float f5 = 0.5F;

@@ -15,6 +15,8 @@ public class MMParticles {
 
     public static final RegistryObject<SimpleParticleType> TIME_SHARD = register("time_shard", false);
 
+    public static final RegistryObject<SimpleParticleType> RIFT = register("rift", false);
+
     private static RegistryObject<SimpleParticleType> register(String id, boolean flag) {
         return PARTICLES.register(id, () -> new SimpleParticleType(flag));
     }

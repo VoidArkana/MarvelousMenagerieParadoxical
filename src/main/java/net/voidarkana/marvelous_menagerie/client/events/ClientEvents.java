@@ -13,6 +13,7 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
+import net.voidarkana.marvelous_menagerie.client.particles.custom.RiftParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParticle;
 
 @OnlyIn(Dist.CLIENT)
@@ -36,5 +37,6 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(MMParticles.TIME_SHARD.get(), TimeShardParticle.Provider::new);
+        event.registerSpriteSet(MMParticles.RIFT.get(), RiftParticle.Provider::new);
     }
 }

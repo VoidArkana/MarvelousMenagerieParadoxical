@@ -48,17 +48,6 @@ public class TimeShardParticle extends TextureSheetParticle {
 
     public int getLightColor(float pPartialTick) {
         return 240;
-//        float f = ((float)this.age + pPartialTick) / (float)this.lifetime;
-//        f = Mth.clamp(f, 0.0F, 1.0F);
-//        int i = super.getLightColor(pPartialTick);
-//        int j = i & 255;
-//        int k = i >> 16 & 255;
-//        j += (int)(f * 15.0F * 16.0F);
-//        if (j > 240) {
-//            j = 240;
-//        }
-//
-//        return j | k << 16;
     }
 
     public void tick() {

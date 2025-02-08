@@ -131,49 +131,75 @@ public class Fracture extends LivingEntity {
         return false;
     }
 
-//    @Override
-//    public boolean isInvulnerable() {
-//        return true;
-//    }
+    @Override
+    public boolean isInvulnerable() {
+        return super.isInvulnerable() && this.getOpeningTime()<20;
+    }
 
     @Override
     public void tick() {
 
-        if (this.getRandom().nextInt(4) == 0) {
-            int xSpeed = this.getRandom().nextInt(-2, 3);
-            int ySpeed = this.getRandom().nextInt(-2, 3);
-            int zSpeed = this.getRandom().nextInt(-2, 3);
-
-            this.level().addParticle(MMParticles.TIME_SHARD.get(),
-                    this.blockPosition().getX() + xSpeed + 0.5,
-                    this.blockPosition().getY() + ySpeed + 1,
-                    this.blockPosition().getZ() + zSpeed + 0.5,
-                    -xSpeed, -ySpeed, -zSpeed
-            );
-        }
-
-        if (this.getRandom().nextInt(16) == 0) {
-
-            int xSpeed = this.getRandom().nextInt(-2, 3);
-            int ySpeed = this.getRandom().nextInt(-2, 3);
-            int zSpeed = this.getRandom().nextInt(-2, 3);
-
-            this.level().addParticle(ParticleTypes.END_ROD,
-                    this.blockPosition().getX() + xSpeed/1.75 + 0.5,
-                    this.blockPosition().getY() + ySpeed/1.75 + 1,
-                    this.blockPosition().getZ() + zSpeed/1.75 + 0.5,
+        if (getOpeningTime()==0){
+            this.level().addParticle(MMParticles.RIFT.get(),
+                    this.blockPosition().getX() + 0.5,
+                    this.blockPosition().getY() + 0.8,
+                    this.blockPosition().getZ() + 0.5,
                     0,0,0
             );
         }
 
+        if (getOpeningTime() == 20){
+            for (int i = 0; i<20; ++i){
+                int xSpeed = this.getRandom().nextInt(-2, 3);
+                int ySpeed = this.getRandom().nextInt(-2, 3);
+                int zSpeed = this.getRandom().nextInt(-2, 3);
+
+                this.level().addParticle(MMParticles.TIME_SHARD.get(),
+                        this.blockPosition().getX() + xSpeed + 0.5,
+                        this.blockPosition().getY() + ySpeed + 1,
+                        this.blockPosition().getZ() + zSpeed + 0.5,
+                        -xSpeed, -ySpeed, -zSpeed
+                );
+            }
+        }
+
+        if (getOpeningTime()>15) {
+            if (this.getRandom().nextInt(4) == 0) {
+                int xSpeed = this.getRandom().nextInt(-2, 3);
+                int ySpeed = this.getRandom().nextInt(-2, 3);
+                int zSpeed = this.getRandom().nextInt(-2, 3);
+
+                this.level().addParticle(MMParticles.TIME_SHARD.get(),
+                        this.blockPosition().getX() + xSpeed + 0.5,
+                        this.blockPosition().getY() + ySpeed + 1,
+                        this.blockPosition().getZ() + zSpeed + 0.5,
+                        -xSpeed, -ySpeed, -zSpeed
+                );
+            }
+
+            if (this.getRandom().nextInt(16) == 0) {
+
+                int xSpeed = this.getRandom().nextInt(-2, 3);
+                int ySpeed = this.getRandom().nextInt(-2, 3);
+                int zSpeed = this.getRandom().nextInt(-2, 3);
+
+                this.level().addParticle(ParticleTypes.END_ROD,
+                        this.blockPosition().getX() + xSpeed/1.75 + 0.5,
+                        this.blockPosition().getY() + ySpeed/1.75 + 1,
+                        this.blockPosition().getZ() + zSpeed/1.75 + 0.5,
+                        0,0,0
+                );
+            }
+        }
+
         super.tick();
 
-        if (this.getOpeningTime()>2 && this.getOpeningTimeLag() < 30){
+        if (this.getOpeningTime()>2 && this.getOpeningTimeLag() < 50){
             int prevOpeningTimeLag = this.getOpeningTimeLag();
             this.setOpeningTimeLag(prevOpeningTimeLag+1);
         }
 
-        if (this.getOpeningTime()<30){
+        if (this.getOpeningTime()<50){
             int prevOpeningTime = this.getOpeningTime();
             this.setOpeningTime(prevOpeningTime+1);
         }
