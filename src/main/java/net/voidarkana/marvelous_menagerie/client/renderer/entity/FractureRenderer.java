@@ -39,8 +39,8 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
     @Override
     public void render(Fracture pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         pPoseStack.pushPose();
+        pPoseStack.translate(0.0F, 0.5F, 0F);
 
-        pPoseStack.translate(0.0F, 0.1F, 0F);
         float scaleClosing;
         float scaleOpeningLag;
         float scaleOpening;
@@ -58,6 +58,8 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         scaleOpeningLag = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTimeLag()-20)/13)));
 
         pPoseStack.scale(scaleOpening * scaleClosing, scaleOpening * scaleClosing, scaleOpening * scaleClosing);
+
+        pPoseStack.translate(0.0F, -0.5F, 0F);
             float f5 = 0.5F;
             float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
             RandomSource randomsource = RandomSource.create(432L);

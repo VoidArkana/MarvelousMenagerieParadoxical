@@ -142,7 +142,7 @@ public class Fracture extends LivingEntity {
         if (getOpeningTime()==0){
             this.level().addParticle(MMParticles.RIFT.get(),
                     this.blockPosition().getX() + 0.5,
-                    this.blockPosition().getY() + 0.8,
+                    this.blockPosition().getY() + 1.1,
                     this.blockPosition().getZ() + 0.5,
                     0,0,0
             );
@@ -156,7 +156,7 @@ public class Fracture extends LivingEntity {
 
                 this.level().addParticle(MMParticles.TIME_SHARD.get(),
                         this.blockPosition().getX() + xSpeed + 0.5,
-                        this.blockPosition().getY() + ySpeed + 1,
+                        this.blockPosition().getY() + ySpeed + 1.25,
                         this.blockPosition().getZ() + zSpeed + 0.5,
                         -xSpeed, -ySpeed, -zSpeed
                 );
@@ -171,7 +171,7 @@ public class Fracture extends LivingEntity {
 
                 this.level().addParticle(MMParticles.TIME_SHARD.get(),
                         this.blockPosition().getX() + xSpeed + 0.5,
-                        this.blockPosition().getY() + ySpeed + 1,
+                        this.blockPosition().getY() + ySpeed + 1.25,
                         this.blockPosition().getZ() + zSpeed + 0.5,
                         -xSpeed, -ySpeed, -zSpeed
                 );
@@ -185,7 +185,7 @@ public class Fracture extends LivingEntity {
 
                 this.level().addParticle(ParticleTypes.END_ROD,
                         this.blockPosition().getX() + xSpeed/1.75 + 0.5,
-                        this.blockPosition().getY() + ySpeed/1.75 + 1,
+                        this.blockPosition().getY() + ySpeed/1.75 + 1.25,
                         this.blockPosition().getZ() + zSpeed/1.75 + 0.5,
                         0,0,0
                 );
@@ -216,7 +216,7 @@ public class Fracture extends LivingEntity {
 
                     this.level().addParticle(MMParticles.TIME_SHARD.get(),
                             this.blockPosition().getX() + xSpeed + 0.5,
-                            this.blockPosition().getY() + ySpeed + 1,
+                            this.blockPosition().getY() + ySpeed + 1.25,
                             this.blockPosition().getZ() + zSpeed + 0.5,
                             -xSpeed, -ySpeed, -zSpeed
                     );

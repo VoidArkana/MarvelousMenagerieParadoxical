@@ -17,7 +17,7 @@ public class RiftParticle extends TextureSheetParticle {
         this.yd = pYSpeed;
         this.zd = pZSpeed;
         this.quadSize = 0.35F;
-        this.lifetime = 30;
+        this.lifetime = 19;
         this.setSpriteFromAge(pSprites);
     }
 
@@ -38,9 +38,9 @@ public class RiftParticle extends TextureSheetParticle {
     public void tick() {
         super.tick();
         this.setSpriteFromAge(this.sprites);
-        if (this.age > this.lifetime - (this.lifetime / 10)) {
-            this.setAlpha(1.0F - ((float)this.age - (float)(this.lifetime / 2)) / (float)this.lifetime);
-        }
+//        if (this.age > this.lifetime - (this.lifetime / 10)) {
+//            this.setAlpha(1.0F - ((float)this.age - (float)(this.lifetime / 2)) / (float)this.lifetime);
+//        }
     }
 
     @OnlyIn(Dist.CLIENT)
