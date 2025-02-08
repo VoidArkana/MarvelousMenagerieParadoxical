@@ -67,15 +67,12 @@ public class FossilCleaningManager extends SimpleJsonResourceReloadListener {
             totalWeight += itemWeightedPair.getWeight();
         }
 
-        System.out.println("total: " + totalWeight);
 
         int randomNr = level.random.nextInt(totalWeight);
         int cumulativeWeight = 0;
-        System.out.println("randomNR: " + randomNr);
 
         for (WeightedItemCodec itemWeightedPair : outputs) {
             cumulativeWeight += itemWeightedPair.getWeight();
-            System.out.println("cumulative: " + cumulativeWeight);
             if (randomNr < cumulativeWeight) {
                 outputItem = itemWeightedPair.getItem();
                 break;

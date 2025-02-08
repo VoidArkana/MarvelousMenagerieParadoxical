@@ -118,12 +118,10 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
     private void dropContent() {
         if (this.level != null && this.level.getServer() != null) {
             boolean hasRecipe = FossilCleaningManager.containsRecipe(this.stack.getItem());
-            //System.out.println(hasRecipe);
             ItemStack result = ItemStack.EMPTY;
             if(hasRecipe) {
                 // determine result item
                 result = FossilCleaningManager.getRandomItemStack(this.stack.getItem(), level);
-                System.out.println(result);
                 // remove input
                 stack = ItemStack.EMPTY;
                 if (!level.isClientSide) sync();

@@ -22,6 +22,42 @@ public class MMItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
+        simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);
+        trapdoorItem(MMBlocks.SIGILLARIA_TRAPDOOR);
+
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_STAIRS);
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_MOSAIC_STAIRS);
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_SLAB);
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_MOSAIC_SLAB);
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_FENCE_GATE);
+        evenSimplerBlockItem(MMBlocks.SIGILLARIA_PRESSURE_PLATE);
+
+        fenceItem(MMBlocks.SIGILLARIA_FENCE, MMBlocks.SIGILLARIA_PLANKS);
+        buttonItem(MMBlocks.SIGILLARIA_BUTTON, MMBlocks.SIGILLARIA_PLANKS);
+
+        simpleItem(MMItems.SIGILLARIA_SIGN);
+        simpleItem(MMItems.SIGILLARIA_HANGING_SIGN);
+
+        saplingItem(MMBlocks.SIGILLARIA_SAPLING);
+        saplingItem(MMBlocks.COOKSONIA);
+
+        simpleBlockItem(MMBlocks.PROTOTAXITES_DOOR);
+        trapdoorItem(MMBlocks.PROTOTAXITES_TRAPDOOR);
+
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_STAIRS);
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_MOSAIC_STAIRS);
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_SLAB);
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_MOSAIC_SLAB);
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_FENCE_GATE);
+        evenSimplerBlockItem(MMBlocks.PROTOTAXITES_PRESSURE_PLATE);
+
+        fenceItem(MMBlocks.PROTOTAXITES_FENCE, MMBlocks.PROTOTAXITES_PLANKS);
+        buttonItem(MMBlocks.PROTOTAXITES_BUTTON, MMBlocks.PROTOTAXITES_PLANKS);
+
+        simpleItem(MMItems.PROTOTAXITES_SIGN);
+        simpleItem(MMItems.PROTOTAXITES_HANGING_SIGN);
+
+
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);
 
@@ -217,5 +253,32 @@ public class MMItemModelProvider extends ItemModelProvider {
     public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
                 .texture("wall", new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    public void trapdoorItem(RegistryObject<Block> block) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath() + "_bottom"));
+    }
+
+    public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
+                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
+                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+    }
+
+    private ItemModelBuilder simpleBlockItem(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(MarvelousMenagerie.MODID,"item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(MarvelousMenagerie.MODID,"block/" + item.getId().getPath()));
     }
 }

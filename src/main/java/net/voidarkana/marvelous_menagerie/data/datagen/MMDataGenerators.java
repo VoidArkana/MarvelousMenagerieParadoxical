@@ -8,10 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMBlockStateProvider;
-import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMBlockTagGenerator;
-import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMItemModelProvider;
-import net.voidarkana.marvelous_menagerie.data.datagen.providers.MMItemTagGenerator;
+import net.voidarkana.marvelous_menagerie.data.datagen.providers.*;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -40,6 +37,6 @@ public class MMDataGenerators {
 
         //generator.addProvider(true, new ModBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-        //generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
     }
 }

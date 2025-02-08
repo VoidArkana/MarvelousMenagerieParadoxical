@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,9 +23,70 @@ public class MMBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-//        nonRotateablePillarBlock(MMBlocks.CHRONO_PEDESTAL, "chrono_pedestal_top",
-//                "chronotite_block_end", "chrono_pedestal_side");
+        //sigillaria woodset
+        blockWithItem(MMBlocks.SIGILLARIA_PLANKS);
+        stairsBlock(((StairBlock) MMBlocks.SIGILLARIA_STAIRS.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        slabBlock(((SlabBlock) MMBlocks.SIGILLARIA_SLAB.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        buttonBlock(((ButtonBlock) MMBlocks.SIGILLARIA_BUTTON.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        pressurePlateBlock(((PressurePlateBlock) MMBlocks.SIGILLARIA_PRESSURE_PLATE.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        fenceBlock(((FenceBlock) MMBlocks.SIGILLARIA_FENCE.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        fenceGateBlock(((FenceGateBlock) MMBlocks.SIGILLARIA_FENCE_GATE.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
 
+        doorBlockWithRenderType(((DoorBlock) MMBlocks.SIGILLARIA_DOOR.get()), modLoc("block/sigillaria_door_bottom"), modLoc("block/sigillaria_door_top"), "cutout");
+        trapdoorBlockWithRenderType(((TrapDoorBlock) MMBlocks.SIGILLARIA_TRAPDOOR.get()), modLoc("block/sigillaria_trapdoor"), true, "cutout");
+
+        blockWithItem(MMBlocks.SIGILLARIA_MOSAIC);
+        stairsBlock(((StairBlock) MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get()), blockTexture(MMBlocks.SIGILLARIA_MOSAIC.get()));
+        slabBlock(((SlabBlock) MMBlocks.SIGILLARIA_MOSAIC_SLAB.get()), blockTexture(MMBlocks.SIGILLARIA_MOSAIC.get()), blockTexture(MMBlocks.SIGILLARIA_MOSAIC.get()));
+
+        signBlock(((StandingSignBlock) MMBlocks.SIGILLARIA_SIGN.get()), ((WallSignBlock) MMBlocks.SIGILLARIA_WALL_SIGN.get()),
+                blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+        hangingSignBlock(MMBlocks.SIGILLARIA_HANGING_SIGN.get(), MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
+                blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
+
+        logBlock(((RotatedPillarBlock) MMBlocks.SIGILLARIA_STEM.get()));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), blockTexture(MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_sigillaria_stem_top"));
+        blockItem(MMBlocks.SIGILLARIA_STEM);
+        blockItem(MMBlocks.STRIPPED_SIGILLARIA_STEM);
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.SIGILLARIA_WOOD.get()), blockTexture(MMBlocks.SIGILLARIA_STEM.get()), blockTexture(MMBlocks.SIGILLARIA_STEM.get()));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_SIGILLARIA_WOOD.get()), blockTexture(MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), blockTexture(MMBlocks.STRIPPED_SIGILLARIA_STEM.get()));
+        blockItem(MMBlocks.SIGILLARIA_WOOD);
+        blockItem(MMBlocks.STRIPPED_SIGILLARIA_WOOD);
+
+        leavesBlock(MMBlocks.SIGILLARIA_LEAVES);
+
+        simpleBlockWithItem(MMBlocks.SIGILLARIA_SAPLING.get(), models().cross(blockTexture(MMBlocks.SIGILLARIA_SAPLING.get()).getPath(),
+                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
+        simpleBlockWithItem(MMBlocks.POTTED_SIGILLARIA_SAPLING.get(), models().singleTexture("potted_sigillaria_sapling", new ResourceLocation("flower_pot_cross"), "plant",
+                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
+
+        simpleBlockWithItem(MMBlocks.COOKSONIA.get(), models().cross(blockTexture(MMBlocks.COOKSONIA.get()).getPath(),
+                blockTexture(MMBlocks.COOKSONIA.get())).renderType("cutout"));
+
+        //prototaxites woodset
+        blockWithItem(MMBlocks.PROTOTAXITES_PLANKS);
+        stairsBlock(((StairBlock) MMBlocks.PROTOTAXITES_STAIRS.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        slabBlock(((SlabBlock) MMBlocks.PROTOTAXITES_SLAB.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        buttonBlock(((ButtonBlock) MMBlocks.PROTOTAXITES_BUTTON.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        pressurePlateBlock(((PressurePlateBlock) MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        fenceBlock(((FenceBlock) MMBlocks.PROTOTAXITES_FENCE.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        fenceGateBlock(((FenceGateBlock) MMBlocks.PROTOTAXITES_FENCE_GATE.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) MMBlocks.PROTOTAXITES_DOOR.get()), modLoc("block/prototaxites_door_bottom"), modLoc("block/prototaxites_door_top"), "cutout");
+        trapdoorBlockWithRenderType(((TrapDoorBlock) MMBlocks.PROTOTAXITES_TRAPDOOR.get()), modLoc("block/prototaxites_trapdoor"), true, "cutout");
+
+        blockWithItem(MMBlocks.PROTOTAXITES_MOSAIC);
+        stairsBlock(((StairBlock) MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get()), blockTexture(MMBlocks.PROTOTAXITES_MOSAIC.get()));
+        slabBlock(((SlabBlock) MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get()), blockTexture(MMBlocks.PROTOTAXITES_MOSAIC.get()), blockTexture(MMBlocks.PROTOTAXITES_MOSAIC.get()));
+
+        signBlock(((StandingSignBlock) MMBlocks.PROTOTAXITES_SIGN.get()), ((WallSignBlock) MMBlocks.PROTOTAXITES_WALL_SIGN.get()),
+                blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+        hangingSignBlock(MMBlocks.PROTOTAXITES_HANGING_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
+                blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
+
+
+        //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),
                 new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_side"),
                 new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_end"));
@@ -199,6 +261,27 @@ public class MMBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) MMBlocks.PERMAFROST_MOSAIC_SLAB.get()), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()));
         wallBlock((WallBlock) MMBlocks.PERMAFROST_MOSAIC_WALL.get(), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()));
         blockWithItem(MMBlocks.CHISELED_PERMAFROST);
+    }
+
+    private void leavesBlock(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().singleTexture(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), new ResourceLocation("minecraft:block/leaves"),
+                        "all", blockTexture(blockRegistryObject.get())).renderType("cutout"));
+    }
+
+    private void blockItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(MarvelousMenagerie.MODID +
+                ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
+    }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
+    }
+
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){

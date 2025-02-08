@@ -1,14 +1,21 @@
 package net.voidarkana.marvelous_menagerie;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -18,10 +25,14 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModFoliagePlacers;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
 import net.voidarkana.marvelous_menagerie.event.ModEvents;
 import net.voidarkana.marvelous_menagerie.event.ServerEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
+import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
 import org.apache.logging.log4j.LogManager;
@@ -65,6 +76,11 @@ public class MarvelousMenagerie
         MMMenuTypes.register(modEventBus);
         MMCreativeTab.register(modEventBus);
 
+        ModTrunkPlacerTypes.register(modEventBus);
+        ModFoliagePlacers.register(modEventBus);
+
+        ModConfiguredFeatures.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
 
         PROXY.init();
@@ -72,6 +88,9 @@ public class MarvelousMenagerie
         eventBus.register(new ModEvents());
         eventBus.register(new ServerEvents());
 
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC,
+                "marvelous_menagerie.toml");
+        
         modEventBus.addListener(this::addCreative);
     }
 
@@ -79,6 +98,22 @@ public class MarvelousMenagerie
     {
         MMNetworkHandler.init();
         MMMessages.register();
+        event.enqueueWork(()->{
+
+//            BrewingRecipeRegistry.addRecipe(new ModPotionRecipes(Potions.AWKWARD,
+//                    ModItems.HALLUCIGENIC_SLIME.get(), ModPotions.HALLUCIGENIA_EXTRACT.get()));
+//
+//            MarvelousEntityPlacement.entityPlacement();
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.SIGILLARIA_SAPLING.getId(), MMBlocks.POTTED_SIGILLARIA_SAPLING);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.SIGILLARIA_SAPLING.get().asItem(), 0.4F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.SIGILLARIA_LEAVES.get().asItem(), 0.4F);
+
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.COOKSONIA.get().asItem(), 0.4F);
+
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.PROTOTAXITES.get().asItem(), 0.4F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.PROTOTAXITES_BLOCK.get().asItem(), 0.8F);
+        });
     }
 
     private void setupClient(FMLClientSetupEvent event) {

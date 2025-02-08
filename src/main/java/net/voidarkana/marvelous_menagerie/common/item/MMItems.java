@@ -1,7 +1,9 @@
 package net.voidarkana.marvelous_menagerie.common.item;
 
+import net.minecraft.world.item.HangingSignItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,6 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.custom.FishBucketItem;
 import net.voidarkana.marvelous_menagerie.common.item.custom.PaleoToolkit;
@@ -163,6 +166,24 @@ public class MMItems {
     //Doedicurus
     public static final RegistryObject<Item> DOEDICURUS_FOSSIL = ITEMS.register("doedicurus_fossil",
             ()-> new Item(new Item.Properties()));
+
+    
+    
+    //Plants
+
+    //Sigillaria
+    public static final RegistryObject<Item> SIGILLARIA_SIGN = ITEMS.register("sigillaria_sign",
+            ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.SIGILLARIA_SIGN.get(), MMBlocks.SIGILLARIA_WALL_SIGN.get()));
+    public static final RegistryObject<Item> SIGILLARIA_HANGING_SIGN = ITEMS.register("sigillaria_hanging_sign",
+            ()-> new HangingSignItem(MMBlocks.SIGILLARIA_HANGING_SIGN.get(), MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
+
+    //Prototaxites
+    public static final RegistryObject<Item> PROTOTAXITES_SIGN = ITEMS.register("prototaxites_sign",
+            ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.PROTOTAXITES_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_SIGN.get()));
+    public static final RegistryObject<Item> PROTOTAXITES_HANGING_SIGN = ITEMS.register("prototaxites_hanging_sign",
+            ()-> new HangingSignItem(MMBlocks.PROTOTAXITES_HANGING_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
+
+
 
     //Fossils
     public static final RegistryObject<Item> SHALE_FOSSIL = ITEMS.register("shale_fossil",

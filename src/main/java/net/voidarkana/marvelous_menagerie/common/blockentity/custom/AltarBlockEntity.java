@@ -52,9 +52,7 @@ public class AltarBlockEntity extends BlockEntityBase {
 
     @Override
     public void onDestroyed(BlockState state, BlockPos pos) {
-        System.out.println("discarding");
         if (this.getFracture(pos) != null){
-            System.out.println("discarded!");
             this.getFracture(pos).closeFracture();
         }
     }
@@ -93,6 +91,13 @@ public class AltarBlockEntity extends BlockEntityBase {
                                 }
                             }
                         }
+
+//                        System.out.println(data.output());
+//                        System.out.println(data.input1());
+//                        System.out.println(data.input2());
+//                        System.out.println(data.input3());
+//                        System.out.println(data.input4());
+//                        System.out.println(itemCount);
 
                         if (itemCount == 4){
                             entitytype = data.output();
