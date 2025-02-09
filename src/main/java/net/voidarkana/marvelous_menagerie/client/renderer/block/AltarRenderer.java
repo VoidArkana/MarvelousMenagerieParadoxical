@@ -23,6 +23,7 @@ public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
 
     public static final Material SKULL_LOCATION = new Material(TextureAtlas.LOCATION_BLOCKS,
             new ResourceLocation(MarvelousMenagerie.MODID, "entity/chrono_altar_skull"));
+
     private final AltarSkullModel skullModel;
 
     public AltarRenderer(BlockEntityRendererProvider.Context pContext) {

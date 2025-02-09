@@ -3,6 +3,10 @@
     {
       "type": "minecraft:single",
       "resource": "marvelous_menagerie:entity/chrono_altar_skull"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "marvelous_menagerie:entity/charnia"
     }
   ]
 }

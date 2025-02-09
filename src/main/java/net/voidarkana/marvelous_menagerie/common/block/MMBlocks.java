@@ -2,11 +2,9 @@ package net.voidarkana.marvelous_menagerie.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.PlaceOnWaterBlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,10 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.*;
 import net.voidarkana.marvelous_menagerie.common.block.custom.flammable.FlammableWoodLogBlock;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.CooksoniaBlock;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.PrototaxitesBlock;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.animal_block.DickinsoniaBlock;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.animal_block.WiwaxiaBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.*;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
@@ -261,6 +256,11 @@ public class MMBlocks {
     public static final RegistryObject<Block> WIWAXIA = registerBlock("wiwaxia",
             ()-> new WiwaxiaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_PURPLE).noOcclusion().instabreak().lightLevel((p_152684_) -> {return 6;})));
 
+    //Charnia
+    public static final RegistryObject<Block> CHARNIA = registerBlock("charnia",
+            ()-> new CharniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_ORANGE)
+                    .noOcclusion().sound(SoundType.MOSS).instabreak().noCollission()
+                    .lightLevel((pState) -> {return 3 + 3 * pState.getValue(CharniaBlock.PICKLES);})));
 
 
 

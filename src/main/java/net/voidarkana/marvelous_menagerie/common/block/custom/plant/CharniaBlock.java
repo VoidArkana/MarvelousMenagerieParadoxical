@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.block.custom.plant.animal_block;
+package net.voidarkana.marvelous_menagerie.common.block.custom.plant;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
+import net.voidarkana.marvelous_menagerie.common.blockentity.custom.CharniaBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 public class CharniaBlock extends BaseEntityBlock implements IPlantable, LiquidBlockContainer {
@@ -52,7 +53,7 @@ public class CharniaBlock extends BaseEntityBlock implements IPlantable, LiquidB
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;//new CharniaBlockEntity(pPos, pState);
+        return new CharniaBlockEntity(pPos, pState);
     }
 
     @Override

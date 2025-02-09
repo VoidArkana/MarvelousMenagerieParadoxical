@@ -40,6 +40,10 @@ public class MMBlockEntities {
                             MMBlocks.PROTOTAXITES_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_SIGN.get(),
                             MMBlocks.SIGILLARIA_HANGING_SIGN.get(), MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<CharniaBlockEntity>> CHARNIA_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("charnia", () ->
+                    BlockEntityType.Builder.of(CharniaBlockEntity::new,
+                            MMBlocks.CHARNIA.get()).build(null));
 
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);

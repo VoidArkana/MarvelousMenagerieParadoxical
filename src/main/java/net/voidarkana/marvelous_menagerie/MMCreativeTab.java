@@ -86,6 +86,7 @@ public class MMCreativeTab {
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
 
+                        output.accept(MMBlocks.CHARNIA.get());
 
                         output.accept(MMBlocks.COOKSONIA.get());
 

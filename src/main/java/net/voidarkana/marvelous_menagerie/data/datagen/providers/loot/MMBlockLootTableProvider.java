@@ -1,13 +1,22 @@
 package net.voidarkana.marvelous_menagerie.data.datagen.providers.loot;
 
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.CharniaBlock;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class MMBlockLootTableProvider extends BlockLootSubProvider {
 
@@ -92,7 +101,16 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get());
 
         this.dropSelf(MMBlocks.WIWAXIA.get());
+
+        this.add(MMBlocks.CHARNIA.get(),
+                block -> createCharniaDrops(MMBlocks.CHARNIA.get()));
         
+    }
+
+    public LootTable.Builder createCharniaDrops(Block charniaBlock) {
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(charniaBlock, LootItem.lootTableItem(charniaBlock).apply(IntStream.rangeClosed(1, 4).boxed().toList(), (integer) -> {
+            return SetItemCountFunction.setCount(ConstantValue.exactly((float) integer.intValue())).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(charniaBlock).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CharniaBlock.PICKLES, integer)));
+        }))));
     }
 
     @Override
