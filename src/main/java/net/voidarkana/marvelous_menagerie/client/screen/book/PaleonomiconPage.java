@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.voidarkana.marvelous_menagerie.client.screen.BookLink;
@@ -41,7 +42,8 @@ public class PaleonomiconPage {
         this.entry = entry;
     }
 
-    protected void renderPage(PaleonomiconScreen screen, PoseStack poseStack, int mouseX, int mouseY, float partialTicks, boolean onFlippingPage) {
+    protected void renderPage(PaleonomiconScreen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks, boolean onFlippingPage) {
+        PoseStack poseStack = guiGraphics.pose();
         int pgNumber = getDisplayPageNumber();
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
         if(entry != null){
@@ -49,10 +51,13 @@ public class PaleonomiconPage {
                 Component title = Component.translatable(entry.getTranslatableTitle());
                 poseStack.pushPose();
                 int titleLength = Math.max(screen.getMinecraft().font.width(title), 1);
-                float titleScale =  Math.min(135F / (float) titleLength, 2.5F);
+                float titleScale =  Math.min(135F / (float) titleLength, 2.5F) / 1.5f;
                 poseStack.translate(65, 7 - 5 * titleScale, 0);
                 poseStack.scale(titleScale, titleScale, 1F);
                 poseStack.translate(-titleLength / 2F, 0, 0);
+
+                //guiGraphics.blit(PaleonomiconScreen.BOOK_TEXTURE, screen.leftPos, screen.topPos, 336, 16, 112, 32, 510, 510);
+
                 screen.getMinecraft().font.drawInBatch8xOutline(title.getVisualOrderText(), 0.0F, 0.0F, 0XFFE7BF, 0XAA977F, poseStack.last().pose(), bufferSource, 15728880);
                 poseStack.popPose();
             }
@@ -80,7 +85,7 @@ public class PaleonomiconPage {
             for (int i = startReadingAt; i < startReadingAt + PaleonomiconScreen.PAGE_SIZE_IN_LINES; i++) {
                 if (bookEntry.getEntryText().size() > i) {
                     String printLine = bookEntry.getEntryText().get(i);
-                    font.drawInBatch(printLine, 0.0F, (i - startReadingAt) * 10,
+                    font.drawInBatch(printLine, 0, (i - startReadingAt) * 10,
                             PaleonomiconScreen.TEXT_COLOR, false, poseStack.last().pose(),
                             bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
                     for (BookLink bookLink : bookEntry.getEntryLinks()) {

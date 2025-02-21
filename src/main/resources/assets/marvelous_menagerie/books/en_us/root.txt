@@ -1,11 +1,11 @@
 
 
-    §lHIDDEN §lBENEATH §lTHE §lSURFACE §lOF §lTHE §lOVERWORLD §rlies many unique cave biomes, all rare in nature.
 
+    §lHIDDEN §lBENEATH §lTHE §lSURFACE §lOF §lTHE §lOVERWORLD §rlies many unique cave biomes, all rare in nature.
     These cave biomes are sought out not only for their novelty, but also due to the various powerful and legendary contents of each.
     Of these biomes, six are known to exist:
 
-    • {Magnetic Caves|magnetic_caves/chapter.json}
+    • {Time Anomalies|anomalies/chapter.json}
     • {Primordial Caves|primordial_caves/chapter.json}
     • {Toxic Caves|toxic_caves/chapter.json}
     • {Abyssal Chasm|abyssal_chasm/chapter.json}

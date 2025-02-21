@@ -71,7 +71,7 @@ import java.util.Optional;
 
 public class PaleonomiconScreen extends Screen {
 
-    private static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/book/paleonomicon.png");
+    public static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/book/paleonomicon.png");
     public static final int PAGE_SIZE_IN_LINES = 15;
 
     public static final int TEXT_COLOR = 0X826A41;
@@ -224,14 +224,22 @@ public class PaleonomiconScreen extends Screen {
         guiGraphics.pose().pushPose();
         poseStack.translate(0, -10, 0);
         guiGraphics.pose().pushPose();
+
         guiGraphics.blit(BOOK_TEXTURE, this.leftPos, this.topPos, 16, 16, this.imageWidth, this.imageHeight, 510, 510);
+
+        if (entryPageNumber == 0){
+            guiGraphics.blit(PaleonomiconScreen.BOOK_TEXTURE, this.leftPos+27, this.topPos+24,
+                    336, 16, 112, 32, 510, 510);
+        }
+
         poseStack.popPose();
+
 
         poseStack.pushPose();
             poseStack.translate(this.leftPos+28, this.topPos+28, 0);
             poseStack.pushPose();
                 poseStack.scale(0.85f, 0.85f, 0);
-                renderBookContents(poseStack, mouseX, mouseY, partialTick);
+                renderBookContents(guiGraphics, mouseX, mouseY, partialTick);
                 guiGraphics.flush();
             poseStack.popPose();
         poseStack.popPose();
@@ -255,18 +263,19 @@ public class PaleonomiconScreen extends Screen {
         poseStack.popPose();
     }
 
-    private void renderBookContents(PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
-        renderForPageType(leftPageRenderer, 0, poseStack, mouseX, mouseY, partialTick);
-        renderForPageType(rightPageRenderer, 1, poseStack, mouseX, mouseY, partialTick);
+    private void renderBookContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTick ) {
+        renderForPageType(leftPageRenderer, 0, graphics, mouseX, mouseY, partialTick);
+        renderForPageType(rightPageRenderer, 1, graphics, mouseX, mouseY, partialTick);
     }
 
     //"kind" - what kind of transform. 0 = left page, 1 = right page, 2 = right side of flipping page, 3 = left side of flipping page
-    private void renderForPageType(PaleonomiconPage contents, int kind, PoseStack poseStack, int mouseX, int mouseY, float partialTick) {
+    private void renderForPageType(PaleonomiconPage contents, int kind, GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        PoseStack poseStack = graphics.pose();
         poseStack.pushPose();
         if (kind == 1){
             poseStack.translate(173F, 0, 0);
         }
-        contents.renderPage(this, poseStack, mouseX, mouseY, partialTick, kind >= 2);
+        contents.renderPage(this, graphics, mouseX, mouseY, partialTick, kind >= 2);
         poseStack.popPose();
     }
 
@@ -351,7 +360,7 @@ public class PaleonomiconScreen extends Screen {
         }
         nextEntryJSON = changePageTo;
         if(goingForwards){
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PUT, 1.0F));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 1.0F));
         }
         return  true;
     }
