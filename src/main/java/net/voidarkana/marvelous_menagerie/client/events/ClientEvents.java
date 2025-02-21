@@ -1,9 +1,13 @@
 package net.voidarkana.marvelous_menagerie.client.events;
 
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -16,6 +20,9 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.RiftParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParticle;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -41,4 +48,24 @@ public class ClientEvents {
         event.registerSpriteSet(MMParticles.TIME_SHARD.get(), TimeShardParticle.Provider::new);
         event.registerSpriteSet(MMParticles.RIFT.get(), RiftParticle.Provider::new);
     }
+
+    public static ShaderInstance GLOWING_SHADER, SEPIA_SHADER;
+
+    public static ShaderInstance getGlowingShader() {
+        return GLOWING_SHADER;
+    }
+
+    @Nullable
+    public static ShaderInstance getSepiaShader() {
+        return SEPIA_SHADER;
+    }
+
+    @SubscribeEvent
+    public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "glowing"), DefaultVertexFormat.POSITION_COLOR),
+                shader -> GLOWING_SHADER = shader);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "sepia"), DefaultVertexFormat.NEW_ENTITY),
+                shader -> SEPIA_SHADER = shader);
+    }
+
 }

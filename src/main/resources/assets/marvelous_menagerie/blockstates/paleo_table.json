@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "marvelous_menagerie:block/paleo_table",
+      "y": 90
+    },
+    "facing=north": {
       "model": "marvelous_menagerie:block/paleo_table"
+    },
+    "facing=south": {
+      "model": "marvelous_menagerie:block/paleo_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "marvelous_menagerie:block/paleo_table",
+      "y": 270
     }
   }
 }

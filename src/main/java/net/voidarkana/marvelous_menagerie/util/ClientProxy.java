@@ -1,15 +1,25 @@
 package net.voidarkana.marvelous_menagerie.util;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.client.events.ClientEvents;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.AltarRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.CharniaRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRenderer;
@@ -17,6 +27,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.FractureRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.screen.book.PaleonomiconScreen;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -57,6 +68,10 @@ public class ClientProxy extends CommonProxy{
     @Override
     public void openToolkitGUI(Player player, BlockPos clicked) {
         Minecraft.getInstance().setScreen(new FossilMinigameScreen(player, clicked));
+    }
+
+    public void openBookGUI(ItemStack itemStackIn) {
+        Minecraft.getInstance().setScreen(new PaleonomiconScreen());
     }
 
 }

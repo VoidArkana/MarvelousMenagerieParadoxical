@@ -22,8 +22,8 @@ public class MMDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-//generator.addProvider(event.includeServer(), new MMRecipeProvider(packOutput));
-        //generator.addProvider(event.includeServer(), MMLootTableProvider.create(packOutput));
+        generator.addProvider(event.includeServer(), new MMRecipeProvider(packOutput));
+        generator.addProvider(event.includeServer(), MMLootTableProvider.create(packOutput));
 
         generator.addProvider(event.includeClient(), new MMBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new MMItemModelProvider(packOutput, existingFileHelper));

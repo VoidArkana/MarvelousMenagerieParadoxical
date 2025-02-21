@@ -33,6 +33,15 @@ public class PaleoToolkit extends Item {
         BlockState blockstate = level.getBlockState(blockpos);
         if (blockstate.getBlock() instanceof FossilBlock) {
 
+            Player player = pContext.getPlayer();
+            ItemStack itemstack = pContext.getItemInHand();
+
+            if (player != null) {
+                itemstack.hurtAndBreak(1, player, (p_150686_) -> {
+                    p_150686_.broadcastBreakEvent(pContext.getHand());
+                });
+            }
+
             pContext.getPlayer().playSound(SoundEvents.SHULKER_BOX_OPEN);
 
             if (pContext.getPlayer() instanceof ServerPlayer) {

@@ -64,33 +64,36 @@ public class AltarBlockEntity extends BlockEntityBase {
                 return InteractionResult.SUCCESS;
             } else {
                 if (this.hasFracture && getFracture(pos)!=null){
+                    Fracture fracture = getFracture(pos);
+                    if (!fracture.isValid()){
+                        return InteractionResult.FAIL;
+                    }else {
+                        EntityType<?> entitytype = MMEntities.CHUD.get();
 
-                    EntityType<?> entitytype = MMEntities.CHUD.get();
+                        for (RitualManager.RitualProcessData data : RitualManager.DATA) {
+                            boolean[] itemUsed = new boolean[4];
 
-                    for (RitualManager.RitualProcessData data : RitualManager.DATA) {
-                        boolean[] itemUsed = new boolean[4];
+                            boolean[] itemChecked = new boolean[4];
 
-                        boolean[] itemChecked = new boolean[4];
+                            int itemCount = 0;
 
-                        int itemCount = 0;
+                            Item[] inputs = new Item[4];
+                            inputs[0] = data.input1();
+                            inputs[1] = data.input2();
+                            inputs[2] = data.input3();
+                            inputs[3] = data.input4();
 
-                        Item[] inputs = new Item[4];
-                        inputs[0] = data.input1();
-                        inputs[1] = data.input2();
-                        inputs[2] = data.input3();
-                        inputs[3] = data.input4();
-
-                        for (int i = 0; i<4; i++){
-                            for (int s = 0; s<4; s++){
-                                if (!itemUsed[i] && !itemChecked[s]){
-                                    if (ingredients[i] == inputs[s]) {
-                                        itemUsed[i] = true;
-                                        itemChecked[s] = true;
-                                        itemCount++;
+                            for (int i = 0; i<4; i++){
+                                for (int s = 0; s<4; s++){
+                                    if (!itemUsed[i] && !itemChecked[s]){
+                                        if (ingredients[i] == inputs[s]) {
+                                            itemUsed[i] = true;
+                                            itemChecked[s] = true;
+                                            itemCount++;
+                                        }
                                     }
                                 }
                             }
-                        }
 
 //                        System.out.println(data.output());
 //                        System.out.println(data.input1());
@@ -99,12 +102,13 @@ public class AltarBlockEntity extends BlockEntityBase {
 //                        System.out.println(data.input4());
 //                        System.out.println(itemCount);
 
-                        if (itemCount == 4){
-                            entitytype = data.output();
+                            if (itemCount == 4){
+                                entitytype = data.output();
+                            }
                         }
-                    }
 
-                    this.getFracture(pos).summonCreature(entitytype);
+                        this.getFracture(pos).summonCreature(entitytype);
+                    }
                 }else {
                     Fracture fracture = new Fracture(this.level, pos.getCenter().x(), pos.getCenter().y()+2, pos.getCenter().z());
                     fracture.setIsNatural(true);

@@ -25,8 +25,6 @@ public class FossilMinigameScreen extends Screen {
 
 
     public GUIParticleSystem particles;
-    ParticleAttractor attractionPoint;
-    ParticleAttractor repulsionPoint;
 
     public static final ResourceLocation GUI =
             new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame.png");
@@ -121,7 +119,7 @@ public class FossilMinigameScreen extends Screen {
     int shakeY = 1;
 
     public FossilMinigameScreen(Player pPlayer, BlockPos clicked) {
-        super(Component.translatable("encyclopedia.title"));
+        super(Component.translatable("fossil.title"));
         this.player = pPlayer;
         this.imageWidth = 241;
         this.imageHeight = dirtSize;

@@ -555,5 +555,7 @@
 
   "entity.marvelous_menagerie.slovenicus": "Slovenicus",
   "item.marvelous_menagerie.slovenicus_bucket": "Bucket of Slovenicus",
-  "item.marvelous_menagerie.slovenicus_spawn_egg": "Slovenicus Spawn Egg"
+  "item.marvelous_menagerie.slovenicus_spawn_egg": "Slovenicus Spawn Egg",
+
+  "book.marvelous_menagerie.root": "Paleonomicon"
 }

@@ -27,10 +27,13 @@ public class Fracture extends LivingEntity {
     private static final EntityDataAccessor<Integer> OPENING_TIME = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> OPENING_TIME_LAG = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> CLOSING_TIME = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> SUMMONING_TIME = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
 
-    private int strikeTime = 0;
-    private Vec3 lightningPos = null;
-    private LightningBolt dummyBolt;
+    EntityType<?> entityType;
+
+    public float rot;
+    public float oRot;
+    public float tRot;
 
     public Fracture(EntityType<Fracture> fractureEntityType, Level level) {
         super(fractureEntityType, level);
@@ -50,6 +53,7 @@ public class Fracture extends LivingEntity {
         this.entityData.define(OPENING_TIME, 0);
         this.entityData.define(OPENING_TIME_LAG, 0);
         this.entityData.define(CLOSING_TIME, 0);
+        this.entityData.define(SUMMONING_TIME, 0);
     }
 
     @Override
@@ -59,6 +63,7 @@ public class Fracture extends LivingEntity {
         pCompound.putInt("OpeningTime", this.getOpeningTime());
         pCompound.putInt("OpeningTimeLag", this.getOpeningTimeLag());
         pCompound.putInt("ClosingTime", this.getClosingTime());
+        //pCompound.putInt("SummoningTime", this.getSummoningTime());
     }
 
     @Override
@@ -68,6 +73,7 @@ public class Fracture extends LivingEntity {
         this.setOpeningTime(pCompound.getInt("OpeningTime"));
         this.setOpeningTimeLag(pCompound.getInt("OpeningTimeLag"));
         this.setClosingTime(pCompound.getInt("ClosingTime"));
+        //this.setSummoningTime(pCompound.getInt("SummoningTime"));
     }
 
     public boolean getIsNatural() {
@@ -100,6 +106,14 @@ public class Fracture extends LivingEntity {
 
     public void setClosingTime(int time) {
         this.entityData.set(CLOSING_TIME, time);
+    }
+
+    public int getSummoningTime() {
+        return this.entityData.get(SUMMONING_TIME);
+    }
+
+    public void setSummoningTime(int time) {
+        this.entityData.set(SUMMONING_TIME, time);
     }
 
     @Override
@@ -136,8 +150,13 @@ public class Fracture extends LivingEntity {
         return super.isInvulnerable() && this.getOpeningTime()<20;
     }
 
+    public boolean isValid(){
+        return this.getClosingTime()<=0 && this.getOpeningTime()>=50 && this.getSummoningTime()<=0;
+    }
+
     @Override
     public void tick() {
+
 
         if (getOpeningTime()==0){
             this.level().addParticle(MMParticles.RIFT.get(),
@@ -194,6 +213,14 @@ public class Fracture extends LivingEntity {
 
         super.tick();
 
+        if (this.getSummoningTime()>0){
+            int prevSummoningTime = this.getSummoningTime();
+            if (getSummoningTime()==40 && !this.level().isClientSide){
+                this.spawnCreature();
+            }
+            this.setSummoningTime(prevSummoningTime-1);
+        }
+
         if (this.getOpeningTime()>2 && this.getOpeningTimeLag() < 50){
             int prevOpeningTimeLag = this.getOpeningTimeLag();
             this.setOpeningTimeLag(prevOpeningTimeLag+1);
@@ -225,6 +252,33 @@ public class Fracture extends LivingEntity {
             this.setClosingTime(nextClosingTime);
         }
 
+        this.oRot = this.rot;
+        this.tRot += 0.02F;
+        while(this.rot >= (float)Math.PI) {
+            this.rot -= ((float)Math.PI * 2F);
+        }
+
+        while(this.rot < -(float)Math.PI) {
+            this.rot += ((float)Math.PI * 2F);
+        }
+
+        while(this.tRot >= (float)Math.PI) {
+            this.tRot -= ((float)Math.PI * 2F);
+        }
+
+        while(this.tRot < -(float)Math.PI) {
+            this.tRot += ((float)Math.PI * 2F);
+        }
+
+        float f2;
+        for(f2 = this.tRot - this.rot; f2 >= (float)Math.PI; f2 -= ((float)Math.PI * 2F)) {
+        }
+
+        while(f2 < -(float)Math.PI) {
+            f2 += ((float)Math.PI * 2F);
+        }
+
+        this.rot += f2 * 0.4F;
     }
 
     public void push(Entity pEntity) {
@@ -253,11 +307,21 @@ public class Fracture extends LivingEntity {
         }
     }
 
-    public void summonCreature(EntityType<?> entitytype){
-        if (entitytype==null){
-            entitytype = MMEntities.CHUD.get();
+    public void summonCreature(EntityType<?> ritualEntity){
+        this.setSummoningTime(80);
+        this.entityType = ritualEntity;
+//        if (entitytype==null){
+//            entitytype = MMEntities.CHUD.get();
+//        }
+//        entitytype.spawn((ServerLevel) this.level(), this.blockPosition(), MobSpawnType.NATURAL);
+//        this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
+    }
+
+    public void spawnCreature(){
+        if (entityType==null){
+            entityType = MMEntities.CHUD.get();
         }
-        entitytype.spawn((ServerLevel) this.level(), this.blockPosition(), MobSpawnType.NATURAL);
+        entityType.spawn((ServerLevel) this.level(), this.blockPosition(), MobSpawnType.NATURAL);
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
 

@@ -1,0 +1,58 @@
+{
+  "parent": "",
+  "text": "root.txt",
+  "title": "book.marvelous_menagerie.root",
+  "widgets": [
+    {
+      "display_page" : 4,
+      "type": "item",
+      "item": "marvelous_menagerie:saca_fossil",
+      "sepia": true,
+      "x": 40,
+      "y": 25,
+      "scale": 3
+    },
+    {
+      "display_page" : 4,
+      "type": "item",
+      "item": "marvelous_menagerie:paleo_table",
+      "sepia": true,
+      "x": 100,
+      "y": 25,
+      "scale": 3
+    },
+    {
+      "display_page" : 6,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/chud.png",
+      "sepia": false,
+      "x": 70,
+      "y": 15,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 128,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "display_page" : 7,
+      "type": "item",
+      "item": "marvelous_menagerie:arandaspis_fossil",
+      "sepia": true,
+      "x": 60,
+      "y": 67,
+      "scale": 3
+    },
+    {
+      "display_page" : 8,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:golden_saca",
+      "sepia": true,
+      "x": 55,
+      "y": 32,
+      "scale": 1
+    }
+  ]
+}

@@ -19,6 +19,8 @@ public class MMCreativeTab {
                     .title(Component.translatable("creativetab.marvelous_menagerie_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
 
+                        output.accept(MMItems.PALEONOMICON.get());
+
                         output.accept(MMItems.PALEO_TOOLKIT.get());
 
                         output.accept(MMBlocks.PALEO_TABLE.get());

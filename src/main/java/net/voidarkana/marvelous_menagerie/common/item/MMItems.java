@@ -15,6 +15,7 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.custom.FishBucketItem;
 import net.voidarkana.marvelous_menagerie.common.item.custom.PaleoToolkit;
+import net.voidarkana.marvelous_menagerie.common.item.custom.Paleonomicon;
 
 public class MMItems {
 
@@ -22,7 +23,10 @@ public class MMItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, MarvelousMenagerie.MODID);
 
     public static final RegistryObject<Item> PALEO_TOOLKIT = ITEMS.register("paleo_toolkit",
-            ()-> new PaleoToolkit(new Item.Properties()));
+            ()-> new PaleoToolkit(new Item.Properties().durability(30)));
+
+    public static final RegistryObject<Item> PALEONOMICON = ITEMS.register("paleonomicon",
+            Paleonomicon::new);
 
     //Chud
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",

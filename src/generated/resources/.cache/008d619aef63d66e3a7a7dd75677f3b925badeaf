@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-08T17:09:41.6838231	Tags for minecraft:block mod id marvelous_menagerie
+// 1.20.1	2025-02-09T10:58:50.5979056	Tags for minecraft:block mod id marvelous_menagerie
 f05fb6df733203cf381553966b3f94424f0e4c1b data/marvelous_menagerie/tags/blocks/dye_depot_amber_wool.json
 a16f591a93f5e33829057045010a5d52628480aa data/marvelous_menagerie/tags/blocks/dye_depot_aqua_wool.json
 6a8f2e69dd2506626fea627068ef30b5cc1a84c0 data/marvelous_menagerie/tags/blocks/dye_depot_beige_wool.json
@@ -23,8 +23,10 @@ b35df1ba06fa65490b887ec74edd019ca1e17ff6 data/marvelous_menagerie/tags/blocks/pi
 be5cff708a86aeeacb2fac578018d4ea664b21a8 data/minecraft/tags/blocks/fence_gates.json
 b165d0539761ac07b12eed85b1100ccc2a80d488 data/minecraft/tags/blocks/leaves.json
 81b969915ebd3b042893efaa22ba6054b7274f0a data/minecraft/tags/blocks/logs_that_burn.json
-85f56cbc66eaf3a9c2154ca25efe37437b9c95c6 data/minecraft/tags/blocks/mineable/axe.json
+c3eda67aa06f615ada3584fc9a9e8e79fcbb5a6d data/minecraft/tags/blocks/mineable/axe.json
 b165d0539761ac07b12eed85b1100ccc2a80d488 data/minecraft/tags/blocks/mineable/hoe.json
+ff1e25fc8625d1c949a17425ddff8b74614d3013 data/minecraft/tags/blocks/mineable/pickaxe.json
+bdc3f6c8b008c0e1645343a14a2e68fc63af5d68 data/minecraft/tags/blocks/mineable/shovel.json
 2b821b5de456538e9133a69b041436dab491348c data/minecraft/tags/blocks/planks.json
 8344604b818af8d7d1fa61cd16d8df9c9f0e429f data/minecraft/tags/blocks/signs.json
 262c65c2ad0cda6647389c1eda7010c1c6b3ef43 data/minecraft/tags/blocks/small_flowers.json
