@@ -41,6 +41,6 @@ public class Paleonomicon extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        tooltip.add(Component.translatable("item.alexscaves.cave_book.desc").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.marvelous_menagerie.paleonomicon.desc").withStyle(ChatFormatting.GRAY));
     }
 }

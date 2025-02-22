@@ -9,8 +9,6 @@
 
   "block.marvelous_menagerie.dodo_eggs": "Dodo Egg",
   "block.marvelous_menagerie.elephant_bird_egg": "Elephant Bird Egg",
-  "item.marvelous_menagerie.thylacine_embryo": "Thylacine Embryo",
-  "item.marvelous_menagerie.steller_sea_cow_embryo": "Steller's Sea Cow Embryo",
 
   "item.marvelous_menagerie.cracked_elephant_egg": "Cracked Elephant Bird Egg",
   "item.marvelous_menagerie.boiled_elephant_egg": "Hard Boiled Elephant Bird Egg",
@@ -558,7 +556,23 @@
   "item.marvelous_menagerie.slovenicus_spawn_egg": "Slovenicus Spawn Egg",
 
   "item.marvelous_menagerie.paleonomicon": "Paleonomicon",
+  "item.marvelous_menagerie.paleonomicon.desc": "By Professor Marbel Louisse",
   "book.marvelous_menagerie.root": "Paleonomicon",
   "book.marvelous_menagerie.anomalies": "Time Anomalies",
-  "book.marvelous_menagerie.fracture": "Time Fracture"
+  "book.marvelous_menagerie.fracture": "Time Fracture",
+  "book.marvelous_menagerie.anomalies_index": "Abominations",
+  "book.marvelous_menagerie.chud": "Chud",
+
+  "entity.marvelous_menagerie.apthoroblattina": "Apthoroblattina",
+
+  "entity.marvelous_menagerie.inostrancevia": "Inostrancevia",
+  "entity.marvelous_menagerie.lystro": "Lystrosaurus",
+  "entity.marvelous_menagerie.theri": "Therizinosaurus",
+  "entity.marvelous_menagerie.tlato": "Tlatolophus",
+  "entity.marvelous_menagerie.borealo": "Borealopelta",
+  "entity.marvelous_menagerie.daeodon": "Daeodon",
+  "entity.marvelous_menagerie.eohippus": "Dawn Horse",
+  "entity.marvelous_menagerie.lepti": "Leptictidium",
+  "entity.marvelous_menagerie.kelenken": "Kelenken",
+  "entity.marvelous_menagerie.doedicurus": "Doedicurus"
 }

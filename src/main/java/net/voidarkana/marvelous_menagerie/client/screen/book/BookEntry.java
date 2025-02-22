@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,17 +37,18 @@ public class BookEntry {
     private BookWidget[] widgets;
     private List<String> entryText = new ArrayList<>();
     private List<BookLink> bookLinks = new ArrayList<>();
+    private List<EntityLinkData> linkedEntites = new ArrayList<>();
 
     private int pageCount = 0;
 
 
-    public BookEntry(String translatableTitle, String parent, String textFileToReadFrom, String requiredProgress, BookWidget[] widgets) {
+    public BookEntry(String translatableTitle, String parent, String textFileToReadFrom, String requiredProgress, BookWidget[] widgets, List<EntityLinkData> linkedEntities) {
         this.translatableTitle = translatableTitle;
         this.parent = parent;
         this.textFileToReadFrom = textFileToReadFrom;
         this.requiredProgress = requiredProgress;
         this.widgets = widgets;
-
+        this.linkedEntites = linkedEntities;
     }
 
     public static BookEntry deserialize(Reader readerIn) {
@@ -77,6 +79,10 @@ public class BookEntry {
         return pageCount;
     }
 
+    public List<EntityLinkData> getLinkedEntities() {
+        return linkedEntites;
+    }
+
     public void init(PaleonomiconScreen screen) {
         this.entryText = getRawTextFromFile(textFileToReadFrom, screen, 30);
         this.pageCount = (int) Math.ceil(entryText.size() / (float) (PaleonomiconScreen.PAGE_SIZE_IN_LINES * 2));
@@ -87,6 +93,7 @@ public class BookEntry {
         ResourceLocation fileRes;
         try {
             fileRes = new ResourceLocation(PaleonomiconScreen.getBookFileDirectory() + lang + "/" + fileName);
+            System.out.println(fileRes);
             //test if it exists. if no exception, then the language is supported
             InputStream is = Minecraft.getInstance().getResourceManager().open(fileRes);
             is.close();
@@ -190,8 +197,10 @@ public class BookEntry {
     public static class Deserializer implements JsonDeserializer<BookEntry> {
 
         public BookEntry deserialize(JsonElement mainElement, Type deserializeType, JsonDeserializationContext context) throws JsonParseException {
+
             JsonObject jsonobject = GsonHelper.convertToJsonObject(mainElement, "book entry");
             BookWidget[] bookWidgets = new BookWidget[0];
+
             if(jsonobject.has("widgets")){
                 JsonArray jsonArray = jsonobject.getAsJsonArray("widgets");
                 bookWidgets = new BookWidget[jsonArray.size()];
@@ -201,6 +210,7 @@ public class BookEntry {
                     bookWidgets[i] = GsonHelper.convertToObject(widgetJson, "", context, type.getWidgetClass());
                 }
             }
+
             String parent = null;
             if (jsonobject.has("parent")) {
                 parent = GsonHelper.getAsString(jsonobject, "parent");
@@ -221,7 +231,9 @@ public class BookEntry {
                 progress = GsonHelper.getAsString(jsonobject, "required_progression");
             }
 
-            BookEntry bookEntry = new BookEntry(title, parent, text, progress, bookWidgets);
+            EntityLinkData[] linkedEntitesRead = GsonHelper.getAsObject(jsonobject, "entity_buttons", new EntityLinkData[0], context, EntityLinkData[].class);
+
+            BookEntry bookEntry = new BookEntry(title, parent, text, progress, bookWidgets, Arrays.asList(linkedEntitesRead));
             return bookEntry;
         }
     }
