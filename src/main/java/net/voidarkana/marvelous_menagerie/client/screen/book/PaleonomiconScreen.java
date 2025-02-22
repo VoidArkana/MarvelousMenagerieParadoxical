@@ -258,7 +258,7 @@ public class PaleonomiconScreen extends Screen {
 
         if (this.entityTooltip != null) {
             guiGraphics.pose().pushPose();
-            guiGraphics.pose().translate(0, 0, 550);
+            guiGraphics.pose().translate(-5, 10, 550);
             guiGraphics.renderTooltip(font, Minecraft.getInstance().font.split(Component.translatable(entityTooltip),
                     Math.max(this.width / 2 - 43, 170)), mouseX, mouseY);
             entityTooltip = null;
@@ -419,6 +419,7 @@ public class PaleonomiconScreen extends Screen {
         if (this.currentEntryJSON.equals(anomaliesEntryJSON)) {
             int rowCount = 0;
             int columnCount = 0;
+            boolean isRight = false;
 
             int linkDataSize = this.plantLinkData.size();
 
@@ -444,13 +445,13 @@ public class PaleonomiconScreen extends Screen {
             if (this.entryPageNumber == 0) {
                 startingOffsetX += 57;
             }
-            startingOffsetY += 20;
+            startingOffsetY += 13;
             if (this.entryPageNumber < 0) {
                 return;
             }
             for (int i = startingEntity; i < linkDataSize; i++) {
                 AbominationEntryManager.AbominationEntryCodec linkData = this.plantLinkData.get(i);
-                if (rowCount == 5) {
+                if (rowCount == (isRight ? 6 : 5)) {
                     break;
                 }
                 if (this.entryPageNumber != 0) {
@@ -459,7 +460,7 @@ public class PaleonomiconScreen extends Screen {
                     }
                 }
                 this.addRenderableWidget(new EntityLinkButton(this, linkData.icon(), linkData.entityName(),
-                        startingOffsetX + k + (columnCount * 24), startingOffsetY + l + (rowCount * 24), (p_213021_1_) -> {
+                        startingOffsetX + k + (columnCount * 24), startingOffsetY + l + (rowCount * 22), (p_213021_1_) -> {
 
                     this.attemptChangePage(new ResourceLocation(PaleonomiconScreen.getBookFileDirectory() + linkData.link()), true);
 
@@ -473,12 +474,21 @@ public class PaleonomiconScreen extends Screen {
                     columnCount = 0;
                 }
 
-                if (0 != this.entryPageNumber && rowCount >= 5) {
-                    startingOffsetX = 16 + 200;
+//                if (0 != this.entryPageNumber && rowCount >= 5) {
+//                    startingOffsetX = 16 + 200;
+//                    columnCount = 0;
+//                    rowCount = 0;
+//                }
+
+                if (rowCount == 5 && !isRight) {
+                    startingOffsetX = 20 + 200;
+                    startingOffsetY = 5;
+                    rowCount=0;
                     columnCount = 0;
-                    rowCount = 0;
+                    isRight = true;
                 }
-                if (rowCount == 5) {
+
+                if (rowCount == 6 && isRight){
                     break;
                 }
             }

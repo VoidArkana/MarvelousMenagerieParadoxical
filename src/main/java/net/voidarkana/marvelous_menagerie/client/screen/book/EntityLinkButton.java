@@ -65,7 +65,7 @@ public class EntityLinkButton extends Button {
 
         int lvt_5_1_ = 0;
         int lvt_6_1_ = 30;
-        float f = (float) 0.9;
+        float f = (float) 0.85;
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(getX(), getY(), 0);
         guiGraphics.pose().translate(1, 10, 50);
