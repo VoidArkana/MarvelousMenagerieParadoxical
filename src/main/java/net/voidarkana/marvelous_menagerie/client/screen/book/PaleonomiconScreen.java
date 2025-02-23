@@ -11,12 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.item.Item;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.AbominationEntryManager;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import org.joml.Vector3f;
-import net.minecraft.client.renderer.MultiBufferSource;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
@@ -43,10 +40,19 @@ public class PaleonomiconScreen extends Screen {
     protected ResourceLocation nextEntryJSON;
     protected final ResourceLocation rootEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/root.json");
 
-
-    protected final ResourceLocation animalsEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/animals/index.json");
-    protected final ResourceLocation plantsEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/plants/index.json");
     protected final ResourceLocation anomaliesEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/anomalies/index.json");
+
+    protected final ResourceLocation earlyPaleoEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/early_paleo/index.json");
+    protected final ResourceLocation carboniferousEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/carboniferous/index.json");
+    protected final ResourceLocation permianEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/permian/index.json");
+
+    protected final ResourceLocation triassicEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/triassic/index.json");
+    protected final ResourceLocation jurassicEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/jurassic/index.json");
+    protected final ResourceLocation cretaceousEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/cretaceous/index.json");
+
+    protected final ResourceLocation paleogeneEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/paleogene/index.json");
+    protected final ResourceLocation neogeneEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/neogene/index.json");
+    protected final ResourceLocation quaternaryEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/quaternary/index.json");
 
     int imageWidth;
     int imageHeight;
@@ -87,7 +93,37 @@ public class PaleonomiconScreen extends Screen {
     private int lastEntryPageBeforeLinkClick = -1;
     protected ResourceLocation currentPageText = null;
 
-    private final List<AbominationEntryManager.AbominationEntryCodec> plantLinkData = new ArrayList<>();
+    /*
+    private final List<EntityBaseEntryManager.EntityCodec> abominationLinkData = new ArrayList<>();
+
+    private final List<EntityBaseEntryManager.EntityCodec> earlyPaleoLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> carboniferousLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> permianLinkData = new ArrayList<>();
+
+    private final List<EntityBaseEntryManager.EntityCodec> triassicLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> jurassicLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> cretaceousLinkData = new ArrayList<>();
+
+    private final List<EntityBaseEntryManager.EntityCodec> paleogeneLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> neogeneLinkData = new ArrayList<>();
+    private final List<EntityBaseEntryManager.EntityCodec> quaternaryLinkData = new ArrayList<>();
+    */
+
+
+    private final List<AbominationEntryManager.EntityCodec> abominationLinkData = new ArrayList<>();
+
+    private final List<EarlyPaleoEntryManager.EntityCodec> earlyPaleoLinkData = new ArrayList<>();
+    private final List<CarboniferousEntryManager.EntityCodec> carboniferousLinkData = new ArrayList<>();
+    private final List<PermianEntryManager.EntityCodec> permianLinkData = new ArrayList<>();
+
+    private final List<TriassicEntryManager.EntityCodec> triassicLinkData = new ArrayList<>();
+    private final List<JurassicEntryManager.EntityCodec> jurassicLinkData = new ArrayList<>();
+    private final List<CretaceousEntryManager.EntityCodec> cretaceousLinkData = new ArrayList<>();
+
+    private final List<PaleogeneEntryManager.EntityCodec> paleogeneLinkData = new ArrayList<>();
+    private final List<NeogeneEntryManager.EntityCodec> neogeneLinkData = new ArrayList<>();
+    private final List<QuaternaryEntryManager.EntityCodec> quaternaryLinkData = new ArrayList<>();
+
 
     protected int xSize = 390;
     protected int ySize = 320;
@@ -99,11 +135,57 @@ public class PaleonomiconScreen extends Screen {
         this.imageHeight = 207;
         resetEntry();
 
-        for (AbominationEntryManager.AbominationEntryCodec data : AbominationEntryManager.DATA) {
-            this.plantLinkData.add(data);
+
+        for (AbominationEntryManager.EntityCodec data : AbominationEntryManager.DATA) {
+            this.abominationLinkData.add(data);
         }
 
-        Collections.sort(this.plantLinkData, Comparator.comparing(AbominationEntryManager.AbominationEntryCodec::getPlant));
+        //paleozoic
+        for (EarlyPaleoEntryManager.EntityCodec data : EarlyPaleoEntryManager.DATA) {
+            this.earlyPaleoLinkData.add(data);
+        }
+        for (CarboniferousEntryManager.EntityCodec data : CarboniferousEntryManager.DATA) {
+            this.carboniferousLinkData.add(data);
+        }
+        for (PermianEntryManager.EntityCodec data : PermianEntryManager.DATA) {
+            this.permianLinkData.add(data);
+        }
+
+        //mesozoic
+        for (TriassicEntryManager.EntityCodec data : TriassicEntryManager.DATA) {
+            this.triassicLinkData.add(data);
+        }
+        for (JurassicEntryManager.EntityCodec data : JurassicEntryManager.DATA) {
+            this.jurassicLinkData.add(data);
+        }
+        for (CretaceousEntryManager.EntityCodec data : CretaceousEntryManager.DATA) {
+            this.cretaceousLinkData.add(data);
+        }
+
+        //quaternary
+        for (PaleogeneEntryManager.EntityCodec data : PaleogeneEntryManager.DATA) {
+            this.paleogeneLinkData.add(data);
+        }
+        for (NeogeneEntryManager.EntityCodec data : NeogeneEntryManager.DATA) {
+            this.neogeneLinkData.add(data);
+        }
+        for (QuaternaryEntryManager.EntityCodec data : QuaternaryEntryManager.DATA) {
+            this.quaternaryLinkData.add(data);
+        }
+
+        Collections.sort(this.abominationLinkData, Comparator.comparing(AbominationEntryManager.EntityCodec::getIcon));
+
+        Collections.sort(this.earlyPaleoLinkData, Comparator.comparing(EarlyPaleoEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.carboniferousLinkData, Comparator.comparing(CarboniferousEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.permianLinkData, Comparator.comparing(PermianEntryManager.EntityCodec::getIcon));
+
+        Collections.sort(this.triassicLinkData, Comparator.comparing(TriassicEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.jurassicLinkData, Comparator.comparing(JurassicEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.cretaceousLinkData, Comparator.comparing(CretaceousEntryManager.EntityCodec::getIcon));
+
+        Collections.sort(this.paleogeneLinkData, Comparator.comparing(PaleogeneEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.neogeneLinkData, Comparator.comparing(NeogeneEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.quaternaryLinkData, Comparator.comparing(QuaternaryEntryManager.EntityCodec::getIcon));
     }
 
     public PaleonomiconScreen(){
@@ -410,90 +492,206 @@ public class PaleonomiconScreen extends Screen {
         return BOOK_WIDGET_TEXTURE;
     }
 
+    private boolean isIndex(){
+        return this.currentEntryJSON.equals(anomaliesEntryJSON)
+
+                || this.currentEntryJSON.equals(earlyPaleoEntryJSON)
+                || this.currentEntryJSON.equals(carboniferousEntryJSON)
+                || this.currentEntryJSON.equals(permianEntryJSON)
+
+                || this.currentEntryJSON.equals(triassicEntryJSON)
+                || this.currentEntryJSON.equals(jurassicEntryJSON)
+                || this.currentEntryJSON.equals(cretaceousEntryJSON)
+
+                || this.currentEntryJSON.equals(paleogeneEntryJSON)
+                || this.currentEntryJSON.equals(neogeneEntryJSON)
+                || this.currentEntryJSON.equals(quaternaryEntryJSON);
+    }
+
     private void addLinkButtons() {
         this.renderables.clear();
         this.clearWidgets();
+
+        if (isIndex()) {
+            this.renderIndexButtons();
+        }
+    }
+
+    private void renderIndexButtons() {
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize + 128) / 2;
 
-        if (this.currentEntryJSON.equals(anomaliesEntryJSON)) {
-            int rowCount = 0;
-            int columnCount = 0;
-            boolean isRight = false;
+        int linkDataSize = 0;
 
-            int linkDataSize = this.plantLinkData.size();
+        if (this.currentEntryJSON.equals(anomaliesEntryJSON))
+            linkDataSize = abominationLinkData.size();
 
-            int startingEntity = 0;
-            if (this.entryPageNumber != 0) {
+        //Paleozoic
+        if (this.currentEntryJSON.equals(earlyPaleoEntryJSON))
+            linkDataSize = earlyPaleoLinkData.size();
 
-                int startingSize = 5 * 5;
+        if (this.currentEntryJSON.equals(carboniferousEntryJSON))
+            linkDataSize = carboniferousLinkData.size();
 
-                if (this.entryPageNumber ==  1) {
-                    startingEntity = linkDataSize - (linkDataSize - (startingSize * (startingSize - 0)));
-                } else {
-                    startingEntity = linkDataSize - (linkDataSize - ((startingSize * (startingSize - 0 * 2) * 2)));
-                }
+        if (this.currentEntryJSON.equals(permianEntryJSON))
+            linkDataSize = permianLinkData.size();
 
-                if (startingEntity < 0) {
-                    return;
-                }
+        //Mesozoic
+        if (this.currentEntryJSON.equals(triassicEntryJSON))
+            linkDataSize = triassicLinkData.size();
+
+        if (this.currentEntryJSON.equals(jurassicEntryJSON))
+            linkDataSize = jurassicLinkData.size();
+
+        if (this.currentEntryJSON.equals(cretaceousEntryJSON))
+            linkDataSize = cretaceousLinkData.size();
+
+        //Cenozoic
+        if (this.currentEntryJSON.equals(paleogeneEntryJSON))
+            linkDataSize = paleogeneLinkData.size();
+
+        if (this.currentEntryJSON.equals(neogeneEntryJSON))
+            linkDataSize = neogeneLinkData.size();
+
+        if (this.currentEntryJSON.equals(quaternaryEntryJSON))
+            linkDataSize = quaternaryLinkData.size();
+
+
+        int rowCount = 0;
+        int columnCount = 0;
+        boolean isRight = false;
+
+        int startingEntity = 0;
+        if (this.entryPageNumber != 0) {
+            int startingSize = 5 * 5;
+            if (this.entryPageNumber ==  1) {
+                startingEntity = linkDataSize - (linkDataSize - (startingSize * (startingSize - 0)));
+            } else {
+                startingEntity = linkDataSize - (linkDataSize - ((startingSize * (startingSize - 0 * 2) * 2)));
             }
-
-            int startingOffsetX = 16;
-            int startingOffsetY = 16;
-
-            if (this.entryPageNumber == 0) {
-                startingOffsetX += 57;
-            }
-            startingOffsetY += 13;
-            if (this.entryPageNumber < 0) {
+            if (startingEntity < 0) {
                 return;
-            }
-            for (int i = startingEntity; i < linkDataSize; i++) {
-                AbominationEntryManager.AbominationEntryCodec linkData = this.plantLinkData.get(i);
-                if (rowCount == (isRight ? 6 : 5)) {
-                    break;
-                }
-                if (this.entryPageNumber != 0) {
-                    if (i > (startingEntity + (5 * 5 * 2))) {
-                        break;
-                    }
-                }
-                this.addRenderableWidget(new EntityLinkButton(this, linkData.icon(), linkData.entityName(),
-                        startingOffsetX + k + (columnCount * 24), startingOffsetY + l + (rowCount * 22), (p_213021_1_) -> {
-
-                    this.attemptChangePage(new ResourceLocation(PaleonomiconScreen.getBookFileDirectory() + linkData.link()), true);
-
-                }));
-
-                columnCount++;
-
-
-                if (columnCount == 5) {
-                    rowCount++;
-                    columnCount = 0;
-                }
-
-//                if (0 != this.entryPageNumber && rowCount >= 5) {
-//                    startingOffsetX = 16 + 200;
-//                    columnCount = 0;
-//                    rowCount = 0;
-//                }
-
-                if (rowCount == 5 && !isRight) {
-                    startingOffsetX = 20 + 200;
-                    startingOffsetY = 5;
-                    rowCount=0;
-                    columnCount = 0;
-                    isRight = true;
-                }
-
-                if (rowCount == 6 && isRight){
-                    break;
-                }
             }
         }
 
+        int startingOffsetX = 16;
+        int startingOffsetY = 16;
+
+        if (this.entryPageNumber == 0) {
+            startingOffsetX += 57;
+        }
+        startingOffsetY += 13;
+        if (this.entryPageNumber < 0) {
+            return;
+        }
+        for (int i = startingEntity; i < linkDataSize; i++) {
+
+            String icon = "";
+            String name = "";
+            String link = "";
+
+            //Abominations
+            if (this.currentEntryJSON.equals(anomaliesEntryJSON)){
+                icon = abominationLinkData.get(i).icon();
+                name = abominationLinkData.get(i).entityName();
+                link = abominationLinkData.get(i).link();
+            }
+
+            //Paleozoic
+            if (this.currentEntryJSON.equals(earlyPaleoEntryJSON)){
+                icon = earlyPaleoLinkData.get(i).icon();
+                name = earlyPaleoLinkData.get(i).entityName();
+                link = earlyPaleoLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(carboniferousEntryJSON)){
+                icon = carboniferousLinkData.get(i).icon();
+                name = carboniferousLinkData.get(i).entityName();
+                link = carboniferousLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(permianEntryJSON)){
+                icon = permianLinkData.get(i).icon();
+                name = permianLinkData.get(i).entityName();
+                link = permianLinkData.get(i).link();
+            }
+
+            //Mesozoic
+            if (this.currentEntryJSON.equals(triassicEntryJSON)){
+                icon = triassicLinkData.get(i).icon();
+                name = triassicLinkData.get(i).entityName();
+                link = triassicLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(jurassicEntryJSON)){
+                icon = jurassicLinkData.get(i).icon();
+                name = jurassicLinkData.get(i).entityName();
+                link = jurassicLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(cretaceousEntryJSON)){
+                icon = cretaceousLinkData.get(i).icon();
+                name = cretaceousLinkData.get(i).entityName();
+                link = cretaceousLinkData.get(i).link();
+            }
+
+            //Cenozoic
+            if (this.currentEntryJSON.equals(paleogeneEntryJSON)){
+                icon = paleogeneLinkData.get(i).icon();
+                name = paleogeneLinkData.get(i).entityName();
+                link = paleogeneLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(neogeneEntryJSON)){
+                icon = neogeneLinkData.get(i).icon();
+                name = neogeneLinkData.get(i).entityName();
+                link = neogeneLinkData.get(i).link();
+            }
+
+            if (this.currentEntryJSON.equals(quaternaryEntryJSON)){
+                icon = quaternaryLinkData.get(i).icon();
+                name = quaternaryLinkData.get(i).entityName();
+                link = quaternaryLinkData.get(i).link();
+            }
+
+            if (rowCount == (isRight ? 6 : 5)) {
+                break;
+            }
+            if (this.entryPageNumber != 0) {
+                if (i > (startingEntity + (5 * 5 * 2))) {
+                    break;
+                }
+            }
+
+            String finalLink = link;
+
+            this.addRenderableWidget(new EntityLinkButton(this, icon, name,
+                    startingOffsetX + k + (columnCount * 24), startingOffsetY + l + (rowCount * 22), (p_213021_1_) -> {
+
+                this.attemptChangePage(new ResourceLocation(PaleonomiconScreen.getBookFileDirectory() + finalLink), true);
+
+            }));
+
+            columnCount++;
+
+
+            if (columnCount == 5) {
+                rowCount++;
+                columnCount = 0;
+            }
+
+            if (rowCount == 5 && !isRight) {
+                startingOffsetX = 20 + 200;
+                startingOffsetY = 5;
+                rowCount=0;
+                columnCount = 0;
+                isRight = true;
+            }
+
+            if (rowCount == 6 && isRight){
+                break;
+            }
+        }
     }
 
 }

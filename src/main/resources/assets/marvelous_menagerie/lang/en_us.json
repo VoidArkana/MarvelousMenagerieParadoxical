@@ -574,5 +574,7 @@
   "entity.marvelous_menagerie.eohippus": "Dawn Horse",
   "entity.marvelous_menagerie.lepti": "Leptictidium",
   "entity.marvelous_menagerie.kelenken": "Kelenken",
-  "entity.marvelous_menagerie.doedicurus": "Doedicurus"
+  "entity.marvelous_menagerie.doedicurus": "Doedicurus",
+
+  "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist"
 }

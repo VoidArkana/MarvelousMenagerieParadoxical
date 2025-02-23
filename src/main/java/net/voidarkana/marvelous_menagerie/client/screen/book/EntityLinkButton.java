@@ -26,7 +26,6 @@ import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.voidarkana.marvelous_menagerie.client.renderer.item.MMItemstackRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.rendertypes.MMRenderTypes;
-import net.voidarkana.marvelous_menagerie.data.codec.AbominationEntryManager;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -10,13 +10,13 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
-import net.voidarkana.marvelous_menagerie.data.codec.AbominationEntryManager;
+import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEvents {
+public class MMEvents {
 
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event){
@@ -67,7 +67,17 @@ public class ModEvents {
         event.addListener(new PikaiaCoralManager());
         event.addListener(new RitualManager());
         event.addListener(new FossilCleaningManager());
+
         event.addListener(new AbominationEntryManager());
+        event.addListener(new EarlyPaleoEntryManager());
+        event.addListener(new CarboniferousEntryManager());
+        event.addListener(new PermianEntryManager());
+        event.addListener(new TriassicEntryManager());
+        event.addListener(new JurassicEntryManager());
+        event.addListener(new CretaceousEntryManager());
+        event.addListener(new PaleogeneEntryManager());
+        event.addListener(new NeogeneEntryManager());
+        event.addListener(new QuaternaryEntryManager());
     }
 
 }

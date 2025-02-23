@@ -1,13 +1,10 @@
 package net.voidarkana.marvelous_menagerie;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,11 +21,12 @@ import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModFoliagePlacers;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
-import net.voidarkana.marvelous_menagerie.event.ModEvents;
+import net.voidarkana.marvelous_menagerie.event.MMEvents;
 import net.voidarkana.marvelous_menagerie.event.ServerEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
@@ -67,6 +65,7 @@ public class MarvelousMenagerie
         modEventBus.addListener(this::setupClient);
 
         MMEntities.register(modEventBus);
+        MMVillagerProfessions.register(modEventBus);
         MMParticles.register(modEventBus);
 
         MMBlocks.register(modEventBus);
@@ -85,7 +84,7 @@ public class MarvelousMenagerie
 
         PROXY.init();
 
-        eventBus.register(new ModEvents());
+        eventBus.register(new MMEvents());
         eventBus.register(new ServerEvents());
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC,

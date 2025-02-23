@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-20T10:54:44.5783451	Item Models: marvelous_menagerie
+// 1.20.1	2025-02-22T13:49:01.2933863	Item Models: marvelous_menagerie
 478d01819bbec98e6f7c0d656f310df1423a26d2 assets/marvelous_menagerie/models/item/arandaspis_bucket.json
 b3f6f2a6d2c27f207199979b3b929967e7f90e5d assets/marvelous_menagerie/models/item/arandaspis_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/arandaspis_spawn_egg.json
@@ -87,7 +87,6 @@ ad177e3e3d28f94feb706ca5e8f09090485fbc88 assets/marvelous_menagerie/models/item/
 f44bcda387b246084ba9bdccf4e7e2ba8105002a assets/marvelous_menagerie/models/item/mudstone_stairs.json
 8c3920e05755ce885aef32c68bfb16bcbad0d69e assets/marvelous_menagerie/models/item/mudstone_wall.json
 91e386b1db74f4d1bec2380f787bb253fcd47d0e assets/marvelous_menagerie/models/item/ophthalmo_fossil.json
-6a39ee9e7a4443b611e0ade55d5b2da48258c3c2 assets/marvelous_menagerie/models/item/paleonomicon.json
 99ca288e299162ed1f0d8815a57e050d0a255d6b assets/marvelous_menagerie/models/item/pelta_fossil.json
 65c3cffae9beb5542167f2f4a61b658bc1a92b89 assets/marvelous_menagerie/models/item/permafrost_bricks_slab.json
 55e596cddc97757d099b6b44fa77897f9cde76e3 assets/marvelous_menagerie/models/item/permafrost_bricks_stairs.json
