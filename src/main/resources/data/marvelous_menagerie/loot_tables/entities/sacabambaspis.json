@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "marvelous_menagerie:sacabambaspis",
+          "name": "marvelous_menagerie:raw_saca",
           "functions": [
             {
               "function": "set_count",

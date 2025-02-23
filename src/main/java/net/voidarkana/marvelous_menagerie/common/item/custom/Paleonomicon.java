@@ -8,6 +8,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,11 +16,15 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.data.codec.BookEntityManager;
+import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class Paleonomicon extends Item {
+
+    boolean usedOnEntity = false;
 
     public Paleonomicon() {
         super(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON));
@@ -27,16 +32,49 @@ public class Paleonomicon extends Item {
 
     public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack itemStackIn = playerIn.getItemInHand(handIn);
-        if (playerIn instanceof ServerPlayer) {
-            ServerPlayer serverplayerentity = (ServerPlayer) playerIn;
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, itemStackIn);
-            serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+        if (!this.usedOnEntity){
+            if (playerIn instanceof ServerPlayer) {
+                ServerPlayer serverplayerentity = (ServerPlayer) playerIn;
+                CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, itemStackIn);
+                serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+            }
+            playerIn.swing(handIn);
+            if (worldIn.isClientSide) {
+                MarvelousMenagerie.PROXY.openBookGUI();
+            }
         }
-        playerIn.swing(handIn);
-        if (worldIn.isClientSide) {
-            MarvelousMenagerie.PROXY.openBookGUI(itemStackIn);
-        }
+
+        this.usedOnEntity = false;
+
         return new InteractionResultHolder(InteractionResult.PASS, itemStackIn);
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
+
+        String link;
+
+        for (BookEntityManager.BookInteractLink data : BookEntityManager.DATA) {
+
+            if (pInteractionTarget.getType() == data.entity()){
+                if (pPlayer instanceof ServerPlayer) {
+                    ServerPlayer serverplayerentity = (ServerPlayer)pPlayer;
+                    serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+                }
+
+                link = data.link();
+
+                pPlayer.swing(pUsedHand);
+
+                if (pPlayer.level().isClientSide){
+                    MarvelousMenagerie.PROXY.openBookGUI(link);
+                }
+                this.usedOnEntity = true;
+                return InteractionResult.PASS;
+            }
+        }
+
+        return super.interactLivingEntity(pStack, pPlayer, pInteractionTarget, pUsedHand);
     }
 
     @Override

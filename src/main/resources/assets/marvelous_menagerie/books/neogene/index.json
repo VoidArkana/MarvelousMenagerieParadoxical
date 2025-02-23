@@ -1,6 +1,6 @@
 {
-  "parent": "root.json",
-  "text": "",
-  "title": "book.marvelous_menagerie.neogene_index",
+  "parent": "organisms.json",
+  "text": "empty.txt",
+  "title": "book.marvelous_menagerie.neogene",
   "widgets": []
 }

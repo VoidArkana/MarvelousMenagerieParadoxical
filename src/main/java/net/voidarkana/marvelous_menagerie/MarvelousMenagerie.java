@@ -26,6 +26,7 @@ import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModFoliagePlacers;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
+import net.voidarkana.marvelous_menagerie.data.datagen.MMLootModifiers;
 import net.voidarkana.marvelous_menagerie.event.MMEvents;
 import net.voidarkana.marvelous_menagerie.event.ServerEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
@@ -63,6 +64,8 @@ public class MarvelousMenagerie
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::setupClient);
+
+        MMLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
         MMEntities.register(modEventBus);
         MMVillagerProfessions.register(modEventBus);

@@ -1,7 +1,7 @@
 {
   "parent": "anomalies/index.json",
   "text": "anomalies/mobs/chud.txt",
-  "title": "book.marvelous_menagerie.chud",
+  "title": "entity.marvelous_menagerie.chud",
   "widgets": [
     {
       "display_page" : 1,

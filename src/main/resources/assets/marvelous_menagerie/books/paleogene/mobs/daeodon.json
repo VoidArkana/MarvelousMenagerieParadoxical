@@ -1,12 +1,12 @@
 {
-  "parent": "root.json",
-  "text": "getting_started.txt",
-  "title": "book.marvelous_menagerie.getting_started",
+  "parent": "paleogene/index.json",
+  "text": "paleogene/mobs/daeodon.txt",
+  "title": "entity.marvelous_menagerie.daeodon",
   "widgets": [
     {
       "display_page" : 1,
       "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/fracture_illustration.png",
+      "image": "marvelous_menagerie:textures/gui/book/chud.png",
       "sepia": true,
       "x": 64,
       "y": 60,

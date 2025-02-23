@@ -70,8 +70,13 @@ public class ClientProxy extends CommonProxy{
         Minecraft.getInstance().setScreen(new FossilMinigameScreen(player, clicked));
     }
 
-    public void openBookGUI(ItemStack itemStackIn) {
+    public void openBookGUI() {
         Minecraft.getInstance().setScreen(new PaleonomiconScreen());
+    }
+
+
+    public void openBookGUI(String link) {
+        Minecraft.getInstance().setScreen(new PaleonomiconScreen(link));
     }
 
 }

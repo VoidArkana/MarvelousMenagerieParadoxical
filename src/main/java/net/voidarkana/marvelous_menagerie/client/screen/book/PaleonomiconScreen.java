@@ -34,7 +34,7 @@ public class PaleonomiconScreen extends Screen {
     public static final int TEXT_LINK_HOVER_COLOR = 0X0094FF;
     public static final int TEXT_LINK_LOCKED_COLOR = 0XD3C9AB;
     public boolean unlockTooltip;
-    private int tickCount = 0;
+
     protected ResourceLocation prevEntryJSON = null;
     protected ResourceLocation currentEntryJSON;
     protected ResourceLocation nextEntryJSON;
@@ -75,9 +75,6 @@ public class PaleonomiconScreen extends Screen {
 
     protected String entityTooltip;
 
-    public static final float MOUSE_LEAN_THRESHOLD = 0.55F;
-    public static final float MAX_MOUSE_LEAN_THRESHOLD = 0.70F;
-
     private boolean incrementingPage;
     private boolean decrementingPage;
 
@@ -91,24 +88,6 @@ public class PaleonomiconScreen extends Screen {
     private BookEntry nextEntry;
     private int entryPageNumber = 0;
     private int lastEntryPageBeforeLinkClick = -1;
-    protected ResourceLocation currentPageText = null;
-
-    /*
-    private final List<EntityBaseEntryManager.EntityCodec> abominationLinkData = new ArrayList<>();
-
-    private final List<EntityBaseEntryManager.EntityCodec> earlyPaleoLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> carboniferousLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> permianLinkData = new ArrayList<>();
-
-    private final List<EntityBaseEntryManager.EntityCodec> triassicLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> jurassicLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> cretaceousLinkData = new ArrayList<>();
-
-    private final List<EntityBaseEntryManager.EntityCodec> paleogeneLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> neogeneLinkData = new ArrayList<>();
-    private final List<EntityBaseEntryManager.EntityCodec> quaternaryLinkData = new ArrayList<>();
-    */
-
 
     private final List<AbominationEntryManager.EntityCodec> abominationLinkData = new ArrayList<>();
 
@@ -130,7 +109,7 @@ public class PaleonomiconScreen extends Screen {
 
     public PaleonomiconScreen(String openTo) {
         super(Component.translatable("item.marvelous_menagerie.paleonomicon"));
-        currentEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, openTo);
+        currentEntryJSON = new ResourceLocation(getBookFileDirectory() + openTo);
         this.imageWidth = 314;
         this.imageHeight = 207;
         resetEntry();
@@ -189,7 +168,7 @@ public class PaleonomiconScreen extends Screen {
     }
 
     public PaleonomiconScreen(){
-        this("books/root.json");
+        this("root.json");
     }
 
     @Override
@@ -204,8 +183,6 @@ public class PaleonomiconScreen extends Screen {
 
     @Override
     public void tick() {
-        tickCount++;
-
         if (incrementingPage) {
             if(nextEntryJSON != null){
                 this.prevEntryJSON = this.currentEntryJSON;

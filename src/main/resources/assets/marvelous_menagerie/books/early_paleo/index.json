@@ -1,6 +1,6 @@
 {
-  "parent": "root.json",
-  "text": "",
-  "title": "book.marvelous_menagerie.early_paleo_index",
+  "parent": "organisms.json",
+  "text": "empty.txt",
+  "title": "book.marvelous_menagerie.early_paleo",
   "widgets": []
 }

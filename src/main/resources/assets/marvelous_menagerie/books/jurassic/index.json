@@ -1,6 +1,6 @@
 {
-  "parent": "root.json",
-  "text": "",
-  "title": "book.marvelous_menagerie.jurassic_index",
+  "parent": "organisms.json",
+  "text": "empty.txt",
+  "title": "book.marvelous_menagerie.jurassic",
   "widgets": []
 }

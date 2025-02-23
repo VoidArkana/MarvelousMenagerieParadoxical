@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Extinct creatures and when to find them...
+
+    • §lPaleozoic
+        • {Early Paleozoic|early_paleo/index.json}
+        • {Carboniferous|carboniferous/index.json}
+        • {Permian|permian/index.json}
+    • §lMezosoic
+        • {Triassic|triassic/index.json}
+        • {Jurassic|jurassic/index.json}
+        • {Cretaceous|cretaceous/index.json}
+    • §lCenozoic
+        • {Paleogene|paleogene/index.json}
+        • {Neogene|neogene/index.json}
+        • {Quaternary|quaternary/index.json}

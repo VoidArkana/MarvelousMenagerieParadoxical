@@ -31,6 +31,9 @@ public class CommonProxy {
     public void openToolkitGUI(Player player, BlockPos clicked) {
     }
 
-    public void openBookGUI(ItemStack itemStackIn) {
+    public void openBookGUI() {
+    }
+
+    public void openBookGUI(String link) {
     }
 }
