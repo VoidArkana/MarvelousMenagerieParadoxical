@@ -289,7 +289,7 @@ public class PaleonomiconScreen extends Screen {
         }
 
         guiGraphics.blit(PaleonomiconScreen.BOOK_TEXTURE, this.leftPos+homeButtonStartX, this.topPos+homeButtonStartY,
-                336, hoveringOverHome ? 48+8 : 48, 20, 36, 510, 510);
+                336, hoveringOverHome ? 48 : 48+8, 20, 36, 510, 510);
 
 
         poseStack.popPose();

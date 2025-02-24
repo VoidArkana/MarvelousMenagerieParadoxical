@@ -71,7 +71,8 @@ public class MarvelousMenagerie
         MMVillagerProfessions.register(modEventBus);
         MMParticles.register(modEventBus);
 
-        MMBlocks.register(modEventBus);
+        MMBlocks.registerBlocks(modEventBus);
+        MMBlocks.registerPaintings(modEventBus);
         MMBlockEntities.register(modEventBus);
         MMItems.register(modEventBus);
 

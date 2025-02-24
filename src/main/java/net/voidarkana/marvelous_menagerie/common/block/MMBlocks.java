@@ -3,6 +3,7 @@ package net.voidarkana.marvelous_menagerie.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -27,15 +28,22 @@ import net.voidarkana.marvelous_menagerie.util.MMWoodTypes;
 import java.util.function.Supplier;
 
 public class MMBlocks {
+
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, MarvelousMenagerie.MODID);
 
+    public static final DeferredRegister<PaintingVariant> PAINTINGS =
+            DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MODID);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
     }
+
+
+    public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud_painting",
+            ()-> new PaintingVariant(64, 48));
 
 
     //if adding another tree, make custom block classes for each thing to make flammable
@@ -855,7 +863,11 @@ public class MMBlocks {
         return MMItems.ITEMS.register(name, ()-> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public static void register(IEventBus eventBus){
+    public static void registerBlocks(IEventBus eventBus){
         BLOCKS.register(eventBus);
+    }
+
+    public static void registerPaintings(IEventBus eventBus){
+        PAINTINGS.register(eventBus);
     }
 }

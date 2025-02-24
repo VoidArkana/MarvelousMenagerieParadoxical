@@ -586,5 +586,8 @@
   "entity.marvelous_menagerie.kelenken": "Kelenken",
   "entity.marvelous_menagerie.doedicurus": "Doedicurus",
 
-  "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist"
+  "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist",
+
+  "painting.marvelous_menagerie.chud_painting.title": "Chud Anatomy",
+  "painting.marvelous_menagerie.chud_painting.author": "Ninni"
 }
