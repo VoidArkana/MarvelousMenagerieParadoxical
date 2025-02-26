@@ -81,7 +81,7 @@ public class EolactoriaModel<T extends Eolactoria> extends HierarchicalModel<T> 
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, EolactoriaAnims.SWIM, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1.0F);
+		this.animate(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
 
 		if (entity.flopSide()){
 			this.animate(entity.flopAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F);

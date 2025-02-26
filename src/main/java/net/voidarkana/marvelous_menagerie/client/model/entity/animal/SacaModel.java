@@ -62,8 +62,9 @@ public class SacaModel<T extends Sacabambaspis> extends HierarchicalModel<T> {
 //		if (pEntity.isInWaterOrBubble()){
 //			this.animateWalk(SacaAnims.SWIM, pLimbSwingAmount, pLimbSwing, 2, 2.5f);
 //		}
+		//System.out.println(pLimbSwingAmount);
 		this.animate(pEntity.swimAnimationState, SacaAnims.SWIM, pAgeInTicks, pLimbSwingAmount);
-		this.animate(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1.0F);
+		this.animate(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1-Math.abs(pLimbSwingAmount));
 		this.animate(pEntity.flopAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
 
 		this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);

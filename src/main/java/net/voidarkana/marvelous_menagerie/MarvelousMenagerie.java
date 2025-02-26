@@ -114,6 +114,7 @@ public class MarvelousMenagerie
 
             ComposterBlock.COMPOSTABLES.put(MMBlocks.COOKSONIA.get().asItem(), 0.4F);
 
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.PROTOTAXITES.getId(), MMBlocks.POTTED_PROTOTAXITES);
             ComposterBlock.COMPOSTABLES.put(MMBlocks.PROTOTAXITES.get().asItem(), 0.4F);
             ComposterBlock.COMPOSTABLES.put(MMBlocks.PROTOTAXITES_BLOCK.get().asItem(), 0.8F);
         });

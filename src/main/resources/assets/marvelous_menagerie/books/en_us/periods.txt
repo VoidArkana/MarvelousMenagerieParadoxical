@@ -13,7 +13,7 @@
 
 
 
-    Extinct creatures and when to find them...
+    Extinct creatures and §lwhen§r to find them
 
     • §lPaleozoic
         • {Early Paleozoic|early_paleo/index.json}

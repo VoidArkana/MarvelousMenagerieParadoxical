@@ -19,7 +19,6 @@ public class Chud extends Monster {
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleNoseState = new AnimationState();
     public final AnimationState rotateAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
     private int idleNoseTimeout = 0;
     private int rotateAnimationTimeout = 0;
 
@@ -43,7 +42,7 @@ public class Chud extends Monster {
     }
 
     private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving(), this.tickCount);
+        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
 
         if (this.idleNoseTimeout <= 0) {
             this.idleNoseTimeout = this.random.nextInt(40) + 80;

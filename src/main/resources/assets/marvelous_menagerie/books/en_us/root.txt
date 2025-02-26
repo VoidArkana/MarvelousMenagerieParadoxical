@@ -11,15 +11,16 @@
 
 
 
-    §lby §lProfessor §lMarbelle §lLouisse
+      §lby §lProfessor
+      §lMarbelle §lLouisse
 
 
 
-    §lTABLE §lOF §lCONTENTS
+ §lTABLE §lOF §lCONTENTS
 
 
-    • {Paleontology|paleontology/chapter.json}
+  • {Paleontology|paleontology/chapter.json}
 
-    • {Time Anomalies|anomalies/chapter.json}
+  • {Time Anomalies|anomalies/chapter.json}
 
-    • {Eras of the Overworld|periods.json}
+  • {Eras of the Overworld|periods.json}

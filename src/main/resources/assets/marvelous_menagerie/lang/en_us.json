@@ -589,5 +589,7 @@
   "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist",
 
   "painting.marvelous_menagerie.chud_painting.title": "Chud Anatomy",
-  "painting.marvelous_menagerie.chud_painting.author": "Ninni"
+  "painting.marvelous_menagerie.chud_painting.author": "Ninni",
+
+  "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites"
 }

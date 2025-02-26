@@ -100,7 +100,7 @@ public class FalcatusModel<T extends Falcatus> extends HierarchicalModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, FalcatusAnims.swim, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1.0F);
+		this.animate(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);

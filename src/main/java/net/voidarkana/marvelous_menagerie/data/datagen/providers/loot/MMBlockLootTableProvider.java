@@ -245,6 +245,9 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.COOKSONIA.get());
 
         this.dropSelf(MMBlocks.PROTOTAXITES.get());
+        this.add(MMBlocks.POTTED_PROTOTAXITES.get(),
+                createPotFlowerItemTable(MMBlocks.PROTOTAXITES.get()));
+
         this.dropSelf(MMBlocks.PROTOTAXITES_BLOCK.get());
 
         this.dropSelf(MMBlocks.DICKINSONIA.get());

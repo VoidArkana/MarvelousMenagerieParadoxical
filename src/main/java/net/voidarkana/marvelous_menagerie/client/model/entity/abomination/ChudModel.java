@@ -96,7 +96,7 @@ public class ChudModel<T extends Chud> extends HierarchicalModel<T> {
 			animateWalk(ChudAnimations.walk,limbSwing, limbSwingAmount, 2, 2.5f);
 		}
 
-		this.animate(entity.idleAnimationState, ChudAnimations.idle, ageInTicks, 1.0F);
+		this.animate(entity.idleAnimationState, ChudAnimations.idle, ageInTicks, 1-Math.abs(limbSwingAmount));
 
 		this.animate(entity.rotateAnimationState, ChudAnimations.rotate, ageInTicks, 1.0F);
 

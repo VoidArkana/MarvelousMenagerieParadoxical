@@ -193,6 +193,9 @@ public class MMBlocks {
     public static final RegistryObject<Block> PROTOTAXITES = registerBlock("prototaxites",
             ()-> new PrototaxitesBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN).noOcclusion(),
                     ModConfiguredFeatures.PROTOTAXITES_KEY));
+    public static final RegistryObject<Block> POTTED_PROTOTAXITES = registerBlock("potted_prototaxites",
+            ()-> new FlowerPotBlock(()-> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.PROTOTAXITES,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_CACTUS).noOcclusion()));
 
     public static final RegistryObject<Block> PROTOTAXITES_BLOCK = registerBlock("prototaxites_block",
             ()-> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN)));

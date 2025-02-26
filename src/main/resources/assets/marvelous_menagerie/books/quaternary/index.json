@@ -1,5 +1,5 @@
 {
-  "parent": "organisms.json",
+  "parent": "periods.json",
   "text": "empty.txt",
   "title": "book.marvelous_menagerie.quaternary",
   "widgets": []

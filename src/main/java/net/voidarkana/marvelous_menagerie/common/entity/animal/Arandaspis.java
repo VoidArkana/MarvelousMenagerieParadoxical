@@ -195,7 +195,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     }
 
     private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(!this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
+        this.idleAnimationState.animateWhen(this.isInWaterOrBubble(), this.tickCount);
 
         this.swimAnimationState.animateWhen(this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
 

@@ -51,7 +51,7 @@ public class ArandaspisModel<T extends Arandaspis> extends HierarchicalModel<T> 
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, ArandaspisAnims.SWIM, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1.0F);
+		this.animate(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, ArandaspisAnims.FLOP, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);

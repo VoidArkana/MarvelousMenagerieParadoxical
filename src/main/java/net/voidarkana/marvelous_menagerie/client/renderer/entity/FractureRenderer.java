@@ -29,7 +29,11 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
     public FractureRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_LAYER)), 0);
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
-                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_emmissive.png")));
+                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_emmissive.png"),
+                (fracture, v, v1) -> {return 1.0F;}));
+        this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
+                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_glow.png"),
+                (fracture, v, v1) -> {return (float) (50-fracture.getOpeningTime())/30;}));
     }
 
     @Override
@@ -59,9 +63,6 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         }else {
             summonRot = 0;
         }
-        //System.out.println(summonRot);
-
-        //pPoseStack.mulPose(Axis.YP.rotationDegrees(Math.abs(summonRot * f2 * 200)));
 
         pPoseStack.pushPose();
         pPoseStack.translate(0.0F, 1.5F, 0F);
