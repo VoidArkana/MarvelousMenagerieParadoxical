@@ -43,6 +43,7 @@ public class CraftingRecipeWidget extends BookWidget {
     }
 
     public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage) {
+
         if (recipe == null && recipeId != null) {
             recipe = getRecipeByName(recipeId);
             if(recipe instanceof AbstractCookingRecipe){

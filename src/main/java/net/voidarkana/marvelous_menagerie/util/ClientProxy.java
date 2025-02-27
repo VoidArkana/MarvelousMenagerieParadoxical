@@ -12,14 +12,19 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.AltarRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.CharniaRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRenderer;
@@ -27,6 +32,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.FractureRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.renderer.item.CustomArmorRenderProperties;
 import net.voidarkana.marvelous_menagerie.client.screen.book.PaleonomiconScreen;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
@@ -36,10 +42,18 @@ import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, value = {Dist.CLIENT})
 public class ClientProxy extends CommonProxy{
 
+    public static int shaderLoadAttemptCooldown = 0;
+
     public ClientProxy() {
     }
 
+    @Override
+    public void init() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    }
+
     public void clientInit() {
+        MinecraftForge.EVENT_BUS.register(new MMClientEvents());
 
         MarvelousMenagerie.CALLBACKS.forEach(Runnable::run);
         MarvelousMenagerie.CALLBACKS.clear();
@@ -79,4 +93,8 @@ public class ClientProxy extends CommonProxy{
         Minecraft.getInstance().setScreen(new PaleonomiconScreen(link));
     }
 
+    @Override
+    public Object getArmorRenderProperties() {
+        return new CustomArmorRenderProperties();
+    }
 }

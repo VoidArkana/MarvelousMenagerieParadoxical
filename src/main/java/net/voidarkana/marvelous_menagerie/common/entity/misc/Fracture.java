@@ -158,9 +158,28 @@ public class Fracture extends LivingEntity {
     @Override
     public void tick() {
 
+        if (this.isUnderWater()){
+
+            double d0 = this.blockPosition().getX();
+            double d1 = this.blockPosition().getY()+1;
+            double d2 = this.blockPosition().getZ();
+
+            if (this.getRandom().nextInt(16) == 0){
+                this.level().addAlwaysVisibleParticle(ParticleTypes.BUBBLE_COLUMN_UP,
+                        d0 + 0.5D, d1, d2 + 0.5D,
+                        0.0D, 0.04D, 0.0D);
+
+                this.level().addAlwaysVisibleParticle(ParticleTypes.BUBBLE_COLUMN_UP,
+                        d0 + this.getRandom().nextFloat(),
+                        d1 + this.getRandom().nextFloat(),
+                        d2 + this.getRandom().nextFloat(),
+                        0.0D, 0.04D, 0.0D);
+
+            }
+        }
 
         if (getOpeningTime()==0){
-            this.level().addParticle(MMParticles.RIFT.get(),
+            this.level().addAlwaysVisibleParticle(MMParticles.RIFT.get(),
                     this.blockPosition().getX() + 0.5,
                     this.blockPosition().getY() + 1.1,
                     this.blockPosition().getZ() + 0.5,
@@ -174,7 +193,7 @@ public class Fracture extends LivingEntity {
                 int ySpeed = this.getRandom().nextInt(-2, 3);
                 int zSpeed = this.getRandom().nextInt(-2, 3);
 
-                this.level().addParticle(MMParticles.TIME_SHARD.get(),
+                this.level().addAlwaysVisibleParticle(MMParticles.TIME_SHARD.get(),
                         this.blockPosition().getX() + xSpeed + 0.5,
                         this.blockPosition().getY() + ySpeed + 1.25,
                         this.blockPosition().getZ() + zSpeed + 0.5,
@@ -189,7 +208,7 @@ public class Fracture extends LivingEntity {
                 int ySpeed = this.getRandom().nextInt(-2, 3);
                 int zSpeed = this.getRandom().nextInt(-2, 3);
 
-                this.level().addParticle(MMParticles.TIME_SHARD.get(),
+                this.level().addAlwaysVisibleParticle(MMParticles.TIME_SHARD.get(),
                         this.blockPosition().getX() + xSpeed + 0.5,
                         this.blockPosition().getY() + ySpeed + 1.25,
                         this.blockPosition().getZ() + zSpeed + 0.5,
@@ -203,7 +222,7 @@ public class Fracture extends LivingEntity {
                 int ySpeed = this.getRandom().nextInt(-2, 3);
                 int zSpeed = this.getRandom().nextInt(-2, 3);
 
-                this.level().addParticle(ParticleTypes.END_ROD,
+                this.level().addAlwaysVisibleParticle(ParticleTypes.END_ROD,
                         this.blockPosition().getX() + xSpeed/1.75 + 0.5,
                         this.blockPosition().getY() + ySpeed/1.75 + 1.25,
                         this.blockPosition().getZ() + zSpeed/1.75 + 0.5,
@@ -242,7 +261,7 @@ public class Fracture extends LivingEntity {
                     int ySpeed = this.getRandom().nextInt(-2, 3);
                     int zSpeed = this.getRandom().nextInt(-2, 3);
 
-                    this.level().addParticle(MMParticles.TIME_SHARD.get(),
+                    this.level().addAlwaysVisibleParticle(MMParticles.TIME_SHARD.get(),
                             this.blockPosition().getX() + xSpeed + 0.5,
                             this.blockPosition().getY() + ySpeed + 1.25,
                             this.blockPosition().getZ() + zSpeed + 0.5,

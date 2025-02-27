@@ -59,22 +59,34 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.PROTOTAXITES_SIGN);
         simpleItem(MMItems.PROTOTAXITES_HANGING_SIGN);
 
-
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);
 
         simpleItem(MMItems.SNIFFER_FOSSIL);
         simpleItem(MMItems.SACA_FOSSIL);
         simpleItem(MMItems.ARANDASPIS_FOSSIL);
+
         simpleItem(MMItems.CARIS_FOSSIL);
+        simpleItem(MMItems.CARIS_SCUTE);
+        simpleItem(MMItems.CARIS_LENS);
+
         simpleItem(MMItems.HALLU_FOSSIL);
+        simpleItem(MMItems.MAGIC_ROLL);
+        simpleItem(MMItems.HALLUCIGENIC_SLIME);
+        simpleItem(MMItems.WARNING);
+
         simpleItem(MMItems.TRILO_FOSSIL);
+        simpleItem(MMItems.TRILO_BITE);
+
         simpleItem(MMItems.PIKAIA_FOSSIL);
         simpleItem(MMItems.FALCA_FOSSIL);
         simpleItem(MMItems.ROACH_FOSSIL);
         simpleItem(MMItems.GORGON_FOSSIL);
         simpleItem(MMItems.LYSTRO_FOSSIL);
+
         simpleItem(MMItems.OPHTHALMO_FOSSIL);
+        simpleItem(MMItems.OPHTHALMO_ARMOR);
+
         simpleItem(MMItems.THERI_FOSSIL);
         simpleItem(MMItems.TLATO_FOSSIL);
         simpleItem(MMItems.PELTA_FOSSIL);
@@ -88,8 +100,18 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.FALCA_FOSSIL);
         simpleItem(MMItems.DODO_FOSSIL);
         simpleItem(MMItems.THYLACINE_FOSSIL);
+
         simpleItem(MMItems.STELLER_FOSSIL);
+        simpleItem(MMItems.STELLER_MILK);
+        simpleItem(MMItems.STELLER_ICE_CREAM);
+
         simpleItem(MMItems.ELEBIRD_FOSSIL);
+        simpleItem(MMItems.BOILED_ELEPHANT_EGG);
+        simpleItem(MMItems.JUMBO_OMELETTE);
+        simpleItem(MMItems.CRACKED_ELEPHANT_EGG);
+        simpleItem(MMItems.EGG_SHELLMET);
+        simpleItem(MMItems.EGG_SHELL_FRAGMENT);
+
         simpleItem(MMItems.DOEDICURUS_FOSSIL);
 
         simpleItem(MMItems.SLOVENICUS_BUCKET);

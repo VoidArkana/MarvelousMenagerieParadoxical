@@ -17,6 +17,24 @@
       "v1": 128,
       "width": 128,
       "height": 128
+    },
+    {
+      "display_page" : 3,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:golden_saca",
+      "sepia": true,
+      "x": 55,
+      "y": 112,
+      "scale": 1
+    },
+    {
+      "display_page" : 2,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:cooked_saca",
+      "sepia": true,
+      "x": 55,
+      "y": 144,
+      "scale": 1
     }
   ]
 }

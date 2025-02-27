@@ -40,11 +40,26 @@ public class MMCreativeTab {
                         output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
+                        output.accept(MMItems.CARIS_LENS.get());
+                        output.accept(MMItems.CARIS_SCUTE.get());
+                        output.accept(MMItems.ANOMALOUS_GOGGLES.get());
+
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
+
+                        output.accept(MMItems.CRACKED_ELEPHANT_EGG.get());
+                        output.accept(MMItems.BOILED_ELEPHANT_EGG.get());
+                        output.accept(MMItems.JUMBO_OMELETTE.get());
+                        output.accept(MMItems.EGG_SHELL_FRAGMENT.get());
+                        output.accept(MMItems.EGG_SHELLMET.get());
 
                         output.accept(MMItems.EOLACTORIA_BUCKET.get());
 
                         output.accept(MMItems.FALCA_BUCKET.get());
+
+                        output.accept(MMItems.HALLUCIGENIC_SLIME.get());
+                        output.accept(MMItems.MAGIC_ROLL.get());
+
+                        output.accept(MMItems.OPHTHALMO_ARMOR.get());
 
                         output.accept(MMItems.SACA_BUCKET.get());
                         output.accept(MMItems.SACABAMBASPIS.get());
@@ -52,6 +67,11 @@ public class MMCreativeTab {
                         output.accept(MMItems.GOLDEN_SACA.get());
 
                         output.accept(MMItems.SLOVENICUS_BUCKET.get());
+
+                        output.accept(MMItems.STELLER_MILK.get());
+                        output.accept(MMItems.STELLER_ICE_CREAM.get());
+
+                        output.accept(MMItems.TRILO_BITE.get());
 
                         output.accept(MMItems.CARIS_FOSSIL.get());
                         output.accept(MMItems.ROACH_FOSSIL.get());

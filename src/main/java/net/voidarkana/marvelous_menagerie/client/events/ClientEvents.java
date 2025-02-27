@@ -1,6 +1,8 @@
 package net.voidarkana.marvelous_menagerie.client.events;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,6 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
+import net.voidarkana.marvelous_menagerie.client.model.armor.AnomalousGogglesModel;
 import net.voidarkana.marvelous_menagerie.client.model.block.AltarSkullModel;
 import net.voidarkana.marvelous_menagerie.client.model.block.CharniaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
@@ -28,6 +31,12 @@ import java.io.IOException;
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
+    public static final ModelLayerLocation ROADRUNNER_BOOTS = createLocation("anomalous_goggles", "main");
+
+    private static ModelLayerLocation createLocation(String model, String layer) {
+        return new ModelLayerLocation(new ResourceLocation("alexsmobs", model), layer);
+    }
+
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(MMModelLayers.SKULL_LAYER, AltarSkullModel::createBodyLayer);
@@ -41,6 +50,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.FALCATUS_LAYER, FalcatusModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.EOLACTORIA_LAYER, EolactoriaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SLOVENICUS_LAYER, SlovenicusModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
     }
 
     @SubscribeEvent

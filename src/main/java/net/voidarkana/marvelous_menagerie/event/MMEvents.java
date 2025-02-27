@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
@@ -55,12 +56,12 @@ public class MMEvents {
     @SubscribeEvent
     public void setTargetEvent(LivingChangeTargetEvent event){
 
-//        if (event.getNewTarget() != null){
-//            if (event.getNewTarget().hasEffect(ModEffects.PACIFIED.get())) {
-//                event.setCanceled(true);
-//                return;
-//            }
-//        }
+        if (event.getNewTarget() != null){
+            if (event.getNewTarget().hasEffect(MMEffects.PACIFIED.get())) {
+                event.setCanceled(true);
+                return;
+            }
+        }
     }
 
     @SubscribeEvent

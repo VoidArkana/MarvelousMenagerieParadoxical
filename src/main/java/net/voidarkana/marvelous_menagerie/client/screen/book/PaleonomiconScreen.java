@@ -253,7 +253,6 @@ public class PaleonomiconScreen extends Screen {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float fakePartialTickThatsZeroForSomeReason) {
-        //System.out.println(this.entryPageNumber);
         this.setFocused(null);
         this.renderBackground(guiGraphics);
 

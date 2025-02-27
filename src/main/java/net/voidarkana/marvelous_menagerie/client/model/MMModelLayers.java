@@ -29,4 +29,7 @@ public class MMModelLayers {
     public static final ModelLayerLocation FRACTURE_EMMISSIVE =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture_emmissive"), "main");
 
+    public static final ModelLayerLocation GOGGLES_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "anomalous_goggles"), "main");
+
 }

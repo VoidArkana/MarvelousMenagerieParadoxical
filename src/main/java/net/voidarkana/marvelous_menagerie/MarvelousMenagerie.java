@@ -1,10 +1,12 @@
 package net.voidarkana.marvelous_menagerie;
 
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,8 +20,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.screen.MMMenuTypes;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
+import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
+import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotionRecipes;
+import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotions;
+import net.voidarkana.marvelous_menagerie.common.enchantment.MMEnchantmentsClass;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
@@ -84,6 +91,11 @@ public class MarvelousMenagerie
 
         ModConfiguredFeatures.register(modEventBus);
 
+        MMSounds.register(modEventBus);
+        MMEffects.register(modEventBus);
+        MMPotions.register(modEventBus);
+        MMEnchantmentsClass.register(modEventBus);
+
         MinecraftForge.EVENT_BUS.register(this);
 
         PROXY.init();
@@ -103,8 +115,8 @@ public class MarvelousMenagerie
         MMMessages.register();
         event.enqueueWork(()->{
 
-//            BrewingRecipeRegistry.addRecipe(new ModPotionRecipes(Potions.AWKWARD,
-//                    ModItems.HALLUCIGENIC_SLIME.get(), ModPotions.HALLUCIGENIA_EXTRACT.get()));
+            BrewingRecipeRegistry.addRecipe(new MMPotionRecipes(Potions.AWKWARD,
+                    MMItems.HALLUCIGENIC_SLIME.get(), MMPotions.HALLUCIGENIA_EXTRACT.get()));
 //
 //            MarvelousEntityPlacement.entityPlacement();
 
@@ -121,7 +133,7 @@ public class MarvelousMenagerie
     }
 
     private void setupClient(FMLClientSetupEvent event) {
-        PROXY.clientInit();
+        event.enqueueWork(() -> PROXY.clientInit());
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)

@@ -1,9 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.item;
 
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,9 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.item.custom.FishBucketItem;
-import net.voidarkana.marvelous_menagerie.common.item.custom.PaleoToolkit;
-import net.voidarkana.marvelous_menagerie.common.item.custom.Paleonomicon;
+import net.voidarkana.marvelous_menagerie.common.item.custom.*;
 
 public class MMItems {
 
@@ -59,9 +54,15 @@ public class MMItems {
     //Trilobite
     public static final RegistryObject<Item> TRILO_FOSSIL = ITEMS.register("trilo_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TRILO_BITE = ITEMS.register("trilo_bite",
+            ()-> new Item(new Item.Properties().food(MMFoods.TRILO_BITE)));
 
     //Anomalocaris
     public static final RegistryObject<Item> CARIS_FOSSIL = ITEMS.register("caris_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CARIS_LENS = ITEMS.register("anomalocaris_lens",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CARIS_SCUTE = ITEMS.register("anomalocaris_scute",
             ()-> new Item(new Item.Properties()));
 
     //Pikaia
@@ -70,6 +71,12 @@ public class MMItems {
 
     //Hallucigenia
     public static final RegistryObject<Item> HALLU_FOSSIL = ITEMS.register("hallu_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HALLUCIGENIC_SLIME = ITEMS.register("hallu_slime",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_ROLL = ITEMS.register("magic_roll",
+            ()-> new Item(new Item.Properties().food(MMFoods.MAGIC_ROLL).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> WARNING = ITEMS.register("warning",
             ()-> new Item(new Item.Properties()));
 
     //Falcatus
@@ -100,6 +107,11 @@ public class MMItems {
     //Ophthalmosaurus
     public static final RegistryObject<Item> OPHTHALMO_FOSSIL = ITEMS.register("ophthalmo_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> OPHTHALMO_ARMOR = ITEMS.register("ophthalmo_armor",
+            ()-> new OphthalmoArmorItem(new Item.Properties().durability(300),
+                    new ItemStack(MMItems.CARIS_SCUTE.get())));
+    public static final RegistryObject<Item> ANOMALOUS_GOGGLES = ITEMS.register("anomalous_goggles",
+            ()-> new AnomalousGogglesItem(MMArmorMaterials.CARIS_SCUTE, ArmorItem.Type.HELMET, new Item.Properties()));
 
     //Therizinosaurus
     public static final RegistryObject<Item> THERI_FOSSIL = ITEMS.register("theri_fossil",
@@ -162,17 +174,32 @@ public class MMItems {
     //Steller's Sea Cow
     public static final RegistryObject<Item> STELLER_FOSSIL = ITEMS.register("steller_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STELLER_MILK = ITEMS.register("steller_sea_cow_milk_bucket",
+            ()-> new SeaCowMilkBucketItem((new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final RegistryObject<Item> STELLER_ICE_CREAM = ITEMS.register("steller_ice_cream",
+            ()-> new StackableBowlFoodItem(new Item.Properties().food(MMFoods.STELLER_ICE_CREAM).stacksTo(16)));
+
 
     //Elephant Bird
     public static final RegistryObject<Item> ELEBIRD_FOSSIL = ITEMS.register("elebird_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CRACKED_ELEPHANT_EGG = ITEMS.register("cracked_elephant_egg",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> EGG_SHELL_FRAGMENT = ITEMS.register("egg_shell_fragment",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BOILED_ELEPHANT_EGG = ITEMS.register("boiled_elephant_egg",
+            ()-> new EggInShellFoodItem(new Item.Properties().craftRemainder(MMItems.EGG_SHELL_FRAGMENT.get()).food(MMFoods.BOILED_ELEPHANT_EGG)));
+    public static final RegistryObject<Item> JUMBO_OMELETTE = ITEMS.register("jumbo_omelette",
+            ()-> new Item(new Item.Properties().food(MMFoods.JUMBO_OMELETTE)));
+    public static final RegistryObject<Item> EGG_SHELLMET = ITEMS.register("egg_shellmet",
+            ()-> new EggShellmetItem(MMArmorMaterials.EGGSHELL, ArmorItem.Type.HELMET, new Item.Properties()));
 
     //Doedicurus
     public static final RegistryObject<Item> DOEDICURUS_FOSSIL = ITEMS.register("doedicurus_fossil",
             ()-> new Item(new Item.Properties()));
 
-    
-    
+
+
     //Plants
 
     //Sigillaria

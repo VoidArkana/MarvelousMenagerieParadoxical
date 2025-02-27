@@ -93,7 +93,6 @@ public class BookEntry {
         ResourceLocation fileRes;
         try {
             fileRes = new ResourceLocation(PaleonomiconScreen.getBookFileDirectory() + lang + "/" + fileName);
-            System.out.println(fileRes);
             //test if it exists. if no exception, then the language is supported
             InputStream is = Minecraft.getInstance().getResourceManager().open(fileRes);
             is.close();

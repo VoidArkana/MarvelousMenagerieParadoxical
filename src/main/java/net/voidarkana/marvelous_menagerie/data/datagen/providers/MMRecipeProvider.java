@@ -75,6 +75,7 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
         //Egg Shellmet
+        makeHelmet(MMItems.EGG_SHELLMET, MMItems.EGG_SHELL_FRAGMENT);
 //        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.EGG_SHELLMET.get(), 1)
 //                .pattern("SSS")
 //                .pattern("S S")
@@ -83,23 +84,23 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
 //                .save(consumer);
 
         //Jumbo Omelette
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.JUMBO_OMELETTE.get(), 1)
-//                .requires(MMItems.BOILED_ELEPHANT_EGG.get())
-//                .requires(Items.CARROT)
-//                .requires(Ingredient.of(Items.POTATO, Items.BAKED_POTATO))
-//                .unlockedBy(getHasName(MMItems.CRACKED_ELEPHANT_EGG.get()), has(MMItems.CRACKED_ELEPHANT_EGG.get()))
-//                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.JUMBO_OMELETTE.get(), 1)
+                .requires(MMItems.BOILED_ELEPHANT_EGG.get())
+                .requires(Items.CARROT)
+                .requires(Ingredient.of(Items.POTATO, Items.BAKED_POTATO))
+                .unlockedBy(getHasName(MMItems.CRACKED_ELEPHANT_EGG.get()), has(MMItems.CRACKED_ELEPHANT_EGG.get()))
+                .save(consumer);
 
         //Steller Ice Cream
-//        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, MMItems.STELLER_ICE_CREAM.get(), 3)
-//                .pattern(" S ")
-//                .pattern("SMS")
-//                .pattern("BBB")
-//                .define('S', Items.SNOWBALL)
-//                .define('M', MMItems.STELLER_MILK.get())
-//                .define('B', Items.BOWL)
-//                .unlockedBy(getHasName(MMItems.STELLER_MILK.get()), has(MMItems.STELLER_MILK.get()))
-//                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, MMItems.STELLER_ICE_CREAM.get(), 3)
+                .pattern(" S ")
+                .pattern("SMS")
+                .pattern("BBB")
+                .define('S', Items.SNOWBALL)
+                .define('M', MMItems.STELLER_MILK.get())
+                .define('B', Items.BOWL)
+                .unlockedBy(getHasName(MMItems.STELLER_MILK.get()), has(MMItems.STELLER_MILK.get()))
+                .save(consumer);
 
         //Golden Sacabambaspis
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, MMItems.GOLDEN_SACA.get(), 1)
@@ -183,33 +184,33 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
         //Anomalous Goggles
-//        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.ANOMALOUS_GOGGLES.get(), 1)
-//                .pattern("LSL")
-//                .define('L', MMItems.CARIS_LENS.get())
-//                .define('S', MMItems.CARIS_SCUTE.get())
-//                .unlockedBy(getHasName(MMItems.CARIS_SCUTE.get()), has(MMItems.CARIS_SCUTE.get()))
-//                .unlockedBy(getHasName(MMItems.CARIS_LENS.get()), has(MMItems.CARIS_LENS.get()))
-//                .save(consumer);
-//
-//
-//        //Ophthalmo Armor
-//        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.OPHTHALMO_ARMOR.get(), 1)
-//                .pattern("S  ")
-//                .pattern("SSS")
-//                .pattern("S S")
-//                .define('S', MMItems.CARIS_SCUTE.get())
-//                .unlockedBy(getHasName(MMItems.CARIS_SCUTE.get()), has(MMItems.CARIS_SCUTE.get()))
-//                .save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.ANOMALOUS_GOGGLES.get(), 1)
+                .pattern("LSL")
+                .define('L', MMItems.CARIS_LENS.get())
+                .define('S', MMItems.CARIS_SCUTE.get())
+                .unlockedBy(getHasName(MMItems.CARIS_SCUTE.get()), has(MMItems.CARIS_SCUTE.get()))
+                .unlockedBy(getHasName(MMItems.CARIS_LENS.get()), has(MMItems.CARIS_LENS.get()))
+                .save(consumer);
+
+
+        //Ophthalmo Armor
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.OPHTHALMO_ARMOR.get(), 1)
+                .pattern("S  ")
+                .pattern("SSS")
+                .pattern("S S")
+                .define('S', MMItems.CARIS_SCUTE.get())
+                .unlockedBy(getHasName(MMItems.CARIS_SCUTE.get()), has(MMItems.CARIS_SCUTE.get()))
+                .save(consumer);
 
         //Magic Pastry
-//        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.MAGIC_ROLL.get(), 1)
-//                .requires(MMItems.HALLUCIGENIC_SLIME.get())
-//                .requires(Items.SUGAR)
-//                .requires(Items.EGG)
-//                .requires(Items.WHEAT)
-//                .requires(Items.MILK_BUCKET)
-//                .unlockedBy(getHasName(MMItems.HALLUCIGENIC_SLIME.get()), has(MMItems.HALLUCIGENIC_SLIME.get()))
-//                .save(consumer);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.MAGIC_ROLL.get(), 1)
+                .requires(MMItems.HALLUCIGENIC_SLIME.get())
+                .requires(Items.SUGAR)
+                .requires(Items.EGG)
+                .requires(Items.WHEAT)
+                .requires(Items.MILK_BUCKET)
+                .unlockedBy(getHasName(MMItems.HALLUCIGENIC_SLIME.get()), has(MMItems.HALLUCIGENIC_SLIME.get()))
+                .save(consumer);
     }
     public ShapelessRecipeBuilder makePlanks(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, (ItemLike)plankOut.get(), 4).requires(logIn).group("planks").unlockedBy("has_log", has(logIn));
