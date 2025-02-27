@@ -33,7 +33,16 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
                 (fracture, v, v1) -> {return 1.0F;}));
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
                 new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_glow.png"),
-                (fracture, v, v1) -> {return (float) (50-fracture.getOpeningTime())/30;}));
+                (fracture, v, v1) -> {
+                return  (float) (50-fracture.getOpeningTime())/30;}));
+        this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
+                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_glow.png"),
+                (fracture, v, v1) -> {
+                    return fracture.getSummoningTime()>30 && fracture.getSummoningTime()<=40 ?
+                                    (float)(fracture.getSummoningTime()-30)/10 :
+
+                            fracture.getSummoningTime()>40 && fracture.getSummoningTime()<=60 ?
+                                    (float)((60-fracture.getSummoningTime()))/20 : 0;}));
     }
 
     @Override

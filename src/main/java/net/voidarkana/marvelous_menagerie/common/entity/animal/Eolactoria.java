@@ -57,21 +57,6 @@ public class Eolactoria extends AbstractBasicFish {
         this.entityData.set(FLOP_SIDE, flopSide);
     }
 
-    @Override
-    @Nullable
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
-            if (dataTag.contains("Age")) {
-                this.setAge(dataTag.getInt("Age"));}
-            this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
-            this.setFromBucket(true);
-        }
-
-        spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-    }
-
     @Nullable
     @Override
     public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {

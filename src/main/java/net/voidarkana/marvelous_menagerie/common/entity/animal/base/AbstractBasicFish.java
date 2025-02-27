@@ -140,6 +140,10 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
             this.setFromBucket(true);
         }
 
+        if (reason==MobSpawnType.TRIGGERED){
+            this.setFromBucket(true);
+        }
+
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }

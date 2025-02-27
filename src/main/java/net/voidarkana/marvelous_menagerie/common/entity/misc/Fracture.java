@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.entity.misc;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -167,7 +168,7 @@ public class Fracture extends LivingEntity {
             );
         }
 
-        if (getOpeningTime() == 20){
+        if (getOpeningTime() == 20 || getSummoningTime() == 40){
             for (int i = 0; i<20; ++i){
                 int xSpeed = this.getRandom().nextInt(-2, 3);
                 int ySpeed = this.getRandom().nextInt(-2, 3);
@@ -321,7 +322,11 @@ public class Fracture extends LivingEntity {
         if (entityType==null){
             entityType = MMEntities.CHUD.get();
         }
-        entityType.spawn((ServerLevel) this.level(), this.blockPosition(), MobSpawnType.NATURAL);
+        entityType.spawn((ServerLevel) this.level(),
+                new BlockPos(this.blockPosition().getX(),
+                this.blockPosition().getY()+1,
+                this.blockPosition().getZ()),
+                MobSpawnType.SPAWN_EGG);
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
 

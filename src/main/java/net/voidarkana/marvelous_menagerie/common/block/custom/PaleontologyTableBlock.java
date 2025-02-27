@@ -18,7 +18,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -28,8 +31,9 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.custom.Paleontology
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PaleontologyTableBlock extends BaseEntityBlock {
+public class PaleontologyTableBlock extends BaseEntityBlock implements SimpleWaterloggedBlock{
 
+    private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private final SoundEvent brushSound;
@@ -50,12 +54,16 @@ public class PaleontologyTableBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
+    @javax.annotation.Nullable
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        LevelAccessor levelaccessor = pContext.getLevel();
+        BlockPos blockpos = pContext.getClickedPos();
+        boolean flag = levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER;
+        return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(flag)).setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING).add(WATERLOGGED);
     }
 
     public RenderShape getRenderShape(BlockState pState) {
@@ -68,6 +76,11 @@ public class PaleontologyTableBlock extends BaseEntityBlock {
 
     public BlockState updateShape(BlockState pState, Direction pDirection, BlockState pNeighborState, LevelAccessor pLevel, BlockPos pPos, BlockPos pNeighborPos) {
         pLevel.scheduleTick(pPos, this, 2);
+
+        if (pState.getValue(WATERLOGGED)) {
+            pLevel.scheduleTick(pPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
+        }
+
         return super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
     }
 
@@ -135,5 +148,18 @@ public class PaleontologyTableBlock extends BaseEntityBlock {
 
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
+
+    public FluidState getFluidState(BlockState pState) {
+        return pState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(pState);
+    }
+    public boolean placeLiquid(LevelAccessor pLevel, BlockPos pPos, BlockState pState, FluidState pFluidState) {
+        if (!pState.getValue(BlockStateProperties.WATERLOGGED) && pFluidState.getType() == Fluids.WATER) {
+            pLevel.setBlock(pPos, pState.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
+            pLevel.scheduleTick(pPos, pFluidState.getType(), pFluidState.getType().getTickDelay(pLevel));
+            return true;
+        } else {
+            return false;
+        }
     }
 }

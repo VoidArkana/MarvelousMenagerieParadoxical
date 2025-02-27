@@ -252,6 +252,10 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
             this.setFromBucket(true);
         }
 
+        if (pReason==MobSpawnType.TRIGGERED){
+            this.setFromBucket(true);
+        }
+
         return pSpawnData;
     }
 
