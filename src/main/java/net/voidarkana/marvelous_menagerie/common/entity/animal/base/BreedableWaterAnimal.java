@@ -131,6 +131,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     }
 
+    @Override
     public boolean isBaby() {
         return this.getAge() < 0;
     }

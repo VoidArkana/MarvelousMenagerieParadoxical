@@ -54,6 +54,12 @@ public class MMEntities {
                             .sized(0.35f, 0.75f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "slovenicus").toString()));
 
+    public static final RegistryObject<EntityType<Anomalocaris>> ANOMALOCARIS =
+            ENTITY_TYPES.register("anomalocaris",
+                    () -> EntityType.Builder.of(Anomalocaris::new, MobCategory.WATER_AMBIENT)
+                            .sized(1f, 0.6f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "anomalocaris").toString()));
+
     public static final RegistryObject<EntityType<Fracture>> FRACTURE =
             ENTITY_TYPES.register("fracture", () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)
                     .sized(1.5f, 1.5f).build("fracture"));

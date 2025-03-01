@@ -5,6 +5,7 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AgeableHierarchicalModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -13,7 +14,7 @@ import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Falcatus;
 
-public class FalcatusModel<T extends Falcatus> extends HierarchicalModel<T> {
+public class FalcatusModel<T extends Falcatus> extends AgeableHierarchicalModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_rot;
@@ -33,7 +34,8 @@ public class FalcatusModel<T extends Falcatus> extends HierarchicalModel<T> {
 	private final ModelPart rightPelvicFin;
 
 	public FalcatusModel(ModelPart root) {
-		this.root = root.getChild("root");
+        super(0.5f, 0);
+        this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
 		this.head = this.body.getChild("head");
@@ -108,7 +110,15 @@ public class FalcatusModel<T extends Falcatus> extends HierarchicalModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		poseStack.pushPose();
+
+		if (this.young){
+			poseStack.scale(0.6f, 0.6f, 0.6f);
+			poseStack.translate(0, 1.1, 0);
+		}
+
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		poseStack.popPose();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AgeableHierarchicalModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,7 +13,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 
-public class SacaModel<T extends Sacabambaspis> extends HierarchicalModel<T> {
+public class SacaModel<T extends Sacabambaspis> extends AgeableHierarchicalModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_control;
@@ -21,7 +22,8 @@ public class SacaModel<T extends Sacabambaspis> extends HierarchicalModel<T> {
 	private final ModelPart tail;
 
 	public SacaModel(ModelPart root) {
-		this.root = root.getChild("root");
+        super(0.6f, 0);
+        this.root = root.getChild("root");
 		this.swim_control = this.root.getChild("swim_control");
 		this.body = this.swim_control.getChild("body");
 		this.tail_base = this.body.getChild("tail_base");
@@ -47,7 +49,15 @@ public class SacaModel<T extends Sacabambaspis> extends HierarchicalModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		poseStack.pushPose();
+
+		if (this.young){
+			poseStack.scale(0.6f, 0.6f, 0.6f);
+			poseStack.translate(0, 0.9, 0);
+		}
+
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		poseStack.popPose();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.AgeableHierarchicalModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -13,7 +14,7 @@ import net.voidarkana.marvelous_menagerie.client.animations.EolactoriaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Eolactoria;
 
-public class EolactoriaModel<T extends Eolactoria> extends HierarchicalModel<T> {
+public class EolactoriaModel<T extends Eolactoria> extends AgeableHierarchicalModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart root;
@@ -30,7 +31,8 @@ public class EolactoriaModel<T extends Eolactoria> extends HierarchicalModel<T> 
 	private final ModelPart leftFrontHorn;
 
 	public EolactoriaModel(ModelPart root) {
-		this.root = root.getChild("root");
+        super(0.5f, 0);
+        this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
 		this.leftPectoralFin = this.body.getChild("leftPectoralFin");
@@ -94,7 +96,15 @@ public class EolactoriaModel<T extends Eolactoria> extends HierarchicalModel<T> 
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		poseStack.pushPose();
+
+		if (this.young){
+			poseStack.scale(0.6f, 0.6f, 0.6f);
+			poseStack.translate(0, 1, 0);
+		}
+
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		poseStack.popPose();
 	}
 
 	@Override

@@ -78,7 +78,7 @@ public class ItemWidget extends BookWidget {
         if(itemStack == null){
             return;
         }
-        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemStack, Minecraft.getInstance().level, null, 0);
+        BakedModel bakedmodel = Minecraft.getInstance().getItemRenderer().getModel(itemStack, Minecraft.getInstance().level, null, 1);
         poseStack.pushPose();
         try {
             poseStack.scale(scale, scale, scale);
@@ -114,29 +114,28 @@ public class ItemWidget extends BookWidget {
         }
         poseStack.popPose();
     }
-    private static void renderModel(PoseStack.Pose p_111068_, VertexConsumer p_111069_, float alpha, @Nullable BlockState p_111070_, BakedModel p_111071_, float p_111072_, float p_111073_, float p_111074_, int p_111075_, int p_111076_, ModelData modelData, net.minecraft.client.renderer.RenderType renderType) {
+
+    private static void renderModel(PoseStack.Pose pose, VertexConsumer vertexConsumer, float alpha, @Nullable BlockState pState, BakedModel bakedModel, float r, float g, float b, int packedLight, int packedOverlay, ModelData modelData, net.minecraft.client.renderer.RenderType renderType) {
         RandomSource randomsource = RandomSource.create();
         long i = 42L;
 
-        for (Direction direction : Direction.values()) {
-            randomsource.setSeed(42L);
-            renderQuadList(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, alpha, p_111071_.getQuads(p_111070_, direction, randomsource, modelData, renderType), p_111075_, p_111076_);
-        }
+        randomsource.setSeed(i);
+        renderQuadList(pose, vertexConsumer, r, g, b, alpha, bakedModel.getQuads(null, Direction.UP, randomsource, modelData, renderType), packedLight, packedOverlay);
+        renderQuadList(pose, vertexConsumer, r, g, b, alpha, bakedModel.getQuads(null, Direction.NORTH, randomsource, modelData, renderType), packedLight, packedOverlay);
+        renderQuadList(pose, vertexConsumer, r, g, b, alpha, bakedModel.getQuads(null, Direction.EAST, randomsource, modelData, renderType), packedLight, packedOverlay);
 
-        randomsource.setSeed(42L);
-        renderQuadList(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, alpha, p_111071_.getQuads(p_111070_, (Direction) null, randomsource, modelData, renderType), p_111075_, p_111076_);
+        renderQuadList(pose, vertexConsumer, r, g, b, alpha, bakedModel.getQuads(null, (Direction) null, randomsource, modelData, renderType), packedLight, packedOverlay);
     }
 
-    private static void renderQuadList(PoseStack.Pose p_111059_, VertexConsumer p_111060_, float p_111061_, float p_111062_, float p_111063_, float alpha, List<BakedQuad> p_111064_, int p_111065_, int p_111066_) {
-        for (BakedQuad bakedquad : p_111064_) {
+    private static void renderQuadList(PoseStack.Pose pose, VertexConsumer vertexConsumer, float r, float g, float b, float alpha, List<BakedQuad> bakedQuads, int packedLight, int packedOverlay) {
+        for (BakedQuad bakedquad : bakedQuads) {
             float f;
             float f1;
             float f2;
-            f = Mth.clamp(p_111061_, 0.0F, 1.0F);
-            f1 = Mth.clamp(p_111062_, 0.0F, 1.0F);
-            f2 = Mth.clamp(p_111063_, 0.0F, 1.0F);
-            p_111060_.putBulkData(p_111059_, bakedquad, new float[]{1.0F, 1.0F, 1.0F, 1.0F}, f, f1, f2, alpha, new int[]{p_111065_, p_111065_, p_111065_, p_111065_}, p_111066_, false);
+            f = Mth.clamp(r, 0.0F, 1.0F);
+            f1 = Mth.clamp(g, 0.0F, 1.0F);
+            f2 = Mth.clamp(b, 0.0F, 1.0F);
+            vertexConsumer.putBulkData(pose, bakedquad, f, f1, f2, alpha, packedLight, packedOverlay, false);
         }
-
     }
 }

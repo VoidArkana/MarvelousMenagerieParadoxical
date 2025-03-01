@@ -69,6 +69,8 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.CARIS_FOSSIL);
         simpleItem(MMItems.CARIS_SCUTE);
         simpleItem(MMItems.CARIS_LENS);
+        simpleItem(MMItems.CARIS_BUCKET);
+        withExistingParent(MMItems.CARIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.HALLU_FOSSIL);
         simpleItem(MMItems.MAGIC_ROLL);

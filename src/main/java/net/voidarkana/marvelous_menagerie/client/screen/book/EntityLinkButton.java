@@ -145,6 +145,7 @@ public class EntityLinkButton extends Button {
         }
         poseStack.popPose();
     }
+
     private static void renderModel(PoseStack.Pose p_111068_, VertexConsumer p_111069_, float alpha, @Nullable BlockState p_111070_, BakedModel p_111071_, float p_111072_, float p_111073_, float p_111074_, int p_111075_, int p_111076_, ModelData modelData, net.minecraft.client.renderer.RenderType renderType) {
         RandomSource randomsource = RandomSource.create();
         long i = 42L;

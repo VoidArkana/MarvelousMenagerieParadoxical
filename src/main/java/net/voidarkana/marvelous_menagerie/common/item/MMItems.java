@@ -43,13 +43,13 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
 
     //Arandaspis
-    public static final RegistryObject<Item> ARANDASPIS_FOSSIL = ITEMS.register("arandaspis_fossil",
-            ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ARANDASPIS_SPAWN_EGG = ITEMS.register("arandaspis_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.ARANDASPIS, 0x637377, 0x88a5b9, new Item.Properties()));
     public static final RegistryObject<Item> ARANDASPIS_BUCKET = ITEMS.register("arandaspis_bucket",
             () -> new FishBucketItem(MMEntities.ARANDASPIS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
+    public static final RegistryObject<Item> ARANDASPIS_FOSSIL = ITEMS.register("arandaspis_fossil",
+            ()-> new Item(new Item.Properties()));
 
     //Trilobite
     public static final RegistryObject<Item> TRILO_FOSSIL = ITEMS.register("trilo_fossil",
@@ -58,6 +58,11 @@ public class MMItems {
             ()-> new Item(new Item.Properties().food(MMFoods.TRILO_BITE)));
 
     //Anomalocaris
+    public static final RegistryObject<Item> CARIS_SPAWN_EGG = ITEMS.register("anomalocaris_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.ANOMALOCARIS, 0x984B4B, 0x722430, new Item.Properties()));
+    public static final RegistryObject<Item> CARIS_BUCKET = ITEMS.register("anomalocaris_bucket",
+            () -> new FishBucketItem(MMEntities.ANOMALOCARIS, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> CARIS_FOSSIL = ITEMS.register("caris_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CARIS_LENS = ITEMS.register("anomalocaris_lens",

@@ -31,7 +31,6 @@ public class MMRenderTypes extends RenderType {
         }else{
             return ForgeRenderTypes.getUnlitTranslucent(locationIn);
         }
-
     }
 
 

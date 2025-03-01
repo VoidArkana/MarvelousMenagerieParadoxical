@@ -40,6 +40,7 @@ public class MMCreativeTab {
                         output.accept(MMItems.DIATOMITE_FOSSIL.get());
                         output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
+                        output.accept(MMItems.CARIS_BUCKET.get());
                         output.accept(MMItems.CARIS_LENS.get());
                         output.accept(MMItems.CARIS_SCUTE.get());
                         output.accept(MMItems.ANOMALOUS_GOGGLES.get());
@@ -101,6 +102,7 @@ public class MMCreativeTab {
                         output.accept(MMItems.TLATO_FOSSIL.get());
 
 
+                        output.accept(MMItems.CARIS_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());

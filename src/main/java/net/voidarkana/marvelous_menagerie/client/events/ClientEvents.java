@@ -51,6 +51,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.EOLACTORIA_LAYER, EolactoriaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SLOVENICUS_LAYER, SlovenicusModel::createBodyLayer);
 
+        event.registerLayerDefinition(MMModelLayers.ANOMALOCARIS_LAYER, AnomalocarisModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
     }
 
@@ -71,12 +73,12 @@ public class ClientEvents {
         return SEPIA_SHADER;
     }
 
-    @SubscribeEvent
-    public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "glowing"), DefaultVertexFormat.POSITION_COLOR),
-                shader -> GLOWING_SHADER = shader);
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "sepia"), DefaultVertexFormat.NEW_ENTITY),
-                shader -> SEPIA_SHADER = shader);
+    public static void setRenderTypeSepiaShader(ShaderInstance instance) {
+        SEPIA_SHADER = instance;
+    }
+
+    public static void setRenderTypeGlowingShader(ShaderInstance instance) {
+        GLOWING_SHADER = instance;
     }
 
 }

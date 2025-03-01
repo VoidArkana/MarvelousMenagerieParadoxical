@@ -26,13 +26,13 @@ public class ArandaspisRenderer extends MobRenderer<Arandaspis, ArandaspisModel<
         return TEXTURE;
     }
 
-    @Override
-    public void render(Arandaspis pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-        if(pEntity.isBaby()){
-            pPoseStack.scale(0.6f, 0.6f, 0.6f);
-        }
-        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
-    }
+//    @Override
+//    public void render(Arandaspis pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
+//        if(pEntity.isBaby()){
+//            pPoseStack.scale(0.6f, 0.6f, 0.6f);
+//        }
+//        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+//    }
 
 
     @Override
