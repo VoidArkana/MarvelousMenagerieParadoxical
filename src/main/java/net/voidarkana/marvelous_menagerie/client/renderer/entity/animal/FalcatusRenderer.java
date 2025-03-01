@@ -2,7 +2,6 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +12,8 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Falcatus;
 
 public class FalcatusRenderer extends MobRenderer<Falcatus, FalcatusModel<Falcatus>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/falcatus.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/falcatus/falcatus.png");
+    private static final ResourceLocation TEXTURE_BABY = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/falcatus/falcatus_baby.png");
 
     public FalcatusRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new FalcatusModel<>(pContext.bakeLayer(MMModelLayers.FALCATUS_LAYER)), 0.5f);
@@ -21,16 +21,8 @@ public class FalcatusRenderer extends MobRenderer<Falcatus, FalcatusModel<Falcat
 
     @Override
     public ResourceLocation getTextureLocation(Falcatus pEntity) {
-        return TEXTURE;
+        return pEntity.isBaby() ? TEXTURE_BABY : TEXTURE;
     }
-
-//    @Override
-//    public void render(Falcatus pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-//        if(pEntity.isBaby()){
-//            pPoseStack.scale(0.6f, 0.6f, 0.6f);
-//        }
-//        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
-//    }
 
     @Override
     protected void setupRotations(Falcatus pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {

@@ -29,7 +29,7 @@ public class MMItems {
 
     //Sacabambaspis
     public static final RegistryObject<Item> SACA_SPAWN_EGG = ITEMS.register("saca_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.SACABAMBASPIS, 0xDFD5B7, 0xAE9C79, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.SACABAMBASPIS, 0xDFD5B7, 0xAE9C79, new Item.Properties()));
     public static final RegistryObject<Item> SACA_BUCKET = ITEMS.register("saca_bucket",
             () -> new FishBucketItem(MMEntities.SACABAMBASPIS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -44,7 +44,7 @@ public class MMItems {
 
     //Arandaspis
     public static final RegistryObject<Item> ARANDASPIS_SPAWN_EGG = ITEMS.register("arandaspis_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.ARANDASPIS, 0x637377, 0x88a5b9, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.ARANDASPIS, 0x637377, 0x88a5b9, new Item.Properties()));
     public static final RegistryObject<Item> ARANDASPIS_BUCKET = ITEMS.register("arandaspis_bucket",
             () -> new FishBucketItem(MMEntities.ARANDASPIS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -59,7 +59,7 @@ public class MMItems {
 
     //Anomalocaris
     public static final RegistryObject<Item> CARIS_SPAWN_EGG = ITEMS.register("anomalocaris_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.ANOMALOCARIS, 0x984B4B, 0x722430, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.ANOMALOCARIS, 0x984B4B, 0x722430, new Item.Properties()));
     public static final RegistryObject<Item> CARIS_BUCKET = ITEMS.register("anomalocaris_bucket",
             () -> new FishBucketItem(MMEntities.ANOMALOCARIS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -88,7 +88,7 @@ public class MMItems {
     public static final RegistryObject<Item> FALCA_FOSSIL = ITEMS.register("falca_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FALCA_SPAWN_EGG = ITEMS.register("falcatus_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.FALCATUS, 0x9bcbaf, 0xc0d3ca, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.FALCATUS, 0x9bcbaf, 0xc0d3ca, new Item.Properties()));
     public static final RegistryObject<Item> FALCA_BUCKET = ITEMS.register("falcatus_bucket",
             () -> new FishBucketItem(MMEntities.FALCATUS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -146,7 +146,7 @@ public class MMItems {
     public static final RegistryObject<Item> EOLACTORIA_FOSSIL = ITEMS.register("eolactoria_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> EOLACTORIA_SPAWN_EGG = ITEMS.register("eolactoria_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.EOLACTORIA, 0xa86640, 0xf1d87f, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.EOLACTORIA, 0xa86640, 0xf1d87f, new Item.Properties()));
     public static final RegistryObject<Item> EOLACTORIA_BUCKET = ITEMS.register("eolactoria_bucket",
             () -> new FishBucketItem(MMEntities.EOLACTORIA, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -163,7 +163,7 @@ public class MMItems {
     public static final RegistryObject<Item> SLOV_FOSSIL = ITEMS.register("slov_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SLOVENICUS_SPAWN_EGG = ITEMS.register("slovenicus_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.SLOVENICUS, 0x713126, 0x9de444, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.SLOVENICUS, 0x713126, 0x9de444, new Item.Properties()));
     public static final RegistryObject<Item> SLOVENICUS_BUCKET = ITEMS.register("slovenicus_bucket",
             () -> new FishBucketItem(MMEntities.SLOVENICUS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));

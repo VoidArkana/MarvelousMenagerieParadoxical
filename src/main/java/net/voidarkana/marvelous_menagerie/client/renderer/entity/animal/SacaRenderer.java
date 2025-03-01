@@ -24,14 +24,6 @@ public class SacaRenderer extends MobRenderer<Sacabambaspis, SacaModel<Sacabamba
         return TEXTURE;
     }
 
-//    @Override
-//    public void render(Sacabambaspis pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
-//        if(pEntity.isBaby()){
-//            pPoseStack.scale(0.6f, 0.6f, 0.6f);
-//        }
-//        super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
-//    }
-
     @Override
     protected void setupRotations(Sacabambaspis pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);

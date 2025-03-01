@@ -135,6 +135,8 @@ public class AnomalocarisModel<T extends Anomalocaris> extends AgeableHierarchic
 
 		this.animate(entity.shakeAnimationState, AnomalocarisAnims.SHAKE, ageInTicks, 1.0F);
 
+		this.animate(entity.attackAnimationState, AnomalocarisAnims.ATTACK, ageInTicks, 1.0F);
+
 		if (this.young){
 			applyStatic(AnomalocarisAnims.BABY);
 		}
