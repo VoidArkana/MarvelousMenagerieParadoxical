@@ -11,6 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
 
 public class MMEntities {
 
@@ -59,6 +60,12 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Anomalocaris::new, MobCategory.WATER_AMBIENT)
                             .sized(1f, 0.6f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "anomalocaris").toString()));
+
+    public static final RegistryObject<EntityType<RiftEntity>> RIFT =
+            ENTITY_TYPES.register("rift",
+                    () -> EntityType.Builder.of(RiftEntity::new, MobCategory.MONSTER)
+                            .sized(0.5f, 0.5f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "rift").toString()));
 
     public static final RegistryObject<EntityType<Fracture>> FRACTURE =
             ENTITY_TYPES.register("fracture", () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)

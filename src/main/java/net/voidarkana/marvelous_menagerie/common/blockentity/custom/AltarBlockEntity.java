@@ -111,7 +111,7 @@ public class AltarBlockEntity extends BlockEntityBase {
                     }
                 }else {
                     Fracture fracture = new Fracture(this.level, pos.getCenter().x(), pos.getCenter().y()+2, pos.getCenter().z());
-                    fracture.setIsNatural(true);
+                    fracture.setIsNatural(false);
                     this.level.addFreshEntity(fracture);
                     this.hasFracture = true;
                 }

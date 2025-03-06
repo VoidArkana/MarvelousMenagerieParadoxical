@@ -32,6 +32,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.Cancelable;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -602,11 +603,13 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             this.moveRelative(this.getSpeed(), pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement());
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
+            if (this.getTarget() == null && this.floatsUp()) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
             }
 
-            this.calculateEntityAnimation(this instanceof FlyingAnimal);
+            this.calculateEntityAnimation(true);
+
+            //this.calculateEntityAnimation(this instanceof FlyingAnimal);
         } else {
             super.travel(pTravelVector);
         }
@@ -619,81 +622,91 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         return true;
     }
 
-//    @Override
-//    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
-//
-//        ItemStack itemstack = pPlayer.getItemInHand(pHand);
-//
-//        int i = this.getAge();
-//
-//        if (this.isBaby() && itemstack.is(YAFMItems.BAD_FEED.get()) && this.getCanGrowUp()){
-//            this.setCanGrowUp(false);
-//
-//            this.setAge(-12000);
-//
-//            for(int j = 0; j < 7; ++j) {
-//                double d0 = this.random.nextGaussian() * 0.02D;
-//                double d1 = this.random.nextGaussian() * 0.02D;
-//                double d2 = this.random.nextGaussian() * 0.02D;
-//                this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-//            }
-//
-//            return InteractionResult.SUCCESS;
-//        }
-//
-//        if (isFood(itemstack)){
-//
-//            if (itemstack.is(YAFMItems.REGULAR_FEED.get())){
-//                this.setFeedQuality(0);
-//            }
-//            if (itemstack.is(YAFMItems.QUALITY_FEED.get())){
-//                this.setFeedQuality(1);
-//            }
-//            if (itemstack.is(YAFMItems.GREAT_FEED.get())){
-//                this.setFeedQuality(2);
-//            }
-//            if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
-//                this.setFeedQuality(3);
-//            }
-//
-//            if (this.isBaby() && this.getCanGrowUp()){
-//                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true);
-//                return InteractionResult.SUCCESS;
-//            }else if (this.isBaby()){
-//                if (itemstack.is(YAFMItems.PREMIUM_FEED.get())){
-//                    this.setCanGrowUp(true);
-//
-//                    for(int j = 0; j < 7; ++j) {
-//                        double d0 = this.random.nextGaussian() * 0.02D;
-//                        double d1 = this.random.nextGaussian() * 0.02D;
-//                        double d2 = this.random.nextGaussian() * 0.02D;
-//                        this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
-//                    }
-//
-//                }else {
-//                    return InteractionResult.PASS;
-//                }
-//            }
-//
-//            if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
-//                this.usePlayerItem(pPlayer, pHand, itemstack);
-//                this.setInLove(pPlayer);
-//                return InteractionResult.SUCCESS;
-//            }
-//
-//            if (this.isBaby()) {
-//                this.usePlayerItem(pPlayer, pHand, itemstack);
-//                this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
-//                return InteractionResult.sidedSuccess(this.level().isClientSide);
-//            }
-//
-//            if (this.level().isClientSide) {
-//                return InteractionResult.CONSUME;
-//            }
-//        }
-//
-//        return super.interactAt(pPlayer, pVec, pHand);
-//    }
+    public boolean floatsUp(){
+        return true;
+    }
+
+    @Override
+    protected void updateWalkAnimation(float pPartialTick) {
+        float f = Math.min(pPartialTick * 4.0F, 1.0F);
+        this.walkAnimation.update(f, 0.4F);
+    }
+
+    @Override
+    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
+
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+        int i = this.getAge();
+
+        if (this.isBaby() && itemstack.is(MMTags.Items.FINTASTIC_BAD_FEED) && this.getCanGrowUp()){
+            this.setCanGrowUp(false);
+
+            this.setAge(-12000);
+
+            for(int j = 0; j < 7; ++j) {
+                double d0 = this.random.nextGaussian() * 0.02D;
+                double d1 = this.random.nextGaussian() * 0.02D;
+                double d2 = this.random.nextGaussian() * 0.02D;
+                this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+
+        if (isFood(itemstack)){
+
+            if (itemstack.is(MMTags.Items.FINTASTIC_FEED)){
+                this.setFeedQuality(0);
+            }
+            if (itemstack.is(MMTags.Items.FINTASTIC_QUALITY_FEED)){
+                this.setFeedQuality(1);
+            }
+            if (itemstack.is(MMTags.Items.FINTASTIC_GREAT_FEED)){
+                this.setFeedQuality(2);
+            }
+            if (itemstack.is(MMTags.Items.FINTASTIC_PREMIUM_FEED)){
+                this.setFeedQuality(3);
+            }
+
+            if (this.isBaby() && this.getCanGrowUp()){
+                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true);
+                return InteractionResult.SUCCESS;
+            }else if (this.isBaby()){
+                if (itemstack.is(MMTags.Items.FINTASTIC_PREMIUM_FEED)){
+                    this.setCanGrowUp(true);
+
+                    for(int j = 0; j < 7; ++j) {
+                        double d0 = this.random.nextGaussian() * 0.02D;
+                        double d1 = this.random.nextGaussian() * 0.02D;
+                        double d2 = this.random.nextGaussian() * 0.02D;
+                        this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+                    }
+
+                }else {
+                    return InteractionResult.PASS;
+                }
+            }
+
+            if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
+                this.usePlayerItem(pPlayer, pHand, itemstack);
+                this.setInLove(pPlayer);
+                return InteractionResult.SUCCESS;
+            }
+
+            if (this.isBaby()) {
+                this.usePlayerItem(pPlayer, pHand, itemstack);
+                this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+
+            if (this.level().isClientSide) {
+                return InteractionResult.CONSUME;
+            }
+        }
+
+        return super.interactAt(pPlayer, pVec, pHand);
+    }
 
     public static int getSpeedUpSecondsWhenFeedingFish(int pTicksUntilAdult, int multiplier) {
         return (int)((float)(pTicksUntilAdult / 20) * 0.1F * (multiplier+1));

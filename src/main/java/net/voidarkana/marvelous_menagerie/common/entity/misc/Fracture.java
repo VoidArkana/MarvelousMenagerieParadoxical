@@ -7,6 +7,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -64,7 +66,6 @@ public class Fracture extends LivingEntity {
         pCompound.putInt("OpeningTime", this.getOpeningTime());
         pCompound.putInt("OpeningTimeLag", this.getOpeningTimeLag());
         pCompound.putInt("ClosingTime", this.getClosingTime());
-        //pCompound.putInt("SummoningTime", this.getSummoningTime());
     }
 
     @Override
@@ -74,7 +75,6 @@ public class Fracture extends LivingEntity {
         this.setOpeningTime(pCompound.getInt("OpeningTime"));
         this.setOpeningTimeLag(pCompound.getInt("OpeningTimeLag"));
         this.setClosingTime(pCompound.getInt("ClosingTime"));
-        //this.setSummoningTime(pCompound.getInt("SummoningTime"));
     }
 
     public boolean getIsNatural() {
@@ -178,13 +178,18 @@ public class Fracture extends LivingEntity {
             }
         }
 
-        if (getOpeningTime()==0){
+        if (getOpeningTime()==0 && !this.getIsNatural()){
             this.level().addAlwaysVisibleParticle(MMParticles.RIFT.get(),
                     this.blockPosition().getX() + 0.5,
                     this.blockPosition().getY() + 1.1,
                     this.blockPosition().getZ() + 0.5,
                     0,0,0
             );
+        }
+
+        if (getOpeningTime()==0 && this.getIsNatural()){
+            this.setOpeningTime(20);
+            this.setOpeningTimeLag(18);
         }
 
         if (getOpeningTime() == 20 || getSummoningTime() == 40){
@@ -330,11 +335,6 @@ public class Fracture extends LivingEntity {
     public void summonCreature(EntityType<?> ritualEntity){
         this.setSummoningTime(80);
         this.entityType = ritualEntity;
-//        if (entitytype==null){
-//            entitytype = MMEntities.CHUD.get();
-//        }
-//        entitytype.spawn((ServerLevel) this.level(), this.blockPosition(), MobSpawnType.NATURAL);
-//        this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
 
     public void spawnCreature(){

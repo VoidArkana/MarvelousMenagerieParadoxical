@@ -19,6 +19,7 @@
       "height": 128
     },
 
+
     {
       "display_page" : 1,
       "type": "image",
@@ -34,17 +35,6 @@
       "width": 32,
       "height": 32
     },
-    {
-      "display_page" : 1,
-      "type": "item",
-      "item": "marvelous_menagerie:falca_fossil",
-      "sepia": true,
-      "x": 30,
-      "y": 25,
-      "scale": 1
-    },
-
-
     {
       "display_page" : 1,
       "type": "image",
@@ -59,6 +49,48 @@
       "v1": 18,
       "width": 32,
       "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 96,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 96,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+
+
+
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:falca_fossil",
+      "sepia": true,
+      "x": 30,
+      "y": 25,
+      "scale": 1
     },
     {
       "display_page" : 1,
@@ -69,23 +101,6 @@
       "y": 25,
       "scale": 1
     },
-
-
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 30,
-      "y": 96,
-      "scale": 1,
-      "u0": 0,
-      "v0": 0,
-      "u1": 16,
-      "v1": 18,
-      "width": 32,
-      "height": 32
-    },
     {
       "display_page" : 1,
       "type": "item",
@@ -94,23 +109,6 @@
       "x": 30,
       "y": 89,
       "scale": 1
-    },
-
-
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 98,
-      "y": 96,
-      "scale": 1,
-      "u0": 0,
-      "v0": 0,
-      "u1": 16,
-      "v1": 18,
-      "width": 32,
-      "height": 32
     },
     {
       "display_page" : 1,

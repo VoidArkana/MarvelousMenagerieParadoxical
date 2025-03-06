@@ -11,6 +11,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
 import net.voidarkana.marvelous_menagerie.data.codec.BookEntityManager;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
@@ -51,6 +52,7 @@ public class MMEvents {
 //        event.put(MMEntities.CHARNIA_ENTITY.get(), PlantEntity.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
+        event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());
     }
 
     @SubscribeEvent

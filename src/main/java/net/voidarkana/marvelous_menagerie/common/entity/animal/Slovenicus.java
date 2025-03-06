@@ -59,4 +59,9 @@ public class Slovenicus extends AbstractBasicFish {
     public boolean canFlop() {
         return false;
     }
+
+    @Override
+    public boolean floatsUp() {
+        return false;
+    }
 }

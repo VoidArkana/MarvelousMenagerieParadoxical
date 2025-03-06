@@ -94,7 +94,11 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         }
 
         if (pEntity.getOpeningTime()>19 && pEntity.getOpeningTime()<50){
-            scaleOpening = (float) (f2 * (Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
+            if (pEntity.getIsNatural()){
+                scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
+            }else {
+                scaleOpening = (float) (f2 * (Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
+            }
         }else if (pEntity.getOpeningTime()<20){
             scaleOpening = 0;
         }else {
@@ -174,10 +178,6 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
     protected RenderType getRenderType(Fracture pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
         return RenderType.entityTranslucent(TEXTURE);//ClientProxy.GLOWING_SPRITE;
     }
-
-//    public static RenderType entityTranslucent(ResourceLocation pLocation, boolean pOutline) {
-//        return ClientProxy.GLOWING_SPRITE.apply(pLocation, pOutline);
-//    }
 
     @Override
     protected boolean shouldShowName(Fracture pEntity) {

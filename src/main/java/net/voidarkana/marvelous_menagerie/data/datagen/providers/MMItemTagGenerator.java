@@ -158,5 +158,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         );
 
         this.tag(MMTags.Items.FINTASTIC_BAD_FEED).addOptional(new ResourceLocation("fintastic:bad_feed"));
+        this.tag(MMTags.Items.FINTASTIC_FEED).addOptional(new ResourceLocation("fintastic:regular_feed"));
+        this.tag(MMTags.Items.FINTASTIC_QUALITY_FEED).addOptional(new ResourceLocation("fintastic:quality_feed"));
+        this.tag(MMTags.Items.FINTASTIC_GREAT_FEED).addOptional(new ResourceLocation("fintastic:great_feed"));
+        this.tag(MMTags.Items.FINTASTIC_PREMIUM_FEED).addOptional(new ResourceLocation("fintastic:premium_feed"));
     }
 }

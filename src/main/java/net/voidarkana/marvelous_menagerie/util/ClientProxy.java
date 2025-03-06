@@ -32,6 +32,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.block.CharniaRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.FractureRenderer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.RiftRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.renderer.item.CustomArmorRenderProperties;
@@ -39,6 +40,7 @@ import net.voidarkana.marvelous_menagerie.client.screen.book.PaleonomiconScreen;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
 
 import java.io.IOException;
 
@@ -80,6 +82,7 @@ public class ClientProxy extends CommonProxy{
         BlockEntityRenderers.register(MMBlockEntities.PALEO_TABLE_ENTITY.get(), PaleoTableRenderer::new);
 
         EntityRenderers.register(MMEntities.FRACTURE.get(), FractureRenderer::new);
+        EntityRenderers.register(MMEntities.RIFT.get(), RiftRenderer::new);
     }
 
     @Override

@@ -28,6 +28,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotionRecipes;
 import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotions;
 import net.voidarkana.marvelous_menagerie.common.enchantment.MMEnchantmentsClass;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.MMEntityPlacements;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
@@ -117,8 +118,8 @@ public class MarvelousMenagerie
 
             BrewingRecipeRegistry.addRecipe(new MMPotionRecipes(Potions.AWKWARD,
                     MMItems.HALLUCIGENIC_SLIME.get(), MMPotions.HALLUCIGENIA_EXTRACT.get()));
-//
-//            MarvelousEntityPlacement.entityPlacement();
+
+            MMEntityPlacements.entityPlacement();
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.SIGILLARIA_SAPLING.getId(), MMBlocks.POTTED_SIGILLARIA_SAPLING);
             ComposterBlock.COMPOSTABLES.put(MMBlocks.SIGILLARIA_SAPLING.get().asItem(), 0.4F);

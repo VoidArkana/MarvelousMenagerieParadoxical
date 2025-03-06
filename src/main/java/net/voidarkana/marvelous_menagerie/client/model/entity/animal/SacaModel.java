@@ -73,7 +73,12 @@ public class SacaModel<T extends Sacabambaspis> extends AgeableHierarchicalModel
 //			this.animateWalk(SacaAnims.SWIM, pLimbSwingAmount, pLimbSwing, 2, 2.5f);
 //		}
 		//System.out.println(pLimbSwingAmount);
-		this.animate(pEntity.swimAnimationState, SacaAnims.SWIM, pAgeInTicks, pLimbSwingAmount);
+		//this.animate(pEntity.swimAnimationState, SacaAnims.SWIM, pAgeInTicks, pLimbSwingAmount);
+
+		if (pEntity.isInWater()){
+			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 3f);
+		}
+
 		this.animate(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1-Math.abs(pLimbSwingAmount));
 		this.animate(pEntity.flopAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
 

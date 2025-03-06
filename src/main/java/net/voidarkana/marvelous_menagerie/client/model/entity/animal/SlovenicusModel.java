@@ -72,7 +72,11 @@ public class SlovenicusModel<T extends Slovenicus> extends AgeableHierarchicalMo
 	public void setupAnim(Slovenicus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animate(entity.swimAnimationState, SlovenicusAnims.SWIM, ageInTicks, limbSwingAmount*1.5f);
+		if (entity.isInWater()){
+			this.animateWalk(SlovenicusAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
+		}
+
+		//this.animate(entity.swimAnimationState, SlovenicusAnims.SWIM, ageInTicks, limbSwingAmount*1.5f);
 		this.animate(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F);
 

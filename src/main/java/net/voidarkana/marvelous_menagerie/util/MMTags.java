@@ -81,6 +81,10 @@ public class MMTags {
     public static class Items {
 
         public static final TagKey<Item> FINTASTIC_BAD_FEED = tag("fintastic_bad_feed");
+        public static final TagKey<Item> FINTASTIC_FEED = tag("fintastic_regular_feed");
+        public static final TagKey<Item> FINTASTIC_QUALITY_FEED = tag("fintastic_quality_feed");
+        public static final TagKey<Item> FINTASTIC_GREAT_FEED = tag("fintastic_great_feed");
+        public static final TagKey<Item> FINTASTIC_PREMIUM_FEED = tag("fintastic_premium_feed");
 
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
 

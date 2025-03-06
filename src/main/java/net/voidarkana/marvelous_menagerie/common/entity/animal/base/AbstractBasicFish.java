@@ -110,17 +110,17 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
     }
 
 
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
-
-        this.walkAnimation.update(f, 0.2f);
-    }
+//    @Override
+//    protected void updateWalkAnimation(float pPartialTick) {
+//        float f;
+//        if(this.getPose() == Pose.STANDING) {
+//            f = Math.min(pPartialTick * 6F, 1f);
+//        } else {
+//            f = 0f;
+//        }
+//
+//        this.walkAnimation.update(f, 0.2f);
+//    }
 
     @Override
     @Nullable
