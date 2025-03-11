@@ -13,15 +13,13 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 
 public class SacaRenderer extends MobRenderer<Sacabambaspis, SacaModel<Sacabambaspis>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/saca.png");
-
     public SacaRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new SacaModel<>(pContext.bakeLayer(MMModelLayers.SACA_LAYER)), 0.5f);
     }
 
     @Override
     public ResourceLocation getTextureLocation(Sacabambaspis pEntity) {
-        return TEXTURE;
+        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/sacabambaspis/saca"+pEntity.getVariantName(pEntity.getVariant())+".png");
     }
 
     @Override

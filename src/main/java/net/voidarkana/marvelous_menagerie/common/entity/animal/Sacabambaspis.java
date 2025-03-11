@@ -33,6 +33,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class Sacabambaspis extends AbstractBasicFish {
 
+    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Sacabambaspis.class, EntityDataSerializers.INT);
+
     public Sacabambaspis(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -41,11 +43,93 @@ public class Sacabambaspis extends AbstractBasicFish {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 1F);
     }
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(VARIANT, 0);
+    }
+
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putInt("Variant", this.getVariant());
+    }
+
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setVariant(pCompound.getInt("Variant"));
+    }
+
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
+    }
+
+    public void setVariant(int variant) {
+        this.entityData.set(VARIANT, variant);
+    }
+
+    @Override
+    public void saveToBucketTag(ItemStack bucket) {
+        super.saveToBucketTag(bucket);
+
+        CompoundTag compoundnbt = bucket.getOrCreateTag();
+
+        compoundnbt.putInt("Variant", this.getAge());
+    }
+
+    @Override
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+
+        int chance = this.getRandom().nextInt(100);
+        int variant;
+//        if (chance<50){
+//            variant = 0;
+//        }else if (chance < 75){
+//            variant = 1;
+//        }else if (chance < 85){
+//            variant = 2;
+//        }else if (chance < 95){
+//            variant = 3;
+//        }else {
+//            variant = 1;
+//        }
+
+        this.setVariant(this.getRandom().nextInt(2));
+
+        if (reason==MobSpawnType.TRIGGERED){
+            this.setFromBucket(true);
+        }
+
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
+            if (dataTag.contains("Age")) {
+                this.setAge(dataTag.getInt("Age"));}
+            this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
+            this.setVariant(dataTag.getInt("Variant"));
+            this.setFromBucket(true);
+        }
+
+        spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+    }
+
+    public String getVariantName(int variantNumber) {
+        return  switch(variantNumber){
+            case 1 -> "_blue";
+            default -> "";
+        };
+    }
 
     @Nullable
     @Override
     public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         Sacabambaspis baby = MMEntities.SACABAMBASPIS.get().create(pLevel);
+        Sacabambaspis otherSaca = (Sacabambaspis)pOtherParent;
+
+        if (this.getRandom().nextBoolean()){
+            this.setVariant(this.getRandom().nextInt(2));
+        }else {
+            this.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherSaca.getVariant());
+        }
+
         baby.setFromBucket(true);
         return baby;
     }
