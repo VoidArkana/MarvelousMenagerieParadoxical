@@ -79,8 +79,8 @@ public class Sacabambaspis extends AbstractBasicFish {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-        int chance = this.getRandom().nextInt(100);
-        int variant;
+//        int chance = this.getRandom().nextInt(100);
+//        int variant;
 //        if (chance<50){
 //            variant = 0;
 //        }else if (chance < 75){
