@@ -2,16 +2,19 @@ package net.voidarkana.marvelous_menagerie.common.entity.misc;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
@@ -21,10 +24,20 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class Fracture extends LivingEntity {
+
+    private static final Predicate<LivingEntity> PLAYER = (entity) -> {
+        return entity instanceof Player;
+    };
+
+    static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(PLAYER);
+
 
     private static final EntityDataAccessor<Boolean> IS_NATURAL = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> OPENING_TIME = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
@@ -62,7 +75,7 @@ public class Fracture extends LivingEntity {
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("IsNatural", this.getIsNatural());
+        pCompound.putBoolean("IsNatural", this.isNatural());
         pCompound.putInt("OpeningTime", this.getOpeningTime());
         pCompound.putInt("OpeningTimeLag", this.getOpeningTimeLag());
         pCompound.putInt("ClosingTime", this.getClosingTime());
@@ -77,7 +90,7 @@ public class Fracture extends LivingEntity {
         this.setClosingTime(pCompound.getInt("ClosingTime"));
     }
 
-    public boolean getIsNatural() {
+    public boolean isNatural() {
         return this.entityData.get(IS_NATURAL);
     }
 
@@ -158,6 +171,14 @@ public class Fracture extends LivingEntity {
     @Override
     public void tick() {
 
+        if (this.getRandom().nextInt(100) == 0) {
+            this.level().playLocalSound((double)this.blockPosition().getX() + (double)0.5F,
+                    (double)this.blockPosition().getY() + (double)0.5F,
+                    (double)this.blockPosition().getZ() + (double)0.5F,
+                    SoundEvents.BEACON_AMBIENT, SoundSource.BLOCKS, 0.5F,
+                    this.getRandom().nextFloat() * 0.4F + 0.8F, false);
+        }
+
         if (this.isUnderWater()){
 
             double d0 = this.blockPosition().getX();
@@ -178,7 +199,7 @@ public class Fracture extends LivingEntity {
             }
         }
 
-        if (getOpeningTime()==0 && !this.getIsNatural()){
+        if (getOpeningTime()==0 && !this.isNatural()){
             this.level().addAlwaysVisibleParticle(MMParticles.RIFT.get(),
                     this.blockPosition().getX() + 0.5,
                     this.blockPosition().getY() + 1.1,
@@ -187,9 +208,13 @@ public class Fracture extends LivingEntity {
             );
         }
 
-        if (getOpeningTime()==0 && this.getIsNatural()){
+        if (getOpeningTime()==0 && this.isNatural()){
             this.setOpeningTime(20);
             this.setOpeningTimeLag(18);
+        }
+
+        if (this.getOpeningTime()==20){
+            this.playSound(SoundEvents.GLASS_BREAK, 1f, 0.75F);
         }
 
         if (getOpeningTime() == 20 || getSummoningTime() == 40){
@@ -238,10 +263,31 @@ public class Fracture extends LivingEntity {
 
         super.tick();
 
+        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.0D), (p_149015_) -> {
+            return RiftEntity.targetingConditions.test(this, p_149015_);
+        });
+
         if (this.getSummoningTime()>0){
             int prevSummoningTime = this.getSummoningTime();
             if (getSummoningTime()==40 && !this.level().isClientSide){
+
                 this.spawnCreature();
+
+                if (this.isNatural()){
+                    for (int i = this.getRandom().nextInt(1, 6); i>0; i--){
+
+                        BuiltInRegistries.ENTITY_TYPE.getTag(MMTags.EntityTypes.TIME_ABERRATIONS).flatMap((entityTypeNamed) -> {
+                            return entityTypeNamed.getRandomElement(this.level().random);
+                        }).ifPresent((entityTypeHolder) -> {
+                            this.entityType = entityTypeHolder.get();
+                        });
+
+                        this.spawnCreature();
+                    }
+
+                    this.setClosingTime(3);
+                }
+
             }
             this.setSummoningTime(prevSummoningTime-1);
         }
@@ -304,6 +350,14 @@ public class Fracture extends LivingEntity {
         }
 
         this.rot += f2 * 0.4F;
+
+        if(!list.isEmpty() && this.isValid() && this.isNatural()){
+            BuiltInRegistries.ENTITY_TYPE.getTag(MMTags.EntityTypes.TIME_ABERRATIONS).flatMap((entityTypeNamed) -> {
+                return entityTypeNamed.getRandomElement(this.level().random);
+            }).ifPresent((entityTypeHolder) -> {
+                this.summonCreature(entityTypeHolder.get());
+            });
+        }
     }
 
     public void push(Entity pEntity) {
@@ -341,11 +395,13 @@ public class Fracture extends LivingEntity {
         if (entityType==null){
             entityType = MMEntities.CHUD.get();
         }
+
         entityType.spawn((ServerLevel) this.level(),
-                new BlockPos(this.blockPosition().getX(),
-                this.blockPosition().getY()+1,
-                this.blockPosition().getZ()),
+                new BlockPos(this.blockPosition().getX() + (this.isNatural() ? this.getRandom().nextInt(3) : 0),
+                        this.blockPosition().getY()+1,
+                        this.blockPosition().getZ() + (this.isNatural() ? this.getRandom().nextInt(3) : 0)),
                 MobSpawnType.SPAWN_EGG);
+
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
 

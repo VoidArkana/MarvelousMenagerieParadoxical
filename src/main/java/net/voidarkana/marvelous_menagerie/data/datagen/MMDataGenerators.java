@@ -33,7 +33,7 @@ public class MMDataGenerators {
 
         generator.addProvider(event.includeServer(),new MMItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
 
-        //generator.addProvider(true, new ModEntityTagsGenerator(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new MMEntityTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
         //generator.addProvider(true, new ModBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
 

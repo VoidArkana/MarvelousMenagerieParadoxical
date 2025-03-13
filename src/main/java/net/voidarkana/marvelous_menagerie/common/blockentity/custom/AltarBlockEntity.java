@@ -30,7 +30,7 @@ public class AltarBlockEntity extends BlockEntityBase {
     public float oRot;
     public float tRot;
 
-    public boolean hasFracture = false;
+    public boolean hasFracture;
 
     Item[] ingredients = new Item[4];
 
@@ -41,13 +41,13 @@ public class AltarBlockEntity extends BlockEntityBase {
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
-        hasFracture = tag.getBoolean("hasFracture");
+        this.hasFracture = tag.getBoolean("hasFracture");
     }
 
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putBoolean("hasFracture", hasFracture);
+        tag.putBoolean("hasFracture", this.hasFracture);
     }
 
     @Override

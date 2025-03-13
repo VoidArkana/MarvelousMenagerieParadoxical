@@ -94,7 +94,7 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         }
 
         if (pEntity.getOpeningTime()>19 && pEntity.getOpeningTime()<50){
-            if (pEntity.getIsNatural()){
+            if (pEntity.isNatural()){
                 scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
             }else {
                 scaleOpening = (float) (f2 * (Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);

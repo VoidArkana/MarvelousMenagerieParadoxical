@@ -44,7 +44,7 @@ public class RiftEntity extends Monster {
     public void tick() {
         super.tick();
 
-        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.0D), (p_149015_) -> {
+        List<LivingEntity> list = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(5.0D), (p_149015_) -> {
             return RiftEntity.targetingConditions.test(this, p_149015_);
         });
 
@@ -73,7 +73,6 @@ public class RiftEntity extends Monster {
                     this.blockPosition().getY()-0.25,
                     this.blockPosition().getZ()+0.5);
             fracture.setIsNatural(true);
-            this.playSound(SoundEvents.GLASS_BREAK, 1f, 0.75F);
             serverlevel.addFreshEntity(fracture);
             this.discard();
         }
