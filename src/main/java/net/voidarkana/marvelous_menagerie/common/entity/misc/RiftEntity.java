@@ -54,9 +54,9 @@ public class RiftEntity extends Monster {
             int zSpeed = this.getRandom().nextInt(-2, 3);
 
             this.level().addAlwaysVisibleParticle(MMParticles.TIME_SHARD.get(),
-                    this.blockPosition().getX() + xSpeed + 0.75,
-                    this.blockPosition().getY() + ySpeed + 0.75,
-                    this.blockPosition().getZ() + zSpeed + 0.25,
+                    this.position().x() + xSpeed,
+                    this.position().y() + ySpeed + 0.25,
+                    this.position().z() + zSpeed,
                     -xSpeed, -ySpeed, -zSpeed
             );
         }
@@ -69,9 +69,9 @@ public class RiftEntity extends Monster {
     private void createFracture() {
         Level $$1 = this.level();
         if ($$1 instanceof ServerLevel serverlevel) {
-            Fracture fracture = new Fracture(serverlevel, this.blockPosition().getX()+0.5,
-                    this.blockPosition().getY()-0.25,
-                    this.blockPosition().getZ()+0.5);
+            Fracture fracture = new Fracture(serverlevel, position().x(),
+                    this.position().y()-0.25,
+                    this.position().z());
             fracture.setIsNatural(true);
             serverlevel.addFreshEntity(fracture);
             this.discard();
