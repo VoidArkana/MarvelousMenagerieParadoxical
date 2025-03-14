@@ -11,9 +11,10 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 
-public class SacaModel<T extends Sacabambaspis> extends AgeableHierarchicalModel<T> {
+public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_control;
@@ -22,7 +23,7 @@ public class SacaModel<T extends Sacabambaspis> extends AgeableHierarchicalModel
 	private final ModelPart tail;
 
 	public SacaModel(ModelPart root) {
-        super(0.6f, 0);
+        super(0.6f, 0.9f);
         this.root = root.getChild("root");
 		this.swim_control = this.root.getChild("swim_control");
 		this.body = this.swim_control.getChild("body");
@@ -69,17 +70,11 @@ public class SacaModel<T extends Sacabambaspis> extends AgeableHierarchicalModel
 	public void setupAnim(Sacabambaspis pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-//		if (pEntity.isInWaterOrBubble()){
-//			this.animateWalk(SacaAnims.SWIM, pLimbSwingAmount, pLimbSwing, 2, 2.5f);
-//		}
-		//System.out.println(pLimbSwingAmount);
-		//this.animate(pEntity.swimAnimationState, SacaAnims.SWIM, pAgeInTicks, pLimbSwingAmount);
-
 		if (pEntity.isInWater()){
 			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 3f);
 		}
 
-		this.animate(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1-Math.abs(pLimbSwingAmount));
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1.0F, 1-Math.abs(pLimbSwingAmount));
 		this.animate(pEntity.flopAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
 
 		this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);

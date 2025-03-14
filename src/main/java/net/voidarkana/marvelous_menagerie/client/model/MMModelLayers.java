@@ -25,6 +25,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "eolactoria"), "main");
     public static final ModelLayerLocation SLOVENICUS_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "slovenicus"), "main");
+    public static final ModelLayerLocation PIKAIA_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "pikaia"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");

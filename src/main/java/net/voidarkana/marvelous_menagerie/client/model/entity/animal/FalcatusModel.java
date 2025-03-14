@@ -12,9 +12,10 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Falcatus;
 
-public class FalcatusModel<T extends Falcatus> extends AgeableHierarchicalModel<T> {
+public class FalcatusModel<T extends Falcatus> extends MarvelousModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_rot;
@@ -34,7 +35,7 @@ public class FalcatusModel<T extends Falcatus> extends AgeableHierarchicalModel<
 	private final ModelPart rightPelvicFin;
 
 	public FalcatusModel(ModelPart root) {
-        super(0.5f, 0);
+        super(0.5f, 1.1f);
         this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
@@ -102,7 +103,7 @@ public class FalcatusModel<T extends Falcatus> extends AgeableHierarchicalModel<
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, FalcatusAnims.swim, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);

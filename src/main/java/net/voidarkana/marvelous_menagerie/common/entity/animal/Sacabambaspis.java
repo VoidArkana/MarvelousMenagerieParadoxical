@@ -125,9 +125,9 @@ public class Sacabambaspis extends AbstractBasicFish {
         Sacabambaspis otherSaca = (Sacabambaspis)pOtherParent;
 
         if (this.getRandom().nextBoolean()){
-            this.setVariant(this.getRandom().nextInt(2));
+            baby.setVariant(this.getRandom().nextInt(2));
         }else {
-            this.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherSaca.getVariant());
+            baby.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherSaca.getVariant());
         }
 
         baby.setFromBucket(true);

@@ -31,6 +31,7 @@ public class MMEvents {
         event.put(MMEntities.EOLACTORIA.get(), Eolactoria.createAttributes().build());
         event.put(MMEntities.SLOVENICUS.get(), Slovenicus.createAttributes().build());
         event.put(MMEntities.ANOMALOCARIS.get(), Anomalocaris.createAttributes().build());
+        event.put(MMEntities.PIKAIA.get(), Pikaia.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());
@@ -46,7 +47,6 @@ public class MMEvents {
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());
 //        event.put(MMEntities.BABY_OPHTHALMO.get(), BabyOphthalmoEntity.createAttributes().build());
 //        event.put(MMEntities.JOSEPHO.get(), JosephoEntity.createAttributes().build());
-//        event.put(MMEntities.PIKAIA.get(), PikaiaEntity.createAttributes().build());
 //        event.put(MMEntities.WIWAXIA_ENTITY.get(), PlantEntity.createAttributes().build());
 //        event.put(MMEntities.HALLUCIGENIA.get(), HallucigeniaEntity.createAttributes().build());
 //        event.put(MMEntities.CHARNIA_ENTITY.get(), PlantEntity.createAttributes().build());

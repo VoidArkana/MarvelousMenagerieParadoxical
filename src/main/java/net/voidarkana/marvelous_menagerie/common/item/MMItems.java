@@ -73,6 +73,11 @@ public class MMItems {
     //Pikaia
     public static final RegistryObject<Item> PIKAIA_FOSSIL = ITEMS.register("pikaia_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PIKAIA_SPAWN_EGG = ITEMS.register("pikaia_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.PIKAIA, 0xc7d3d2, 0x9db7b7, new Item.Properties()));
+    public static final RegistryObject<Item> PIKAIA_BUCKET = ITEMS.register("pikaia_bucket",
+            () -> new FishBucketItem(MMEntities.PIKAIA, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Hallucigenia
     public static final RegistryObject<Item> HALLU_FOSSIL = ITEMS.register("hallu_fossil",

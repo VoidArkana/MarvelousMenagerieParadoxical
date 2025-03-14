@@ -61,6 +61,14 @@ public class MMEntities {
                             .sized(1f, 0.6f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "anomalocaris").toString()));
 
+    public static final RegistryObject<EntityType<Pikaia>> PIKAIA =
+            ENTITY_TYPES.register("pikaia",
+                    () -> EntityType.Builder.of(Pikaia::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.7f, 0.3f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "pikaia").toString()));
+
+
+
     public static final RegistryObject<EntityType<RiftEntity>> RIFT =
             ENTITY_TYPES.register("rift",
                     () -> EntityType.Builder.of(RiftEntity::new, MobCategory.MONSTER)

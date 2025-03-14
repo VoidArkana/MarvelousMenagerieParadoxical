@@ -10,11 +10,11 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.ChudAnimations;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 
-public class ChudModel<T extends Chud> extends HierarchicalModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	//public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "chud"), "main");
+public class ChudModel<T extends Chud> extends MarvelousModel<T> {
+
 	private final ModelPart root;
 	private final ModelPart body_main;
 	private final ModelPart body;
@@ -32,7 +32,8 @@ public class ChudModel<T extends Chud> extends HierarchicalModel<T> {
 	private final ModelPart leg_back_r;
 
 	public ChudModel(ModelPart root) {
-		this.root = root.getChild("root");
+        super(1, 0);
+        this.root = root.getChild("root");
 		this.body_main = this.root.getChild("body_main");
 		this.body = this.body_main.getChild("body");
 		this.eye_left = this.body.getChild("eye_left");
@@ -96,7 +97,7 @@ public class ChudModel<T extends Chud> extends HierarchicalModel<T> {
 			animateWalk(ChudAnimations.walk,limbSwing, limbSwingAmount, 2, 2.5f);
 		}
 
-		this.animate(entity.idleAnimationState, ChudAnimations.idle, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, ChudAnimations.idle, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 
 		this.animate(entity.rotateAnimationState, ChudAnimations.rotate, ageInTicks, 1.0F);
 

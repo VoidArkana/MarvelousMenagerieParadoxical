@@ -12,9 +12,10 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
 
-public class ArandaspisModel<T extends Arandaspis> extends AgeableHierarchicalModel<T> {
+public class ArandaspisModel<T extends Arandaspis> extends MarvelousModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_rot;
@@ -23,7 +24,7 @@ public class ArandaspisModel<T extends Arandaspis> extends AgeableHierarchicalMo
 	private final ModelPart fin;
 
 	public ArandaspisModel(ModelPart root) {
-        super(0.4f, 0);
+        super(0.4f, 1.5f);
         this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
@@ -53,7 +54,7 @@ public class ArandaspisModel<T extends Arandaspis> extends AgeableHierarchicalMo
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, ArandaspisAnims.SWIM, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, ArandaspisAnims.FLOP, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);

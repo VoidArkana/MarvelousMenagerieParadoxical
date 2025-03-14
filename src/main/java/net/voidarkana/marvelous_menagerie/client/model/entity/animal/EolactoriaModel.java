@@ -12,9 +12,10 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.EolactoriaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Eolactoria;
 
-public class EolactoriaModel<T extends Eolactoria> extends AgeableHierarchicalModel<T> {
+public class EolactoriaModel<T extends Eolactoria> extends MarvelousModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart root;
@@ -31,7 +32,7 @@ public class EolactoriaModel<T extends Eolactoria> extends AgeableHierarchicalMo
 	private final ModelPart leftFrontHorn;
 
 	public EolactoriaModel(ModelPart root) {
-        super(0.5f, 0);
+        super(0.5f, 1f);
         this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
@@ -83,7 +84,7 @@ public class EolactoriaModel<T extends Eolactoria> extends AgeableHierarchicalMo
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animate(entity.swimAnimationState, EolactoriaAnims.SWIM, ageInTicks, limbSwingAmount);
-		this.animate(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1,1-Math.abs(limbSwingAmount));
 
 		if (entity.flopSide()){
 			this.animate(entity.flopAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F);

@@ -62,6 +62,8 @@ public class MMCreativeTab {
 
                         output.accept(MMItems.OPHTHALMO_ARMOR.get());
 
+                        output.accept(MMItems.PIKAIA_BUCKET.get());
+
                         output.accept(MMItems.SACA_BUCKET.get());
                         output.accept(MMItems.SACABAMBASPIS.get());
                         output.accept(MMItems.COOKED_SACA.get());
@@ -107,6 +109,7 @@ public class MMCreativeTab {
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
+                        output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
 

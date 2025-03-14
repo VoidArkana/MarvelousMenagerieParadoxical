@@ -11,9 +11,10 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.SlovenicusAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Slovenicus;
 
-public class SlovenicusModel<T extends Slovenicus> extends AgeableHierarchicalModel<T> {
+public class SlovenicusModel<T extends Slovenicus> extends MarvelousModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	private final ModelPart root;
 	private final ModelPart swim_rot;
@@ -27,7 +28,7 @@ public class SlovenicusModel<T extends Slovenicus> extends AgeableHierarchicalMo
 	private final ModelPart fin;
 
 	public SlovenicusModel(ModelPart root) {
-        super(0.6f, 0);
+        super(0.6f, 1f);
         this.root = root.getChild("root");
 		this.swim_rot = this.root.getChild("swim_rot");
 		this.body = this.swim_rot.getChild("body");
@@ -76,8 +77,7 @@ public class SlovenicusModel<T extends Slovenicus> extends AgeableHierarchicalMo
 			this.animateWalk(SlovenicusAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
 		}
 
-		//this.animate(entity.swimAnimationState, SlovenicusAnims.SWIM, ageInTicks, limbSwingAmount*1.5f);
-		this.animate(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 		this.animate(entity.flopAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = (headPitch * ((float)Math.PI / 180F))/4;

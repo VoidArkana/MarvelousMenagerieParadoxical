@@ -63,8 +63,17 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.CHRONOTITE);
 
         simpleItem(MMItems.SNIFFER_FOSSIL);
+
         simpleItem(MMItems.SACA_FOSSIL);
+        simpleItem(MMItems.SACABAMBASPIS);
+        simpleItem(MMItems.GOLDEN_SACA);
+        simpleItem(MMItems.COOKED_SACA);
+        simpleItem(MMItems.SACA_BUCKET);
+        withExistingParent(MMItems.SACA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.ARANDASPIS_FOSSIL);
+        simpleItem(MMItems.ARANDASPIS_BUCKET);
+        withExistingParent(MMItems.ARANDASPIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.CARIS_FOSSIL);
         simpleItem(MMItems.CARIS_SCUTE);
@@ -81,7 +90,13 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.TRILO_BITE);
 
         simpleItem(MMItems.PIKAIA_FOSSIL);
+        simpleItem(MMItems.PIKAIA_BUCKET);
+        withExistingParent(MMItems.PIKAIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.FALCA_FOSSIL);
+        simpleItem(MMItems.FALCA_BUCKET);
+        withExistingParent(MMItems.FALCA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.ROACH_FOSSIL);
         simpleItem(MMItems.GORGON_FOSSIL);
         simpleItem(MMItems.LYSTRO_FOSSIL);
@@ -95,11 +110,18 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.DAEODON_FOSSIL);
         simpleItem(MMItems.DAWN_FOSSIL);
         simpleItem(MMItems.LEPTI_FOSSIL);
+
         simpleItem(MMItems.EOLACTORIA_FOSSIL);
+        simpleItem(MMItems.EOLACTORIA_BUCKET);
+        withExistingParent(MMItems.EOLACTORIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.KELENKEN_FOSSIL);
         simpleItem(MMItems.JOSEPHO_FOSSIL);
+
         simpleItem(MMItems.SLOV_FOSSIL);
-        simpleItem(MMItems.FALCA_FOSSIL);
+        simpleItem(MMItems.SLOVENICUS_BUCKET);
+        withExistingParent(MMItems.SLOVENICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.DODO_FOSSIL);
         simpleItem(MMItems.THYLACINE_FOSSIL);
 
@@ -115,24 +137,6 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.EGG_SHELL_FRAGMENT);
 
         simpleItem(MMItems.DOEDICURUS_FOSSIL);
-
-        simpleItem(MMItems.SLOVENICUS_BUCKET);
-        withExistingParent(MMItems.SLOVENICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-        simpleItem(MMItems.ARANDASPIS_BUCKET);
-        withExistingParent(MMItems.ARANDASPIS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-        simpleItem(MMItems.FALCA_BUCKET);
-        withExistingParent(MMItems.FALCA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-        simpleItem(MMItems.EOLACTORIA_BUCKET);
-        withExistingParent(MMItems.EOLACTORIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
-
-        simpleItem(MMItems.SACABAMBASPIS);
-        simpleItem(MMItems.GOLDEN_SACA);
-        simpleItem(MMItems.COOKED_SACA);
-        simpleItem(MMItems.SACA_BUCKET);
-        withExistingParent(MMItems.SACA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         withExistingParent(MMItems.CHUD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 

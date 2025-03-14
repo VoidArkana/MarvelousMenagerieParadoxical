@@ -176,7 +176,7 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
     @Nullable
     @Override
     protected RenderType getRenderType(Fracture pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
-        return RenderType.entityTranslucent(TEXTURE);//ClientProxy.GLOWING_SPRITE;
+        return RenderType.entityTranslucent(TEXTURE);
     }
 
     @Override

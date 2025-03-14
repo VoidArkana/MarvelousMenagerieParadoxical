@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+//TODO: fix loot table issues when breaking different fossil types
 public class FossilBlock extends Block {
 
     private ItemStack item = ItemStack.EMPTY;
@@ -54,7 +55,7 @@ public class FossilBlock extends Block {
     }
 
     private @NotNull ResourceLocation getFossilLoottable(int successLevel) {
-        String path = "fossil/success_"+ successLevel +"/"+getDescriptionId();
+        String path = "fossil/success_"+ successLevel +"/" + this.getDescriptionId();
         return new ResourceLocation(MarvelousMenagerie.MODID, path);
     }
 

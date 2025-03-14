@@ -9,9 +9,10 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Anomalocaris;
 
-public class AnomalocarisModel<T extends Anomalocaris> extends AgeableHierarchicalModel<T> {
+public class AnomalocarisModel<T extends Anomalocaris> extends MarvelousModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart swim_control;
@@ -38,7 +39,7 @@ public class AnomalocarisModel<T extends Anomalocaris> extends AgeableHierarchic
 	private final ModelPart tail_fin;
 
 	public AnomalocarisModel(ModelPart root) {
-        super(0.6f, 1);
+        super(0.6f, 0.6f);
         this.root = root.getChild("root");
 		this.swim_control = this.root.getChild("swim_control");
 		this.root_rotation = this.swim_control.getChild("root_rotation");
@@ -129,7 +130,7 @@ public class AnomalocarisModel<T extends Anomalocaris> extends AgeableHierarchic
 
 		this.animate(entity.swimAnimationState, AnomalocarisAnims.SWIM, ageInTicks, limbSwingAmount*4f);
 
-		this.animate(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 
 		this.animate(entity.flopAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F);
 
@@ -150,7 +151,7 @@ public class AnomalocarisModel<T extends Anomalocaris> extends AgeableHierarchic
 
 		if (this.young){
 			poseStack.scale(0.6f, 0.6f, 0.6f);
-			poseStack.translate(0, 0.6, 0);
+			poseStack.translate(0, 1, 0);
 		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);

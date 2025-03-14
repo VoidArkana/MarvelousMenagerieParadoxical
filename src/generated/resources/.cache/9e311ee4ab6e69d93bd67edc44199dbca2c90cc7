@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-28T18:43:48.0423757	Item Models: marvelous_menagerie
+// 1.20.1	2025-03-14T18:11:47.859872	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -110,7 +110,9 @@ bf520637b6a7555afa219a14d0c4de14875e432e assets/marvelous_menagerie/models/item/
 7db22fa15626ed6c6037e827655a70ff5297db41 assets/marvelous_menagerie/models/item/permafrost_slab.json
 f71b8374733908ff70e720dea34d3f2800a9b279 assets/marvelous_menagerie/models/item/permafrost_stairs.json
 9abd8aeb89c1170da8a3cb64feaae41596bddcf3 assets/marvelous_menagerie/models/item/permafrost_wall.json
+7b8be324641ef083d552e4c04a7eb5e744b7a1f5 assets/marvelous_menagerie/models/item/pikaia_bucket.json
 a3b8ce82206a6342b09d1fdbc2ab49ed1d535e23 assets/marvelous_menagerie/models/item/pikaia_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/pikaia_spawn_egg.json
 c8f1448982e158a90a2e275699e072fc368b71e4 assets/marvelous_menagerie/models/item/polished_breccia_slab.json
 2089b686903a19e3fc16da012da180c8f48d194d assets/marvelous_menagerie/models/item/polished_breccia_stairs.json
 a86a0726fffebf9b038b05998e64dbe774f799c2 assets/marvelous_menagerie/models/item/polished_breccia_wall.json
