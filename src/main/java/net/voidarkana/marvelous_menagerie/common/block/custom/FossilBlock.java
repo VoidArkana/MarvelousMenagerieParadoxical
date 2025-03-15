@@ -42,9 +42,15 @@ public class FossilBlock extends Block {
     @Nullable
     protected Level level;
     public boolean hasLootPassed = false;
+    private String lootTable;
 
-    public FossilBlock(Properties pProperties) {
+    public FossilBlock(Properties pProperties, String pLootTable) {
         super(pProperties);
+        this.lootTable = pLootTable;
+    }
+
+    public FossilBlock(Properties pProperties){
+        this(pProperties, "");
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -55,7 +61,7 @@ public class FossilBlock extends Block {
     }
 
     private @NotNull ResourceLocation getFossilLoottable(int successLevel) {
-        String path = "fossil/success_"+ successLevel +"/" + this.getDescriptionId();
+        String path = "fossil/success_"+ successLevel + "/" + this.lootTable;
         return new ResourceLocation(MarvelousMenagerie.MODID, path);
     }
 
@@ -66,6 +72,7 @@ public class FossilBlock extends Block {
             ResourceLocation lootTable = getFossilLoottable(successLevel);
 
             LootTable loottable = this.level.getServer().getLootData().getLootTable(lootTable);
+
             if (pPlayer instanceof ServerPlayer serverplayer) {
                 CriteriaTriggers.GENERATE_LOOT.trigger(serverplayer, lootTable);
             }
@@ -85,7 +92,6 @@ public class FossilBlock extends Block {
                     itemstack = objectarraylist.get(0);
                     break;
                 default:
-                    //LOGGER.warn("Expected max 1 loot from loot table " + this.lootTable + " got " + objectarraylist.size());
                     itemstack = objectarraylist.get(0);
             }
             this.item = itemstack;
@@ -99,9 +105,6 @@ public class FossilBlock extends Block {
         if (this.level != null && this.level.getServer() != null) {
             this.unpackLootTable(pPlayer, pPos, successLevel);
             if (!this.item.isEmpty()) {
-//                double d0 = EntityType.ITEM.getWidth();
-//                double d1 = 1.0D - d0;
-//                double d2 = d0 / 2.0D;
                 double d3 = Vec3.atCenterOf(pPos).x;
                 double d4 = (double) pPos.getY() + (double)(EntityType.ITEM.getHeight() / 2.0F);
                 double d5 = Vec3.atCenterOf(pPos).z;
@@ -116,15 +119,15 @@ public class FossilBlock extends Block {
     }
 
     public void destroyOriginalWithSuccessLevel(Player pPlayer, int successLevel, BlockPos pPos){
-        this.dropContent(pPlayer, pPos, successLevel);
         BlockPos tempAdjacent;
+        this.dropContent(pPlayer, pPos, successLevel);
         for (int x = -1; x < 2; x++){
             for (int y = -1; y < 2; y++){
                 for (int z = -1; z < 2; z++){
                     tempAdjacent = new BlockPos(pPos.getX()+x, pPos.getY()+y, pPos.getZ()+z);
                     BlockState block = level.getBlockState(tempAdjacent);
-                    if (block.is(MMTags.Blocks.FOSSIL_BLOCKS) && !(tempAdjacent == pPos)){
-                        passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, level, 0);
+                    if (block.getBlock() instanceof FossilBlock fossilBlock && !(tempAdjacent == pPos)){
+                        fossilBlock.passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, level, 0);
                     }
                 }
             }
@@ -133,15 +136,15 @@ public class FossilBlock extends Block {
 
     public void passOnWithSuccessLevel(Player pPlayer, int successLevel, BlockPos pPos, Level pLevel, int chance){
         this.level = pLevel;
-        this.dropContent(pPlayer, pPos, successLevel);
         BlockPos tempAdjacent;
+        this.dropContent(pPlayer, pPos, successLevel);
         for (int x = pPos.getX()-1; x < pPos.getX()+2; x++){
             for (int y = pPos.getY()-1; y < pPos.getY()+2; y++){
                 for (int z = pPos.getZ()-1; z < pPos.getZ()+2; z++){
                     tempAdjacent = new BlockPos(x, y, z);
                     BlockState block = level.getBlockState(tempAdjacent);
-                    if (block.is(MMTags.Blocks.FOSSIL_BLOCKS) && !(tempAdjacent == pPos) && pLevel.random.nextInt(3)>chance){
-                        passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, level, 0);
+                    if (block.getBlock() instanceof FossilBlock fossilBlock && !(tempAdjacent == pPos) && pLevel.random.nextInt(3)>chance){
+                        fossilBlock.passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, level, 0);
                     }
                 }
             }

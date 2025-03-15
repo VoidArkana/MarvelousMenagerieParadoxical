@@ -290,7 +290,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> SHALE_FOSSIL_BLOCK = registerBlock("shale_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE), "shale"));
 
 
     public static final RegistryObject<Block> POLISHED_SHALE = registerBlock("polished_shale",
@@ -354,7 +354,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> SILTSTONE_FOSSIL_BLOCK = registerBlock("siltstone_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "siltstone"));
 
 
     public static final RegistryObject<Block> POLISHED_SILTSTONE = registerBlock("polished_siltstone",
@@ -418,7 +418,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> GABBRO_FOSSIL_BLOCK = registerBlock("gabbro_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "gabbro"));
 
 
     public static final RegistryObject<Block> POLISHED_GABBRO = registerBlock("polished_gabbro",
@@ -482,7 +482,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> MUDSTONE_FOSSIL_BLOCK = registerBlock("mudstone_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "mudstone"));
 
 
     public static final RegistryObject<Block> POLISHED_MUDSTONE = registerBlock("polished_mudstone",
@@ -546,7 +546,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> LIMESTONE_FOSSIL_BLOCK = registerBlock("limestone_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "limestone"));
 
 
     public static final RegistryObject<Block> POLISHED_LIMESTONE = registerBlock("polished_limestone",
@@ -610,7 +610,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> CHALK_FOSSIL_BLOCK = registerBlock("chalk_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "chalk"));
 
 
     public static final RegistryObject<Block> POLISHED_CHALK = registerBlock("polished_chalk",
@@ -674,7 +674,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> BRECCIA_FOSSIL_BLOCK = registerBlock("breccia_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "breccia"));
 
 
     public static final RegistryObject<Block> POLISHED_BRECCIA = registerBlock("polished_breccia",
@@ -738,7 +738,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> DIATOMITE_FOSSIL_BLOCK = registerBlock("diatomite_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE), "diatomite"));
 
 
     public static final RegistryObject<Block> POLISHED_DIATOMITE = registerBlock("polished_diatomite",
@@ -802,7 +802,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> PERMAFROST_FOSSIL_BLOCK = registerBlock("permafrost_fossil_block",
-            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.MUD_BRICKS)));
+            ()-> new FossilBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.MUD_BRICKS), "permafrost"));
 
 
     public static final RegistryObject<Block> POLISHED_PERMAFROST = registerBlock("polished_permafrost",
