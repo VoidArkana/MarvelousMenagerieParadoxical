@@ -36,6 +36,11 @@ public class MMMessages {
                 FossilRecipeS2C::encode,
                 FossilRecipeS2C::decode,
                 FossilRecipeS2C::onPacketReceived);
+
+        CHANNEL.registerMessage(id(), ChangeFossilMessage.class,
+                ChangeFossilMessage::write,
+                ChangeFossilMessage::read,
+                ChangeFossilMessage::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

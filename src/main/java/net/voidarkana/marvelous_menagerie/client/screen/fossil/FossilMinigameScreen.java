@@ -19,6 +19,8 @@ import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.FossilBlockEntity;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
+import net.voidarkana.marvelous_menagerie.util.network.ChangeFossilMessage;
+import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
@@ -1063,9 +1065,11 @@ public class FossilMinigameScreen extends Screen {
     public void breakFossils(){
        //System.out.println(clickedPos);
 
-        if (player.level().getBlockEntity(clickedPos) instanceof FossilBlockEntity fossilBlock){
-            fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
-        }
+        MMMessages.sendToServer(new ChangeFossilMessage(this.successLevel, this.clickedPos));
+
+//        if (player.level().getBlockState(clickedPos).getBlock() instanceof FossilBlock fossilBlock){
+//            fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
+//        }
 
     }
 

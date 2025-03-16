@@ -20,7 +20,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
-import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 
 public class FossilBlockEntity extends BlockEntity {
 
@@ -28,7 +27,7 @@ public class FossilBlockEntity extends BlockEntity {
     private long lootTableSeed;
 
     public FossilBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(MMBlockEntities.FOSSILBLOCK_ENTITY.get(), pPos, pBlockState);
+        super(null, pPos, pBlockState);
     }
 
     public ResourceLocation getFossilLoottable(int successLevel, String lootTable) {
