@@ -9,10 +9,17 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.message.FossilRecipeS2C;
-import org.lwjgl.system.windows.MSG;
 
 public class MMMessages {
-    private static SimpleChannel INSTANCE;
+
+    private static final String PROTOCOL_VERSION = "1";
+
+    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(MarvelousMenagerie.MODID, "channel"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals
+    );
 
     private static int packetId = 0;
     private static int id() {
@@ -20,31 +27,27 @@ public class MMMessages {
     }
 
     public static void register() {
-        SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(MarvelousMenagerie.MODID, "messages"))
-                .networkProtocolVersion(() -> "1.0")
-                .clientAcceptedVersions(s -> true)
-                .serverAcceptedVersions(s -> true)
-                .simpleChannel();
+        CHANNEL.registerMessage(id(), TESyncPacket.class,
+                TESyncPacket::encode,
+                TESyncPacket::decode,
+                TESyncPacket::consume);
 
-        INSTANCE = net;
-
-        net.registerMessage(id(), FossilRecipeS2C.class,
+        CHANNEL.registerMessage(id(), FossilRecipeS2C.class,
                 FossilRecipeS2C::encode,
                 FossilRecipeS2C::decode,
                 FossilRecipeS2C::onPacketReceived);
     }
 
     public static <MSG> void sendToServer(MSG message) {
-        INSTANCE.sendToServer(message);
+        CHANNEL.sendToServer(message);
     }
 
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
-        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
     public static <MSG> void sendToClients(MSG message) {
-        INSTANCE.send(PacketDistributor.ALL.noArg(), message);
+        CHANNEL.send(PacketDistributor.ALL.noArg(), message);
     }
 
 
@@ -55,7 +58,7 @@ public class MMMessages {
     }
 
     public static <MSG> void sendNonLocal(MSG msg, ServerPlayer player) {
-        INSTANCE.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        CHANNEL.sendTo(msg, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 }
 

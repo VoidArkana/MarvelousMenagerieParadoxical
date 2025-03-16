@@ -41,7 +41,6 @@ import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
-import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -112,7 +111,7 @@ public class MarvelousMenagerie
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        MMNetworkHandler.init();
+//        MMNetworkHandler.init();
         MMMessages.register();
         event.enqueueWork(()->{
 

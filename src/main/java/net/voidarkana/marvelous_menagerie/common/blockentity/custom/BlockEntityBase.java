@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;
-import net.voidarkana.marvelous_menagerie.util.network.MMNetworkHandler;
+import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import net.voidarkana.marvelous_menagerie.util.network.TESyncPacket;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +34,7 @@ public class BlockEntityBase extends BlockEntity {
         saveAdditional(tag);
         if (level == null) return;
         if (!level.isClientSide()) {
-            MMNetworkHandler.CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(worldPosition)), new TESyncPacket(worldPosition, tag));
+            MMMessages.CHANNEL.send(PacketDistributor.TRACKING_CHUNK.with(() -> level.getChunkAt(worldPosition)), new TESyncPacket(worldPosition, tag));
         }
     }
 

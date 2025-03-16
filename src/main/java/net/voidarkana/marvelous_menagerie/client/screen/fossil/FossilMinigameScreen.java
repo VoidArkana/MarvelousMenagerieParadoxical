@@ -17,6 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.common.blockentity.custom.FossilBlockEntity;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
@@ -1062,7 +1063,7 @@ public class FossilMinigameScreen extends Screen {
     public void breakFossils(){
        //System.out.println(clickedPos);
 
-        if (player.level().getBlockState(clickedPos).getBlock() instanceof FossilBlock fossilBlock){
+        if (player.level().getBlockEntity(clickedPos) instanceof FossilBlockEntity fossilBlock){
             fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
         }
 

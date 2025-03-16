@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.message.FossilRecipeS2C;
 
 public class MMNetworkHandler {
 
@@ -22,7 +23,10 @@ public class MMNetworkHandler {
 //        INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(MarvelousMenagerie.MODID, "network"),
 //                () -> "1.0", (s) -> true, (s) -> true);
 
-        CHANNEL.registerMessage(++id, TESyncPacket.class, TESyncPacket::encode, TESyncPacket::decode, TESyncPacket::consume);
+        CHANNEL.registerMessage(++id, TESyncPacket.class,
+                TESyncPacket::encode,
+                TESyncPacket::decode,
+                TESyncPacket::consume);
 
         //CHANNEL.registerMessage(id++, OpenElephantBirdScreenPacket.class, OpenElephantBirdScreenPacket::encode, OpenElephantBirdScreenPacket::decode, OpenElephantBirdScreenPacket.Handler::handle);
     }

@@ -56,13 +56,14 @@ public class MMBlockStateProvider extends BlockStateProvider {
 
         leavesBlock(MMBlocks.SIGILLARIA_LEAVES);
 
-        simpleBlockWithItem(MMBlocks.SIGILLARIA_SAPLING.get(), models().cross(blockTexture(MMBlocks.SIGILLARIA_SAPLING.get()).getPath(),
-                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
-        simpleBlockWithItem(MMBlocks.POTTED_SIGILLARIA_SAPLING.get(), models().singleTexture("potted_sigillaria_sapling", new ResourceLocation("flower_pot_cross"), "plant",
-                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
+//        simpleBlockWithItem(MMBlocks.SIGILLARIA_SAPLING.get(), models().cross(blockTexture(MMBlocks.SIGILLARIA_SAPLING.get()).getPath(),
+//                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
 
-        simpleBlockWithItem(MMBlocks.COOKSONIA.get(), models().cross(blockTexture(MMBlocks.COOKSONIA.get()).getPath(),
-                blockTexture(MMBlocks.COOKSONIA.get())).renderType("cutout"));
+//        simpleBlockWithItem(MMBlocks.POTTED_SIGILLARIA_SAPLING.get(), models().singleTexture("potted_sigillaria_sapling", new ResourceLocation("flower_pot_cross"), "plant",
+//                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
+
+//        simpleBlockWithItem(MMBlocks.COOKSONIA.get(), models().cross(blockTexture(MMBlocks.COOKSONIA.get()).getPath(),
+//                blockTexture(MMBlocks.COOKSONIA.get())).renderType("cutout"));
 
         //prototaxites woodset
         blockWithItem(MMBlocks.PROTOTAXITES_PLANKS);

@@ -35,6 +35,7 @@ public class ServerEvents {
         ServerPlayer player = event.getPlayer();
         List<ServerPlayer> playerList = event.getPlayerList().getPlayers();
         Map<Item, List<WeightedItemCodec>> analyzerRecipes = FossilCleaningManager.getRecipes();
+
         if(player != null){
             MMMessages.sendToPlayer(new FossilRecipeS2C(analyzerRecipes), player);
         }
@@ -46,6 +47,7 @@ public class ServerEvents {
                     FossilCleaningManager.populateRecipeMap(serverLevel);
                 }
                 Map<Item, List<WeightedItemCodec>> analyzerRecipesReload = FossilCleaningManager.getRecipes();
+
                 MMMessages.sendToPlayer(new FossilRecipeS2C(analyzerRecipesReload), player1);
             }
         }

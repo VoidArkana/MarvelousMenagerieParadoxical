@@ -25,6 +25,10 @@ public class MMItemModelProvider extends ItemModelProvider {
         //simpleItem(MMItems.PALEONOMICON);
 
         simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);
+
+//        simpleBlockItem(MMBlocks.SIGILLARIA_SAPLING);
+//        simpleBlockItem(MMBlocks.COOKSONIA);
+
         trapdoorItem(MMBlocks.SIGILLARIA_TRAPDOOR);
 
         evenSimplerBlockItem(MMBlocks.SIGILLARIA_STAIRS);
@@ -40,8 +44,8 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.SIGILLARIA_SIGN);
         simpleItem(MMItems.SIGILLARIA_HANGING_SIGN);
 
-        saplingItem(MMBlocks.SIGILLARIA_SAPLING);
-        saplingItem(MMBlocks.COOKSONIA);
+//        saplingItem(MMBlocks.SIGILLARIA_SAPLING);
+//        saplingItem(MMBlocks.COOKSONIA);
 
         simpleBlockItem(MMBlocks.PROTOTAXITES_DOOR);
         trapdoorItem(MMBlocks.PROTOTAXITES_TRAPDOOR);
