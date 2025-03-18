@@ -35,7 +35,7 @@ public class MMDataGenerators {
 
         generator.addProvider(true, new MMEntityTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
-        //generator.addProvider(true, new ModBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
+        generator.addProvider(true, new MMBiomeTagGenerator(packOutput, lookupProvider, existingFileHelper));
 
         generator.addProvider(event.includeServer(), new ModWorldGenProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new MMPOITagsProvider(packOutput, lookupProvider, existingFileHelper));

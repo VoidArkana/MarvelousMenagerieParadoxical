@@ -12,6 +12,7 @@ import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 public class ModBiomeModifiers {
 
@@ -39,9 +40,8 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_DIATOMITE_VEIN = registerKey("add_diatomite_vein");
     public static final ResourceKey<BiomeModifier> ADD_DIATOMITE_FOSSIL = registerKey("add_diatomite_fossil");
 
-    public static final ResourceKey<BiomeModifier> ADD_PERMAFROST_VEIN = registerKey("add_permafrost_vein");
+//    public static final ResourceKey<BiomeModifier> ADD_PERMAFROST_VEIN = registerKey("add_permafrost_vein");
     public static final ResourceKey<BiomeModifier> EXTRA_ADD_PERMAFROST_VEIN = registerKey("extra_add_permafrost_vein");
-    public static final ResourceKey<BiomeModifier> DIRT_ADD_PERMAFROST_VEIN = registerKey("dirt_add_permafrost_vein");
     public static final ResourceKey<BiomeModifier> ADD_PERMAFROST_FOSSIL = registerKey("add_permafrost_fossil");
 
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
@@ -143,26 +143,18 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_DECORATION));
 
 
-
-        context.register(ADD_PERMAFROST_VEIN, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PERMAFROST_VEIN_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES));
-
+//        context.register(ADD_PERMAFROST_VEIN, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
+//                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+//                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PERMAFROST_VEIN_PLACED_KEY)),
+//                GenerationStep.Decoration.UNDERGROUND_ORES));
 
         context.register(EXTRA_ADD_PERMAFROST_VEIN, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
+                biomes.getOrThrow(MMTags.Biomes.PERMAFROST_BIOMES),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.EXTRA_PERMAFROST_VEIN_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES));
 
-
-        context.register(DIRT_ADD_PERMAFROST_VEIN, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(Tags.Biomes.IS_COLD_OVERWORLD),
-                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.DIRT_PERMAFROST_VEIN_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES));
-
         context.register(ADD_PERMAFROST_FOSSIL, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
+                biomes.getOrThrow(MMTags.Biomes.PERMAFROST_BIOMES),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PERMAFROST_FOSSIL_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_DECORATION));
     }

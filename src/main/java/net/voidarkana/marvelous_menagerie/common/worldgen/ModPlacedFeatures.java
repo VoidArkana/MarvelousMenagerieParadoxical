@@ -41,8 +41,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DIATOMITE_VEIN_PLACED_KEY = registerKey("diatomite_placed");
     public static final ResourceKey<PlacedFeature> DIATOMITE_FOSSIL_PLACED_KEY = registerKey("diatomite_fossil_placed");
 
-    public static final ResourceKey<PlacedFeature> PERMAFROST_VEIN_PLACED_KEY = registerKey("permafrost_placed");
-    public static final ResourceKey<PlacedFeature> DIRT_PERMAFROST_VEIN_PLACED_KEY = registerKey("dirt_permafrost_placed");
+//    public static final ResourceKey<PlacedFeature> PERMAFROST_VEIN_PLACED_KEY = registerKey("permafrost_placed");
     public static final ResourceKey<PlacedFeature> EXTRA_PERMAFROST_VEIN_PLACED_KEY = registerKey("extra_permafrost_placed");
     public static final ResourceKey<PlacedFeature> PERMAFROST_FOSSIL_PLACED_KEY = registerKey("permafrost_fossil_placed");
 
@@ -115,35 +114,31 @@ public class ModPlacedFeatures {
 
         register(context, BRECCIA_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BRECCIA_FOSSIL_KEY),
                 ModOrePlacement.commonOrePlacement(50, HeightRangePlacement.uniform(VerticalAnchor.absolute(50),
-                        VerticalAnchor.absolute(85))));
+                        VerticalAnchor.absolute(75))));
 
 
 
         register(context, DIATOMITE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DIATOMITE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
-                        VerticalAnchor.absolute(120))));
+                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(70),
+                        VerticalAnchor.absolute(100))));
 
         register(context, DIATOMITE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DIATOMITE_FOSSIL_KEY),
-                ModOrePlacement.commonOrePlacement(50, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
-                        VerticalAnchor.absolute(120))));
+                ModOrePlacement.commonOrePlacement(50, HeightRangePlacement.uniform(VerticalAnchor.absolute(70),
+                        VerticalAnchor.absolute(100))));
 
 
 
-        register(context, PERMAFROST_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERMAFROST_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(120),
-                        VerticalAnchor.absolute(320))));
-
-        register(context, DIRT_PERMAFROST_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DIRT_PERMAFROST_KEY),
-                ModOrePlacement.rareOrePlacement(15, HeightRangePlacement.uniform(VerticalAnchor.absolute(60),
-                        VerticalAnchor.absolute(320))));
+//        register(context, PERMAFROST_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERMAFROST_KEY),
+//                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(120),
+//                        VerticalAnchor.absolute(320))));
 
         register(context, EXTRA_PERMAFROST_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EXTRA_PERMAFROST_KEY),
-                ModOrePlacement.rareOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(60),
-                        VerticalAnchor.absolute(320))));
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
+                        VerticalAnchor.absolute(150))));
 
         register(context, PERMAFROST_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERMAFROST_FOSSIL_KEY),
-                ModOrePlacement.commonOrePlacement(100, HeightRangePlacement.uniform(VerticalAnchor.absolute(60),
-                        VerticalAnchor.absolute(320))));
+                ModOrePlacement.commonOrePlacement(100, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
+                        VerticalAnchor.absolute(150))));
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {

@@ -69,10 +69,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> DIATOMITE_KEY = registerKey("diatomite");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DIATOMITE_FOSSIL_KEY = registerKey("diatomite_fossil");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PERMAFROST_KEY = registerKey("permafrost");
+    //public static final ResourceKey<ConfiguredFeature<?, ?>> PERMAFROST_KEY = registerKey("permafrost");
     public static final ResourceKey<ConfiguredFeature<?, ?>> EXTRA_PERMAFROST_KEY = registerKey("extra_permafrost");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DIRT_PERMAFROST_KEY = registerKey("dirt_permafrost");
-
     public static final ResourceKey<ConfiguredFeature<?, ?>> PERMAFROST_FOSSIL_KEY = registerKey("permafrost_fossil");
 
 
@@ -82,6 +80,7 @@ public class ModConfiguredFeatures {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest dirtReplaceables = new TagMatchTest(BlockTags.DIRT);
+        RuleTest iceReplaceables = new TagMatchTest(BlockTags.ICE);
 
         RuleTest shaleReplaceables = new BlockMatchTest(MMBlocks.SHALE.get());
         RuleTest siltstoneReplaceables = new BlockMatchTest(MMBlocks.SILTSTONE.get());
@@ -161,15 +160,16 @@ public class ModConfiguredFeatures {
                 MMBlocks.DIATOMITE_FOSSIL_BLOCK.get().defaultBlockState(), 15));
 
 
-        register(context, PERMAFROST_KEY, Feature.ORE, new OreConfiguration(stoneReplaceables,
-                MMBlocks.PERMAFROST.get().defaultBlockState(), 64));
+        List<OreConfiguration.TargetBlockState> extraPermafrost = List.of(OreConfiguration.target(stoneReplaceables,
+                        MMBlocks.PERMAFROST.get().defaultBlockState()),
+                OreConfiguration.target(dirtReplaceables, MMBlocks.PERMAFROST.get().defaultBlockState()),
+                OreConfiguration.target(iceReplaceables, MMBlocks.PERMAFROST.get().defaultBlockState()));
 
-        register(context, EXTRA_PERMAFROST_KEY, Feature.ORE, new OreConfiguration(stoneReplaceables,
-                MMBlocks.PERMAFROST.get().defaultBlockState(), 64));
 
+//        register(context, PERMAFROST_KEY, Feature.ORE, new OreConfiguration(stoneReplaceables,
+//                MMBlocks.PERMAFROST.get().defaultBlockState(), 64));
 
-        register(context, DIRT_PERMAFROST_KEY, Feature.ORE, new OreConfiguration(dirtReplaceables,
-                MMBlocks.PERMAFROST.get().defaultBlockState(), 64));
+        register(context, EXTRA_PERMAFROST_KEY, Feature.ORE, new OreConfiguration(extraPermafrost, 64));
 
         register(context, PERMAFROST_FOSSIL_KEY, Feature.ORE, new OreConfiguration(permafrostReplaceables,
                 MMBlocks.PERMAFROST_FOSSIL_BLOCK.get().defaultBlockState(), 15));
