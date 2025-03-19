@@ -10,35 +10,14 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
-public class MMCreativeTab {
+public class MMCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MarvelousMenagerie.MODID);
 
-    public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_TAB =
-            CREATIVE_MODE_TABS.register("marvelous_menagerie_tab", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMItems.SHALE_FOSSIL.get()))
-                    .title(Component.translatable("creativetab.marvelous_menagerie_tab"))
+    public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_MOBS =
+            CREATIVE_MODE_TABS.register("marvelous_menagerie_tab_mobs", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMItems.CARIS_BUCKET.get()))
+                    .title(Component.translatable("creativetab.marvelous_menagerie_tab_mobs"))
                     .displayItems((itemDisplayParameters, output) -> {
-
-                        output.accept(MMItems.PALEONOMICON.get());
-
-                        output.accept(MMItems.PALEO_TOOLKIT.get());
-
-                        output.accept(MMBlocks.PALEO_TABLE.get());
-
-                        output.accept(MMItems.CHRONOTITE.get());
-                        output.accept(MMBlocks.CHRONOTITE.get());
-                        output.accept(MMBlocks.CHRONO_ALTAR.get());
-                        output.accept(MMBlocks.CHRONO_PEDESTAL.get());
-
-                        output.accept(MMItems.SHALE_FOSSIL.get());
-                        output.accept(MMItems.SILTSTONE_FOSSIL.get());
-                        output.accept(MMItems.GABBRO_FOSSIL.get());
-                        output.accept(MMItems.MUDSTONE_FOSSIL.get());
-                        output.accept(MMItems.LIMESTONE_FOSSIL.get());
-                        output.accept(MMItems.CHALK_FOSSIL.get());
-                        output.accept(MMItems.BRECCIA_FOSSIL.get());
-                        output.accept(MMItems.DIATOMITE_FOSSIL.get());
-                        output.accept(MMItems.PERMAFROST_FOSSIL.get());
 
                         output.accept(MMItems.CARIS_BUCKET.get());
                         output.accept(MMItems.CARIS_LENS.get());
@@ -167,7 +146,100 @@ public class MMCreativeTab {
                         output.accept(MMItems.SIGILLARIA_HANGING_SIGN.get());
                         output.accept(MMBlocks.SIGILLARIA_LEAVES.get());
                         output.accept(MMBlocks.SIGILLARIA_SAPLING.get());
-                        
+                    })
+                    .build());
+
+
+    public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_PLANTS =
+            CREATIVE_MODE_TABS.register("marvelous_menagerie_tab_plants", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMBlocks.SIGILLARIA_SAPLING.get()))
+                    .title(Component.translatable("creativetab.marvelous_menagerie_tab_plants"))
+                    .displayItems((itemDisplayParameters, output) -> {
+
+                        output.accept(MMBlocks.CHARNIA.get());
+
+                        output.accept(MMBlocks.COOKSONIA.get());
+
+                        output.accept(MMBlocks.DICKINSONIA.get());
+
+                        output.accept(MMBlocks.WIWAXIA.get());
+
+                        output.accept(MMBlocks.PROTOTAXITES_PLANKS.get());
+
+                        output.accept(MMBlocks.PROTOTAXITES_BLOCK.get());
+
+                        output.accept(MMBlocks.PROTOTAXITES_STAIRS.get());
+                        output.accept(MMBlocks.PROTOTAXITES_SLAB.get());
+                        output.accept(MMBlocks.PROTOTAXITES_FENCE.get());
+                        output.accept(MMBlocks.PROTOTAXITES_FENCE_GATE.get());
+                        output.accept(MMBlocks.PROTOTAXITES_DOOR.get());
+                        output.accept(MMBlocks.PROTOTAXITES_TRAPDOOR.get());
+                        output.accept(MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get());
+                        output.accept(MMBlocks.PROTOTAXITES_BUTTON.get());
+
+                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC.get());
+                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get());
+                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get());
+                        output.accept(MMItems.PROTOTAXITES_SIGN.get());
+                        output.accept(MMItems.PROTOTAXITES_HANGING_SIGN.get());
+
+                        output.accept(MMBlocks.PROTOTAXITES.get());
+
+
+
+                        output.accept(MMBlocks.SIGILLARIA_PLANKS.get());
+
+                        output.accept(MMBlocks.SIGILLARIA_STEM.get());
+                        output.accept(MMBlocks.STRIPPED_SIGILLARIA_STEM.get());
+                        output.accept(MMBlocks.SIGILLARIA_WOOD.get());
+                        output.accept(MMBlocks.STRIPPED_SIGILLARIA_WOOD.get());
+
+                        output.accept(MMBlocks.SIGILLARIA_STAIRS.get());
+                        output.accept(MMBlocks.SIGILLARIA_SLAB.get());
+                        output.accept(MMBlocks.SIGILLARIA_FENCE.get());
+                        output.accept(MMBlocks.SIGILLARIA_FENCE_GATE.get());
+                        output.accept(MMBlocks.SIGILLARIA_DOOR.get());
+                        output.accept(MMBlocks.SIGILLARIA_TRAPDOOR.get());
+                        output.accept(MMBlocks.SIGILLARIA_PRESSURE_PLATE.get());
+                        output.accept(MMBlocks.SIGILLARIA_BUTTON.get());
+
+                        output.accept(MMBlocks.SIGILLARIA_MOSAIC.get());
+                        output.accept(MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get());
+                        output.accept(MMBlocks.SIGILLARIA_MOSAIC_SLAB.get());
+                        output.accept(MMItems.SIGILLARIA_SIGN.get());
+                        output.accept(MMItems.SIGILLARIA_HANGING_SIGN.get());
+                        output.accept(MMBlocks.SIGILLARIA_LEAVES.get());
+                        output.accept(MMBlocks.SIGILLARIA_SAPLING.get());
+                    })
+                    .build());
+
+    public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_MISC =
+            CREATIVE_MODE_TABS.register("marvelous_menagerie_tab_misc", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMItems.PALEONOMICON.get()))
+                    .title(Component.translatable("creativetab.marvelous_menagerie_tab_misc"))
+                    .displayItems((itemDisplayParameters, output) -> {
+
+                        output.accept(MMItems.PALEONOMICON.get());
+
+                        output.accept(MMItems.PALEO_TOOLKIT.get());
+
+                        output.accept(MMBlocks.PALEO_TABLE.get());
+
+                        output.accept(MMItems.OPAL.get());
+
+                        output.accept(MMItems.CHRONOTITE.get());
+                        output.accept(MMBlocks.CHRONOTITE.get());
+                        output.accept(MMBlocks.CHRONO_ALTAR.get());
+                        output.accept(MMBlocks.CHRONO_PEDESTAL.get());
+
+                        output.accept(MMItems.SHALE_FOSSIL.get());
+                        output.accept(MMItems.SILTSTONE_FOSSIL.get());
+                        output.accept(MMItems.GABBRO_FOSSIL.get());
+                        output.accept(MMItems.MUDSTONE_FOSSIL.get());
+                        output.accept(MMItems.LIMESTONE_FOSSIL.get());
+                        output.accept(MMItems.CHALK_FOSSIL.get());
+                        output.accept(MMItems.BRECCIA_FOSSIL.get());
+                        output.accept(MMItems.DIATOMITE_FOSSIL.get());
+                        output.accept(MMItems.PERMAFROST_FOSSIL.get());
+
                         output.accept(MMBlocks.SHALE.get());
                         output.accept(MMBlocks.SHALE_SLAB.get());
                         output.accept(MMBlocks.SHALE_STAIRS.get());
@@ -338,7 +410,7 @@ public class MMCreativeTab {
                         output.accept(MMBlocks.PERMAFROST_MOSAIC_WALL.get());
                         output.accept(MMBlocks.PERMAFROST_FOSSIL_BLOCK.get());
                         output.accept(MMBlocks.CHISELED_PERMAFROST.get());
-                        
+
                     })
                     .build());
 

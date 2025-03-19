@@ -145,7 +145,9 @@ public class FossilBlock extends Block {
     }
 
     public void passOnWithSuccessLevel(Player pPlayer, int successLevel, BlockPos pPos, int chance, Level pLevel){
-        if (!this.level.isClientSide){
+        if (!pLevel.isClientSide){
+
+            this.level = pLevel;
 
             BlockPos tempAdjacent;
             this.dropContent(pPlayer, pPos, successLevel);
@@ -157,7 +159,7 @@ public class FossilBlock extends Block {
                         Block block = this.level.getBlockState(tempAdjacent).getBlock();
 
                         if (block instanceof FossilBlock fossilBlock && !(tempAdjacent == pPos) && this.level.random.nextInt(3)>chance){
-                            fossilBlock.passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, chance+1, pLevel);
+                            fossilBlock.passOnWithSuccessLevel(pPlayer, successLevel, tempAdjacent, chance, pLevel);
                         }
                     }
                 }

@@ -86,6 +86,8 @@ public class MMTags {
         public static final TagKey<Item> FINTASTIC_GREAT_FEED = tag("fintastic_great_feed");
         public static final TagKey<Item> FINTASTIC_PREMIUM_FEED = tag("fintastic_premium_feed");
 
+        public static final TagKey<Item> ANIMAL_FOSSILS = tag("animal_fossils");
+
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
 
         public static final TagKey<Item> DYE_DEPOT_WOOL_ITEM = tag("dye_depot_wool_item");
@@ -108,6 +110,7 @@ public class MMTags {
         public static final TagKey<Item> DYE_DEPOT_TAN_WOOL_ITEM = tag("dye_depot_tan_wool_item");
 
         public static final TagKey<Item> NATURAL_FOSSILS = tag("natural_fossils");
+
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MODID, name));

@@ -22,7 +22,7 @@ public class MMItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        //simpleItem(MMItems.PALEONOMICON);
+        simpleItem(MMItems.OPAL);
 
         simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);
 

@@ -1,5 +1,4 @@
 {
-  "creativetab.marvelous_menagerie_tab": "Marvelous Menagerie: Paradoxical",
   
   "entity.marvelous_menagerie.dodo": "Dodo",
   "entity.marvelous_menagerie.thylacine": "Thylacine",
@@ -591,5 +590,11 @@
   "painting.marvelous_menagerie.chud_painting.title": "Chud Anatomy",
   "painting.marvelous_menagerie.chud_painting.author": "Ninni",
 
-  "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites"
+  "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites",
+
+  "item.marvelous_menagerie.opal": "Opal",
+
+  "creativetab.marvelous_menagerie_tab_mobs": "Marvelous Menagerie - Mobs",
+  "creativetab.marvelous_menagerie_tab_plants": "Marvelous Menagerie - Plants",
+  "creativetab.marvelous_menagerie_tab_misc": "Marvelous Menagerie - Miscelaneous"
 }

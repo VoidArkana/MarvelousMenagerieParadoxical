@@ -23,6 +23,9 @@ public class MMItems {
     public static final RegistryObject<Item> PALEONOMICON = ITEMS.register("paleonomicon",
             Paleonomicon::new);
 
+    public static final RegistryObject<Item> OPAL = ITEMS.register("opal",
+            () -> new Item(new Item.Properties()));
+
     //Chud
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x4c2f33, new Item.Properties()));

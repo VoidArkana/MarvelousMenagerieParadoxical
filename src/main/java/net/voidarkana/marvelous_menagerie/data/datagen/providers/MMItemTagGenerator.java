@@ -24,6 +24,35 @@ public class MMItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
 
+        this.tag(MMTags.Items.ANIMAL_FOSSILS).add(
+                MMItems.SACA_FOSSIL.get(),
+                MMItems.ARANDASPIS_FOSSIL.get(),
+                MMItems.TRILO_FOSSIL.get(),
+                MMItems.CARIS_FOSSIL.get(),
+                MMItems.PIKAIA_FOSSIL.get(),
+                MMItems.HALLU_FOSSIL.get(),
+                MMItems.FALCA_FOSSIL.get(),
+                MMItems.GORGON_FOSSIL.get(),
+                MMItems.LYSTRO_FOSSIL.get(),
+                MMItems.OPHTHALMO_FOSSIL.get(),
+                MMItems.THERI_FOSSIL.get(),
+                MMItems.TLATO_FOSSIL.get(),
+                MMItems.PELTA_FOSSIL.get(),
+                MMItems.DAEODON_FOSSIL.get(),
+                MMItems.DAWN_FOSSIL.get(),
+                MMItems.LEPTI_FOSSIL.get(),
+                MMItems.EOLACTORIA_FOSSIL.get(),
+                MMItems.KELENKEN_FOSSIL.get(),
+                MMItems.JOSEPHO_FOSSIL.get(),
+                MMItems.SLOV_FOSSIL.get(),
+                MMItems.DODO_FOSSIL.get(),
+                MMItems.THYLACINE_FOSSIL.get(),
+                MMItems.STELLER_FOSSIL.get(),
+                MMItems.ELEBIRD_FOSSIL.get(),
+                MMItems.DOEDICURUS_FOSSIL.get(),
+                MMItems.SNIFFER_FOSSIL.get()
+        );
+
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(
                 MMItems.SHALE_FOSSIL.get(),
                 MMItems.SILTSTONE_FOSSIL.get(),

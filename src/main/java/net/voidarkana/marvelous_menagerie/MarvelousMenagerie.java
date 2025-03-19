@@ -84,7 +84,7 @@ public class MarvelousMenagerie
         MMItems.register(modEventBus);
 
         MMMenuTypes.register(modEventBus);
-        MMCreativeTab.register(modEventBus);
+        MMCreativeTabs.register(modEventBus);
 
         ModTrunkPlacerTypes.register(modEventBus);
         ModFoliagePlacers.register(modEventBus);

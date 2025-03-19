@@ -418,7 +418,7 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                         Blocks.DEAD_TUBE_CORAL_FAN,
                         Blocks.DEAD_TUBE_CORAL_WALL_FAN)
 
-                //Unusual Prehistori
+                //Unusual Prehistory
                 .addOptional(new ResourceLocation("unusual_prehistory:dead_clathrodictyon_coral"))
                 .addOptional(new ResourceLocation("unusual_prehistory:dead_clathrodictyon_coral_block_fan"))
                 .addOptional(new ResourceLocation("unusual_prehistory:dead_clathrodictyon_coral_fan"))

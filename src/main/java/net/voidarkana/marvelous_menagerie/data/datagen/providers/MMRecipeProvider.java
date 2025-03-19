@@ -46,6 +46,45 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         makeButton(MMBlocks.SIGILLARIA_BUTTON, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
         makePressurePlate(MMBlocks.SIGILLARIA_PRESSURE_PLATE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
 
+        //Paleo Toolkit
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, MMItems.PALEO_TOOLKIT.get(), 1)
+                .requires(Items.IRON_PICKAXE)
+                .requires(Items.BRUSH)
+                .requires(Blocks.BARREL)
+                .unlockedBy(getHasName(MMBlocks.SHALE.get()), has(MMTags.Items.NATURAL_FOSSILS))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, MMItems.PALEONOMICON.get(), 1)
+                .requires(Items.BOOK)
+                .requires(MMTags.Items.ANIMAL_FOSSILS)
+                .unlockedBy(getHasName(MMItems.PALEO_TOOLKIT.get()), has(MMItems.PALEO_TOOLKIT.get()))
+                .save(consumer);
+
+        //Chronotite Pillar
+        makeIngotToBlock(MMBlocks.CHRONOTITE, MMItems.CHRONOTITE);
+        makeBlockToIngot(MMItems.CHRONOTITE, MMBlocks.CHRONOTITE);
+
+        //Chronotite Pedestal
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.CHRONO_PEDESTAL.get(), 2)
+                .pattern("P")
+                .pattern("C")
+                .define('P', Blocks.PURPLE_CARPET)
+                .define('C', MMBlocks.CHRONOTITE.get())
+                .unlockedBy(getHasName(MMBlocks.CHRONOTITE.get()), has(MMBlocks.CHRONOTITE.get()))
+                .save(consumer);
+
+        //Chronotite Altar
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.CHRONO_ALTAR.get(), 1)
+                .pattern(" F ")
+                .pattern("OCO")
+                .pattern("CCC")
+                .define('F', MMTags.Items.ANIMAL_FOSSILS)
+                .define('O', MMItems.OPAL.get())
+                .define('C', MMBlocks.CHRONOTITE.get())
+                .unlockedBy(getHasName(MMBlocks.CHRONO_PEDESTAL.get()), has(MMBlocks.CHRONO_PEDESTAL.get()))
+                .save(consumer);
+
+
         //Sigillaria mosaic
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.SIGILLARIA_MOSAIC.get(), 1)
                 .pattern("S")

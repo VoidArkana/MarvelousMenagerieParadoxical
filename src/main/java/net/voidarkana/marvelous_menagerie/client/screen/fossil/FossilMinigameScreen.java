@@ -16,8 +16,6 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
-import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
-import net.voidarkana.marvelous_menagerie.common.blockentity.custom.FossilBlockEntity;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 import net.voidarkana.marvelous_menagerie.util.network.ChangeFossilMessage;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;

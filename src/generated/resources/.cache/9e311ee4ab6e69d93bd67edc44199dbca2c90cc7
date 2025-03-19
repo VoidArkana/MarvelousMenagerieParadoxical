@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-15T21:20:02.196894	Item Models: marvelous_menagerie
+// 1.20.1	2025-03-18T16:15:25.8285108	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -96,6 +96,7 @@ ef5998277d3fc5c81967dd85d6d39d51f4b9469f assets/marvelous_menagerie/models/item/
 ad177e3e3d28f94feb706ca5e8f09090485fbc88 assets/marvelous_menagerie/models/item/mudstone_slab.json
 f44bcda387b246084ba9bdccf4e7e2ba8105002a assets/marvelous_menagerie/models/item/mudstone_stairs.json
 8c3920e05755ce885aef32c68bfb16bcbad0d69e assets/marvelous_menagerie/models/item/mudstone_wall.json
+1369d7278239d645157c4081fb993714796b97ab assets/marvelous_menagerie/models/item/opal.json
 d87b45649edabf05ead764fd580c774bb8a4429a assets/marvelous_menagerie/models/item/ophthalmo_armor.json
 91e386b1db74f4d1bec2380f787bb253fcd47d0e assets/marvelous_menagerie/models/item/ophthalmo_fossil.json
 99ca288e299162ed1f0d8815a57e050d0a255d6b assets/marvelous_menagerie/models/item/pelta_fossil.json
