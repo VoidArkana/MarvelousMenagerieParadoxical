@@ -10,6 +10,8 @@ public class CommonConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> HALLU_FLASH;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> NATURAL_SPAWNS;
+
     static {
         BUILDER.push("Configs for Marvelous Menagerie");
 
@@ -19,6 +21,10 @@ public class CommonConfig {
         HALLU_FLASH = BUILDER.comment("Defines if the Hallucinating effect uses a shader that causes flashing lights. " +
                         "If this setting is set to \"false\" the effect will use a gentler shader instead.")
                 .define("Flashy hallucinations?", true);
+
+
+        NATURAL_SPAWNS = BUILDER.comment("Defines if mobs should naturally spawn in the world.")
+                .define("Natural Dinos?", false);
 
         BUILDER.pop();
         SPEC= BUILDER.build();

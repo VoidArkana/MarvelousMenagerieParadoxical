@@ -259,10 +259,11 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         return pSpawnData;
     }
 
-    public static class SchoolSpawnGroupData implements SpawnGroupData {
+    public static class SchoolSpawnGroupData extends AgeableFishGroupData {
         public final Arandaspis leader;
 
         public SchoolSpawnGroupData(Arandaspis pLeader) {
+            super(true);
             this.leader = pLeader;
         }
     }

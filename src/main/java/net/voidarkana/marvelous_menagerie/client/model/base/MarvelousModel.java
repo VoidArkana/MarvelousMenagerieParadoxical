@@ -45,15 +45,32 @@ public abstract class MarvelousModel<E extends Entity> extends HierarchicalModel
     }
 
     protected void animateIdle(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed, float pScale) {
-
         float scale = Math.max(0, Math.min(1-Math.abs(pSpeed), 1f));
-
-        pAnimationState.updateTime(pAgeInTicks, scale);
-
+        pAnimationState.updateTime(pAgeInTicks, pSpeed);
         pAnimationState.ifStarted((p_233392_) -> {
-            KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), scale, ANIMATION_VECTOR_CACHE);
+            KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), pScale, MarvelousModel.ANIMATION_VECTOR_CACHE);
         });
+    }
 
+    protected void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks) {
+        this.animate(pAnimationState, pAnimationDefinition, pAgeInTicks, 1.0F);
+    }
+
+    protected void animateWalk(AnimationDefinition pAnimationDefinition, float pLimbSwing, float pLimbSwingAmount, float pMaxAnimationSpeed, float pAnimationScaleFactor) {
+        long i = (long)(pLimbSwing * 50.0F * pMaxAnimationSpeed);
+        float f = Math.min(pLimbSwingAmount * pAnimationScaleFactor, 1.0F);
+        KeyframeAnimations.animate(this, pAnimationDefinition, i, f, MarvelousModel.ANIMATION_VECTOR_CACHE);
+    }
+
+    protected void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed) {
+        pAnimationState.updateTime(pAgeInTicks, pSpeed);
+        pAnimationState.ifStarted((p_233392_) -> {
+            KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), 1.0F, MarvelousModel.ANIMATION_VECTOR_CACHE);
+        });
+    }
+
+    protected void applyStatic(AnimationDefinition pAnimationDefinition) {
+        KeyframeAnimations.animate(this, pAnimationDefinition, 0L, 1.0F, MarvelousModel.ANIMATION_VECTOR_CACHE);
     }
 
 }

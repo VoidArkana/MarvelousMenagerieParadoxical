@@ -84,6 +84,7 @@ public class MMCreativeTabs {
 
 
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());
+                        output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
@@ -91,61 +92,6 @@ public class MMCreativeTabs {
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
-
-                        output.accept(MMBlocks.CHARNIA.get());
-
-                        output.accept(MMBlocks.COOKSONIA.get());
-
-                        output.accept(MMBlocks.DICKINSONIA.get());
-
-                        output.accept(MMBlocks.WIWAXIA.get());
-
-                        output.accept(MMBlocks.PROTOTAXITES_PLANKS.get());
-
-                        output.accept(MMBlocks.PROTOTAXITES_BLOCK.get());
-
-                        output.accept(MMBlocks.PROTOTAXITES_STAIRS.get());
-                        output.accept(MMBlocks.PROTOTAXITES_SLAB.get());
-                        output.accept(MMBlocks.PROTOTAXITES_FENCE.get());
-                        output.accept(MMBlocks.PROTOTAXITES_FENCE_GATE.get());
-                        output.accept(MMBlocks.PROTOTAXITES_DOOR.get());
-                        output.accept(MMBlocks.PROTOTAXITES_TRAPDOOR.get());
-                        output.accept(MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get());
-                        output.accept(MMBlocks.PROTOTAXITES_BUTTON.get());
-
-                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC.get());
-                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get());
-                        output.accept(MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get());
-                        output.accept(MMItems.PROTOTAXITES_SIGN.get());
-                        output.accept(MMItems.PROTOTAXITES_HANGING_SIGN.get());
-
-                        output.accept(MMBlocks.PROTOTAXITES.get());
-
-
-
-                        output.accept(MMBlocks.SIGILLARIA_PLANKS.get());
-
-                        output.accept(MMBlocks.SIGILLARIA_STEM.get());
-                        output.accept(MMBlocks.STRIPPED_SIGILLARIA_STEM.get());
-                        output.accept(MMBlocks.SIGILLARIA_WOOD.get());
-                        output.accept(MMBlocks.STRIPPED_SIGILLARIA_WOOD.get());
-
-                        output.accept(MMBlocks.SIGILLARIA_STAIRS.get());
-                        output.accept(MMBlocks.SIGILLARIA_SLAB.get());
-                        output.accept(MMBlocks.SIGILLARIA_FENCE.get());
-                        output.accept(MMBlocks.SIGILLARIA_FENCE_GATE.get());
-                        output.accept(MMBlocks.SIGILLARIA_DOOR.get());
-                        output.accept(MMBlocks.SIGILLARIA_TRAPDOOR.get());
-                        output.accept(MMBlocks.SIGILLARIA_PRESSURE_PLATE.get());
-                        output.accept(MMBlocks.SIGILLARIA_BUTTON.get());
-
-                        output.accept(MMBlocks.SIGILLARIA_MOSAIC.get());
-                        output.accept(MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get());
-                        output.accept(MMBlocks.SIGILLARIA_MOSAIC_SLAB.get());
-                        output.accept(MMItems.SIGILLARIA_SIGN.get());
-                        output.accept(MMItems.SIGILLARIA_HANGING_SIGN.get());
-                        output.accept(MMBlocks.SIGILLARIA_LEAVES.get());
-                        output.accept(MMBlocks.SIGILLARIA_SAPLING.get());
                     })
                     .build());
 

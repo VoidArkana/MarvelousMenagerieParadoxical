@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-18T16:15:25.8285108	Item Models: marvelous_menagerie
+// 1.20.1	2025-03-19T13:30:21.0379649	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -154,6 +154,7 @@ a7db1bd22bdcc9b058cc30b9b74406dd3401c2a0 assets/marvelous_menagerie/models/item/
 b9f40c40bbbf45867657237261e4130b676c293b assets/marvelous_menagerie/models/item/prototaxites_trapdoor.json
 7258a878299ed35814f2aa4e46d3e4c6de375488 assets/marvelous_menagerie/models/item/raw_saca.json
 cb35fc8d85b1dbd52d679daa3b3bdda8713e986f assets/marvelous_menagerie/models/item/roach_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/roach_spawn_egg.json
 394aefd12d907eaca0fbbc5fa3513f62fe926420 assets/marvelous_menagerie/models/item/saca_bucket.json
 2f1a417cef385c77f9b854767d7765dcf1f6cb92 assets/marvelous_menagerie/models/item/saca_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/saca_spawn_egg.json

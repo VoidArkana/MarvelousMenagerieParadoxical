@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -54,6 +55,7 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy(getHasName(MMBlocks.SHALE.get()), has(MMTags.Items.NATURAL_FOSSILS))
                 .save(consumer);
 
+        //Paleonomicon
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, MMItems.PALEONOMICON.get(), 1)
                 .requires(Items.BOOK)
                 .requires(MMTags.Items.ANIMAL_FOSSILS)
@@ -63,6 +65,17 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         //Chronotite Pillar
         makeIngotToBlock(MMBlocks.CHRONOTITE, MMItems.CHRONOTITE);
         makeBlockToIngot(MMItems.CHRONOTITE, MMBlocks.CHRONOTITE);
+
+        //Paleo Table
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.PALEO_TABLE.get(), 1)
+                .pattern("FB")
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ItemTags.PLANKS)
+                .define('F', MMTags.Items.NATURAL_FOSSILS)
+                .define('B', Items.BRUSH)
+                .unlockedBy(getHasName(MMItems.SHALE_FOSSIL.get()), has(MMTags.Items.NATURAL_FOSSILS))
+                .save(consumer);
 
         //Chronotite Pedestal
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.CHRONO_PEDESTAL.get(), 2)

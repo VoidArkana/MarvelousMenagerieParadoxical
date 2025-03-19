@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_falcatus_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:falcatus",
+    "weight": 5,
+    "minCount": 1,
+    "maxCount": 2,
+    "category": "water_creature"
+  }
+}

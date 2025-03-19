@@ -104,6 +104,8 @@ public class MMItems {
     //Apthoroblattina
     public static final RegistryObject<Item> ROACH_FOSSIL = ITEMS.register("roach_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ROACH_SPAWN_EGG = ITEMS.register("roach_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.ROACH, 0x201e24, 0x453638, new Item.Properties()));
 
     //Inostrancevia
     public static final RegistryObject<Item> GORGON_FOSSIL = ITEMS.register("gorgon_fossil",

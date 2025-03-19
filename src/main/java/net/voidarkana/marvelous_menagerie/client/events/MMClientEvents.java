@@ -100,7 +100,6 @@ public class MMClientEvents {
             return;
 
         ItemStack helmet = AnomalousGogglesItem.getWornItem(player);
-        //System.out.println(helmet);
         if (!helmet.isEmpty() && helmet.getItem() instanceof AnomalousGogglesItem){
             if ((fluid == Fluids.LAVA || fluid == Fluids.FLOWING_LAVA) && helmet.getEnchantmentLevel(MMEnchantmentsClass.INFERNAL_VISION.get())>0){
                 event.scaleFarPlaneDistance(10f);
@@ -114,13 +113,4 @@ public class MMClientEvents {
         }
     }
 
-//    public static ItemStack getWornItem(Entity entity){
-//        if (!(entity instanceof Player livingEntity)){
-//            return ItemStack.EMPTY;
-//        }
-//
-//        ItemStack item = livingEntity.getItemBySlot(EquipmentSlot.HEAD);
-//
-//        return item;
-//    }
 }

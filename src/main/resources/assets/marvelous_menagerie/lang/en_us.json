@@ -596,5 +596,7 @@
 
   "creativetab.marvelous_menagerie_tab_mobs": "Marvelous Menagerie - Mobs",
   "creativetab.marvelous_menagerie_tab_plants": "Marvelous Menagerie - Plants",
-  "creativetab.marvelous_menagerie_tab_misc": "Marvelous Menagerie - Miscelaneous"
+  "creativetab.marvelous_menagerie_tab_misc": "Marvelous Menagerie - Miscelaneous",
+
+  "entity.marvelous_menagerie.rift": "Temporal Rift"
 }

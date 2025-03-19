@@ -37,6 +37,10 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
 
         tag(MMTags.Biomes.PIKAIA_BIOMES).add(Biomes.WARM_OCEAN);
 
+        tag(MMTags.Biomes.EOLACTORIA_BIOMES).add(Biomes.LUKEWARM_OCEAN);
+        tag(MMTags.Biomes.SLOVENICUS_BIOMES).add(Biomes.WARM_OCEAN);
+        tag(MMTags.Biomes.FALCATUS_BIOMES).add(Biomes.SWAMP, Biomes.MANGROVE_SWAMP);
+
         tag(MMTags.Biomes.ARANDASPIS_BIOMES).addTags(BiomeTags.IS_OCEAN);
         tag(MMTags.Biomes.HALLU_BIOMES).add(Biomes.WARM_OCEAN);
 

@@ -37,6 +37,10 @@ public class MMTags {
 
         public static final TagKey<Biome> PIKAIA_BIOMES = create("is_pikaia_biome");
 
+        public static final TagKey<Biome> EOLACTORIA_BIOMES = create("is_eolactoria_biome");
+        public static final TagKey<Biome> SLOVENICUS_BIOMES = create("is_slovenicus_biome");
+        public static final TagKey<Biome> FALCATUS_BIOMES = create("is_falcatus_biome");
+
         public static final TagKey<Biome> ARANDASPIS_BIOMES = create("is_arandaspis_biome");
         public static final TagKey<Biome> HALLU_BIOMES = create("is_hallu_biome");
 
