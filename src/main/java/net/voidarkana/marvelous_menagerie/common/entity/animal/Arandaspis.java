@@ -17,6 +17,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,6 +26,9 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.BoidGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.LimitSpeedAndLookInVelocityDirectionGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.StayInWaterGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
@@ -54,8 +58,13 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.5D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-        this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
-        this.goalSelector.addGoal(5, new FollowFlockLeaderGoal(this));
+        this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1.0D, 10));
+//        this.goalSelector.addGoal(5, new FollowFlockLeaderGoal(this));
+
+        this.targetSelector.addGoal(0, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.goalSelector.addGoal(5, new BoidGoal(this, 0.01f, 0.9f, 8 / 20f, 1 / 20f));
+        this.goalSelector.addGoal(3, new StayInWaterGoal(this));
+        this.goalSelector.addGoal(2, new LimitSpeedAndLookInVelocityDirectionGoal(this, 0.3f, 0.4f));
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
@@ -75,6 +84,9 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         super.readAdditionalSaveData(pCompound);
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
     }
+
+    @Override
+    protected void waterSwimSound() {}
 
     public boolean fromBucket() {
         return this.entityData.get(FROM_BUCKET);
