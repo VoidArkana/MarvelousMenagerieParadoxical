@@ -19,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
@@ -26,6 +27,7 @@ import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -37,7 +39,6 @@ public class Fracture extends LivingEntity {
     };
 
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(PLAYER);
-
 
     private static final EntityDataAccessor<Boolean> IS_NATURAL = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> OPENING_TIME = SynchedEntityData.defineId(Fracture.class, EntityDataSerializers.INT);
@@ -269,6 +270,8 @@ public class Fracture extends LivingEntity {
 
         if (this.getSummoningTime()>0){
             int prevSummoningTime = this.getSummoningTime();
+
+
             if (getSummoningTime()==40 && !this.level().isClientSide){
 
                 this.spawnCreature();
@@ -405,6 +408,7 @@ public class Fracture extends LivingEntity {
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
 
+
     public void closeFracture(){
         this.setClosingTime(20);
     }
@@ -433,4 +437,5 @@ public class Fracture extends LivingEntity {
     public boolean canDrownInFluidType(FluidType type) {
         return false;
     }
+
 }

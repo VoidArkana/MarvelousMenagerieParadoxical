@@ -1,6 +1,8 @@
 package net.voidarkana.marvelous_menagerie.common.blockentity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -10,10 +12,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -60,10 +65,12 @@ public class AltarBlockEntity extends BlockEntityBase {
     @Override
     public InteractionResult onActivated(BlockState state, BlockPos pos, Player player, InteractionHand hand) {
         if (this.canBeActivated(this.level, pos)){
+
             if (!(this.level instanceof ServerLevel)) {
                 return InteractionResult.SUCCESS;
             } else {
                 if (this.hasFracture && getFracture(pos)!=null){
+
                     Fracture fracture = getFracture(pos);
                     if (!fracture.isValid()){
                         return InteractionResult.FAIL;
@@ -95,17 +102,12 @@ public class AltarBlockEntity extends BlockEntityBase {
                                 }
                             }
 
-//                        System.out.println(data.output());
-//                        System.out.println(data.input1());
-//                        System.out.println(data.input2());
-//                        System.out.println(data.input3());
-//                        System.out.println(data.input4());
-//                        System.out.println(itemCount);
-
                             if (itemCount == 4){
                                 entitytype = data.output();
                             }
                         }
+
+                        this.clearPedestals(this.level, pos);
 
                         this.getFracture(pos).summonCreature(entitytype);
                     }
@@ -162,7 +164,70 @@ public class AltarBlockEntity extends BlockEntityBase {
         return false;
     }
 
-    int formationSize(Level pLevel, BlockPos pPos){
+    public void clearPedestals(Level level, BlockPos pos){
+        int formationSize = this.formationSize(level, pos);
+        int height = formationSize > 3 ? 1 : 0;
+        int radius = formationSize > 3 ? formationSize-3 : formationSize;
+
+        if (radius>0){
+
+            BlockPos pos1 = pos.offset(radius, height, radius);
+            BlockPos pos2 = pos.offset(-radius, height, radius);
+            BlockPos pos3 = pos.offset(radius, height, -radius);
+            BlockPos pos4 = pos.offset(-radius, height, -radius);
+
+
+            BlockEntity be1 = level.getBlockEntity(pos1);
+            BlockEntity be2 = level.getBlockEntity(pos2);
+            BlockEntity be3 = level.getBlockEntity(pos3);
+            BlockEntity be4 = level.getBlockEntity(pos4);
+
+            if (be1 instanceof PedestalBlockEntity pedestal1 && be2 instanceof PedestalBlockEntity pedestal2
+                    && be3 instanceof PedestalBlockEntity pedestal3 && be4 instanceof PedestalBlockEntity pedestal4) {
+
+
+                ((ServerLevel)level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, pedestal1.stack),
+                        (double)pos1.getX() + 0.5D,
+                        (double)pos1.getY() + 1,
+                        (double)pos1.getZ() + 0.5D, 8,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D, (double)0.075F);
+
+                ((ServerLevel)level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, pedestal2.stack),
+                        (double)pos2.getX() + 0.5D,
+                        (double)pos2.getY() + 1,
+                        (double)pos2.getZ() + 0.5D, 8,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D, (double)0.075F);
+
+                ((ServerLevel)level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, pedestal3.stack),
+                        (double)pos3.getX() + 0.5D,
+                        (double)pos3.getY() + 1,
+                        (double)pos3.getZ() + 0.5D, 8,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D, (double)0.075F);
+
+                ((ServerLevel)level).sendParticles(new ItemParticleOption(ParticleTypes.ITEM, pedestal4.stack),
+                        (double)pos4.getX() + 0.5D,
+                        (double)pos4.getY() + 1,
+                        (double)pos4.getZ() + 0.5D, 8,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D,
+                        ((double)level.random.nextFloat() - 0.5D) * 0.08D, (double)0.075F);
+
+
+                pedestal1.take();
+                pedestal2.take();
+                pedestal3.take();
+                pedestal4.take();
+            }
+        }
+    }
+
+    public int formationSize(Level pLevel, BlockPos pPos){
 
         int size = 1;
 
@@ -212,7 +277,54 @@ public class AltarBlockEntity extends BlockEntityBase {
         return 0;
     }
 
-    public static void skullAnimationTick(Level pLevel, BlockPos pPos, BlockState pState, AltarBlockEntity pBlockEntity) {
+    public static void altarTick(Level pLevel, BlockPos pPos, BlockState pState, AltarBlockEntity pBlockEntity) {
+
+        if (pLevel.getBlockEntity(pPos) instanceof AltarBlockEntity altar){
+
+            int formationSize = altar.formationSize(pLevel, pPos);
+            int height = formationSize > 3 ? 1 : 0;
+            int radius = formationSize > 3 ? formationSize-3 : formationSize;
+
+            Fracture fracture = altar.getFracture(pPos);
+
+            if (fracture != null){
+                if (fracture.getSummoningTime() > 60 && fracture.getSummoningTime() <= 80){
+
+                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                            (double)pPos.getX() + 0.5D,
+                            (double)pPos.getY() + 4.5D,
+                            (double)pPos.getZ() + 0.5D,
+                            (float) radius,
+                            ((float)height-3.5),
+                            (float)radius);
+
+                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                            (double)pPos.getX() + 0.5D,
+                            (double)pPos.getY() + 4.5D,
+                            (double)pPos.getZ() + 0.5D,
+                            (float) -radius,
+                            ((float)height-3.5),
+                            (float)radius);
+
+                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                            (double)pPos.getX() + 0.5D,
+                            (double)pPos.getY() + 4.5D,
+                            (double)pPos.getZ() + 0.5D,
+                            (float) radius,
+                            ((float)height-3.5),
+                            (float)-radius);
+
+                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                            (double)pPos.getX() + 0.5D,
+                            (double)pPos.getY() + 4.5D,
+                            (double)pPos.getZ() + 0.5D,
+                            (float) -radius,
+                            ((float)height-3.5),
+                            (float)-radius);
+                }
+            }
+        }
+
         pBlockEntity.oRot = pBlockEntity.rot;
         Player player = pLevel.getNearestPlayer((double)pPos.getX() + 0.5D, (double)pPos.getY() + 0.5D, (double)pPos.getZ() + 0.5D, 3.0D, false);
         if (player != null) {

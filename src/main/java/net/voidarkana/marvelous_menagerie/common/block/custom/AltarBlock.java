@@ -2,6 +2,8 @@ package net.voidarkana.marvelous_menagerie.common.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -23,9 +25,11 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.AltarBlockEntity;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.BlockEntityBase;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +55,7 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
 
     @javax.annotation.Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, MMBlockEntities.ALTAR_ENTITY.get(), AltarBlockEntity::skullAnimationTick) : null;
+        return pLevel.isClientSide ? createTickerHelper(pBlockEntityType, MMBlockEntities.ALTAR_ENTITY.get(), AltarBlockEntity::altarTick) : null;
     }
 
     @Override
@@ -122,4 +126,54 @@ public class AltarBlock extends BaseEntityBlock implements SimpleWaterloggedBloc
         }
     }
 
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        super.animateTick(pState, pLevel, pPos, pRandom);
+
+//        if (pLevel.getBlockEntity(pPos) instanceof AltarBlockEntity altar){
+//
+//            int formationSize = altar.formationSize(pLevel, pPos);
+//            int height = formationSize > 3 ? 1 : 0;
+//            int radius = formationSize > 3 ? formationSize-3 : formationSize;
+//
+//            Fracture fracture = altar.getFracture(pPos);
+//
+//            if (fracture != null){
+//                if (fracture.getSummoningTime() > 50 && fracture.getSummoningTime() <= 80){
+//
+//                    pLevel.addParticle(ParticleTypes.ENCHANT,
+//                                (double)pPos.getX() + 0.5D,
+//                                (double)pPos.getY() + 2.0D,
+//                                (double)pPos.getZ() + 0.5D,
+//                                (float) radius,
+//                                ((float)height - 1.0F),
+//                                (float)radius);
+//
+//                    pLevel.addParticle(ParticleTypes.ENCHANT,
+//                            (double)pPos.getX() + 0.5D,
+//                            (double)pPos.getY() + 2.0D,
+//                            (double)pPos.getZ() + 0.5D,
+//                            (float) -radius,
+//                            ((float)height - 1.0F),
+//                            (float)radius);
+//
+//                    pLevel.addParticle(ParticleTypes.ENCHANT,
+//                            (double)pPos.getX() + 0.5D,
+//                            (double)pPos.getY() + 2.0D,
+//                            (double)pPos.getZ() + 0.5D,
+//                            (float) radius,
+//                            ((float)height - 1.0F),
+//                            (float)-radius);
+//
+//                    pLevel.addParticle(ParticleTypes.ENCHANT,
+//                            (double)pPos.getX() + 0.5D,
+//                            (double)pPos.getY() + 2.0D,
+//                            (double)pPos.getZ() + 0.5D,
+//                            (float) -radius,
+//                            ((float)height - 1.0F),
+//                            (float)-radius);
+//                }
+//            }
+//        }
+    }
 }

@@ -16,7 +16,7 @@ public class RoachRenderer extends MobRenderer<Apthoroblattina, RoachModel<Aptho
     private static final ResourceLocation BABY = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/apthoroblattina/apthoroblattina_baby.png");
 
     public RoachRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new RoachModel<>(pContext.bakeLayer(MMModelLayers.ROACH_LAYER)), 0.5f);
+        super(pContext, new RoachModel<>(pContext.bakeLayer(MMModelLayers.ROACH_LAYER)), 0.75f);
     }
 
     @Override

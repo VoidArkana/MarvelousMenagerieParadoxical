@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -49,13 +48,78 @@ public class Apthoroblattina extends Animal {
     }
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.HONEYCOMB), false));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(0, new FloatGoal(this) {
+            @Override
+            public void start() {
+                if (Apthoroblattina.this.isJohn()){
+                    Apthoroblattina.this.isJohn = false;
+                }
+                super.start();
+            }
+        });
+        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F) {
+            @Override
+            public void start() {
+                if (Apthoroblattina.this.isJohn()){
+                    Apthoroblattina.this.isJohn = false;
+                }
+                super.start();
+            }
+        });
+        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Apthoroblattina.this.isJohn();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+            }
+        });
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.HONEYCOMB), false)
+        {
+            @Override
+            public void start() {
+                if (Apthoroblattina.this.isJohn()){
+                    Apthoroblattina.this.isJohn = false;
+                }
+                super.start();
+            }
+        });
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Apthoroblattina.this.isJohn();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+            }
+        });
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Apthoroblattina.this.isJohn();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+            }
+        });
+        this.goalSelector.addGoal(6, new RandomLookAroundGoal(this){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Apthoroblattina.this.isJohn();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+            }
+        });
     }
 
     @Override
@@ -75,39 +139,41 @@ public class Apthoroblattina extends Animal {
 
     private void setupAnimationStates() {
 
-        this.idleAnimationState.animateWhen(this.isAlive() && ((this.onGround() && !this.isBaby()) || this.isBaby()),
-                this.tickCount);
+        if (!this.isJohn()){
+            this.idleAnimationState.animateWhen(this.isAlive() && ((this.onGround() && !this.isBaby()) || this.isBaby()),
+                    this.tickCount);
 
-        if (!this.walkAnimation.isMoving()){
-            if (this.idleRotTimeout <= 0) {
+            if (!this.walkAnimation.isMoving()){
+                if (this.idleRotTimeout <= 0) {
 
-                this.idleRotTimeout = this.random.nextInt(30) + 130;
-                int rot = this.getRandom().nextInt(3);
+                    this.idleRotTimeout = this.random.nextInt(30) + 130;
+                    int rot = this.getRandom().nextInt(3);
 
-                if (rot == 0)
-                    this.idleRotRightState.start(this.tickCount);
-                else if (rot == 1)
-                    this.idleRotLeftState.start(this.tickCount);
-                else
-                    this.idleRotBothState.start(this.tickCount);
+                    if (rot == 0)
+                        this.idleRotRightState.start(this.tickCount);
+                    else if (rot == 1)
+                        this.idleRotLeftState.start(this.tickCount);
+                    else
+                        this.idleRotBothState.start(this.tickCount);
+
+                } else {
+                    --this.idleRotTimeout;
+                }
+            }
+
+            if (this.idleVibrateTimeout <= 0) {
+                this.idleVibrateTimeout = this.random.nextInt(40) + 80;
+
+                this.idleVibrateState.start(this.tickCount);
 
             } else {
-                --this.idleRotTimeout;
+                --this.idleVibrateTimeout;
             }
+
+            this.fallFlyState.animateWhen(!this.onGround() && !this.isBaby(), this.tickCount);
+        }else {
+            this.johnAnimationState.animateWhen(this.isAlive(), this.tickCount);
         }
-
-        if (this.idleVibrateTimeout <= 0) {
-            this.idleVibrateTimeout = this.random.nextInt(40) + 80;
-
-            this.idleVibrateState.start(this.tickCount);
-
-        } else {
-            --this.idleVibrateTimeout;
-        }
-
-        this.johnAnimationState.animateWhen(this.isJohn(), this.tickCount);
-
-        this.fallFlyState.animateWhen(!this.onGround() && !this.isBaby(), this.tickCount);
 
     }
 
@@ -144,7 +210,7 @@ public class Apthoroblattina extends Animal {
     }
 
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
-        this.playSound(SoundEvents.SPIDER_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.SPIDER_STEP, 0.05F, this.getVoicePitch());
     }
 
     @Override
@@ -153,7 +219,7 @@ public class Apthoroblattina extends Animal {
     }
 
     public void aiStep() {
-        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 10D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
             this.isJohn = false;
             this.jukebox = null;
         }
@@ -172,6 +238,8 @@ public class Apthoroblattina extends Animal {
     public void setRecordPlayingNearby(BlockPos pPos, boolean pIsPartying) {
         this.jukebox = pPos;
         this.isJohn = pIsPartying;
+        this.getNavigation().stop();
+        this.goalSelector.getRunningGoals().forEach(Goal::stop);
     }
 
     public boolean isJohn() {

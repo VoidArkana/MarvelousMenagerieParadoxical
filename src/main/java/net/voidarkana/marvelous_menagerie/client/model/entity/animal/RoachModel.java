@@ -1,4 +1,5 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.3
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal;
+// Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -7,7 +8,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.ChudAnimations;
 import net.voidarkana.marvelous_menagerie.client.animations.RoachAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Apthoroblattina;
@@ -111,6 +111,9 @@ public class RoachModel<T extends Apthoroblattina> extends MarvelousModel<T> {
 		if (this.young){
 			applyStatic(RoachAnims.BABY);
 		}
+
+		this.head.xRot = headPitch * ((float)Math.PI / 180F);
+		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override
@@ -118,13 +121,17 @@ public class RoachModel<T extends Apthoroblattina> extends MarvelousModel<T> {
 		poseStack.pushPose();
 
 
-		if (!this.young){
+		if (this.young){
+			poseStack.scale(0.75F, 0.75F, 0.75F);
+			poseStack.translate(0, 0.5F, 0);
+		}else{
 			poseStack.scale(1.5F, 1.5F, 1.5F);
 			poseStack.translate(0, -0.5F, 0);
 		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();	}
+		poseStack.popPose();
+	}
 
 	@Override
 	public ModelPart root() {
