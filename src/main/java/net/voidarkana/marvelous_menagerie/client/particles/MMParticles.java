@@ -17,6 +17,8 @@ public class MMParticles {
 
     public static final RegistryObject<SimpleParticleType> RIFT = register("rift", false);
 
+    public static final RegistryObject<SimpleParticleType> ITEM_MORPH = register("item_morph", false);
+
     private static RegistryObject<SimpleParticleType> register(String id, boolean flag) {
         return PARTICLES.register(id, () -> new SimpleParticleType(flag));
     }

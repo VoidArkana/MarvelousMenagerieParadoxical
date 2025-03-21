@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -288,9 +289,9 @@ public class AltarBlockEntity extends BlockEntityBase {
             Fracture fracture = altar.getFracture(pPos);
 
             if (fracture != null){
-                if (fracture.getSummoningTime() > 60 && fracture.getSummoningTime() <= 80){
+                if (fracture.getSummoningTime() > 70 && fracture.getSummoningTime() <= 80 && pLevel.getRandom().nextInt(4)>0){
 
-                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                    pLevel.addParticle(MMParticles.ITEM_MORPH.get(),
                             (double)pPos.getX() + 0.5D,
                             (double)pPos.getY() + 4.5D,
                             (double)pPos.getZ() + 0.5D,
@@ -298,7 +299,7 @@ public class AltarBlockEntity extends BlockEntityBase {
                             ((float)height-3.5),
                             (float)radius);
 
-                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                    pLevel.addParticle(MMParticles.ITEM_MORPH.get(),
                             (double)pPos.getX() + 0.5D,
                             (double)pPos.getY() + 4.5D,
                             (double)pPos.getZ() + 0.5D,
@@ -306,7 +307,7 @@ public class AltarBlockEntity extends BlockEntityBase {
                             ((float)height-3.5),
                             (float)radius);
 
-                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                    pLevel.addParticle(MMParticles.ITEM_MORPH.get(),
                             (double)pPos.getX() + 0.5D,
                             (double)pPos.getY() + 4.5D,
                             (double)pPos.getZ() + 0.5D,
@@ -314,7 +315,7 @@ public class AltarBlockEntity extends BlockEntityBase {
                             ((float)height-3.5),
                             (float)-radius);
 
-                    pLevel.addParticle(ParticleTypes.ENCHANT,
+                    pLevel.addParticle(MMParticles.ITEM_MORPH.get(),
                             (double)pPos.getX() + 0.5D,
                             (double)pPos.getY() + 4.5D,
                             (double)pPos.getZ() + 0.5D,

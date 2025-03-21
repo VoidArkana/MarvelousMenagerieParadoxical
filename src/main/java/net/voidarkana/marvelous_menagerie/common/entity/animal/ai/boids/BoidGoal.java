@@ -36,7 +36,7 @@ public class BoidGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return true;
+        return this.mob.isInWater();
     }
 
     public void tick() {

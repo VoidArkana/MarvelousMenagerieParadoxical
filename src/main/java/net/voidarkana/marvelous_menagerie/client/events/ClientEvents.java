@@ -22,6 +22,7 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
+import net.voidarkana.marvelous_menagerie.client.particles.custom.ItemMorphParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.RiftParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParticle;
 import org.jetbrains.annotations.Nullable;
@@ -58,6 +59,7 @@ public class ClientEvents {
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(MMParticles.TIME_SHARD.get(), TimeShardParticle.Provider::new);
         event.registerSpriteSet(MMParticles.RIFT.get(), RiftParticle.Provider::new);
+        event.registerSpriteSet(MMParticles.ITEM_MORPH.get(), ItemMorphParticle.Provider::new);
     }
 
     public static ShaderInstance GLOWING_SHADER, SEPIA_SHADER;
