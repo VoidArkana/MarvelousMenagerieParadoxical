@@ -1,6 +1,10 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,7 +28,11 @@ import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
+
 public class Apthoroblattina extends Animal {
+
+    protected static final EntityDataAccessor<Boolean> IS_JOHN = SynchedEntityData.defineId(Apthoroblattina.class, EntityDataSerializers.BOOLEAN);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleRotRightState = new AnimationState();
@@ -37,89 +45,84 @@ public class Apthoroblattina extends Animal {
     private int idleRotTimeout = 0;
     private int idleVibrateTimeout = 0;
 
-    private boolean isJohn;
     @javax.annotation.Nullable
     private BlockPos jukebox;
 
     public Apthoroblattina(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new RoachMoveControl();
-        this.lookControl = new RoachLookControl();
+        this.lookControl = new Apthoroblattina.RoachLookControl(this);
+        this.moveControl = new Apthoroblattina.RoachMoveControl(this);
     }
+
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this) {
-            @Override
-            public void start() {
-                if (Apthoroblattina.this.isJohn()){
-                    Apthoroblattina.this.isJohn = false;
-                }
-                super.start();
-            }
-        });
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F) {
-            @Override
-            public void start() {
-                if (Apthoroblattina.this.isJohn()){
-                    Apthoroblattina.this.isJohn = false;
-                }
-                super.start();
-            }
-        });
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D){
-            @Override
-            public boolean canUse() {
-                return super.canUse() && !Apthoroblattina.this.isJohn();
-            }
-
-            @Override
-            public boolean canContinueToUse() {
-                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
-            }
-        });
+        this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
+        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new DanceParty(this));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.HONEYCOMB), false)
         {
             @Override
             public void start() {
                 if (Apthoroblattina.this.isJohn()){
-                    Apthoroblattina.this.isJohn = false;
+                    Apthoroblattina.this.setIsJohn(false);
                 }
                 super.start();
             }
         });
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D){
-            @Override
-            public boolean canUse() {
-                return super.canUse() && !Apthoroblattina.this.isJohn();
-            }
-
-            @Override
-            public boolean canContinueToUse() {
-                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
-            }
-        });
+        this.goalSelector.addGoal(4, new RoachWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F){
             @Override
             public boolean canUse() {
-                return super.canUse() && !Apthoroblattina.this.isJohn();
+                if (Apthoroblattina.this.isJohn()){
+                    return false;
+                }
+                return super.canUse();
             }
 
             @Override
             public boolean canContinueToUse() {
-                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+                if (Apthoroblattina.this.isJohn()){
+                    return false;
+                }
+                return super.canContinueToUse();
             }
         });
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this){
             @Override
             public boolean canUse() {
-                return super.canUse() && !Apthoroblattina.this.isJohn();
+                if (Apthoroblattina.this.isJohn()){
+                    return false;
+                }
+                return super.canUse();
             }
 
             @Override
             public boolean canContinueToUse() {
-                return super.canContinueToUse() && !Apthoroblattina.this.isJohn();
+                if (Apthoroblattina.this.isJohn()){
+                    return false;
+                }
+                return super.canContinueToUse();
             }
         });
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_JOHN, false);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setIsJohn(pCompound.getBoolean("IsJohn"));
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("IsJohn", this.isJohn());
     }
 
     @Override
@@ -135,6 +138,19 @@ public class Apthoroblattina extends Animal {
     @Override
     public AgeableMob getBreedOffspring(ServerLevel p_146743_, AgeableMob p_146744_) {
         return MMEntities.ROACH.get().create(p_146743_);
+    }
+
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isJohn()) {
+            if (this.getNavigation().getPath() != null) {
+                this.getNavigation().stop();
+            }
+            pTravelVector = Vec3.ZERO;
+            super.travel(pTravelVector);
+        } else {
+            super.travel(pTravelVector);
+        }
     }
 
     private void setupAnimationStates() {
@@ -171,9 +187,10 @@ public class Apthoroblattina extends Animal {
             }
 
             this.fallFlyState.animateWhen(!this.onGround() && !this.isBaby(), this.tickCount);
-        }else {
-            this.johnAnimationState.animateWhen(this.isAlive(), this.tickCount);
         }
+
+        this.johnAnimationState.animateWhen(this.isAlive() && this.isJohn(), this.tickCount);
+
 
     }
 
@@ -190,8 +207,26 @@ public class Apthoroblattina extends Animal {
     }
 
     @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (this.isJohn()){
+            this.setIsJohn(false);
+        }
+        return super.hurt(pSource, pAmount);
+    }
+
+    @Override
     public void tick() {
         super.tick();
+
+        if ((this.isInWater() || this.isInLove()) && this.isJohn()){
+            this.setIsJohn(false);
+        }
+
+        if (this.isJohn()){
+            this.getNavigation().stop();
+            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
+        }
+
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }
@@ -219,8 +254,8 @@ public class Apthoroblattina extends Animal {
     }
 
     public void aiStep() {
-        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 10D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
-            this.isJohn = false;
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
+            this.setIsJohn(false);
             this.jukebox = null;
         }
         super.aiStep();
@@ -237,36 +272,40 @@ public class Apthoroblattina extends Animal {
 
     public void setRecordPlayingNearby(BlockPos pPos, boolean pIsPartying) {
         this.jukebox = pPos;
-        this.isJohn = pIsPartying;
-        this.getNavigation().stop();
-        this.goalSelector.getRunningGoals().forEach(Goal::stop);
+        this.setIsJohn(pIsPartying);
     }
 
     public boolean isJohn() {
-        return this.isJohn;
+        return this.entityData.get(IS_JOHN);
+    }
+
+    public void setIsJohn(boolean isJohn) {
+        this.entityData.set(IS_JOHN, isJohn);
     }
 
 
     class RoachMoveControl extends MoveControl {
-        public RoachMoveControl() {
-            super(Apthoroblattina.this);
+        Apthoroblattina mob;
+        public RoachMoveControl(Apthoroblattina pMob) {
+            super(pMob);
+            this.mob = pMob;
         }
 
         public void tick() {
-            if (Apthoroblattina.this.canMove()) {
-                super.tick();
-            }
-
+            if (!mob.isJohn()) super.tick();
         }
     }
 
     public class RoachLookControl extends LookControl {
-        public RoachLookControl() {
-            super(Apthoroblattina.this);
+        Apthoroblattina mob;
+
+        public RoachLookControl(Apthoroblattina pMob) {
+            super(pMob);
+            this.mob = pMob;
         }
 
         public void tick() {
-            if (!Apthoroblattina.this.isJohn()) {
+            if (!mob.isJohn()) {
                 super.tick();
             }
         }
@@ -300,4 +339,64 @@ public class Apthoroblattina extends Animal {
     public MobType getMobType() {
         return MobType.ARTHROPOD;
     }
+
+    public class DanceParty extends Goal {
+        private final Apthoroblattina mob;
+
+        public DanceParty(Apthoroblattina pMob) {
+            this.mob = pMob;
+            this.setFlags(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
+        }
+
+        public boolean canContinueToUse() {
+            return this.canUse();
+        }
+
+        public boolean canUse() {
+            if (this.mob.isInWaterOrBubble()) {
+                return false;
+            } else if (!this.mob.onGround()) {
+                return false;
+            } else {
+                return this.mob.isJohn();
+            }
+        }
+
+        public void start() {
+            this.mob.getNavigation().stop();
+        }
+
+        @Override
+        public void stop() {
+            this.mob.setIsJohn(false);
+        }
+    }
+
+    public class RoachWanderGoal extends WaterAvoidingRandomStrollGoal {
+
+        private Apthoroblattina mob;
+
+        public RoachWanderGoal(Apthoroblattina pMob, double pSpeedModifier) {
+            super(pMob, pSpeedModifier);
+            this.mob = pMob;
+        }
+
+        @Override
+        public boolean canUse() {
+            if (mob.isJohn()){
+                return false;
+            }
+            return super.canUse();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            if (this.mob.isJohn()){
+                this.mob.getNavigation().stop();
+                return false;
+            }
+            return super.canContinueToUse();
+        }
+    }
+
 }

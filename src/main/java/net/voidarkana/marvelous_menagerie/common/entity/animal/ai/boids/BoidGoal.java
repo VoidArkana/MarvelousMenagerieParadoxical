@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class BoidGoal extends Goal {
@@ -19,12 +20,12 @@ public class BoidGoal extends Goal {
     public final float separationRange;
     public final float alignmentInfluence;
     public final float cohesionInfluence;
-    private final Mob mob;
+    private final Arandaspis mob;
     private int timeToFindNearbyEntities;
-    List<? extends Mob> nearbyMobs;
+    List<? extends Arandaspis> nearbyMobs;
     private boolean enabled = true;
 
-    public BoidGoal(Mob mob, float separationInfluence, float separationRange, float alignmentInfluence, float cohesionInfluence) {
+    public BoidGoal(Arandaspis mob, float separationInfluence, float separationRange, float alignmentInfluence, float cohesionInfluence) {
         timeToFindNearbyEntities = 0;
 
         this.mob = mob;
@@ -36,7 +37,7 @@ public class BoidGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return this.mob.isInWater();
+        return this.mob.isInWater() && mob.isFollower(); //(mob.isFollower() || (mob.hasFollowers() && mob.canBeFollowed()));
     }
 
     public void tick() {
@@ -46,7 +47,7 @@ public class BoidGoal extends Goal {
 
         if (--this.timeToFindNearbyEntities <= 0) {
             this.timeToFindNearbyEntities = this.adjustedTickDelay(40);
-            nearbyMobs = getNearbyEntitiesOfSameClass(mob);
+            nearbyMobs = getNearbyEntitiesOfSameSchool(mob);
         } else {
             nearbyMobs.removeIf(LivingEntity::isDeadOrDying);
         }
@@ -56,17 +57,34 @@ public class BoidGoal extends Goal {
             enabled = false;
         }
 
-        //mob.addDeltaMovement(random());
-        mob.addDeltaMovement(cohesion());
-        mob.addDeltaMovement(alignment());
-        mob.addDeltaMovement(separation());
+        if (enabled){
+            //mob.addDeltaMovement(random());
+            mob.addDeltaMovement(cohesion());
+            mob.addDeltaMovement(alignment());
+            mob.addDeltaMovement(separation());
+        }
+
 
     }
 
-    public static List<? extends Mob> getNearbyEntitiesOfSameClass(Mob mob) {
-        Predicate<Mob> predicate = (_mob) -> true;
+    public static List<? extends Arandaspis> getNearbyEntitiesOfSameSchool(Arandaspis pMob) {
+        Predicate<Arandaspis> predicate =
+                (pArandaspis) -> {
+                    if (pArandaspis.isFollower() && pMob.isFollower()) {
+                        return pArandaspis.leader == pMob.leader;
+                    }else if (pArandaspis.isFollower() && pMob.canBeFollowed()){
+                        return pArandaspis.leader == pMob;
+                    }else if (pArandaspis.canBeFollowed() && pMob.isFollower()){
+                        return pMob.leader == pArandaspis;
+                    }
+                    return false;
+                };
+//                        (pArandaspis.isFollower() && ((pArandaspis.leader == mob.leader && pArandaspis.isFollower() && Objects.requireNonNull(pArandaspis.leader).canBeFollowed())
+//                                || (pArandaspis.leader == mob && mob.canBeFollowed()) ))
+//                || (mob.isFollower() && ((pArandaspis.leader == mob.leader && mob.isFollower() && Objects.requireNonNull(pArandaspis.leader).canBeFollowed())
+//                                || (mob.leader == pArandaspis && pArandaspis.canBeFollowed()) ));
 
-        return mob.level().getEntitiesOfClass(mob.getClass(), mob.getBoundingBox().inflate(4.0, 4.0, 4.0), predicate);
+        return pMob.level().getEntitiesOfClass(pMob.getClass(), pMob.getBoundingBox().inflate(4.0, 4.0, 4.0), predicate);
     }
 
     public Vec3 random() {
@@ -120,6 +138,7 @@ public class BoidGoal extends Goal {
         }
 
         c = c.scale(1f / nearbyMobs.size());
+
         c = c.subtract(mob.position());
         return c.scale(cohesionInfluence);
     }

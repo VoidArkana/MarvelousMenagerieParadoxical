@@ -263,6 +263,382 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .requires(Items.MILK_BUCKET)
                 .unlockedBy(getHasName(MMItems.HALLUCIGENIC_SLIME.get()), has(MMItems.HALLUCIGENIC_SLIME.get()))
                 .save(consumer);
+
+        //Shale
+        this.makeSlab(MMBlocks.SHALE, MMBlocks.SHALE_SLAB);
+        this.makeSlab(MMBlocks.SHALE_BRICKS, MMBlocks.SHALE_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_SHALE, MMBlocks.POLISHED_SHALE_SLAB);
+        this.makeSlab(MMBlocks.SHALE_MOSAIC, MMBlocks.SHALE_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.SHALE, MMBlocks.POLISHED_SHALE);
+        this.makeBricks(MMBlocks.POLISHED_SHALE, MMBlocks.SHALE_BRICKS);
+        this.makeBricks(MMBlocks.SHALE_BRICKS, MMBlocks.SHALE_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.SHALE_BRICKS_SLAB, MMBlocks.CHISELED_SHALE);
+
+        this.makeWall(MMBlocks.SHALE, MMBlocks.SHALE_WALL);
+        this.makeWall(MMBlocks.SHALE_BRICKS, MMBlocks.SHALE_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_SHALE, MMBlocks.POLISHED_SHALE_WALL);
+        this.makeWall(MMBlocks.SHALE_MOSAIC, MMBlocks.SHALE_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.SHALE, MMBlocks.SHALE_STAIRS);
+        this.makeStairs(MMBlocks.SHALE_BRICKS, MMBlocks.SHALE_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_SHALE, MMBlocks.POLISHED_SHALE_STAIRS);
+        this.makeStairs(MMBlocks.SHALE_MOSAIC, MMBlocks.SHALE_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_MOSAIC.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.POLISHED_SHALE.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.CHISELED_SHALE.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_BRICKS.get());
+
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.POLISHED_SHALE.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_WALL.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.POLISHED_SHALE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.POLISHED_SHALE_STAIRS.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_STAIRS.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.SHALE, MMBlocks.SHALE_MOSAIC_STAIRS.get());
+
+        //Siltstone
+        this.makeSlab(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_SLAB);
+        this.makeSlab(MMBlocks.SILTSTONE_BRICKS, MMBlocks.SILTSTONE_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_SILTSTONE, MMBlocks.POLISHED_SILTSTONE_SLAB);
+        this.makeSlab(MMBlocks.SILTSTONE_MOSAIC, MMBlocks.SILTSTONE_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.SILTSTONE, MMBlocks.POLISHED_SILTSTONE);
+        this.makeBricks(MMBlocks.POLISHED_SILTSTONE, MMBlocks.SILTSTONE_BRICKS);
+        this.makeBricks(MMBlocks.SILTSTONE_BRICKS, MMBlocks.SILTSTONE_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.SILTSTONE_BRICKS_SLAB, MMBlocks.CHISELED_SILTSTONE);
+
+        this.makeWall(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_WALL);
+        this.makeWall(MMBlocks.SILTSTONE_BRICKS, MMBlocks.SILTSTONE_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_SILTSTONE, MMBlocks.POLISHED_SILTSTONE_WALL);
+        this.makeWall(MMBlocks.SILTSTONE_MOSAIC, MMBlocks.SILTSTONE_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_STAIRS);
+        this.makeStairs(MMBlocks.SILTSTONE_BRICKS, MMBlocks.SILTSTONE_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_SILTSTONE, MMBlocks.POLISHED_SILTSTONE_STAIRS);
+        this.makeStairs(MMBlocks.SILTSTONE_MOSAIC, MMBlocks.SILTSTONE_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_MOSAIC.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.POLISHED_SILTSTONE.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.CHISELED_SILTSTONE.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_BRICKS.get());
+
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.POLISHED_SILTSTONE.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_WALL.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.POLISHED_SILTSTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.POLISHED_SILTSTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.SILTSTONE, MMBlocks.SILTSTONE_MOSAIC_STAIRS.get());
+
+
+        //Gabbro
+        this.makeSlab(MMBlocks.GABBRO, MMBlocks.GABBRO_SLAB);
+        this.makeSlab(MMBlocks.GABBRO_BRICKS, MMBlocks.GABBRO_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_GABBRO, MMBlocks.POLISHED_GABBRO_SLAB);
+        this.makeSlab(MMBlocks.GABBRO_MOSAIC, MMBlocks.GABBRO_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.GABBRO, MMBlocks.POLISHED_GABBRO);
+        this.makeBricks(MMBlocks.POLISHED_GABBRO, MMBlocks.GABBRO_BRICKS);
+        this.makeBricks(MMBlocks.GABBRO_BRICKS, MMBlocks.GABBRO_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.GABBRO_BRICKS_SLAB, MMBlocks.CHISELED_GABBRO);
+
+        this.makeWall(MMBlocks.GABBRO, MMBlocks.GABBRO_WALL);
+        this.makeWall(MMBlocks.GABBRO_BRICKS, MMBlocks.GABBRO_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_GABBRO, MMBlocks.POLISHED_GABBRO_WALL);
+        this.makeWall(MMBlocks.GABBRO_MOSAIC, MMBlocks.GABBRO_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.GABBRO, MMBlocks.GABBRO_STAIRS);
+        this.makeStairs(MMBlocks.GABBRO_BRICKS, MMBlocks.GABBRO_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_GABBRO, MMBlocks.POLISHED_GABBRO_STAIRS);
+        this.makeStairs(MMBlocks.GABBRO_MOSAIC, MMBlocks.GABBRO_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_MOSAIC.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.POLISHED_GABBRO.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.CHISELED_GABBRO.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_BRICKS.get());
+
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.POLISHED_GABBRO.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_WALL.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.POLISHED_GABBRO_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.POLISHED_GABBRO_STAIRS.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_STAIRS.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.GABBRO, MMBlocks.GABBRO_MOSAIC_STAIRS.get());
+
+
+        //Mudstone
+        this.makeSlab(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_SLAB);
+        this.makeSlab(MMBlocks.MUDSTONE_BRICKS, MMBlocks.MUDSTONE_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_MUDSTONE, MMBlocks.POLISHED_MUDSTONE_SLAB);
+        this.makeSlab(MMBlocks.MUDSTONE_MOSAIC, MMBlocks.MUDSTONE_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.MUDSTONE, MMBlocks.POLISHED_MUDSTONE);
+        this.makeBricks(MMBlocks.POLISHED_MUDSTONE, MMBlocks.MUDSTONE_BRICKS);
+        this.makeBricks(MMBlocks.MUDSTONE_BRICKS, MMBlocks.MUDSTONE_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.MUDSTONE_BRICKS_SLAB, MMBlocks.CHISELED_MUDSTONE);
+
+        this.makeWall(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_WALL);
+        this.makeWall(MMBlocks.MUDSTONE_BRICKS, MMBlocks.MUDSTONE_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_MUDSTONE, MMBlocks.POLISHED_MUDSTONE_WALL);
+        this.makeWall(MMBlocks.MUDSTONE_MOSAIC, MMBlocks.MUDSTONE_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_STAIRS);
+        this.makeStairs(MMBlocks.MUDSTONE_BRICKS, MMBlocks.MUDSTONE_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_MUDSTONE, MMBlocks.POLISHED_MUDSTONE_STAIRS);
+        this.makeStairs(MMBlocks.MUDSTONE_MOSAIC, MMBlocks.MUDSTONE_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_MOSAIC.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.POLISHED_MUDSTONE.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.CHISELED_MUDSTONE.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_BRICKS.get());
+
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.POLISHED_MUDSTONE.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_WALL.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.POLISHED_MUDSTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.POLISHED_MUDSTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.MUDSTONE, MMBlocks.MUDSTONE_MOSAIC_STAIRS.get());
+
+
+        //Limestone
+        this.makeSlab(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_SLAB);
+        this.makeSlab(MMBlocks.LIMESTONE_BRICKS, MMBlocks.LIMESTONE_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_LIMESTONE, MMBlocks.POLISHED_LIMESTONE_SLAB);
+        this.makeSlab(MMBlocks.LIMESTONE_MOSAIC, MMBlocks.LIMESTONE_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.LIMESTONE, MMBlocks.POLISHED_LIMESTONE);
+        this.makeBricks(MMBlocks.POLISHED_LIMESTONE, MMBlocks.LIMESTONE_BRICKS);
+        this.makeBricks(MMBlocks.LIMESTONE_BRICKS, MMBlocks.LIMESTONE_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.LIMESTONE_BRICKS_SLAB, MMBlocks.CHISELED_LIMESTONE);
+
+        this.makeWall(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_WALL);
+        this.makeWall(MMBlocks.LIMESTONE_BRICKS, MMBlocks.LIMESTONE_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_LIMESTONE, MMBlocks.POLISHED_LIMESTONE_WALL);
+        this.makeWall(MMBlocks.LIMESTONE_MOSAIC, MMBlocks.LIMESTONE_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_STAIRS);
+        this.makeStairs(MMBlocks.LIMESTONE_BRICKS, MMBlocks.LIMESTONE_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_LIMESTONE, MMBlocks.POLISHED_LIMESTONE_STAIRS);
+        this.makeStairs(MMBlocks.LIMESTONE_MOSAIC, MMBlocks.LIMESTONE_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_MOSAIC.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.POLISHED_LIMESTONE.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.CHISELED_LIMESTONE.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_BRICKS.get());
+
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.POLISHED_LIMESTONE.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_WALL.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.POLISHED_LIMESTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.POLISHED_LIMESTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_STAIRS.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.LIMESTONE, MMBlocks.LIMESTONE_MOSAIC_STAIRS.get());
+
+
+        //Chalk
+        this.makeSlab(MMBlocks.CHALK, MMBlocks.CHALK_SLAB);
+        this.makeSlab(MMBlocks.CHALK_BRICKS, MMBlocks.CHALK_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_CHALK, MMBlocks.POLISHED_CHALK_SLAB);
+        this.makeSlab(MMBlocks.CHALK_MOSAIC, MMBlocks.CHALK_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.CHALK, MMBlocks.POLISHED_CHALK);
+        this.makeBricks(MMBlocks.POLISHED_CHALK, MMBlocks.CHALK_BRICKS);
+        this.makeBricks(MMBlocks.CHALK_BRICKS, MMBlocks.CHALK_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.CHALK_BRICKS_SLAB, MMBlocks.CHISELED_CHALK);
+
+        this.makeWall(MMBlocks.CHALK, MMBlocks.CHALK_WALL);
+        this.makeWall(MMBlocks.CHALK_BRICKS, MMBlocks.CHALK_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_CHALK, MMBlocks.POLISHED_CHALK_WALL);
+        this.makeWall(MMBlocks.CHALK_MOSAIC, MMBlocks.CHALK_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.CHALK, MMBlocks.CHALK_STAIRS);
+        this.makeStairs(MMBlocks.CHALK_BRICKS, MMBlocks.CHALK_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_CHALK, MMBlocks.POLISHED_CHALK_STAIRS);
+        this.makeStairs(MMBlocks.CHALK_MOSAIC, MMBlocks.CHALK_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_MOSAIC.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.POLISHED_CHALK.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHISELED_CHALK.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_BRICKS.get());
+
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.POLISHED_CHALK.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_WALL.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.POLISHED_CHALK_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.POLISHED_CHALK_STAIRS.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_STAIRS.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.CHALK, MMBlocks.CHALK_MOSAIC_STAIRS.get());
+
+
+        //Breccia
+        this.makeSlab(MMBlocks.BRECCIA, MMBlocks.BRECCIA_SLAB);
+        this.makeSlab(MMBlocks.BRECCIA_BRICKS, MMBlocks.BRECCIA_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_BRECCIA, MMBlocks.POLISHED_BRECCIA_SLAB);
+        this.makeSlab(MMBlocks.BRECCIA_MOSAIC, MMBlocks.BRECCIA_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.BRECCIA, MMBlocks.POLISHED_BRECCIA);
+        this.makeBricks(MMBlocks.POLISHED_BRECCIA, MMBlocks.BRECCIA_BRICKS);
+        this.makeBricks(MMBlocks.BRECCIA_BRICKS, MMBlocks.BRECCIA_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.BRECCIA_BRICKS_SLAB, MMBlocks.CHISELED_BRECCIA);
+
+        this.makeWall(MMBlocks.BRECCIA, MMBlocks.BRECCIA_WALL);
+        this.makeWall(MMBlocks.BRECCIA_BRICKS, MMBlocks.BRECCIA_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_BRECCIA, MMBlocks.POLISHED_BRECCIA_WALL);
+        this.makeWall(MMBlocks.BRECCIA_MOSAIC, MMBlocks.BRECCIA_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.BRECCIA, MMBlocks.BRECCIA_STAIRS);
+        this.makeStairs(MMBlocks.BRECCIA_BRICKS, MMBlocks.BRECCIA_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_BRECCIA, MMBlocks.POLISHED_BRECCIA_STAIRS);
+        this.makeStairs(MMBlocks.BRECCIA_MOSAIC, MMBlocks.BRECCIA_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_MOSAIC.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.POLISHED_BRECCIA.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.CHISELED_BRECCIA.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_BRICKS.get());
+
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.POLISHED_BRECCIA.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_WALL.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.POLISHED_BRECCIA_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.POLISHED_BRECCIA_STAIRS.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_STAIRS.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.BRECCIA, MMBlocks.BRECCIA_MOSAIC_STAIRS.get());
+
+
+        //Diatomite
+        this.makeSlab(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_SLAB);
+        this.makeSlab(MMBlocks.DIATOMITE_BRICKS, MMBlocks.DIATOMITE_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_DIATOMITE, MMBlocks.POLISHED_DIATOMITE_SLAB);
+        this.makeSlab(MMBlocks.DIATOMITE_MOSAIC, MMBlocks.DIATOMITE_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.DIATOMITE, MMBlocks.POLISHED_DIATOMITE);
+        this.makeBricks(MMBlocks.POLISHED_DIATOMITE, MMBlocks.DIATOMITE_BRICKS);
+        this.makeBricks(MMBlocks.DIATOMITE_BRICKS, MMBlocks.DIATOMITE_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.DIATOMITE_BRICKS_SLAB, MMBlocks.CHISELED_DIATOMITE);
+
+        this.makeWall(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_WALL);
+        this.makeWall(MMBlocks.DIATOMITE_BRICKS, MMBlocks.DIATOMITE_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_DIATOMITE, MMBlocks.POLISHED_DIATOMITE_WALL);
+        this.makeWall(MMBlocks.DIATOMITE_MOSAIC, MMBlocks.DIATOMITE_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_STAIRS);
+        this.makeStairs(MMBlocks.DIATOMITE_BRICKS, MMBlocks.DIATOMITE_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_DIATOMITE, MMBlocks.POLISHED_DIATOMITE_STAIRS);
+        this.makeStairs(MMBlocks.DIATOMITE_MOSAIC, MMBlocks.DIATOMITE_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_MOSAIC.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.POLISHED_DIATOMITE.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.CHISELED_DIATOMITE.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_BRICKS.get());
+
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.POLISHED_DIATOMITE.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_WALL.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.POLISHED_DIATOMITE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.POLISHED_DIATOMITE_STAIRS.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_STAIRS.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.DIATOMITE, MMBlocks.DIATOMITE_MOSAIC_STAIRS.get());
+
+
+        //Permafrost
+        this.makeSlab(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_SLAB);
+        this.makeSlab(MMBlocks.PERMAFROST_BRICKS, MMBlocks.PERMAFROST_BRICKS_SLAB);
+        this.makeSlab(MMBlocks.POLISHED_PERMAFROST, MMBlocks.POLISHED_PERMAFROST_SLAB);
+        this.makeSlab(MMBlocks.PERMAFROST_MOSAIC, MMBlocks.PERMAFROST_MOSAIC_SLAB);
+
+        this.makeBricks(MMBlocks.PERMAFROST, MMBlocks.POLISHED_PERMAFROST);
+        this.makeBricks(MMBlocks.POLISHED_PERMAFROST, MMBlocks.PERMAFROST_BRICKS);
+        this.makeBricks(MMBlocks.PERMAFROST_BRICKS, MMBlocks.PERMAFROST_MOSAIC);
+        this.makeChiseledBricks(MMBlocks.PERMAFROST_BRICKS_SLAB, MMBlocks.CHISELED_PERMAFROST);
+
+        this.makeWall(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_WALL);
+        this.makeWall(MMBlocks.PERMAFROST_BRICKS, MMBlocks.PERMAFROST_BRICKS_WALL);
+        this.makeWall(MMBlocks.POLISHED_PERMAFROST, MMBlocks.POLISHED_PERMAFROST_WALL);
+        this.makeWall(MMBlocks.PERMAFROST_MOSAIC, MMBlocks.PERMAFROST_MOSAIC_WALL);
+
+        this.makeStairs(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_STAIRS);
+        this.makeStairs(MMBlocks.PERMAFROST_BRICKS, MMBlocks.PERMAFROST_BRICKS_STAIRS);
+        this.makeStairs(MMBlocks.POLISHED_PERMAFROST, MMBlocks.POLISHED_PERMAFROST_STAIRS);
+        this.makeStairs(MMBlocks.PERMAFROST_MOSAIC, MMBlocks.PERMAFROST_MOSAIC_STAIRS);
+
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_MOSAIC.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.POLISHED_PERMAFROST.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.CHISELED_PERMAFROST.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_BRICKS.get());
+
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.POLISHED_PERMAFROST.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_WALL.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_MOSAIC_WALL.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_BRICKS_WALL.get());
+
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.POLISHED_PERMAFROST_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_BRICKS_SLAB.get(), 2);
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_MOSAIC_SLAB.get(), 2);
+
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.POLISHED_PERMAFROST_STAIRS.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_STAIRS.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_BRICKS_STAIRS.get());
+        this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_MOSAIC_STAIRS.get());
     }
     public ShapelessRecipeBuilder makePlanks(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, (ItemLike)plankOut.get(), 4).requires(logIn).group("planks").unlockedBy("has_log", has(logIn));
@@ -293,7 +669,10 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
     }
 
     public ShapedRecipeBuilder makeWall(Supplier<? extends Block> wallOut, Supplier<? extends Block> blockIn) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, (ItemLike)wallOut.get(), 6).pattern("MMM").pattern("MMM").define('M', (ItemLike)blockIn.get()).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
+        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, (ItemLike)wallOut.get(),
+                6).pattern("MMM").pattern("MMM").define('M',
+                (ItemLike)blockIn.get()).unlockedBy("has_" +
+                ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
     }
 
     public ShapedRecipeBuilder makeFence(Supplier<? extends Block> fenceOut, Supplier<? extends Block> blockIn) {
@@ -305,11 +684,16 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
     }
 
     public ShapedRecipeBuilder makeBricks(Supplier<? extends Block> bricksOut, Supplier<? extends Block> blockIn) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, (ItemLike)bricksOut.get(), 4).pattern("MM").pattern("MM").define('M', (ItemLike)blockIn.get()).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
+        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,
+                (ItemLike)bricksOut.get(), 4).pattern("MM").pattern("MM")
+                .define('M', (ItemLike)blockIn.get()).unlockedBy("has_" +
+                        ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
     }
 
     public ShapedRecipeBuilder makeChiseledBricks(Supplier<? extends Block> bricksOut, Supplier<? extends Block> blockIn) {
-        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, (ItemLike)bricksOut.get()).pattern("M").pattern("M").define('M', (ItemLike)blockIn.get()).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
+        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,
+                (ItemLike)bricksOut.get()).pattern("M").pattern("M").define('M',
+                (ItemLike)blockIn.get()).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
     }
 
     public ShapedRecipeBuilder makeWood(Supplier<? extends Block> woodOut, Supplier<? extends Block> logIn) {

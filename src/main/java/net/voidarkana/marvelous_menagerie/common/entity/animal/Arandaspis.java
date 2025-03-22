@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+//TODO: only join leader in boids if the school is of the right size
 public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
     public final AnimationState idleAnimationState = new AnimationState();
@@ -44,8 +45,8 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     public final AnimationState flopAnimationState = new AnimationState();
 
     @javax.annotation.Nullable
-    private Arandaspis leader;
-    private int schoolSize = 1;
+    public Arandaspis leader;
+    public int schoolSize = 1;
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Arandaspis.class, EntityDataSerializers.BOOLEAN);
 
@@ -55,16 +56,19 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
-        this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.5D));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
-        this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1.0D, 10));
-//        this.goalSelector.addGoal(5, new FollowFlockLeaderGoal(this));
-
         this.targetSelector.addGoal(0, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.goalSelector.addGoal(5, new BoidGoal(this, 0.01f, 0.9f, 8 / 20f, 1 / 20f));
-        this.goalSelector.addGoal(3, new StayInWaterGoal(this));
-        this.goalSelector.addGoal(2, new LimitSpeedAndLookInVelocityDirectionGoal(this, 0.3f, 0.4f));
+
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
+        this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.5D));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
+        this.goalSelector.addGoal(1, new OrganizeBoidsGoal(this));
+
+        this.goalSelector.addGoal(2, new BoidGoal(this, 0.2f, 0.4f, 8 / 20f, 1 / 20f));
+        this.goalSelector.addGoal(2, new StayInWaterGoal(this));
+        this.goalSelector.addGoal(2, new LimitSpeedAndLookInVelocityDirectionGoal(this, 0.65f));
+
+        this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1, 10));
+        //this.goalSelector.addGoal(6, new FishSwimGoal(this));
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
@@ -159,7 +163,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     }
 
     public int getMaxSchoolSize() {
-        return super.getMaxSpawnClusterSize();
+        return 10;
     }
 
     protected boolean canRandomSwim() {
@@ -280,13 +284,13 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         }
     }
 
-    public class FollowFlockLeaderGoal extends Goal {
+    public class OrganizeBoidsGoal extends Goal {
         private static final int INTERVAL_TICKS = 200;
         private final Arandaspis mob;
         private int timeToRecalcPath;
         private int nextStartTick;
 
-        public FollowFlockLeaderGoal(Arandaspis pFish) {
+        public OrganizeBoidsGoal(Arandaspis pFish) {
             this.mob = pFish;
             this.nextStartTick = this.nextStartTick(pFish);
         }
@@ -329,15 +333,29 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
             this.mob.stopFollowing();
         }
 
-        public void tick() {
-            if (--this.timeToRecalcPath <= 0) {
-                this.timeToRecalcPath = this.adjustedTickDelay(10);
-                this.mob.pathToLeader();
-            }
-        }
+//        public void tick() {
+//            if (--this.timeToRecalcPath <= 0) {
+//                this.timeToRecalcPath = this.adjustedTickDelay(10);
+//                this.mob.pathToLeader();
+//            }
+//        }
     }
 
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
         return !this.fromBucket() && !this.hasCustomName();
+    }
+
+    static class FishSwimGoal extends RandomSwimmingGoal {
+        private final Arandaspis fish;
+
+        public FishSwimGoal(Arandaspis boidFish) {
+            super(boidFish, 1.0, 10);
+            this.fish = boidFish;
+        }
+
+        @Override
+        public boolean canUse() {
+            return !this.fish.isFollower() && !this.fish.hasFollowers() && super.canUse();
+        }
     }
 }
