@@ -26,6 +26,8 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(EntityType.ENDER_DRAGON).add(EntityType.PUFFERFISH);
 
         this.tag(MMTags.EntityTypes.TIME_ABERRATIONS)
-                .add(MMEntities.CHUD.get());
+                .add(MMEntities.CHUD.get())
+                .add(MMEntities.BEHOLDER.get());
+
     }
 }

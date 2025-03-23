@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
@@ -33,6 +34,7 @@ public class MMEvents {
         event.put(MMEntities.ANOMALOCARIS.get(), Anomalocaris.createAttributes().build());
         event.put(MMEntities.PIKAIA.get(), Pikaia.createAttributes().build());
         event.put(MMEntities.ROACH.get(), Apthoroblattina.createAttributes().build());
+        event.put(MMEntities.BEHOLDER.get(), Beholder.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());

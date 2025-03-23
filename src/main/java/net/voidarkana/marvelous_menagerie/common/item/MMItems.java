@@ -30,6 +30,10 @@ public class MMItems {
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x4c2f33, new Item.Properties()));
 
+    //Beholder
+    public static final RegistryObject<Item> BEHOLDER_SPAWN_EGG = ITEMS.register("beholder_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.BEHOLDER, 0x46b06a, 0x194d3f, new Item.Properties()));
+
     //Sacabambaspis
     public static final RegistryObject<Item> SACA_SPAWN_EGG = ITEMS.register("saca_spawn_egg",
             ()-> new FishSpawnEggItem(MMEntities.SACABAMBASPIS, 0xDFD5B7, 0xAE9C79, new Item.Properties()));

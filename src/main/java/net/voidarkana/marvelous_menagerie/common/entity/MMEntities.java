@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
@@ -72,6 +73,12 @@ public class MMEntities {
             () -> EntityType.Builder.of(Apthoroblattina::new, MobCategory.CREATURE)
                     .sized(1.2F, 0.45F)
                     .build(new ResourceLocation(MarvelousMenagerie.MODID,"apthoroblattina").toString()));
+
+    public static final RegistryObject<EntityType<Beholder>> BEHOLDER
+            = ENTITY_TYPES.register("beholder",
+            () -> EntityType.Builder.of(Beholder::new, MobCategory.MONSTER)
+                    .sized(1.2F, 1F)
+                    .build(new ResourceLocation(MarvelousMenagerie.MODID,"beholder").toString()));
 
 
 //    public static final RegistryObject<EntityType<DawnHorse>> DAWN_HORSE =

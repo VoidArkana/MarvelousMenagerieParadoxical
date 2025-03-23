@@ -3,6 +3,7 @@ package net.voidarkana.marvelous_menagerie.common.blockentity.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -25,6 +26,7 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -110,7 +112,16 @@ public class AltarBlockEntity extends BlockEntityBase {
 
                         this.clearPedestals(this.level, pos);
 
-                        this.getFracture(pos).summonCreature(entitytype);
+                        if (entitytype == MMEntities.CHUD.get()){
+                            BuiltInRegistries.ENTITY_TYPE.getTag(MMTags.EntityTypes.TIME_ABERRATIONS).flatMap((entityTypeNamed) -> {
+                                return entityTypeNamed.getRandomElement(this.level.random);
+                            }).ifPresent((entityTypeHolder) -> {
+                                this.getFracture(pos).summonCreature(entityTypeHolder.get());
+                            });
+                        }else {
+                            this.getFracture(pos).summonCreature(entitytype);
+                        }
+
                     }
                 }else {
                     Fracture fracture = new Fracture(this.level, pos.getCenter().x(), pos.getCenter().y()+2, pos.getCenter().z());

@@ -86,12 +86,13 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());
                         output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
-                        output.accept(MMItems.CHUD_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
+                        output.accept(MMItems.BEHOLDER_SPAWN_EGG.get());
+                        output.accept(MMItems.CHUD_SPAWN_EGG.get());
                     })
                     .build());
 

@@ -19,6 +19,7 @@ import net.voidarkana.marvelous_menagerie.client.model.block.AltarSkullModel;
 import net.voidarkana.marvelous_menagerie.client.model.block.CharniaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.BeholderModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
@@ -51,6 +52,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.ANOMALOCARIS_LAYER, AnomalocarisModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.PIKAIA_LAYER, PikaiaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.ROACH_LAYER, RoachModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BEHOLDER_LAYER, BeholderModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
     }

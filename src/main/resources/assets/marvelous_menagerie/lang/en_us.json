@@ -318,6 +318,9 @@
   "item.marvelous_menagerie.chud_spawn_egg": "Chud Spawn Egg",
   "entity.marvelous_menagerie.chud": "Chud",
 
+  "item.marvelous_menagerie.beholder_spawn_egg": "Beholder Spawn Egg",
+  "entity.marvelous_menagerie.beholder": "Beholder",
+
   "item.marvelous_menagerie.sniffer_fossil": "Sniffer Fossil",
 
   "item.marvelous_menagerie.shale_fossil": "Shale Fossil",
@@ -599,5 +602,6 @@
   "creativetab.marvelous_menagerie_tab_plants": "Marvelous Menagerie - Plants",
   "creativetab.marvelous_menagerie_tab_misc": "Marvelous Menagerie - Miscelaneous",
 
-  "entity.marvelous_menagerie.rift": "Temporal Rift"
+  "entity.marvelous_menagerie.rift": "Temporal Rift",
+  "entity.marvelous_menagerie.fracture": "Time Fracture"
 }

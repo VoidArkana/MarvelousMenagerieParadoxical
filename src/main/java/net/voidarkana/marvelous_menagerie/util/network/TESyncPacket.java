@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.util.network;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -36,8 +37,8 @@ public class TESyncPacket {
             if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)
                 world = MarvelousMenagerie.PROXY.getWorld();
             else {
-                if (sender == null) return;
-                world = sender.level();
+                if (sender == null) world = Minecraft.getInstance().getSingleplayerServer().overworld();
+                else world = sender.level();
             }
 
             if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_SERVER) {
