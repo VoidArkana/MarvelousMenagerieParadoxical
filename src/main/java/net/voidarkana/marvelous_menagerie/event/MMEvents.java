@@ -13,7 +13,6 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import net.voidarkana.marvelous_menagerie.data.codec.BookEntityManager;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
@@ -65,7 +64,6 @@ public class MMEvents {
         event.addListener(new PikaiaCoralManager());
         event.addListener(new RitualManager());
         event.addListener(new FossilCleaningManager());
-        event.addListener(new BookEntityManager());
 
         event.addListener(new AbominationEntryManager());
         event.addListener(new EarlyPaleoEntryManager());

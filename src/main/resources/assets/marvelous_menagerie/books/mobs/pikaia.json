@@ -1,0 +1,120 @@
+{
+  "parent": "early_paleo/index.json",
+  "text": "early_paleo/mobs/pikaia.txt",
+  "title": "entity.marvelous_menagerie.pikaia",
+  "widgets": [
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/chud.png",
+      "sepia": true,
+      "x": 64,
+      "y": 60,
+      "scale": 0.6,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 128,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 32,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 32,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 96,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 96,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+
+
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:pikaia_fossil",
+      "sepia": true,
+      "x": 30,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:dead_tube_coral",
+      "sepia": true,
+      "x": 98,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:dead_brain_coral_block",
+      "sepia": true,
+      "x": 30,
+      "y": 89,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:water_bucket",
+      "sepia": true,
+      "x": 98,
+      "y": 89,
+      "scale": 1
+    }
+  ]
+}

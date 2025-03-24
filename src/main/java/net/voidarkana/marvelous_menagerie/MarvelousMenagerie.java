@@ -56,11 +56,7 @@ public class MarvelousMenagerie
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static CommonProxy PROXY = (CommonProxy) DistExecutor.runForDist(() -> {
-        return ClientProxy::new;
-    }, () -> {
-        return CommonProxy::new;
-    });
+    public static CommonProxy PROXY = (CommonProxy) DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public static final List<Runnable> CALLBACKS = new ArrayList<>();
 

@@ -146,11 +146,21 @@ public class MMModEvents {
                     new ItemStack(Items.EMERALD, 3),
                     6, 8, 0.02f));
 
+            trades.get(4).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(MMItems.OPAL.get(), 1),
+                    new ItemStack(Items.EMERALD, 3),
+                    6, 8, 0.02f));
+
 
             //level 5
-            trades.get(3).add((pTrader, pRandom) -> new MerchantOffer(
+            trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 20),
                     new ItemStack(MMItems.CHRONOTITE.get(), 3),
+                    2, 8, 0.02f));
+
+            trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 20),
+                    new ItemStack(MMItems.OPAL.get(), 3),
                     2, 8, 0.02f));
 
             trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(

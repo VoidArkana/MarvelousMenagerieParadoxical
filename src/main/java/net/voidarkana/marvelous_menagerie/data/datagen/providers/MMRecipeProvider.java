@@ -686,7 +686,7 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, (ItemLike)fenceGateOut.get()).pattern("/M/").pattern("/M/").define('M', (ItemLike)blockIn.get()).define('/', Tags.Items.RODS_WOODEN).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
     }
 
-    public ShapedRecipeBuilder makeBricks(Supplier<? extends Block> bricksOut, Supplier<? extends Block> blockIn) {
+    public ShapedRecipeBuilder makeBricks(Supplier<? extends Block> blockIn, Supplier<? extends Block> bricksOut) {
         return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,
                 (ItemLike)bricksOut.get(), 4).pattern("MM").pattern("MM")
                 .define('M', (ItemLike)blockIn.get()).unlockedBy("has_" +

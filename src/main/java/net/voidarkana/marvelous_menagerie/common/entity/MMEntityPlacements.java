@@ -7,12 +7,13 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Anomalocaris;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Pikaia;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
 
 public class MMEntityPlacements {
 
     public static void entityPlacement() {
         SpawnPlacements.register(MMEntities.RIFT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Monster::checkMonsterSpawnRules);
+                RiftEntity::checkRiftSpawnRules);
 
         SpawnPlacements.register(MMEntities.SACABAMBASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sacabambaspis::checkSurfaceWaterDinoSpawnRules);
         SpawnPlacements.register(MMEntities.ANOMALOCARIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Anomalocaris::checkSurfaceWaterDinoSpawnRules);

@@ -14,15 +14,16 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MoveTowardsTargetGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
@@ -42,7 +43,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     public final AnimationState idleLookAround = new AnimationState();
     int idleLookTimeout;
 
-
     public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
 
@@ -55,6 +55,8 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new AnimatedAttackGoal(this, 1.25D, true, 11, 9));
+        this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));

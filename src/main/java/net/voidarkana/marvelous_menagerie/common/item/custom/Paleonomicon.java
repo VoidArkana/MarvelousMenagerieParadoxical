@@ -16,8 +16,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.BookEntityManager;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -52,26 +51,15 @@ public class Paleonomicon extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack pStack, Player pPlayer, LivingEntity pInteractionTarget, InteractionHand pUsedHand) {
 
-        String link;
+        pPlayer.getItemInHand(pUsedHand);
+        if (pPlayer instanceof ServerPlayer serverplayerentity) {
+            serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+        }
 
-        for (BookEntityManager.BookInteractLink data : BookEntityManager.DATA) {
-
-            if (pInteractionTarget.getType() == data.entity()){
-                if (pPlayer instanceof ServerPlayer) {
-                    ServerPlayer serverplayerentity = (ServerPlayer)pPlayer;
-                    serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
-                }
-
-                link = data.link();
-
-                pPlayer.swing(pUsedHand);
-
-                if (pPlayer.level().isClientSide){
-                    MarvelousMenagerie.PROXY.openBookGUI(link);
-                }
-                this.usedOnEntity = true;
-                return InteractionResult.PASS;
-            }
+        if (pPlayer.level().isClientSide && pInteractionTarget.getEncodeId() != null && pInteractionTarget.getType().is(MMTags.EntityTypes.HAS_ENTRY)) {
+            this.usedOnEntity = true;
+            String id = pInteractionTarget.getEncodeId().split(":")[1];
+            MarvelousMenagerie.PROXY.openBookGUI("mobs/" + id + ".json");
         }
 
         return super.interactLivingEntity(pStack, pPlayer, pInteractionTarget, pUsedHand);

@@ -23,8 +23,6 @@ public class CarboniferousEntryManager extends EntityBaseEntryManager{
 
     @Override
     public void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        Map<ResourceLocation, CarboniferousEntryManager.EntityCodec> encyclopedia = new HashMap<>();
-
         object.forEach((resourceLocation, jsonElement) -> {
             CarboniferousEntryManager.EntityCodec entryData = CarboniferousEntryManager.EntityCodec.CODEC.parse(JsonOps.INSTANCE, jsonElement).result().orElseThrow();
             DATA.add(entryData);

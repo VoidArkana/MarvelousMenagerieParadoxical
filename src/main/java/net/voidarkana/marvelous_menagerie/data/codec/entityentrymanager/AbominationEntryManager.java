@@ -8,6 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,16 +20,39 @@ public class AbominationEntryManager extends EntityBaseEntryManager{
         super("paleonomicon/abomination");
     }
 
+    protected static Map<ResourceLocation, AbominationEntryManager.EntityCodec> encyclopediaEntries = new HashMap();
+
+    public static Map<ResourceLocation, AbominationEntryManager.EntityCodec> getEncyclopediaEntries() {
+        return encyclopediaEntries;
+    }
+
+    public static void setEncyclopediaEntries(Map<ResourceLocation, AbominationEntryManager.EntityCodec> encyclopediaEntries) {
+        AbominationEntryManager.encyclopediaEntries = encyclopediaEntries;
+    }
+
     public static final List<AbominationEntryManager.EntityCodec> DATA = Lists.newArrayList();
 
     @Override
-    public void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
+    public void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         Map<ResourceLocation, AbominationEntryManager.EntityCodec> encyclopedia = new HashMap<>();
 
-        object.forEach((resourceLocation, jsonElement) -> {
-            AbominationEntryManager.EntityCodec entryData = AbominationEntryManager.EntityCodec.CODEC.parse(JsonOps.INSTANCE, jsonElement).result().orElseThrow();
-            DATA.add(entryData);
-        });
+        for(Map.Entry<ResourceLocation, JsonElement> entry : jsons.entrySet()) {
+            ResourceLocation key = (ResourceLocation)entry.getKey();
+            JsonElement element = (JsonElement)entry.getValue();
+            AbominationEntryManager.EntityCodec.CODEC.decode(JsonOps.INSTANCE, element).get().ifLeft((result) -> {
+                AbominationEntryManager.EntityCodec encyclopediaCodec = (AbominationEntryManager.EntityCodec)result.getFirst();
+
+                encyclopedia.put(key, encyclopediaCodec);
+
+            }).ifRight((partial) -> MarvelousMenagerie.LOGGER.error("Failed to parse recipe JSON for {} due to: {}", "paleonomicon/abomination", partial.message()));
+        }
+
+        encyclopediaEntries = encyclopedia;
+
+//        object.forEach((resourceLocation, jsonElement) -> {
+//            AbominationEntryManager.EntityCodec entryData = AbominationEntryManager.EntityCodec.CODEC.parse(JsonOps.INSTANCE, jsonElement).result().orElseThrow();
+//            DATA.add(entryData);
+//        });
     }
 
     public record EntityCodec(String entityName, String icon, String link) {

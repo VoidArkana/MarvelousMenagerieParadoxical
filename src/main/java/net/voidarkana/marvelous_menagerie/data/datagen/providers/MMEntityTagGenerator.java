@@ -29,5 +29,17 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.CHUD.get())
                 .add(MMEntities.BEHOLDER.get());
 
+        this.tag(MMTags.EntityTypes.HAS_ENTRY)
+                .add(MMEntities.CHUD.get())
+                .add(MMEntities.BEHOLDER.get())
+                .add(MMEntities.ANOMALOCARIS.get())
+                .add(MMEntities.ARANDASPIS.get())
+                .add(MMEntities.SACABAMBASPIS.get())
+                .add(MMEntities.PIKAIA.get())
+                .add(EntityType.SNIFFER)
+                .add(MMEntities.FALCATUS.get())
+                .add(MMEntities.ROACH.get())
+                .add(MMEntities.SLOVENICUS.get())
+                .add(MMEntities.EOLACTORIA.get());
     }
 }

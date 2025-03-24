@@ -18,6 +18,8 @@ public class MMTags {
 
         public static final TagKey<EntityType<?>> TIME_ABERRATIONS = tag("time_aberrations");
 
+        public static final TagKey<EntityType<?>> HAS_ENTRY = tag("has_paleonomicon_entry");
+
         private static TagKey<EntityType<?>> tag(String name){
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MarvelousMenagerie.MODID, name));
         }

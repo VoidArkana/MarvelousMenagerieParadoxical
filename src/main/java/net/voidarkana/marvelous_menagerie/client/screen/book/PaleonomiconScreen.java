@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundEvents;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.client.screen.book.widget.EntityData;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import org.joml.Vector3f;
 
@@ -89,7 +90,7 @@ public class PaleonomiconScreen extends Screen {
     private int entryPageNumber = 0;
     private int lastEntryPageBeforeLinkClick = -1;
 
-    private final List<AbominationEntryManager.EntityCodec> abominationLinkData = new ArrayList<>();
+    private final List<EntityData> abominationLinkData = new ArrayList<>();
 
     private final List<EarlyPaleoEntryManager.EntityCodec> earlyPaleoLinkData = new ArrayList<>();
     private final List<CarboniferousEntryManager.EntityCodec> carboniferousLinkData = new ArrayList<>();
@@ -109,6 +110,7 @@ public class PaleonomiconScreen extends Screen {
 
     public PaleonomiconScreen(String openTo) {
         super(Component.translatable("item.marvelous_menagerie.paleonomicon"));
+        System.out.println(new ResourceLocation(getBookFileDirectory() + openTo));
         currentEntryJSON = new ResourceLocation(getBookFileDirectory() + openTo);
         this.imageWidth = 314;
         this.imageHeight = 207;
@@ -116,7 +118,7 @@ public class PaleonomiconScreen extends Screen {
 
 
         for (AbominationEntryManager.EntityCodec data : AbominationEntryManager.DATA) {
-            this.abominationLinkData.add(data);
+            this.abominationLinkData.add(new EntityData(data.entityName(), data.icon(), data.link()));
         }
 
         //paleozoic
@@ -152,7 +154,7 @@ public class PaleonomiconScreen extends Screen {
             this.quaternaryLinkData.add(data);
         }
 
-        Collections.sort(this.abominationLinkData, Comparator.comparing(AbominationEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.abominationLinkData, Comparator.comparing(EntityData::getEntity));
 
         Collections.sort(this.earlyPaleoLinkData, Comparator.comparing(EarlyPaleoEntryManager.EntityCodec::getIcon));
         Collections.sort(this.carboniferousLinkData, Comparator.comparing(CarboniferousEntryManager.EntityCodec::getIcon));
@@ -568,9 +570,9 @@ public class PaleonomiconScreen extends Screen {
 
             //Abominations
             if (this.currentEntryJSON.equals(anomaliesEntryJSON)){
-                icon = abominationLinkData.get(i).icon();
-                name = abominationLinkData.get(i).entityName();
-                link = abominationLinkData.get(i).link();
+                icon = abominationLinkData.get(i).getItem();
+                name = abominationLinkData.get(i).getEntity();
+                link = abominationLinkData.get(i).getLink();
             }
 
             //Paleozoic
