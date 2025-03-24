@@ -20,7 +20,7 @@ public class AbominationEntryManager extends EntityBaseEntryManager{
         super("paleonomicon/abomination");
     }
 
-    protected static Map<ResourceLocation, AbominationEntryManager.EntityCodec> encyclopediaEntries = new HashMap();
+    public static Map<ResourceLocation, AbominationEntryManager.EntityCodec> encyclopediaEntries = new HashMap();
 
     public static Map<ResourceLocation, AbominationEntryManager.EntityCodec> getEncyclopediaEntries() {
         return encyclopediaEntries;
@@ -49,7 +49,7 @@ public class AbominationEntryManager extends EntityBaseEntryManager{
 
         encyclopediaEntries = encyclopedia;
 
-//        object.forEach((resourceLocation, jsonElement) -> {
+//        jsons.forEach((resourceLocation, jsonElement) -> {
 //            AbominationEntryManager.EntityCodec entryData = AbominationEntryManager.EntityCodec.CODEC.parse(JsonOps.INSTANCE, jsonElement).result().orElseThrow();
 //            DATA.add(entryData);
 //        });

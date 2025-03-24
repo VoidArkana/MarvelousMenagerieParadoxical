@@ -7,13 +7,23 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.commands.arguments.ResourceOrTagKeyArgument;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.EntityData;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
@@ -24,6 +34,8 @@ import java.util.*;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import static net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.AbominationEntryManager.encyclopediaEntries;
 
 public class PaleonomiconScreen extends Screen {
 
@@ -108,6 +120,14 @@ public class PaleonomiconScreen extends Screen {
     protected int xSize = 390;
     protected int ySize = 320;
 
+    private static Optional<? extends HolderSet.ListBacked<EntityType>> getHolders(ResourceOrTagKeyArgument.Result<EntityType> pStructure, Registry<EntityType> pStructureRegistry) {
+        return pStructure.unwrap().map((p_258231_) -> {
+            return pStructureRegistry.getHolder(p_258231_).map((p_214491_) -> {
+                return HolderSet.direct(p_214491_);
+            });
+        }, pStructureRegistry::getTag);
+    }
+
     public PaleonomiconScreen(String openTo) {
         super(Component.translatable("item.marvelous_menagerie.paleonomicon"));
         System.out.println(new ResourceLocation(getBookFileDirectory() + openTo));
@@ -117,7 +137,7 @@ public class PaleonomiconScreen extends Screen {
         resetEntry();
 
 
-        for (AbominationEntryManager.EntityCodec data : AbominationEntryManager.DATA) {
+        for (AbominationEntryManager.EntityCodec data : encyclopediaEntries.values()) {
             this.abominationLinkData.add(new EntityData(data.entityName(), data.icon(), data.link()));
         }
 
@@ -501,8 +521,10 @@ public class PaleonomiconScreen extends Screen {
 
         int linkDataSize = 0;
 
-        if (this.currentEntryJSON.equals(anomaliesEntryJSON))
+        if (this.currentEntryJSON.equals(anomaliesEntryJSON)){
+
             linkDataSize = abominationLinkData.size();
+        }
 
         //Paleozoic
         if (this.currentEntryJSON.equals(earlyPaleoEntryJSON))

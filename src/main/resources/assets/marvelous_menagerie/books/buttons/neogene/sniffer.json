@@ -1,0 +1,5 @@
+{
+  "entity_name": "entity.minecraft.sniffer",
+  "icon": "marvelous_menagerie:sniffer_fossil",
+  "link": "neogene/mobs/sniffer.json"
+}
