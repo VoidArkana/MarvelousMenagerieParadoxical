@@ -212,6 +212,12 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		this.animate(entity.attackAnimationState, BeholderAnims.BITE_OVERLAY, ageInTicks, 1);
 		this.animate(entity.idleLookAround, BeholderAnims.LOOKAROUND_BLEND, ageInTicks, 1);
 
+		this.animate(entity.openJawsStartState, BeholderAnims.JAWS_OPEN, ageInTicks, 1);
+		this.animate(entity.keepJawsOpenState, BeholderAnims.OPEN_JAW_STATIC, ageInTicks, 1);
+		this.animate(entity.closeJawsState, BeholderAnims.GRAB, ageInTicks, 1);
+		this.animate(entity.keepGrabbingState, BeholderAnims.GRAB_OVERLAY, ageInTicks, 1);
+		this.animate(entity.releaseJawsState, BeholderAnims.GRAB_END, ageInTicks, 1);
+
 		this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
 		this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
 	}

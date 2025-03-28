@@ -13,6 +13,9 @@ import static net.voidarkana.marvelous_menagerie.util.mini2DX.compat.MathUtils.s
 import static org.joml.Math.sqrt;
 
 public class Mathf {
+
+    public static final float STARTING_ANGLE = 0.0174532925F;
+
     static Random rand = new Random();
     static {
 
@@ -30,12 +33,15 @@ public class Mathf {
     public static Vec2 randVec2Uniform(){
         return new Vec2(rand.nextFloat(), rand.nextFloat());
     }
+
     public static float randFloat(float max){
         return rand.nextFloat()*max;
     }
+
     public static float randInt(int exclusiveMax){
         return rand.nextInt(exclusiveMax);
     }
+
     public static float randFloat(float min,float max){
         return rand.nextFloat()*(max-min) + min;
     }

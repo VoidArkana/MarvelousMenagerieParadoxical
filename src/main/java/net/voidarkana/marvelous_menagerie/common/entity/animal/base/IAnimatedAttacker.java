@@ -4,7 +4,7 @@ public interface IAnimatedAttacker {
 
     boolean isAttacking();
 
-    void setAttacking(boolean pFromBucket);
+    void setAttacking(boolean attacking);
 
 
     int attackAnimationTimeout();

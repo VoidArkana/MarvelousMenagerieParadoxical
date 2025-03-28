@@ -72,7 +72,9 @@ public class Sacabambaspis extends AbstractBasicFish {
 
         CompoundTag compoundnbt = bucket.getOrCreateTag();
 
-        compoundnbt.putInt("Variant", this.getAge());
+        compoundnbt.putInt("Age", this.getAge());
+        compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
     }
 
     @Override
