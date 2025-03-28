@@ -7,21 +7,31 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
+import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
@@ -34,6 +44,11 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     public Boolean hasJawsOpened;
     public Boolean hasJawsClosed;
     public Boolean hasReleased;
+    public boolean isLandNavigator;
+    public float prevTilt;
+    public float tilt;
+    public float currentRoll = 0.0F;
+
 
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> WANTS_TO_GRAB = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
@@ -71,23 +86,32 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         this.hasJawsOpened = false;
         this.hasJawsClosed = false;
         this.hasReleased = true;
+        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
+        switchNavigator(true);
     }
 
     protected void registerGoals() {
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, true));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+
         this.goalSelector.addGoal(1, new BeholderAttackGoal(this, 1.25D, true, 11, 9));
         this.goalSelector.addGoal(1, new BeholderGrabGoal(this, 1.25D, true));
         this.goalSelector.addGoal(2, new MoveTowardsTargetGoal(this, 1, 32.0F));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(7, new BeholderStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new BeholderSwimGoal(this, 1.0D, 7));
+        this.goalSelector.addGoal(8, new BeholderLookAtPlayer(this));
+        this.goalSelector.addGoal(8, new BeholderRandomLook(this));
     }
 
     @Override
     public boolean canBreatheUnderwater() {
         return true;
+    }
+
+    public boolean isPushedByFluid() {
+        return false;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -157,6 +181,53 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         this.entityData.set(GRABBING_TICKS, pFromBucket);
     }
 
+    private void switchNavigator(boolean onLand) {
+        if (onLand) {
+            this.moveControl = new MoveControl(this);
+            PathNavigation prevNav = this.navigation;
+            this.navigation = new GroundPathNavigation(this, level());
+            this.lookControl = new LookControl(this);
+            this.isLandNavigator = true;
+        } else {
+            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2F, 0.1F, true);
+            PathNavigation prevNav = this.navigation;
+            this.navigation = new AmphibiousPathNavigation(this, level());
+            this.lookControl = new SmoothSwimmingLookControl(this, 10);
+            this.isLandNavigator = false;
+        }
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        prevTilt = tilt;
+        if (this.isInWater() && !this.onGround() && !this.isLandNavigator) {
+            final float v = Mth.degreesDifference(this.getYRot(), yRotO);
+            if (Math.abs(v) > 1) {
+                if (Math.abs(tilt) < 25) {
+                    tilt -= Math.signum(v);
+                }
+            } else {
+                if (Math.abs(tilt) > 0) {
+                    final float tiltSign = Math.signum(tilt);
+                    tilt -= tiltSign * 0.85F;
+                    if (tilt * tiltSign < 0) {
+                        tilt = 0;
+                    }
+                }
+            }
+        } else {
+            tilt = 0;
+        }
+
+        float prevRoll =  this.currentRoll;
+        float targetRoll = Math.max(-0.45F, Math.min(0.45F, (this.getYRot() - this.yRotO) * 0.1F));
+        targetRoll = -targetRoll;
+        this.currentRoll = prevRoll + (targetRoll - prevRoll) * 0.05F;
+
+    }
+
     @Override
     public int attackAnimationTimeout() {
         return this.attackAnimationTimeout;
@@ -179,6 +250,15 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         }
 
         super.tick();
+
+        final boolean ground = !this.isInWater();
+
+        if (!ground && this.isLandNavigator) {
+            switchNavigator(false);
+        }
+        if (ground && !this.isLandNavigator) {
+            switchNavigator(true);
+        }
 
 
         if (this.isGrabbing()){
@@ -233,6 +313,22 @@ public class Beholder extends Monster implements IAnimatedAttacker {
             final double extraX = radius * Mth.sin(Mth.PI + angle);
             final double extraZ = radius * Mth.cos(angle);
             passenger.setPos(this.getX() + extraX, this.getY() + 0.1F, this.getZ() + extraZ);
+        }
+    }
+
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isEffectiveAi() && this.isInWater()) {
+            this.moveRelative(this.getSpeed(), pTravelVector);
+            this.move(MoverType.SELF, this.getDeltaMovement());
+            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+            if (this.getTarget() == null) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
+            }
+
+            this.calculateEntityAnimation(true);
+        } else {
+            super.travel(pTravelVector);
         }
     }
 
@@ -361,6 +457,141 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     @Override
     public boolean canAttack(LivingEntity pTarget) {
         return super.canAttack(pTarget) && this.getPassengers().isEmpty();
+    }
+
+    public class BeholderRandomLook extends RandomLookAroundGoal{
+
+        private final Beholder beholder;
+
+        public BeholderRandomLook(Beholder pMob) {
+            super(pMob);
+            this.beholder = pMob;
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse() && !beholder.isGrabbing();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse() && !beholder.isGrabbing();
+        }
+    }
+
+    public class BeholderLookAtPlayer extends LookAtPlayerGoal{
+
+        private final Beholder beholder;
+
+        public BeholderLookAtPlayer(Beholder pMob) {
+            super(pMob, Player.class, 8.0F);
+            this.beholder = pMob;
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse() && !beholder.isGrabbing();
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse() && !beholder.isGrabbing();
+        }
+    }
+
+    public class BeholderStrollGoal extends RandomStrollGoal{
+
+        private final Beholder beholder;
+
+        public BeholderStrollGoal(Beholder pMob, double pSpeedModifier) {
+            super(pMob, pSpeedModifier);
+            this.beholder = pMob;
+        }
+
+        @Override
+        public boolean canUse() {
+            return super.canUse() && this.beholder.isLandNavigator;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return super.canContinueToUse() && this.beholder.isLandNavigator;
+        }
+    }
+
+    public class BeholderSwimGoal extends RandomStrollGoal {
+        public BeholderSwimGoal(PathfinderMob creature, double speed, int chance) {
+            super(creature, speed, chance, false);
+        }
+
+        public boolean canUse() {
+            if (this.mob.isVehicle() || mob.getTarget() != null || !this.mob.isInWater() && this.mob instanceof Beholder && ((Beholder) this.mob).isLandNavigator) {
+                return false;
+            } else {
+                if (!this.forceTrigger) {
+                    if (this.mob.getRandom().nextInt(this.interval) != 0) {
+                        return false;
+                    }
+                }
+                Vec3 vector3d = this.getPosition();
+                if (vector3d == null) {
+                    return false;
+                } else {
+                    this.wantedX = vector3d.x;
+                    this.wantedY = vector3d.y;
+                    this.wantedZ = vector3d.z;
+                    this.forceTrigger = false;
+                    return true;
+                }
+            }
+        }
+
+        @Nullable
+        protected Vec3 getPosition() {
+            if(this.mob.hasRestriction() && this.mob.distanceToSqr(Vec3.atCenterOf(this.mob.getRestrictCenter())) > this.mob.getRestrictRadius() * this.mob.getRestrictRadius()){
+                return DefaultRandomPos.getPosTowards(this.mob, 7, 3, Vec3.atBottomCenterOf(this.mob.getRestrictCenter()), 1);
+            }
+            if(this.mob.getRandom().nextFloat() < 0.3F){
+                Vec3 vector3d = findSurfaceTarget(this.mob, 15, 7);
+                if(vector3d != null){
+                    return vector3d;
+                }
+            }
+            Vec3 vector3d = DefaultRandomPos.getPos(this.mob, 7, 3);
+
+            for(int i = 0; vector3d != null && !this.mob.level().getBlockState(this.fromVec3(vector3d)).isPathfindable(this.mob.level(), fromVec3(vector3d), PathComputationType.WATER) && i++ < 15; vector3d = DefaultRandomPos.getPos(this.mob, 10, 7)) {
+            }
+
+            return vector3d;
+        }
+
+        public static final BlockPos fromVec3(Vec3 vec3){
+            return fromCoords(vec3.x, vec3.y, vec3.z);
+        }
+
+        public static final BlockPos fromCoords(double x, double y, double z){
+            return new BlockPos((int) x, (int) y, (int) z);
+        }
+
+        private boolean canJumpTo(BlockPos pos, int dx, int dz, int scale) {
+            BlockPos blockpos = pos.offset(dx * scale, 0, dz * scale);
+            return this.mob.level().getFluidState(blockpos).is(FluidTags.WATER) && !this.mob.level().getBlockState(blockpos).blocksMotion();
+        }
+
+        private boolean isAirAbove(BlockPos pos, int dx, int dz, int scale) {
+            return this.mob.level().getBlockState(pos.offset(dx * scale, 1, dz * scale)).isAir() && this.mob.level().getBlockState(pos.offset(dx * scale, 2, dz * scale)).isAir();
+        }
+
+        private Vec3 findSurfaceTarget(PathfinderMob creature, int i, int i1) {
+            BlockPos upPos = creature.blockPosition();
+            while(creature.level().getFluidState(upPos).is(FluidTags.WATER)){
+                upPos = upPos.above();
+            }
+            if(isAirAbove(upPos.below(), 0, 0, 0) && canJumpTo(upPos.below(), 0, 0, 0)){
+                return new Vec3(upPos.getX() + 0.5F, upPos.getY() - 1F, upPos.getZ() + 0.5F);
+            }
+            return null;
+        }
     }
 
     public class BeholderAttackGoal extends AnimatedAttackGoal{

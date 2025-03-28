@@ -9,7 +9,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.ChudAnimations;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 
@@ -196,10 +195,12 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 	public void setupAnim(Beholder entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isSprinting()){
-			animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, 1);
-		}else {
-			animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f);
+		if (entity.isLandNavigator){
+			if (entity.isSprinting()){
+				animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, 1);
+			}else {
+				animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f);
+			}
 		}
 
 		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
@@ -218,8 +219,15 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		this.animate(entity.keepGrabbingState, BeholderAnims.GRAB_OVERLAY, ageInTicks, 1);
 		this.animate(entity.releaseJawsState, BeholderAnims.GRAB_END, ageInTicks, 1);
 
-		this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
-		this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		if (entity.isLandNavigator){
+			this.body_main.resetPose();
+			this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
+			this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		}else {
+			this.look_control.resetPose();
+			this.body_main.xRot = headPitch * ((float)Math.PI / 180F);
+			this.body_main.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		}
 	}
 
 	@Override
