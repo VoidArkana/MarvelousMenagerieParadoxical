@@ -26,6 +26,13 @@ public class MMItems {
     public static final RegistryObject<Item> OPAL = ITEMS.register("opal",
             () -> new Item(new Item.Properties()));
 
+    //April Fools
+    public static final RegistryObject<Item> RAW_CHUD = ITEMS.register("raw_chud",
+            ()-> new Item(new Item.Properties().food(MMFoods.RAW_SACA)));
+    public static final RegistryObject<Item> COOKED_CHUD = ITEMS.register("cooked_chud",
+            ()-> new Item(new Item.Properties().food(MMFoods.GOLDEN_SACA)));
+
+
     //Chud
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x4c2f33, new Item.Properties()));
@@ -91,12 +98,12 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HALLUCIGENIC_SLIME = ITEMS.register("hallu_slime",
             ()-> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> MAGIC_ROLL = ITEMS.register("magic_roll",
-            ()-> new Item(new Item.Properties().food(MMFoods.MAGIC_ROLL).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> WARNING = ITEMS.register("warning",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MAGIC_ROLL = ITEMS.register("magic_roll",
+            ()-> new Item(new Item.Properties().food(MMFoods.MAGIC_ROLL).rarity(Rarity.RARE)));
 
-    //Falcatus
+    //Falcatus¿
     public static final RegistryObject<Item> FALCA_FOSSIL = ITEMS.register("falca_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FALCA_SPAWN_EGG = ITEMS.register("falcatus_spawn_egg",

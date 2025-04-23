@@ -23,6 +23,9 @@ public class MMBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
+        //april fools
+        blockWithItem(MMBlocks.CHUD_BLOCK);
+
         //sigillaria woodset
         blockWithItem(MMBlocks.SIGILLARIA_PLANKS);
         stairsBlock(((StairBlock) MMBlocks.SIGILLARIA_STAIRS.get()), blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));

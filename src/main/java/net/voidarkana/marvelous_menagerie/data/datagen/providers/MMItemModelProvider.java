@@ -22,6 +22,10 @@ public class MMItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
+        //april fools
+        simpleItem(MMItems.COOKED_CHUD);
+        simpleItem(MMItems.RAW_CHUD);
+
         simpleItem(MMItems.OPAL);
 
         simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);

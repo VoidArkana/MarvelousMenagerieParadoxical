@@ -317,6 +317,9 @@
 
   "item.marvelous_menagerie.chud_spawn_egg": "Chud Spawn Egg",
   "entity.marvelous_menagerie.chud": "Chud",
+  "block.marvelous_menagerie.chud_block": "Chud Block",
+  "item.marvelous_menagerie.raw_chud": "Chud",
+  "item.marvelous_menagerie.cooked_chud": "Cooked Chud",
 
   "item.marvelous_menagerie.beholder_spawn_egg": "Beholder Spawn Egg",
   "entity.marvelous_menagerie.beholder": "Beholder",

@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-22T22:33:30.6149956	Item Models: marvelous_menagerie
+// 1.20.1	2025-04-01T10:51:49.1857792	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -32,6 +32,7 @@ c6dcec6df8edbc14ae5cfe2724044013cea8280a assets/marvelous_menagerie/models/item/
 6f6943a67a09eb82691abfad9c53ece5c80f524c assets/marvelous_menagerie/models/item/chronotite.json
 9143577b91276ad1870b5c415c4c19606a9adde0 assets/marvelous_menagerie/models/item/chronotite_block.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/chud_spawn_egg.json
+f1fdcab04c864ca101cb13d8ee74a527fc28b548 assets/marvelous_menagerie/models/item/cooked_chud.json
 77e9c1c51f69d89b7d0660eb933a93da5d641164 assets/marvelous_menagerie/models/item/cooked_saca.json
 c87d4f308a7dd7459f874db43442972781db599f assets/marvelous_menagerie/models/item/cracked_elephant_egg.json
 4e0842c41a6605140d8803af6fbb07bf88f9ce04 assets/marvelous_menagerie/models/item/daeodon_fossil.json
@@ -153,6 +154,7 @@ a7db1bd22bdcc9b058cc30b9b74406dd3401c2a0 assets/marvelous_menagerie/models/item/
 359a0ef432db3e21d957ec905f457ae0a3115e2c assets/marvelous_menagerie/models/item/prototaxites_slab.json
 7fb7757f7ec215a71c7aa933e42649814f2d1598 assets/marvelous_menagerie/models/item/prototaxites_stairs.json
 b9f40c40bbbf45867657237261e4130b676c293b assets/marvelous_menagerie/models/item/prototaxites_trapdoor.json
+43e87418e940dda451fa617fbe63cca8dd564827 assets/marvelous_menagerie/models/item/raw_chud.json
 7258a878299ed35814f2aa4e46d3e4c6de375488 assets/marvelous_menagerie/models/item/raw_saca.json
 cb35fc8d85b1dbd52d679daa3b3bdda8713e986f assets/marvelous_menagerie/models/item/roach_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/roach_spawn_egg.json

@@ -274,6 +274,9 @@ public class MMBlocks {
                     .lightLevel((pState) -> {return 3 + 3 * pState.getValue(CharniaBlock.PICKLES);})));
 
 
+    //April Fools
+    public static final RegistryObject<Block> CHUD_BLOCK = registerBlock("chud_block",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.FROGSPAWN)));
 
     //shale
     public static final RegistryObject<Block> SHALE = registerBlock("shale",
