@@ -54,6 +54,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.ROACH_LAYER, RoachModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BEHOLDER_LAYER, BeholderModel::createBodyLayer);
 
+        event.registerLayerDefinition(MMModelLayers.DAWNHORSE_LAYER, DawnHorseModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
     }
 

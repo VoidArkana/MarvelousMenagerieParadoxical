@@ -81,11 +81,11 @@ public class MMEntities {
                     .build(new ResourceLocation(MarvelousMenagerie.MODID,"beholder").toString()));
 
 
-//    public static final RegistryObject<EntityType<DawnHorse>> DAWN_HORSE =
-//            ENTITIES.register("dawn_horse",
-//                    () -> EntityType.Builder.of(DawnHorse::new, MobCategory.CREATURE)
-//                            .sized(0.5F, 0.5F)
-//                            .build("dawn_horse"));
+    public static final RegistryObject<EntityType<DawnHorse>> DAWN_HORSE =
+            ENTITY_TYPES.register("dawn_horse",
+                    () -> EntityType.Builder.of(DawnHorse::new, MobCategory.CREATURE)
+                            .sized(0.5F, 0.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID,"dawn_horse").toString()));
 
 //    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS = ENTITIES.register("doedicurus", () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE).sized(1.75F, 1.75F).build("doedicurus"));
 //    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM = ENTITIES.register("leptictidium", () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE).sized(0.5F, 0.4F).build("leptictidium"));

@@ -79,6 +79,7 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.PIKAIA.get(), PikaiaRenderer::new);
         EntityRenderers.register(MMEntities.ROACH.get(), RoachRenderer::new);
         EntityRenderers.register(MMEntities.BEHOLDER.get(), BeholderRenderer::new);
+        EntityRenderers.register(MMEntities.DAWN_HORSE.get(), DawnHorseRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);

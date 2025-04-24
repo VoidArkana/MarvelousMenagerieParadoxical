@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_dawn_horse_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:dawn_horse",
+    "weight": 4,
+    "minCount": 3,
+    "maxCount": 6,
+    "category": "creature"
+  }
+}

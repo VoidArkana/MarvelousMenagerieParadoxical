@@ -48,6 +48,9 @@ public class MMTags {
 
         public static final TagKey<Biome> PERMAFROST_BIOMES = create("permafrost_biomes");
 
+        public static final TagKey<Biome> ROACH_BIOMES = create("is_roach_biome");
+        public static final TagKey<Biome> DAWN_HORSE_BIOMES = create("is_dawn_horse_biome");
+
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MODID, pName));
         }
@@ -87,6 +90,7 @@ public class MMTags {
     public static class Items {
 
         public static final TagKey<Item> FINTASTIC_BAD_FEED = tag("fintastic_bad_feed");
+        public static final TagKey<Item> FINTASTIC_ALL_FEEDS = tag("fintastic_all_feeds");
         public static final TagKey<Item> FINTASTIC_FEED = tag("fintastic_regular_feed");
         public static final TagKey<Item> FINTASTIC_QUALITY_FEED = tag("fintastic_quality_feed");
         public static final TagKey<Item> FINTASTIC_GREAT_FEED = tag("fintastic_great_feed");

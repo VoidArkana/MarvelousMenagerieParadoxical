@@ -46,5 +46,9 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
 
         tag(MMTags.Biomes.PERMAFROST_BIOMES).addTags(BiomeTags.SPAWNS_SNOW_FOXES)
                 .addTags(BiomeTags.HAS_IGLOO).addTags(BiomeTags.HAS_VILLAGE_SNOWY).addTags(Tags.Biomes.IS_SNOWY);
+
+        tag(MMTags.Biomes.ROACH_BIOMES).addTags(BiomeTags.IS_SAVANNA).add(Biomes.DRIPSTONE_CAVES);
+
+        tag(MMTags.Biomes.DAWN_HORSE_BIOMES).addTags(BiomeTags.IS_TAIGA).addTags(BiomeTags.IS_FOREST);
     }
 }

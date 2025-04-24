@@ -587,7 +587,10 @@
   "entity.marvelous_menagerie.tlato": "Tlatolophus",
   "entity.marvelous_menagerie.borealo": "Borealopelta",
   "entity.marvelous_menagerie.daeodon": "Daeodon",
-  "entity.marvelous_menagerie.eohippus": "Dawn Horse",
+
+  "entity.marvelous_menagerie.dawn_horse": "Dawn Horse",
+  "item.marvelous_menagerie.dawn_horse_spawn_egg": "Dawn Horse Spawn Egg",
+
   "entity.marvelous_menagerie.lepti": "Leptictidium",
   "entity.marvelous_menagerie.kelenken": "Kelenken",
   "entity.marvelous_menagerie.doedicurus": "Doedicurus",
@@ -600,6 +603,7 @@
   "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites",
 
   "item.marvelous_menagerie.opal": "Opal",
+  "item.marvelous_menagerie.chrono_watch": "Chronotite Watch",
 
   "creativetab.marvelous_menagerie_tab_mobs": "Marvelous Menagerie - Mobs",
   "creativetab.marvelous_menagerie_tab_plants": "Marvelous Menagerie - Plants",

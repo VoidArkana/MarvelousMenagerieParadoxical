@@ -25,6 +25,7 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
+import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.NotNull;
@@ -74,10 +75,17 @@ public class AltarBlockEntity extends BlockEntityBase {
             } else {
                 if (this.hasFracture && getFracture(pos)!=null){
 
+                    ItemStack item = player.getItemInHand(hand);
+
                     Fracture fracture = getFracture(pos);
-                    if (!fracture.isValid()){
+                    if (!fracture.isValid() || !item.is(MMItems.CHRONO_WATCH.get())){
                         return InteractionResult.FAIL;
-                    }else {
+                    }else{
+
+                        if (!player.isCreative()){
+                            item.shrink(1);
+                        }
+
                         EntityType<?> entitytype = MMEntities.CHUD.get();
 
                         for (RitualManager.RitualProcessData data : RitualManager.DATA) {
@@ -121,8 +129,8 @@ public class AltarBlockEntity extends BlockEntityBase {
                         }else {
                             this.getFracture(pos).summonCreature(entitytype);
                         }
-
                     }
+
                 }else {
                     Fracture fracture = new Fracture(this.level, pos.getCenter().x(), pos.getCenter().y()+2, pos.getCenter().z());
                     fracture.setIsNatural(false);

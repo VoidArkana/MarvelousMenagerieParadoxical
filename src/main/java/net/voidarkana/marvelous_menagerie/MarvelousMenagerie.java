@@ -1,5 +1,10 @@
 package net.voidarkana.marvelous_menagerie;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -8,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +35,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotions;
 import net.voidarkana.marvelous_menagerie.common.enchantment.MMEnchantmentsClass;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntityPlacements;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.DawnHorse;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
@@ -46,6 +53,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MarvelousMenagerie.MODID)
@@ -98,6 +106,7 @@ public class MarvelousMenagerie
 
         eventBus.register(new MMEvents());
         eventBus.register(new ServerEvents());
+        eventBus.addListener(this::addEntityGoals);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC,
                 "marvelous_menagerie.toml");
@@ -133,8 +142,17 @@ public class MarvelousMenagerie
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
+    {}
 
+    private static final Predicate<LivingEntity> ADDITIONAL_PREY_SELECTOR = (p_289448_) -> {
+        EntityType<?> entitytype = p_289448_.getType();
+        return entitytype == MMEntities.DAWN_HORSE.get();
+    };
+
+    private void addEntityGoals(EntityJoinLevelEvent e) {
+        if (e.getEntity() instanceof Wolf wolf) {
+            wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, DawnHorse.class, false, ADDITIONAL_PREY_SELECTOR));
+        }
     }
 
 //    @SubscribeEvent

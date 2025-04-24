@@ -27,6 +27,7 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.RAW_CHUD);
 
         simpleItem(MMItems.OPAL);
+        simpleItem(MMItems.CHRONO_WATCH);
 
         simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);
 
@@ -118,7 +119,10 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.TLATO_FOSSIL);
         simpleItem(MMItems.PELTA_FOSSIL);
         simpleItem(MMItems.DAEODON_FOSSIL);
+
         simpleItem(MMItems.DAWN_FOSSIL);
+        withExistingParent(MMItems.DAWN_HORSE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         simpleItem(MMItems.LEPTI_FOSSIL);
 
         simpleItem(MMItems.EOLACTORIA_FOSSIL);

@@ -100,6 +100,17 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
 
+        //Chrono Watch
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MMItems.CHRONO_WATCH.get(), 1)
+                .pattern(" C ")
+                .pattern("COC")
+                .pattern(" C ")
+                .define('O', MMItems.OPAL.get())
+                .define('C', MMItems.CHRONOTITE.get())
+                .unlockedBy(getHasName(MMItems.OPAL.get()), has(MMItems.CHRONOTITE.get()))
+                .save(consumer);
+
+
         //Sigillaria mosaic
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.SIGILLARIA_MOSAIC.get(), 1)
                 .pattern("S")

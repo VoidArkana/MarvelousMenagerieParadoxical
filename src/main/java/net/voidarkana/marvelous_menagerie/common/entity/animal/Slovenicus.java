@@ -39,7 +39,7 @@ public class Slovenicus extends AbstractBasicFish {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.6F);
+                .add(Attributes.MOVEMENT_SPEED, 0.5F);
     }
 
     @Nullable

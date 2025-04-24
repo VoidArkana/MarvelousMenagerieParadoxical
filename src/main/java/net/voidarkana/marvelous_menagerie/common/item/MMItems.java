@@ -25,6 +25,8 @@ public class MMItems {
 
     public static final RegistryObject<Item> OPAL = ITEMS.register("opal",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHRONO_WATCH = ITEMS.register("chrono_watch",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(16)));
 
     //April Fools
     public static final RegistryObject<Item> RAW_CHUD = ITEMS.register("raw_chud",
@@ -158,6 +160,8 @@ public class MMItems {
     //Dawn Horse
     public static final RegistryObject<Item> DAWN_FOSSIL = ITEMS.register("dawn_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DAWN_HORSE_SPAWN_EGG = ITEMS.register("dawn_horse_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.DAWN_HORSE, 0xb89268, 0xffe5b1, new Item.Properties()));
 
     //Leptictidium
     public static final RegistryObject<Item> LEPTI_FOSSIL = ITEMS.register("lepti_fossil",

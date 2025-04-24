@@ -59,6 +59,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         this.targetSelector.addGoal(0, (new HurtByTargetGoal(this)).setAlertOthers());
 
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.foodIngredients(), false));
         this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.5D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(1, new OrganizeBoidsGoal(this));

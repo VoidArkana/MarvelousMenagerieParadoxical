@@ -1,8 +1,11 @@
 package net.voidarkana.marvelous_menagerie.event;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +37,7 @@ public class MMEvents {
         event.put(MMEntities.PIKAIA.get(), Pikaia.createAttributes().build());
         event.put(MMEntities.ROACH.get(), Apthoroblattina.createAttributes().build());
         event.put(MMEntities.BEHOLDER.get(), Beholder.createAttributes().build());
+        event.put(MMEntities.DAWN_HORSE.get(), DawnHorse.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());
@@ -76,5 +80,4 @@ public class MMEvents {
         event.addListener(new NeogeneEntryManager());
         event.addListener(new QuaternaryEntryManager());
     }
-
 }

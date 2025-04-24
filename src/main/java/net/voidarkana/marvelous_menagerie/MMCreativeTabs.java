@@ -86,6 +86,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());
                         output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
+                        output.accept(MMItems.DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
@@ -170,12 +171,14 @@ public class MMCreativeTabs {
 
                         output.accept(MMBlocks.PALEO_TABLE.get());
 
-                        output.accept(MMItems.OPAL.get());
-
                         output.accept(MMItems.CHRONOTITE.get());
                         output.accept(MMBlocks.CHRONOTITE.get());
                         output.accept(MMBlocks.CHRONO_ALTAR.get());
                         output.accept(MMBlocks.CHRONO_PEDESTAL.get());
+
+                        output.accept(MMItems.OPAL.get());
+
+                        output.accept(MMItems.CHRONO_WATCH.get());
 
                         output.accept(MMItems.SHALE_FOSSIL.get());
                         output.accept(MMItems.SILTSTONE_FOSSIL.get());

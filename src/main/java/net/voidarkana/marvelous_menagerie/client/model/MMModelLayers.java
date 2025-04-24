@@ -31,6 +31,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "roach"), "main");
     public static final ModelLayerLocation BEHOLDER_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "beholder"), "main");
+    public static final ModelLayerLocation DAWNHORSE_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "dawn_horse"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");
