@@ -87,6 +87,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
                         output.accept(MMItems.DAWN_HORSE_SPAWN_EGG.get());
+                        output.accept(MMItems.SKELETON_DAWN_HORSE_SPAWN_EGG.get());
+                        output.accept(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());

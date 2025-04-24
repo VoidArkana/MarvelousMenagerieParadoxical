@@ -87,6 +87,20 @@ public class MMEntities {
                             .sized(0.5F, 0.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID,"dawn_horse").toString()));
 
+
+    public static final RegistryObject<EntityType<SkeletonDawnHorse>> SKELETON_DAWN_HORSE =
+            ENTITY_TYPES.register("skeleton_dawn_horse",
+                    () -> EntityType.Builder.of(SkeletonDawnHorse::new, MobCategory.MONSTER)
+                            .sized(0.5F, 0.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID,"skeleton_dawn_horse").toString()));
+
+
+    public static final RegistryObject<EntityType<ZombieDawnHorse>> ZOMBIE_DAWN_HORSE =
+            ENTITY_TYPES.register("zombie_dawn_horse",
+                    () -> EntityType.Builder.of(ZombieDawnHorse::new, MobCategory.MONSTER)
+                            .sized(0.5F, 0.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID,"zombie_dawn_horse").toString()));
+
 //    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS = ENTITIES.register("doedicurus", () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE).sized(1.75F, 1.75F).build("doedicurus"));
 //    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM = ENTITIES.register("leptictidium", () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE).sized(0.5F, 0.4F).build("leptictidium"));
 //    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));

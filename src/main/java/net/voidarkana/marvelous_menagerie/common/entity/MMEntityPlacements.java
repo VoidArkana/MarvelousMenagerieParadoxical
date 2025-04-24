@@ -12,6 +12,7 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.RIFT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 RiftEntity::checkRiftSpawnRules);
 
+
         SpawnPlacements.register(MMEntities.SACABAMBASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sacabambaspis::checkSurfaceWaterDinoSpawnRules);
         SpawnPlacements.register(MMEntities.ANOMALOCARIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Anomalocaris::checkSurfaceWaterDinoSpawnRules);
         SpawnPlacements.register(MMEntities.PIKAIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pikaia::checkSurfaceWaterDinoSpawnRules);
@@ -22,6 +23,9 @@ public class MMEntityPlacements {
 
         SpawnPlacements.register(MMEntities.ROACH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Apthoroblattina::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.DAWN_HORSE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DawnHorse::checkAnimalSpawnRules);
+
+        SpawnPlacements.register(MMEntities.SKELETON_DAWN_HORSE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                SkeletonDawnHorse::checkMonsterSpawnRules);
 
 //        SpawnPlacements.register(MMEntities.DODO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DodoEntity::checkSurfaceDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.THYLACINE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ThylacineEntity::checkSurfaceDinoSpawnRules);

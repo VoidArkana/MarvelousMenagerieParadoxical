@@ -38,6 +38,8 @@ public class MMEvents {
         event.put(MMEntities.ROACH.get(), Apthoroblattina.createAttributes().build());
         event.put(MMEntities.BEHOLDER.get(), Beholder.createAttributes().build());
         event.put(MMEntities.DAWN_HORSE.get(), DawnHorse.createAttributes().build());
+        event.put(MMEntities.ZOMBIE_DAWN_HORSE.get(), DawnHorse.createAttributes().build());
+        event.put(MMEntities.SKELETON_DAWN_HORSE.get(), DawnHorse.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());

@@ -55,6 +55,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BEHOLDER_LAYER, BeholderModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.DAWNHORSE_LAYER, DawnHorseModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.SKELETON_DAWNHORSE_LAYER, SkeletonDawnHorseModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.ZOMBIE_DAWNHORSE_LAYER, ZombieDawnHorseModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
     }

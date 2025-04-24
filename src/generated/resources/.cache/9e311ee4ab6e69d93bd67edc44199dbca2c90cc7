@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-23T19:51:56.800888	Item Models: marvelous_menagerie
+// 1.20.1	2025-04-24T15:08:28.8608362	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -195,6 +195,7 @@ ebf12f1fe2fa5596b9a479babeb8dbe6f9568ccc assets/marvelous_menagerie/models/item/
 4724488f8107e6334d5af3249d9c462469ae85a3 assets/marvelous_menagerie/models/item/siltstone_slab.json
 e65325da2b0630ddbc365e45ef58a5f508562bbc assets/marvelous_menagerie/models/item/siltstone_stairs.json
 54a1a840253dfea6fae8fb42539c47ff13cc441d assets/marvelous_menagerie/models/item/siltstone_wall.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/skeleton_dawn_horse_spawn_egg.json
 be34c6639c622a60d4baaaf45d2004dfbd47b4c1 assets/marvelous_menagerie/models/item/slovenicus_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/slovenicus_spawn_egg.json
 7d459309a7fc315fa71a0e8e5808be7435a3fe4a assets/marvelous_menagerie/models/item/slov_fossil.json
@@ -208,3 +209,4 @@ b8fe239d7b3bf2f8257cb2c9fd3b43ab833bc1f5 assets/marvelous_menagerie/models/item/
 6da3c90c5874c9372b2bc8f9e61d7f3acce49dc6 assets/marvelous_menagerie/models/item/trilo_bite.json
 54f3b34f9e53be305dfcadad94b2eb8e41e1c34d assets/marvelous_menagerie/models/item/trilo_fossil.json
 d75fd3b022ac14b579c412cad6e46315b1d1f0b0 assets/marvelous_menagerie/models/item/warning.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/zombie_dawn_horse_spawn_egg.json

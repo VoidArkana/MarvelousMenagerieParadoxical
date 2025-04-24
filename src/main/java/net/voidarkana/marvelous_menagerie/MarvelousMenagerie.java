@@ -4,19 +4,18 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -144,28 +143,17 @@ public class MarvelousMenagerie
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {}
 
-    private static final Predicate<LivingEntity> ADDITIONAL_PREY_SELECTOR = (p_289448_) -> {
+    private static final Predicate<LivingEntity> DAWN_HORSE_PREY = (p_289448_) -> {
         EntityType<?> entitytype = p_289448_.getType();
         return entitytype == MMEntities.DAWN_HORSE.get();
     };
 
     private void addEntityGoals(EntityJoinLevelEvent e) {
         if (e.getEntity() instanceof Wolf wolf) {
-            wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, DawnHorse.class, false, ADDITIONAL_PREY_SELECTOR));
+            wolf.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(wolf, DawnHorse.class, false, DAWN_HORSE_PREY));
+        }
+        if (e.getEntity() instanceof Cat cat) {
+            cat.targetSelector.addGoal(4, new NonTameRandomTargetGoal<>(cat, DawnHorse.class, false, DAWN_HORSE_PREY));
         }
     }
-
-//    @SubscribeEvent
-//    public void onServerStarting(ServerStartingEvent event)
-//    {
-//
-//    }
-//
-//    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-//    public static class ClientModEvents
-//    {
-//        @SubscribeEvent
-//        public static void onClientSetup(FMLClientSetupEvent event) {
-//        }
-//    }
 }

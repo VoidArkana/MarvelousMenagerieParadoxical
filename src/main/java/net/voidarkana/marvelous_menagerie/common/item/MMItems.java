@@ -162,6 +162,10 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DAWN_HORSE_SPAWN_EGG = ITEMS.register("dawn_horse_spawn_egg",
             () -> new ForgeSpawnEggItem(MMEntities.DAWN_HORSE, 0xb89268, 0xffe5b1, new Item.Properties()));
+    public static final RegistryObject<Item> SKELETON_DAWN_HORSE_SPAWN_EGG = ITEMS.register("skeleton_dawn_horse_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.SKELETON_DAWN_HORSE, 0xf4d4a2, 0xffeec6, new Item.Properties()));
+    public static final RegistryObject<Item> ZOMBIE_DAWN_HORSE_SPAWN_EGG = ITEMS.register("zombie_dawn_horse_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.ZOMBIE_DAWN_HORSE, 0x574d3c, 0x8a8667, new Item.Properties()));
 
     //Leptictidium
     public static final RegistryObject<Item> LEPTI_FOSSIL = ITEMS.register("lepti_fossil",

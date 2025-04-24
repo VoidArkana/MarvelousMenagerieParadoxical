@@ -589,7 +589,11 @@
   "entity.marvelous_menagerie.daeodon": "Daeodon",
 
   "entity.marvelous_menagerie.dawn_horse": "Dawn Horse",
+  "entity.marvelous_menagerie.skeleton_dawn_horse": "Fossil Dawn Horse",
+  "entity.marvelous_menagerie.zombie_dawn_horse": "Zombie Dawn Horse",
   "item.marvelous_menagerie.dawn_horse_spawn_egg": "Dawn Horse Spawn Egg",
+  "item.marvelous_menagerie.skeleton_dawn_horse_spawn_egg": "Fossil Dawn Horse Spawn Egg",
+  "item.marvelous_menagerie.zombie_dawn_horse_spawn_egg": "Zombie Dawn Horse Spawn Egg",
 
   "entity.marvelous_menagerie.lepti": "Leptictidium",
   "entity.marvelous_menagerie.kelenken": "Kelenken",

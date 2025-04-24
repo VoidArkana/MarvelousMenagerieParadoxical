@@ -10,6 +10,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -18,21 +20,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import org.jetbrains.annotations.Nullable;
 
-public class DawnHorse extends Animal {
 
-    public DawnHorse(EntityType<? extends Animal> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
+public class DawnHorse extends Animal {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleTailState = new AnimationState();
     public final AnimationState idleEarsState = new AnimationState();
     public final AnimationState neighState = new AnimationState();
+
+    public DawnHorse(EntityType<? extends Animal> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
 
     private int idleTailTimeout = 0;
     private int idleEarsTimeout = 0;
@@ -45,23 +46,23 @@ public class DawnHorse extends Animal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Wolf.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.GOLDEN_CARROT), false));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1D));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-//        this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0F).add(Attributes.MOVEMENT_SPEED, 0.25F);
     }
 
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.GOLDEN_CARROT);
-    }
-
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0F).add(Attributes.MOVEMENT_SPEED, 0.25F);
     }
 
     private void setupAnimationStates() {
@@ -127,9 +128,30 @@ public class DawnHorse extends Animal {
         return SoundEvents.HORSE_AMBIENT;
     }
 
+    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
+        if (pFallDistance > 1.0F) {
+            this.playSound(SoundEvents.HORSE_LAND, 0.4F, 1.0F);
+        }
+
+        int i = this.calculateFallDamage(pFallDistance, pMultiplier);
+        if (i <= 0) {
+            return false;
+        } else {
+            this.hurt(pSource, (float)i);
+            if (this.isVehicle()) {
+                for(Entity entity : this.getIndirectPassengers()) {
+                    entity.hurt(pSource, (float)i);
+                }
+            }
+
+            this.playBlockFallSound();
+            return true;
+        }
+    }
+
     @Override
     public float getVoicePitch() {
-        return this.isBaby() ? 3 : 2.2F;
+        return this.isBaby() ? 3.2f : 2.2F;
     }
 
     public void customServerAiStep() {
@@ -173,6 +195,4 @@ public class DawnHorse extends Animal {
     protected void playGallopSound(SoundType pSoundType) {
         this.playSound(SoundEvents.HORSE_GALLOP, pSoundType.getVolume() * 0.15F, pSoundType.getPitch());
     }
-
-
 }
