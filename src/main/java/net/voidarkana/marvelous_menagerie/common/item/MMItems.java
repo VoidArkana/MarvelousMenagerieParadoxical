@@ -98,6 +98,11 @@ public class MMItems {
     //Hallucigenia
     public static final RegistryObject<Item> HALLU_FOSSIL = ITEMS.register("hallu_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HALLUCIGENIA_SPAWN_EGG = ITEMS.register("hallu_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.HALLUCIGENIA, 0xcd90cd, 0xcd90cd, new Item.Properties()));
+    public static final RegistryObject<Item> HALLUCIGENIA_BUCKET = ITEMS.register("hallu_bucket",
+            () -> new FishBucketItem(MMEntities.HALLUCIGENIA, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
     public static final RegistryObject<Item> HALLUCIGENIC_SLIME = ITEMS.register("hallu_slime",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WARNING = ITEMS.register("warning",

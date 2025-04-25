@@ -101,6 +101,12 @@ public class MMEntities {
                             .sized(0.5F, 0.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID,"zombie_dawn_horse").toString()));
 
+    public static final RegistryObject<EntityType<Hallucigenia>> HALLUCIGENIA =
+            ENTITY_TYPES.register("hallucigenia",
+                    () -> EntityType.Builder.of(Hallucigenia::new, MobCategory.WATER_AMBIENT)
+                            .sized(1f, 0.7f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia").toString()));
+
 //    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS = ENTITIES.register("doedicurus", () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE).sized(1.75F, 1.75F).build("doedicurus"));
 //    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM = ENTITIES.register("leptictidium", () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE).sized(0.5F, 0.4F).build("leptictidium"));
 //    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));

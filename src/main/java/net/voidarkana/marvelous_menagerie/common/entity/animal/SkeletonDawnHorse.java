@@ -12,13 +12,11 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.dimension.DimensionType;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.SkeletonDawnHorseRenderer;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import org.jetbrains.annotations.Nullable;
 

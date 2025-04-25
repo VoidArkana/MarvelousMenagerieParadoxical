@@ -1,7 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.entity;
 
 import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
@@ -13,13 +12,13 @@ public class MMEntityPlacements {
                 RiftEntity::checkRiftSpawnRules);
 
 
-        SpawnPlacements.register(MMEntities.SACABAMBASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sacabambaspis::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.ANOMALOCARIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Anomalocaris::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.PIKAIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pikaia::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.ARANDASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Arandaspis::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.FALCATUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pikaia::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.SLOVENICUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Slovenicus::checkSurfaceWaterDinoSpawnRules);
-        SpawnPlacements.register(MMEntities.EOLACTORIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Eolactoria::checkSurfaceWaterDinoSpawnRules);
+        SpawnPlacements.register(MMEntities.SACABAMBASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Sacabambaspis::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.ANOMALOCARIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Anomalocaris::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.PIKAIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pikaia::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.ARANDASPIS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Arandaspis::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.FALCATUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Pikaia::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.SLOVENICUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Slovenicus::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.EOLACTORIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Eolactoria::checkSurfaceWaterCreatureRules);
 
         SpawnPlacements.register(MMEntities.ROACH.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Apthoroblattina::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.DAWN_HORSE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DawnHorse::checkAnimalSpawnRules);
