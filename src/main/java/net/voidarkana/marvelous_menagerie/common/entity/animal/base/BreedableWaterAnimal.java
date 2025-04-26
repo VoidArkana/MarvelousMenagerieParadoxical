@@ -598,8 +598,12 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
     }
 
+    public boolean canSwim(){
+        return true;
+    }
+
     public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
+        if (this.isEffectiveAi() && this.isInWater() && this.canSwim()) {
             this.moveRelative(this.getSpeed(), pTravelVector);
             this.move(MoverType.SELF, this.getDeltaMovement());
             this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));

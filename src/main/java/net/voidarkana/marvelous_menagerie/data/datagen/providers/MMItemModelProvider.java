@@ -94,6 +94,8 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.MAGIC_ROLL);
         simpleItem(MMItems.HALLUCIGENIC_SLIME);
         simpleItem(MMItems.WARNING);
+        withExistingParent(MMItems.HALLUCIGENIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(MMItems.HALLUCIGENIA_BUCKET);
 
         simpleItem(MMItems.TRILO_FOSSIL);
         simpleItem(MMItems.TRILO_BITE);

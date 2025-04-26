@@ -57,8 +57,8 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
     public int attackAnimationTimeout;
 
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState flopAnimationState = new AnimationState();
+    public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState shakeAnimationState = new AnimationState();
 

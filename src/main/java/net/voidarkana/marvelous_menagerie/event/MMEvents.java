@@ -40,6 +40,7 @@ public class MMEvents {
         event.put(MMEntities.DAWN_HORSE.get(), DawnHorse.createAttributes().build());
         event.put(MMEntities.ZOMBIE_DAWN_HORSE.get(), DawnHorse.createAttributes().build());
         event.put(MMEntities.SKELETON_DAWN_HORSE.get(), DawnHorse.createAttributes().build());
+        event.put(MMEntities.HALLUCIGENIA.get(), Hallucigenia.createAttributes().build());
 
 //        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.THYLACINE.get(), ThylacineEntity.createAttributes().build());
@@ -48,7 +49,6 @@ public class MMEvents {
 //        event.put(MMEntities.TRILOBITE.get(), TrilobiteEntity.createAttributes().build());
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());
 //        event.put(MMEntities.JOSEPHO.get(), JosephoEntity.createAttributes().build());
-//        event.put(MMEntities.HALLUCIGENIA.get(), HallucigeniaEntity.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

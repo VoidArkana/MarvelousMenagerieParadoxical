@@ -36,6 +36,7 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.FALCA_BUCKET.get());
 
+                        output.accept(MMItems.HALLUCIGENIA_BUCKET.get());
                         output.accept(MMItems.HALLUCIGENIC_SLIME.get());
                         output.accept(MMItems.MAGIC_ROLL.get());
 
@@ -91,6 +92,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
+                        output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());

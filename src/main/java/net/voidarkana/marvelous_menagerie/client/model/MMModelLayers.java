@@ -37,6 +37,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "skeleton_dawn_horse"), "main");
     public static final ModelLayerLocation ZOMBIE_DAWNHORSE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "zombie_dawn_horse"), "main");
+    public static final ModelLayerLocation HALLU_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");

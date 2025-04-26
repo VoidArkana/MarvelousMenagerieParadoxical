@@ -19,6 +19,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.JumpControl;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -26,6 +28,7 @@ import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +37,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
@@ -44,6 +48,9 @@ import java.util.function.Predicate;
 
 public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
 
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState flopAnimationState = new AnimationState();
+
     private static final Predicate<LivingEntity> SCARY_MOB = (p_289442_) -> {
         if (p_289442_ instanceof Player && ((Player)p_289442_).isCreative()) {
             return false;
@@ -51,6 +58,23 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
             return p_289442_.getType() == EntityType.AXOLOTL || p_289442_.getMobType() != MobType.WATER;
         }
     };
+
+    static class FishJumpControl extends JumpControl {
+
+        Hallucigenia mob;
+        public FishJumpControl(Hallucigenia fish) {
+            super(fish);
+            mob = fish;
+        }
+
+        @Override
+        public void jump() {
+            if (!mob.isInWater()){
+                super.jump();
+            }
+        }
+    }
+
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(SCARY_MOB);
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
@@ -58,13 +82,15 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
     public Hallucigenia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 1, 1, 1, 0.1F, true);
+        this.jumpControl = new FishJumpControl(this);
+//        this.moveControl = new SmoothSwimmingMoveControl(this, 1, 10, 0.02F, 0.1F, true);
+        this.lookControl = new LookControl(this);
         this.setMaxUpStep(1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D);
+                .add(Attributes.MOVEMENT_SPEED, 0.25f);
     }
 
     @Override
@@ -72,7 +98,13 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         super.registerGoals();
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1));
-        this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80){
+            @Nullable
+            @Override
+            protected Vec3 getPosition() {
+                return DefaultRandomPos.getPos(this.mob, 10, 0);
+            }
+        });
     }
 
     protected void defineSynchedData() {
@@ -92,6 +124,16 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
 
     protected PathNavigation createNavigation(Level pLevel) {
         return new WaterBoundPathNavigation(this, pLevel);
+    }
+
+    @Override
+    public boolean canFlop() {
+        return false;
+    }
+
+    @Override
+    public boolean canSwim() {
+        return false;
     }
 
     public void aiStep() {
@@ -121,6 +163,21 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
             }
         }
 
+    }
+
+    @Override
+    public void tick() {
+        if (this.level().isClientSide()){
+            this.setupAnimationStates();
+        }
+        super.tick();
+    }
+
+    private void setupAnimationStates() {
+
+        this.idleAnimationState.animateWhen(this.isInWaterOrBubble(), this.tickCount);
+
+        this.flopAnimationState.animateWhen(!this.isInWaterOrBubble(), this.tickCount);
     }
 
     @Override
@@ -190,6 +247,8 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         Bucketable.saveDefaultDataToBucketTag(this, bucket);
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
+        compoundnbt.putInt("Age", this.getAge());
+        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -218,8 +277,11 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("FromEgg", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             this.setFromBucket(true);
+            if (dataTag.contains("Age")) {
+                this.setAge(dataTag.getInt("Age"));}
+            this.setCanGrowUp(dataTag.getBoolean("CanGrow"));
         }
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);

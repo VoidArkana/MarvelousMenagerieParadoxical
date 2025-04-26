@@ -101,25 +101,28 @@ public class SkeletonDawnHorse extends DawnHorse{
     }
 
     public static final Predicate<Entity> BABY_ZOMBIE = (entity) -> {
-        return entity.isAlive() && entity instanceof Zombie && ((Zombie) entity).isBaby();
+        return entity.isAlive() && entity instanceof Zombie && ((Zombie) entity).isBaby() && !entity.isPassenger();
     };
 
     @javax.annotation.Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @javax.annotation.Nullable SpawnGroupData pSpawnData, @javax.annotation.Nullable CompoundTag pDataTag) {
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
 
-        List<Zombie> list = pLevel.getEntitiesOfClass(Zombie.class, this.getBoundingBox().inflate(5.0D, 3.0D, 5.0D), BABY_ZOMBIE);
-        if (!list.isEmpty()) {
-            Zombie zombie = list.get(0);
-            zombie.startRiding(this);
-        }else {
-            Zombie baby = EntityType.ZOMBIE.create(this.level());
-            if (baby != null) {
-                baby.setBaby(true);
-                baby.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
-                baby.finalizeSpawn(pLevel, pDifficulty, MobSpawnType.JOCKEY, null, null);
-                baby.startRiding(this);
-                pLevel.addFreshEntity(baby);
+        if (pReason == MobSpawnType.NATURAL){
+
+            List<Zombie> list = pLevel.getEntitiesOfClass(Zombie.class, this.getBoundingBox().inflate(5.0D, 3.0D, 5.0D), BABY_ZOMBIE);
+            if (!list.isEmpty()) {
+                Zombie zombie = list.get(0);
+                zombie.startRiding(this);
+            }else {
+                Zombie baby = EntityType.ZOMBIE.create(this.level());
+                if (baby != null) {
+                    baby.setBaby(true);
+                    baby.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+                    baby.finalizeSpawn(pLevel, pDifficulty, MobSpawnType.JOCKEY, null, null);
+                    baby.startRiding(this);
+                    pLevel.addFreshEntity(baby);
+                }
             }
         }
 

@@ -614,5 +614,7 @@
   "creativetab.marvelous_menagerie_tab_misc": "Marvelous Menagerie - Miscelaneous",
 
   "entity.marvelous_menagerie.rift": "Temporal Rift",
-  "entity.marvelous_menagerie.fracture": "Time Fracture"
+  "entity.marvelous_menagerie.fracture": "Time Fracture",
+
+  "item.nirvana.potion_bon.effect.hallu_extract": "Hallucigenic Bong"
 }

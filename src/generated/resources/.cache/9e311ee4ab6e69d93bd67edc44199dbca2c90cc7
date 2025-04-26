@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-24T15:08:28.8608362	Item Models: marvelous_menagerie
+// 1.20.1	2025-04-25T22:00:13.4853528	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -72,8 +72,10 @@ fc450b6e249044ca5d0a1c8fd8d4c1e199c28bdd assets/marvelous_menagerie/models/item/
 660f47b28f0855619fd5dc7ddc3ba1d25d6fb714 assets/marvelous_menagerie/models/item/gabbro_wall.json
 40747d59545a2485d9008684bb40439f3ea1ff2e assets/marvelous_menagerie/models/item/golden_saca.json
 735ad6ddc5d61d624fe79ebddf679c664e05010c assets/marvelous_menagerie/models/item/gorgon_fossil.json
+c195b41e907f04904958e4854f2f0c641e3f0591 assets/marvelous_menagerie/models/item/hallu_bucket.json
 843e65eb652d1913794e94ef45fb56a4674f0c04 assets/marvelous_menagerie/models/item/hallu_fossil.json
 ee2a76101a5fc02e1a45b0cddc1873e3bce6789e assets/marvelous_menagerie/models/item/hallu_slime.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/hallu_spawn_egg.json
 b424e41b5959b8e383f712e86b4ed57dd59b4403 assets/marvelous_menagerie/models/item/josepho_fossil.json
 9bbebfd123c6cea8d60e970a32038c196e594740 assets/marvelous_menagerie/models/item/jumbo_omelette.json
 dd66a5284143d29756a1073617a65abf339ddb5b assets/marvelous_menagerie/models/item/kelenken_fossil.json
