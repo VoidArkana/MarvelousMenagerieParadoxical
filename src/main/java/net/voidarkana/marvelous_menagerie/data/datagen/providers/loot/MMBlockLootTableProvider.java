@@ -29,6 +29,8 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
 
         this.dropSelf(MMBlocks.CHUD_BLOCK.get());
 
+        this.dropSelf(MMBlocks.OPAL_BLOCK.get());
+
         this.dropSelf(MMBlocks.PALEO_TABLE.get());
         this.dropSelf(MMBlocks.CHRONO_ALTAR.get());
         this.dropSelf(MMBlocks.CHRONO_PEDESTAL.get());

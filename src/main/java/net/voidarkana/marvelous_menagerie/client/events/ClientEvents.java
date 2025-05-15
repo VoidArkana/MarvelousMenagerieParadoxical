@@ -1,15 +1,10 @@
 package net.voidarkana.marvelous_menagerie.client.events;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -27,8 +22,6 @@ import net.voidarkana.marvelous_menagerie.client.particles.custom.ItemMorphParti
 import net.voidarkana.marvelous_menagerie.client.particles.custom.RiftParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParticle;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

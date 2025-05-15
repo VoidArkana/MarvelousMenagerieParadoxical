@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "marvelous_menagerie:raw_dawn_horse"
+  },
+  "result": "marvelous_menagerie:cooked_dawn_horse",
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -110,7 +110,7 @@ public class MMItems {
     public static final RegistryObject<Item> MAGIC_ROLL = ITEMS.register("magic_roll",
             ()-> new Item(new Item.Properties().food(MMFoods.MAGIC_ROLL).rarity(Rarity.RARE)));
 
-    //Falcatus¿
+    //Falcatus
     public static final RegistryObject<Item> FALCA_FOSSIL = ITEMS.register("falca_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FALCA_SPAWN_EGG = ITEMS.register("falcatus_spawn_egg",
@@ -171,6 +171,10 @@ public class MMItems {
             () -> new ForgeSpawnEggItem(MMEntities.SKELETON_DAWN_HORSE, 0xf4d4a2, 0xffeec6, new Item.Properties()));
     public static final RegistryObject<Item> ZOMBIE_DAWN_HORSE_SPAWN_EGG = ITEMS.register("zombie_dawn_horse_spawn_egg",
             () -> new ForgeSpawnEggItem(MMEntities.ZOMBIE_DAWN_HORSE, 0x574d3c, 0x8a8667, new Item.Properties()));
+    public static final RegistryObject<Item> RAW_DAWN_HORSE = ITEMS.register("raw_dawn_horse",
+            ()-> new Item(new Item.Properties().food(MMFoods.RAW_DAWN_HORSE)));
+    public static final RegistryObject<Item> COOKED_DAWN_HORSE = ITEMS.register("cooked_dawn_horse",
+            ()-> new Item(new Item.Properties().food(MMFoods.COOKED_DAWN_HORSE)));
 
     //Leptictidium
     public static final RegistryObject<Item> LEPTI_FOSSIL = ITEMS.register("lepti_fossil",

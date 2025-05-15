@@ -14,12 +14,13 @@
             "#forge:no_default_monsters"
           ]
         }
-      }
+      },
+      "#minecraft:is_end"
     ]
   },
   "spawners": {
     "type": "marvelous_menagerie:skeleton_dawn_horse",
-    "weight": 120,
+    "weight": 5,
     "minCount": 1,
     "maxCount": 1
   }

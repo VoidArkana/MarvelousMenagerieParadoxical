@@ -594,6 +594,8 @@
   "item.marvelous_menagerie.dawn_horse_spawn_egg": "Dawn Horse Spawn Egg",
   "item.marvelous_menagerie.skeleton_dawn_horse_spawn_egg": "Fossil Dawn Horse Spawn Egg",
   "item.marvelous_menagerie.zombie_dawn_horse_spawn_egg": "Zombie Dawn Horse Spawn Egg",
+  "item.marvelous_menagerie.raw_dawn_horse": "Raw Dawn Horse",
+  "item.marvelous_menagerie.cooked_dawn_horse": "Cooked Dawn Horse",
 
   "entity.marvelous_menagerie.lepti": "Leptictidium",
   "entity.marvelous_menagerie.kelenken": "Kelenken",
@@ -607,6 +609,7 @@
   "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites",
 
   "item.marvelous_menagerie.opal": "Opal",
+  "block.marvelous_menagerie.opal_block": "Opal Block",
   "item.marvelous_menagerie.chrono_watch": "Chronotite Watch",
 
   "creativetab.marvelous_menagerie_tab_mobs": "Marvelous Menagerie - Mobs",

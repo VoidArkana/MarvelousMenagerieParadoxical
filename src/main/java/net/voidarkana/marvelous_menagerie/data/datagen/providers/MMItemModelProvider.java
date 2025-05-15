@@ -126,6 +126,8 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.DAWN_HORSE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(MMItems.SKELETON_DAWN_HORSE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        simpleItem(MMItems.RAW_DAWN_HORSE);
+        simpleItem(MMItems.COOKED_DAWN_HORSE);
 
         simpleItem(MMItems.LEPTI_FOSSIL);
 

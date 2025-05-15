@@ -6,6 +6,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 
 public class MMFoods {
+
     public static final FoodProperties BOILED_ELEPHANT_EGG = (new FoodProperties.Builder())
             .nutrition(6)
             .saturationMod(0.6F).build();
@@ -44,5 +45,14 @@ public class MMFoods {
             .effect(new MobEffectInstance(MMEffects.HALLUCINATING.get(), 20*30, 0), 1.0F)
             .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20*30, 1), 1.0F)
             .effect(new MobEffectInstance(MobEffects.DIG_SPEED, 20*30, 1), 1.0F).build();
+
+
+    public static final FoodProperties RAW_DAWN_HORSE = (new FoodProperties.Builder())
+            .nutrition(3)
+            .saturationMod(0.3F).meat().build();
+
+    public static final FoodProperties COOKED_DAWN_HORSE = (new FoodProperties.Builder())
+            .nutrition(5)
+            .saturationMod(0.6F).meat().build();
 
 }

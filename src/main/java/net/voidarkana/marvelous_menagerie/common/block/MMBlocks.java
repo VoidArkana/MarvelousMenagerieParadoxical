@@ -278,6 +278,11 @@ public class MMBlocks {
     public static final RegistryObject<Block> CHUD_BLOCK = registerBlock("chud_block",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.FROGSPAWN)));
 
+    //opal
+
+    public static final RegistryObject<Block> OPAL_BLOCK = registerBlock("opal_block",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_BLOCK).sound(SoundType.AMETHYST)));
+
     //shale
     public static final RegistryObject<Block> SHALE = registerBlock("shale",
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.DEEPSLATE)));

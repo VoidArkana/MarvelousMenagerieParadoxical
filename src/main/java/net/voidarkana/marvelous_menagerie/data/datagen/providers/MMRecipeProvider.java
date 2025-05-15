@@ -277,6 +277,10 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy(getHasName(MMItems.HALLUCIGENIC_SLIME.get()), has(MMItems.HALLUCIGENIC_SLIME.get()))
                 .save(consumer);
 
+        //Opal
+        this.makeIngotToBlock(MMBlocks.OPAL_BLOCK, MMItems.OPAL).save(consumer);
+        this.makeBlockToIngot(MMItems.OPAL, MMBlocks.OPAL_BLOCK).save(consumer);
+
         //Shale
         this.makeSlab(MMBlocks.SHALE, MMBlocks.SHALE_SLAB).save(consumer);
         this.makeSlab(MMBlocks.SHALE_BRICKS, MMBlocks.SHALE_BRICKS_SLAB).save(consumer);

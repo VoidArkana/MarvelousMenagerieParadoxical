@@ -26,6 +26,9 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
 
+                        output.accept(MMItems.RAW_DAWN_HORSE.get());
+                        output.accept(MMItems.COOKED_DAWN_HORSE.get());
+
                         output.accept(MMItems.CRACKED_ELEPHANT_EGG.get());
                         output.accept(MMItems.BOILED_ELEPHANT_EGG.get());
                         output.accept(MMItems.JUMBO_OMELETTE.get());
@@ -181,6 +184,7 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.CHRONO_PEDESTAL.get());
 
                         output.accept(MMItems.OPAL.get());
+                        output.accept(MMBlocks.OPAL_BLOCK.get());
 
                         output.accept(MMItems.CHRONO_WATCH.get());
 

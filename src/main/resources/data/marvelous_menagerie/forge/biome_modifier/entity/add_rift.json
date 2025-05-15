@@ -19,7 +19,7 @@
   },
   "spawners": {
     "type": "marvelous_menagerie:rift",
-    "weight": 60,
+    "weight": 10,
     "minCount": 1,
     "maxCount": 1
   }
