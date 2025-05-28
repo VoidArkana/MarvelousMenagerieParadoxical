@@ -59,6 +59,7 @@ public class Paleonomicon extends Item {
         if (pPlayer.level().isClientSide && pInteractionTarget.getEncodeId() != null && pInteractionTarget.getType().is(MMTags.EntityTypes.HAS_ENTRY)) {
             this.usedOnEntity = true;
             String id = pInteractionTarget.getEncodeId().split(":")[1];
+            System.out.println(id);
             MarvelousMenagerie.PROXY.openBookGUI("mobs/" + id + ".json");
         }
 

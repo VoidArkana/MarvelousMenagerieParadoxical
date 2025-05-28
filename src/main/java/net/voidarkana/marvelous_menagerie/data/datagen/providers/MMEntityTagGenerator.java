@@ -40,6 +40,8 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.FALCATUS.get())
                 .add(MMEntities.ROACH.get())
                 .add(MMEntities.SLOVENICUS.get())
-                .add(MMEntities.EOLACTORIA.get());
+                .add(MMEntities.EOLACTORIA.get())
+                .add(MMEntities.DAWN_HORSE.get())
+                .add(MMEntities.HALLUCIGENIA.get());
     }
 }

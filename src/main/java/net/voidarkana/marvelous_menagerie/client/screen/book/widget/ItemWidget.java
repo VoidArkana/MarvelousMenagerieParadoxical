@@ -51,7 +51,7 @@ public class ItemWidget extends BookWidget {
         this.sepia = sepia;
     }
 
-    public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage) {
+    public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage, int mouseX, int mouseY) {
         if (actualItem == null && item != null) {
             actualItem = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(item)));
             if (nbt != null && !nbt.isEmpty()) {

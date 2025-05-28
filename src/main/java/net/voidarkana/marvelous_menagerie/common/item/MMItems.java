@@ -85,6 +85,8 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> CARIS_SCUTE = ITEMS.register("anomalocaris_scute",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANOMALOUS_GOGGLES = ITEMS.register("anomalous_goggles",
+            ()-> new AnomalousGogglesItem(MMArmorMaterials.CARIS_SCUTE, ArmorItem.Type.HELMET, new Item.Properties()));
 
     //Pikaia
     public static final RegistryObject<Item> PIKAIA_FOSSIL = ITEMS.register("pikaia_fossil",
@@ -143,8 +145,6 @@ public class MMItems {
     public static final RegistryObject<Item> OPHTHALMO_ARMOR = ITEMS.register("ophthalmo_armor",
             ()-> new OphthalmoArmorItem(new Item.Properties().durability(300),
                     new ItemStack(MMItems.CARIS_SCUTE.get())));
-    public static final RegistryObject<Item> ANOMALOUS_GOGGLES = ITEMS.register("anomalous_goggles",
-            ()-> new AnomalousGogglesItem(MMArmorMaterials.CARIS_SCUTE, ArmorItem.Type.HELMET, new Item.Properties()));
 
     //Therizinosaurus
     public static final RegistryObject<Item> THERI_FOSSIL = ITEMS.register("theri_fossil",

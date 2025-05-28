@@ -1,5 +1,5 @@
 {
   "entity_name": "entity.marvelous_menagerie.doedicurus",
   "icon": "marvelous_menagerie:doedicurus_fossil",
-  "link": "quaternary/mobs/doedicurus.json"
+  "link": "mobs/doedicurus.json"
 }

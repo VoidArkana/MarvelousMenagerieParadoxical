@@ -1,5 +1,5 @@
 {
   "entity_name": "entity.marvelous_menagerie.trilobite",
   "icon": "marvelous_menagerie:trilo_fossil",
-  "link": "permian/mobs/trilobite.json"
+  "link": "mobs/trilobite.json"
 }

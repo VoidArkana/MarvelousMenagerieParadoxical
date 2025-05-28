@@ -155,7 +155,7 @@ public class DawnHorse extends Animal {
 
     @Override
     public float getVoicePitch() {
-        return this.isBaby() ? 3.2f : 2.2F;
+        return this.isBaby() ? 4.2f : 2.2F;
     }
 
     public void customServerAiStep() {

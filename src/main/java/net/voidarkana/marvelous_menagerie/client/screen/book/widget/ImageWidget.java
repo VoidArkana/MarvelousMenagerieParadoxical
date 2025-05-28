@@ -33,6 +33,8 @@ public class ImageWidget extends BookWidget {
     @Expose
     private int height;
 
+
+
     @Expose(serialize = false, deserialize = false)
     private ResourceLocation actualTexture;
 
@@ -50,10 +52,13 @@ public class ImageWidget extends BookWidget {
     }
 
 
-    public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage) {
+    public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage, int mouseX, int mouseY) {
         if(this.actualTexture == null){
             this.actualTexture = new ResourceLocation(image);
         }
+
+        this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + this.width && mouseY < this.getY() + this.height;
+
         VertexConsumer vertexconsumer = bufferSource.getBuffer(MMRenderTypes.getBookWidget(this.actualTexture, sepia));
         float scale = getScale();
         float scaledU0 = u0 / (float)width;

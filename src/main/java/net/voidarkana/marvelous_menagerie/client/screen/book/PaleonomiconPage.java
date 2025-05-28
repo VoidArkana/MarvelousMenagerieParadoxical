@@ -74,7 +74,7 @@ public class PaleonomiconPage {
             poseStack.popPose();
             for (BookWidget widget : entry.getWidgets()) {
                 if (widget.getDisplayPage() == pgNumber) {
-                    widget.render(poseStack, bufferSource, partialTicks, onFlippingPage);
+                    widget.render(poseStack, bufferSource, partialTicks, onFlippingPage, mouseX, mouseY);
                 }
             }
         }

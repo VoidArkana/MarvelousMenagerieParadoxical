@@ -19,6 +19,8 @@ public abstract class BookWidget {
     @Expose
     private float scale;
 
+    protected boolean isHovered;
+
     public BookWidget(int displayPage, Type type, int x, int y, float scale) {
         this.displayPage = displayPage;
         this.type = type;
@@ -47,7 +49,7 @@ public abstract class BookWidget {
         return scale;
     }
 
-    public abstract void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage);
+    public abstract void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage, int mouseX, int mouseY);
 
     public enum Type {
 

@@ -1,5 +1,5 @@
 {
   "entity_name": "entity.marvelous_menagerie.beholder",
   "icon": "marvelous_menagerie:chronotite",
-  "link": "anomalies/mobs/beholder.json"
+  "link": "mobs/beholder.json"
 }

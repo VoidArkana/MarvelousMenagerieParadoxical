@@ -1,7 +1,7 @@
 {
   "parent": "paleogene/index.json",
-  "text": "paleogene/mobs/eohippus.txt",
-  "title": "entity.marvelous_menagerie.eohippus",
+  "text": "paleogene/mobs/dawn_horse.txt",
+  "title": "entity.marvelous_menagerie.dawn_horse",
   "widgets": [
     {
       "display_page" : 1,

@@ -1,5 +1,5 @@
 {
   "entity_name": "entity.marvelous_menagerie.pikaia",
   "icon": "marvelous_menagerie:pikaia_fossil",
-  "link": "early_paleo/mobs/pikaia.json"
+  "link": "mobs/pikaia.json"
 }
