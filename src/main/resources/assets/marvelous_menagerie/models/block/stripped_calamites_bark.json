@@ -1,0 +1,7 @@
+{
+  "parent": "marvelous_menagerie:block/cube_all",
+  "textures": {
+    "texture": "marvelous_menagerie:block/stripped_calamites_bark",
+    "particle": "marvelous_menagerie:block/stripped_calamites_bundle"
+  }
+}

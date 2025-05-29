@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,89 +36,41 @@ public class MMBlocks {
     public static final DeferredRegister<PaintingVariant> PAINTINGS =
             DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MODID);
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
     }
 
-
     public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud_painting",
-            ()-> new PaintingVariant(64, 48));
+            () -> new PaintingVariant(64, 48));
 
-
-    //if adding another tree, make custom block classes for each thing to make flammable
     //Sigillaria plank blocks
     public static final RegistryObject<Block> SIGILLARIA_PLANKS = registerBlock("sigillaria_planks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> SIGILLARIA_STAIRS = registerBlock("sigillaria_stairs",
-            ()-> new StairBlock(() -> MMBlocks.SIGILLARIA_PLANKS.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new StairBlock(() -> MMBlocks.SIGILLARIA_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
+                    .ignitedByLava().sound(SoundType.NETHER_WOOD)));
     public static final RegistryObject<Block> SIGILLARIA_SLAB = registerBlock("sigillaria_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> SIGILLARIA_BUTTON = registerBlock("sigillaria_button",
-            ()-> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.NETHER_WOOD), BlockSetType.CRIMSON, 25, true){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.NETHER_WOOD).ignitedByLava()
+                    , BlockSetType.CRIMSON, 25, true));
     public static final RegistryObject<Block> SIGILLARIA_PRESSURE_PLATE = registerBlock("sigillaria_pressure_plate",
-            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).sound(SoundType.NETHER_WOOD), BlockSetType.CRIMSON){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy
+                    (Blocks.OAK_PRESSURE_PLATE).sound(SoundType.NETHER_WOOD).ignitedByLava(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> SIGILLARIA_FENCE = registerBlock("sigillaria_fence",
-            ()-> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> SIGILLARIA_FENCE_GATE = registerBlock("sigillaria_fence_gate",
-            ()-> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).sound(SoundType.NETHER_WOOD), SoundEvents.NETHER_WOOD_FENCE_GATE_OPEN, SoundEvents.NETHER_WOOD_FENCE_GATE_CLOSE){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).ignitedByLava().sound(SoundType.NETHER_WOOD),
+                    SoundEvents.NETHER_WOOD_FENCE_GATE_OPEN, SoundEvents.NETHER_WOOD_FENCE_GATE_CLOSE));
 
 
     //Sigillaria Door and Trapdoor
     public static final RegistryObject<Block> SIGILLARIA_DOOR = registerBlock("sigillaria_door",
-            ()-> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
     public static final RegistryObject<Block> SIGILLARIA_TRAPDOOR = registerBlock("sigillaria_trapdoor",
-            ()-> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(),BlockSetType.CRIMSON));
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
 
     //Sigillaria signs
     public static final RegistryObject<Block> SIGILLARIA_SIGN = BLOCKS.register("sigillaria_sign",
@@ -131,113 +84,87 @@ public class MMBlocks {
 
     //Sigillaria Mosaic Blocks
     public static final RegistryObject<Block> SIGILLARIA_MOSAIC = registerBlock("sigillaria_mosaic",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> SIGILLARIA_MOSAIC_STAIRS = registerBlock("sigillaria_mosaic_stairs",
-            ()-> new StairBlock(() -> MMBlocks.SIGILLARIA_PLANKS.get().defaultBlockState(),BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new StairBlock(() -> MMBlocks.SIGILLARIA_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> SIGILLARIA_MOSAIC_SLAB = registerBlock("sigillaria_mosaic_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 5;}
-            });
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     //Sigillaria logs and wood
-    public static final RegistryObject<Block> SIGILLARIA_STEM = registerBlock ("sigillaria_stem",
+    public static final RegistryObject<Block> SIGILLARIA_STEM = registerBlock("sigillaria_stem",
             () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.STEM)));
-    public static final RegistryObject<Block> SIGILLARIA_WOOD = registerBlock ("sigillaria_wood",
+    public static final RegistryObject<Block> SIGILLARIA_WOOD = registerBlock("sigillaria_wood",
             () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.STEM)));
-    public static final RegistryObject<Block> STRIPPED_SIGILLARIA_STEM = registerBlock ("stripped_sigillaria_stem",
+    public static final RegistryObject<Block> STRIPPED_SIGILLARIA_STEM = registerBlock("stripped_sigillaria_stem",
             () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.STEM)));
-    public static final RegistryObject<Block> STRIPPED_SIGILLARIA_WOOD = registerBlock ("stripped_sigillaria_wood",
+    public static final RegistryObject<Block> STRIPPED_SIGILLARIA_WOOD = registerBlock("stripped_sigillaria_wood",
             () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.STEM)));
 
     //Sigillaria Leaves
     public static final RegistryObject<Block> SIGILLARIA_LEAVES = registerBlock("sigillaria_leaves",
-            ()-> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)){
-                @Override
-                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return true;}
-                @Override
-                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 60;}
-                @Override
-                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {return 30;}
-            });
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
     //Sigillaria Sapling Blocks
     public static final RegistryObject<Block> SIGILLARIA_SAPLING = registerBlock("sigillaria_sapling",
-            ()-> new SaplingBlock(new SigillariaTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
+            () -> new SaplingBlock(new SigillariaTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
     public static final RegistryObject<Block> POTTED_SIGILLARIA_SAPLING = registerBlock("potted_sigillaria_sapling",
-            ()-> new FlowerPotBlock(()-> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.SIGILLARIA_SAPLING,
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.SIGILLARIA_SAPLING,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> COOKSONIA = registerBlock("cooksonia",
-            ()-> new CooksoniaBlock(BlockBehaviour.Properties.copy(Blocks.SUGAR_CANE).noOcclusion().noCollission()));
+            () -> new CooksoniaBlock(BlockBehaviour.Properties.copy(Blocks.SUGAR_CANE).noOcclusion().noCollission()));
 
 
     public static final RegistryObject<Block> PROTOTAXITES = registerBlock("prototaxites",
-            ()-> new PrototaxitesBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN).noOcclusion(),
+            () -> new PrototaxitesBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN).noOcclusion(),
                     ModConfiguredFeatures.PROTOTAXITES_KEY));
     public static final RegistryObject<Block> POTTED_PROTOTAXITES = registerBlock("potted_prototaxites",
-            ()-> new FlowerPotBlock(()-> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.PROTOTAXITES,
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.PROTOTAXITES,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_CACTUS).noOcclusion()));
 
     public static final RegistryObject<Block> PROTOTAXITES_BLOCK = registerBlock("prototaxites_block",
-            ()-> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN)));
+            () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN)));
 
     public static final RegistryObject<Block> DICKINSONIA = registerBlock("dickinsonia",
-            ()-> new DickinsoniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).noOcclusion().instabreak().lightLevel((p_152684_) -> {return 6;})));
+            () -> new DickinsoniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).noOcclusion().instabreak().lightLevel((p_152684_) -> {
+                return 6;
+            })));
 
     //prototaxites blocks
 
     public static final RegistryObject<Block> PROTOTAXITES_PLANKS = registerBlock("prototaxites_planks",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> PROTOTAXITES_STAIRS = registerBlock("prototaxites_stairs",
-            ()-> new StairBlock(() -> MMBlocks.PROTOTAXITES_PLANKS.get().defaultBlockState(),
+            () -> new StairBlock(() -> MMBlocks.PROTOTAXITES_PLANKS.get().defaultBlockState(),
 
                     BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> PROTOTAXITES_SLAB = registerBlock("prototaxites_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> PROTOTAXITES_BUTTON = registerBlock("prototaxites_button",
-            ()-> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.NETHER_WOOD).ignitedByLava(),
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.NETHER_WOOD).ignitedByLava(),
                     BlockSetType.CRIMSON, 25, true));
 
     public static final RegistryObject<Block> PROTOTAXITES_PRESSURE_PLATE = registerBlock("prototaxites_pressure_plate",
-            ()-> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
                     BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).sound(SoundType.NETHER_WOOD).ignitedByLava(),
                     BlockSetType.CRIMSON));
 
     public static final RegistryObject<Block> PROTOTAXITES_FENCE = registerBlock("prototaxites_fence",
-            ()-> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> PROTOTAXITES_FENCE_GATE = registerBlock("prototaxites_fence_gate",
-            ()-> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).sound(SoundType.NETHER_WOOD).ignitedByLava(),
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).sound(SoundType.NETHER_WOOD).ignitedByLava(),
                     SoundEvents.NETHER_WOOD_FENCE_GATE_OPEN, SoundEvents.NETHER_WOOD_FENCE_GATE_CLOSE));
 
 
     //Prototaxites Door and Trapdoor
     public static final RegistryObject<Block> PROTOTAXITES_DOOR = registerBlock("prototaxites_door",
-            ()-> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
 
     public static final RegistryObject<Block> PROTOTAXITES_TRAPDOOR = registerBlock("prototaxites_trapdoor",
-            ()-> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(),BlockSetType.CRIMSON));
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.CRIMSON));
 
     //Prototaxites signs
     public static final RegistryObject<Block> PROTOTAXITES_SIGN = BLOCKS.register("prototaxites_sign",
@@ -254,14 +181,34 @@ public class MMBlocks {
 
     //Prototaxites Mosaic Blocks
     public static final RegistryObject<Block> PROTOTAXITES_MOSAIC = registerBlock("prototaxites_mosaic",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> PROTOTAXITES_MOSAIC_STAIRS = registerBlock("prototaxites_mosaic_stairs",
-            ()-> new StairBlock(() -> MMBlocks.PROTOTAXITES_PLANKS.get().defaultBlockState(),
+            () -> new StairBlock(() -> MMBlocks.PROTOTAXITES_PLANKS.get().defaultBlockState(),
                     BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> PROTOTAXITES_MOSAIC_SLAB = registerBlock("prototaxites_mosaic_slab",
-            ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+
+
+
+    //Calamites
+    public static final RegistryObject<Block> CALAMITES_BRANCH = registerBlock("calamites_branch",
+            ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
+
+    public static final RegistryObject<Block> CALAMITES_LOG = registerBlock ("calamites_log",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_BARK = registerBlock ("calamites_bark",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+
 
     //Wiwaxia
     public static final RegistryObject<Block> WIWAXIA = registerBlock("wiwaxia",
