@@ -23,6 +23,7 @@ import net.voidarkana.marvelous_menagerie.common.block.custom.flammable.Flammabl
 import net.voidarkana.marvelous_menagerie.common.block.custom.plant.*;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.CalamitesTreeGrower;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
 import net.voidarkana.marvelous_menagerie.util.MMWoodTypes;
 
@@ -193,9 +194,8 @@ public class MMBlocks {
 
 
     //Calamites
-    //TODO: Calamites tree grower
     public static final RegistryObject<Block> CALAMITES_SAPLING = registerBlock("calamites_sapling",
-            () -> new SaplingBlock(new SigillariaTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
+            () -> new SaplingBlock(new CalamitesTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
     public static final RegistryObject<Block> POTTED_CALAMITES_SAPLING = registerBlock("potted_calamites_sapling",
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.CALAMITES_SAPLING,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));

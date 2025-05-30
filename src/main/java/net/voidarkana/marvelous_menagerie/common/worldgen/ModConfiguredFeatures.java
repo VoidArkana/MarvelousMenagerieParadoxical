@@ -24,11 +24,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.common.worldgen.features.CalamitesFeature;
 import net.voidarkana.marvelous_menagerie.common.worldgen.features.HugePrototaxitesFeature;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaFoliagePlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaTrunkPlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaFoliagePlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaTrunkPlacer;
+import net.voidarkana.marvelous_menagerie.common.worldgen.util.CalamitesFeatureConfiguration;
 import net.voidarkana.marvelous_menagerie.common.worldgen.util.HugePrototaxitesFeatureConfiguration;
 
 import java.util.List;
@@ -41,10 +43,18 @@ public class ModConfiguredFeatures {
     public static final RegistryObject<Feature<HugePrototaxitesFeatureConfiguration>> PROTOTAXITES_FEATURE =
             register_feature("prototaxites_feature", () -> new HugePrototaxitesFeature(HugePrototaxitesFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<CalamitesFeatureConfiguration>> CALAMITES_FEATURE =
+            register_feature("calamites_feature", () -> new CalamitesFeature(CalamitesFeatureConfiguration.CODEC));
+
+    //plants
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_KEY = registerKey("sigillaria");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_HUGE = registerKey("sigillaria_huge");
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> PROTOTAXITES_KEY = registerKey("prototaxites");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CALAMITES_KEY = registerKey("calamites");
+
+    //fossils
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHALE_KEY = registerKey("shale");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHALE_FOSSIL_KEY = registerKey("shale_fossil");
 
@@ -108,6 +118,9 @@ public class ModConfiguredFeatures {
 
         register(context, PROTOTAXITES_KEY, ModConfiguredFeatures.PROTOTAXITES_FEATURE.get(), new HugePrototaxitesFeatureConfiguration(
                 BlockStateProvider.simple(MMBlocks.PROTOTAXITES_BLOCK.get()), 3));
+
+        register(context, CALAMITES_KEY, ModConfiguredFeatures.CALAMITES_FEATURE.get(), new CalamitesFeatureConfiguration(
+                BlockStateProvider.simple(MMBlocks.CALAMITES_LOG.get()), BlockStateProvider.simple(MMBlocks.CALAMITES_BRANCH.get()),12, 15));
 
         //fossils
         register(context, SHALE_KEY, Feature.ORE, new OreConfiguration(deepslateReplaceables,

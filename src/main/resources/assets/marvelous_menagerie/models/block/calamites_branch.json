@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
 		"1": "marvelous_menagerie:block/calamites_branch",
 		"particle": "marvelous_menagerie:block/stripped_calamites_log"
 	},
-	"render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"from": [7, 7, 0],
@@ -25,9 +25,9 @@
 			"to": [13, 13, 2],
 			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 2]},
 			"faces": {
-				"north": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
+				"north": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 5], "texture": "#1"},
-				"south": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
+				"south": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
 				"west": {"uv": [0, 0, 0, 5], "texture": "#1"},
 				"up": {"uv": [0, 0, 5, 0], "texture": "#1"},
 				"down": {"uv": [0, 0, 5, 0], "texture": "#1"}
@@ -38,9 +38,9 @@
 			"to": [13, 13, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 14]},
 			"faces": {
-				"north": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
+				"north": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 5], "texture": "#1"},
-				"south": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
+				"south": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
 				"west": {"uv": [0, 0, 0, 5], "texture": "#1"},
 				"up": {"uv": [0, 0, 5, 0], "texture": "#1"},
 				"down": {"uv": [0, 0, 5, 0], "texture": "#1"}
@@ -49,11 +49,11 @@
 		{
 			"from": [3, 3, 11],
 			"to": [13, 13, 11],
-			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 11]},
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 8, 11]},
 			"faces": {
-				"north": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
+				"north": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 5], "texture": "#1"},
-				"south": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
+				"south": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
 				"west": {"uv": [0, 0, 0, 5], "texture": "#1"},
 				"up": {"uv": [0, 0, 5, 0], "texture": "#1"},
 				"down": {"uv": [0, 0, 5, 0], "texture": "#1"}
@@ -62,11 +62,11 @@
 		{
 			"from": [3, 3, 5],
 			"to": [13, 13, 5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 5]},
+			"rotation": {"angle": -45, "axis": "z", "origin": [8, 8, 5]},
 			"faces": {
-				"north": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
+				"north": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 5], "texture": "#1"},
-				"south": {"uv": [8, 1.5, 3, 6.5], "texture": "#1"},
+				"south": {"uv": [3, 1.5, 8, 6.5], "texture": "#1"},
 				"west": {"uv": [0, 0, 0, 5], "texture": "#1"},
 				"up": {"uv": [0, 0, 5, 0], "texture": "#1"},
 				"down": {"uv": [0, 0, 5, 0], "texture": "#1"}
