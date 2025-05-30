@@ -26,6 +26,7 @@ import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
 import net.voidarkana.marvelous_menagerie.util.MMWoodTypes;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MMBlocks {
@@ -36,11 +37,6 @@ public class MMBlocks {
     public static final DeferredRegister<PaintingVariant> PAINTINGS =
             DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MODID);
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
-        RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn);
-        return toReturn;
-    }
 
     public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud_painting",
             () -> new PaintingVariant(64, 48));
@@ -197,16 +193,16 @@ public class MMBlocks {
             ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
 
     public static final RegistryObject<Block> CALAMITES_LOG = registerBlock ("calamites_log",
-            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).ignitedByLava()));
 
-    public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
-            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
-
-    public static final RegistryObject<Block> CALAMITES_BARK = registerBlock ("calamites_bark",
-            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
-
-    public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
-            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+//    public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
+//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+//
+//    public static final RegistryObject<Block> CALAMITES_BARK = registerBlock ("calamites_bark",
+//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+//
+//    public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
+//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
 
 
 
@@ -817,7 +813,24 @@ public class MMBlocks {
             ()-> new PaleontologyTableBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), SoundEvents.BRUSH_SAND,
                     SoundEvents.BRUSH_SAND_COMPLETED));
 
-    private static <T extends Block>RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block){
+
+    private static <T extends Block> Supplier<T> registerBlockWithItem(String key, Supplier<T> block, Function<Supplier<T>, Item> item) {
+        Supplier<T> entry = create(key, block);
+        MMItems.ITEMS.register(key, () -> item.apply(entry));
+        return entry;
+    }
+
+    private static <T extends Block> Supplier<T> create(String key, Supplier<T> block) {
+        return BLOCKS.register(key, block);
+    }
+
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
+        registerBlockItem(name, toReturn);
+        return toReturn;
+    }
+
+    private static <T extends Block>RegistryObject<Item> registerBlockItem(String name,RegistryObject<T> block){
         return MMItems.ITEMS.register(name, ()-> new BlockItem(block.get(), new Item.Properties()));
     }
 

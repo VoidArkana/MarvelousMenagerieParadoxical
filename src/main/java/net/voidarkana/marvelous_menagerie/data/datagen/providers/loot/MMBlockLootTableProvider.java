@@ -287,10 +287,12 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
 
         this.add(MMBlocks.CALAMITES_BRANCH.get(),
                 block -> createLeavesDrops(MMBlocks.CALAMITES_BRANCH.get(), MMBlocks.SIGILLARIA_SAPLING.get(), 0.075f));
-        this.dropSelf(MMBlocks.CALAMITES_BARK.get());
+
         this.dropSelf(MMBlocks.CALAMITES_LOG.get());
-        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BARK.get());
-        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_LOG.get());
+
+//        this.dropSelf(MMBlocks.CALAMITES_BARK.get());
+//        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BARK.get());
+//        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_LOG.get());
 
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));

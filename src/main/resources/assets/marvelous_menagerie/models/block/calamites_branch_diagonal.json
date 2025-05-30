@@ -5,6 +5,7 @@
 		"0": "marvelous_menagerie:block/calamites_branch",
 		"particle": "marvelous_menagerie:block/stripped_calamites_log"
 	},
+	"render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"from": [6.7, 6.7, -3.3],

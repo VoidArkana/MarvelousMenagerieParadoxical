@@ -12,8 +12,11 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -26,6 +29,7 @@ public class CalamitesBranchBlock extends Block implements SimpleWaterloggedBloc
     private static final SegmentedAnglePrecision SEGMENTED_ANGLE8 = new SegmentedAnglePrecision(3);
     public static final int MAX = SEGMENTED_ANGLE8.getMask();
     private static final int ROTATIONS = MAX;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     VoxelShape NW_SE_AABB = Shapes.or(
             Block.box(-1, 7, -1, 3, 9, 3),
@@ -56,7 +60,8 @@ public class CalamitesBranchBlock extends Block implements SimpleWaterloggedBloc
     public CalamitesBranchBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(ROTATION_8, Integer.valueOf(0)));
+                .setValue(ROTATION_8, Integer.valueOf(0))
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -80,10 +85,9 @@ public class CalamitesBranchBlock extends Block implements SimpleWaterloggedBloc
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
-        BlockState blockstate = pContext.getLevel().getBlockState(pContext.getClickedPos());
 
-            return fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8 ? this.defaultBlockState().setValue(ROTATION_8,
-                    convertToSegment(pContext.getRotation())) : null;
+        return this.defaultBlockState().setValue(ROTATION_8, convertToSegment(pContext.getRotation()))
+                .setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
     }
 
     public static int convertToSegment(float pAngle) {
@@ -91,7 +95,7 @@ public class CalamitesBranchBlock extends Block implements SimpleWaterloggedBloc
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(ROTATION_8);
+        pBuilder.add(ROTATION_8).add(WATERLOGGED);
     }
 
     @Override

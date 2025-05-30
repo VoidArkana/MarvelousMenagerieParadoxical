@@ -45,11 +45,6 @@ public class MMBlockEntities {
                     BlockEntityType.Builder.of(CharniaBlockEntity::new,
                             MMBlocks.CHARNIA.get()).build(null));
 
-//    public static final RegistryObject<BlockEntityType<FossilBlockEntity>> FOSSILBLOCK_ENTITY =
-//            BLOCK_ENTITIES.register("fossil_block_entity", () ->
-//                    BlockEntityType.Builder.of(FossilBlockEntity::new,
-//                            MMBlocks.CHRONO_ALTAR.get()).build(null));
-
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

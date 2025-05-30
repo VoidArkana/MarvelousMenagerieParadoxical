@@ -119,9 +119,9 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.WIWAXIA.get());
 
                         output.accept(MMBlocks.CALAMITES_LOG.get());
-                        output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
-                        output.accept(MMBlocks.CALAMITES_BARK.get());
-                        output.accept(MMBlocks.STRIPPED_CALAMITES_BARK.get());
+//                        output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
+//                        output.accept(MMBlocks.CALAMITES_BARK.get());
+//                        output.accept(MMBlocks.STRIPPED_CALAMITES_BARK.get());
                         output.accept(MMBlocks.CALAMITES_BRANCH.get());
 
 

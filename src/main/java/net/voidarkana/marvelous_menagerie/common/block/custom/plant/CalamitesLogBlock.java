@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.Map;
 
@@ -37,16 +38,16 @@ public class CalamitesLogBlock extends ThinLogBlock{
     public CalamitesLogBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(FACING, Direction.UP)
-                .setValue(NORTH, Boolean.valueOf(false))
-                .setValue(EAST, Boolean.valueOf(false))
-                .setValue(SOUTH, Boolean.valueOf(false))
-                .setValue(WEST, Boolean.valueOf(false))
-                .setValue(NORTHEAST,  Boolean.valueOf(false))
-                .setValue(SOUTHEAST, Boolean.valueOf(false))
-                .setValue(SOUTHWEST,  Boolean.valueOf(false))
-                .setValue(NORTHWEST, Boolean.valueOf(false))
-                .setValue(WATERLOGGED, Boolean.valueOf(false)));
+                .setValue(AXIS, Direction.Axis.Y)
+                .setValue(NORTH, Boolean.FALSE)
+                .setValue(EAST, Boolean.FALSE)
+                .setValue(SOUTH, Boolean.FALSE)
+                .setValue(WEST, Boolean.FALSE)
+                .setValue(NORTHEAST, Boolean.FALSE)
+                .setValue(SOUTHEAST, Boolean.FALSE)
+                .setValue(SOUTHWEST, Boolean.FALSE)
+                .setValue(NORTHWEST, Boolean.FALSE)
+                .setValue(WATERLOGGED, Boolean.FALSE));
 
     }
 
@@ -65,8 +66,6 @@ public class CalamitesLogBlock extends ThinLogBlock{
         BlockPos bpSouthWest = blockpos.south().west();
         BlockPos bpNorthWest = blockpos.north().west();
 
-        BlockState bsThis = blockgetter.getBlockState(blockpos);
-
         BlockState bsNorth = blockgetter.getBlockState(bpNorth);
         BlockState bsEast = blockgetter.getBlockState(bpEast);
         BlockState bsSouth = blockgetter.getBlockState(bpSouth);
@@ -77,57 +76,78 @@ public class CalamitesLogBlock extends ThinLogBlock{
         BlockState bsSouthWest = blockgetter.getBlockState(bpSouthWest);
         BlockState bsNorthWest = blockgetter.getBlockState(bpNorthWest);
 
+        boolean isAxisVertical = pContext.getClickedFace().getAxis().isVertical();
+
         return super.getStateForPlacement(pContext)
-                .setValue(FACING, pContext.getNearestLookingDirection().getOpposite())
-                .setValue(NORTH, Boolean.valueOf(this.connectsTo(bsNorth, bpNorth, bsThis)))
-                .setValue(EAST, Boolean.valueOf(this.connectsTo(bsEast, bpEast, bsThis)))
-                .setValue(SOUTH, Boolean.valueOf(this.connectsTo(bsSouth, bpSouth, bsThis)))
-                .setValue(WEST, Boolean.valueOf(this.connectsTo(bsWest, bpWest, bsThis)))
-                .setValue(NORTHEAST,  Boolean.valueOf(this.connectsTo(bsNorthEast, bpNorthEast, bsThis)))
-                .setValue(SOUTHEAST, Boolean.valueOf(this.connectsTo(bsSouthEast, bpSouthEast, bsThis)))
-                .setValue(SOUTHWEST,  Boolean.valueOf(this.connectsTo(bsSouthWest, bpSouthWest, bsThis)))
-                .setValue(NORTHWEST, Boolean.valueOf(this.connectsTo(bsNorthWest, bpNorthWest, bsThis)))
-                .setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
+                .setValue(AXIS, pContext.getClickedFace().getAxis())
+                .setValue(NORTH, this.connectsTo(bsNorth, bpNorth, blockpos, isAxisVertical))
+                .setValue(EAST, this.connectsTo(bsEast, bpEast, blockpos, isAxisVertical))
+                .setValue(SOUTH, this.connectsTo(bsSouth, bpSouth, blockpos, isAxisVertical))
+                .setValue(WEST, this.connectsTo(bsWest, bpWest, blockpos, isAxisVertical))
+                .setValue(NORTHEAST, this.connectsTo(bsNorthEast, bpNorthEast, blockpos, isAxisVertical))
+                .setValue(SOUTHEAST, this.connectsTo(bsSouthEast, bpSouthEast, blockpos, isAxisVertical))
+                .setValue(SOUTHWEST, this.connectsTo(bsSouthWest, bpSouthWest, blockpos, isAxisVertical))
+                .setValue(NORTHWEST, this.connectsTo(bsNorthWest, bpNorthWest, blockpos, isAxisVertical))
+                .setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
-    private boolean connectsTo(BlockState branchState, BlockPos branchPos, BlockState logState) {
-        if (branchState.is(MMBlocks.CALAMITES_BRANCH.get()) && logState.is(this)){
-            if (logState.getValue(FACING).getAxis().isVertical()){
-            return true;
+    private boolean connectsTo(BlockState branchState, BlockPos branchPos, BlockPos logPos, Boolean isVertical) {
+        int x = logPos.getX() - branchPos.getX();
+        int z = logPos.getZ() - branchPos.getZ();
+        if (branchState.is(MMBlocks.CALAMITES_BRANCH.get()) && isVertical){
+            if (z != 0 && x == 0 && (branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 0
+                    || branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 4)){
+                return true;
             }
+            if (z != x && z != 0 && x != 0 && (branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 1
+                    || branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 5)){
+                return true;
+            }
+
+            if (z == 0 && x != 0 && (branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 2
+                    || branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 6)){
+                return true;
+            }
+
+            if (z == x && z != 0 && (branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 3
+                    || branchState.getValue(CalamitesBranchBlock.ROTATION_8) == 7)){
+                return true;
+            }
+
         }
         return false;
     }
 
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        pLevel.scheduleTick(pCurrentPos, this, 2);
+
         if (pState.getValue(WATERLOGGED)) {
             pLevel.scheduleTick(pCurrentPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
 
-        if (pFacing.getAxis().getPlane() == Direction.Plane.VERTICAL){
+        if (pState.getValue(AXIS).isVertical() && pFacing.getAxis().getPlane() == Direction.Plane.HORIZONTAL){
+
             BlockPos bpNorthEast = pCurrentPos.north().east();
             BlockPos bpSouthEast = pCurrentPos.south().east();
             BlockPos bpSouthWest = pCurrentPos.south().west();
             BlockPos bpNorthWest = pCurrentPos.north().west();
-
-            BlockState bsThis = pLevel.getBlockState(pCurrentPos);
 
             BlockState bsNorthEast = pLevel.getBlockState(bpNorthEast);
             BlockState bsSouthEast = pLevel.getBlockState(bpSouthEast);
             BlockState bsSouthWest = pLevel.getBlockState(bpSouthWest);
             BlockState bsNorthWest = pLevel.getBlockState(bpNorthWest);
 
-            return pState.setValue(PROPERTY_BY_DIRECTION.get(pFacing),
-                    Boolean.valueOf(this.connectsTo(pFacingState, pFacingPos, pState)))
-                    .setValue(NORTHEAST,  Boolean.valueOf(this.connectsTo(bsNorthEast, bpNorthEast, bsThis)))
-                    .setValue(SOUTHEAST, Boolean.valueOf(this.connectsTo(bsSouthEast, bpSouthEast, bsThis)))
-                    .setValue(SOUTHWEST,  Boolean.valueOf(this.connectsTo(bsSouthWest, bpSouthWest, bsThis)))
-                    .setValue(NORTHWEST, Boolean.valueOf(this.connectsTo(bsNorthWest, bpNorthWest, bsThis)));
+            return pState.setValue(PROPERTY_BY_DIRECTION.get(pFacing), Boolean.valueOf(this.connectsTo(pFacingState, pFacingPos, pCurrentPos, true)))
+                    .setValue(NORTHEAST, this.connectsTo(bsNorthEast, bpNorthEast, pCurrentPos,true))
+                    .setValue(SOUTHEAST, this.connectsTo(bsSouthEast, bpSouthEast, pCurrentPos,true))
+                    .setValue(SOUTHWEST, this.connectsTo(bsSouthWest, bpSouthWest, pCurrentPos,true))
+                    .setValue(NORTHWEST, this.connectsTo(bsNorthWest, bpNorthWest, pCurrentPos,true));
         }
+
         return super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, NORTH, EAST, WEST, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, WATERLOGGED);
+        pBuilder.add(AXIS, NORTH, EAST, WEST, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, WATERLOGGED);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "marvelous_menagerie:block/cube_all",
+  "parent": "marvelous_menagerie:block/thin_log",
   "textures": {
     "texture": "marvelous_menagerie:block/calamites_log",
     "particle": "marvelous_menagerie:block/calamites_bundle"
