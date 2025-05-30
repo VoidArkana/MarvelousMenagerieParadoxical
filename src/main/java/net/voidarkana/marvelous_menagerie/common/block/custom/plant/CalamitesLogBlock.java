@@ -82,7 +82,7 @@ public class CalamitesLogBlock extends ThinLogBlock{
 
         boolean isAxisVertical = pContext.getClickedFace().getAxis().isVertical();
 
-        return super.getStateForPlacement(pContext)
+        return this.defaultBlockState()
                 .setValue(AXIS, pContext.getClickedFace().getAxis())
                 .setValue(NORTH, this.connectsTo(bsNorth, bpNorth, blockpos, isAxisVertical))
                 .setValue(EAST, this.connectsTo(bsEast, bpEast, blockpos, isAxisVertical))

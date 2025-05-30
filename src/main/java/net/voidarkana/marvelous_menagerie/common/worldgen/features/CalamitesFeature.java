@@ -51,12 +51,11 @@ public class CalamitesFeature extends Feature<CalamitesFeatureConfiguration> {
                              CalamitesFeatureConfiguration pConfig, int pMaxHeight, BlockPos.MutableBlockPos pMutablePos,
                              FeaturePlaceContext<CalamitesFeatureConfiguration> pContext) {
 
-        int midSectionStart = 4;
         int midSectionEnd = pMaxHeight - 3;
         int midSectionLength = pMaxHeight - 6;
         int midSectionPortionSmall = (int) Math.floor((double) midSectionLength /3);
-        int midSectionPortionBigStart = 3 + midSectionPortionSmall;
-        int midSectionPortionBigEnd = 3 - midSectionPortionSmall;
+        int midSectionPortionBigStart = 4 + midSectionPortionSmall;
+        int midSectionPortionBigEnd = pMaxHeight - 3 - midSectionPortionSmall;
 
         for(int currentHeight = 1; currentHeight <= pMaxHeight; ++currentHeight) {
             if (!(currentHeight <= 2 || currentHeight == pMaxHeight)){

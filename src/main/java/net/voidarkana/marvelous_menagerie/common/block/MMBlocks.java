@@ -201,7 +201,7 @@ public class MMBlocks {
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     public static final RegistryObject<Block> CALAMITES_BRANCH = registerBlock("calamites_branch",
-            ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).sound(SoundType.BAMBOO_WOOD)));
+            ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).sound(SoundType.BAMBOO_WOOD).strength(0.1f)));
     public static final RegistryObject<Block> CALAMITES_LOG = registerBlock ("calamites_log",
             () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
     public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
@@ -223,7 +223,7 @@ public class MMBlocks {
 
 
     public static final RegistryObject<Block> CALAMITES_PLANKS = registerBlock("calamites_planks",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
 
     public static final RegistryObject<Block> CALAMITES_STAIRS = registerBlock("calamites_stairs",
             () -> new StairBlock(() -> MMBlocks.CALAMITES_PLANKS.get().defaultBlockState(),
@@ -251,10 +251,10 @@ public class MMBlocks {
 
     //Calamites Door and Trapdoor
     public static final RegistryObject<Block> CALAMITES_DOOR = registerBlock("calamites_door",
-            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.BAMBOO));
 
     public static final RegistryObject<Block> CALAMITES_TRAPDOOR = registerBlock("calamites_trapdoor",
-            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.BAMBOO));
 
     //Calamites signs
     public static final RegistryObject<Block> CALAMITES_SIGN = BLOCKS.register("calamites_sign",
@@ -279,8 +279,6 @@ public class MMBlocks {
 
     public static final RegistryObject<Block> CALAMITES_MOSAIC_SLAB = registerBlock("calamites_mosaic_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
-
-
 
 
     //Wiwaxia

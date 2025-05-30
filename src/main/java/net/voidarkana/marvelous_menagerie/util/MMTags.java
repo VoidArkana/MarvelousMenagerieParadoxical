@@ -59,6 +59,9 @@ public class MMTags {
     public static class Blocks {
         public static final TagKey<Block> SIGILLARIA_LOG_BLOCK = tag("sigillaria_log_block");
 
+        public static final TagKey<Block> CALAMITES_LOG_BLOCK = tag("calamites_log_block");
+        public static final TagKey<Block> CALAMITES_BUNDLE_BLOCK = tag("calamites_bundle_block");
+
         public static final TagKey<Block> DYE_DEPOT_WOOL = tag("dye_depot_wool");
 
         public static final TagKey<Block> DYE_DEPOT_MAROON_WOOL = tag("dye_depot_maroon_wool");
@@ -99,6 +102,8 @@ public class MMTags {
         public static final TagKey<Item> ANIMAL_FOSSILS = tag("animal_fossils");
 
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
+        public static final TagKey<Item> CALAMITES_LOG_ITEM = tag("calamites_log_item");
+        public static final TagKey<Item> CALAMITES_BUNDLE_ITEM = tag("calamites_bundle_item");
 
         public static final TagKey<Item> DYE_DEPOT_WOOL_ITEM = tag("dye_depot_wool_item");
 

@@ -119,7 +119,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
         blockItem(MMBlocks.CALAMITES_BUNDLE);
         blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLE);
 
-        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/calamites_bundled_bark_top"));
         axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundled_bark_top"));
         blockItem(MMBlocks.CALAMITES_BUNDLED_BARK);
         blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK);

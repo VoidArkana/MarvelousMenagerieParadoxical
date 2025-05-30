@@ -42,8 +42,8 @@ public class MMBlockEntities {
     public static final RegistryObject<BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
             BLOCK_ENTITIES.register( "mod_hanging_sign", () ->
                     BlockEntityType.Builder.of(ModHangingSignBlockEntity::new,
-                            MMBlocks.PROTOTAXITES_SIGN.get(),
-                            MMBlocks.PROTOTAXITES_WALL_SIGN.get(),
+                            MMBlocks.PROTOTAXITES_HANGING_SIGN.get(),
+                            MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
                             MMBlocks.SIGILLARIA_HANGING_SIGN.get(),
                             MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
                             MMBlocks.CALAMITES_HANGING_SIGN.get(),

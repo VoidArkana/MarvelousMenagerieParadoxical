@@ -73,6 +73,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
 
         this.copy(MMTags.Blocks.SIGILLARIA_LOG_BLOCK, MMTags.Items.SIGILLARIA_LOG_ITEM);
 
+        this.copy(MMTags.Blocks.CALAMITES_LOG_BLOCK, MMTags.Items.CALAMITES_LOG_ITEM);
+        this.copy(MMTags.Blocks.CALAMITES_BUNDLE_BLOCK, MMTags.Items.CALAMITES_BUNDLE_ITEM);
+
         this.copy(MMTags.Blocks.DYE_DEPOT_AMBER_WOOL, MMTags.Items.DYE_DEPOT_AMBER_WOOL_ITEM);
         this.copy(MMTags.Blocks.DYE_DEPOT_AQUA_WOOL, MMTags.Items.DYE_DEPOT_AQUA_WOOL_ITEM);
         this.copy(MMTags.Blocks.DYE_DEPOT_BEIGE_WOOL, MMTags.Items.DYE_DEPOT_BEIGE_WOOL_ITEM);
@@ -109,66 +112,84 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 .addTag(MMTags.Items.DYE_DEPOT_VERDANT_WOOL_ITEM);
 
         this.tag(ItemTags.LOGS_THAT_BURN)
-                .addTag(MMTags.Items.SIGILLARIA_LOG_ITEM);
+                .addTag(MMTags.Items.SIGILLARIA_LOG_ITEM)
+                .addTag(MMTags.Items.CALAMITES_LOG_ITEM)
+                .addTag(MMTags.Items.CALAMITES_BUNDLE_ITEM);
 
         this.tag(ItemTags.PLANKS).add(
                 MMBlocks.PROTOTAXITES_PLANKS.get().asItem(),
                 MMBlocks.PROTOTAXITES_MOSAIC.get().asItem(),
                 MMBlocks.SIGILLARIA_PLANKS.get().asItem(),
-                MMBlocks.SIGILLARIA_MOSAIC.get().asItem()
+                MMBlocks.SIGILLARIA_MOSAIC.get().asItem(),
+                MMBlocks.CALAMITES_PLANKS.get().asItem(),
+                MMBlocks.CALAMITES_MOSAIC.get().asItem()
         );
 
         this.tag(ItemTags.LEAVES).add(
-                MMBlocks.SIGILLARIA_LEAVES.get().asItem()
+                MMBlocks.SIGILLARIA_LEAVES.get().asItem(),
+                MMBlocks.CALAMITES_BRANCH.get().asItem()
         );
+
         this.tag(ItemTags.WOODEN_FENCES).add(
                 MMBlocks.PROTOTAXITES_FENCE.get().asItem(),
-                MMBlocks.SIGILLARIA_FENCE.get().asItem()
+                MMBlocks.SIGILLARIA_FENCE.get().asItem(),
+                MMBlocks.CALAMITES_FENCE.get().asItem()
         );
         this.tag(ItemTags.FENCE_GATES).add(
                 MMBlocks.PROTOTAXITES_FENCE_GATE.get().asItem(),
-                MMBlocks.SIGILLARIA_FENCE_GATE.get().asItem()
+                MMBlocks.SIGILLARIA_FENCE_GATE.get().asItem(),
+                MMBlocks.CALAMITES_FENCE_GATE.get().asItem()
         );
 
         this.tag(ItemTags.WOODEN_DOORS).add(
                 MMBlocks.PROTOTAXITES_DOOR.get().asItem(),
-                MMBlocks.SIGILLARIA_DOOR.get().asItem()
+                MMBlocks.SIGILLARIA_DOOR.get().asItem(),
+                MMBlocks.CALAMITES_DOOR.get().asItem()
         );
 
         this.tag(ItemTags.WOODEN_TRAPDOORS).add(
                 MMBlocks.PROTOTAXITES_TRAPDOOR.get().asItem(),
-                MMBlocks.SIGILLARIA_TRAPDOOR.get().asItem()
+                MMBlocks.SIGILLARIA_TRAPDOOR.get().asItem(),
+                MMBlocks.CALAMITES_TRAPDOOR.get().asItem()
         );
 
         this.tag(ItemTags.WOODEN_STAIRS).add(
                 MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get().asItem(),
                 MMBlocks.PROTOTAXITES_STAIRS.get().asItem(),
                 MMBlocks.SIGILLARIA_STAIRS.get().asItem(),
-                MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get().asItem()
+                MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get().asItem(),
+                MMBlocks.CALAMITES_STAIRS.get().asItem(),
+                MMBlocks.CALAMITES_MOSAIC_STAIRS.get().asItem()
         );
         this.tag(ItemTags.WOODEN_SLABS).add(
                 MMBlocks.PROTOTAXITES_SLAB.get().asItem(),
                 MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get().asItem(),
                 MMBlocks.SIGILLARIA_SLAB.get().asItem(),
-                MMBlocks.SIGILLARIA_MOSAIC_SLAB.get().asItem()
+                MMBlocks.SIGILLARIA_MOSAIC_SLAB.get().asItem(),
+                MMBlocks.CALAMITES_SLAB.get().asItem(),
+                MMBlocks.CALAMITES_MOSAIC_SLAB.get().asItem()
         );
         this.tag(ItemTags.WOODEN_BUTTONS).add(
                 MMBlocks.PROTOTAXITES_BUTTON.get().asItem(),
-                MMBlocks.SIGILLARIA_BUTTON.get().asItem()
+                MMBlocks.SIGILLARIA_BUTTON.get().asItem(),
+                MMBlocks.CALAMITES_BUTTON.get().asItem()
         );
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get().asItem(),
-                MMBlocks.SIGILLARIA_PRESSURE_PLATE.get().asItem()
+                MMBlocks.SIGILLARIA_PRESSURE_PLATE.get().asItem(),
+                MMBlocks.CALAMITES_PRESSURE_PLATE.get().asItem()
         );
 
         this.tag(ItemTags.SIGNS).add(
                 MMItems.PROTOTAXITES_SIGN.get(),
-                MMItems.SIGILLARIA_SIGN.get()
+                MMItems.SIGILLARIA_SIGN.get(),
+                MMItems.CALAMITES_SIGN.get()
         );
 
         this.tag(ItemTags.HANGING_SIGNS).add(
                 MMItems.PROTOTAXITES_HANGING_SIGN.get(),
-                MMItems.SIGILLARIA_HANGING_SIGN.get()
+                MMItems.SIGILLARIA_HANGING_SIGN.get(),
+                MMItems.CALAMITES_HANGING_SIGN.get()
         );
 
         this.tag(ItemTags.FISHES).add(
@@ -182,7 +203,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
 
         this.tag(ItemTags.AXOLOTL_TEMPT_ITEMS).add(
                 MMItems.SACA_BUCKET.get(),
-                //MMItems.PIKAIA_BUCKET.get(),
+                MMItems.PIKAIA_BUCKET.get(),
                 MMItems.ARANDASPIS_BUCKET.get()
         );
 

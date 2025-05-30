@@ -265,14 +265,42 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.PROTOTAXITES_SIGN.get(),
                 MMBlocks.PROTOTAXITES_WALL_SIGN.get(),
                 MMBlocks.PROTOTAXITES_HANGING_SIGN.get(),
-                MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get()
+                MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
+
+                MMBlocks.CALAMITES_PLANKS.get(),
+                MMBlocks.CALAMITES_BRANCH.get(),
+                MMBlocks.CALAMITES_STAIRS.get(),
+                MMBlocks.CALAMITES_SLAB.get(),
+                MMBlocks.CALAMITES_BUTTON.get(),
+                MMBlocks.CALAMITES_PRESSURE_PLATE.get(),
+                MMBlocks.CALAMITES_FENCE.get(),
+                MMBlocks.CALAMITES_FENCE_GATE.get(),
+                MMBlocks.CALAMITES_MOSAIC.get(),
+                MMBlocks.CALAMITES_MOSAIC_SLAB.get(),
+                MMBlocks.CALAMITES_MOSAIC_STAIRS.get(),
+                MMBlocks.CALAMITES_DOOR.get(),
+                MMBlocks.CALAMITES_TRAPDOOR.get(),
+                MMBlocks.CALAMITES_LOG.get(),
+                MMBlocks.STRIPPED_CALAMITES_LOG.get(),
+                MMBlocks.CALAMITES_BARK.get(),
+                MMBlocks.STRIPPED_CALAMITES_BARK.get(),
+                MMBlocks.CALAMITES_BUNDLE.get(),
+                MMBlocks.STRIPPED_CALAMITES_BUNDLE.get(),
+                MMBlocks.CALAMITES_BUNDLED_BARK.get(),
+                MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get(),
+                MMBlocks.CALAMITES_SIGN.get(),
+                MMBlocks.CALAMITES_WALL_SIGN.get(),
+                MMBlocks.CALAMITES_HANGING_SIGN.get(),
+                MMBlocks.CALAMITES_WALL_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.PLANKS).add(
                 MMBlocks.SIGILLARIA_PLANKS.get(),
                 MMBlocks.SIGILLARIA_MOSAIC.get(),
                 MMBlocks.PROTOTAXITES_PLANKS.get(),
-                MMBlocks.PROTOTAXITES_MOSAIC.get()
+                MMBlocks.PROTOTAXITES_MOSAIC.get(),
+                MMBlocks.CALAMITES_PLANKS.get(),
+                MMBlocks.CALAMITES_MOSAIC.get()
         );
 
         this.tag(MMTags.Blocks.SIGILLARIA_LOG_BLOCK).add(
@@ -282,11 +310,29 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.STRIPPED_SIGILLARIA_WOOD.get()
         );
 
+        this.tag(MMTags.Blocks.CALAMITES_LOG_BLOCK).add(
+                MMBlocks.CALAMITES_LOG.get(),
+                MMBlocks.STRIPPED_CALAMITES_LOG.get(),
+                MMBlocks.CALAMITES_BARK.get(),
+                MMBlocks.STRIPPED_CALAMITES_BARK.get()
+        );
+
+        this.tag(MMTags.Blocks.CALAMITES_BUNDLE_BLOCK).add(
+                MMBlocks.CALAMITES_BUNDLE.get(),
+                MMBlocks.STRIPPED_CALAMITES_BUNDLE.get(),
+                MMBlocks.CALAMITES_BUNDLED_BARK.get(),
+                MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()
+        );
+
         this.tag(BlockTags.LOGS_THAT_BURN)
-                .addTag(MMTags.Blocks.SIGILLARIA_LOG_BLOCK);
+                .addTag(MMTags.Blocks.SIGILLARIA_LOG_BLOCK)
+                .addTag(MMTags.Blocks.CALAMITES_LOG_BLOCK)
+                .addTag(MMTags.Blocks.CALAMITES_BUNDLE_BLOCK)
+        ;
 
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
-                MMBlocks.SIGILLARIA_LEAVES.get()
+                MMBlocks.SIGILLARIA_LEAVES.get(),
+                MMBlocks.CALAMITES_BRANCH.get()
         );
 
         this.tag(BlockTags.LEAVES).add(
@@ -294,52 +340,67 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
         );
         this.tag(BlockTags.WOODEN_FENCES).add(
                 MMBlocks.SIGILLARIA_FENCE.get(),
-                MMBlocks.PROTOTAXITES_FENCE.get()
+                MMBlocks.PROTOTAXITES_FENCE.get(),
+                MMBlocks.CALAMITES_FENCE.get()
         );
         this.tag(BlockTags.FENCE_GATES).add(
                 MMBlocks.SIGILLARIA_FENCE_GATE.get(),
-                MMBlocks.PROTOTAXITES_FENCE_GATE.get()
+                MMBlocks.PROTOTAXITES_FENCE_GATE.get(),
+                MMBlocks.CALAMITES_FENCE_GATE.get()
         );
 
         this.tag(BlockTags.WOODEN_DOORS).add(
                 MMBlocks.SIGILLARIA_DOOR.get(),
-                MMBlocks.PROTOTAXITES_DOOR.get()
+                MMBlocks.PROTOTAXITES_DOOR.get(),
+                MMBlocks.CALAMITES_DOOR.get()
         );
 
         this.tag(BlockTags.WOODEN_TRAPDOORS).add(
                 MMBlocks.SIGILLARIA_TRAPDOOR.get(),
-                MMBlocks.PROTOTAXITES_TRAPDOOR.get()
+                MMBlocks.PROTOTAXITES_TRAPDOOR.get(),
+                MMBlocks.CALAMITES_TRAPDOOR.get()
         );
 
         this.tag(BlockTags.WOODEN_STAIRS).add(
                 MMBlocks.SIGILLARIA_STAIRS.get(),
                 MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get(),
                 MMBlocks.PROTOTAXITES_STAIRS.get(),
-                MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get()
+                MMBlocks.PROTOTAXITES_MOSAIC_STAIRS.get(),
+                MMBlocks.CALAMITES_STAIRS.get(),
+                MMBlocks.CALAMITES_MOSAIC_STAIRS.get()
         );
+
         this.tag(BlockTags.WOODEN_SLABS).add(
                 MMBlocks.SIGILLARIA_SLAB.get(),
                 MMBlocks.SIGILLARIA_MOSAIC_SLAB.get(),
                 MMBlocks.PROTOTAXITES_SLAB.get(),
-                MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get()
+                MMBlocks.PROTOTAXITES_MOSAIC_SLAB.get(),
+                MMBlocks.CALAMITES_SLAB.get(),
+                MMBlocks.CALAMITES_MOSAIC_SLAB.get()
         );
+
         this.tag(BlockTags.WOODEN_BUTTONS).add(
                 MMBlocks.SIGILLARIA_BUTTON.get(),
-                MMBlocks.PROTOTAXITES_BUTTON.get()
+                MMBlocks.PROTOTAXITES_BUTTON.get(),
+                MMBlocks.CALAMITES_BUTTON.get()
         );
+
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 MMBlocks.SIGILLARIA_PRESSURE_PLATE.get(),
-                MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get()
+                MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get(),
+                MMBlocks.CALAMITES_PRESSURE_PLATE.get()
         );
 
         this.tag(BlockTags.SIGNS).add(
                 MMBlocks.SIGILLARIA_SIGN.get(),
-                MMBlocks.PROTOTAXITES_SIGN.get()
+                MMBlocks.PROTOTAXITES_SIGN.get(),
+                MMBlocks.CALAMITES_SIGN.get()
         );
 
         this.tag(BlockTags.WALL_SIGNS).add(
                 MMBlocks.SIGILLARIA_WALL_SIGN.get(),
-                MMBlocks.PROTOTAXITES_WALL_SIGN.get()
+                MMBlocks.PROTOTAXITES_WALL_SIGN.get(),
+                MMBlocks.CALAMITES_WALL_SIGN.get()
         );
 
         this.tag(BlockTags.CEILING_HANGING_SIGNS).add(
