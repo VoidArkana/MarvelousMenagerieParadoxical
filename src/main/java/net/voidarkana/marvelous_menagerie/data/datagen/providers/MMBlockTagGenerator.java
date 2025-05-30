@@ -344,12 +344,14 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.CEILING_HANGING_SIGNS).add(
                 MMBlocks.SIGILLARIA_HANGING_SIGN.get(),
-                MMBlocks.PROTOTAXITES_HANGING_SIGN.get()
+                MMBlocks.PROTOTAXITES_HANGING_SIGN.get(),
+                MMBlocks.CALAMITES_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.WALL_HANGING_SIGNS).add(
                 MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
-                MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get()
+                MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
+                MMBlocks.CALAMITES_WALL_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.SMALL_FLOWERS).add(

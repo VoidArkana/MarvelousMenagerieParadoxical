@@ -92,6 +92,38 @@ public class MMBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(MMBlocks.PROTOTAXITES_HANGING_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
                 blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
 
+        //Calamites
+
+        blockWithItem(MMBlocks.CALAMITES_PLANKS);
+        stairsBlock(((StairBlock) MMBlocks.CALAMITES_STAIRS.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        slabBlock(((SlabBlock) MMBlocks.CALAMITES_SLAB.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        buttonBlock(((ButtonBlock) MMBlocks.CALAMITES_BUTTON.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        pressurePlateBlock(((PressurePlateBlock) MMBlocks.CALAMITES_PRESSURE_PLATE.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        fenceBlock(((FenceBlock) MMBlocks.CALAMITES_FENCE.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        fenceGateBlock(((FenceGateBlock) MMBlocks.CALAMITES_FENCE_GATE.get()), blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) MMBlocks.CALAMITES_DOOR.get()), modLoc("block/calamites_door_bottom"), modLoc("block/calamites_door_top"), "cutout");
+        trapdoorBlockWithRenderType(((TrapDoorBlock) MMBlocks.CALAMITES_TRAPDOOR.get()), modLoc("block/calamites_trapdoor"), true, "cutout");
+
+        blockWithItem(MMBlocks.CALAMITES_MOSAIC);
+        stairsBlock(((StairBlock) MMBlocks.CALAMITES_MOSAIC_STAIRS.get()), blockTexture(MMBlocks.CALAMITES_MOSAIC.get()));
+        slabBlock(((SlabBlock) MMBlocks.CALAMITES_MOSAIC_SLAB.get()), blockTexture(MMBlocks.CALAMITES_MOSAIC.get()), blockTexture(MMBlocks.CALAMITES_MOSAIC.get()));
+
+        signBlock(((StandingSignBlock) MMBlocks.CALAMITES_SIGN.get()), ((WallSignBlock) MMBlocks.CALAMITES_WALL_SIGN.get()),
+                blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+        hangingSignBlock(MMBlocks.CALAMITES_HANGING_SIGN.get(), MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
+                blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/calamites_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundle_top"));
+        blockItem(MMBlocks.CALAMITES_BUNDLE);
+        blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLE);
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundled_bark_top"));
+        blockItem(MMBlocks.CALAMITES_BUNDLED_BARK);
+        blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK);
+
 
         //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),

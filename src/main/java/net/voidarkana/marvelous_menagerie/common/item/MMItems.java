@@ -257,6 +257,11 @@ public class MMItems {
     public static final RegistryObject<Item> PROTOTAXITES_HANGING_SIGN = ITEMS.register("prototaxites_hanging_sign",
             ()-> new HangingSignItem(MMBlocks.PROTOTAXITES_HANGING_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
 
+    //Calamites
+    public static final RegistryObject<Item> CALAMITES_SIGN = ITEMS.register("calamites_sign",
+            ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.CALAMITES_SIGN.get(), MMBlocks.CALAMITES_WALL_SIGN.get()));
+    public static final RegistryObject<Item> CALAMITES_HANGING_SIGN = ITEMS.register("calamites_hanging_sign",
+            ()-> new HangingSignItem(MMBlocks.CALAMITES_HANGING_SIGN.get(), MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
 
 
     //Fossils

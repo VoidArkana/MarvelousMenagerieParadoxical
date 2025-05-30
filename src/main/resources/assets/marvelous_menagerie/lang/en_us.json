@@ -619,5 +619,39 @@
   "entity.marvelous_menagerie.rift": "Temporal Rift",
   "entity.marvelous_menagerie.fracture": "Time Fracture",
 
-  "item.nirvana.potion_bon.effect.hallu_extract": "Hallucigenic Bong"
+  "item.nirvana.potion_bon.effect.hallu_extract": "Hallucigenic Bong",
+
+
+  "block.marvelous_menagerie.calamites_planks": "Calamites Planks",
+  "block.marvelous_menagerie.calamites_stairs": "Calamites Stairs",
+  "block.marvelous_menagerie.calamites_slab": "Calamites Slab",
+  "block.marvelous_menagerie.calamites_button": "Calamites Button",
+  "block.marvelous_menagerie.calamites_pressure_plate": "Calamites Pressure Plate",
+  "block.marvelous_menagerie.calamites_fence": "Calamites Fence",
+  "block.marvelous_menagerie.calamites_fence_gate": "Calamites Fence Gate",
+
+  "block.marvelous_menagerie.calamites_door": "Calamites Door",
+  "block.marvelous_menagerie.calamites_trapdoor": "Calamites Trapdoor",
+
+  "block.marvelous_menagerie.calamites_mosaic": "Calamites Mosaic",
+  "block.marvelous_menagerie.calamites_mosaic_stairs": "Calamites Mosaic Stairs",
+  "block.marvelous_menagerie.calamites_mosaic_slab": "Calamites Mosaic Slab",
+
+  "block.marvelous_menagerie.calamites_log": "Calamites Log",
+  "block.marvelous_menagerie.stripped_calamites_log": "Stripped Calamites Log",
+  "block.marvelous_menagerie.calamites_bark": "Calamites Bark",
+  "block.marvelous_menagerie.stripped_calamites_bark": "Stripped Calamites Bark",
+  "block.marvelous_menagerie.calamites_bundle": "Bundled Calamites",
+  "block.marvelous_menagerie.stripped_calamites_bundle": "Stripped Bundled Calamites",
+  "block.marvelous_menagerie.calamites_bundled_bark": "Bundled Calamites Bark",
+  "block.marvelous_menagerie.stripped_calamites_bundled_bark": "Bundled Stripped Calamites Bark",
+
+  "block.marvelous_menagerie.calamites_sign": "Calamites Sign",
+  "block.marvelous_menagerie.calamites_wall_sign": "Calamites Sign",
+  "block.marvelous_menagerie.calamites_wall_hanging_sign": "Calamites Hanging Sign",
+  "block.marvelous_menagerie.calamites_hanging_sign": "Calamites Hanging Sign",
+
+  "block.marvelous_menagerie.calamites_branch": "Calamites Branch",
+  "block.marvelous_menagerie.calamites_sapling": "Calamites Sapling",
+  "block.marvelous_menagerie.potted_calamites_sapling": "Potted Calamites Sapling"
 }

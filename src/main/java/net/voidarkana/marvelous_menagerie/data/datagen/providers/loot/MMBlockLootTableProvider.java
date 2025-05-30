@@ -286,13 +286,49 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.WIWAXIA.get());
 
         this.add(MMBlocks.CALAMITES_BRANCH.get(),
-                block -> createLeavesDrops(MMBlocks.CALAMITES_BRANCH.get(), MMBlocks.SIGILLARIA_SAPLING.get(), 0.075f));
+                block -> createLeavesDrops(MMBlocks.CALAMITES_BRANCH.get(), MMBlocks.CALAMITES_SAPLING.get(), 0.075f));
 
         this.dropSelf(MMBlocks.CALAMITES_LOG.get());
 
-//        this.dropSelf(MMBlocks.CALAMITES_BARK.get());
-//        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BARK.get());
-//        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_LOG.get());
+        this.dropSelf(MMBlocks.CALAMITES_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_LOG.get());
+
+        this.dropSelf(MMBlocks.CALAMITES_PLANKS.get());
+        this.dropSelf(MMBlocks.CALAMITES_STAIRS.get());
+        this.dropSelf(MMBlocks.CALAMITES_FENCE.get());
+        this.dropSelf(MMBlocks.CALAMITES_FENCE_GATE.get());
+        this.dropSelf(MMBlocks.CALAMITES_BUTTON.get());
+        this.dropSelf(MMBlocks.CALAMITES_PRESSURE_PLATE.get());
+        this.dropSelf(MMBlocks.CALAMITES_TRAPDOOR.get());
+
+        this.add(MMBlocks.CALAMITES_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.CALAMITES_SLAB.get()));
+        this.add(MMBlocks.CALAMITES_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.CALAMITES_MOSAIC_SLAB.get()));
+        this.add(MMBlocks.CALAMITES_DOOR.get(),
+                block -> createDoorTable(MMBlocks.CALAMITES_DOOR.get()));
+
+        this.add(MMBlocks.CALAMITES_SIGN.get(),
+                block -> createSingleItemTable(MMItems.CALAMITES_SIGN.get()));
+        this.add(MMBlocks.CALAMITES_WALL_SIGN.get(),
+                block -> createSingleItemTable(MMItems.CALAMITES_SIGN.get()));
+        this.add(MMBlocks.CALAMITES_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.CALAMITES_HANGING_SIGN.get()));
+        this.add(MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.CALAMITES_HANGING_SIGN.get()));
+
+        this.dropSelf(MMBlocks.CALAMITES_MOSAIC.get());
+        this.dropSelf(MMBlocks.CALAMITES_MOSAIC_STAIRS.get());
+
+        this.dropSelf(MMBlocks.CALAMITES_BUNDLE.get());
+        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get());
+        this.dropSelf(MMBlocks.CALAMITES_BUNDLED_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get());
+
+        this.dropSelf(MMBlocks.CALAMITES_SAPLING.get());
+        this.add(MMBlocks.POTTED_CALAMITES_SAPLING.get(),
+                createPotFlowerItemTable(MMBlocks.CALAMITES_SAPLING.get()));
 
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));

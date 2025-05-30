@@ -107,10 +107,19 @@ public class MMBlocks {
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.SIGILLARIA_SAPLING,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
+    //Cooksonia
     public static final RegistryObject<Block> COOKSONIA = registerBlock("cooksonia",
             () -> new CooksoniaBlock(BlockBehaviour.Properties.copy(Blocks.SUGAR_CANE).noOcclusion().noCollission()));
 
+    //Dickinsonia
+    public static final RegistryObject<Block> DICKINSONIA = registerBlock("dickinsonia",
+            () -> new DickinsoniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).noOcclusion().instabreak().lightLevel((p_152684_) -> {
+                return 6;
+            })));
 
+
+
+    //prototaxites blocks
     public static final RegistryObject<Block> PROTOTAXITES = registerBlock("prototaxites",
             () -> new PrototaxitesBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN).noOcclusion(),
                     ModConfiguredFeatures.PROTOTAXITES_KEY));
@@ -121,12 +130,7 @@ public class MMBlocks {
     public static final RegistryObject<Block> PROTOTAXITES_BLOCK = registerBlock("prototaxites_block",
             () -> new HugeMushroomBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).mapColor(MapColor.COLOR_GREEN)));
 
-    public static final RegistryObject<Block> DICKINSONIA = registerBlock("dickinsonia",
-            () -> new DickinsoniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).noOcclusion().instabreak().lightLevel((p_152684_) -> {
-                return 6;
-            })));
 
-    //prototaxites blocks
 
     public static final RegistryObject<Block> PROTOTAXITES_PLANKS = registerBlock("prototaxites_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
@@ -189,20 +193,93 @@ public class MMBlocks {
 
 
     //Calamites
+    //TODO: Calamites tree grower
+    public static final RegistryObject<Block> CALAMITES_SAPLING = registerBlock("calamites_sapling",
+            () -> new SaplingBlock(new SigillariaTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> POTTED_CALAMITES_SAPLING = registerBlock("potted_calamites_sapling",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.CALAMITES_SAPLING,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
     public static final RegistryObject<Block> CALAMITES_BRANCH = registerBlock("calamites_branch",
-            ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM)));
-
+            ()-> new CalamitesBranchBlock(BlockBehaviour.Properties.copy(Blocks.MUSHROOM_STEM).sound(SoundType.BAMBOO_WOOD)));
     public static final RegistryObject<Block> CALAMITES_LOG = registerBlock ("calamites_log",
-            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).ignitedByLava()));
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> CALAMITES_BARK = registerBlock ("calamites_bark",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
+            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
 
-//    public static final RegistryObject<Block> STRIPPED_CALAMITES_LOG = registerBlock ("stripped_calamites_log",
-//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
-//
-//    public static final RegistryObject<Block> CALAMITES_BARK = registerBlock ("calamites_bark",
-//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
-//
-//    public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
-//            () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+    //Woodset
+    public static final RegistryObject<Block> CALAMITES_BUNDLE = registerBlock("calamites_bundle",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD)));
+    public static final RegistryObject<Block> CALAMITES_BUNDLED_BARK = registerBlock("calamites_bundled_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_BUNDLE = registerBlock("stripped_calamites_bundle",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.BAMBOO_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_CALAMITES_BUNDLED_BARK = registerBlock("stripped_calamites_bundled_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.BAMBOO_WOOD)));
+
+
+    public static final RegistryObject<Block> CALAMITES_PLANKS = registerBlock("calamites_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_STAIRS = registerBlock("calamites_stairs",
+            () -> new StairBlock(() -> MMBlocks.CALAMITES_PLANKS.get().defaultBlockState(),
+
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> CALAMITES_SLAB = registerBlock("calamites_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_BUTTON = registerBlock("calamites_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.BAMBOO_WOOD).ignitedByLava(),
+                    BlockSetType.CRIMSON, 25, true));
+
+    public static final RegistryObject<Block> CALAMITES_PRESSURE_PLATE = registerBlock("calamites_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).sound(SoundType.BAMBOO_WOOD).ignitedByLava(),
+                    BlockSetType.CRIMSON));
+
+    public static final RegistryObject<Block> CALAMITES_FENCE = registerBlock("calamites_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_FENCE_GATE = registerBlock("calamites_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).sound(SoundType.BAMBOO_WOOD).ignitedByLava(),
+                    SoundEvents.BAMBOO_WOOD_FENCE_GATE_OPEN, SoundEvents.BAMBOO_WOOD_FENCE_GATE_CLOSE));
+
+
+    //Calamites Door and Trapdoor
+    public static final RegistryObject<Block> CALAMITES_DOOR = registerBlock("calamites_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+
+    public static final RegistryObject<Block> CALAMITES_TRAPDOOR = registerBlock("calamites_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).noOcclusion(), BlockSetType.CRIMSON));
+
+    //Calamites signs
+    public static final RegistryObject<Block> CALAMITES_SIGN = BLOCKS.register("calamites_sign",
+            () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_SIGN), MMWoodTypes.CALAMITES));
+
+    public static final RegistryObject<Block> CALAMITES_WALL_SIGN = BLOCKS.register("calamites_wall_sign",
+            () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_SIGN), MMWoodTypes.CALAMITES));
+
+    public static final RegistryObject<Block> CALAMITES_HANGING_SIGN = BLOCKS.register("calamites_hanging_sign",
+            () -> new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_HANGING_SIGN), MMWoodTypes.CALAMITES));
+
+    public static final RegistryObject<Block> CALAMITES_WALL_HANGING_SIGN = BLOCKS.register("calamites_wall_hanging_sign",
+            () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN), MMWoodTypes.CALAMITES));
+
+    //Calamites Mosaic Blocks
+    public static final RegistryObject<Block> CALAMITES_MOSAIC = registerBlock("calamites_mosaic",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_MOSAIC_STAIRS = registerBlock("calamites_mosaic_stairs",
+            () -> new StairBlock(() -> MMBlocks.CALAMITES_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
+    public static final RegistryObject<Block> CALAMITES_MOSAIC_SLAB = registerBlock("calamites_mosaic_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
+
 
 
 

@@ -1,0 +1,115 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_calamites_log",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "axis": "x"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_calamites_log"
+      },
+      "when": {
+        "axis": "y"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_calamites_log",
+        "x": 90
+      },
+      "when": {
+        "axis": "z"
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub"
+      },
+      "when": {
+        "axis": "y",
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub",
+        "y": 90
+      },
+      "when": {
+        "axis": "y",
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub",
+        "y": 180
+      },
+      "when": {
+        "axis": "y",
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub",
+        "y": 270
+      },
+      "when": {
+        "axis": "y",
+        "west": "true"
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub_diagonal",
+        "y": 90
+      },
+      "when": {
+        "axis": "y",
+        "northeast": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub_diagonal"
+      },
+      "when": {
+        "axis": "y",
+        "northwest": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub_diagonal",
+        "y": 270
+      },
+      "when": {
+        "axis": "y",
+        "southwest": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/calamites_nub_diagonal",
+        "y": 180
+      },
+      "when": {
+        "axis": "y",
+        "southeast": "true"
+      }
+    }
+  ]
+}

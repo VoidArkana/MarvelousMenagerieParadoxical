@@ -3,7 +3,9 @@ package net.voidarkana.marvelous_menagerie.common.block.custom.plant;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -13,8 +15,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.ToolAction;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import org.checkerframework.checker.units.qual.A;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -149,5 +153,38 @@ public class CalamitesLogBlock extends ThinLogBlock{
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(AXIS, NORTH, EAST, WEST, SOUTH, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, WATERLOGGED);
+    }
+
+    @Override
+    public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        if (context.getItemInHand().getItem() instanceof AxeItem){
+            if(state.is(MMBlocks.CALAMITES_LOG.get())){
+                return MMBlocks.STRIPPED_CALAMITES_LOG.get().defaultBlockState()
+                        .setValue(AXIS, state.getValue(AXIS))
+                        .setValue(NORTH, state.getValue(NORTH))
+                        .setValue(EAST, state.getValue(EAST))
+                        .setValue(WEST, state.getValue(WEST))
+                        .setValue(SOUTH, state.getValue(SOUTH))
+                        .setValue(NORTHEAST, state.getValue(NORTHEAST))
+                        .setValue(NORTHWEST, state.getValue(NORTHWEST))
+                        .setValue(SOUTHEAST, state.getValue(SOUTHEAST))
+                        .setValue(SOUTHWEST, state.getValue(SOUTHWEST))
+                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+            }
+            if(state.is(MMBlocks.CALAMITES_BARK.get())){
+                return MMBlocks.STRIPPED_CALAMITES_BARK.get().defaultBlockState()
+                        .setValue(AXIS, state.getValue(AXIS))
+                        .setValue(NORTH, state.getValue(NORTH))
+                        .setValue(EAST, state.getValue(EAST))
+                        .setValue(WEST, state.getValue(WEST))
+                        .setValue(SOUTH, state.getValue(SOUTH))
+                        .setValue(NORTHEAST, state.getValue(NORTHEAST))
+                        .setValue(NORTHWEST, state.getValue(NORTHWEST))
+                        .setValue(SOUTHEAST, state.getValue(SOUTHEAST))
+                        .setValue(SOUTHWEST, state.getValue(SOUTHWEST))
+                        .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+            }
+        }
+        return super.getToolModifiedState(state, context, toolAction, simulate);
     }
 }

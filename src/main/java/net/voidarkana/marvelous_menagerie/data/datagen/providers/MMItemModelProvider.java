@@ -68,6 +68,23 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.PROTOTAXITES_SIGN);
         simpleItem(MMItems.PROTOTAXITES_HANGING_SIGN);
 
+
+        simpleBlockItem(MMBlocks.CALAMITES_DOOR);
+        trapdoorItem(MMBlocks.CALAMITES_TRAPDOOR);
+
+        evenSimplerBlockItem(MMBlocks.CALAMITES_STAIRS);
+        evenSimplerBlockItem(MMBlocks.CALAMITES_MOSAIC_STAIRS);
+        evenSimplerBlockItem(MMBlocks.CALAMITES_SLAB);
+        evenSimplerBlockItem(MMBlocks.CALAMITES_MOSAIC_SLAB);
+        evenSimplerBlockItem(MMBlocks.CALAMITES_FENCE_GATE);
+        evenSimplerBlockItem(MMBlocks.CALAMITES_PRESSURE_PLATE);
+
+        fenceItem(MMBlocks.CALAMITES_FENCE, MMBlocks.CALAMITES_PLANKS);
+        buttonItem(MMBlocks.CALAMITES_BUTTON, MMBlocks.CALAMITES_PLANKS);
+
+        simpleItem(MMItems.CALAMITES_SIGN);
+        simpleItem(MMItems.CALAMITES_HANGING_SIGN);
+
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);
 

@@ -8,7 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -60,6 +63,10 @@ public class ClientProxy extends CommonProxy{
     }
 
     public void clientInit() {
+        Sheets.addWoodType(MMWoodTypes.SIGILLARIA);
+        Sheets.addWoodType(MMWoodTypes.PROTOTAXITES);
+        Sheets.addWoodType(MMWoodTypes.CALAMITES);
+
         MinecraftForge.EVENT_BUS.register(new MMClientEvents());
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -88,6 +95,8 @@ public class ClientProxy extends CommonProxy{
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.CHARNIA_BLOCK_ENTITY.get(), CharniaRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.PALEO_TABLE_ENTITY.get(), PaleoTableRenderer::new);
+        BlockEntityRenderers.register(MMBlockEntities.MOD_SIGN.get(), SignRenderer::new);
+        BlockEntityRenderers.register(MMBlockEntities.MOD_HANGING_SIGN.get(), HangingSignRenderer::new);
 
         EntityRenderers.register(MMEntities.FRACTURE.get(), FractureRenderer::new);
         EntityRenderers.register(MMEntities.RIFT.get(), RiftRenderer::new);

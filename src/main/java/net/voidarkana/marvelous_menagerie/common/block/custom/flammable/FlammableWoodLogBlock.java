@@ -40,6 +40,13 @@ public class FlammableWoodLogBlock extends RotatedPillarBlock {
             if(state.is(MMBlocks.SIGILLARIA_WOOD.get())){
                 return MMBlocks.STRIPPED_SIGILLARIA_WOOD.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
             }
+
+            if(state.is(MMBlocks.CALAMITES_BUNDLE.get())){
+                return MMBlocks.STRIPPED_CALAMITES_BUNDLE.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
+            if(state.is(MMBlocks.CALAMITES_BUNDLED_BARK.get())){
+                return MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get().defaultBlockState().setValue(AXIS, state.getValue(AXIS));
+            }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
     }

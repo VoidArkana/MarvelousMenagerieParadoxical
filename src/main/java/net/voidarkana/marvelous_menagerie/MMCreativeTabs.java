@@ -119,10 +119,34 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.WIWAXIA.get());
 
                         output.accept(MMBlocks.CALAMITES_LOG.get());
-//                        output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
-//                        output.accept(MMBlocks.CALAMITES_BARK.get());
-//                        output.accept(MMBlocks.STRIPPED_CALAMITES_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
+                        output.accept(MMBlocks.CALAMITES_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_CALAMITES_BARK.get());
+
+                        output.accept(MMBlocks.CALAMITES_PLANKS.get());
+
+                        output.accept(MMBlocks.CALAMITES_BUNDLE.get());
+                        output.accept(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get());
+                        output.accept(MMBlocks.CALAMITES_BUNDLED_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get());
+
+                        output.accept(MMBlocks.CALAMITES_STAIRS.get());
+                        output.accept(MMBlocks.CALAMITES_SLAB.get());
+                        output.accept(MMBlocks.CALAMITES_FENCE.get());
+                        output.accept(MMBlocks.CALAMITES_FENCE_GATE.get());
+                        output.accept(MMBlocks.CALAMITES_DOOR.get());
+                        output.accept(MMBlocks.CALAMITES_TRAPDOOR.get());
+                        output.accept(MMBlocks.CALAMITES_PRESSURE_PLATE.get());
+                        output.accept(MMBlocks.CALAMITES_BUTTON.get());
+
+                        output.accept(MMBlocks.CALAMITES_MOSAIC.get());
+                        output.accept(MMBlocks.CALAMITES_MOSAIC_STAIRS.get());
+                        output.accept(MMBlocks.CALAMITES_MOSAIC_SLAB.get());
+                        output.accept(MMItems.CALAMITES_SIGN.get());
+                        output.accept(MMItems.CALAMITES_HANGING_SIGN.get());
                         output.accept(MMBlocks.CALAMITES_BRANCH.get());
+                        output.accept(MMBlocks.CALAMITES_SAPLING.get());
+
 
 
                         output.accept(MMBlocks.PROTOTAXITES_PLANKS.get());
