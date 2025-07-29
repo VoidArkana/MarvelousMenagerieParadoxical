@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.renderer.entity;
+package net.voidarkana.marvelous_menagerie.client.renderer.entity.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

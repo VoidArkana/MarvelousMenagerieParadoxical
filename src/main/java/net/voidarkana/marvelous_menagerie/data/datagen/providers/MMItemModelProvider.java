@@ -49,6 +49,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.SIGILLARIA_SIGN);
         simpleItem(MMItems.SIGILLARIA_HANGING_SIGN);
 
+        simpleItem(MMItems.SIGILLARIA_BOAT);
+        simpleItem(MMItems.SIGILLARIA_CHEST_BOAT);
+
 //        saplingItem(MMBlocks.SIGILLARIA_SAPLING);
 //        saplingItem(MMBlocks.COOKSONIA);
 
@@ -68,6 +71,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.PROTOTAXITES_SIGN);
         simpleItem(MMItems.PROTOTAXITES_HANGING_SIGN);
 
+        simpleItem(MMItems.PROTOTAXITES_BOAT);
+        simpleItem(MMItems.PROTOTAXITES_CHEST_BOAT);
+
 
         simpleBlockItem(MMBlocks.CALAMITES_DOOR);
         trapdoorItem(MMBlocks.CALAMITES_TRAPDOOR);
@@ -84,6 +90,9 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleItem(MMItems.CALAMITES_SIGN);
         simpleItem(MMItems.CALAMITES_HANGING_SIGN);
+
+        simpleItem(MMItems.CALAMITES_BOAT);
+        simpleItem(MMItems.CALAMITES_CHEST_BOAT);
 
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);

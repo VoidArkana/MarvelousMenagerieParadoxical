@@ -13,7 +13,6 @@ import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 
 public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart root;
 	private final ModelPart body_main;
@@ -221,8 +220,12 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 
 		if (entity.isLandNavigator){
 			this.body_main.resetPose();
-			this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
-			this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
+			if (entity.isGrabbing()){
+				this.look_control.resetPose();
+			}else{
+				this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
+				this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
+			}
 		}else {
 			this.look_control.resetPose();
 			this.body_main.xRot = headPitch * ((float)Math.PI / 180F);

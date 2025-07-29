@@ -1,5 +1,4 @@
 {
-  
   "entity.marvelous_menagerie.dodo": "Dodo",
   "entity.marvelous_menagerie.thylacine": "Thylacine",
   "entity.marvelous_menagerie.elephant_bird": "Elephant Bird",
@@ -314,6 +313,7 @@
 
 
   "item.marvelous_menagerie.paleo_toolkit": "Paleontology Toolkit",
+  "item.marvelous_menagerie.paleo_toolkit.desc": "Use on embedded fossil blocks to initiate an excavation!",
 
   "item.marvelous_menagerie.chud_spawn_egg": "Chud Spawn Egg",
   "entity.marvelous_menagerie.chud": "Chud",
@@ -653,5 +653,17 @@
 
   "block.marvelous_menagerie.calamites_branch": "Calamites Branch",
   "block.marvelous_menagerie.calamites_sapling": "Calamites Sapling",
-  "block.marvelous_menagerie.potted_calamites_sapling": "Potted Calamites Sapling"
+  "block.marvelous_menagerie.potted_calamites_sapling": "Potted Calamites Sapling",
+
+  "item.marvelous_menagerie.sigillaria_boat": "Sigillaria Boat",
+  "item.marvelous_menagerie.sigillaria_chest_boat": "Sigillaria Boat with Chest",
+
+  "item.marvelous_menagerie.prototaxites_boat": "Prototaxites Boat",
+  "item.marvelous_menagerie.prototaxites_chest_boat": "Prototaxites Boat with Chest",
+
+  "item.marvelous_menagerie.calamites_boat": "Calamites Boat",
+  "item.marvelous_menagerie.calamites_chest_boat": "Calamites Boat with Chest",
+
+  "entity.marvelous_menagerie.mm_boat": "Boat",
+  "entity.marvelous_menagerie.mm_chest_boat": "Boat with Chest"
 }

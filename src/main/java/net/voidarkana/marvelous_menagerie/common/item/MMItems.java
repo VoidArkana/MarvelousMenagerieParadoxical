@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
 import net.voidarkana.marvelous_menagerie.common.item.custom.*;
 
 public class MMItems {
@@ -251,11 +252,21 @@ public class MMItems {
     public static final RegistryObject<Item> SIGILLARIA_HANGING_SIGN = ITEMS.register("sigillaria_hanging_sign",
             ()-> new HangingSignItem(MMBlocks.SIGILLARIA_HANGING_SIGN.get(), MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> SIGILLARIA_BOAT = ITEMS.register("sigillaria_boat",
+            () -> new MMBoatItem(false, MMBoatEntity.Type.SIGILLARIA, new Item.Properties()));
+    public static final RegistryObject<Item> SIGILLARIA_CHEST_BOAT = ITEMS.register("sigillaria_chest_boat",
+            () -> new MMBoatItem(true, MMBoatEntity.Type.SIGILLARIA, new Item.Properties()));
+
     //Prototaxites
     public static final RegistryObject<Item> PROTOTAXITES_SIGN = ITEMS.register("prototaxites_sign",
             ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.PROTOTAXITES_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_SIGN.get()));
     public static final RegistryObject<Item> PROTOTAXITES_HANGING_SIGN = ITEMS.register("prototaxites_hanging_sign",
             ()-> new HangingSignItem(MMBlocks.PROTOTAXITES_HANGING_SIGN.get(), MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> PROTOTAXITES_BOAT = ITEMS.register("prototaxites_boat",
+            () -> new MMBoatItem(false, MMBoatEntity.Type.PROTOTAXITES, new Item.Properties()));
+    public static final RegistryObject<Item> PROTOTAXITES_CHEST_BOAT = ITEMS.register("prototaxites_chest_boat",
+            () -> new MMBoatItem(true, MMBoatEntity.Type.PROTOTAXITES, new Item.Properties()));
 
     //Calamites
     public static final RegistryObject<Item> CALAMITES_SIGN = ITEMS.register("calamites_sign",
@@ -263,6 +274,10 @@ public class MMItems {
     public static final RegistryObject<Item> CALAMITES_HANGING_SIGN = ITEMS.register("calamites_hanging_sign",
             ()-> new HangingSignItem(MMBlocks.CALAMITES_HANGING_SIGN.get(), MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> CALAMITES_BOAT = ITEMS.register("calamites_boat",
+            () -> new MMBoatItem(false, MMBoatEntity.Type.CALAMITES, new Item.Properties()));
+    public static final RegistryObject<Item> CALAMITES_CHEST_BOAT = ITEMS.register("calamites_chest_boat",
+            () -> new MMBoatItem(true, MMBoatEntity.Type.CALAMITES, new Item.Properties()));
 
     //Fossils
     public static final RegistryObject<Item> SHALE_FOSSIL = ITEMS.register("shale_fossil",

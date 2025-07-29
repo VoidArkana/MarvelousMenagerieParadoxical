@@ -50,4 +50,9 @@ public class MMModelLayers {
     public static final ModelLayerLocation GOGGLES_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "anomalous_goggles"), "main");
 
+    public static final ModelLayerLocation BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "boat"), "main");
+    public static final ModelLayerLocation CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat"), "main");
+
 }

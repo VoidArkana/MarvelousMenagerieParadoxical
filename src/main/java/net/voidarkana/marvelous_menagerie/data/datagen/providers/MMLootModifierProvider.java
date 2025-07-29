@@ -20,6 +20,6 @@ public class MMLootModifierProvider extends GlobalLootModifierProvider {
     protected void start() {
         add("seeds_from_sniffing", new AddItemsModifier(new LootItemCondition[] {
                 new LootTableIdCondition.Builder(new ResourceLocation("gameplay/sniffer_digging")).build()
-        }, List.of(MMBlocks.SIGILLARIA_SAPLING.get().asItem(), MMBlocks.PROTOTAXITES.get().asItem(), MMBlocks.COOKSONIA.get().asItem())));
+        }, List.of(MMBlocks.CALAMITES_SAPLING.get().asItem(), MMBlocks.SIGILLARIA_SAPLING.get().asItem(), MMBlocks.PROTOTAXITES.get().asItem(), MMBlocks.COOKSONIA.get().asItem())));
     }
 }

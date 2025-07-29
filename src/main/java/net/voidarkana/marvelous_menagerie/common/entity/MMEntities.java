@@ -12,6 +12,8 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.MMChestBoatEntity;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
 
 public class MMEntities {
@@ -106,6 +108,14 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Hallucigenia::new, MobCategory.WATER_AMBIENT)
                             .sized(1f, 0.7f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia").toString()));
+
+    public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
+            ENTITY_TYPES.register("mod_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375f, 0.5625f).build("mod_boat"));
+
+    public static final RegistryObject<EntityType<MMChestBoatEntity>> MM_CHEST_BOAT =
+            ENTITY_TYPES.register("mod_chest_boat", () -> EntityType.Builder.<MMChestBoatEntity>of(MMChestBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375f, 0.5625f).build("mod_chest_boat"));
 
 //    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS = ENTITIES.register("doedicurus", () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE).sized(1.75F, 1.75F).build("doedicurus"));
 //    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM = ENTITIES.register("leptictidium", () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE).sized(0.5F, 0.4F).build("leptictidium"));

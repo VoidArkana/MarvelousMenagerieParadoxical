@@ -34,6 +34,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.Cancelable;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
@@ -459,8 +460,14 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     protected BreedableWaterAnimal(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        if (this.hasNormalControls()){
+            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+            this.lookControl = new SmoothSwimmingLookControl(this, 10);
+        }
+    }
+
+    public boolean hasNormalControls(){
+        return true;
     }
 
     protected void defineSynchedData() {

@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -33,6 +34,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
@@ -83,9 +85,13 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
         this.jumpControl = new FishJumpControl(this);
-//        this.moveControl = new SmoothSwimmingMoveControl(this, 1, 10, 0.02F, 0.1F, true);
-        this.lookControl = new LookControl(this);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 1, 1, 0.02F, 0.1F, true);
         this.setMaxUpStep(1.0F);
+    }
+
+    @Override
+    public boolean hasNormalControls() {
+        return false;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -95,14 +101,13 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80){
             @Nullable
             @Override
             protected Vec3 getPosition() {
-                return DefaultRandomPos.getPos(this.mob, 10, 0);
+                return DefaultRandomPos.getPos(this.mob, 10, 1);
             }
         });
     }
@@ -136,19 +141,8 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         return false;
     }
 
+    @Override
     public void aiStep() {
-        super.aiStep();
-
-        if (this.isAlive()) {
-            for(Mob mob : this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(0.3D), (p_149013_) -> {
-                return targetingConditions.test(this, p_149013_);
-            })) {
-                if (mob.isAlive()) {
-                    this.touch(mob);
-                }
-            }
-        }
-
         if (this.isInWater()) {
             if(!this.onGround()){
                 this.setDeltaMovement(this.getDeltaMovement().add(0, -0.08, 0));
@@ -163,6 +157,17 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
             }
         }
 
+        super.aiStep();
+
+        if (this.isAlive()) {
+            for(Mob mob : this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(0.3D), (p_149013_) -> {
+                return targetingConditions.test(this, p_149013_);
+            })) {
+                if (mob.isAlive()) {
+                    this.touch(mob);
+                }
+            }
+        }
     }
 
     @Override
@@ -307,5 +312,10 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
 
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.COD_HURT;
+    }
+
+    @Override
+    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
+        return pLevel.getFluidState(pPos.above()).is(FluidTags.WATER) ? 0F : super.getWalkTargetValue(pPos, pLevel);
     }
 }

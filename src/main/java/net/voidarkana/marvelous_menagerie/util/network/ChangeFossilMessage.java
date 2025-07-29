@@ -34,7 +34,7 @@ public class ChangeFossilMessage {
 
     public static void handle(ChangeFossilMessage message, Supplier<NetworkEvent.Context> context) {
         // server level
-        Player player = context.get().getSender();
+        //Player player = context.get().getSender();
 
         Level level;
         ServerPlayer sender = context.get().getSender();
@@ -52,7 +52,7 @@ public class ChangeFossilMessage {
                 //fossil.updateState(this.packed, this.recipient, this.sender, this.description, player);
 
                 BlockState state = level.getBlockState(message.pos);
-                fossil.destroyOriginalWithSuccessLevel(player, message.success, message.pos);
+                fossil.destroyOriginalWithSuccessLevel(level ,message.success, message.pos);
                 //also sends new block to clients. maybe not needed since blockstate changes
                 level.sendBlockUpdated(message.pos, state, state, 3);
 

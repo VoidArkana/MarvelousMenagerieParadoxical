@@ -1,5 +1,7 @@
 package net.voidarkana.marvelous_menagerie.client.events;
 
+import net.minecraft.client.model.BoatModel;
+import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -53,6 +55,9 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.HALLU_LAYER, HallucigeniaModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
+
+        event.registerLayerDefinition(MMModelLayers.BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
     }
 
     @SubscribeEvent

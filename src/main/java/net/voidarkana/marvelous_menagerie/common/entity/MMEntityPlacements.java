@@ -26,6 +26,9 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.SKELETON_DAWN_HORSE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 SkeletonDawnHorse::checkMonsterSpawnRules);
 
+        SpawnPlacements.register(MMEntities.HALLUCIGENIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Hallucigenia::checkSurfaceWaterCreatureRules);
+
+
 //        SpawnPlacements.register(MMEntities.DODO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DodoEntity::checkSurfaceDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.THYLACINE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ThylacineEntity::checkSurfaceDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.ELEPHANT_BIRD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ElephantBirdEntity::checkSurfaceDinoSpawnRules);
@@ -33,7 +36,6 @@ public class MMEntityPlacements {
 //        SpawnPlacements.register(MMEntities.OPHTHALMO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, OphthalmoEntity::checkSurfaceWaterDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.STELLER_SEA_COW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StellerEntity::checkSurfaceWaterDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.TRILOBITE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TrilobiteEntity::checkSurfaceWaterDinoSpawnRules);
-//        SpawnPlacements.register(MMEntities.HALLUCIGENIA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, HallucigeniaEntity::checkSurfaceWaterDinoSpawnRules);
     }
 
 }
