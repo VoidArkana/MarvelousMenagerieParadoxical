@@ -557,7 +557,17 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .addOptional(new ResourceLocation("rainbowreef:dead_shelf_coral_block"))
 
                 .addOptional(new ResourceLocation("rainbowreef:dead_tower_coral"))
-                .addOptional(new ResourceLocation("rainbowreef:dead_tower_coral_block"));
+                .addOptional(new ResourceLocation("rainbowreef:dead_tower_coral_block"))
+
+                //fintastic
+                .addOptional(new ResourceLocation("fintastic:fossil_stromatolite"))
+                .addOptional(new ResourceLocation("fintastic:stromatolite"))
+
+                .addOptional(new ResourceLocation("fintastic:fossil_stromatolite_growths"))
+                .addOptional(new ResourceLocation("fintastic:stromatolite_growths"))
+
+                .addOptional(new ResourceLocation("fintastic:fossil_stromatolite_block"))
+                .addOptional(new ResourceLocation("fintastic:stromatolite_block"));
 
         this.tag(BlockTags.WALLS).add(
 

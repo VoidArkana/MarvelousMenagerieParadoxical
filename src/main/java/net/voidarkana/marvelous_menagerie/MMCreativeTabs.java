@@ -147,6 +147,8 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.CALAMITES_BRANCH.get());
                         output.accept(MMBlocks.CALAMITES_SAPLING.get());
 
+                        output.accept(MMItems.CALAMITES_BOAT.get());
+                        output.accept(MMItems.CALAMITES_CHEST_BOAT.get());
 
 
                         output.accept(MMBlocks.PROTOTAXITES_PLANKS.get());
@@ -169,6 +171,9 @@ public class MMCreativeTabs {
                         output.accept(MMItems.PROTOTAXITES_HANGING_SIGN.get());
 
                         output.accept(MMBlocks.PROTOTAXITES.get());
+
+                        output.accept(MMItems.PROTOTAXITES_BOAT.get());
+                        output.accept(MMItems.PROTOTAXITES_CHEST_BOAT.get());
 
 
 
@@ -195,6 +200,9 @@ public class MMCreativeTabs {
                         output.accept(MMItems.SIGILLARIA_HANGING_SIGN.get());
                         output.accept(MMBlocks.SIGILLARIA_LEAVES.get());
                         output.accept(MMBlocks.SIGILLARIA_SAPLING.get());
+
+                        output.accept(MMItems.SIGILLARIA_BOAT.get());
+                        output.accept(MMItems.SIGILLARIA_CHEST_BOAT.get());
                     })
                     .build());
 

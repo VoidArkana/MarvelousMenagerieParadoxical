@@ -50,9 +50,19 @@ public class MMModelLayers {
     public static final ModelLayerLocation GOGGLES_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "anomalous_goggles"), "main");
 
-    public static final ModelLayerLocation BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "boat"), "main");
-    public static final ModelLayerLocation CHEST_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat"), "main");
+    public static final ModelLayerLocation SIGILLARIA_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "boat/sigillaria"), "main");
+    public static final ModelLayerLocation SIGILLARIA_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/sigillaria"), "main");
+
+    public static final ModelLayerLocation PROTOTAXITES_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "boat/prototaxites"), "main");
+    public static final ModelLayerLocation PROTOTAXITES_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/prototaxites"), "main");
+
+    public static final ModelLayerLocation CALAMITES_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "boat/calamites"), "main");
+    public static final ModelLayerLocation CALAMITES_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/calamites"), "main");
 
 }

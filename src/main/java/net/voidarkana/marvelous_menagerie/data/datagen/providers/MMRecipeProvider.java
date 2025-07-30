@@ -34,21 +34,6 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
 
-        //Sigillaria woodset
-        makePlanks(MMBlocks.SIGILLARIA_PLANKS, MMTags.Items.SIGILLARIA_LOG_ITEM).save(consumer);
-        makeWood(MMBlocks.SIGILLARIA_WOOD, MMBlocks.SIGILLARIA_STEM).save(consumer);
-        makeWood(MMBlocks.STRIPPED_SIGILLARIA_WOOD, MMBlocks.STRIPPED_SIGILLARIA_STEM).save(consumer);
-        makeStairs(MMBlocks.SIGILLARIA_PLANKS, MMBlocks.SIGILLARIA_STAIRS).save(consumer);
-        makeStairs(MMBlocks.SIGILLARIA_MOSAIC, MMBlocks.SIGILLARIA_MOSAIC_STAIRS).save(consumer);
-        makeSlab(MMBlocks.SIGILLARIA_PLANKS, MMBlocks.SIGILLARIA_SLAB).save(consumer);
-        makeSlab(MMBlocks.SIGILLARIA_MOSAIC, MMBlocks.SIGILLARIA_MOSAIC_SLAB).save(consumer);
-        makeFence(MMBlocks.SIGILLARIA_FENCE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-        makeFenceGate(MMBlocks.SIGILLARIA_FENCE_GATE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-        makeDoor(MMBlocks.SIGILLARIA_DOOR, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-        makeTrapdoor(MMBlocks.SIGILLARIA_TRAPDOOR, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-        makeButton(MMBlocks.SIGILLARIA_BUTTON, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-        makePressurePlate(MMBlocks.SIGILLARIA_PRESSURE_PLATE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
-
         //Paleo Toolkit
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, MMItems.PALEO_TOOLKIT.get(), 1)
                 .requires(Items.IRON_PICKAXE)
@@ -111,6 +96,22 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
 
+
+        //Sigillaria woodset
+        makePlanks(MMBlocks.SIGILLARIA_PLANKS, MMTags.Items.SIGILLARIA_LOG_ITEM).save(consumer);
+        makeWood(MMBlocks.SIGILLARIA_WOOD, MMBlocks.SIGILLARIA_STEM).save(consumer);
+        makeWood(MMBlocks.STRIPPED_SIGILLARIA_WOOD, MMBlocks.STRIPPED_SIGILLARIA_STEM).save(consumer);
+        makeStairs(MMBlocks.SIGILLARIA_PLANKS, MMBlocks.SIGILLARIA_STAIRS).save(consumer);
+        makeStairs(MMBlocks.SIGILLARIA_MOSAIC, MMBlocks.SIGILLARIA_MOSAIC_STAIRS).save(consumer);
+        makeSlab(MMBlocks.SIGILLARIA_PLANKS, MMBlocks.SIGILLARIA_SLAB).save(consumer);
+        makeSlab(MMBlocks.SIGILLARIA_MOSAIC, MMBlocks.SIGILLARIA_MOSAIC_SLAB).save(consumer);
+        makeFence(MMBlocks.SIGILLARIA_FENCE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+        makeFenceGate(MMBlocks.SIGILLARIA_FENCE_GATE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+        makeDoor(MMBlocks.SIGILLARIA_DOOR, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+        makeTrapdoor(MMBlocks.SIGILLARIA_TRAPDOOR, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+        makeButton(MMBlocks.SIGILLARIA_BUTTON, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+        makePressurePlate(MMBlocks.SIGILLARIA_PRESSURE_PLATE, MMBlocks.SIGILLARIA_PLANKS).save(consumer);
+
         //Sigillaria mosaic
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.SIGILLARIA_MOSAIC.get(), 1)
                 .pattern("S")
@@ -139,14 +140,23 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy(getHasName(MMBlocks.SIGILLARIA_STEM.get()), has(MMBlocks.SIGILLARIA_STEM.get()))
                 .save(consumer);
 
+        //Sigillaria boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, MMItems.SIGILLARIA_BOAT.get(), 1)
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', MMBlocks.SIGILLARIA_PLANKS.get())
+                .unlockedBy(getHasName(MMBlocks.SIGILLARIA_PLANKS.get()), has(MMBlocks.SIGILLARIA_PLANKS.get()))
+                .save(consumer);
+
+        //Sigillaria chest boat
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, MMItems.SIGILLARIA_CHEST_BOAT.get(), 1)
+                .requires(MMItems.SIGILLARIA_BOAT.get())
+                .requires(Blocks.CHEST)
+                .unlockedBy(getHasName(MMBlocks.SIGILLARIA_PLANKS.get()), has(MMBlocks.SIGILLARIA_PLANKS.get()))
+                .save(consumer);
+
         //Egg Shellmet
         makeHelmet(MMItems.EGG_SHELLMET, MMItems.EGG_SHELL_FRAGMENT);
-//        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.EGG_SHELLMET.get(), 1)
-//                .pattern("SSS")
-//                .pattern("S S")
-//                .define('S', MMItems.EGG_SHELL_FRAGMENT.get())
-//                .unlockedBy(getHasName(MMItems.EGG_SHELL_FRAGMENT.get()), has(MMItems.EGG_SHELL_FRAGMENT.get()))
-//                .save(consumer);
 
         //Jumbo Omelette
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.JUMBO_OMELETTE.get(), 1)
@@ -246,6 +256,21 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .define('#', Items.CHAIN)
                 .define('S', MMBlocks.PROTOTAXITES_BLOCK.get())
                 .unlockedBy(getHasName(MMBlocks.PROTOTAXITES_BLOCK.get()), has(MMBlocks.PROTOTAXITES_BLOCK.get()))
+                .save(consumer);
+
+        //Prototaxites boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, MMItems.PROTOTAXITES_BOAT.get(), 1)
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', MMBlocks.PROTOTAXITES_PLANKS.get())
+                .unlockedBy(getHasName(MMBlocks.PROTOTAXITES_PLANKS.get()), has(MMBlocks.PROTOTAXITES_PLANKS.get()))
+                .save(consumer);
+
+        //Prototaxites chest boat
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, MMItems.PROTOTAXITES_CHEST_BOAT.get(), 1)
+                .requires(MMItems.PROTOTAXITES_BOAT.get())
+                .requires(Blocks.CHEST)
+                .unlockedBy(getHasName(MMBlocks.PROTOTAXITES_PLANKS.get()), has(MMBlocks.PROTOTAXITES_PLANKS.get()))
                 .save(consumer);
 
         //Anomalous Goggles
@@ -657,9 +682,85 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_BRICKS_STAIRS.get()).save(consumer, this.name("permafrost_to_bricks_stairs_stonecutter"));
         this.stonecutting(MMBlocks.PERMAFROST, MMBlocks.PERMAFROST_MOSAIC_STAIRS.get()).save(consumer, this.name("permafrost_to_mosaic_stairs_stonecutter"));
 
+
+        //Calamites woodset
+        makePlanks(MMBlocks.CALAMITES_PLANKS, MMTags.Items.CALAMITES_BUNDLE_ITEM).save(consumer);
+        makePlanksFromThinLog(MMBlocks.CALAMITES_PLANKS, MMTags.Items.CALAMITES_LOG_ITEM).save(consumer, "calamites_planks_from_thin_log");
+        makeWood(MMBlocks.CALAMITES_BUNDLED_BARK, MMBlocks.CALAMITES_BUNDLE).save(consumer);
+        makeWood(MMBlocks.CALAMITES_BARK, MMBlocks.CALAMITES_LOG).save(consumer);
+        makeWood(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK, MMBlocks.STRIPPED_CALAMITES_BUNDLE).save(consumer);
+        makeWood(MMBlocks.STRIPPED_CALAMITES_BARK, MMBlocks.STRIPPED_CALAMITES_LOG).save(consumer);
+        makeStairs(MMBlocks.CALAMITES_PLANKS, MMBlocks.CALAMITES_STAIRS).save(consumer);
+        makeStairs(MMBlocks.CALAMITES_MOSAIC, MMBlocks.CALAMITES_MOSAIC_STAIRS).save(consumer);
+        makeSlab(MMBlocks.CALAMITES_PLANKS, MMBlocks.CALAMITES_SLAB).save(consumer);
+        makeSlab(MMBlocks.CALAMITES_MOSAIC, MMBlocks.CALAMITES_MOSAIC_SLAB).save(consumer);
+        makeFence(MMBlocks.CALAMITES_FENCE, MMBlocks.CALAMITES_PLANKS).save(consumer);
+        makeFenceGate(MMBlocks.CALAMITES_FENCE_GATE, MMBlocks.CALAMITES_PLANKS).save(consumer);
+        makeDoor(MMBlocks.CALAMITES_DOOR, MMBlocks.CALAMITES_PLANKS).save(consumer);
+        makeTrapdoor(MMBlocks.CALAMITES_TRAPDOOR, MMBlocks.CALAMITES_PLANKS).save(consumer);
+        makeButton(MMBlocks.CALAMITES_BUTTON, MMBlocks.CALAMITES_PLANKS).save(consumer);
+        makePressurePlate(MMBlocks.CALAMITES_PRESSURE_PLATE, MMBlocks.CALAMITES_PLANKS).save(consumer);
+
+        make4IngotToBlock(MMBlocks.CALAMITES_BUNDLE.get(), MMBlocks.CALAMITES_LOG.get()).save(consumer, "calamites_log_to_bundle");
+        make4IngotToBlock(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get(), MMBlocks.STRIPPED_CALAMITES_LOG.get()).save(consumer, "calamites_stripped_log_to_bundle");
+        make4IngotToBlock(MMBlocks.CALAMITES_BUNDLED_BARK.get(), MMBlocks.CALAMITES_BARK.get()).save(consumer, "calamites_bark_to_bundle");
+        make4IngotToBlock(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get(), MMBlocks.STRIPPED_CALAMITES_BARK.get()).save(consumer, "calamites_stripped_bark_to_bundle");
+
+        makeBlockTo4Ingot(MMBlocks.CALAMITES_LOG.get(), MMBlocks.CALAMITES_BUNDLE.get()).save(consumer, "calamites_bundle_to_log");
+        makeBlockTo4Ingot(MMBlocks.STRIPPED_CALAMITES_LOG.get(), MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()).save(consumer, "calamites_stripped_bundle_to_log");
+        makeBlockTo4Ingot(MMBlocks.CALAMITES_BARK.get(), MMBlocks.CALAMITES_BUNDLED_BARK.get()).save(consumer, "calamites_bundle_to_bark");
+        makeBlockTo4Ingot(MMBlocks.STRIPPED_CALAMITES_BARK.get(), MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()).save(consumer, "calamites_bundle_to_stripped_bark");
+
+        //Calamites mosaic
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.CALAMITES_MOSAIC.get(), 1)
+                .pattern("S")
+                .pattern("S")
+                .define('S', MMBlocks.CALAMITES_SLAB.get())
+                .unlockedBy(getHasName(MMBlocks.CALAMITES_BUNDLE.get()), has(MMBlocks.CALAMITES_BUNDLE.get()))
+                .save(consumer);
+
+        //Calamites sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.CALAMITES_SIGN.get(), 3)
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern(" # ")
+                .define('S', MMBlocks.CALAMITES_PLANKS.get())
+                .define('#', Tags.Items.RODS_WOODEN)
+                .unlockedBy(getHasName(MMBlocks.CALAMITES_BUNDLE.get()), has(MMBlocks.CALAMITES_BUNDLE.get()))
+                .save(consumer);
+
+        //Calamites hanging sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.CALAMITES_HANGING_SIGN.get(), 6)
+                .pattern("# #")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('#', Items.CHAIN)
+                .define('S', MMBlocks.STRIPPED_CALAMITES_BUNDLE.get())
+                .unlockedBy(getHasName(MMBlocks.CALAMITES_BUNDLE.get()), has(MMBlocks.CALAMITES_BUNDLE.get()))
+                .save(consumer);
+
+        //Calamites boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, MMItems.CALAMITES_BOAT.get(), 1)
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', MMBlocks.CALAMITES_PLANKS.get())
+                .unlockedBy(getHasName(MMBlocks.CALAMITES_PLANKS.get()), has(MMBlocks.CALAMITES_PLANKS.get()))
+                .save(consumer);
+
+        //Calamites chest boat
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, MMItems.CALAMITES_CHEST_BOAT.get(), 1)
+                .requires(MMItems.CALAMITES_BOAT.get())
+                .requires(Blocks.CHEST)
+                .unlockedBy(getHasName(MMBlocks.CALAMITES_PLANKS.get()), has(MMBlocks.CALAMITES_PLANKS.get()))
+                .save(consumer);
     }
+
     public ShapelessRecipeBuilder makePlanks(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, (ItemLike)plankOut.get(), 4).requires(logIn).group("planks").unlockedBy("has_log", has(logIn));
+    }
+
+    public ShapelessRecipeBuilder makePlanksFromThinLog(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, (ItemLike)plankOut.get(), 1).requires(logIn).group("planks").unlockedBy("has_log", has(logIn));
     }
 
     public ShapedRecipeBuilder makeDoor(Supplier<? extends Block> doorOut, Supplier<? extends Block> plankIn) {
@@ -732,6 +833,22 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
 
     public ShapelessRecipeBuilder makeBlockToIngot(Supplier<? extends Item> ingotOut, Supplier<? extends Block> blockIn) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, (ItemLike)ingotOut.get(), 9).requires((ItemLike)blockIn.get()).unlockedBy("has_" + ForgeRegistries.BLOCKS.getKey((Block)blockIn.get()).getPath(), has((ItemLike)blockIn.get()));
+    }
+
+    public ShapedRecipeBuilder make4IngotToBlock(ItemLike blockOut, ItemLike ingotIn) {
+        return ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,
+                        blockOut)
+                .pattern("##")
+                .pattern("##")
+                .define('#', ingotIn)
+                .unlockedBy("has_" +
+                                ForgeRegistries.ITEMS.getKey(ingotIn.asItem()).getPath(),
+                        has(ingotIn));
+    }
+
+    public ShapelessRecipeBuilder makeBlockTo4Ingot(ItemLike ingotOut, ItemLike blockIn) {
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, ingotOut, 4)
+                .requires(blockIn).unlockedBy(getHasName(blockIn), has((ItemLike)blockIn));
     }
 
     public ShapedRecipeBuilder makeNuggetToIngot(Supplier<? extends Item> ingotOut, Supplier<? extends Item> nuggetIn) {

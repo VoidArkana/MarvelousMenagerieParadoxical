@@ -56,8 +56,14 @@ public class ClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 
-        event.registerLayerDefinition(MMModelLayers.BOAT_LAYER, BoatModel::createBodyModel);
-        event.registerLayerDefinition(MMModelLayers.CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.SIGILLARIA_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.SIGILLARIA_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+
+        event.registerLayerDefinition(MMModelLayers.PROTOTAXITES_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.PROTOTAXITES_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+
+        event.registerLayerDefinition(MMModelLayers.CALAMITES_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.CALAMITES_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
     }
 
     @SubscribeEvent
