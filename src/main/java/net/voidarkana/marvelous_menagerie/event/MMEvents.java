@@ -1,11 +1,8 @@
 package net.voidarkana.marvelous_menagerie.event;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -16,11 +13,9 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
-import net.voidarkana.marvelous_menagerie.util.CommonProxy;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {
@@ -72,15 +67,6 @@ public class MMEvents {
         event.addListener(new RitualManager());
         event.addListener(new FossilCleaningManager());
 
-        event.addListener(MarvelousMenagerie.PROXY.getAbominationEntryManager());
-        event.addListener(new EarlyPaleoEntryManager());
-        event.addListener(new CarboniferousEntryManager());
-        event.addListener(new PermianEntryManager());
-        event.addListener(new TriassicEntryManager());
-        event.addListener(new JurassicEntryManager());
-        event.addListener(new CretaceousEntryManager());
-        event.addListener(new PaleogeneEntryManager());
-        event.addListener(new NeogeneEntryManager());
-        event.addListener(new QuaternaryEntryManager());
+        event.addListener(MarvelousMenagerie.PROXY.getPaleonomiconIndexManager());
     }
 }

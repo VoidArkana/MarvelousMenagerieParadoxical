@@ -6,25 +6,12 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
-import net.voidarkana.marvelous_menagerie.util.network.indexes.PaleogeneIndexSyncPacket;
+import net.voidarkana.marvelous_menagerie.data.codec.PaleonomiconIndexManager;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonProxy {
 
-    private final AbominationEntryManager abominationEntryManager = new AbominationEntryManager();
-
-    private final EarlyPaleoEntryManager earlyPaleoEntryManager = new EarlyPaleoEntryManager();
-    private final CarboniferousEntryManager carboniferousEntryManager = new CarboniferousEntryManager();
-    private final PermianEntryManager permianEntryManager = new PermianEntryManager();
-
-    private final TriassicEntryManager triassicEntryManager = new TriassicEntryManager();
-    private final JurassicEntryManager jurassicEntryManager = new JurassicEntryManager();
-    private final CretaceousEntryManager cretaceousEntryManager = new CretaceousEntryManager();
-
-    private final PaleogeneEntryManager paleogeneEntryManager = new PaleogeneEntryManager();
-    private final NeogeneEntryManager neogeneEntryManager = new NeogeneEntryManager();
-    private final QuaternaryEntryManager quaternaryEntryManager = new QuaternaryEntryManager();
+    private final PaleonomiconIndexManager paleonomiconIndexManager = new PaleonomiconIndexManager();
 
     public CommonProxy() {
     }
@@ -52,37 +39,7 @@ public class CommonProxy {
         return null;
     }
 
-    public AbominationEntryManager getAbominationEntryManager(){
-        return abominationEntryManager;
-    }
-
-    public EarlyPaleoEntryManager getEarlyPaleoEntryManager(){
-        return earlyPaleoEntryManager;
-    }
-    public CarboniferousEntryManager getCarboniferousEntryManager(){
-        return carboniferousEntryManager;
-    }
-    public PermianEntryManager getPermianEntryManager(){
-        return permianEntryManager;
-    }
-
-    public TriassicEntryManager getTriassicEntryManager(){
-        return triassicEntryManager;
-    }
-    public JurassicEntryManager getJurassicEntryManager(){
-        return jurassicEntryManager;
-    }
-    public CretaceousEntryManager getCretaceousEntryManager(){
-        return cretaceousEntryManager;
-    }
-
-    public PaleogeneEntryManager getPaleogeneEntryManager(){
-        return paleogeneEntryManager;
-    }
-    public NeogeneEntryManager getNeogeneEntryManager(){
-        return neogeneEntryManager;
-    }
-    public QuaternaryEntryManager getQuaternaryEntryManager(){
-        return quaternaryEntryManager;
+    public PaleonomiconIndexManager getPaleonomiconIndexManager(){
+        return paleonomiconIndexManager;
     }
 }

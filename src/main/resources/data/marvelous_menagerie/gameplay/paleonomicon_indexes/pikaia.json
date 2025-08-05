@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:pikaia",
+  "icon": "marvelous_menagerie:pikaia_fossil",
+  "link": "mobs/pikaia.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}

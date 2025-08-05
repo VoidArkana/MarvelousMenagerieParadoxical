@@ -2,5 +2,6 @@
   "parent": "periods.json",
   "text": "empty.txt",
   "title": "book.marvelous_menagerie.early_paleo",
-  "widgets": []
+  "widgets": [],
+  "is_index": true
 }

@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:arandaspis",
+  "icon": "marvelous_menagerie:arandaspis_fossil",
+  "link": "mobs/arandaspis.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}

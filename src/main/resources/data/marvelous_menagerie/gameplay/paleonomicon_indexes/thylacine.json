@@ -1,0 +1,13 @@
+{
+  "entity_name": "marvelous_menagerie:thylacine",
+  "icon": "marvelous_menagerie:thylacine_fossil",
+  "link": "mobs/thylacine.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.neogene"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.quaternary"
+    }
+  ]
+}

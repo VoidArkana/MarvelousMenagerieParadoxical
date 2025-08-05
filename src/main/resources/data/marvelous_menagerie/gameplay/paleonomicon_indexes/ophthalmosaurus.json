@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:ophthalmo",
+  "icon": "marvelous_menagerie:ophthalmo_fossil",
+  "link": "mobs/ophthalmo.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.jurassic"
+    }
+  ]
+}

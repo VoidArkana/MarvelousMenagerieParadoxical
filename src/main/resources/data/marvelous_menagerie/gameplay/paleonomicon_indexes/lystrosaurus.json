@@ -1,0 +1,13 @@
+{
+  "entity_name": "marvelous_menagerie:lystro",
+  "icon": "marvelous_menagerie:lystro_fossil",
+  "link": "mobs/lystro.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.permian"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.triassic"
+    }
+  ]
+}

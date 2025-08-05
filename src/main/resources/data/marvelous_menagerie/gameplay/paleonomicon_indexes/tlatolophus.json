@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:tlato",
+  "icon": "marvelous_menagerie:tlato_fossil",
+  "link": "mobs/tlato.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.cretaceous"
+    }
+  ]
+}

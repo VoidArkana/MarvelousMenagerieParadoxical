@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:slovenicus",
+  "icon": "marvelous_menagerie:slov_fossil",
+  "link": "mobs/slovenicus.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.neogene"
+    }
+  ]
+}

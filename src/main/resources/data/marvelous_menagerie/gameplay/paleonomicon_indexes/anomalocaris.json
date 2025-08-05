@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:anomalocaris",
+  "icon": "marvelous_menagerie:caris_fossil",
+  "link": "mobs/anomalocaris.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}

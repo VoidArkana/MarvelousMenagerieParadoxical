@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:falcatus",
+  "icon": "marvelous_menagerie:falca_fossil",
+  "link": "mobs/falcatus.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.carboniferous"
+    }
+  ]
+}

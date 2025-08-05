@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:elephant_bird",
+  "icon": "marvelous_menagerie:elebird_fossil",
+  "link": "mobs/elebird.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.quaternary"
+    }
+  ]
+}

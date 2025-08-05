@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:steller_sea_cow",
+  "icon": "marvelous_menagerie:steller_fossil",
+  "link": "mobs/steller.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.quaternary"
+    }
+  ]
+}

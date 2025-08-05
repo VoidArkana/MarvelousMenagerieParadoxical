@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:dawn_horse",
+  "icon": "marvelous_menagerie:dawn_fossil",
+  "link": "mobs/dawn_horse.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.paleogene"
+    }
+  ]
+}

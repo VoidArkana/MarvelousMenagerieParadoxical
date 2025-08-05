@@ -2,5 +2,6 @@
   "parent": "periods.json",
   "text": "empty.txt",
   "title": "book.marvelous_menagerie.cretaceous",
-  "widgets": []
+  "widgets": [],
+  "is_index": true
 }

@@ -1,0 +1,16 @@
+{
+  "entity_name": "marvelous_menagerie:trilobite",
+  "icon": "marvelous_menagerie:trilo_fossil",
+  "link": "mobs/trilobite.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.carboniferous"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.permian"
+    }
+  ]
+}

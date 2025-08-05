@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:hallucigenia",
+  "icon": "marvelous_menagerie:hallu_fossil",
+  "link": "mobs/hallucigenia.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}

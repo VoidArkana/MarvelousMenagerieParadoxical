@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:kelenken",
+  "icon": "marvelous_menagerie:kelenken_fossil",
+  "link": "mobs/kelenken.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.neogene"
+    }
+  ]
+}

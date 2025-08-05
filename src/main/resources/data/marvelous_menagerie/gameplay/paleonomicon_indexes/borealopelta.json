@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:borealo",
+  "icon": "marvelous_menagerie:pelta_fossil",
+  "link": "mobs/borealopelta.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.cretaceous"
+    }
+  ]
+}

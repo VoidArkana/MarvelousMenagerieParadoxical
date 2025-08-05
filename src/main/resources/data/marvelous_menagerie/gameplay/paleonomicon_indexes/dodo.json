@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:dodo",
+  "icon": "marvelous_menagerie:dodo_fossil",
+  "link": "mobs/dodo.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.quaternary"
+    }
+  ]
+}

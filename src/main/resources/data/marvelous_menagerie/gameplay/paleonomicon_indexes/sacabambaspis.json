@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:sacabambaspis",
+  "icon": "marvelous_menagerie:saca_fossil",
+  "link": "mobs/sacabambaspis.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}
