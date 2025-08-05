@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.ophthalmo",
+  "entity_name": "marvelous_menagerie:ophthalmo",
   "icon": "marvelous_menagerie:ophthalmo_fossil",
   "link": "mobs/ophthalmo.json"
 }

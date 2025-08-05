@@ -103,16 +103,16 @@ public class PaleonomiconScreen extends Screen {
     private final List<EntityData> abominationLinkData = new ArrayList<>();
 
     private final List<EntityData> earlyPaleoLinkData = new ArrayList<>();
-    private final List<CarboniferousEntryManager.EntityCodec> carboniferousLinkData = new ArrayList<>();
-    private final List<PermianEntryManager.EntityCodec> permianLinkData = new ArrayList<>();
+    private final List<EntityData> carboniferousLinkData = new ArrayList<>();
+    private final List<EntityData> permianLinkData = new ArrayList<>();
 
-    private final List<TriassicEntryManager.EntityCodec> triassicLinkData = new ArrayList<>();
-    private final List<JurassicEntryManager.EntityCodec> jurassicLinkData = new ArrayList<>();
-    private final List<CretaceousEntryManager.EntityCodec> cretaceousLinkData = new ArrayList<>();
+    private final List<EntityData> triassicLinkData = new ArrayList<>();
+    private final List<EntityData> jurassicLinkData = new ArrayList<>();
+    private final List<EntityData> cretaceousLinkData = new ArrayList<>();
 
-    private final List<PaleogeneEntryManager.EntityCodec> paleogeneLinkData = new ArrayList<>();
-    private final List<NeogeneEntryManager.EntityCodec> neogeneLinkData = new ArrayList<>();
-    private final List<QuaternaryEntryManager.EntityCodec> quaternaryLinkData = new ArrayList<>();
+    private final List<EntityData> paleogeneLinkData = new ArrayList<>();
+    private final List<EntityData> neogeneLinkData = new ArrayList<>();
+    private final List<EntityData> quaternaryLinkData = new ArrayList<>();
 
 
     protected int xSize = 390;
@@ -136,54 +136,54 @@ public class PaleonomiconScreen extends Screen {
 
 
         for (AbominationEntryManager.EntityCodec data : AbominationEntryManager.DATA) {
-            this.abominationLinkData.add(new EntityData(data.entityName(), data.icon(), data.link()));
+            this.abominationLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
 
         //paleozoic
         for (EarlyPaleoEntryManager.EntityCodec data : EarlyPaleoEntryManager.DATA) {
-            this.earlyPaleoLinkData.add(new EntityData(data.entityName(), data.icon(), data.link()));
+            this.earlyPaleoLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (CarboniferousEntryManager.EntityCodec data : CarboniferousEntryManager.DATA) {
-            this.carboniferousLinkData.add(data);
+            this.carboniferousLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (PermianEntryManager.EntityCodec data : PermianEntryManager.DATA) {
-            this.permianLinkData.add(data);
+            this.permianLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
 
         //mesozoic
         for (TriassicEntryManager.EntityCodec data : TriassicEntryManager.DATA) {
-            this.triassicLinkData.add(data);
+            this.triassicLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (JurassicEntryManager.EntityCodec data : JurassicEntryManager.DATA) {
-            this.jurassicLinkData.add(data);
+            this.jurassicLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (CretaceousEntryManager.EntityCodec data : CretaceousEntryManager.DATA) {
-            this.cretaceousLinkData.add(data);
+            this.cretaceousLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
 
         //quaternary
         for (PaleogeneEntryManager.EntityCodec data : PaleogeneEntryManager.DATA) {
-            this.paleogeneLinkData.add(data);
+            this.paleogeneLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (NeogeneEntryManager.EntityCodec data : NeogeneEntryManager.DATA) {
-            this.neogeneLinkData.add(data);
+            this.neogeneLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
         for (QuaternaryEntryManager.EntityCodec data : QuaternaryEntryManager.DATA) {
-            this.quaternaryLinkData.add(data);
+            this.quaternaryLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
         }
 
         Collections.sort(this.abominationLinkData, Comparator.comparing(EntityData::getEntity));
 
-        Collections.sort(this.carboniferousLinkData, Comparator.comparing(CarboniferousEntryManager.EntityCodec::getIcon));
-        Collections.sort(this.permianLinkData, Comparator.comparing(PermianEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.carboniferousLinkData, Comparator.comparing(EntityData::getEntity));
+        Collections.sort(this.permianLinkData, Comparator.comparing(EntityData::getEntity));
 
-        Collections.sort(this.triassicLinkData, Comparator.comparing(TriassicEntryManager.EntityCodec::getIcon));
-        Collections.sort(this.jurassicLinkData, Comparator.comparing(JurassicEntryManager.EntityCodec::getIcon));
-        Collections.sort(this.cretaceousLinkData, Comparator.comparing(CretaceousEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.triassicLinkData, Comparator.comparing(EntityData::getEntity));
+        Collections.sort(this.jurassicLinkData, Comparator.comparing(EntityData::getEntity));
+        Collections.sort(this.cretaceousLinkData, Comparator.comparing(EntityData::getEntity));
 
-        Collections.sort(this.paleogeneLinkData, Comparator.comparing(PaleogeneEntryManager.EntityCodec::getIcon));
-        Collections.sort(this.neogeneLinkData, Comparator.comparing(NeogeneEntryManager.EntityCodec::getIcon));
-        Collections.sort(this.quaternaryLinkData, Comparator.comparing(QuaternaryEntryManager.EntityCodec::getIcon));
+        Collections.sort(this.paleogeneLinkData, Comparator.comparing(EntityData::getEntity));
+        Collections.sort(this.neogeneLinkData, Comparator.comparing(EntityData::getEntity));
+        Collections.sort(this.quaternaryLinkData, Comparator.comparing(EntityData::getEntity));
     }
 
     public PaleonomiconScreen(){
@@ -567,53 +567,53 @@ public class PaleonomiconScreen extends Screen {
             }
 
             if (this.currentEntryJSON.equals(carboniferousEntryJSON)){
-                icon = carboniferousLinkData.get(i).icon();
-                name = carboniferousLinkData.get(i).entityName();
-                link = carboniferousLinkData.get(i).link();
+                icon = carboniferousLinkData.get(i).getItem();
+                name = carboniferousLinkData.get(i).getEntity();
+                link = carboniferousLinkData.get(i).getLink();
             }
 
             if (this.currentEntryJSON.equals(permianEntryJSON)){
-                icon = permianLinkData.get(i).icon();
-                name = permianLinkData.get(i).entityName();
-                link = permianLinkData.get(i).link();
+                icon = permianLinkData.get(i).getItem();
+                name = permianLinkData.get(i).getEntity();
+                link = permianLinkData.get(i).getLink();
             }
 
             //Mesozoic
             if (this.currentEntryJSON.equals(triassicEntryJSON)){
-                icon = triassicLinkData.get(i).icon();
-                name = triassicLinkData.get(i).entityName();
-                link = triassicLinkData.get(i).link();
+                icon = triassicLinkData.get(i).getItem();
+                name = triassicLinkData.get(i).getEntity();
+                link = triassicLinkData.get(i).getLink();
             }
 
             if (this.currentEntryJSON.equals(jurassicEntryJSON)){
-                icon = jurassicLinkData.get(i).icon();
-                name = jurassicLinkData.get(i).entityName();
-                link = jurassicLinkData.get(i).link();
+                icon = jurassicLinkData.get(i).getItem();
+                name = jurassicLinkData.get(i).getEntity();
+                link = jurassicLinkData.get(i).getLink();
             }
 
             if (this.currentEntryJSON.equals(cretaceousEntryJSON)){
-                icon = cretaceousLinkData.get(i).icon();
-                name = cretaceousLinkData.get(i).entityName();
-                link = cretaceousLinkData.get(i).link();
+                icon = cretaceousLinkData.get(i).getItem();
+                name = cretaceousLinkData.get(i).getEntity();
+                link = cretaceousLinkData.get(i).getLink();
             }
 
             //Cenozoic
             if (this.currentEntryJSON.equals(paleogeneEntryJSON)){
-                icon = paleogeneLinkData.get(i).icon();
-                name = paleogeneLinkData.get(i).entityName();
-                link = paleogeneLinkData.get(i).link();
+                icon = paleogeneLinkData.get(i).getItem();
+                name = paleogeneLinkData.get(i).getEntity();
+                link = paleogeneLinkData.get(i).getLink();
             }
 
             if (this.currentEntryJSON.equals(neogeneEntryJSON)){
-                icon = neogeneLinkData.get(i).icon();
-                name = neogeneLinkData.get(i).entityName();
-                link = neogeneLinkData.get(i).link();
+                icon = neogeneLinkData.get(i).getItem();
+                name = neogeneLinkData.get(i).getEntity();
+                link = neogeneLinkData.get(i).getLink();
             }
 
             if (this.currentEntryJSON.equals(quaternaryEntryJSON)){
-                icon = quaternaryLinkData.get(i).icon();
-                name = quaternaryLinkData.get(i).entityName();
-                link = quaternaryLinkData.get(i).link();
+                icon = quaternaryLinkData.get(i).getItem();
+                name = quaternaryLinkData.get(i).getEntity();
+                link = quaternaryLinkData.get(i).getLink();
             }
 
             if (rowCount == (isRight ? 6 : 5)) {

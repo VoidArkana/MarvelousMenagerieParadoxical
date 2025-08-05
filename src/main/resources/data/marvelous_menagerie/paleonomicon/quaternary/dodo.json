@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.dodo",
+  "entity_name": "marvelous_menagerie:dodo",
   "icon": "marvelous_menagerie:dodo_fossil",
   "link": "mobs/dodo.json"
 }

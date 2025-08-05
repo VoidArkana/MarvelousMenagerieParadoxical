@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.falcatus",
+  "entity_name": "marvelous_menagerie:falcatus",
   "icon": "marvelous_menagerie:falca_fossil",
   "link": "mobs/falcatus.json"
 }

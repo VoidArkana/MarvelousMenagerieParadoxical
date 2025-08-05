@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.anomalocaris",
+  "entity_name": "marvelous_menagerie:anomalocaris",
   "icon": "marvelous_menagerie:caris_fossil",
   "link": "mobs/anomalocaris.json"
 }

@@ -20,6 +20,7 @@ import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.util.CommonProxy;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {
@@ -71,7 +72,7 @@ public class MMEvents {
         event.addListener(new RitualManager());
         event.addListener(new FossilCleaningManager());
 
-        event.addListener(new AbominationEntryManager());
+        event.addListener(MarvelousMenagerie.PROXY.getAbominationEntryManager());
         event.addListener(new EarlyPaleoEntryManager());
         event.addListener(new CarboniferousEntryManager());
         event.addListener(new PermianEntryManager());

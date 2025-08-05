@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.steller_sea_cow",
+  "entity_name": "marvelous_menagerie:steller_sea_cow",
   "icon": "marvelous_menagerie:steller_fossil",
   "link": "mobs/steller.json"
 }

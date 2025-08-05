@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.apthoroblattina",
+  "entity_name": "marvelous_menagerie:apthoroblattina",
   "icon": "marvelous_menagerie:roach_fossil",
   "link": "mobs/roach.json"
 }

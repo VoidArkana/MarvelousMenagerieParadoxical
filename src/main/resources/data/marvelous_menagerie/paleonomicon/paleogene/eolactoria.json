@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.eolactoria",
+  "entity_name": "marvelous_menagerie:eolactoria",
   "icon": "marvelous_menagerie:eolactoria_fossil",
   "link": "mobs/eolactoria.json"
 }

@@ -9,6 +9,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.message.FossilRecipeS2C;
+import net.voidarkana.marvelous_menagerie.util.network.indexes.*;
 
 public class MMMessages {
 
@@ -41,6 +42,48 @@ public class MMMessages {
                 ChangeFossilMessage::write,
                 ChangeFossilMessage::read,
                 ChangeFossilMessage::handle);
+
+        CHANNEL.registerMessage(id(), AbominationIndexSyncPacket.class,
+                AbominationIndexSyncPacket::write,
+                AbominationIndexSyncPacket::read,
+                AbominationIndexSyncPacket::handle);
+
+        CHANNEL.registerMessage(id(), CarboniferousIndexSyncPacket.class,
+                CarboniferousIndexSyncPacket::write,
+                CarboniferousIndexSyncPacket::read,
+                CarboniferousIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), CretaceousIndexSyncPacket.class,
+                CretaceousIndexSyncPacket::write,
+                CretaceousIndexSyncPacket::read,
+                CretaceousIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), EarlyPaleoIndexSyncPacket.class,
+                EarlyPaleoIndexSyncPacket::write,
+                EarlyPaleoIndexSyncPacket::read,
+                EarlyPaleoIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), JurassicIndexSyncPacket.class,
+                JurassicIndexSyncPacket::write,
+                JurassicIndexSyncPacket::read,
+                JurassicIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), NeogeneIndexSyncPacket.class,
+                NeogeneIndexSyncPacket::write,
+                NeogeneIndexSyncPacket::read,
+                NeogeneIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), PaleogeneIndexSyncPacket.class,
+                PaleogeneIndexSyncPacket::write,
+                PaleogeneIndexSyncPacket::read,
+                PaleogeneIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), PermianIndexSyncPacket.class,
+                PermianIndexSyncPacket::write,
+                PermianIndexSyncPacket::read,
+                PermianIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), QuaternaryIndexSyncPacket.class,
+                QuaternaryIndexSyncPacket::write,
+                QuaternaryIndexSyncPacket::read,
+                QuaternaryIndexSyncPacket::handle);
+        CHANNEL.registerMessage(id(), TriassicIndexSyncPacket.class,
+                TriassicIndexSyncPacket::write,
+                TriassicIndexSyncPacket::read,
+                TriassicIndexSyncPacket::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

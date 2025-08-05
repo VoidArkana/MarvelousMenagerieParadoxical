@@ -1,5 +1,5 @@
 {
-  "entity_name": "entity.marvelous_menagerie.thylacine",
+  "entity_name": "marvelous_menagerie:thylacine",
   "icon": "marvelous_menagerie:thylacine_fossil",
   "link": "mobs/thylacine.json"
 }
