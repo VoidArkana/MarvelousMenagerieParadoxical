@@ -85,6 +85,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.THERI_FOSSIL.get());
                         output.accept(MMItems.THYLACINE_FOSSIL.get());
                         output.accept(MMItems.TLATO_FOSSIL.get());
+                        output.accept(MMItems.TRILO_FOSSIL.get());
 
 
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());

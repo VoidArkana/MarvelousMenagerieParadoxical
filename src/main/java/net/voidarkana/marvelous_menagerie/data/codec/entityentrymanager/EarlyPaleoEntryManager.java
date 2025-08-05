@@ -23,7 +23,6 @@ public class EarlyPaleoEntryManager extends EntityBaseEntryManager{
 
     @Override
     public void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profilerFiller) {
-        Map<ResourceLocation, EarlyPaleoEntryManager.EntityCodec> encyclopedia = new HashMap<>();
 
         object.forEach((resourceLocation, jsonElement) -> {
             EarlyPaleoEntryManager.EntityCodec entryData = EarlyPaleoEntryManager.EntityCodec.CODEC.parse(JsonOps.INSTANCE, jsonElement).result().orElseThrow();
@@ -32,7 +31,6 @@ public class EarlyPaleoEntryManager extends EntityBaseEntryManager{
     }
 
     public record EntityCodec(String entityName, String icon, String link) {
-
         public static final Codec<EarlyPaleoEntryManager.EntityCodec> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         Codec.STRING.fieldOf("entity_name").forGetter(EarlyPaleoEntryManager.EntityCodec::entityName),
