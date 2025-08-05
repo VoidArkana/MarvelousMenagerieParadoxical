@@ -1,5 +1,10 @@
 {
   "entity_name": "marvelous_menagerie:beholder",
   "icon": "marvelous_menagerie:chronotite",
-  "link": "mobs/beholder.json"
+  "link": "mobs/beholder.json",
+  "indexes": [
+    {
+      "index_name": "abomination"
+    }
+  ]
 }

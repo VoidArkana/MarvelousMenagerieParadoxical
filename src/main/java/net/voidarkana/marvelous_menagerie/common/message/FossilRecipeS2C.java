@@ -18,13 +18,10 @@ import java.util.function.Supplier;
 
 public class FossilRecipeS2C {
     private static final Codec<Map<Item, List<WeightedItemCodec>>> MAPPER =
-            Codec.unboundedMap(
-                            BuiltInRegistries.ITEM.byNameCodec(),
-                            WeightedItemCodec.CODEC.listOf()
-                    ).xmap(WeightedItemCodec::convertToMap, WeightedItemCodec::convertFromMap)
+            Codec.unboundedMap(BuiltInRegistries.ITEM.byNameCodec(), WeightedItemCodec.CODEC.listOf()).xmap(WeightedItemCodec::convertToMap, WeightedItemCodec::convertFromMap)
                     .orElse(e -> {
                                 MarvelousMenagerie.LOGGER.error("Failed to parse Analyzer Entries can't send packet! Due to " + e);},
-                            new HashMap<>());;
+                            new HashMap<>());
     public static Map<Item, List<WeightedItemCodec>> SYNCED_DATA = new HashMap<>();
     private final Map<Item, List<WeightedItemCodec>> map;
 

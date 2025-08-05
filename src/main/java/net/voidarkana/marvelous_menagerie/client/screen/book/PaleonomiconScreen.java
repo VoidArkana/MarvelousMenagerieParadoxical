@@ -22,6 +22,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.EntityData;
+import net.voidarkana.marvelous_menagerie.data.codec.IndexTagsCodec;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.*;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.joml.Vector3f;
@@ -136,7 +137,11 @@ public class PaleonomiconScreen extends Screen {
 
 
         for (AbominationEntryManager.EntityCodec data : AbominationEntryManager.DATA) {
-            this.abominationLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
+            for (IndexTagsCodec i : data.tags()){
+                if (Objects.equals(i.getIndex(), "abomination")){
+                    this.abominationLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link()));
+                }
+            }
         }
 
         //paleozoic
@@ -488,19 +493,7 @@ public class PaleonomiconScreen extends Screen {
     }
 
     private boolean isIndex(){
-        return this.currentEntryJSON.equals(anomaliesEntryJSON)
-
-                || this.currentEntryJSON.equals(earlyPaleoEntryJSON)
-                || this.currentEntryJSON.equals(carboniferousEntryJSON)
-                || this.currentEntryJSON.equals(permianEntryJSON)
-
-                || this.currentEntryJSON.equals(triassicEntryJSON)
-                || this.currentEntryJSON.equals(jurassicEntryJSON)
-                || this.currentEntryJSON.equals(cretaceousEntryJSON)
-
-                || this.currentEntryJSON.equals(paleogeneEntryJSON)
-                || this.currentEntryJSON.equals(neogeneEntryJSON)
-                || this.currentEntryJSON.equals(quaternaryEntryJSON);
+        return !(this.currentEntry == null) && this.currentEntry.getIsIndex();
     }
 
     private void addLinkButtons() {
@@ -516,6 +509,7 @@ public class PaleonomiconScreen extends Screen {
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize + 128) / 2;
 
+        //TODO: Make it so it automatically detects when a page is an index here, instead of storing the data in variables
         int linkDataSize = getLinkDataSize();
 
 

@@ -2,5 +2,6 @@
   "parent": "anomalies/chapter.json",
   "text": "empty.txt",
   "title": "book.marvelous_menagerie.anomalies_index",
-  "widgets": []
+  "widgets": [],
+  "is_index": true
 }

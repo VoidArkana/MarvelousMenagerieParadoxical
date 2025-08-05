@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.AbominationEntryManager;
 import net.voidarkana.marvelous_menagerie.data.codec.entityentrymanager.CarboniferousEntryManager;
 import net.voidarkana.marvelous_menagerie.util.network.SyncJsonResourcePacket;
 

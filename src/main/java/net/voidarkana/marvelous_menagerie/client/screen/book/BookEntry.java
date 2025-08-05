@@ -37,18 +37,18 @@ public class BookEntry {
     private BookWidget[] widgets;
     private List<String> entryText = new ArrayList<>();
     private List<BookLink> bookLinks = new ArrayList<>();
-    private List<EntityLinkData> linkedEntites = new ArrayList<>();
+    private boolean isIndex;
 
     private int pageCount = 0;
 
 
-    public BookEntry(String translatableTitle, String parent, String textFileToReadFrom, String requiredProgress, BookWidget[] widgets, List<EntityLinkData> linkedEntities) {
+    public BookEntry(String translatableTitle, String parent, String textFileToReadFrom, String requiredProgress, BookWidget[] widgets, boolean isIndex) {
         this.translatableTitle = translatableTitle;
         this.parent = parent;
         this.textFileToReadFrom = textFileToReadFrom;
         this.requiredProgress = requiredProgress;
         this.widgets = widgets;
-        this.linkedEntites = linkedEntities;
+        this.isIndex = isIndex;
     }
 
     public static BookEntry deserialize(Reader readerIn) {
@@ -79,8 +79,8 @@ public class BookEntry {
         return pageCount;
     }
 
-    public List<EntityLinkData> getLinkedEntities() {
-        return linkedEntites;
+    public boolean getIsIndex() {
+        return isIndex;
     }
 
     public void init(PaleonomiconScreen screen) {
@@ -230,9 +230,12 @@ public class BookEntry {
                 progress = GsonHelper.getAsString(jsonobject, "required_progression");
             }
 
-            EntityLinkData[] linkedEntitesRead = GsonHelper.getAsObject(jsonobject, "entity_buttons", new EntityLinkData[0], context, EntityLinkData[].class);
+            boolean isIndex = false;
+            if (jsonobject.has("is_index")) {
+                isIndex = GsonHelper.getAsBoolean(jsonobject, "is_index");
+            }
 
-            BookEntry bookEntry = new BookEntry(title, parent, text, progress, bookWidgets, Arrays.asList(linkedEntitesRead));
+            BookEntry bookEntry = new BookEntry(title, parent, text, progress, bookWidgets, isIndex);
             return bookEntry;
         }
     }

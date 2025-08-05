@@ -1,5 +1,10 @@
 {
   "entity_name": "marvelous_menagerie:chud",
   "icon": "marvelous_menagerie:chronotite",
-  "link": "mobs/chud.json"
+  "link": "mobs/chud.json",
+  "indexes": [
+    {
+      "index_name": "abomination"
+    }
+  ]
 }
