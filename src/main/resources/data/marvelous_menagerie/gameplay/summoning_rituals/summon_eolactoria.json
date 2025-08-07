@@ -1,7 +1,15 @@
 {
-  "input1": "minecraft:milk_bucket",
-  "input2": "minecraft:tropical_fish",
-  "input3": "minecraft:water_bucket",
-  "input4": "marvelous_menagerie:eolactoria_fossil",
+  "input1": {
+    "item": "minecraft:milk_bucket"
+  },
+  "input2": {
+    "item": "minecraft:tropical_fish"
+  },
+  "input3": {
+    "item": "minecraft:water_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:eolactoria_fossil"
+  },
   "output": "marvelous_menagerie:eolactoria"
 }

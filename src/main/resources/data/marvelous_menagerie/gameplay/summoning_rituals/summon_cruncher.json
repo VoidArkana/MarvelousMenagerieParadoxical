@@ -1,7 +1,15 @@
 {
-  "input1": "minecraft:netherite_block",
-  "input2": "minecraft:sniffer_egg",
-  "input3": "marvelous_menagerie:limestone_fossil",
-  "input4": "species:bone_spike",
+  "input1": {
+    "item": "minecraft:netherite_block"
+  },
+  "input2": {
+    "item": "minecraft:sniffer_egg"
+  },
+  "input3": {
+    "item": "marvelous_menagerie:limestone_fossil"
+  },
+  "input4": {
+    "item": "species:bone_spike"
+  },
   "output": "species:cruncher"
 }

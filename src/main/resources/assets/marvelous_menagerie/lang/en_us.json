@@ -665,5 +665,8 @@
   "item.marvelous_menagerie.calamites_chest_boat": "Calamites Boat with Chest",
 
   "entity.marvelous_menagerie.mm_boat": "Boat",
-  "entity.marvelous_menagerie.mm_chest_boat": "Boat with Chest"
+  "entity.marvelous_menagerie.mm_chest_boat": "Boat with Chest",
+
+ "jei.marvelous_menagerie.chrono_watch_tooltip": "Used to activate the altar!",
+  "jei.marvelous_menagerie.summoning_rituals": "Summoning Rituals"
 }

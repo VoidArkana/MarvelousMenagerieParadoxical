@@ -1,7 +1,15 @@
 {
-  "input1": "minecraft:spider_eye",
-  "input2": "marvelous_menagerie:trilo_bite",
-  "input3": "minecraft:water_bucket",
-  "input4": "marvelous_menagerie:caris_fossil",
+  "input1": {
+    "item": "minecraft:spider_eye"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:trilo_bite"
+  },
+  "input3": {
+    "item": "minecraft:water_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:caris_fossil"
+  },
   "output": "marvelous_menagerie:anomalocaris"
 }

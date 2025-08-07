@@ -126,6 +126,8 @@ public class MMTags {
 
         public static final TagKey<Item> NATURAL_FOSSILS = tag("natural_fossils");
 
+        public static final TagKey<Item> CORAL_ITEMS = tag("coral_items");
+        public static final TagKey<Item> CORAL_BLOCK_ITEMS = tag("coral_block_items");
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MODID, name));

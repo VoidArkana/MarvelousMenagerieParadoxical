@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.blockentity.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -89,13 +91,16 @@ public class AltarBlockEntity extends BlockEntityBase {
                         EntityType<?> entitytype = MMEntities.CHUD.get();
 
                         for (RitualManager.RitualProcessData data : RitualManager.DATA) {
+
+                            System.out.println(data);
+
                             boolean[] itemUsed = new boolean[4];
 
                             boolean[] itemChecked = new boolean[4];
 
                             int itemCount = 0;
 
-                            Item[] inputs = new Item[4];
+                            Ingredient[] inputs = new Ingredient[4];
                             inputs[0] = data.input1();
                             inputs[1] = data.input2();
                             inputs[2] = data.input3();
@@ -104,10 +109,12 @@ public class AltarBlockEntity extends BlockEntityBase {
                             for (int i = 0; i<4; i++){
                                 for (int s = 0; s<4; s++){
                                     if (!itemUsed[i] && !itemChecked[s]){
-                                        if (ingredients[i] == inputs[s]) {
-                                            itemUsed[i] = true;
-                                            itemChecked[s] = true;
-                                            itemCount++;
+                                        for(ItemStack itemstack : inputs[s].getItems()) {
+                                            if (itemstack.is(ingredients[i])) {
+                                                itemUsed[i] = true;
+                                                itemChecked[s] = true;
+                                                itemCount++;
+                                            }
                                         }
                                     }
                                 }

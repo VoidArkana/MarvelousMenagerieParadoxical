@@ -1,7 +1,15 @@
 {
-  "input1": "minecraft:leather",
-  "input2": "minecraft:seagrass",
-  "input3": "minecraft:water_bucket",
-  "input4": "marvelous_menagerie:slov_fossil",
+  "input1": {
+    "item": "minecraft:leather"
+  },
+  "input2": {
+    "item": "minecraft:seagrass"
+  },
+  "input3": {
+    "item": "minecraft:water_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:slov_fossil"
+  },
   "output": "marvelous_menagerie:slovenicus"
 }

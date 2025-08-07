@@ -4,8 +4,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -218,5 +220,24 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMTags.Items.FINTASTIC_QUALITY_FEED,
                         MMTags.Items.FINTASTIC_GREAT_FEED,
                         MMTags.Items.FINTASTIC_PREMIUM_FEED);
+
+        this.tag(MMTags.Items.CORAL_ITEMS).add(
+                Blocks.TUBE_CORAL.asItem(),
+                Blocks.BRAIN_CORAL.asItem(),
+                Blocks.BUBBLE_CORAL.asItem(),
+                Blocks.FIRE_CORAL.asItem(),
+                Blocks.HORN_CORAL.asItem(),
+                Blocks.TUBE_CORAL_FAN.asItem(),
+                Blocks.BRAIN_CORAL_FAN.asItem(),
+                Blocks.BUBBLE_CORAL_FAN.asItem(),
+                Blocks.FIRE_CORAL_FAN.asItem(),
+                Blocks.HORN_CORAL_FAN.asItem());
+
+        this.tag(MMTags.Items.CORAL_BLOCK_ITEMS).add(
+                Blocks.TUBE_CORAL_BLOCK.asItem(),
+                Blocks.BRAIN_CORAL_BLOCK.asItem(),
+                Blocks.BUBBLE_CORAL_BLOCK.asItem(),
+                Blocks.FIRE_CORAL_BLOCK.asItem(),
+                Blocks.HORN_CORAL_BLOCK.asItem());
     }
 }
