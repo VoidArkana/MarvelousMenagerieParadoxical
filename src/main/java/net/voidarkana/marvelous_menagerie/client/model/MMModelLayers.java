@@ -40,6 +40,27 @@ public class MMModelLayers {
     public static final ModelLayerLocation HALLU_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia"), "main");
 
+    public static final ModelLayerLocation TRILO_FAT_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "main");
+    public static final ModelLayerLocation TRILO_FAT_LAYER_SECOND =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "second");
+    public static final ModelLayerLocation TRILO_FAT_LAYER_HIGHLIGHT =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "highlight");
+
+    public static final ModelLayerLocation TRILO_MID_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "main");
+    public static final ModelLayerLocation TRILO_MID_LAYER_SECOND =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "second");
+    public static final ModelLayerLocation TRILO_MID_LAYER_HIGHLIGHT =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "highlight");
+
+    public static final ModelLayerLocation TRILO_ITTY_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "main");
+    public static final ModelLayerLocation TRILO_ITTY_LAYER_SECOND =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "second");
+    public static final ModelLayerLocation TRILO_ITTY_LAYER_HIGHLIGHT =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "highlight");
+
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");
     public static final ModelLayerLocation RIFT_LAYER =

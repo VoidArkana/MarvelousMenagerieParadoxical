@@ -73,6 +73,11 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> TRILO_BITE = ITEMS.register("trilo_bite",
             ()-> new Item(new Item.Properties().food(MMFoods.TRILO_BITE)));
+    public static final RegistryObject<Item> TRILOBITE_SPAWN_EGG = ITEMS.register("trilobite_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.TRILOBITE, 0x4F281E, 0x745750, new Item.Properties()));
+    public static final RegistryObject<Item> TRILO_BUCKET = ITEMS.register("trilo_bucket",
+            () -> new PatternedAnimalBucketItem(MMEntities.TRILOBITE, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Anomalocaris
     public static final RegistryObject<Item> CARIS_SPAWN_EGG = ITEMS.register("anomalocaris_spawn_egg",

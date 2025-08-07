@@ -125,6 +125,8 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleItem(MMItems.TRILO_FOSSIL);
         simpleItem(MMItems.TRILO_BITE);
+        simpleItem(MMItems.TRILO_BUCKET);
+        withExistingParent(MMItems.TRILOBITE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.PIKAIA_FOSSIL);
         simpleItem(MMItems.PIKAIA_BUCKET);

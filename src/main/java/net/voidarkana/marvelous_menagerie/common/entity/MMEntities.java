@@ -109,6 +109,13 @@ public class MMEntities {
                             .sized(1f, 0.7f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia").toString()));
 
+    public static final RegistryObject<EntityType<Trilobite>> TRILOBITE =
+            ENTITY_TYPES.register("trilobite",
+                    () -> EntityType.Builder.of(Trilobite::new, MobCategory.WATER_AMBIENT)
+                            .sized(0.6f, 0.15f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "trilobite").toString()));
+
+
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
             ENTITY_TYPES.register("mm_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f).build("mm_boat"));

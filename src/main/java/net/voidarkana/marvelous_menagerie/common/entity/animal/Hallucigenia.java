@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
@@ -42,13 +43,14 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Predicate;
 
-public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
+public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketable {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState flopAnimationState = new AnimationState();
@@ -61,37 +63,13 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         }
     };
 
-    static class FishJumpControl extends JumpControl {
-
-        Hallucigenia mob;
-        public FishJumpControl(Hallucigenia fish) {
-            super(fish);
-            mob = fish;
-        }
-
-        @Override
-        public void jump() {
-            if (!mob.isInWater()){
-                super.jump();
-            }
-        }
-    }
-
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(SCARY_MOB);
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
 
     public Hallucigenia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.jumpControl = new FishJumpControl(this);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 1, 1, 0.02F, 0.1F, true);
-        this.setMaxUpStep(1.0F);
-    }
-
-    @Override
-    public boolean hasNormalControls() {
-        return false;
+        this.switchNavigator(false);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -110,6 +88,8 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
                 return DefaultRandomPos.getPos(this.mob, 10, 1);
             }
         });
+        this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
     }
 
     protected void defineSynchedData() {
@@ -127,36 +107,8 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
     }
 
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new WaterBoundPathNavigation(this, pLevel);
-    }
-
-    @Override
-    public boolean canFlop() {
-        return false;
-    }
-
-    @Override
-    public boolean canSwim() {
-        return false;
-    }
-
     @Override
     public void aiStep() {
-        if (this.isInWater()) {
-            if(!this.onGround()){
-                this.setDeltaMovement(this.getDeltaMovement().add(0, -0.08, 0));
-            }
-
-            BlockPos pos = this.blockPosition();
-            BlockState block = this.level().getBlockState(pos.above());
-            if (this.getStepHeight() >= 1 && block.getFluidState().is(Fluids.EMPTY)){
-                this.setMaxUpStep(0);
-            }else if (this.isInWater() && block.getFluidState().is(Fluids.WATER)){
-                this.setMaxUpStep(1);
-            }
-        }
-
         super.aiStep();
 
         if (this.isAlive()) {
@@ -312,10 +264,5 @@ public class Hallucigenia extends BreedableWaterAnimal implements Bucketable {
 
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.COD_HURT;
-    }
-
-    @Override
-    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return pLevel.getFluidState(pPos.above()).is(FluidTags.WATER) ? 0F : super.getWalkTargetValue(pPos, pLevel);
     }
 }

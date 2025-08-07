@@ -19,6 +19,9 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.BeholderModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.ItemMorphParticle;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.RiftParticle;
@@ -52,7 +55,18 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.DAWNHORSE_LAYER, DawnHorseModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SKELETON_DAWNHORSE_LAYER, SkeletonDawnHorseModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.ZOMBIE_DAWNHORSE_LAYER, ZombieDawnHorseModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.HALLU_LAYER, HallucigeniaModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.TRILO_FAT_LAYER, TrilobiteFatModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_FAT_LAYER_SECOND, TrilobiteFatModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_FAT_LAYER_HIGHLIGHT, TrilobiteFatModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_ITTY_LAYER, TrilobiteIttyModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_ITTY_LAYER_SECOND, TrilobiteIttyModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_ITTY_LAYER_HIGHLIGHT, TrilobiteIttyModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_MID_LAYER, TrilobiteMidModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_MID_LAYER_SECOND, TrilobiteMidModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TRILO_MID_LAYER_HIGHLIGHT, TrilobiteMidModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

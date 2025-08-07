@@ -57,6 +57,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.STELLER_MILK.get());
                         output.accept(MMItems.STELLER_ICE_CREAM.get());
 
+                        output.accept(MMItems.TRILO_BUCKET.get());
                         output.accept(MMItems.TRILO_BITE.get());
 
                         output.accept(MMItems.CARIS_FOSSIL.get());
@@ -100,6 +101,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
+                        output.accept(MMItems.TRILOBITE_SPAWN_EGG.get());
+
                         output.accept(MMItems.BEHOLDER_SPAWN_EGG.get());
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
                     })

@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-29T16:26:18.9692784	Item Models: marvelous_menagerie
+// 1.20.1	2025-08-07T12:45:18.7898835	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -228,7 +228,9 @@ be34c6639c622a60d4baaaf45d2004dfbd47b4c1 assets/marvelous_menagerie/models/item/
 c02a9a90ec9c664e0cc0e6b363a91224ac5d24cb assets/marvelous_menagerie/models/item/theri_fossil.json
 b8fe239d7b3bf2f8257cb2c9fd3b43ab833bc1f5 assets/marvelous_menagerie/models/item/thylacine_fossil.json
 1a114719bedfc54ca37bebc5cb7099e5321cb0d9 assets/marvelous_menagerie/models/item/tlato_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/trilobite_spawn_egg.json
 6da3c90c5874c9372b2bc8f9e61d7f3acce49dc6 assets/marvelous_menagerie/models/item/trilo_bite.json
+e4ac8ba1c3ee03f909b84ecb3ec3b3fc559e8955 assets/marvelous_menagerie/models/item/trilo_bucket.json
 54f3b34f9e53be305dfcadad94b2eb8e41e1c34d assets/marvelous_menagerie/models/item/trilo_fossil.json
 d75fd3b022ac14b579c412cad6e46315b1d1f0b0 assets/marvelous_menagerie/models/item/warning.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/zombie_dawn_horse_spawn_egg.json
