@@ -23,7 +23,7 @@ public class TrilobiteRenderer extends MobRenderer<Trilobite, MarvelousModel<Tri
     private final TrilobiteFatModel<Trilobite> triloFatModel;
 
     public TrilobiteRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new TrilobiteMidModel<>(pContext.bakeLayer(MMModelLayers.TRILO_MID_LAYER)), 0.15f);
+        super(pContext, new TrilobiteMidModel<>(pContext.bakeLayer(MMModelLayers.TRILO_MID_LAYER)), 0.25f);
 
         this.triloIttyModel = new TrilobiteIttyModel<>(pContext.bakeLayer(MMModelLayers.TRILO_ITTY_LAYER));
         this.triloMidModel = new TrilobiteMidModel<>(pContext.bakeLayer(MMModelLayers.TRILO_MID_LAYER));

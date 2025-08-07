@@ -36,8 +36,8 @@ public class TrilobiteHighlightLayer extends RenderLayer<Trilobite, MarvelousMod
         if (!entity.isLGBTrilo() && !entity.isInvisible() && entity.getHasHighlight()){
             Object object;
             ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MODID,
-                    "textures/entity/animal/trilobite/"+entity.getVariantModel()+"/highlight/"+
-                    entity.getVariantModel()+"_highlight_"+Trilobite.getColorName(entity.getHighlightColor())+".png");
+                    "textures/entity/animal/trilobite/"+Trilobite.getModelName(entity.getVariantModel())+"/highlight/"+
+                            Trilobite.getModelName(entity.getVariantModel())+"_highlight_"+Trilobite.getColorName(entity.getHighlightColor())+".png");
 
             object = switch (entity.getVariantModel()) {
                 case 0, 1, 2, 3, 4 -> triloMidModel;

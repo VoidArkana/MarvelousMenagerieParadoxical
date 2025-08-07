@@ -74,7 +74,7 @@ public class MMItems {
     public static final RegistryObject<Item> TRILO_BITE = ITEMS.register("trilo_bite",
             ()-> new Item(new Item.Properties().food(MMFoods.TRILO_BITE)));
     public static final RegistryObject<Item> TRILOBITE_SPAWN_EGG = ITEMS.register("trilobite_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.TRILOBITE, 0x4F281E, 0x745750, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.TRILOBITE, 0x4F281E, 0x745750, new Item.Properties()));
     public static final RegistryObject<Item> TRILO_BUCKET = ITEMS.register("trilo_bucket",
             () -> new PatternedAnimalBucketItem(MMEntities.TRILOBITE, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -98,7 +98,7 @@ public class MMItems {
     public static final RegistryObject<Item> PIKAIA_FOSSIL = ITEMS.register("pikaia_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> PIKAIA_SPAWN_EGG = ITEMS.register("pikaia_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.PIKAIA, 0xc7d3d2, 0x9db7b7, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.PIKAIA, 0xc7d3d2, 0x9db7b7, new Item.Properties()));
     public static final RegistryObject<Item> PIKAIA_BUCKET = ITEMS.register("pikaia_bucket",
             () -> new FishBucketItem(MMEntities.PIKAIA, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
@@ -107,7 +107,7 @@ public class MMItems {
     public static final RegistryObject<Item> HALLU_FOSSIL = ITEMS.register("hallu_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HALLUCIGENIA_SPAWN_EGG = ITEMS.register("hallu_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.HALLUCIGENIA, 0xcd90cd, 0xcd90cd, new Item.Properties()));
+            ()-> new FishSpawnEggItem(MMEntities.HALLUCIGENIA, 0xcd90cd, 0xcd90cd, new Item.Properties()));
     public static final RegistryObject<Item> HALLUCIGENIA_BUCKET = ITEMS.register("hallu_bucket",
             () -> new FishBucketItem(MMEntities.HALLUCIGENIA, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
