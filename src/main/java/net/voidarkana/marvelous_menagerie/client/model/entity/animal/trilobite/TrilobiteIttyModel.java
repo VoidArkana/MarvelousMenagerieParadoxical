@@ -57,26 +57,26 @@ public class TrilobiteIttyModel<T extends Trilobite> extends MarvelousModel<T> {
 
 		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 12).addBox(1.5F, -0.6F, 0.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(5, 12).addBox(-1.5F, -0.6F, 0.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(10, 13).addBox(-1.5F, -0.6F, 2.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.0F))
-		.texOffs(11, 4).addBox(-1.5F, -0.6F, 0.0F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.5F, -0.5F));
+		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 12).addBox(1.5F, -0.6F, 0.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.001F))
+		.texOffs(5, 12).addBox(-1.5F, -0.6F, 0.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.001F))
+		.texOffs(10, 13).addBox(-1.5F, -0.6F, 2.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F))
+		.texOffs(11, 4).addBox(-1.5F, -0.6F, 0.0F, 3.0F, 0.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -0.5F, -0.5F));
 
 		PartDefinition legs_l = body.addOrReplaceChild("legs_l", CubeListBuilder.create(), PartPose.offset(0.75F, -0.5F, 1.0F));
 
-		PartDefinition leg_1_l = legs_l.addOrReplaceChild("leg_1_l", CubeListBuilder.create().texOffs(13, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -0.5F));
+		PartDefinition leg_1_l = legs_l.addOrReplaceChild("leg_1_l", CubeListBuilder.create().texOffs(13, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, -0.5F));
 
-		PartDefinition leg_2_l = legs_l.addOrReplaceChild("leg_2_l", CubeListBuilder.create().texOffs(3, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition leg_2_l = legs_l.addOrReplaceChild("leg_2_l", CubeListBuilder.create().texOffs(3, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition leg_3_l = legs_l.addOrReplaceChild("leg_3_l", CubeListBuilder.create().texOffs(0, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.5F));
+		PartDefinition leg_3_l = legs_l.addOrReplaceChild("leg_3_l", CubeListBuilder.create().texOffs(0, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, 0.5F));
 
 		PartDefinition legs_r = body.addOrReplaceChild("legs_r", CubeListBuilder.create(), PartPose.offset(-0.75F, -0.5F, 1.0F));
 
-		PartDefinition leg_1_r = legs_r.addOrReplaceChild("leg_1_r", CubeListBuilder.create().texOffs(10, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -0.5F));
+		PartDefinition leg_1_r = legs_r.addOrReplaceChild("leg_1_r", CubeListBuilder.create().texOffs(10, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, -0.5F));
 
-		PartDefinition leg_2_r = legs_r.addOrReplaceChild("leg_2_r", CubeListBuilder.create().texOffs(6, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition leg_2_r = legs_r.addOrReplaceChild("leg_2_r", CubeListBuilder.create().texOffs(6, 16).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition leg_3_r = legs_r.addOrReplaceChild("leg_3_r", CubeListBuilder.create().texOffs(16, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.5F));
+		PartDefinition leg_3_r = legs_r.addOrReplaceChild("leg_3_r", CubeListBuilder.create().texOffs(16, 15).addBox(-0.5F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 0.0F, 0.5F));
 
 		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(11, 7).addBox(-2.0F, -0.65F, 2.0F, 3.0F, 1.0F, 1.0F, new CubeDeformation(0.01F))
 		.texOffs(0, 0).addBox(-3.0F, 0.35F, 1.0F, 5.0F, 0.0F, 3.0F, new CubeDeformation(0.001F)), PartPose.offset(0.5F, 0.05F, -3.0F));
@@ -107,7 +107,15 @@ public class TrilobiteIttyModel<T extends Trilobite> extends MarvelousModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		poseStack.pushPose();
+
+		if (this.young){
+			poseStack.scale(0.6f, 0.6f, 0.6f);
+			poseStack.translate(0, 1, 0);
+		}
+
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		poseStack.popPose();
 	}
 
 	@Override

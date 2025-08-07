@@ -128,7 +128,15 @@ public class TrilobiteMidModel<T extends Trilobite> extends MarvelousModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		poseStack.pushPose();
+
+		if (this.young){
+			poseStack.scale(0.6f, 0.6f, 0.6f);
+			poseStack.translate(0, 1, 0);
+		}
+
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		poseStack.popPose();
 	}
 
 	@Override

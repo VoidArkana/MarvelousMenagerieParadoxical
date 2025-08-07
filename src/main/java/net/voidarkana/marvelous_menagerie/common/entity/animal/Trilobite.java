@@ -174,10 +174,10 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
-        if (this.getVariantModel() == 5) {
-            return super.getDimensions(pPose).scale(2F, 2.5F);
-        } else if (this.getVariantModel() == 4){
-            return super.getDimensions(pPose).scale(0.8F, 1F);
+        if (this.getVariantModel() == 6) {
+            return super.getDimensions(pPose).scale(1.5F, 1.75F);
+        } else if (this.getVariantModel() == 5){
+            return super.getDimensions(pPose).scale(0.5F, 1F);
         }else {
             return super.getDimensions(pPose);
         }
@@ -298,8 +298,8 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             this.setCanGrowUp(dataTag.getBoolean("CanGrow"));
         }else{
             int variantModelChange = this.random.nextInt(0, 7);
-            int variantColorBaseChange = this.random.nextInt(0, 7);
-            int variantColorSecondChange = this.random.nextInt(0, 11);
+            int variantColorBaseChange = this.random.nextInt(0, 25);
+            int variantColorSecondChange = this.random.nextInt(0, 25);
 
             this.setVariantModel(variantModelChange);
             this.setVariantBaseColor(variantColorBaseChange);
@@ -316,16 +316,15 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         Trilobite otherParent = (Trilobite) pOtherParent;
         Trilobite baby = MMEntities.TRILOBITE.get().create(pLevel);
 
-        if (baby != null){
+        int mainColor;
+        int secondColor;
+        boolean hasHighlightColor;
+        int highlightColor;
 
+        if (baby != null && pOtherParent != null){
             int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
-            int mainColor;
-            int secondColor;
-            boolean hasHighlightColor;
-            int highlightColor;
 
             switch (lowerQuality){
-
                 case 1:
                     if (this.random.nextBoolean()){
                         mainColor = this.random.nextInt(25);
@@ -370,6 +369,20 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             }
 
             baby.setVariantModel(this.getVariantModel());
+            baby.setVariantBaseColor(mainColor);
+            baby.setVariantSecondColor(secondColor);
+            baby.setHasHighlight(hasHighlightColor);
+            baby.setHighlightColor(highlightColor);
+
+            baby.setFromBucket(true);
+        }else if (baby != null){
+
+            baby.setVariantModel(this.getVariantModel());
+
+            mainColor = this.random.nextInt(25);
+            secondColor = this.random.nextInt(25);
+            hasHighlightColor = this.random.nextInt(3)==0;
+            highlightColor = this.random.nextInt(25);
             baby.setVariantBaseColor(mainColor);
             baby.setVariantSecondColor(secondColor);
             baby.setHasHighlight(hasHighlightColor);

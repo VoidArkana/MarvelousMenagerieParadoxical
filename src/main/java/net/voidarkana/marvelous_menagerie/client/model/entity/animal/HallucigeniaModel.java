@@ -171,7 +171,8 @@ public class HallucigeniaModel<T extends Hallucigenia> extends MarvelousModel<T>
 		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();	}
+		poseStack.popPose();
+	}
 
 	@Override
 	public ModelPart root() {
