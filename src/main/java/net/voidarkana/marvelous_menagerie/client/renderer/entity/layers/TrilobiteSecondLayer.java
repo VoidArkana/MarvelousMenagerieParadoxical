@@ -57,21 +57,5 @@ public class TrilobiteSecondLayer extends RenderLayer<Trilobite, MarvelousModel<
                     entity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch,
                     pPartialTick, 1, 1, 1);
         }
-
-//        this.getParentModel().copyPropertiesTo(this.model);
-//        this.model.prepareMobModel(entity, pLimbSwing, pLimbSwingAmount, pPartialTick);
-//        this.model.setupAnim(entity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-
-//        if (!entity.isLGBTrilo() && !entity.isInvisible()){
-//
-//            RenderType cameo = RenderType.entityCutoutNoCull(new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/trilobite/trilobite_"+entity.getModelName(entity.getVariantModel())
-//                    +"_second/trilobite_"+entity.getModelName(entity.getVariantModel())+"_second_"+entity.getSecondColorName(entity.getVariantSecondColor())+".png"));
-//            ResourceLocation trilobiteModel = new ResourceLocation(MarvelousMenagerie.MODID, "geo/trilobite/trilobite_"
-//                    +entity.getModelName(entity.getVariantModel())+".geo.json");
-//
-//            this.getRenderer().reRender(this.getGeoModel().getBakedModel(trilobiteModel), poseStack, bufferSource, entity, renderType,
-//                    bufferSource.getBuffer(cameo), partialTick, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-//
-//        }
     }
 }

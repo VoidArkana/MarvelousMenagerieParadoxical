@@ -116,9 +116,9 @@ public class TrilobiteMidModel<T extends Trilobite> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		if (entity.isSprinting()){
-			this.animateWalk(TrilobiteMidAnims.RUN_MID, limbSwing, limbSwingAmount, 15f, 100);
+			this.animateWalk(TrilobiteMidAnims.RUN_MID, limbSwing, limbSwingAmount, 10f, 100);
 		}else {
-			this.animateWalk(TrilobiteMidAnims.WALK_MID, limbSwing, limbSwingAmount, 15f, 100);
+			this.animateWalk(TrilobiteMidAnims.WALK_MID, limbSwing, limbSwingAmount, 10f, 100);
 		}
 
 		this.animateIdle(entity.idleAnimationState, TrilobiteMidAnims.IDLE_MID, ageInTicks, 1, 1-Math.abs(limbSwingAmount));

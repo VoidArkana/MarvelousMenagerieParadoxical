@@ -113,7 +113,7 @@ public class TrilobiteFatModel<T extends Trilobite> extends MarvelousModel<T> {
 	public void setupAnim(Trilobite entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animateWalk(TrilobiteAnims.WALK_FAT, limbSwing, limbSwingAmount, 15f, 100);
+		this.animateWalk(TrilobiteAnims.WALK_FAT, limbSwing, limbSwingAmount, 10f, 100);
 
 		this.animateIdle(entity.idleAnimationState, TrilobiteAnims.IDLE_FAT, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 

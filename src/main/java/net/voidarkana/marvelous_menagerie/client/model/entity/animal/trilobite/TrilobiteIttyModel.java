@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.RenderType;
 import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
@@ -32,7 +33,7 @@ public class TrilobiteIttyModel<T extends Trilobite> extends MarvelousModel<T> {
 	private final ModelPart wisker_r;
 
 	public TrilobiteIttyModel(ModelPart root) {
-        super(1, 1);
+        super(1, 1, RenderType::entityCutout);
         this.root = root.getChild("root");
 		this.body = this.root.getChild("body");
 		this.legs_l = this.body.getChild("legs_l");
@@ -98,7 +99,7 @@ public class TrilobiteIttyModel<T extends Trilobite> extends MarvelousModel<T> {
 	public void setupAnim(Trilobite entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animateWalk(TrilobiteAnims.WALK_SMALL, limbSwing, limbSwingAmount, 15f, 100);
+		this.animateWalk(TrilobiteAnims.WALK_SMALL, limbSwing, limbSwingAmount, 10f, 100);
 
 		this.animateIdle(entity.idleAnimationState, TrilobiteAnims.IDLE_SMALL, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 

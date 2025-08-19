@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.common.item.custom;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EntityType;
@@ -26,61 +27,53 @@ public class PatternedAnimalBucketItem extends FishBucketItem {
         if (getFishType() == MMEntities.TRILOBITE.get()) {
             CompoundTag compoundtag = pStack.getTag();
             if (compoundtag != null && compoundtag.contains("Model", 3)) {
-                int i = compoundtag.getInt("Model");
-                int j = compoundtag.getInt("BaseColor");
-                int k = compoundtag.getInt("SecondColor");
-                int l = compoundtag.getInt("HighlightColor");
-                boolean hasHighlight = compoundtag.getBoolean("HasHighlight");
 
+                int lgbt = compoundtag.getInt("LGBTVariant");
                 ChatFormatting[] achatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
 
+                int i = compoundtag.getInt("Model");
                 String model = "translatable.marvelous_menagerie.trilo_model." + Trilobite.getModelName(i);
-                String base = "translatable.marvelous_menagerie.trilo_base_color." + Trilobite.getColorName(j);
-                String second = "translatable.marvelous_menagerie.trilo_second_color." + Trilobite.getColorName(k);
-                String highlight = "translatable.marvelous_menagerie.trilo_highlight_color." + Trilobite.getColorName(l);
+
+                MutableComponent modelComponent = Component.translatable("translatable.marvelous_menagerie.model");
+                modelComponent.append(":").append(CommonComponents.SPACE).append(Component.translatable(model)).withStyle(achatformatting);
+
+                pTooltipComponents.add(modelComponent);
+
+                if (lgbt==0){
+                    int j = compoundtag.getInt("BaseColor");
+                    int k = compoundtag.getInt("SecondColor");
+                    int l = compoundtag.getInt("HighlightColor");
+                    boolean hasHighlight = compoundtag.getBoolean("HasHighlight");
+
+                    String base = "translatable.marvelous_menagerie.trilo_color." + Trilobite.getColorName(j);
+                    String second = "translatable.marvelous_menagerie.trilo_color." + Trilobite.getColorName(k);
+                    String highlight = "translatable.marvelous_menagerie.trilo_color." + Trilobite.getColorName(l);
+                    MutableComponent baseComponent = Component.translatable("translatable.marvelous_menagerie.base_color");
+                    baseComponent.append(":").append(CommonComponents.SPACE).append(Component.translatable(base)).withStyle(achatformatting);
+
+                    MutableComponent secondComponent = Component.translatable("translatable.marvelous_menagerie.secondary_color");
+                    secondComponent.append(":").append(CommonComponents.SPACE).append(Component.translatable(second)).withStyle(achatformatting);
+
+                    pTooltipComponents.add(baseComponent);
+                    pTooltipComponents.add(secondComponent);
+
+                    if (hasHighlight){
+                        MutableComponent highlightComponent = Component.translatable("translatable.marvelous_menagerie.highlight_color");
+                        highlightComponent.append(":").append(CommonComponents.SPACE).append(Component.translatable(highlight)).withStyle(achatformatting);
 
 
-                pTooltipComponents.add(Component.translatable(model).withStyle(achatformatting));
+                        pTooltipComponents.add(highlightComponent);
+                    }
+                }else {
+                    String lgbtVariant = "translatable.marvelous_menagerie.lgbt." + Trilobite.getLGBTVariantName(lgbt);
 
-                MutableComponent mutablecomponent = Component.translatable(base);
+                    MutableComponent lgbtComponent = Component.translatable("translatable.marvelous_menagerie.pride_flag");
+                    lgbtComponent.append(":").append(CommonComponents.SPACE).append(Component.translatable(lgbtVariant)).withStyle(achatformatting);
 
-                mutablecomponent.withStyle(achatformatting);
-                pTooltipComponents.add(mutablecomponent);
-
-                MutableComponent mutablecomponent2 = Component.translatable(second);
-
-                mutablecomponent2.withStyle(achatformatting);
-                pTooltipComponents.add(mutablecomponent2);
-
-
-                if (hasHighlight){
-                    MutableComponent mutablecomponent3 = Component.translatable(highlight);
-                    mutablecomponent3.withStyle(achatformatting);
-                    pTooltipComponents.add(mutablecomponent3);
+                    pTooltipComponents.add(lgbtComponent);
                 }
             }
         }
-
-//        if (getFishType() == ModEntities.BABY_OPHTHALMO.get()) {
-//            CompoundTag compoundtag = pStack.getTag();
-//            if (compoundtag != null && compoundtag.contains("BaseColor", 3)) {
-//                int i = compoundtag.getInt("BaseColor");
-//                int j = compoundtag.getInt("Pattern");
-//
-//                ChatFormatting[] achatformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
-//
-//                String model = "translatable.marvelous_menagerie.ophthalmo.base" + BabyOphthalmoEntity.getColorName(i);
-//
-//                pTooltipComponents.add(Component.translatable(model).withStyle(achatformatting));
-//
-//                if (j!=0){
-//                    String base = "translatable.marvelous_menagerie.ophthalmo.pattern" + BabyOphthalmoEntity.getPatternName(j);
-//                    MutableComponent mutablecomponent = Component.translatable(base);
-//                    mutablecomponent.withStyle(achatformatting);
-//                    pTooltipComponents.add(mutablecomponent);
-//                }
-//            }
-//        }
 
 
     }

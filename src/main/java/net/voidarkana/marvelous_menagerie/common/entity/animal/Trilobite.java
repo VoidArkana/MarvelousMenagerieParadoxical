@@ -1,7 +1,8 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
@@ -36,25 +36,12 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWat
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-import java.util.function.Predicate;
 
 public class Trilobite extends BottomDwellerWaterCreature implements Bucketable {
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState spinIdleAnimationState = new AnimationState();
     private int idleSpinTimeout = 0;
-
-
-    private static final Predicate<LivingEntity> SCARY_MOB = (p_289442_) -> {
-        if (p_289442_ instanceof Player && ((Player)p_289442_).isCreative()) {
-            return false;
-        } else {
-            return p_289442_.getType() == EntityType.AXOLOTL || p_289442_.getMobType() != MobType.WATER;
-        }
-    };
-
-    static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(SCARY_MOB);
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> VARIANT_MODEL = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.INT);
@@ -269,6 +256,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         compoundnbt.putInt("SecondColor", this.getVariantSecondColor());
         compoundnbt.putInt("HighlightColor", this.getHighlightColor());
         compoundnbt.putBoolean("HasHighlight", this.getHasHighlight());
+        compoundnbt.putInt("LGBTVariant", this.getLGBTVariant());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -294,20 +282,56 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     @Override
+    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+        if (itemstack.is(MMItems.MAGIC_ROLL.get()) && this.getLGBTVariant() == 0){
+
+            if (!pPlayer.getAbilities().instabuild) {
+                itemstack.shrink(1);
+            }
+
+            ParticleOptions particleoptions = ParticleTypes.NOTE;
+
+            if (this.random.nextInt(10) == 0) {
+                this.setLGBTVariant(this.random.nextInt(1, 14));
+            } else {
+                particleoptions = ParticleTypes.SMOKE;
+            }
+
+            for(int i = 0; i < 7; ++i) {
+                double d0 = this.random.nextGaussian() * 0.02D;
+                double d1 = this.random.nextGaussian() * 0.02D;
+                double d2 = this.random.nextGaussian() * 0.02D;
+                this.level().addParticle(particleoptions, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+            }
+
+            this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.5F);
+
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.interactAt(pPlayer, pVec, pHand);
+    }
+
+    @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Model", 3)) {
+
+            System.out.println(dataTag.getInt("Age"));
+
             this.setVariantModel(dataTag.getInt("Model"));
             this.setVariantBaseColor(dataTag.getInt("BaseColor"));
             this.setVariantSecondColor(dataTag.getInt("SecondColor"));
-            this.setHighlightColor(dataTag.getInt("HighlightColor"));
-            this.setHasHighlight(dataTag.getBoolean("HasHighlight"));
             this.setLGBTVariant(dataTag.getInt("LGBTVariant"));
             this.setFromBucket(true);
-            if (dataTag.contains("Age")) {
-                this.setAge(dataTag.getInt("Age"));}
             this.setCanGrowUp(dataTag.getBoolean("CanGrow"));
+            this.setAge(dataTag.getInt("Age"));
+            this.setHighlightColor(dataTag.getInt("HighlightColor"));
+            this.setHasHighlight(dataTag.getBoolean("HasHighlight"));
+
         }else{
             int variantModelChange = this.random.nextInt(0, 7);
             int variantColorBaseChange = this.random.nextInt(0, 25);
@@ -321,15 +345,13 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             this.setHighlightColor(variantColorHighlight);
             this.setHasHighlight(hasHighlight);
 
-            int LGBTVariant = this.random.nextInt(1, 13);
-            if (this.random.nextInt(100) == 0){
+            int LGBTVariant = this.random.nextInt(1, 14);
+            if (this.random.nextInt(50) == 0){
                 this.setLGBTVariant(LGBTVariant);
             }else{
                 this.setLGBTVariant(0);
             }
-
         }
-
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -392,8 +414,8 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
                     break;
             }
 
-            int LGBTVariant = this.random.nextInt(1, 13);
-            if (this.random.nextInt(100) == 0){
+            int LGBTVariant = this.random.nextInt(1, 14);
+            if (this.random.nextInt(60) == 0){
                 baby.setLGBTVariant(LGBTVariant);
             }else{
                 baby.setLGBTVariant(0);
@@ -432,66 +454,28 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     public boolean isLGBTrilo(){
-        return this.isLGBT() || this.isAroAce() || this.isAro() || this.isAce() || this.isBi() || this.isPan() || this.isGay() || this.isLesbian()
-                || this.isEnby() || this.isAgender() || this.isGenderfluid() || this.isTrans() || this.isGenderQueer();
+        return this.getLGBTVariant()>0;
     }
 
-    public boolean isLGBT(){
-        return Objects.equals(getTriloName(), "lgbt");
+    public static String getLGBTVariantName(int i){
+        return switch(i){
+            case 1 -> "ace";
+            case 2 -> "agender";
+            case 3 -> "aro";
+            case 4 -> "aroace";
+            case 5 -> "bi";
+            case 6 -> "enby";
+            case 7 -> "gay";
+            case 8 -> "genderfluid";
+            case 9 -> "genderqueer";
+            case 10 -> "lesbian";
+            case 11 -> "lgbt";
+            case 12 -> "pan";
+            case 13 -> "trans";
+            default ->  "";
+        };
     }
 
-    public boolean isAro(){
-        return Objects.equals(getTriloName(), "aro") || Objects.equals(getTriloName(), "aromantic");
-    }
-
-    public boolean isAce(){
-        return Objects.equals(getTriloName(), "ace") || Objects.equals(getTriloName(), "asexual");
-    }
-
-    public boolean isAroAce(){
-        return Objects.equals(getTriloName(), "aroace");
-    }
-
-    public boolean isBi(){
-        return Objects.equals(getTriloName(), "bi") || Objects.equals(getTriloName(), "bisexual");
-    }
-
-    public boolean isGenderQueer(){
-        return Objects.equals(getTriloName(), "genderqueer");
-    }
-
-    public boolean isGay(){
-        return Objects.equals(getTriloName(), "gay");
-    }
-
-    public boolean isLesbian(){
-        return Objects.equals(getTriloName(), "lesbian");
-    }
-
-    public boolean isEnby(){
-        return Objects.equals(getTriloName(), "enby") || Objects.equals(getTriloName(), "nonbinary") || Objects.equals(getTriloName(), "non-binary") || Objects.equals(getTriloName(), "non binary");
-    }
-
-    public boolean isAgender(){
-        return Objects.equals(getTriloName(), "agender");
-    }
-
-    public boolean isGenderfluid(){
-        return Objects.equals(getTriloName(), "genderfluid");
-    }
-
-    public boolean isPan(){
-        return Objects.equals(getTriloName(), "pan") || Objects.equals(getTriloName(), "pansexual");
-    }
-
-    public boolean isTrans(){
-        return Objects.equals(getTriloName(), "trans") || Objects.equals(getTriloName(), "transgender");
-    }
-
-    public String getTriloName(){
-        String s = ChatFormatting.stripFormatting(this.getName().getString());
-        return s.toLowerCase();
-    }
     static class MoveToWaterGoal extends MoveToBlockGoal {
 
         private final Trilobite turtle;
@@ -556,15 +540,15 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     public static String getColorName(int i){
         return switch (i){
-            case 1 -> "black";
-            case 2 -> "blue";
-            case 3 -> "carbon";
-            case 4 -> "clay";
-            case 5 -> "cocoa";
-            case 6 -> "dirt";
-            case 7 -> "fig";
-            case 8 -> "gravel";
-            case 9 -> "green";
+            case 1 ->  "black";
+            case 2 ->  "blue";
+            case 3 ->  "carbon";
+            case 4 ->  "clay";
+            case 5 ->  "cocoa";
+            case 6 ->  "dirt";
+            case 7 ->  "fig";
+            case 8 ->  "gravel";
+            case 9 ->  "green";
             case 10 -> "lime";
             case 11 -> "marsh";
             case 12 -> "minsk";
@@ -578,7 +562,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             case 20 -> "rosy";
             case 21 -> "sand";
             case 22 -> "teal";
-            case 23 ->  "white";
+            case 23 -> "white";
             case 24 -> "yellow";
             default -> "brown";
         };

@@ -3,6 +3,7 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.T
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.TrilobiteHighlightLayer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.TrilobiteSecondLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
+import org.jetbrains.annotations.Nullable;
 
 public class TrilobiteRenderer extends MobRenderer<Trilobite, MarvelousModel<Trilobite>> {
 
@@ -53,16 +55,27 @@ public class TrilobiteRenderer extends MobRenderer<Trilobite, MarvelousModel<Tri
 
     @Override
     public ResourceLocation getTextureLocation(Trilobite entity) {
-//        if (entity.isLGBTrilo()){
-//            return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/trilobite/lgbtrilos/"+entity.getModelName(entity.getVariantModel())+
-//                    "/trilobite_"+entity.getModelName(entity.getVariantModel())+"_"+entity.getTriloName()+".png");
-//        }
-//        else{
+        if (entity.isLGBTrilo()){
+            return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/lgbtrilos/"+Trilobite.getLGBTVariantName(entity.getLGBTVariant())+
+                    "/"+Trilobite.getModelName(entity.getVariantModel())+ "_"+Trilobite.getLGBTVariantName(entity.getLGBTVariant())+".png");
+        } else{
             return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/"
-                    +entity.getModelName(entity.getVariantModel())+ "/base/"
-                    +entity.getModelName(entity.getVariantModel())+"_base_"
-                    +entity.getColorName(entity.getVariantBaseColor())+".png");
-        //}
+                    +Trilobite.getModelName(entity.getVariantModel())+ "/base/"
+                    +Trilobite.getModelName(entity.getVariantModel())+"_base_"
+                    +Trilobite.getColorName(entity.getVariantBaseColor())+".png");
+        }
+    }
+
+    @Override
+    protected @Nullable RenderType getRenderType(Trilobite pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
+        ResourceLocation resourcelocation = this.getTextureLocation(pLivingEntity);
+        if (pTranslucent) {
+            return RenderType.itemEntityTranslucentCull(resourcelocation);
+        } else if (pBodyVisible) {
+            return this.model.renderType(resourcelocation);
+        } else {
+            return pGlowing ? RenderType.outline(resourcelocation) : null;
+        }
     }
 
 }
