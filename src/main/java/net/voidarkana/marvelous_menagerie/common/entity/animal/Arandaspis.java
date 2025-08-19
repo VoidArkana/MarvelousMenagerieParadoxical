@@ -40,6 +40,7 @@ import java.util.stream.Stream;
 //TODO: only join leader in boids if the school is of the right size
 public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
+
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState flopAnimationState = new AnimationState();
@@ -49,6 +50,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     public int schoolSize = 1;
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Arandaspis.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Arandaspis.class, EntityDataSerializers.INT);
 
     public Arandaspis(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -78,16 +80,27 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FROM_BUCKET, false);
+        this.entityData.define(VARIANT, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("FromBucket", this.fromBucket());
+        pCompound.putInt("Variant", this.getVariant());
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
+        this.setVariant(pCompound.getInt("Variant"));
+    }
+
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
+    }
+
+    public void setVariant(int variant) {
+        this.entityData.set(VARIANT, variant);
     }
 
     @Override
@@ -118,6 +131,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
         compoundnbt.putInt("Age", this.getAge());
         compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putInt("Variant", this.getVariant());
 
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
@@ -138,9 +152,18 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     @Nullable
     @Override
     public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+        Arandaspis otherParent = (Arandaspis) pOtherParent;
         Arandaspis baby = MMEntities.ARANDASPIS.get().create(pLevel);
         baby.setFromBucket(true);
+        baby.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherParent.getVariant());
         return baby;
+    }
+
+    public static String getVariantName(int variantNumber) {
+        return  switch(variantNumber){
+            case 1 -> "blue";
+            default -> "green";
+        };
     }
 
     protected SoundEvent getAmbientSound() {
@@ -262,16 +285,20 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
             this.startFollowing(((Arandaspis.SchoolSpawnGroupData)pSpawnData).leader);
         }
 
-        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("Age", 3)) {
-            if (pDataTag.contains("Age")) {
-                this.setAge(pDataTag.getInt("Age"));}
-            this.setFromBucket(pDataTag.getBoolean("CanGrowUp"));
+        if (pReason==MobSpawnType.TRIGGERED || pReason==MobSpawnType.BREEDING){
             this.setFromBucket(true);
         }
 
-        if (pReason==MobSpawnType.TRIGGERED){
+        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("CanGrowUp", 3)) {
+            if (pDataTag.contains("Age")) {
+                this.setAge(pDataTag.getInt("Age"));}
+            this.setVariant(pDataTag.getInt("Variant"));
+            this.setFromBucket(pDataTag.getBoolean("CanGrowUp"));
             this.setFromBucket(true);
+        }else {
+            this.setVariant(this.getRandom().nextInt(2));
         }
+
 
         return pSpawnData;
     }

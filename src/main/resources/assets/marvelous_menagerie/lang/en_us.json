@@ -603,8 +603,11 @@
 
   "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist",
 
-  "painting.marvelous_menagerie.chud_painting.title": "Chud Anatomy",
-  "painting.marvelous_menagerie.chud_painting.author": "Ninni",
+  "painting.marvelous_menagerie.chud.title": "Chud Anatomy",
+  "painting.marvelous_menagerie.chud.author": "Ninni",
+
+  "painting.marvelous_menagerie.earthlings.title": "Earthlings",
+  "painting.marvelous_menagerie.earthlings.author": "VoidArkana",
 
   "block.marvelous_menagerie.potted_prototaxites": "Potted Prototaxites",
 

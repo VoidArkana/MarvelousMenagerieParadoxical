@@ -200,17 +200,22 @@ public class MMModEvents {
 
         // Adds our piece to all village houses pool
         // Note, the resourcelocation is getting the pool files from the data folder. Not assets folder.
-        addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/plains/houses"),
-                "marvelous_menagerie:plains_fossil_1", 250);
 
+        //desert
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
-                new ResourceLocation("minecraft:village/plains/houses"),
-                "marvelous_menagerie:plains_fossil_2", 250);
+                new ResourceLocation("minecraft:village/desert/houses"),
+                "marvelous_menagerie:village_museum_desert", 25);
 
+        //plains
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/plains/houses"),
-                "marvelous_menagerie:plains_fossil_3", 250);
+                "marvelous_menagerie:village_museum_plains", 25);
+
+        //savannah
+
+        //snowy
+
+        //taiga
     }
 
     private static final ResourceKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY = ResourceKey.create(

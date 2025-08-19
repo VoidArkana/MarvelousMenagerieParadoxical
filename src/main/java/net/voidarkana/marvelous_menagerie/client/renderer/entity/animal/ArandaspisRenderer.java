@@ -15,7 +15,6 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 
 public class ArandaspisRenderer extends MobRenderer<Arandaspis, ArandaspisModel<Arandaspis>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/arandaspis.png");
 
     public ArandaspisRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new ArandaspisModel<>(pContext.bakeLayer(MMModelLayers.ARANDASPIS_LAYER)), 0.25f);
@@ -23,7 +22,8 @@ public class ArandaspisRenderer extends MobRenderer<Arandaspis, ArandaspisModel<
 
     @Override
     public ResourceLocation getTextureLocation(Arandaspis pEntity) {
-        return TEXTURE;
+        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/arandaspis/arandaspis_"
+                +Arandaspis.getVariantName(pEntity.getVariant())+".png");
     }
 
     @Override

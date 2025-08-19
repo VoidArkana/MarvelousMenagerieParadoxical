@@ -62,6 +62,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     private static final EntityDataAccessor<Integer> VARIANT_SECOND_COLOR = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> HIGHLIGHT_COLOR = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> HAS_HIGHLIGHT = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> LGBT_VARIANT = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.INT);
 
     public Trilobite(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -109,6 +110,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         this.entityData.define(VARIANT_BASE_COLOR, 0);
         this.entityData.define(VARIANT_SECOND_COLOR, 0);
         this.entityData.define(HIGHLIGHT_COLOR, 0);
+        this.entityData.define(LGBT_VARIANT, 0);
         this.entityData.define(HAS_HIGHLIGHT, false);
     }
 
@@ -120,6 +122,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         pCompound.putInt("SecondColor", this.getVariantSecondColor());
         pCompound.putInt("HighlightColor", this.getHighlightColor());
         pCompound.putBoolean("HasHighlight", this.getHasHighlight());
+        pCompound.putInt("LGBTVariant", this.getLGBTVariant());
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
@@ -130,7 +133,15 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         this.setVariantSecondColor(pCompound.getInt("SecondColor"));
         this.setHighlightColor(pCompound.getInt("HighlightColor"));
         this.setHasHighlight(pCompound.getBoolean("HasHighlight"));
+        this.setLGBTVariant(pCompound.getInt("LGBTVariant"));
     }
+
+    //variant model
+    public void setLGBTVariant(int variant) {
+        this.entityData.set(LGBT_VARIANT, variant);}
+
+    public int getLGBTVariant() {
+        return this.entityData.get(LGBT_VARIANT);}
 
     //variant model
     public void setVariantModel(int variant) {
@@ -286,12 +297,13 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Model", 3)) {
             this.setVariantModel(dataTag.getInt("Model"));
             this.setVariantBaseColor(dataTag.getInt("BaseColor"));
             this.setVariantSecondColor(dataTag.getInt("SecondColor"));
             this.setHighlightColor(dataTag.getInt("HighlightColor"));
             this.setHasHighlight(dataTag.getBoolean("HasHighlight"));
+            this.setLGBTVariant(dataTag.getInt("LGBTVariant"));
             this.setFromBucket(true);
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
@@ -300,10 +312,22 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             int variantModelChange = this.random.nextInt(0, 7);
             int variantColorBaseChange = this.random.nextInt(0, 25);
             int variantColorSecondChange = this.random.nextInt(0, 25);
+            int variantColorHighlight = this.random.nextInt(0, 25);
+            boolean hasHighlight = this.random.nextInt(3) == 0;
 
             this.setVariantModel(variantModelChange);
             this.setVariantBaseColor(variantColorBaseChange);
             this.setVariantSecondColor(variantColorSecondChange);
+            this.setHighlightColor(variantColorHighlight);
+            this.setHasHighlight(hasHighlight);
+
+            int LGBTVariant = this.random.nextInt(1, 13);
+            if (this.random.nextInt(100) == 0){
+                this.setLGBTVariant(LGBTVariant);
+            }else{
+                this.setLGBTVariant(0);
+            }
+
         }
 
 
@@ -321,7 +345,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         boolean hasHighlightColor;
         int highlightColor;
 
-        if (baby != null && pOtherParent != null){
+        if (baby != null){
             int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
 
             switch (lowerQuality){
@@ -368,21 +392,14 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
                     break;
             }
 
-            baby.setVariantModel(this.getVariantModel());
-            baby.setVariantBaseColor(mainColor);
-            baby.setVariantSecondColor(secondColor);
-            baby.setHasHighlight(hasHighlightColor);
-            baby.setHighlightColor(highlightColor);
-
-            baby.setFromBucket(true);
-        }else if (baby != null){
+            int LGBTVariant = this.random.nextInt(1, 13);
+            if (this.random.nextInt(100) == 0){
+                baby.setLGBTVariant(LGBTVariant);
+            }else{
+                baby.setLGBTVariant(0);
+            }
 
             baby.setVariantModel(this.getVariantModel());
-
-            mainColor = this.random.nextInt(25);
-            secondColor = this.random.nextInt(25);
-            hasHighlightColor = this.random.nextInt(3)==0;
-            highlightColor = this.random.nextInt(25);
             baby.setVariantBaseColor(mainColor);
             baby.setVariantSecondColor(secondColor);
             baby.setHasHighlight(hasHighlightColor);
@@ -390,6 +407,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
             baby.setFromBucket(true);
         }
+
         return baby;
     }
 
@@ -415,7 +433,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     public boolean isLGBTrilo(){
         return this.isLGBT() || this.isAroAce() || this.isAro() || this.isAce() || this.isBi() || this.isPan() || this.isGay() || this.isLesbian()
-                || this.isEnby() || this.isAgender() || this.isGenderfluid() || this.isTrans();
+                || this.isEnby() || this.isAgender() || this.isGenderfluid() || this.isTrans() || this.isGenderQueer();
     }
 
     public boolean isLGBT(){
@@ -423,11 +441,11 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     public boolean isAro(){
-        return Objects.equals(getTriloName(), "aro");
+        return Objects.equals(getTriloName(), "aro") || Objects.equals(getTriloName(), "aromantic");
     }
 
     public boolean isAce(){
-        return Objects.equals(getTriloName(), "ace");
+        return Objects.equals(getTriloName(), "ace") || Objects.equals(getTriloName(), "asexual");
     }
 
     public boolean isAroAce(){
@@ -435,7 +453,11 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     public boolean isBi(){
-        return Objects.equals(getTriloName(), "bi");
+        return Objects.equals(getTriloName(), "bi") || Objects.equals(getTriloName(), "bisexual");
+    }
+
+    public boolean isGenderQueer(){
+        return Objects.equals(getTriloName(), "genderqueer");
     }
 
     public boolean isGay(){
@@ -447,7 +469,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     public boolean isEnby(){
-        return Objects.equals(getTriloName(), "enby");
+        return Objects.equals(getTriloName(), "enby") || Objects.equals(getTriloName(), "nonbinary") || Objects.equals(getTriloName(), "non-binary") || Objects.equals(getTriloName(), "non binary");
     }
 
     public boolean isAgender(){
@@ -459,11 +481,11 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     public boolean isPan(){
-        return Objects.equals(getTriloName(), "pan");
+        return Objects.equals(getTriloName(), "pan") || Objects.equals(getTriloName(), "pansexual");
     }
 
     public boolean isTrans(){
-        return Objects.equals(getTriloName(), "trans");
+        return Objects.equals(getTriloName(), "trans") || Objects.equals(getTriloName(), "transgender");
     }
 
     public String getTriloName(){

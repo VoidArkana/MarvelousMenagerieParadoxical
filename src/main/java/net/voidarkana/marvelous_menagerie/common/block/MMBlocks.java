@@ -39,8 +39,14 @@ public class MMBlocks {
             DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MODID);
 
 
-    public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud_painting",
+    public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud",
             () -> new PaintingVariant(64, 48));
+
+    public static final RegistryObject<PaintingVariant> OVERWORLDLINGS_PAINTING = PAINTINGS.register("two_overworldlings",
+            () -> new PaintingVariant(48, 48));
+
+    public static final RegistryObject<PaintingVariant> DODO_PAINTING = PAINTINGS.register("louisses_dodo",
+            () -> new PaintingVariant(48, 32));
 
     //Sigillaria plank blocks
     public static final RegistryObject<Block> SIGILLARIA_PLANKS = registerBlock("sigillaria_planks",

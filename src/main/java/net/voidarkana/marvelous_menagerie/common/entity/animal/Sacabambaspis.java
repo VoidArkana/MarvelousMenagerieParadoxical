@@ -81,23 +81,8 @@ public class Sacabambaspis extends AbstractBasicFish {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-//        int chance = this.getRandom().nextInt(100);
-//        int variant;
-//        if (chance<50){
-//            variant = 0;
-//        }else if (chance < 75){
-//            variant = 1;
-//        }else if (chance < 85){
-//            variant = 2;
-//        }else if (chance < 95){
-//            variant = 3;
-//        }else {
-//            variant = 1;
-//        }
 
-        this.setVariant(this.getRandom().nextInt(2));
-
-        if (reason==MobSpawnType.TRIGGERED){
+        if (reason==MobSpawnType.TRIGGERED || reason==MobSpawnType.BREEDING){
             this.setFromBucket(true);
         }
 
@@ -107,6 +92,17 @@ public class Sacabambaspis extends AbstractBasicFish {
             this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
             this.setVariant(dataTag.getInt("Variant"));
             this.setFromBucket(true);
+        }else{
+
+            int chance = this.getRandom().nextInt(100);
+            int variant;
+            if (chance>94){
+                variant = 2;
+            }else {
+                variant = this.getRandom().nextInt(2);
+            }
+
+            this.setVariant(variant);
         }
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -116,6 +112,7 @@ public class Sacabambaspis extends AbstractBasicFish {
     public String getVariantName(int variantNumber) {
         return  switch(variantNumber){
             case 1 -> "_blue";
+            case 2 -> "_golden";
             default -> "";
         };
     }
@@ -126,11 +123,15 @@ public class Sacabambaspis extends AbstractBasicFish {
         Sacabambaspis baby = MMEntities.SACABAMBASPIS.get().create(pLevel);
         Sacabambaspis otherSaca = (Sacabambaspis)pOtherParent;
 
-        if (this.getRandom().nextBoolean()){
-            baby.setVariant(this.getRandom().nextInt(2));
+        int chance = this.getRandom().nextInt(100);
+        int variant;
+        if (chance>94){
+            variant = 2;
         }else {
-            baby.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherSaca.getVariant());
+            variant = this.getRandom().nextBoolean() ? this.getVariant() : otherSaca.getVariant();
         }
+
+        baby.setVariant(variant);
 
         baby.setFromBucket(true);
         return baby;
