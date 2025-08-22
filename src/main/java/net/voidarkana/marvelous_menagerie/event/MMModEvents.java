@@ -204,18 +204,27 @@ public class MMModEvents {
         //desert
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/desert/houses"),
-                "marvelous_menagerie:village_museum_desert", 25);
+                "marvelous_menagerie:village_museum_desert", 30);
 
         //plains
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/plains/houses"),
-                "marvelous_menagerie:village_museum_plains", 25);
+                "marvelous_menagerie:village_museum_plains", 20);
 
-        //savannah
+        //savanna
+        addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                new ResourceLocation("minecraft:village/savanna/houses"),
+                "marvelous_menagerie:village_museum_savanna", 25);
 
         //snowy
+        addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                new ResourceLocation("minecraft:village/snowy/houses"),
+                "marvelous_menagerie:village_museum_snowy", 20);
 
         //taiga
+        addBuildingToPool(templatePoolRegistry, processorListRegistry,
+                new ResourceLocation("minecraft:village/taiga/houses"),
+                "marvelous_menagerie:village_museum_taiga", 30);
     }
 
     private static final ResourceKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY = ResourceKey.create(
