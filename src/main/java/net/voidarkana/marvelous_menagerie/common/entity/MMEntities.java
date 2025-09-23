@@ -115,6 +115,13 @@ public class MMEntities {
                             .sized(0.6f, 0.15f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "trilobite").toString()));
 
+    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM =
+            ENTITY_TYPES.register("leptictidium",
+                    () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE)
+                            .sized(0.5F, 0.4F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "leptictidium").toString()));
+
+
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
             ENTITY_TYPES.register("mm_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)

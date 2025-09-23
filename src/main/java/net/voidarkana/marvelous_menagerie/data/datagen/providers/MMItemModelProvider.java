@@ -158,6 +158,7 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.COOKED_DAWN_HORSE);
 
         simpleItem(MMItems.LEPTI_FOSSIL);
+        withExistingParent(MMItems.LEPTICTIDIUM_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.EOLACTORIA_FOSSIL);
         simpleItem(MMItems.EOLACTORIA_BUCKET);

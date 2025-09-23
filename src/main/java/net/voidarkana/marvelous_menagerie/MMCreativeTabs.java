@@ -98,6 +98,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
+                        output.accept(MMItems.LEPTICTIDIUM_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());

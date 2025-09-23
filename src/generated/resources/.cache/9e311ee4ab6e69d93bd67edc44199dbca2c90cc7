@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-07T12:45:18.7898835	Item Models: marvelous_menagerie
+// 1.20.1	2025-09-23T00:03:26.3463976	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -94,6 +94,7 @@ ee2a76101a5fc02e1a45b0cddc1873e3bce6789e assets/marvelous_menagerie/models/item/
 b424e41b5959b8e383f712e86b4ed57dd59b4403 assets/marvelous_menagerie/models/item/josepho_fossil.json
 9bbebfd123c6cea8d60e970a32038c196e594740 assets/marvelous_menagerie/models/item/jumbo_omelette.json
 dd66a5284143d29756a1073617a65abf339ddb5b assets/marvelous_menagerie/models/item/kelenken_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/leptictidium_spawn_egg.json
 a946582a55ce54d30ac61b02c4f0d50617e39d16 assets/marvelous_menagerie/models/item/lepti_fossil.json
 4f2f9091b0ff77bc10f6c8ddda64175322cd8c77 assets/marvelous_menagerie/models/item/limestone_bricks_slab.json
 3137223e309180f8687c66c2a04f77cd2a497dde assets/marvelous_menagerie/models/item/limestone_bricks_stairs.json

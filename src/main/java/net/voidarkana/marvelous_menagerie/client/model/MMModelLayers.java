@@ -61,6 +61,9 @@ public class MMModelLayers {
     public static final ModelLayerLocation TRILO_ITTY_LAYER_HIGHLIGHT =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "highlight");
 
+    public static final ModelLayerLocation LEPTI_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "leptictidium"), "highlight");
+
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");
     public static final ModelLayerLocation RIFT_LAYER =

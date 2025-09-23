@@ -570,7 +570,13 @@
   "item.marvelous_menagerie.raw_dawn_horse": "Raw Dawn Horse",
   "item.marvelous_menagerie.cooked_dawn_horse": "Cooked Dawn Horse",
 
-  "entity.marvelous_menagerie.lepti": "Leptictidium",
+  "entity.marvelous_menagerie.leptictidium": "Leptictidium",
+  "item.marvelous_menagerie.leptictidium_spawn_egg": "Leptictidium Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.leptictidium_scared": "Leptictidium trembles",
+  "marvelous_menagerie.sound.subtitle.leptictidium_hurt": "Leptictidium hurts",
+  "marvelous_menagerie.sound.subtitle.leptictidium_death": "Leptictidium dies",
+  "marvelous_menagerie.sound.subtitle.leptictidium_ambient": "Leptictidium squeaks",
+
   "entity.marvelous_menagerie.kelenken": "Kelenken",
   "entity.marvelous_menagerie.doedicurus": "Doedicurus",
 

@@ -185,6 +185,8 @@ public class MMItems {
     //Leptictidium
     public static final RegistryObject<Item> LEPTI_FOSSIL = ITEMS.register("lepti_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LEPTICTIDIUM_SPAWN_EGG = ITEMS.register("leptictidium_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.LEPTICTIDIUM, 0xc09251, 0xe28554, new Item.Properties()));
 
     //Eolactoria
     public static final RegistryObject<Item> EOLACTORIA_FOSSIL = ITEMS.register("eolactoria_fossil",

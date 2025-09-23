@@ -60,6 +60,15 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> PET_ARMOR_EQUIP = registerSoundEvents("caris_armor_equip");
     public static final RegistryObject<SoundEvent> PET_ARMOR_UNEQUIP = registerSoundEvents("caris_armor_unequip");
 
+    public static final RegistryObject<SoundEvent> DOEDICURUS_AMBIENT = registerSoundEvents("doedicurus_idle");
+    public static final RegistryObject<SoundEvent> DOEDICURUS_HURT = registerSoundEvents("doedicurus_hurt");
+    public static final RegistryObject<SoundEvent> DOEDICURUS_DEATH = registerSoundEvents("doedicurus_death");
+
+    public static final RegistryObject<SoundEvent> LEPTICTIDIUM_AMBIENT = registerSoundEvents("leptictidium_ambient");
+    public static final RegistryObject<SoundEvent> LEPTICTIDIUM_HURT = registerSoundEvents("leptictidium_hurt");
+    public static final RegistryObject<SoundEvent> LEPTICTIDIUM_DEATH = registerSoundEvents("leptictidium_death");
+    public static final RegistryObject<SoundEvent> LEPTICTIDIUM_SCARED = registerSoundEvents("leptictidium_scared");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
