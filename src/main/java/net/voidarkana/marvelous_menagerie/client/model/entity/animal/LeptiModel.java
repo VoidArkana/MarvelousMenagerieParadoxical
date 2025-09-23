@@ -86,7 +86,7 @@ public class LeptiModel<T extends Leptictidium> extends MarvelousModel<T> {
 		this.animate(entity.idleTiltState, LeptiAnims.LOOKDOWN, ageInTicks, 1.0F);
 
 		this.body.xRot = headPitch * ((float)Math.PI / 180F);
-		this.body.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.body.yRot = netHeadYaw * ((float)Math.PI / 180F)/2;
 	}
 
 	@Override
