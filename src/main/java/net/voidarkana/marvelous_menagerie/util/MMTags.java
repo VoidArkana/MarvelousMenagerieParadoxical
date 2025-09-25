@@ -50,6 +50,7 @@ public class MMTags {
 
         public static final TagKey<Biome> ROACH_BIOMES = create("is_roach_biome");
         public static final TagKey<Biome> DAWN_HORSE_BIOMES = create("is_dawn_horse_biome");
+        public static final TagKey<Biome> LEPTI_BIOMES = create("is_leptictidium_biome");
 
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MODID, pName));

@@ -121,6 +121,11 @@ public class MMEntities {
                             .sized(0.5F, 0.4F)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "leptictidium").toString()));
 
+    public static final RegistryObject<EntityType<Thylacine>> THYLACINE =
+            ENTITY_TYPES.register("thylacine",
+                    () -> EntityType.Builder.of(Thylacine::new, MobCategory.CREATURE)
+                            .sized(0.7f, 0.7f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "thylacine").toString()));
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =

@@ -99,7 +99,8 @@ public class LeptiModel<T extends Leptictidium> extends MarvelousModel<T> {
 		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();	}
+		poseStack.popPose();
+	}
 
 	@Override
 	public ModelPart root() {

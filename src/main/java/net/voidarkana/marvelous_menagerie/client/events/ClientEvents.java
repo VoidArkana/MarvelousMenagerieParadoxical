@@ -69,6 +69,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.TRILO_MID_LAYER_HIGHLIGHT, TrilobiteMidModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.LEPTI_LAYER, LeptiModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.THYLACINE_LAYER, ThylacineModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

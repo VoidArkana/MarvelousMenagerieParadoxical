@@ -156,9 +156,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         simpleItem(MMItems.RAW_DAWN_HORSE);
         simpleItem(MMItems.COOKED_DAWN_HORSE);
+        withExistingParent(MMItems.LEPTICTIDIUM_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.LEPTI_FOSSIL);
-        withExistingParent(MMItems.LEPTICTIDIUM_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.EOLACTORIA_FOSSIL);
         simpleItem(MMItems.EOLACTORIA_BUCKET);
@@ -172,7 +172,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.SLOVENICUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.DODO_FOSSIL);
+
         simpleItem(MMItems.THYLACINE_FOSSIL);
+        withExistingParent(MMItems.THYLA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.STELLER_FOSSIL);
         simpleItem(MMItems.STELLER_MILK);

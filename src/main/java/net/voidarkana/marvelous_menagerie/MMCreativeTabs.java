@@ -102,6 +102,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
+                        output.accept(MMItems.THYLA_SPAWN_EGG.get());
                         output.accept(MMItems.TRILOBITE_SPAWN_EGG.get());
 
                         output.accept(MMItems.BEHOLDER_SPAWN_EGG.get());

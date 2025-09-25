@@ -221,6 +221,8 @@ public class MMItems {
     //Thylacine
     public static final RegistryObject<Item> THYLACINE_FOSSIL = ITEMS.register("thylacine_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> THYLA_SPAWN_EGG = ITEMS.register("thylacine_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.THYLACINE, 0xe6a25f, 0x443429, new Item.Properties()));
 
     //Steller's Sea Cow
     public static final RegistryObject<Item> STELLER_FOSSIL = ITEMS.register("steller_fossil",
