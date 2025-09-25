@@ -65,6 +65,10 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "leptictidium"), "main");
     public static final ModelLayerLocation THYLACINE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "thylacine"), "main");
+    public static final ModelLayerLocation DODO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "dodo"), "main");
+    public static final ModelLayerLocation BABY_DODO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "baby_dodo"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");

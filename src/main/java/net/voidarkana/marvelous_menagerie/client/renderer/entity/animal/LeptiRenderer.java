@@ -5,9 +5,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.DawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.LeptiModel;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.DawnHorse;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Leptictidium;
 
 public class LeptiRenderer extends MobRenderer<Leptictidium, LeptiModel<Leptictidium>> {

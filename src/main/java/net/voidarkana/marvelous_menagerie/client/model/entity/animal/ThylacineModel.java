@@ -2,13 +2,11 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.LeptiAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ThylacineAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;

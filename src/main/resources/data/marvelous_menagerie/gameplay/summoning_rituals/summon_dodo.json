@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:feather"
+  },
+  "input2": {
+    "item": "minecraft:pumpkin"
+  },
+  "input3": {
+    "item": "minecraft:melon"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:dodo_fossil"
+  },
+  "output": "marvelous_menagerie:dodo"
+}

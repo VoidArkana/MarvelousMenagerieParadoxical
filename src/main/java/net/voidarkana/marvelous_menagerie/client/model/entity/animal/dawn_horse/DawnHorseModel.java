@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.4
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse;// Made with Blockbench 4.12.4
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 
 import com.mojang.blaze3d.vertex.PoseStack;

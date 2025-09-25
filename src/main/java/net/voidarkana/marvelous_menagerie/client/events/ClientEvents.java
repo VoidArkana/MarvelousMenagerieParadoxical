@@ -19,6 +19,11 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.BeholderModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.DawnHorseModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.SkeletonDawnHorseModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.ZombieDawnHorseModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDodoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
@@ -70,6 +75,8 @@ public class ClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.LEPTI_LAYER, LeptiModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.THYLACINE_LAYER, ThylacineModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.DODO_LAYER, DodoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_DODO_LAYER, BabyDodoModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

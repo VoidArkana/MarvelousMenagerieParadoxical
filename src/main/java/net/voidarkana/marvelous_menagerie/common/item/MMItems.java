@@ -217,6 +217,8 @@ public class MMItems {
     //Dodo
     public static final RegistryObject<Item> DODO_FOSSIL = ITEMS.register("dodo_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DODO_SPAWN_EGG = ITEMS.register("dodo_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.DODO, 0x7f929a, 0x374454, new Item.Properties()));
 
     //Thylacine
     public static final RegistryObject<Item> THYLACINE_FOSSIL = ITEMS.register("thylacine_fossil",

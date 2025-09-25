@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.SkeletonDawnHorseModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.SkeletonDawnHorseModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.SkeletonDawnHorse;
 
 public class SkeletonDawnHorseRenderer extends MobRenderer<SkeletonDawnHorse, SkeletonDawnHorseModel<SkeletonDawnHorse>> {

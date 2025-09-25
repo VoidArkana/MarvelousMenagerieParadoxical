@@ -40,8 +40,8 @@ public class MMEvents {
         event.put(MMEntities.TRILOBITE.get(), Trilobite.createAttributes().build());
         event.put(MMEntities.LEPTICTIDIUM.get(), Leptictidium.createAttributes().build());
         event.put(MMEntities.THYLACINE.get(), Thylacine.createAttributes().build());
+        event.put(MMEntities.DODO.get(), Dodo.createAttributes().build());
 
-//        event.put(MMEntities.DODO.get(), DodoEntity.createAttributes().build());
 //        event.put(MMEntities.ELEPHANT_BIRD.get(), ElephantBirdEntity.createAttributes().build());
 //        event.put(MMEntities.STELLER_SEA_COW.get(), StellerEntity.createAttributes().build());
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());

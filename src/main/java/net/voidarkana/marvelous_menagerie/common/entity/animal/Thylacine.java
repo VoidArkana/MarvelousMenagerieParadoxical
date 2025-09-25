@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -8,7 +9,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,13 +28,16 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
+import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -46,6 +52,8 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
     public int attackAnimationTimeout;
     public int howlAnimationTimeout;
     public int yawnAnimationTimeout;
+
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.RABBIT, Items.RABBIT_FOOT, Items.COOKED_RABBIT);
 
     public Thylacine(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
@@ -78,6 +86,7 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
+        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -86,8 +95,14 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
         this.goalSelector.addGoal(1, new AnimatedAttackGoal(this, 1.25D, true, 7, 3));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Leptictidium.class, false));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Rabbit.class, false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
 
         super.registerGoals();
+    }
+
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return FOOD_ITEMS.test(pStack);
     }
 
     @Override
@@ -463,5 +478,9 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
+    }
+
+    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }
