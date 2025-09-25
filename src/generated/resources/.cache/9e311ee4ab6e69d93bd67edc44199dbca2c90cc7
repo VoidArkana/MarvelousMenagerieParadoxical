@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-25T12:42:08.0692743	Item Models: marvelous_menagerie
+// 1.20.1	2025-09-25T16:51:05.5613506	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -50,7 +50,6 @@ c6dcec6df8edbc14ae5cfe2724044013cea8280a assets/marvelous_menagerie/models/item/
 f1fdcab04c864ca101cb13d8ee74a527fc28b548 assets/marvelous_menagerie/models/item/cooked_chud.json
 5891fe1f4d130580c947f4ebaf5fdf57034b2cb0 assets/marvelous_menagerie/models/item/cooked_dawn_horse.json
 77e9c1c51f69d89b7d0660eb933a93da5d641164 assets/marvelous_menagerie/models/item/cooked_saca.json
-c87d4f308a7dd7459f874db43442972781db599f assets/marvelous_menagerie/models/item/cracked_elephant_egg.json
 4e0842c41a6605140d8803af6fbb07bf88f9ce04 assets/marvelous_menagerie/models/item/daeodon_fossil.json
 8aad0904d8bc9d0b930ca2118095d22ba62a6f4f assets/marvelous_menagerie/models/item/dawn_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/dawn_horse_spawn_egg.json
@@ -70,6 +69,8 @@ e8c99144c686205800b7d26b3aa05b2c5a81d0a7 assets/marvelous_menagerie/models/item/
 a30fa9438878a858c5bf8d9448c9d6445fa98f5d assets/marvelous_menagerie/models/item/egg_shellmet.json
 28e5a7ff6bca4feaa98eede8aed07855b3d84a12 assets/marvelous_menagerie/models/item/egg_shell_fragment.json
 5a48912f8eec35a9ad1d26dd36d048204f348ed2 assets/marvelous_menagerie/models/item/elebird_fossil.json
+71f4aea2a968e1eb312473712d00a993bf918263 assets/marvelous_menagerie/models/item/elephant_bird_egg.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/elephant_bird_spawn_egg.json
 ae38af13e3907475790873a9d59c306f33ec10fe assets/marvelous_menagerie/models/item/eolactoria_bucket.json
 d3e4dc76bec5d4bb3e55c1c4c54067a38b9b5d45 assets/marvelous_menagerie/models/item/eolactoria_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/eolactoria_spawn_egg.json

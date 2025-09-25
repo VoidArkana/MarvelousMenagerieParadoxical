@@ -1,11 +1,19 @@
-// Made with Blockbench 4.12.6
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird;// Made with Blockbench 4.12.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
 
-public class elephant_bird<T extends Entity> extends EntityModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "elephant_bird"), "main");
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.EleBirdAnims;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
+
+public class EleBirdModel<T extends ElephantBird> extends MarvelousModel<T> {
+
 	private final ModelPart root;
 	private final ModelPart main;
 	private final ModelPart body_overlay;
@@ -24,8 +32,9 @@ public class elephant_bird<T extends Entity> extends EntityModel<T> {
 	private final ModelPart leg_left;
 	private final ModelPart leg_right;
 
-	public elephant_bird(ModelPart root) {
-		this.root = root.getChild("root");
+	public EleBirdModel(ModelPart root) {
+        super(1, 1);
+        this.root = root.getChild("root");
 		this.main = this.root.getChild("main");
 		this.body_overlay = this.main.getChild("body_overlay");
 		this.body = this.body_overlay.getChild("body");
@@ -88,12 +97,38 @@ public class elephant_bird<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(ElephantBird entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.root().getAllParts().forEach(ModelPart::resetPose);
 
+		if (entity.isInWaterOrBubble()){
+
+			this.animate(entity.idleAnimationState, EleBirdAnims.SWIM, ageInTicks, 1);
+
+		}else {
+
+			if (entity.isSprinting()){
+				animateWalk(EleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
+			}else {
+				animateWalk(EleBirdAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
+			}
+
+			this.animateIdle(entity.idleAnimationState, EleBirdAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
+
+			this.animate(entity.shakeAnimationState, EleBirdAnims.SHAKE, ageInTicks, 1);
+			this.animate(entity.smhAnimationState, EleBirdAnims.NUH_UH, ageInTicks, 1);
+		}
+
+		this.head_look.xRot = headPitch * ((float)Math.PI / 180F);
+		this.head_look.yRot = netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	@Override
+	public ModelPart root() {
+		return root;
 	}
 }

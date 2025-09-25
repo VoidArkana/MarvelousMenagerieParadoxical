@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
-import net.voidarkana.marvelous_menagerie.util.network.TESyncPacket;
+import net.voidarkana.marvelous_menagerie.util.network.message.TESyncPacket;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockEntityBase extends BlockEntity {

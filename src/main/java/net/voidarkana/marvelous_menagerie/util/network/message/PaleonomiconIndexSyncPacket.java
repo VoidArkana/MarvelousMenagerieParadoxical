@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.util.network.indexes;
+package net.voidarkana.marvelous_menagerie.util.network.message;
 
 import com.google.common.collect.BiMap;
 import net.minecraft.network.FriendlyByteBuf;

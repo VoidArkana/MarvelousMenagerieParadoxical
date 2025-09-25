@@ -8,8 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.common.message.FossilRecipeS2C;
-import net.voidarkana.marvelous_menagerie.util.network.indexes.*;
+import net.voidarkana.marvelous_menagerie.util.network.message.*;
 
 public class MMMessages {
 
@@ -47,6 +46,11 @@ public class MMMessages {
                 PaleonomiconIndexSyncPacket::write,
                 PaleonomiconIndexSyncPacket::read,
                 PaleonomiconIndexSyncPacket::handle);
+
+        CHANNEL.registerMessage(id(), OpenElephantBirdScreenPacket.class,
+                OpenElephantBirdScreenPacket::write,
+                OpenElephantBirdScreenPacket::read,
+                OpenElephantBirdScreenPacket.Handler::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

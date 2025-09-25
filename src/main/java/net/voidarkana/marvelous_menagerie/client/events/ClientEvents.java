@@ -24,6 +24,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.ZombieDawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyEleBirdModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
@@ -77,6 +79,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.THYLACINE_LAYER, ThylacineModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.DODO_LAYER, DodoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_DODO_LAYER, BabyDodoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.ELEBIRD_LAYER, EleBirdModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ELEBIRD_LAYER, BabyEleBirdModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

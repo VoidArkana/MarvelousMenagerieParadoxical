@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -67,7 +66,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.PERMAFROST_FOSSIL.get());
 
         this.tag(Tags.Items.EGGS).add(
-                MMItems.CRACKED_ELEPHANT_EGG.get());
+                MMItems.ELEPHANT_BIRD_EGG.get());
 
         this.tag(Tags.Items.ARMORS_HELMETS).add(
                 MMItems.EGG_SHELLMET.get(),

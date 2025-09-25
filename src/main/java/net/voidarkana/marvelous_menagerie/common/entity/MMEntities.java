@@ -133,6 +133,14 @@ public class MMEntities {
                             .sized(0.7f, 0.9f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "dodo").toString()));
 
+    public static final RegistryObject<EntityType<ElephantBird>> ELEPHANT_BIRD =
+            ENTITY_TYPES.register("elephant_bird",
+                    () -> EntityType.Builder.of(ElephantBird::new, MobCategory.CREATURE)
+                            .sized(1.2f, 3.2f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MODID, "elephant_bird").toString()));
+
+
+
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
             ENTITY_TYPES.register("mm_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f).build("mm_boat"));

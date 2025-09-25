@@ -18,7 +18,7 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.network.PacketDistributor;
-import net.voidarkana.marvelous_menagerie.util.network.indexes.PaleonomiconIndexSyncPacket;
+import net.voidarkana.marvelous_menagerie.util.network.message.PaleonomiconIndexSyncPacket;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 
 import javax.annotation.Nullable;

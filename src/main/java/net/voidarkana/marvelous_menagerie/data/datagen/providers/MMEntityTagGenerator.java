@@ -45,6 +45,7 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.HALLUCIGENIA.get())
                 .add(MMEntities.TRILOBITE.get())
                 .add(MMEntities.THYLACINE.get())
-                .add(MMEntities.DODO.get());
+                .add(MMEntities.DODO.get())
+                .add(MMEntities.ELEPHANT_BIRD.get());
     }
 }

@@ -184,9 +184,10 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.ELEBIRD_FOSSIL);
         simpleItem(MMItems.BOILED_ELEPHANT_EGG);
         simpleItem(MMItems.JUMBO_OMELETTE);
-        simpleItem(MMItems.CRACKED_ELEPHANT_EGG);
+        simpleItem(MMItems.ELEPHANT_BIRD_EGG);
         simpleItem(MMItems.EGG_SHELLMET);
         simpleItem(MMItems.EGG_SHELL_FRAGMENT);
+        withExistingParent(MMItems.ELE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.DOEDICURUS_FOSSIL);
 

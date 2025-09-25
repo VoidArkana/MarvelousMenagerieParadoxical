@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
-import net.voidarkana.marvelous_menagerie.util.network.ChangeFossilMessage;
+import net.voidarkana.marvelous_menagerie.util.network.message.ChangeFossilMessage;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;

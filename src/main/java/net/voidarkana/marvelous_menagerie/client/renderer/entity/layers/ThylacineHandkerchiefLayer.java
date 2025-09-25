@@ -66,7 +66,6 @@ public class ThylacineHandkerchiefLayer extends RenderLayer<Thylacine, Thylacine
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, Thylacine entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 
-        Object object;
         ResourceLocation texture;
 
         if (entityLivingBaseIn.hasHandkerchief()) {

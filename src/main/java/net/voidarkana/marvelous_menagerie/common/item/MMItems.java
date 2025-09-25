@@ -238,7 +238,7 @@ public class MMItems {
     //Elephant Bird
     public static final RegistryObject<Item> ELEBIRD_FOSSIL = ITEMS.register("elebird_fossil",
             ()-> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> CRACKED_ELEPHANT_EGG = ITEMS.register("cracked_elephant_egg",
+    public static final RegistryObject<Item> ELEPHANT_BIRD_EGG = ITEMS.register("elephant_bird_egg",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> EGG_SHELL_FRAGMENT = ITEMS.register("egg_shell_fragment",
             ()-> new Item(new Item.Properties()));
@@ -248,6 +248,8 @@ public class MMItems {
             ()-> new Item(new Item.Properties().food(MMFoods.JUMBO_OMELETTE)));
     public static final RegistryObject<Item> EGG_SHELLMET = ITEMS.register("egg_shellmet",
             ()-> new EggShellmetItem(MMArmorMaterials.EGGSHELL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> ELE_SPAWN_EGG = ITEMS.register("elephant_bird_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.ELEPHANT_BIRD, 0x53423c, 0x322820, new Item.Properties()));
 
     //Doedicurus
     public static final RegistryObject<Item> DOEDICURUS_FOSSIL = ITEMS.register("doedicurus_fossil",

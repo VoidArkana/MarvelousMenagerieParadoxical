@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.message;
+package net.voidarkana.marvelous_menagerie.util.network.message;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;

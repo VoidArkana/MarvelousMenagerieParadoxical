@@ -15,8 +15,8 @@ public class MMMenuTypes {
 
     public static final DeferredRegister<MenuType<?>> DEF_REG = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MarvelousMenagerie.MODID);
 
-//    public static final RegistryObject<MenuType<ElephantBirdMenu>> ELEPHANT_BIRD_CONTAINER = MENUS.register("elephant_bird_container",
-//            () -> new MenuType<>(ElephantBirdMenu::new, FeatureFlags.REGISTRY.allFlags()));
+    public static final RegistryObject<MenuType<ElephantBirdMenu>> ELEPHANT_BIRD_CONTAINER = DEF_REG.register("elephant_bird_container",
+            () -> new MenuType<>(ElephantBirdMenu::new, FeatureFlags.REGISTRY.allFlags()));
 
 //    public static final Supplier<MenuType<FossilMinigameMenu>> FOSSIL_MENU = DEF_REG.register("fossil_menu",
 //        () -> new MenuType<FossilMinigameMenu>(FossilMinigameMenu::new, FeatureFlags.DEFAULT_FLAGS));

@@ -29,7 +29,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.RAW_DAWN_HORSE.get());
                         output.accept(MMItems.COOKED_DAWN_HORSE.get());
 
-                        output.accept(MMItems.CRACKED_ELEPHANT_EGG.get());
+                        output.accept(MMItems.ELEPHANT_BIRD_EGG.get());
                         output.accept(MMItems.BOILED_ELEPHANT_EGG.get());
                         output.accept(MMItems.JUMBO_OMELETTE.get());
                         output.accept(MMItems.EGG_SHELL_FRAGMENT.get());
@@ -96,6 +96,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.SKELETON_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.DODO_SPAWN_EGG.get());
+                        output.accept(MMItems.ELE_SPAWN_EGG.get());
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());

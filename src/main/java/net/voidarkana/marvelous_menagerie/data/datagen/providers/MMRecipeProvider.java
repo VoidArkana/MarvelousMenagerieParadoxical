@@ -3,7 +3,6 @@ package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -163,7 +162,7 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .requires(MMItems.BOILED_ELEPHANT_EGG.get())
                 .requires(Items.CARROT)
                 .requires(Ingredient.of(Items.POTATO, Items.BAKED_POTATO))
-                .unlockedBy(getHasName(MMItems.CRACKED_ELEPHANT_EGG.get()), has(MMItems.CRACKED_ELEPHANT_EGG.get()))
+                .unlockedBy(getHasName(MMItems.ELEPHANT_BIRD_EGG.get()), has(MMItems.ELEPHANT_BIRD_EGG.get()))
                 .save(consumer);
 
         //Steller Ice Cream

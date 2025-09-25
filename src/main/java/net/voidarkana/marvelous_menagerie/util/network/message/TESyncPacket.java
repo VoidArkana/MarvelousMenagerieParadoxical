@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.util.network;
+package net.voidarkana.marvelous_menagerie.util.network.message;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

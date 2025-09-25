@@ -557,4 +557,5 @@ public class Dodo extends Animal {
         }
 
         this.flappingAnimationState.animateWhen(this.isAlive(), this.tickCount);
-    }}
+    }
+}

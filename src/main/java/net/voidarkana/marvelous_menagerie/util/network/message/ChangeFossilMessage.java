@@ -1,9 +1,8 @@
-package net.voidarkana.marvelous_menagerie.util.network;
+package net.voidarkana.marvelous_menagerie.util.network.message;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkDirection;
