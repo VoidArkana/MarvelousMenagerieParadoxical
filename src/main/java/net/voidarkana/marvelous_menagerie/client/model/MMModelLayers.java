@@ -73,6 +73,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "elephant_bird"), "main");
     public static final ModelLayerLocation BABY_ELEBIRD_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "baby_elephant_bird"), "main");
+    public static final ModelLayerLocation DOEDICURUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "doedicurus"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");

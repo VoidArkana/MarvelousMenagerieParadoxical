@@ -534,11 +534,11 @@
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.caris_armor_unequip"
   },
-  "doedicurus_ambient": {
-    "subtitle": "marvelous_menagerie.sound.subtitle.doedicurus_ambient",
+  "doedicurus_idle": {
+    "subtitle": "marvelous_menagerie.sound.subtitle.doedicurus_idle",
     "sounds": [
       {
-        "name": "marvelous_menagerie:doedicurus_ambient",
+        "name": "marvelous_menagerie:doedicurus_idle_1",
         "stream": true
       }
     ]
@@ -547,7 +547,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.doedicurus_death",
     "sounds": [
       {
-        "name": "marvelous_menagerie:doedicurus_death",
+        "name": "marvelous_menagerie:doedicurus_death_1",
         "stream": true
       }
     ]
@@ -556,7 +556,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.doedicurus_hurt",
     "sounds": [
       {
-        "name": "marvelous_menagerie:doedicurus_hurt",
+        "name": "marvelous_menagerie:doedicurus_hurt_1",
         "stream": true
       }
     ]

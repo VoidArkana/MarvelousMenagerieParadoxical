@@ -139,6 +139,11 @@ public class MMEntities {
                             .sized(1.2f, 3.2f)
                             .build(new ResourceLocation(MarvelousMenagerie.MODID, "elephant_bird").toString()));
 
+    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS =
+            ENTITY_TYPES.register("doedicurus",
+                    () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE)
+                            .sized(1.75F, 1.75F).build("doedicurus"));
+
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
@@ -149,9 +154,8 @@ public class MMEntities {
             ENTITY_TYPES.register("mm_chest_boat", () -> EntityType.Builder.<MMChestBoatEntity>of(MMChestBoatEntity::new, MobCategory.MISC)
                     .sized(1.375f, 0.5625f).build("mm_chest_boat"));
 
-//    public static final RegistryObject<EntityType<Doedicurus>> DOEDICURUS = ENTITIES.register("doedicurus", () -> EntityType.Builder.of(Doedicurus::new, MobCategory.CREATURE).sized(1.75F, 1.75F).build("doedicurus"));
-//    public static final RegistryObject<EntityType<Leptictidium>> LEPTICTIDIUM = ENTITIES.register("leptictidium", () -> EntityType.Builder.of(Leptictidium::new, MobCategory.CREATURE).sized(0.5F, 0.4F).build("leptictidium"));
-//    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));
+
+    //    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));
 
 
     public static final RegistryObject<EntityType<RiftEntity>> RIFT =

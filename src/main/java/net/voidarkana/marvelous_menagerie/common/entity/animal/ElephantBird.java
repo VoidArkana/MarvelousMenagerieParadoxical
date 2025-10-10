@@ -440,35 +440,6 @@ public class ElephantBird extends Animal implements ContainerListener, HasCustom
     }
 
     @Override
-    public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        if (pFallDistance > 1.0F) {
-            if (this.isBaby()){
-                this.playSound(SoundEvents.HORSE_LAND, 0F, 1.0F);
-            }
-            else {
-                this.playSound(SoundEvents.HORSE_LAND, 0.15F, 1.0F);
-            }
-        }
-
-        int i = this.calculateFallDamage(pFallDistance, pMultiplier);
-        if (i <= 0) {
-            return false;
-        } else {
-            this.hurt(pSource, (float)i);
-            if (this.isVehicle()) {
-                Iterator var5 = this.getIndirectPassengers().iterator();
-
-                while(var5.hasNext()) {
-                    Entity entity = (Entity)var5.next();
-                    entity.hurt(pSource, (float)i);
-                }
-            }
-
-            return true;
-        }
-    }
-
-    @Override
     public float getVoicePitch() {
         return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F;
     }

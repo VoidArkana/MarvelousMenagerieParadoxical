@@ -254,7 +254,8 @@ public class MMItems {
     //Doedicurus
     public static final RegistryObject<Item> DOEDICURUS_FOSSIL = ITEMS.register("doedicurus_fossil",
             ()-> new Item(new Item.Properties()));
-
+    public static final RegistryObject<Item> DOEDICURUS_SPAWN_EGG = ITEMS.register("doedicurus_spawn_egg",
+            () -> new ForgeSpawnEggItem(MMEntities.DOEDICURUS, 0x694628, 0x926f40, new Item.Properties()));
 
 
     //Plants

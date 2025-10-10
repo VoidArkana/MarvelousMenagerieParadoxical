@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-25T16:51:05.5613506	Item Models: marvelous_menagerie
+// 1.20.1	2025-09-29T12:48:14.8186566	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -66,6 +66,7 @@ f5d9cbd2f271b3eb9946df03d5c7e75d373c56cf assets/marvelous_menagerie/models/item/
 e8c99144c686205800b7d26b3aa05b2c5a81d0a7 assets/marvelous_menagerie/models/item/dodo_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/dodo_spawn_egg.json
 5ae22c85cf0649e9a979e0ff1e382e4b7875f4a8 assets/marvelous_menagerie/models/item/doedicurus_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/doedicurus_spawn_egg.json
 a30fa9438878a858c5bf8d9448c9d6445fa98f5d assets/marvelous_menagerie/models/item/egg_shellmet.json
 28e5a7ff6bca4feaa98eede8aed07855b3d84a12 assets/marvelous_menagerie/models/item/egg_shell_fragment.json
 5a48912f8eec35a9ad1d26dd36d048204f348ed2 assets/marvelous_menagerie/models/item/elebird_fossil.json

@@ -29,6 +29,8 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.LEPTICTIDIUM.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Leptictidium::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.DODO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Dodo::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.ELEPHANT_BIRD.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ElephantBird::checkAnimalSpawnRules);
+        SpawnPlacements.register(MMEntities.DOEDICURUS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Doedicurus::checkAnimalSpawnRules);
+
 //        SpawnPlacements.register(MMEntities.JOSEPHO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, JosephoEntity::checkSurfaceDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.OPHTHALMO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, OphthalmoEntity::checkSurfaceWaterDinoSpawnRules);
 //        SpawnPlacements.register(MMEntities.STELLER_SEA_COW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StellerEntity::checkSurfaceWaterDinoSpawnRules);

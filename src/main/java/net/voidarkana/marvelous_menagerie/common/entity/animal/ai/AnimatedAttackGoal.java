@@ -48,7 +48,7 @@ public class AnimatedAttackGoal extends MeleeAttackGoal {
 
             if (entity instanceof IAnimatedAttacker attacker){
                 attacker.setAttacking(false);
-                attacker.setAttackAnimationTimeout(0);;
+                attacker.setAttackAnimationTimeout(0);
             }
 
         }
@@ -95,4 +95,5 @@ public class AnimatedAttackGoal extends MeleeAttackGoal {
             attacker.setAttacking(false);
         super.stop();
     }
+
 }

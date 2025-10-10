@@ -575,7 +575,12 @@
   "marvelous_menagerie.sound.subtitle.leptictidium_ambient": "Leptictidium squeaks",
 
   "entity.marvelous_menagerie.kelenken": "Kelenken",
+
   "entity.marvelous_menagerie.doedicurus": "Doedicurus",
+  "item.marvelous_menagerie.doedicurus_spawn_egg": "Doedicurus Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.doedicurus_idle": "Doedicurus grunts",
+  "marvelous_menagerie.sound.subtitle.doedicurus_hurt": "Doedicurus hurts",
+  "marvelous_menagerie.sound.subtitle.doedicurus_death": "Doedicurus dies",
 
   "entity.minecraft.villager.marvelous_menagerie.paleontologist": "Paleontologist",
 

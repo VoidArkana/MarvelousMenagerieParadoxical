@@ -81,6 +81,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_DODO_LAYER, BabyDodoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.ELEBIRD_LAYER, EleBirdModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_ELEBIRD_LAYER, BabyEleBirdModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.DOEDICURUS_LAYER, DoedicurusModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

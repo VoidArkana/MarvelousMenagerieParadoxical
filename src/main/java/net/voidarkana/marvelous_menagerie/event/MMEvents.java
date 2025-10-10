@@ -42,6 +42,7 @@ public class MMEvents {
         event.put(MMEntities.THYLACINE.get(), Thylacine.createAttributes().build());
         event.put(MMEntities.DODO.get(), Dodo.createAttributes().build());
         event.put(MMEntities.ELEPHANT_BIRD.get(), ElephantBird.createAttributes().build());
+        event.put(MMEntities.DOEDICURUS.get(), Doedicurus.createAttributes().build());
 
 //        event.put(MMEntities.STELLER_SEA_COW.get(), StellerEntity.createAttributes().build());
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());

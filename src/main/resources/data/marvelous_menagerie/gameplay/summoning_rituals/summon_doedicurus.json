@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:bowl"
+  },
+  "input2": {
+    "item": "minecraft:dead_bush"
+  },
+  "input3": {
+    "item": "minecraft:turtle_scute"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:doedicurus_fossil"
+  },
+  "output": "marvelous_menagerie:doedicurus"
+}
