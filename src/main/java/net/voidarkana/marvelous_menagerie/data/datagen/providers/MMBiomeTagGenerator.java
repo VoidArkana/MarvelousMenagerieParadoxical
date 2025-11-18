@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class MMBiomeTagGenerator extends BiomeTagsProvider {
     public MMBiomeTagGenerator(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, ExistingFileHelper existingFileHelper) {
-        super(pOutput, pProvider, MarvelousMenagerie.MODID, existingFileHelper);
+        super(pOutput, pProvider, MarvelousMenagerie.MOD_ID, existingFileHelper);
     }
 
     @Override

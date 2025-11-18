@@ -1,7 +1,6 @@
 package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -56,10 +55,10 @@ public class TrilobiteRenderer extends MobRenderer<Trilobite, MarvelousModel<Tri
     @Override
     public ResourceLocation getTextureLocation(Trilobite entity) {
         if (entity.isLGBTrilo()){
-            return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/lgbtrilos/"+Trilobite.getLGBTVariantName(entity.getLGBTVariant())+
+            return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/lgbtrilos/"+Trilobite.getLGBTVariantName(entity.getLGBTVariant())+
                     "/"+Trilobite.getModelName(entity.getVariantModel())+ "_"+Trilobite.getLGBTVariantName(entity.getLGBTVariant())+".png");
         } else{
-            return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/"
+            return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/"
                     +Trilobite.getModelName(entity.getVariantModel())+ "/base/"
                     +Trilobite.getModelName(entity.getVariantModel())+"_base_"
                     +Trilobite.getColorName(entity.getVariantBaseColor())+".png");

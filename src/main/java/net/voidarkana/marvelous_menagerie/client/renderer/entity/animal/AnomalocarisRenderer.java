@@ -18,7 +18,7 @@ public class AnomalocarisRenderer extends MobRenderer<Anomalocaris, Anomalocaris
 
     @Override
     public ResourceLocation getTextureLocation(Anomalocaris pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/anomalocaris/anomalocaris"+pEntity.getVariantName(pEntity.getVariant())+".png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/anomalocaris/anomalocaris"+pEntity.getVariantName(pEntity.getVariant())+".png");
     }
 
     @Override

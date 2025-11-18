@@ -27,7 +27,7 @@ import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID)
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID)
 public class MMModEvents {
 
     @SubscribeEvent

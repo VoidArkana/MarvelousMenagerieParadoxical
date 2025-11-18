@@ -12,7 +12,7 @@ import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 public class MMCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MarvelousMenagerie.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> MARVELOUS_MENAGERIE_MOBS =
             CREATIVE_MODE_TABS.register("marvelous_menagerie_tab_mobs", ()-> CreativeModeTab.builder().icon(() -> new ItemStack(MMItems.CARIS_BUCKET.get()))
@@ -101,6 +101,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.EOLACTORIA_SPAWN_EGG.get());
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
+                        output.accept(MMItems.JOSEPHO_SPAWN_EGG.get());
                         output.accept(MMItems.LEPTICTIDIUM_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());

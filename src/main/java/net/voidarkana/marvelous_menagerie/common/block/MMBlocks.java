@@ -1,18 +1,13 @@
 package net.voidarkana.marvelous_menagerie.common.block;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -33,10 +28,10 @@ import java.util.function.Supplier;
 public class MMBlocks {
 
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, MarvelousMenagerie.MOD_ID);
 
     public static final DeferredRegister<PaintingVariant> PAINTINGS =
-            DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.PAINTING_VARIANTS, MarvelousMenagerie.MOD_ID);
 
 
     public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud",

@@ -705,5 +705,9 @@
   "translatable.marvelous_menagerie.lgbt.lesbian" : "Lesbian",
   "translatable.marvelous_menagerie.lgbt.lgbt" : "LGBT+",
   "translatable.marvelous_menagerie.lgbt.pan" : "Pansexual",
-  "translatable.marvelous_menagerie.lgbt.trans" : "Transgender"
+  "translatable.marvelous_menagerie.lgbt.trans" : "Transgender",
+
+  "entity.marvelous_menagerie.tameable.command_0": "%s is wandering",
+  "entity.marvelous_menagerie.tameable.command_1": "%s is following",
+  "entity.marvelous_menagerie.tameable.command_2": "%s is staying"
 }

@@ -2,7 +2,6 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +18,7 @@ public class SacaRenderer extends MobRenderer<Sacabambaspis, SacaModel<Sacabamba
 
     @Override
     public ResourceLocation getTextureLocation(Sacabambaspis pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/sacabambaspis/saca"+pEntity.getVariantName(pEntity.getVariant())+".png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/sacabambaspis/saca"+pEntity.getVariantName(pEntity.getVariant())+".png");
     }
 
     @Override

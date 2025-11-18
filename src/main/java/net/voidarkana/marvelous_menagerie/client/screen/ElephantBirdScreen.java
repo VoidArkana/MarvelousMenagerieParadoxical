@@ -10,7 +10,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
 
 public class ElephantBirdScreen extends AbstractContainerScreen<ElephantBirdMenu> {
     private static final ResourceLocation HORSE_INVENTORY_LOCATION =
-            new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/container/elephant_bird.png");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/container/elephant_bird.png");
     private final ElephantBird horse;
     private float xMouse;
     private float yMouse;

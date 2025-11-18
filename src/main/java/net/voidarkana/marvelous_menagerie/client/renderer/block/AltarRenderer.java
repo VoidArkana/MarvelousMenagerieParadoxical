@@ -22,7 +22,7 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.custom.AltarBlockEn
 public class AltarRenderer implements BlockEntityRenderer<AltarBlockEntity> {
 
     public static final Material SKULL_LOCATION = new Material(TextureAtlas.LOCATION_BLOCKS,
-            new ResourceLocation(MarvelousMenagerie.MODID, "entity/chrono_altar_skull"));
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "entity/chrono_altar_skull"));
 
     private final AltarSkullModel skullModel;
 

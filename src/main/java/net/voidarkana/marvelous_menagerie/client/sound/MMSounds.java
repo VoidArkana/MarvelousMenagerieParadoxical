@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 public class MMSounds {
 
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<SoundEvent> DODO_IDLE = registerSoundEvents("dodo_idle");
     public static final RegistryObject<SoundEvent> DODO_HURT = registerSoundEvents("dodo_hurt");
@@ -72,7 +72,7 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
-        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MarvelousMenagerie.MODID, name)));
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MarvelousMenagerie.MOD_ID, name)));
     }
 
     public static void register(IEventBus eventBus){

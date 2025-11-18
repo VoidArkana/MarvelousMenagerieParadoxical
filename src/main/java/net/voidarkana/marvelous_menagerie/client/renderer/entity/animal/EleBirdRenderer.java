@@ -19,8 +19,8 @@ public class EleBirdRenderer extends MobRenderer<ElephantBird, MarvelousModel<El
     private final EleBirdModel<ElephantBird> elebirdModel;
     private final BabyEleBirdModel<ElephantBird> babyElebirdModel;
 
-    private static final ResourceLocation REGULAR_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/elephant_bird/elephant_bird.png");
-    private static final ResourceLocation BABY_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/elephant_bird/baby_elephant_bird.png");
+    private static final ResourceLocation REGULAR_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird.png");
+    private static final ResourceLocation BABY_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/baby_elephant_bird.png");
 
     public EleBirdRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new EleBirdModel<>(pContext.bakeLayer(MMModelLayers.ELEBIRD_LAYER)), 1f);

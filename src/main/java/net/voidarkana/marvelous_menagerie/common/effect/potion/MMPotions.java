@@ -12,7 +12,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 
 public class MMPotions {
     public static final DeferredRegister<Potion> POTIONS
-            = DeferredRegister.create(ForgeRegistries.POTIONS, MarvelousMenagerie.MODID);
+            = DeferredRegister.create(ForgeRegistries.POTIONS, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<Potion> HALLUCIGENIA_EXTRACT = POTIONS.register("hallu_extract",
             () -> new Potion(new MobEffectInstance(MMEffects.HALLUCINATING.get(), 1800, 0),

@@ -24,7 +24,7 @@ public class EleBirdChestLayer extends RenderLayer<ElephantBird, MarvelousModel<
 
         if (entityLivingBaseIn.hasChest()) {
 
-            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/elephant_bird/elephant_bird_chest.png");
+            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird_chest.png");
 
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.getParentModel(), texture, pPoseStack, pBuffer, pPackedLight,
                     entityLivingBaseIn, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch,

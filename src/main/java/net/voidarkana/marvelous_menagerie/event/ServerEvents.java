@@ -17,7 +17,7 @@ import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ServerEvents {
 
     @SubscribeEvent

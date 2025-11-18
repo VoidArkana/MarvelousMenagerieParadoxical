@@ -12,7 +12,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 
 public class BeholderRenderer extends MobRenderer<Beholder, BeholderModel<Beholder>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/abomination/beholder.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/abomination/beholder.png");
 
     public BeholderRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new BeholderModel<>(pContext.bakeLayer(MMModelLayers.BEHOLDER_LAYER)), 0.5f);

@@ -9,11 +9,10 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 //import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameMenu;
 
-import java.util.function.Supplier;
 
 public class MMMenuTypes {
 
-    public static final DeferredRegister<MenuType<?>> DEF_REG = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MarvelousMenagerie.MODID);
+    public static final DeferredRegister<MenuType<?>> DEF_REG = DeferredRegister.create(ForgeRegistries.MENU_TYPES, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<MenuType<ElephantBirdMenu>> ELEPHANT_BIRD_CONTAINER = DEF_REG.register("elephant_bird_container",
             () -> new MenuType<>(ElephantBirdMenu::new, FeatureFlags.REGISTRY.allFlags()));

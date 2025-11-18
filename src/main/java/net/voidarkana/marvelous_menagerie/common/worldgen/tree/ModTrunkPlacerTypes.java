@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.Sigillaria
 
 public class ModTrunkPlacerTypes {
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER =
-            DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, MarvelousMenagerie.MODID);
+            DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<TrunkPlacerType<SigillariaTrunkPlacer>> SIGILLARIA_TRUNK_PLACER =
             TRUNK_PLACER.register("sigillaria_trunk_placer", ()-> new TrunkPlacerType<>(SigillariaTrunkPlacer.CODEC));

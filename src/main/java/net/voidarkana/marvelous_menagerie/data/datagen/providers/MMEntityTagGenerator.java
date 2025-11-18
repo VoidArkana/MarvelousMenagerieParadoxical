@@ -3,7 +3,6 @@ package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -16,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 public class MMEntityTagGenerator extends EntityTypeTagsProvider {
 
     public MMEntityTagGenerator(PackOutput p_256095_, CompletableFuture<HolderLookup.Provider> p_256572_, @Nullable ExistingFileHelper existingFileHelper) {
-        super(p_256095_, p_256572_, MarvelousMenagerie.MODID, existingFileHelper);
+        super(p_256095_, p_256572_, MarvelousMenagerie.MOD_ID, existingFileHelper);
     }
 
     protected void addTags(HolderLookup.Provider pProvider) {
@@ -47,6 +46,7 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.THYLACINE.get())
                 .add(MMEntities.DODO.get())
                 .add(MMEntities.ELEPHANT_BIRD.get())
-                .add(MMEntities.DOEDICURUS.get());
+                .add(MMEntities.DOEDICURUS.get())
+                .add(MMEntities.JOSEPHO.get());
     }
 }

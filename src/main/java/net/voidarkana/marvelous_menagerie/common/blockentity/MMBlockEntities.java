@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.custom.*;
 
 public class MMBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<PedestalBlockEntity>> PEDESTAL_ENTITY =
             BLOCK_ENTITIES.register("pedestal_entity", () ->

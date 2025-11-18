@@ -13,11 +13,11 @@ import java.util.concurrent.CompletableFuture;
 
 public class MMPOITagsProvider extends PoiTypeTagsProvider {
     public MMPOITagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(pOutput, pProvider, MarvelousMenagerie.MODID, existingFileHelper);
+        super(pOutput, pProvider, MarvelousMenagerie.MOD_ID, existingFileHelper);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(PoiTypeTags.ACQUIRABLE_JOB_SITE).addOptional(new ResourceLocation(MarvelousMenagerie.MODID, "paleo_poi"));
+        tag(PoiTypeTags.ACQUIRABLE_JOB_SITE).addOptional(new ResourceLocation(MarvelousMenagerie.MOD_ID, "paleo_poi"));
     }
 }

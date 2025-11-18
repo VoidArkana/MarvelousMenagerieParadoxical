@@ -2,10 +2,8 @@ package net.voidarkana.marvelous_menagerie;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
 import net.minecraft.world.entity.animal.Cat;
-import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
@@ -55,11 +53,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(MarvelousMenagerie.MODID)
+@Mod(MarvelousMenagerie.MOD_ID)
 public class MarvelousMenagerie
 {
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "marvelous_menagerie";
+    public static final String MOD_ID = "marvelous_menagerie";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogManager.getLogger();
 

@@ -10,10 +10,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ThylacineModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;
 
 @OnlyIn(Dist.CLIENT)
 public class EleBirdSwagLayer extends RenderLayer<ElephantBird, MarvelousModel<ElephantBird>> {
@@ -27,7 +24,7 @@ public class EleBirdSwagLayer extends RenderLayer<ElephantBird, MarvelousModel<E
 
         if (entityLivingBaseIn.hasSwag()) {
 
-            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/elephant_bird/elephant_bird_"+entityLivingBaseIn.getSwagColor()+".png");
+            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird_"+entityLivingBaseIn.getSwagColor()+".png");
 
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.getParentModel(), texture, pPoseStack, pBuffer, pPackedLight,
                     entityLivingBaseIn, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch,

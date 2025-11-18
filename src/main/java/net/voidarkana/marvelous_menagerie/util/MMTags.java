@@ -21,7 +21,7 @@ public class MMTags {
         public static final TagKey<EntityType<?>> HAS_ENTRY = tag("has_paleonomicon_entry");
 
         private static TagKey<EntityType<?>> tag(String name){
-            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MarvelousMenagerie.MODID, name));
+            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }
     }
 
@@ -54,7 +54,7 @@ public class MMTags {
         public static final TagKey<Biome> DOEDICURUS_BIOMES = create("is_doedicurus_biome");
 
         private static TagKey<Biome> create(String pName) {
-            return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MODID, pName));
+            return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MOD_ID, pName));
         }
     }
 
@@ -88,7 +88,7 @@ public class MMTags {
         public static final TagKey<Block> FOSSIL_BLOCKS = tag("fossil_blocks");
 
         private static TagKey<Block> tag(String name){
-            return BlockTags.create(new ResourceLocation(MarvelousMenagerie.MODID, name));
+            return BlockTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }
     }
 
@@ -132,7 +132,7 @@ public class MMTags {
         public static final TagKey<Item> CORAL_BLOCK_ITEMS = tag("coral_block_items");
 
         private static TagKey<Item> tag(String name){
-            return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MODID, name));
+            return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }
     }
 }

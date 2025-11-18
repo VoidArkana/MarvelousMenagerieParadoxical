@@ -36,7 +36,7 @@ import net.voidarkana.marvelous_menagerie.client.particles.custom.TimeShardParti
 import org.jetbrains.annotations.Nullable;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent
@@ -82,6 +82,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.ELEBIRD_LAYER, EleBirdModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_ELEBIRD_LAYER, BabyEleBirdModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.DOEDICURUS_LAYER, DoedicurusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.JOSEPHO_LAYER, JosephoModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

@@ -18,13 +18,13 @@ public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
     private final DodoModel<Dodo> dodoModel;
     private final BabyDodoModel<Dodo> babyDodoModel;
 
-    private static final ResourceLocation TEXTURE_BLUE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/dodo.png");
-    private static final ResourceLocation TEXTURE_BROWN = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/dodo_variant.png");
-    private static final ResourceLocation TEXTURE_BABY_BLUE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/baby_dodo.png");
-    private static final ResourceLocation TEXTURE_BABY_BROWN = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/baby_dodo_variant.png");
+    private static final ResourceLocation TEXTURE_BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo.png");
+    private static final ResourceLocation TEXTURE_BROWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_variant.png");
+    private static final ResourceLocation TEXTURE_BABY_BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo.png");
+    private static final ResourceLocation TEXTURE_BABY_BROWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_variant.png");
 
-    private static final ResourceLocation TEXTURE_NUGGET = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/dodo_nugget.png");
-    private static final ResourceLocation TEXTURE_BABY_NUGGET = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dodo/baby_dodo_nugget.png");
+    private static final ResourceLocation TEXTURE_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_nugget.png");
+    private static final ResourceLocation TEXTURE_BABY_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_nugget.png");
 
     public DodoRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new DodoModel<>(pContext.bakeLayer(MMModelLayers.DODO_LAYER)), 0.4f);

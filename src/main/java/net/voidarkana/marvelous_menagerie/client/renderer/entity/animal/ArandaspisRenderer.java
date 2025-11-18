@@ -2,16 +2,13 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ArandaspisModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.SacaModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 
 public class ArandaspisRenderer extends MobRenderer<Arandaspis, ArandaspisModel<Arandaspis>> {
 
@@ -22,7 +19,7 @@ public class ArandaspisRenderer extends MobRenderer<Arandaspis, ArandaspisModel<
 
     @Override
     public ResourceLocation getTextureLocation(Arandaspis pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/arandaspis/arandaspis_"
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/arandaspis/arandaspis_"
                 +Arandaspis.getVariantName(pEntity.getVariant())+".png");
     }
 

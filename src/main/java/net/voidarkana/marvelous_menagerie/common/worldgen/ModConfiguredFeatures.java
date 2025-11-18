@@ -6,10 +6,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -38,7 +36,7 @@ import java.util.function.Supplier;
 
 public class ModConfiguredFeatures {
 
-    public static final DeferredRegister<Feature<?>> MOD_FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MarvelousMenagerie.MODID);
+    public static final DeferredRegister<Feature<?>> MOD_FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<Feature<HugePrototaxitesFeatureConfiguration>> PROTOTAXITES_FEATURE =
             register_feature("prototaxites_feature", () -> new HugePrototaxitesFeature(HugePrototaxitesFeatureConfiguration.CODEC));
@@ -190,7 +188,7 @@ public class ModConfiguredFeatures {
 
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(MarvelousMenagerie.MODID, name));
+        return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context,

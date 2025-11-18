@@ -2,7 +2,6 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +12,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Slovenicus;
 
 public class SlovenicusRenderer extends MobRenderer<Slovenicus, SlovenicusModel<Slovenicus>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/slovenicus.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/slovenicus.png");
 
     public SlovenicusRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new SlovenicusModel<>(pContext.bakeLayer(MMModelLayers.SLOVENICUS_LAYER)), 0.1f);

@@ -32,7 +32,7 @@ import java.util.Optional;
 
 public class PaleonomiconScreen extends Screen {
 
-    public static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/book/paleonomicon.png");
+    public static final ResourceLocation BOOK_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/book/paleonomicon.png");
     public static final int PAGE_SIZE_IN_LINES = 15;
 
     public static final int TEXT_COLOR = 0X826A41;
@@ -44,7 +44,7 @@ public class PaleonomiconScreen extends Screen {
     protected ResourceLocation prevEntryJSON = null;
     protected ResourceLocation currentEntryJSON;
     protected ResourceLocation nextEntryJSON;
-    protected final ResourceLocation rootEntryJSON = new ResourceLocation(MarvelousMenagerie.MODID, "books/root.json");
+    protected final ResourceLocation rootEntryJSON = new ResourceLocation(MarvelousMenagerie.MOD_ID, "books/root.json");
 
     int imageWidth;
     int imageHeight;
@@ -376,7 +376,7 @@ public class PaleonomiconScreen extends Screen {
     }
 
     public static String getBookFileDirectory() {
-        return MarvelousMenagerie.MODID + ":books/";
+        return MarvelousMenagerie.MOD_ID + ":books/";
     }
 
     public boolean attemptChangePage(ResourceLocation changePageTo, boolean goingForwards) {

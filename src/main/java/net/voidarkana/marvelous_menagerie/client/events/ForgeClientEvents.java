@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ForgeClientEvents {
 
     @OnlyIn(Dist.CLIENT)

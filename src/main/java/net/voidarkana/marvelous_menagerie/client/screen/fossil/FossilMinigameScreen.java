@@ -28,10 +28,10 @@ public class FossilMinigameScreen extends Screen {
     public GUIParticleSystem particles;
 
     public static final ResourceLocation GUI =
-            new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame.png");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/fossil/fossil_minigame.png");
 
     public static final ResourceLocation VIGNETTE =
-            new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/fossil/fossil_minigame_2.png");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/fossil/fossil_minigame_2.png");
 
     final int dirtSize = 176;
     int imageWidth;

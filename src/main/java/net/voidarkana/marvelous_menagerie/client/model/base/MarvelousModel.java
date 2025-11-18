@@ -45,7 +45,6 @@ public abstract class MarvelousModel<E extends Entity> extends HierarchicalModel
     }
 
     protected void animateIdle(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed, float pScale) {
-        float scale = Math.max(0, Math.min(1-Math.abs(pSpeed), 1f));
         pAnimationState.updateTime(pAgeInTicks, pSpeed);
         pAnimationState.ifStarted((p_233392_) -> {
             KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), pScale, MarvelousModel.ANIMATION_VECTOR_CACHE);

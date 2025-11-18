@@ -16,6 +16,6 @@ public class DawnHorseRenderer extends MobRenderer<DawnHorse, DawnHorseModel<Daw
 
     @Override
     public ResourceLocation getTextureLocation(DawnHorse pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/dawn_horse/dawn_horse.png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dawn_horse/dawn_horse.png");
     }
 }

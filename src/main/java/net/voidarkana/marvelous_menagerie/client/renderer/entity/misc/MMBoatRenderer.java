@@ -24,7 +24,7 @@ public class MMBoatRenderer extends BoatRenderer {
     public MMBoatRenderer(EntityRendererProvider.Context pContext, boolean pChestBoat) {
         super(pContext, pChestBoat);
         this.boatResources = Stream.of(MMBoatEntity.Type.values()).collect(ImmutableMap.toImmutableMap(type -> type,
-                type -> Pair.of(new ResourceLocation(MarvelousMenagerie.MODID, getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
+                type -> Pair.of(new ResourceLocation(MarvelousMenagerie.MOD_ID, getTextureLocation(type, pChestBoat)), this.createBoatModel(pContext, type, pChestBoat))));
     }
 
     private static String getTextureLocation(MMBoatEntity.Type pType, boolean pChestBoat) {
@@ -46,7 +46,7 @@ public class MMBoatRenderer extends BoatRenderer {
     }
 
     private static ModelLayerLocation createLocation(String pPath, String pModel) {
-        return new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, pPath), pModel);
+        return new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, pPath), pModel);
     }
 
     public Pair<ResourceLocation, ListModel<Boat>> getModelWithLocation(Boat boat) {

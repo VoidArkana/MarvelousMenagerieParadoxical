@@ -16,7 +16,7 @@ import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 public class MMItemModelProvider extends ItemModelProvider {
 
     public MMItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, MarvelousMenagerie.MODID, existingFileHelper);
+        super(output, MarvelousMenagerie.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -165,7 +165,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.EOLACTORIA_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.KELENKEN_FOSSIL);
+
         simpleItem(MMItems.JOSEPHO_FOSSIL);
+        withExistingParent(MMItems.JOSEPHO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.SLOV_FOSSIL);
         simpleItem(MMItems.SLOVENICUS_BUCKET);
@@ -327,17 +329,17 @@ public class MMItemModelProvider extends ItemModelProvider {
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(MarvelousMenagerie.MODID, "item/" + item.getId().getPath()));
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "item/" + item.getId().getPath()));
     }
 
     public void evenSimplerBlockItem(RegistryObject<Block> block) {
-        this.withExistingParent(MarvelousMenagerie.MODID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+        this.withExistingParent(MarvelousMenagerie.MOD_ID + ":" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
                 modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
     }
 
     public void wallItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall", new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("wall", new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void trapdoorItem(RegistryObject<Block> block) {
@@ -347,23 +349,23 @@ public class MMItemModelProvider extends ItemModelProvider {
 
     public void fenceItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/fence_inventory"))
-                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock) {
         this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(), mcLoc("block/button_inventory"))
-                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MODID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
+                .texture("texture",  new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(MarvelousMenagerie.MODID,"item/" + item.getId().getPath()));
+                new ResourceLocation(MarvelousMenagerie.MOD_ID,"item/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder saplingItem(RegistryObject<Block> item) {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(MarvelousMenagerie.MODID,"block/" + item.getId().getPath()));
+                new ResourceLocation(MarvelousMenagerie.MOD_ID,"block/" + item.getId().getPath()));
     }
 }

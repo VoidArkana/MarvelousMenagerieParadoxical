@@ -4,9 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -20,7 +18,7 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
 
 
     public MMBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, MarvelousMenagerie.MODID, existingFileHelper);
+        super(output, lookupProvider, MarvelousMenagerie.MOD_ID, existingFileHelper);
     }
 
     @Override

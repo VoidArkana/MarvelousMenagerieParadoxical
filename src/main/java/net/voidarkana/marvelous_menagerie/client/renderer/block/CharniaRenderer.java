@@ -23,7 +23,7 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.custom.CharniaBlock
 public class CharniaRenderer implements BlockEntityRenderer<CharniaBlockEntity> {
 
     public static final Material CHARNIA_LOCATION = new Material(TextureAtlas.LOCATION_BLOCKS,
-            new ResourceLocation(MarvelousMenagerie.MODID, "entity/charnia"));
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "entity/charnia"));
 
     private final CharniaModel charniaModel;
 

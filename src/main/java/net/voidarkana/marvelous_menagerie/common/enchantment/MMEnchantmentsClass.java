@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 public class MMEnchantmentsClass {
-    public static final DeferredRegister<Enchantment> ENCHANTMENTS =  DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MarvelousMenagerie.MODID);
+    public static final DeferredRegister<Enchantment> ENCHANTMENTS =  DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MarvelousMenagerie.MOD_ID);
 
     public static final EnchantmentCategory ANOMALOUS_GOGGLES = EnchantmentCategory.create("anomalous_goggles", (item -> item == MMItems.ANOMALOUS_GOGGLES.get()));
 

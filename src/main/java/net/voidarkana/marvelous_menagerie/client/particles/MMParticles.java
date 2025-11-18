@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 public class MMParticles {
 
     public static final DeferredRegister<ParticleType<?>> PARTICLES =
-            DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<SimpleParticleType> TIME_SHARD = register("time_shard", false);
 

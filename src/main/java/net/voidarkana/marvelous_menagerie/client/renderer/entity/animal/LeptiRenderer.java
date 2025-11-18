@@ -16,6 +16,6 @@ public class LeptiRenderer extends MobRenderer<Leptictidium, LeptiModel<Lepticti
 
     @Override
     public ResourceLocation getTextureLocation(Leptictidium pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/leptictidium.png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/leptictidium.png");
     }
 }

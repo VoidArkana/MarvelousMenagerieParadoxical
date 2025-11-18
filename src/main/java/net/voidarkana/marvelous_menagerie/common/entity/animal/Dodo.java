@@ -251,10 +251,6 @@ public class Dodo extends Animal {
 
     @Override
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
-        if (pFallDistance > 1.0F) {
-            this.playSound(SoundEvents.CHICKEN_STEP, 0F, 1.0F);
-        }
-
         return false;
     }
 

@@ -43,7 +43,7 @@ public class MMRenderTypes extends RenderType {
     });
 
     public static final RenderType GLOWING = RenderType.create(
-            MarvelousMenagerie.MODID + ":glowing",
+            MarvelousMenagerie.MOD_ID + ":glowing",
             DefaultVertexFormat.POSITION_COLOR,
             VertexFormat.Mode.QUADS, 256, true, false,
             RenderType.CompositeState.builder()

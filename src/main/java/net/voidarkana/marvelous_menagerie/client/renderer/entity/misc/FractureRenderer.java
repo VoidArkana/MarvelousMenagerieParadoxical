@@ -22,21 +22,21 @@ import org.joml.Matrix4f;
 
 public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureModel<Fracture>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture.png");
 
     private static final float HALF_SQRT_3 = (float)(Math.sqrt(3.0D) / 2.0D);
 
     public FractureRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_LAYER)), 0);
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
-                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_emmissive.png"),
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture_emmissive.png"),
                 (fracture, v, v1) -> {return 1.0F;}));
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
-                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_glow.png"),
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture_glow.png"),
                 (fracture, v, v1) -> {
                 return  (float) (50-fracture.getOpeningTime())/30;}));
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
-                new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/fracture_glow.png"),
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture_glow.png"),
                 (fracture, v, v1) -> {
                     return fracture.getSummoningTime()>30 && fracture.getSummoningTime()<=40 ?
                                     (float)(fracture.getSummoningTime()-30)/10 :

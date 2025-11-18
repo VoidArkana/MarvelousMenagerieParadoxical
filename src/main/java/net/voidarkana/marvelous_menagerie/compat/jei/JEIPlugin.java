@@ -20,8 +20,8 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
-    public static final ResourceLocation ID = new ResourceLocation(MarvelousMenagerie.MODID, "jei_plugin");
-    public static final RecipeType<RitualManager.RitualProcessData> SUMMONING_RITUALS = RecipeType.create(MarvelousMenagerie.MODID, "summoning_rituals",
+    public static final ResourceLocation ID = new ResourceLocation(MarvelousMenagerie.MOD_ID, "jei_plugin");
+    public static final RecipeType<RitualManager.RitualProcessData> SUMMONING_RITUALS = RecipeType.create(MarvelousMenagerie.MOD_ID, "summoning_rituals",
             RitualManager.RitualProcessData.class);
 
     @Override

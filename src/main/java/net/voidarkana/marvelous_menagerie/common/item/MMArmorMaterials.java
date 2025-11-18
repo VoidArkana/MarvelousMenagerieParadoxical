@@ -67,7 +67,7 @@ public enum MMArmorMaterials implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return MarvelousMenagerie.MODID + ":" + this.name;
+        return MarvelousMenagerie.MOD_ID + ":" + this.name;
     }
 
     @Override

@@ -886,6 +886,6 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
     }
 
     private ResourceLocation name(String name) {
-        return new ResourceLocation(MarvelousMenagerie.MODID, name);
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, name);
     }
 }

@@ -17,7 +17,7 @@ import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {
 
     @SubscribeEvent
@@ -43,10 +43,10 @@ public class MMEvents {
         event.put(MMEntities.DODO.get(), Dodo.createAttributes().build());
         event.put(MMEntities.ELEPHANT_BIRD.get(), ElephantBird.createAttributes().build());
         event.put(MMEntities.DOEDICURUS.get(), Doedicurus.createAttributes().build());
+        event.put(MMEntities.JOSEPHO.get(), Josephoartigasia.createAttributes().build());
 
 //        event.put(MMEntities.STELLER_SEA_COW.get(), StellerEntity.createAttributes().build());
 //        event.put(MMEntities.OPHTHALMO.get(), OphthalmoEntity.createAttributes().build());
-//        event.put(MMEntities.JOSEPHO.get(), JosephoEntity.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

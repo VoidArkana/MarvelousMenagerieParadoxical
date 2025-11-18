@@ -16,6 +16,6 @@ public class HallucigeniaRenderer extends MobRenderer<Hallucigenia, Hallucigenia
 
     @Override
     public ResourceLocation getTextureLocation(Hallucigenia pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/hallucigenia.png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/hallucigenia.png");
     }
 }

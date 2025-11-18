@@ -13,7 +13,7 @@ import java.util.List;
 public class MMLootModifierProvider extends GlobalLootModifierProvider {
 
     public MMLootModifierProvider(PackOutput output) {
-        super(output, MarvelousMenagerie.MODID);
+        super(output, MarvelousMenagerie.MOD_ID);
     }
 
     @Override

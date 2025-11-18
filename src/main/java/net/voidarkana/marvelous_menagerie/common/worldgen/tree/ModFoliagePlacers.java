@@ -12,7 +12,7 @@ import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.Sigillaria
 public class ModFoliagePlacers {
 
     public static final DeferredRegister<FoliagePlacerType<?>> FOLIAGE_PLACERS =
-            DeferredRegister.create(Registries.FOLIAGE_PLACER_TYPE, MarvelousMenagerie.MODID);
+            DeferredRegister.create(Registries.FOLIAGE_PLACER_TYPE, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<FoliagePlacerType<SigillariaFoliagePlacer>> SIGILLARIA_FOLIAGE_PLACER =
             FOLIAGE_PLACERS.register("sigillaria_foliage_placer", () -> new FoliagePlacerType<>(SigillariaFoliagePlacer.CODEC));

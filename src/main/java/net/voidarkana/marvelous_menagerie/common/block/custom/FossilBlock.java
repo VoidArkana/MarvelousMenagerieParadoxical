@@ -1,21 +1,13 @@
 package net.voidarkana.marvelous_menagerie.common.block.custom;
 
-import com.google.common.collect.Sets;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -25,12 +17,8 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-
-import java.util.Comparator;
-import java.util.HashSet;
 
 public class FossilBlock extends Block {
 
@@ -59,7 +47,7 @@ public class FossilBlock extends Block {
 
     public ResourceLocation getFossilLoottable(int successLevel, String lootTable) {
         String path = "fossil/success_"+ successLevel + "/" + lootTable;
-        return new ResourceLocation(MarvelousMenagerie.MODID, path);
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, path);
     }
 
     public void unpackLootTable(BlockPos pPos, int successLevel) {

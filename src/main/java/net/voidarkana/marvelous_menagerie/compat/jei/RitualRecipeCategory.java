@@ -1,6 +1,5 @@
 package net.voidarkana.marvelous_menagerie.compat.jei;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -31,8 +30,8 @@ import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
 @OnlyIn(Dist.CLIENT)
 public class RitualRecipeCategory implements IRecipeCategory<RitualManager.RitualProcessData> {
-    public static final ResourceLocation UID = new ResourceLocation(MarvelousMenagerie.MODID, "summoning_ritual");
-    public static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/jei/summoning_ritual.png");
+    public static final ResourceLocation UID = new ResourceLocation(MarvelousMenagerie.MOD_ID, "summoning_ritual");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/jei/summoning_ritual.png");
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawable slotDrawable;

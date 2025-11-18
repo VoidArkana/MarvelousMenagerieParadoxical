@@ -13,9 +13,9 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 
 public class MMVillagerProfessions {
     public static final DeferredRegister<PoiType> POI_TYPES =
-            DeferredRegister.create(ForgeRegistries.POI_TYPES, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.POI_TYPES, MarvelousMenagerie.MOD_ID);
     public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSIONS =
-            DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<PoiType> PALEO_POI = POI_TYPES.register("paleo_poi",
             () -> new PoiType(ImmutableSet.copyOf(MMBlocks.PALEO_TABLE.get().getStateDefinition().getPossibleStates()),

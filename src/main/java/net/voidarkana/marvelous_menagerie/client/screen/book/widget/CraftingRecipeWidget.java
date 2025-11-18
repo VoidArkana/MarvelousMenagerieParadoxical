@@ -33,8 +33,8 @@ public class CraftingRecipeWidget extends BookWidget {
     @Expose(serialize = false, deserialize = false)
     private boolean smelting = false;
 
-    private static final ResourceLocation CRAFTING_GRID_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/book/crafting_grid.png");
-    private static final ResourceLocation SMELTING_GRID_TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/gui/book/smelting_grid.png");
+    private static final ResourceLocation CRAFTING_GRID_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/book/crafting_grid.png");
+    private static final ResourceLocation SMELTING_GRID_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/gui/book/smelting_grid.png");
 
     public CraftingRecipeWidget(int displayPage, String recipeId, boolean sepia, int x, int y, float scale) {
         super(displayPage, Type.CRAFTING_RECIPE, x, y, scale);

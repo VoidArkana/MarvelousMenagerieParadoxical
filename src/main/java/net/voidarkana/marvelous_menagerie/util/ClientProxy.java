@@ -41,7 +41,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import java.io.IOException;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MODID, value = {Dist.CLIENT})
+@Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, value = {Dist.CLIENT})
 public class ClientProxy extends CommonProxy{
 
     public static int shaderLoadAttemptCooldown = 0;
@@ -88,6 +88,7 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.DODO.get(), DodoRenderer::new);
         EntityRenderers.register(MMEntities.ELEPHANT_BIRD.get(), EleBirdRenderer::new);
         EntityRenderers.register(MMEntities.DOEDICURUS.get(), DoedicurusRenderer::new);
+        EntityRenderers.register(MMEntities.JOSEPHO.get(), JosephoRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);
@@ -130,8 +131,8 @@ public class ClientProxy extends CommonProxy{
     private void registerShaders(RegisterShadersEvent event) {
 
         try {
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "glowing"), DefaultVertexFormat.POSITION_COLOR), ClientEvents::setRenderTypeGlowingShader);
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MODID, "sepia"), DefaultVertexFormat.NEW_ENTITY), ClientEvents::setRenderTypeSepiaShader);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "glowing"), DefaultVertexFormat.POSITION_COLOR), ClientEvents::setRenderTypeGlowingShader);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "sepia"), DefaultVertexFormat.NEW_ENTITY), ClientEvents::setRenderTypeSepiaShader);
             MarvelousMenagerie.LOGGER.info("registered internal shaders");
         } catch (IOException exception) {
             MarvelousMenagerie.LOGGER.error("could not register internal shaders");

@@ -18,7 +18,7 @@ import org.joml.Quaternionf;
 
 public class RiftRenderer extends LivingEntityRenderer<RiftEntity, RiftModel<RiftEntity>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/fracture/rift.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/rift.png");
 
     private final EntityRenderDispatcher renderer;
 

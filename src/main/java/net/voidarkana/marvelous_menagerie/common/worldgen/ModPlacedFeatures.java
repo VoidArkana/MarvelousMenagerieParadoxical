@@ -142,7 +142,7 @@ public class ModPlacedFeatures {
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(MarvelousMenagerie.MODID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
     }
 
     private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,

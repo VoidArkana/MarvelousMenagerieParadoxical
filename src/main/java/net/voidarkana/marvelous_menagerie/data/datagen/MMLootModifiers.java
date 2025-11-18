@@ -11,7 +11,7 @@ import net.voidarkana.marvelous_menagerie.data.datagen.providers.AddItemsModifie
 public class MMLootModifiers {
 
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS = DeferredRegister.create(
-            ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MarvelousMenagerie.MODID);
+            ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MarvelousMenagerie.MOD_ID);
 
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ADD_ITEM =

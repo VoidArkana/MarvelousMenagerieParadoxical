@@ -10,7 +10,6 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.PikaiaModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Pikaia;
-import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import org.jetbrains.annotations.Nullable;
 
 public class PikaiaRenderer extends MobRenderer<Pikaia, PikaiaModel<Pikaia>> {
@@ -21,7 +20,7 @@ public class PikaiaRenderer extends MobRenderer<Pikaia, PikaiaModel<Pikaia>> {
 
     @Override
     public ResourceLocation getTextureLocation(Pikaia pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/pikaia/pikaia" + (pEntity.isPikachu()? "chu" : "") + ".png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/pikaia/pikaia" + (pEntity.isPikachu()? "chu" : "") + ".png");
     }
 
     @Override

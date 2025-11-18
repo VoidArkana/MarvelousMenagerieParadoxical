@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
+    "": [
+      {
       "model": "marvelous_menagerie:block/sigillaria_sapling"
-    }
+      },
+      {
+        "model": "marvelous_menagerie:block/sigillaria_sapling",
+        "y": 90
+      }
+    ]
   }
 }

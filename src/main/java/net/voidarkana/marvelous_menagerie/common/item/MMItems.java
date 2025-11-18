@@ -16,7 +16,7 @@ import net.voidarkana.marvelous_menagerie.common.item.custom.*;
 public class MMItems {
 
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.ITEMS, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<Item> PALEO_TOOLKIT = ITEMS.register("paleo_toolkit",
             ()-> new PaleoToolkit(new Item.Properties().durability(30)));
@@ -204,6 +204,8 @@ public class MMItems {
     //Josephoartigasia
     public static final RegistryObject<Item> JOSEPHO_FOSSIL = ITEMS.register("josepho_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> JOSEPHO_SPAWN_EGG = ITEMS.register("josepho_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.JOSEPHO, 0x8d6047, 0x31191b, new Item.Properties()));
 
     //Slovenicus
     public static final RegistryObject<Item> SLOV_FOSSIL = ITEMS.register("slov_fossil",

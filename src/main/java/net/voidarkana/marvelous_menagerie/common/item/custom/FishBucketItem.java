@@ -22,7 +22,7 @@ public class FishBucketItem extends MobBucketItem {
         DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> {
             return () -> {
                 return MarvelousMenagerie.CALLBACKS.add(() -> {
-                    ItemProperties.register(this, new ResourceLocation(MarvelousMenagerie.MODID, "variant"), (stack, world, player, i) -> {
+                    ItemProperties.register(this, new ResourceLocation(MarvelousMenagerie.MOD_ID, "variant"), (stack, world, player, i) -> {
                         return stack.hasTag() ? (float)stack.getTag().getInt("Variant") : 0.0F;
                     });
                 });

@@ -12,8 +12,8 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Falcatus;
 
 public class FalcatusRenderer extends MobRenderer<Falcatus, FalcatusModel<Falcatus>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/falcatus/falcatus.png");
-    private static final ResourceLocation TEXTURE_BABY = new ResourceLocation(MarvelousMenagerie.MODID,"textures/entity/animal/falcatus/falcatus_baby.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/falcatus/falcatus.png");
+    private static final ResourceLocation TEXTURE_BABY = new ResourceLocation(MarvelousMenagerie.MOD_ID,"textures/entity/animal/falcatus/falcatus_baby.png");
 
     public FalcatusRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new FalcatusModel<>(pContext.bakeLayer(MMModelLayers.FALCATUS_LAYER)), 0.5f);

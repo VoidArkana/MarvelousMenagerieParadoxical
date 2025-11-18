@@ -39,15 +39,15 @@ public class TrilobiteSecondLayer extends RenderLayer<Trilobite, MarvelousModel<
             switch (entity.getVariantModel()){
                 case 0,1,2,3,4 :
                     object = triloMidModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/mid_second/mid_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
+                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/mid_second/mid_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
                     break;
                 case 5 :
                     object = triloIttyModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/itty/second/itty_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
+                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/itty/second/itty_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
                     break;
                 default :
                     object = triloFatModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MODID, "textures/entity/animal/trilobite/fat/second/fat_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
+                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/fat/second/fat_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
                     break;
             };
 

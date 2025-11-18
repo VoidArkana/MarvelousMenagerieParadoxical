@@ -7,98 +7,101 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 public class MMModelLayers {
 
     public static final ModelLayerLocation SKULL_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "skull"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "skull"), "main");
     public static final ModelLayerLocation CHARNIA_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "charnia"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "charnia"), "main");
 
     public static final ModelLayerLocation CHUD_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "chud"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "chud"), "main");
     public static final ModelLayerLocation SACA_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "sacabambaspis"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "sacabambaspis"), "main");
     public static final ModelLayerLocation ANOMALOCARIS_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "anomalocaris"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "anomalocaris"), "main");
     public static final ModelLayerLocation ARANDASPIS_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "arandaspis"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "arandaspis"), "main");
     public static final ModelLayerLocation FALCATUS_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "falcatus"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "falcatus"), "main");
     public static final ModelLayerLocation EOLACTORIA_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "eolactoria"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "eolactoria"), "main");
     public static final ModelLayerLocation SLOVENICUS_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "slovenicus"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "slovenicus"), "main");
     public static final ModelLayerLocation PIKAIA_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "pikaia"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "pikaia"), "main");
     public static final ModelLayerLocation ROACH_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "roach"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "roach"), "main");
     public static final ModelLayerLocation BEHOLDER_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "beholder"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "beholder"), "main");
     public static final ModelLayerLocation DAWNHORSE_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "dawn_horse"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "dawn_horse"), "main");
     public static final ModelLayerLocation SKELETON_DAWNHORSE_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "skeleton_dawn_horse"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "skeleton_dawn_horse"), "main");
     public static final ModelLayerLocation ZOMBIE_DAWNHORSE_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "zombie_dawn_horse"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "zombie_dawn_horse"), "main");
     public static final ModelLayerLocation HALLU_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "hallucigenia"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "hallucigenia"), "main");
 
     public static final ModelLayerLocation TRILO_FAT_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_fat"), "main");
     public static final ModelLayerLocation TRILO_FAT_LAYER_SECOND =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "second");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_fat"), "second");
     public static final ModelLayerLocation TRILO_FAT_LAYER_HIGHLIGHT =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_fat"), "highlight");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_fat"), "highlight");
 
     public static final ModelLayerLocation TRILO_MID_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_mid"), "main");
     public static final ModelLayerLocation TRILO_MID_LAYER_SECOND =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "second");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_mid"), "second");
     public static final ModelLayerLocation TRILO_MID_LAYER_HIGHLIGHT =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_mid"), "highlight");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_mid"), "highlight");
 
     public static final ModelLayerLocation TRILO_ITTY_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_itty"), "main");
     public static final ModelLayerLocation TRILO_ITTY_LAYER_SECOND =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "second");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_itty"), "second");
     public static final ModelLayerLocation TRILO_ITTY_LAYER_HIGHLIGHT =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "trilo_itty"), "highlight");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_itty"), "highlight");
 
     public static final ModelLayerLocation LEPTI_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "leptictidium"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "leptictidium"), "main");
     public static final ModelLayerLocation THYLACINE_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "thylacine"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "thylacine"), "main");
     public static final ModelLayerLocation DODO_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "dodo"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "dodo"), "main");
     public static final ModelLayerLocation BABY_DODO_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "baby_dodo"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_dodo"), "main");
     public static final ModelLayerLocation ELEBIRD_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "elephant_bird"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "elephant_bird"), "main");
     public static final ModelLayerLocation BABY_ELEBIRD_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "baby_elephant_bird"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_elephant_bird"), "main");
     public static final ModelLayerLocation DOEDICURUS_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "doedicurus"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "doedicurus"), "main");
+
+    public static final ModelLayerLocation JOSEPHO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "josepho"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");
     public static final ModelLayerLocation RIFT_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "rift"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "rift"), "main");
     public static final ModelLayerLocation FRACTURE_EMMISSIVE =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "fracture_emmissive"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture_emmissive"), "main");
 
     public static final ModelLayerLocation GOGGLES_LAYER =
-            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MODID, "anomalous_goggles"), "main");
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "anomalous_goggles"), "main");
 
     public static final ModelLayerLocation SIGILLARIA_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "boat/sigillaria"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/sigillaria"), "main");
     public static final ModelLayerLocation SIGILLARIA_CHEST_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/sigillaria"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/sigillaria"), "main");
 
     public static final ModelLayerLocation PROTOTAXITES_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "boat/prototaxites"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/prototaxites"), "main");
     public static final ModelLayerLocation PROTOTAXITES_CHEST_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/prototaxites"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/prototaxites"), "main");
 
     public static final ModelLayerLocation CALAMITES_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "boat/calamites"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/calamites"), "main");
     public static final ModelLayerLocation CALAMITES_CHEST_BOAT_LAYER = new ModelLayerLocation(
-            new ResourceLocation(MarvelousMenagerie.MODID, "chest_boat/calamites"), "main");
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/calamites"), "main");
 
 }

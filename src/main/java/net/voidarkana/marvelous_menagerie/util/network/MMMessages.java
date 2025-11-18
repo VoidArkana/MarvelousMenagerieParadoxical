@@ -15,7 +15,7 @@ public class MMMessages {
     private static final String PROTOCOL_VERSION = "1";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(MarvelousMenagerie.MODID, "channel"),
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "channel"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals

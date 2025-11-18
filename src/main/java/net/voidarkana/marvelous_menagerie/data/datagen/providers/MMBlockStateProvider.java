@@ -5,19 +5,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 
-import static net.minecraft.data.models.model.TextureMapping.cubeBottomTop;
-
 public class MMBlockStateProvider extends BlockStateProvider {
 
     public MMBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, MarvelousMenagerie.MODID, exFileHelper);
+        super(output, MarvelousMenagerie.MOD_ID, exFileHelper);
     }
 
     @Override
@@ -51,7 +48,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
                 blockTexture(MMBlocks.SIGILLARIA_PLANKS.get()));
 
         logBlock(((RotatedPillarBlock) MMBlocks.SIGILLARIA_STEM.get()));
-        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), blockTexture(MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_sigillaria_stem_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), blockTexture(MMBlocks.STRIPPED_SIGILLARIA_STEM.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_sigillaria_stem_top"));
         blockItem(MMBlocks.SIGILLARIA_STEM);
         blockItem(MMBlocks.STRIPPED_SIGILLARIA_STEM);
 
@@ -114,21 +111,21 @@ public class MMBlockStateProvider extends BlockStateProvider {
         hangingSignBlock(MMBlocks.CALAMITES_HANGING_SIGN.get(), MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
                 blockTexture(MMBlocks.CALAMITES_PLANKS.get()));
 
-        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/calamites_bundle_top"));
-        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/calamites_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_calamites_bundle_top"));
         blockItem(MMBlocks.CALAMITES_BUNDLE);
         blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLE);
 
-        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/calamites_bundled_bark_top"));
-        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MODID, "block/stripped_calamites_bundled_bark_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/calamites_bundled_bark_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()), blockTexture(MMBlocks.STRIPPED_CALAMITES_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_calamites_bundled_bark_top"));
         blockItem(MMBlocks.CALAMITES_BUNDLED_BARK);
         blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK);
 
 
         //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),
-                new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_side"),
-                new ResourceLocation(MarvelousMenagerie.MODID, "block/chronotite_block_end"));
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/chronotite_block_side"),
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/chronotite_block_end"));
 
         blockWithItem(MMBlocks.SHALE);
         stairsBlock(((StairBlock) MMBlocks.SHALE_STAIRS.get()), blockTexture(MMBlocks.SHALE.get()));
@@ -309,7 +306,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(MarvelousMenagerie.MODID +
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(MarvelousMenagerie.MOD_ID +
                 ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
@@ -329,9 +326,9 @@ public class MMBlockStateProvider extends BlockStateProvider {
     }
 
     private void nonRotateablePillarBlock(RegistryObject<Block> blockRegistryObject, String top, String bottom, String side){
-        ResourceLocation rSide = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + side);
-        ResourceLocation rTop = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + top);
-        ResourceLocation rBottom = new ResourceLocation(MarvelousMenagerie.MODID, "block/" + bottom);
+        ResourceLocation rSide = new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + side);
+        ResourceLocation rTop = new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + top);
+        ResourceLocation rBottom = new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/" + bottom);
 
         simpleBlockWithItem(blockRegistryObject.get(),
                 models().cubeBottomTop(name(blockRegistryObject.get()), rSide, rBottom, rTop));

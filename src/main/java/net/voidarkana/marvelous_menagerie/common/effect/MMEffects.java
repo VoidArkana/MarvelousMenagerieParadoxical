@@ -13,7 +13,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.custom.SeaCowSerenityEff
 
 public class MMEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
-            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MarvelousMenagerie.MODID);
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MarvelousMenagerie.MOD_ID);
 
     public static final RegistryObject<MobEffect> SEA_COW_SERENITY = MOB_EFFECTS.register("sea_cow_serenity",
             ()-> new SeaCowSerenityEffect(MobEffectCategory.BENEFICIAL, 796861));
