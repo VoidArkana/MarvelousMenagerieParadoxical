@@ -77,8 +77,10 @@ public class SlovenicusModel<T extends Slovenicus> extends MarvelousModel<T> {
 			this.animateWalk(SlovenicusAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
 		}
 
-		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
-		this.animate(entity.flopAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F);
+		if (entity.isInWaterOrBubble())
+			this.animateIdle(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
+		else
+			this.animate(entity.idleAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = (headPitch * ((float)Math.PI / 180F))/4;
 	}

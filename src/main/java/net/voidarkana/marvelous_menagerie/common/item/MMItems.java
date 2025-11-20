@@ -235,6 +235,13 @@ public class MMItems {
             ()-> new SeaCowMilkBucketItem((new Item.Properties()).craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> STELLER_ICE_CREAM = ITEMS.register("steller_ice_cream",
             ()-> new StackableBowlFoodItem(new Item.Properties().food(MMFoods.STELLER_ICE_CREAM).stacksTo(16)));
+    public static final RegistryObject<Item> STELLER_SPAWN_EGG = ITEMS.register("steller_sea_cow_spawn_egg",
+            ()-> new FishSpawnEggItem(MMEntities.STELLER_SEA_COW, 0x2F292B, 0x1F191D, new Item.Properties()));
+    public static final RegistryObject<Item> STELLER_BUCKET = ITEMS.register("steller_bucket", () -> {
+        return new FishBucketItem(MMEntities.STELLER_SEA_COW, () -> {
+            return Fluids.WATER;
+        }, Items.BUCKET, false, (new Item.Properties()).stacksTo(1));
+    });
 
 
     //Elephant Bird

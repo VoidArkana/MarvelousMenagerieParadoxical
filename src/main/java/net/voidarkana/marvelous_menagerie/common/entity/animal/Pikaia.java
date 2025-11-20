@@ -108,7 +108,7 @@ public class Pikaia extends AbstractBasicFish {
         this.entityData.set(IS_POLLINATING, fromBook);
     }
 
-    protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pHand);
 
         if (itemStack.is(Items.DRIED_KELP) && this.canPollinate()){

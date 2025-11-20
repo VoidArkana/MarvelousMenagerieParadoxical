@@ -102,9 +102,13 @@ public class FalcatusModel<T extends Falcatus> extends MarvelousModel<T> {
 	public void setupAnim(Falcatus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animate(entity.swimAnimationState, FalcatusAnims.swim, ageInTicks, limbSwingAmount);
-		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
-		this.animate(entity.flopAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F);
+
+		if (entity.isInWaterOrBubble()){
+			this.animateWalk(FalcatusAnims.swim, limbSwing, limbSwingAmount,2f, 3f);
+			this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
+		}
+		else
+			this.animate(entity.idleAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F);
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
 	}

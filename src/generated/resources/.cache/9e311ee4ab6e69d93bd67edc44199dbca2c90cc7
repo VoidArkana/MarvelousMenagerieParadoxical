@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-18T12:34:44.7909354	Item Models: marvelous_menagerie
+// 1.20.1	2025-11-20T12:29:09.1871585	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -227,9 +227,11 @@ be34c6639c622a60d4baaaf45d2004dfbd47b4c1 assets/marvelous_menagerie/models/item/
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/slovenicus_spawn_egg.json
 7d459309a7fc315fa71a0e8e5808be7435a3fe4a assets/marvelous_menagerie/models/item/slov_fossil.json
 38732374ecc0188f0216fb5f97becb9645f14dcf assets/marvelous_menagerie/models/item/sniffer_fossil.json
+bb3d83873c821d793d36d83bf4606d12144982e8 assets/marvelous_menagerie/models/item/steller_bucket.json
 7b89a27c5061605f96c055dc58ac66e277bbdc7f assets/marvelous_menagerie/models/item/steller_fossil.json
 290cd84638fded16b6eefa77a26d31b8e2bd2565 assets/marvelous_menagerie/models/item/steller_ice_cream.json
 10f9b77f47b09be08105efc02f614cfc0103f7ab assets/marvelous_menagerie/models/item/steller_sea_cow_milk_bucket.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/steller_sea_cow_spawn_egg.json
 c02a9a90ec9c664e0cc0e6b363a91224ac5d24cb assets/marvelous_menagerie/models/item/theri_fossil.json
 b8fe239d7b3bf2f8257cb2c9fd3b43ab833bc1f5 assets/marvelous_menagerie/models/item/thylacine_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/thylacine_spawn_egg.json

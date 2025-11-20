@@ -35,6 +35,7 @@ import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
@@ -42,9 +43,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IAnimatedAttacker, NeutralMob {
+public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker, NeutralMob {
 
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Anomalocaris.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Anomalocaris.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> SHAKING_TIME = SynchedEntityData.defineId(Anomalocaris.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Anomalocaris.class, EntityDataSerializers.INT);
@@ -88,7 +88,6 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
         this.entityData.define(SHAKING_TIME, 0);
         this.entityData.define(VARIANT, 0);
         this.entityData.define(IS_ATTACKING, false);
@@ -97,7 +96,6 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
-        pCompound.putBoolean("FromBucket", this.fromBucket());
         pCompound.putInt("ShakingTime", this.getShakingTime());
         pCompound.putInt("Variant", this.getVariant());
         pCompound.putBoolean("IsAttacking", this.isAttacking());
@@ -106,7 +104,6 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-        this.setFromBucket(pCompound.getBoolean("FromBucket"));
         this.setShakingTime(pCompound.getInt("ShakingTime"));
         this.setVariant(pCompound.getInt("Variant"));
         this.setAttacking(pCompound.getBoolean("IsAttacking"));
@@ -160,12 +157,6 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
     }
 
     @Override
-    public boolean fromBucket() {return this.entityData.get(FROM_BUCKET);}
-
-    @Override
-    public void setFromBucket(boolean pFromBucket) {this.entityData.set(FROM_BUCKET, pFromBucket);}
-
-    @Override
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         Bucketable.saveDefaultDataToBucketTag(this, bucket);
@@ -177,18 +168,8 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
     }
 
     @Override
-    public void loadFromBucketTag(CompoundTag pTag) {
-        Bucketable.loadDefaultDataFromBucketTag(this, pTag);
-    }
-
-    @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(MMItems.CARIS_BUCKET.get());
-    }
-
-    @Override
-    public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_FILL_FISH;
     }
 
     @Override
@@ -271,10 +252,9 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
     }
 
     public void tick (){
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
+
         super.tick();
+
         if (this.getShakingTime()>0){
             int prevShakingTime = this.getShakingTime();
             if (this.getShakingTime()==12){
@@ -288,7 +268,8 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
         }
     }
 
-    private void setupAnimationStates() {
+
+    public void setupAnimationStates() {
 
         this.shakeAnimationState.animateWhen(this.getShakingTime()>0, this.tickCount);
 
@@ -306,7 +287,7 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
         }
     }
 
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
 
         ItemStack itemstack = player.getItemInHand(hand);
 
@@ -317,7 +298,7 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
             return InteractionResult.SUCCESS;
         }
         else {
-            return Bucketable.bucketMobPickup(player, hand, this).orElse(super.mobInteract(player, hand));
+            return super.mobInteract(player, hand);
         }
     }
 
@@ -333,12 +314,6 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
         return true;
     }
 
-    protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {}
-
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.COD_AMBIENT;
-    }
-
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return MMSounds.ARTHROPOD_HURT.get();
     }
@@ -347,28 +322,9 @@ public class Anomalocaris extends BreedableWaterAnimal implements Bucketable, IA
         return MMSounds.ARTHROPOD_DEATH.get();
     }
 
-    public SoundEvent getFlopSound() {
-        return MMSounds.CREATURE_FLOPS.get();
-    }
-
-    protected SoundEvent getSwimSound() {
-        return MMSounds.CREATURE_SWIM.get();
-    }
-
     @Override
     public boolean canAttack(LivingEntity entity) {
         return super.canAttack(entity) && !this.isBaby();
-    }
-
-//    public static boolean checkSurfaceWaterDinoSpawnRules(EntityType<? extends Anomalocaris> pWaterAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-//        int i = pLevel.getSeaLevel();
-//        int j = i - 13;
-//        return pPos.getY() >= j && pPos.getY() <= i && pLevel.getFluidState(pPos.below()).is(FluidTags.WATER) && pLevel.getBlockState(pPos.above()).is(Blocks.WATER) && UnusualPrehistoryConfig.DINO_NATURAL_SPAWNING.get();
-//    }
-
-    //persistance stuff
-    public boolean removeWhenFarAway(double p_213397_1_) {
-        return !this.hasCustomName() && !this.fromBucket();
     }
 
     @Override

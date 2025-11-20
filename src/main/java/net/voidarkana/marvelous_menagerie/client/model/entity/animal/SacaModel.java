@@ -69,8 +69,10 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 3f);
 		}
 
-		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1.0F, 1-Math.abs(pLimbSwingAmount));
-		this.animate(pEntity.flopAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
+		if (pEntity.isInWaterOrBubble())
+			this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1.0F, 1-Math.abs(pLimbSwingAmount));
+		else
+			this.animate(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
 
 		this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);
 	}

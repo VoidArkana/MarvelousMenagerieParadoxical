@@ -83,13 +83,17 @@ public class EolactoriaModel<T extends Eolactoria> extends MarvelousModel<T> {
 	public void setupAnim(Eolactoria entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		this.animate(entity.swimAnimationState, EolactoriaAnims.SWIM, ageInTicks, limbSwingAmount);
-		this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1,1-Math.abs(limbSwingAmount));
+		if (entity.isInWaterOrBubble()){
+			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1,1-Math.abs(limbSwingAmount));
 
-		if (entity.flopSide()){
-			this.animate(entity.flopAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F);
-		}else {
-			this.animate(entity.flopAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F);
+			this.animateWalk(EolactoriaAnims.SWIM, limbSwing, limbSwingAmount,2f, 3f);
+		}
+		else{
+			if (entity.flopSide()){
+				this.animate(entity.idleAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F);
+			}else {
+				this.animate(entity.idleAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F);
+			}
 		}
 
 		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);

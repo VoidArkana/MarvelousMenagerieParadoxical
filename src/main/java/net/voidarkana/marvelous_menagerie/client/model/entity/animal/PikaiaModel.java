@@ -85,8 +85,10 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 			this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
 		}
 
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
-		this.animate(entity.flopAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F);
+		if (entity.isInWaterOrBubble())
+			this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
+		else
+			this.animate(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F);
 
 		this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
 

@@ -78,6 +78,10 @@ public class MMModelLayers {
 
     public static final ModelLayerLocation JOSEPHO_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "josepho"), "main");
+    public static final ModelLayerLocation STELLER_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "steller_sea_cow"), "main");
+    public static final ModelLayerLocation BABY_STELLER_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_steller_sea_cow"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

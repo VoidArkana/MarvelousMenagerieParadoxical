@@ -29,7 +29,6 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState swimAnimationState = new AnimationState();
-    public final AnimationState flopAnimationState = new AnimationState();
 
     public AbstractBasicFish(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -82,13 +81,21 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
         }
     }
 
+    public boolean canBeBucketed(){
+        return true;
+    }
+
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
     }
 
-    protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        return Bucketable.bucketMobPickup(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        if (canBeBucketed()){
+            return Bucketable.bucketMobPickup(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
+        }else {
+            return super.mobInteract(pPlayer, pHand);
+        }
     }
 
     public boolean removeWhenFarAway(double p_213397_1_) {
@@ -103,12 +110,10 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
         super.tick();
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isInWaterOrBubble(), this.tickCount);
+    public void setupAnimationStates() {
+        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
 
         this.swimAnimationState.animateWhen(this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
-
-        this.flopAnimationState.animateWhen(!this.isInWaterOrBubble(), this.tickCount);
     }
 
 
