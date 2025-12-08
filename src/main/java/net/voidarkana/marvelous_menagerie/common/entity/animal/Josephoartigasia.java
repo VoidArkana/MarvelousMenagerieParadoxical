@@ -64,6 +64,7 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState sitStartAnimationState = new AnimationState();
     public final AnimationState sitEndAnimationState = new AnimationState();
+    public final AnimationState sitIdleAnimationState = new AnimationState();
     public final AnimationState earsWiggleAnimationState = new AnimationState();
     public final AnimationState rightEarWiggleAnimationState = new AnimationState();
     public final AnimationState leftEarWiggleAnimationState = new AnimationState();
@@ -75,6 +76,17 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     public Josephoartigasia (EntityType<? extends TamableAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.0F);
+        this.reassessTameGoals();
+    }
+    
+    @javax.annotation.Nullable
+    public LivingEntity getControllingPassenger() {
+        for(Entity passenger : this.getPassengers()) {
+            if (passenger instanceof Player) {
+                return (Player)passenger;
+            }
+        }
+        return null;
     }
 
     //attributes
@@ -375,11 +387,18 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
                 if (!this.sitStartAnimationState.isStarted())
                     this.sitStartAnimationState.start(this.tickCount);
             }else if (this.getStandingTime()>0){
+                if (this.sitIdleAnimationState.isStarted())
+                    this.sitIdleAnimationState.stop();
                 if (this.sitStartAnimationState.isStarted())
                     this.sitStartAnimationState.stop();
                 if (!this.sitEndAnimationState.isStarted())
                     this.sitEndAnimationState.start(this.tickCount);
             }
+        }
+
+        if (this.isInSittingPose() && !this.sitStartAnimationState.isStarted()){
+            if (!this.sitIdleAnimationState.isStarted())
+                this.sitIdleAnimationState.start(this.tickCount);
         }
 
     }

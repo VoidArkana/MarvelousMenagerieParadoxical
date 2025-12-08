@@ -4,6 +4,7 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.ICustomFollower;
 
+//taken from the old UP
 public class TameableFollowOwnerGoal extends FollowOwnerGoal {
 
     private ICustomFollower follower;

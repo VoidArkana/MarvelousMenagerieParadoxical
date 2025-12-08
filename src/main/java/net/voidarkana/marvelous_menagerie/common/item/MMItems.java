@@ -151,6 +151,11 @@ public class MMItems {
     public static final RegistryObject<Item> OPHTHALMO_ARMOR = ITEMS.register("ophthalmo_armor",
             ()-> new OphthalmoArmorItem(new Item.Properties().durability(300),
                     new ItemStack(MMItems.CARIS_SCUTE.get())));
+    public static final RegistryObject<Item> OPHTHALMO_SPAWN_EGG = ITEMS.register("ophthalmo_spawn_egg",
+            ()-> new FishSpawnEggItem(MMEntities.OPHTHALMO, 0x485060, 0x262F42, new Item.Properties()));
+    public static final RegistryObject<Item> BABY_OPHTHALMO_BUCKET = ITEMS.register("baby_ophthalmo_bucket",
+            () -> new FishBucketItem(MMEntities.OPHTHALMO, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Therizinosaurus
     public static final RegistryObject<Item> THERI_FOSSIL = ITEMS.register("theri_fossil",

@@ -26,6 +26,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDo
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyEleBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.BabyOphthalmoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.OphthalmoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.BabyStellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.StellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
@@ -87,6 +89,13 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.JOSEPHO_LAYER, JosephoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.STELLER_LAYER, StellerModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_STELLER_LAYER, BabyStellerModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_LAYER, OphthalmoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_PATTERN_LAYER, OphthalmoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_SADDLE_LAYER, OphthalmoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_ARMOR_LAYER, OphthalmoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_LAYER, BabyOphthalmoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER, BabyOphthalmoModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

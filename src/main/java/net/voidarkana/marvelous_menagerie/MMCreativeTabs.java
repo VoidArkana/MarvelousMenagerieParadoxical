@@ -43,6 +43,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.HALLUCIGENIC_SLIME.get());
                         output.accept(MMItems.MAGIC_ROLL.get());
 
+                        output.accept(MMItems.BABY_OPHTHALMO_BUCKET.get());
                         output.accept(MMItems.OPHTHALMO_ARMOR.get());
 
                         output.accept(MMItems.PIKAIA_BUCKET.get());
@@ -104,6 +105,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
                         output.accept(MMItems.JOSEPHO_SPAWN_EGG.get());
                         output.accept(MMItems.LEPTICTIDIUM_SPAWN_EGG.get());
+                        output.accept(MMItems.OPHTHALMO_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());

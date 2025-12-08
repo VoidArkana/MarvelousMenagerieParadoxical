@@ -156,6 +156,12 @@ public class MMEntities {
                             .sized(4f, 2.25f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "steller_sea_cow").toString()));
 
+    public static final RegistryObject<EntityType<Ophthalmosaurus>> OPHTHALMO =
+            ENTITY_TYPES.register("ophthalmo",
+                    () -> EntityType.Builder.of(Ophthalmosaurus::new, MobCategory.WATER_CREATURE)
+                            .sized(1.5f, 1.3f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo").toString()));
+
     //    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));
 
 

@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
@@ -39,15 +40,16 @@ import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, value = {Dist.CLIENT})
 public class ClientProxy extends CommonProxy{
 
+    public static List<UUID> blockedEntityRenders = new ArrayList<>();
     public static int shaderLoadAttemptCooldown = 0;
-
-    public ClientProxy() {
-    }
 
     @Override
     public void init() {
@@ -90,6 +92,7 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.DOEDICURUS.get(), DoedicurusRenderer::new);
         EntityRenderers.register(MMEntities.JOSEPHO.get(), JosephoRenderer::new);
         EntityRenderers.register(MMEntities.STELLER_SEA_COW.get(), StellerRenderer::new);
+        EntityRenderers.register(MMEntities.OPHTHALMO.get(), OphthalmoRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);
@@ -130,7 +133,6 @@ public class ClientProxy extends CommonProxy{
     }
 
     private void registerShaders(RegisterShadersEvent event) {
-
         try {
         event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "glowing"), DefaultVertexFormat.POSITION_COLOR), ClientEvents::setRenderTypeGlowingShader);
         event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "sepia"), DefaultVertexFormat.NEW_ENTITY), ClientEvents::setRenderTypeSepiaShader);
@@ -139,5 +141,17 @@ public class ClientProxy extends CommonProxy{
             MarvelousMenagerie.LOGGER.error("could not register internal shaders");
             exception.printStackTrace();
         }
+    }
+
+    public void blockRenderingEntity(UUID id) {
+        blockedEntityRenders.add(id);
+    }
+
+    public void releaseRenderingEntity(UUID id) {
+        blockedEntityRenders.remove(id);
+    }
+
+    public boolean isFirstPersonPlayer(Entity entity) {
+        return entity.equals(Minecraft.getInstance().cameraEntity) && Minecraft.getInstance().options.getCameraType().isFirstPerson();
     }
 }

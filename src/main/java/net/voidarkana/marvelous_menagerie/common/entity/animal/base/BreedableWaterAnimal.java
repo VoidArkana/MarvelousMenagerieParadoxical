@@ -1,5 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
 
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -32,9 +34,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.Cancelable;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
@@ -46,13 +48,14 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public float currentRoll = 0.0F;
 
-    //ageable mob
+    private static final EntityDataAccessor<Integer> OUT_OF_WATER_TICKS = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
     public static final int BABY_START_AGE = -24000;
     private static final int FORCED_AGE_PARTICLE_TICKS = 40;
     protected int age;
     protected int forcedAge;
     protected int forcedAgeTimer;
+    int prevTicksOutOfWater;
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         if (pSpawnData == null) {
@@ -121,6 +124,14 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
 
         super.onSyncedDataUpdated(pKey);
+    }
+
+    public int getOutOfWaterTicks() {
+        return this.entityData.get(OUT_OF_WATER_TICKS);
+    }
+
+    public void setOutOfWaterTicks(int variant) {
+        this.entityData.set(OUT_OF_WATER_TICKS, variant);
     }
 
     protected void ageBoundaryReached() {
@@ -420,6 +431,11 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }).ifPresent((p_277486_) -> {
             p_277486_.awardStat(Stats.ANIMALS_BRED);
             //CriteriaTriggers.BRED_ANIMALS.trigger(p_277486_, this, pAnimal, pBaby);
+
+            LootContext $$4 = EntityPredicate.createContext(p_277486_, this);
+            LootContext $$5 = EntityPredicate.createContext(p_277486_, pAnimal);
+            LootContext $$6 = pBaby != null ? EntityPredicate.createContext(p_277486_, pBaby) : null;
+            CriteriaTriggers.BRED_ANIMALS.trigger(p_277486_, (p_18653_) -> p_18653_.matches($$4, $$5, $$6));
         });
         this.setAge(6000);
         pAnimal.setAge(6000);
@@ -475,6 +491,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.entityData.define(FEED_TYPE, 0);
         this.entityData.define(CAN_GROW_UP, true);
         this.entityData.define(DATA_BABY_ID, false);
+        this.entityData.define(OUT_OF_WATER_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -532,6 +549,22 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
+
+        if (!this.level().isClientSide){
+
+            if (!this.isInWater() && this.getOutOfWaterTicks() < 5 && !this.isVehicle()){
+
+                this.prevTicksOutOfWater = this.getOutOfWaterTicks();
+                this.setOutOfWaterTicks(this.prevTicksOutOfWater +1);
+
+            }else if (this.isInWater() && this.getOutOfWaterTicks() > 0){
+
+                this.prevTicksOutOfWater = this.getOutOfWaterTicks();
+                this.setOutOfWaterTicks(this.prevTicksOutOfWater -1);
+
+            }
+
         }
 
         super.aiStep();
@@ -663,7 +696,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             return InteractionResult.SUCCESS;
         }
 
-        if (isFood(itemstack)){
+        if (isFood(itemstack) || itemstack.is(MMTags.Items.FINTASTIC_ALL_FEEDS)){
 
             if (itemstack.is(MMTags.Items.FINTASTIC_FEED)){
                 this.setFeedQuality(0);

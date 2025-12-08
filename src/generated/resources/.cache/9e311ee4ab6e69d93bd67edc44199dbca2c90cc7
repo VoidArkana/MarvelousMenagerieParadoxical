@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-20T12:29:09.1871585	Item Models: marvelous_menagerie
+// 1.20.1	2025-12-07T15:30:39.2118547	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -6,6 +6,7 @@ ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/
 478d01819bbec98e6f7c0d656f310df1423a26d2 assets/marvelous_menagerie/models/item/arandaspis_bucket.json
 b3f6f2a6d2c27f207199979b3b929967e7f90e5d assets/marvelous_menagerie/models/item/arandaspis_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/arandaspis_spawn_egg.json
+6f0a489a87e4698d26e843231cdf9e35d87e69f7 assets/marvelous_menagerie/models/item/baby_ophthalmo_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/beholder_spawn_egg.json
 8227ebd4e20d2f685ab8ecfd5fc2cfd71963ad1b assets/marvelous_menagerie/models/item/boiled_elephant_egg.json
 940f2ee162b1522d9bb53661c3e84dbd89bd6e85 assets/marvelous_menagerie/models/item/breccia_bricks_slab.json
@@ -125,6 +126,7 @@ f44bcda387b246084ba9bdccf4e7e2ba8105002a assets/marvelous_menagerie/models/item/
 1369d7278239d645157c4081fb993714796b97ab assets/marvelous_menagerie/models/item/opal.json
 d87b45649edabf05ead764fd580c774bb8a4429a assets/marvelous_menagerie/models/item/ophthalmo_armor.json
 91e386b1db74f4d1bec2380f787bb253fcd47d0e assets/marvelous_menagerie/models/item/ophthalmo_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/ophthalmo_spawn_egg.json
 99ca288e299162ed1f0d8815a57e050d0a255d6b assets/marvelous_menagerie/models/item/pelta_fossil.json
 65c3cffae9beb5542167f2f4a61b658bc1a92b89 assets/marvelous_menagerie/models/item/permafrost_bricks_slab.json
 55e596cddc97757d099b6b44fa77897f9cde76e3 assets/marvelous_menagerie/models/item/permafrost_bricks_stairs.json

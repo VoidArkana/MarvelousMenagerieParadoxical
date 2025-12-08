@@ -69,19 +69,35 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "dodo"), "main");
     public static final ModelLayerLocation BABY_DODO_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_dodo"), "main");
+
     public static final ModelLayerLocation ELEBIRD_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "elephant_bird"), "main");
     public static final ModelLayerLocation BABY_ELEBIRD_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_elephant_bird"), "main");
+
     public static final ModelLayerLocation DOEDICURUS_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "doedicurus"), "main");
 
     public static final ModelLayerLocation JOSEPHO_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "josepho"), "main");
+
     public static final ModelLayerLocation STELLER_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "steller_sea_cow"), "main");
     public static final ModelLayerLocation BABY_STELLER_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_steller_sea_cow"), "main");
+
+    public static final ModelLayerLocation OPHTHALMO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo"), "main");
+    public static final ModelLayerLocation BABY_OPHTHALMO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_ophthalmo"), "main");
+    public static final ModelLayerLocation OPHTHALMO_PATTERN_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_pattern"), "main");
+    public static final ModelLayerLocation BABY_OPHTHALMO_PATTERN_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_ophthalmo_pattern"), "main");
+    public static final ModelLayerLocation OPHTHALMO_SADDLE_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_saddle"), "main");
+    public static final ModelLayerLocation OPHTHALMO_ARMOR_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_armor"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

@@ -88,7 +88,7 @@ public class FossilMinigameScreen extends Screen {
 
     boolean hasAppliedDamage;
 
-    int maxHits = 15;
+    int maxHits = 15; //default: 15
     int currentHits; //multiply by 24
 
     public Boolean isDud;

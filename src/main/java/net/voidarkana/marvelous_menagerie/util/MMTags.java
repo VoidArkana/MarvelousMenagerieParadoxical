@@ -131,6 +131,8 @@ public class MMTags {
         public static final TagKey<Item> CORAL_ITEMS = tag("coral_items");
         public static final TagKey<Item> CORAL_BLOCK_ITEMS = tag("coral_block_items");
 
+        public static final TagKey<Item> OPHTHALMO_FOOD = tag("ophthalmo_food");
+
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }

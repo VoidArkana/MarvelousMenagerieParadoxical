@@ -238,5 +238,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 Blocks.BUBBLE_CORAL_BLOCK.asItem(),
                 Blocks.FIRE_CORAL_BLOCK.asItem(),
                 Blocks.HORN_CORAL_BLOCK.asItem());
+
+        this.tag(MMTags.Items.OPHTHALMO_FOOD).add(
+                MMItems.SACABAMBASPIS.get(),
+                MMItems.TRILO_BITE.get());
     }
 }

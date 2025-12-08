@@ -100,12 +100,11 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		if (this.young)
 			this.applyStatic(JosephoAnims.BABY);
 
-		if (entity.isInWaterOrBubble()){
+		if (entity.isInWaterOrBubble() && !entity.onGround()){
 
 			this.animate(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1);
 
 		}else {
-
 			if (!entity.isInSittingPose()){
 				animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
@@ -113,7 +112,9 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 			this.animate(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1);
 			this.animate(entity.sitEndAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
 			this.animate(entity.sitStartAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
+			this.animate(entity.sitIdleAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
 		}
+
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);

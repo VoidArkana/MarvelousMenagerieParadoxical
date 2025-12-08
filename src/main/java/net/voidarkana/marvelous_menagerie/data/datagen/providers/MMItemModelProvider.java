@@ -144,6 +144,8 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleItem(MMItems.OPHTHALMO_FOSSIL);
         simpleItem(MMItems.OPHTHALMO_ARMOR);
+        simpleItem(MMItems.BABY_OPHTHALMO_BUCKET);
+        withExistingParent(MMItems.OPHTHALMO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.THERI_FOSSIL);
         simpleItem(MMItems.TLATO_FOSSIL);
