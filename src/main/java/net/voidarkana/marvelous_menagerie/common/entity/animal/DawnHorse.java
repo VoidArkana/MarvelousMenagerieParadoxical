@@ -24,23 +24,23 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 
-public class DawnHorse extends Animal {
+public class DawnHorse extends MarvelousAnimal {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleTailState = new AnimationState();
     public final AnimationState idleEarsState = new AnimationState();
     public final AnimationState neighState = new AnimationState();
 
-    public DawnHorse(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public DawnHorse(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    private int idleTailTimeout = 0;
-    private int idleEarsTimeout = 0;
+    private int idleTailTimeout = this.random.nextInt(40) + 80;
+    private int idleEarsTimeout = this.random.nextInt(40) + 80;
     private int neighTimeout = 0;
 
     protected boolean canGallop = true;
@@ -69,8 +69,8 @@ public class DawnHorse extends Animal {
         return pStack.is(Items.GOLDEN_CARROT);
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if (this.idleEarsTimeout <= 0) {
             this.idleEarsTimeout = this.random.nextInt(40) + 80;
@@ -86,26 +86,6 @@ public class DawnHorse extends Animal {
             --this.idleTailTimeout;
         }
 
-    }
-
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
-
-        this.walkAnimation.update(f, 0.2f);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
     }
 
     @Nullable
@@ -198,9 +178,5 @@ public class DawnHorse extends Animal {
 
     protected void playGallopSound(SoundType pSoundType) {
         this.playSound(SoundEvents.HORSE_GALLOP, pSoundType.getVolume() * 0.15F, pSoundType.getPitch());
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }

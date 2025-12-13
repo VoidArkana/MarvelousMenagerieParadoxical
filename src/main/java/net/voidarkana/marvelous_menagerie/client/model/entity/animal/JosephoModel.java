@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.DodoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.JosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
@@ -100,20 +101,18 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		if (this.young)
 			this.applyStatic(JosephoAnims.BABY);
 
-		if (entity.isInWaterOrBubble() && !entity.onGround()){
-
-			this.animate(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1);
-
-		}else {
+		if (!entity.isInWaterOrBubble()){
 			if (!entity.isInSittingPose()){
 				animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
 
-			this.animate(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1);
 			this.animate(entity.sitEndAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
 			this.animate(entity.sitStartAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
 			this.animate(entity.sitIdleAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
 		}
+
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
 
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);

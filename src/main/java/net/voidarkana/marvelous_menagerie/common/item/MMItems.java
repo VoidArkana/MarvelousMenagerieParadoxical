@@ -168,6 +168,8 @@ public class MMItems {
     //Borealopelta
     public static final RegistryObject<Item> PELTA_FOSSIL = ITEMS.register("pelta_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> BOREALO_SPAWN_EGG = ITEMS.register("borealopelta_spawn_egg",
+            ()-> new FishSpawnEggItem(MMEntities.BOREALOPELTA, 0xbe2215, 0xe6742f, new Item.Properties()));
 
     //Daeodon
     public static final RegistryObject<Item> DAEODON_FOSSIL = ITEMS.register("daeodon_fossil",
@@ -271,6 +273,10 @@ public class MMItems {
     public static final RegistryObject<Item> DOEDICURUS_SPAWN_EGG = ITEMS.register("doedicurus_spawn_egg",
             () -> new ForgeSpawnEggItem(MMEntities.DOEDICURUS, 0x694628, 0x926f40, new Item.Properties()));
 
+    //Blubber
+    public static final RegistryObject<Item> FLUBBER_FOSSIL = ITEMS.register("flubber_fossil",
+            ()-> new Item(new Item.Properties()));
+
 
     //Plants
 
@@ -308,22 +314,33 @@ public class MMItems {
             () -> new MMBoatItem(true, MMBoatEntity.Type.CALAMITES, new Item.Properties()));
 
     //Fossils
+    //Early Paleo
     public static final RegistryObject<Item> SHALE_FOSSIL = ITEMS.register("shale_fossil",
             ()-> new Item(new Item.Properties()));
+    //Carboniferous
     public static final RegistryObject<Item> SILTSTONE_FOSSIL = ITEMS.register("siltstone_fossil",
             ()-> new Item(new Item.Properties()));
+    //Permian
     public static final RegistryObject<Item> GABBRO_FOSSIL = ITEMS.register("gabbro_fossil",
             ()-> new Item(new Item.Properties()));
+
+    //Triassic
     public static final RegistryObject<Item> MUDSTONE_FOSSIL = ITEMS.register("mudstone_fossil",
             ()-> new Item(new Item.Properties()));
+    //Jurassic
     public static final RegistryObject<Item> LIMESTONE_FOSSIL = ITEMS.register("limestone_fossil",
             ()-> new Item(new Item.Properties()));
+    //Cretaceous
     public static final RegistryObject<Item> CHALK_FOSSIL = ITEMS.register("chalk_fossil",
             ()-> new Item(new Item.Properties()));
+
+    //Paleogene
     public static final RegistryObject<Item> BRECCIA_FOSSIL = ITEMS.register("breccia_fossil",
             ()-> new Item(new Item.Properties()));
+    //Neogene
     public static final RegistryObject<Item> DIATOMITE_FOSSIL = ITEMS.register("diatomite_fossil",
             ()-> new Item(new Item.Properties()));
+    //Quaternary
     public static final RegistryObject<Item> PERMAFROST_FOSSIL = ITEMS.register("permafrost_fossil",
             ()-> new Item(new Item.Properties()));
 

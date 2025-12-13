@@ -35,6 +35,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 
 import javax.annotation.Nullable;
@@ -49,13 +50,14 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     public float tilt;
     public float currentRoll = 0.0F;
 
-
+    private static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> WANTS_TO_GRAB = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_GRABBING = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> GRABBING_TICKS = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.INT);
 
     public int attackAnimationTimeout;
+    int prevTicksInWater;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleTwitchState = new AnimationState();
@@ -66,7 +68,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     public final AnimationState idleLookAround = new AnimationState();
     int idleLookTimeout;
 
-    public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
 
     public final AnimationState openJawsStartState = new AnimationState();
@@ -129,6 +130,7 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         this.entityData.define(WANTS_TO_GRAB, false);
         this.entityData.define(IS_GRABBING, false);
         this.entityData.define(GRABBING_TICKS, 0);
+        this.entityData.define(IN_WATER_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -145,6 +147,14 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         this.setWantsToGrab(pCompound.getBoolean("WantsToGrab"));
         this.setIsGrabbing(pCompound.getBoolean("IsGrabbing"));
         this.setGrabbingTicks(pCompound.getInt("GrabbingTicks"));
+    }
+
+    public int getInWaterTicks() {
+        return this.entityData.get(IN_WATER_TICKS);
+    }
+
+    public void setInWaterTicks(int variant) {
+        this.entityData.set(IN_WATER_TICKS, variant);
     }
 
     @Override
@@ -200,6 +210,22 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     @Override
     public void aiStep() {
         super.aiStep();
+
+        if (!this.level().isClientSide){
+
+            if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0 && !this.isVehicle()){
+
+                this.prevTicksInWater = this.getInWaterTicks();
+                this.setInWaterTicks(this.prevTicksInWater -1);
+
+            }else if (this.isInWater() && !this.onGround() && this.getInWaterTicks() < 5){
+
+                this.prevTicksInWater = this.getInWaterTicks();
+                this.setInWaterTicks(this.prevTicksInWater +1);
+
+            }
+
+        }
 
         prevTilt = tilt;
         if (this.isInWater() && !this.onGround() && !this.isLandNavigator) {
@@ -427,8 +453,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
         this.idleAnimationState.animateWhen(!this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
         this.idleOverlay.animateWhen(!this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
-
-        this.swimAnimationState.animateWhen(this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;

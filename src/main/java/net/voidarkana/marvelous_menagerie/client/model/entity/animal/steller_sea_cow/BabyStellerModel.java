@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyStellerAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.StellerSeaCow;
 
@@ -69,14 +70,15 @@ public class BabyStellerModel<T extends StellerSeaCow> extends MarvelousModel<T>
 		if (entity.isInWaterOrBubble()){
 			this.animateWalk(BabyStellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
 
-			this.animateIdle(entity.idleAnimationState, BabyStellerAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
-
 			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F)/2;
 
 		}else {
 			this.swim_rot.resetPose();
-			this.animate(entity.idleAnimationState, BabyStellerAnims.FLOP, ageInTicks, 1.0F);
 		}
+
+		this.animateIdle(entity.idleAnimationState, BabyStellerAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyStellerAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+
 
 		this.head.yRot = netHeadYaw * (float)Math.PI / 180F;
 		this.head.xRot = headPitch * (float)Math.PI / 180F;

@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.HallucigeniaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;
@@ -147,17 +148,15 @@ public class HallucigeniaModel<T extends Hallucigenia> extends MarvelousModel<T>
 
 		if (entity.isInWaterOrBubble()){
 
-			this.animateIdle(entity.idleAnimationState, HallucigeniaAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
-
 			animateWalk(HallucigeniaAnims.WALK, limbSwing, limbSwingAmount, 15f, 100);
 
 			this.head.xRot = headPitch * ((float)Math.PI / 180F);
 			this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
 
-		}else {
-
-			this.animateIdle(entity.flopAnimationState, HallucigeniaAnims.BEACHED, ageInTicks, 1.0f, 1);
 		}
+
+		this.animateIdle(entity.idleAnimationState, HallucigeniaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, HallucigeniaAnims.BEACHED, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
 
 	}
 

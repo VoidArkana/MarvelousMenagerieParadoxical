@@ -54,5 +54,7 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
         tag(MMTags.Biomes.LEPTI_BIOMES).addTag(BiomeTags.IS_FOREST);
 
         tag(MMTags.Biomes.DOEDICURUS_BIOMES).addTag(BiomeTags.HAS_VILLAGE_PLAINS).addTag(BiomeTags.IS_SAVANNA);
+
+        tag(MMTags.Biomes.BOREALOPELTA_BIOMES).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_FOREST);
     }
 }

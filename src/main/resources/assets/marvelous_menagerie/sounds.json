@@ -598,6 +598,43 @@
         "stream": true
       }
     ]
-  }
+  },
 
+
+  "borealopelta_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:borealo_idle_0"
+      },
+      {
+        "name": "marvelous_menagerie:borealo_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:borealo_idle_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.borealopelta_idle"
+  },
+  "borealopelta_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:borealo_hurt_0"
+      },
+      {
+        "name": "marvelous_menagerie:borealo_hurt_1"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.borealopelta_hurt"
+  },
+  "borealopelta_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:borealo_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.borealopelta_death"
+  }
 }

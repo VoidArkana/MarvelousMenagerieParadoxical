@@ -42,8 +42,6 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
 
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState swimAnimationState = new AnimationState();
-    public final AnimationState flopAnimationState = new AnimationState();
 
     @javax.annotation.Nullable
     public Arandaspis leader;
@@ -235,11 +233,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     }
 
     private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isInWaterOrBubble(), this.tickCount);
-
-        this.swimAnimationState.animateWhen(this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
-
-        this.flopAnimationState.animateWhen(!this.isInWaterOrBubble(), this.tickCount);
+        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
     }
 
     @Override

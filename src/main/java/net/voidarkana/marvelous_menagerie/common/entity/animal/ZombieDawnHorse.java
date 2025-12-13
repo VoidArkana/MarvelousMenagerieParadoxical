@@ -10,11 +10,12 @@ import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import org.jetbrains.annotations.Nullable;
 
 public class ZombieDawnHorse extends DawnHorse{
 
-    public ZombieDawnHorse(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public ZombieDawnHorse(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

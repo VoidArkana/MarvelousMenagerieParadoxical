@@ -37,7 +37,7 @@ public class MMEntities {
     public static final RegistryObject<EntityType<Sacabambaspis>> SACABAMBASPIS =
             ENTITY_TYPES.register("sacabambaspis",
                     () -> EntityType.Builder.of(Sacabambaspis::new, MobCategory.WATER_AMBIENT)
-                            .sized(1.1f, 0.5f)
+                            .sized(0.75f, 0.5f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "sacabambaspis").toString()));
 
     public static final RegistryObject<EntityType<Falcatus>> FALCATUS =
@@ -147,8 +147,7 @@ public class MMEntities {
     public static final RegistryObject<EntityType<Josephoartigasia>> JOSEPHO =
             ENTITY_TYPES.register("josepho",
                     () -> EntityType.Builder.of(Josephoartigasia::new, MobCategory.CREATURE)
-                            .sized(1.5f, 1.9f)
-                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "josepho").toString()));
+                            .sized(1.75F, 1.75F).build("josepho"));
 
     public static final RegistryObject<EntityType<StellerSeaCow>> STELLER_SEA_COW =
             ENTITY_TYPES.register("steller_sea_cow",
@@ -162,7 +161,11 @@ public class MMEntities {
                             .sized(1.5f, 1.3f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo").toString()));
 
-    //    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA = ENTITIES.register("borealopelta", () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE).sized(1.8F, 1.7F).build("borealopelta"));
+    public static final RegistryObject<EntityType<Borealopelta>> BOREALOPELTA =
+            ENTITY_TYPES.register("borealopelta",
+                    () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE)
+                            .sized(2.25F, 1.8F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "borealopelta").toString()));
 
 
 

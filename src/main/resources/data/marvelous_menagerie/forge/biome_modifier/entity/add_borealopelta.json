@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_borealopelta_horse_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:borealopelta",
+    "weight": 4,
+    "minCount": 1,
+    "maxCount": 3,
+    "category": "creature"
+  }
+}

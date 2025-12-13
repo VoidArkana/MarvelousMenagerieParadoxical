@@ -36,15 +36,15 @@ import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Thylacine extends Animal implements IAnimatedAttacker {
+public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState howlAnimationState = new AnimationState();
     public final AnimationState yawnAnimationState = new AnimationState();
     public final AnimationState attackAnimationState1 = new AnimationState();
@@ -55,7 +55,7 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.RABBIT, Items.RABBIT_FOOT, Items.COOKED_RABBIT);
 
-    public Thylacine(EntityType<? extends Animal> entityType, Level level) {
+    public Thylacine(EntityType<? extends MarvelousAnimal> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -238,7 +238,6 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
         }
     }
 
-
     //interactions
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
@@ -334,8 +333,8 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
     }
 
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 10;
@@ -364,24 +363,8 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
         }
     }
 
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
-
-        this.walkAnimation.update(f, 0.2f);
-    }
-
     public void tick (){
         super.tick();
-
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
 
         //handles howling
         if (this.getHowlingTime() > 0){
@@ -478,9 +461,5 @@ public class Thylacine extends Animal implements IAnimatedAttacker {
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }

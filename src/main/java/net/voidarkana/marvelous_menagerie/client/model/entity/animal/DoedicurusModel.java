@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BabyEleBirdAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.DoedicurusAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Doedicurus;
@@ -116,20 +117,17 @@ public class DoedicurusModel<T extends Doedicurus> extends MarvelousModel<T> {
 			this.applyStatic(DoedicurusAnims.BABY);
 		}
 
-		if (entity.isInWaterOrBubble()){
-
-			this.animate(entity.idleAnimationState, DoedicurusAnims.SWIM, ageInTicks, 1);
-
-		}else {
+		if (!entity.isInWaterOrBubble()){
 			animateWalk(DoedicurusAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f);
-
-			this.animateIdle(entity.idleAnimationState, DoedicurusAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 
 			this.animate(entity.attackAnimationState1, DoedicurusAnims.ATTACK_1, ageInTicks, 1F);
 			this.animate(entity.attackAnimationState2, DoedicurusAnims.ATTACK_2, ageInTicks, 1F);
 
 			this.animate(entity.idleShakeState, DoedicurusAnims.IDLE_SHAKE, ageInTicks, 1);
 		}
+
+		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);

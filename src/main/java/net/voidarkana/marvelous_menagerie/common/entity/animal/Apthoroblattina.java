@@ -30,25 +30,24 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.config.ModConfig;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
-public class Apthoroblattina extends Animal {
+public class Apthoroblattina extends MarvelousAnimal {
 
     protected static final EntityDataAccessor<Boolean> IS_JOHN = SynchedEntityData.defineId(Apthoroblattina.class, EntityDataSerializers.BOOLEAN);
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleRotRightState = new AnimationState();
     public final AnimationState idleRotLeftState = new AnimationState();
     public final AnimationState idleRotBothState = new AnimationState();
     public final AnimationState idleVibrateState = new AnimationState();
-    public final AnimationState fallFlyState = new AnimationState();
     public final AnimationState johnAnimationState = new AnimationState();
 
-    private int idleRotTimeout = 0;
-    private int idleVibrateTimeout = 0;
+    private int idleRotTimeout = this.random.nextInt(30) + 130;
+    private int idleVibrateTimeout = this.random.nextInt(40) + 80;
     int prevTicksOffGround;
 
     @javax.annotation.Nullable
@@ -56,7 +55,7 @@ public class Apthoroblattina extends Animal {
 
     private static final EntityDataAccessor<Integer> TICKS_OFF_GROUND = SynchedEntityData.defineId(Apthoroblattina.class, EntityDataSerializers.INT);
 
-    public Apthoroblattina(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public Apthoroblattina(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.lookControl = new Apthoroblattina.RoachLookControl(this);
         this.moveControl = new Apthoroblattina.RoachMoveControl(this);
@@ -170,11 +169,10 @@ public class Apthoroblattina extends Animal {
         }
     }
 
-    private void setupAnimationStates() {
+    public void setupAnimationStates() {
 
         if (!this.isJohn()){
-            this.idleAnimationState.animateWhen(this.isAlive() && ((this.onGround() && !this.isBaby()) || this.isBaby()),
-                    this.tickCount);
+            super.setupAnimationStates();
 
             if (!this.walkAnimation.isMoving()){
                 if (this.idleRotTimeout <= 0) {
@@ -203,24 +201,11 @@ public class Apthoroblattina extends Animal {
                 --this.idleVibrateTimeout;
             }
 
-            this.fallFlyState.animateWhen(!this.onGround() && !this.isBaby(), this.tickCount);
         }
 
         this.johnAnimationState.animateWhen(this.isAlive() && this.isJohn(), this.tickCount);
 
 
-    }
-
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
-
-        this.walkAnimation.update(f, 0.2f);
     }
 
     @Override
@@ -242,10 +227,6 @@ public class Apthoroblattina extends Animal {
         if (this.isJohn()){
             this.getNavigation().stop();
             this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
-        }
-
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
         }
     }
 
@@ -428,10 +409,6 @@ public class Apthoroblattina extends Animal {
             }
             return super.canContinueToUse();
         }
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 
 }

@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.EleBirdAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
@@ -100,11 +101,7 @@ public class EleBirdModel<T extends ElephantBird> extends MarvelousModel<T> {
 	public void setupAnim(ElephantBird entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isInWaterOrBubble()){
-
-			this.animate(entity.idleAnimationState, EleBirdAnims.SWIM, ageInTicks, 1);
-
-		}else {
+		if (!entity.isInWaterOrBubble()){
 
 			if (entity.isSprinting()){
 				animateWalk(EleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
@@ -112,11 +109,13 @@ public class EleBirdModel<T extends ElephantBird> extends MarvelousModel<T> {
 				animateWalk(EleBirdAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
 
-			this.animateIdle(entity.idleAnimationState, EleBirdAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
-
 			this.animate(entity.shakeAnimationState, EleBirdAnims.SHAKE, ageInTicks, 1);
-			this.animate(entity.smhAnimationState, EleBirdAnims.NUH_UH, ageInTicks, 1);
 		}
+
+		this.animate(entity.smhAnimationState, EleBirdAnims.NUH_UH, ageInTicks, 1);
+
+		this.animateIdle(entity.idleAnimationState, EleBirdAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, EleBirdAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
 
 		this.head_look.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head_look.yRot = netHeadYaw * ((float)Math.PI / 180F);

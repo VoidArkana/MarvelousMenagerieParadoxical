@@ -28,7 +28,6 @@ import org.jetbrains.annotations.Nullable;
 public abstract class AbstractBasicFish extends BreedableWaterAnimal implements Bucketable{
 
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState swimAnimationState = new AnimationState();
 
     public AbstractBasicFish(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -112,8 +111,6 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
 
     public void setupAnimationStates() {
         this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
-
-        this.swimAnimationState.animateWhen(this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
     }
 
 

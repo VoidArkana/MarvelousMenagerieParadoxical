@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal;
+package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
@@ -13,7 +13,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 
 
 public abstract class BottomDwellerWaterCreature extends BreedableWaterAnimal {

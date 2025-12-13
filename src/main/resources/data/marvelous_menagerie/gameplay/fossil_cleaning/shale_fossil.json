@@ -2,15 +2,15 @@
   "input": ["marvelous_menagerie:shale_fossil"],
   "entries": [
     {
-      "weight": 15,
+      "weight": 11,
       "item": "marvelous_menagerie:arandaspis_fossil"
     },
     {
-      "weight": 15,
+      "weight": 10,
       "item": "marvelous_menagerie:saca_fossil"
     },
     {
-      "weight": 13,
+      "weight": 18,
       "item": "marvelous_menagerie:trilo_fossil"
     },
     {

@@ -56,9 +56,6 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
 
     public int attackAnimationTimeout;
 
-    public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState flopAnimationState = new AnimationState();
-    public final AnimationState swimAnimationState = new AnimationState();
     public final AnimationState attackAnimationState = new AnimationState();
     public final AnimationState shakeAnimationState = new AnimationState();
 
@@ -270,14 +267,9 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
 
 
     public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         this.shakeAnimationState.animateWhen(this.getShakingTime()>0, this.tickCount);
-
-        this.idleAnimationState.animateWhen(this.isInWaterOrBubble(), this.tickCount);
-
-        this.swimAnimationState.animateWhen(this.walkAnimation.isMoving() && this.isInWaterOrBubble(), this.tickCount);
-
-        this.flopAnimationState.animateWhen(!this.isInWaterOrBubble(), this.tickCount);
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;

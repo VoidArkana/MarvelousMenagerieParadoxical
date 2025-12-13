@@ -97,6 +97,8 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_LAYER, BabyOphthalmoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER, BabyOphthalmoModel::createBodyLayer);
 
+        event.registerLayerDefinition(MMModelLayers.BOREALOPELTA_LAYER, BorealoModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 
         event.registerLayerDefinition(MMModelLayers.SIGILLARIA_BOAT_LAYER, BoatModel::createBodyModel);

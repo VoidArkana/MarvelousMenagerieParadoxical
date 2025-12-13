@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.LeptiAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ThylacineAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;
@@ -125,19 +126,13 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 			this.applyStatic(ThylacineAnims.BABY);
 		}
 
-		if (entity.isInWaterOrBubble()){
-
-			this.animate(entity.idleAnimationState, ThylacineAnims.SWIM, ageInTicks, 1);
-
-		}else {
+		if (!entity.isInWaterOrBubble()){
 
 			if (entity.isSprinting()){
 				animateWalk(ThylacineAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
 			}else {
 				animateWalk(ThylacineAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
-
-			this.animateIdle(entity.idleAnimationState, ThylacineAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 
 			this.animate(entity.attackAnimationState1, ThylacineAnims.ATTACK_1, ageInTicks, 1);
 			this.animate(entity.attackAnimationState2, ThylacineAnims.ATTACK_2, ageInTicks, 1);
@@ -147,6 +142,10 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 			this.animate(entity.howlAnimationState, ThylacineAnims.HOWL, ageInTicks, 1);
 
 		}
+
+		this.animateIdle(entity.idleAnimationState, ThylacineAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, ThylacineAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);

@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.EolactoriaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.SlovenicusAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Eolactoria;
 
@@ -84,19 +85,17 @@ public class EolactoriaModel<T extends Eolactoria> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		if (entity.isInWaterOrBubble()){
-			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1,1-Math.abs(limbSwingAmount));
-
 			this.animateWalk(EolactoriaAnims.SWIM, limbSwing, limbSwingAmount,2f, 3f);
-		}
-		else{
-			if (entity.flopSide()){
-				this.animate(entity.idleAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F);
-			}else {
-				this.animate(entity.idleAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F);
-			}
+			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
 		}
 
-		this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
+		this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+
+		if (entity.flopSide())
+			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		else
+			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+
 	}
 
 	@Override

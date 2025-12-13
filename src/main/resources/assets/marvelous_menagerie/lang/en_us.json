@@ -709,5 +709,11 @@
 
   "entity.marvelous_menagerie.tameable.command_0": "%s is wandering",
   "entity.marvelous_menagerie.tameable.command_1": "%s is following",
-  "entity.marvelous_menagerie.tameable.command_2": "%s is staying"
+  "entity.marvelous_menagerie.tameable.command_2": "%s is staying",
+
+  "entity.marvelous_menagerie.borealopelta": "Borealopelta",
+  "item.marvelous_menagerie.borealopelta_spawn_egg": "Borealopelta Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.borealopelta_idle": "Borealopelta grunts",
+  "marvelous_menagerie.sound.subtitle.borealopelta_hurt": "Borealopelta hurts",
+  "marvelous_menagerie.sound.subtitle.borealopelta_death": "Borealopelta dies"
 }

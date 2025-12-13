@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
@@ -65,15 +66,15 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 	public void setupAnim(Sacabambaspis pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (pEntity.isInWater()){
+		if (pEntity.isInWaterOrBubble()){
 			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 3f);
+			this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);
+		}else {
+			this.swim_control.resetPose();
 		}
 
-		if (pEntity.isInWaterOrBubble())
-			this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1.0F, 1-Math.abs(pLimbSwingAmount));
-		else
-			this.animate(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F);
-
-		this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, 1-pEntity.getOutOfWaterTicks()/5f-Math.abs(pLimbSwingAmount)));
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (pEntity.getOutOfWaterTicks()/5f));
 	}
+
 }

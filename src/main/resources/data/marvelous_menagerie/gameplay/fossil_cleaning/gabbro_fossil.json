@@ -2,7 +2,7 @@
   "input": ["marvelous_menagerie:gabbro_fossil"],
   "entries": [
     {
-      "weight": 13,
+      "weight": 10,
       "item": "marvelous_menagerie:gorgon_fossil"
     },
     {
@@ -12,6 +12,10 @@
     {
       "weight": 15,
       "item": "marvelous_menagerie:trilo_fossil"
+    },
+    {
+      "weight": 10,
+      "item": "marvelous_menagerie:flubber_fossil"
     }
   ]
 }

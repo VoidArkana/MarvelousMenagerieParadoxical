@@ -65,6 +65,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_FOSSIL.get());
                         output.accept(MMItems.ROACH_FOSSIL.get());
                         output.accept(MMItems.ARANDASPIS_FOSSIL.get());
+                        output.accept(MMItems.FLUBBER_FOSSIL.get());
                         output.accept(MMItems.PELTA_FOSSIL.get());
                         output.accept(MMItems.DAEODON_FOSSIL.get());
                         output.accept(MMItems.DAWN_FOSSIL.get());
@@ -94,6 +95,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());
                         output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
+                        output.accept(MMItems.BOREALO_SPAWN_EGG.get());
                         output.accept(MMItems.DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.SKELETON_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.get());

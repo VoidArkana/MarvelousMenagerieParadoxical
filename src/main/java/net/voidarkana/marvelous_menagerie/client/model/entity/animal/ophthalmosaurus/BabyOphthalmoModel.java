@@ -80,6 +80,7 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 
 		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
 		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+
 	}
 
 	@Override

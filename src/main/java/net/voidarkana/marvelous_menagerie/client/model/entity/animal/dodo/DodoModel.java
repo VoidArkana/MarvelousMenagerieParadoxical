@@ -80,11 +80,7 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 	public void setupAnim(Dodo entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isInWaterOrBubble()){
-
-			this.animate(entity.idleAnimationState, DodoAnims.SWIM, ageInTicks, 1);
-
-		}else {
+		if (!entity.isInWaterOrBubble()){
 
 			this.animate(entity.peckingAnimationState, DodoAnims.PECK, ageInTicks, 1);
 
@@ -95,12 +91,19 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 			}
 
 
-			this.animateIdle(entity.idleAnimationState, DodoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getTicksOffGround()/5f-Math.abs(limbSwingAmount)));
-			this.animateIdle(entity.flappingAnimationState, DodoAnims.FLAP, ageInTicks, 1.0f, (entity.getTicksOffGround()/5f));
-
 			this.animate(entity.shakingAnimationState, DodoAnims.SHAKE, ageInTicks, 1);
 			this.animate(entity.lookAnimationState, DodoAnims.IDLE_LOOK, ageInTicks, 1);
 		}
+
+		this.animateIdle(entity.idleAnimationState, DodoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+
+		this.animateIdle(entity.idleAnimationState, DodoAnims.IDLE, ageInTicks, 1.0f,
+				Math.max(0, 1-entity.getTicksOffGround()/5f-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+
+		this.animateIdle(entity.idleAnimationState, DodoAnims.FLAP, ageInTicks, 1.0f,
+				entity.getTicksOffGround()/5f-entity.getInWaterTicks()/5f);
+
+
 
 		this.neck.xRot = -headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);

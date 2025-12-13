@@ -99,6 +99,9 @@ public class MMModelLayers {
     public static final ModelLayerLocation OPHTHALMO_ARMOR_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_armor"), "main");
 
+    public static final ModelLayerLocation BOREALOPELTA_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "borealopelta"), "main");
+
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");
     public static final ModelLayerLocation RIFT_LAYER =

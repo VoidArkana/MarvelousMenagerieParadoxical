@@ -38,6 +38,7 @@ import net.voidarkana.marvelous_menagerie.client.screen.ElephantBirdMenu;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.ElephantBirdFollowCaravanGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
@@ -47,9 +48,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
-public class ElephantBird extends Animal implements ContainerListener, HasCustomInventoryScreen {
+public class ElephantBird extends MarvelousAnimal implements ContainerListener, HasCustomInventoryScreen {
 
-    public ElephantBird(EntityType<? extends Animal> entityType, Level level) {
+    public ElephantBird(EntityType<? extends MarvelousAnimal> entityType, Level level) {
         super(entityType, level);
         this.setMaxUpStep(1.5F);
         GroundPathNavigation groundpathnavigation = (GroundPathNavigation)this.getNavigation();
@@ -83,11 +84,10 @@ public class ElephantBird extends Animal implements ContainerListener, HasCustom
     private ElephantBird caravanTail;
     private static final EntityDataAccessor<Boolean> DATA_ID_CHEST = SynchedEntityData.defineId(ElephantBird.class, EntityDataSerializers.BOOLEAN);
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState shakeAnimationState = new AnimationState();
     public final AnimationState smhAnimationState = new AnimationState();
 
-    int shakeAnimationTimeout;
+    int shakeAnimationTimeout = this.random.nextInt(160) + 100;
     int smhAnimationTimeout;
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -409,9 +409,6 @@ public class ElephantBird extends Animal implements ContainerListener, HasCustom
 
     public void tick (){
         super.tick();
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
 
         if (this.getEatenTime()>0){
             if (this.getEatenTime()==590){
@@ -582,24 +579,9 @@ public class ElephantBird extends Animal implements ContainerListener, HasCustom
         }
     }
 
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
+    public void setupAnimationStates() {
 
-        this.walkAnimation.update(f, 0.2f);
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
-    }
-
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+        super.setupAnimationStates();
 
         if (this.shakeAnimationTimeout <= 0) {
             this.shakeAnimationTimeout = this.random.nextInt(160) + 100;

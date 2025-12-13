@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -45,31 +46,27 @@ import org.slf4j.LoggerFactory;
 
 import java.util.EnumSet;
 
-public class Dodo extends Animal {
+public class Dodo extends MarvelousAnimal {
 
-    private static final Logger log = LoggerFactory.getLogger(Dodo.class);
     private int eggLayTime;
     private int initialEggTime;
     int prevTicksOffGround;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE, Items.MELON, Items.PUMPKIN);
 
-    public Dodo(EntityType<? extends Animal> entityType, Level level) {
+    public Dodo(EntityType<? extends MarvelousAnimal> entityType, Level level) {
         super(entityType, level);
         eggLayTime = random.nextInt(5000) + (5000);
         initialEggTime = eggLayTime;
     }
 
     private static final int PECK_ANIMATION_TICKS = 36;
-    public boolean isFalling;
     
-    public final AnimationState flappingAnimationState = new AnimationState();
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState lookAnimationState = new AnimationState();
     public final AnimationState peckingAnimationState = new AnimationState();
     public final AnimationState shakingAnimationState = new AnimationState();
 
-    public int lookAnimationTimeout;
+    public int lookAnimationTimeout = this.random.nextInt(320) + 160;
     public int shakingAnimationTimeout;
     public int peckingAnimationTimeout;
 
@@ -317,7 +314,7 @@ public class Dodo extends Animal {
 
         public void tick() {
             super.tick();
-            //this.dodo.getLookControl().setLookAt((double)this.blockPos.getX() + 0.5D, (double)(this.blockPos.getY() + 1), (double)this.blockPos.getZ() + 0.5D, 10.0F, (float)this.dodo.getMaxHeadXRot());
+
             if (this.isReachedTarget()) {
 
                 if (!this.dodo.getIsPecking()){
@@ -498,37 +495,9 @@ public class Dodo extends Animal {
             this.setSprinting(false);
         }
     }
-    
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
 
-        this.walkAnimation.update(f, 0.2f);
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
-    }
-
-    @Override
-    public void tick() {
-        //System.out.println(this.getTicksOffGround());
-
-
-        super.tick();
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
-
-    }
-
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if (this.lookAnimationTimeout <= 0) {
             this.lookAnimationTimeout = this.random.nextInt(320) + 160;
@@ -551,7 +520,5 @@ public class Dodo extends Animal {
         } else {
             --this.shakingAnimationTimeout;
         }
-
-        this.flappingAnimationState.animateWhen(this.isAlive(), this.tickCount);
     }
 }

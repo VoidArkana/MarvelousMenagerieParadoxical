@@ -26,27 +26,23 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 
-public class Leptictidium extends Animal {
+public class Leptictidium extends MarvelousAnimal {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleTiltState = new AnimationState();
     public final AnimationState idleNoseState = new AnimationState();
-    public final AnimationState neighState = new AnimationState();
 
-    public Leptictidium(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public Leptictidium(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    private int idleTiltTimeout = 0;
-    private int idleNoseTimeout = 0;
-    private int neighTimeout = 0;
+    private int idleTiltTimeout = this.random.nextInt(160) + 160;
+    private int idleNoseTimeout = this.random.nextInt(40) + 80;
 
-    protected boolean canGallop = true;
-    protected int gallopSoundCounter;
 
     @Override
     protected void registerGoals() {
@@ -88,8 +84,8 @@ public class Leptictidium extends Animal {
         return pStack.is(Items.SPIDER_EYE);
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if (this.idleNoseTimeout <= 0) {
             this.idleNoseTimeout = this.random.nextInt(40) + 80;
@@ -105,26 +101,6 @@ public class Leptictidium extends Animal {
             --this.idleTiltTimeout;
         }
 
-    }
-
-    @Override
-    protected void updateWalkAnimation(float pPartialTick) {
-        float f;
-        if(this.getPose() == Pose.STANDING) {
-            f = Math.min(pPartialTick * 6F, 1f);
-        } else {
-            f = 0f;
-        }
-
-        this.walkAnimation.update(f, 0.2f);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
     }
 
     @Nullable

@@ -51,7 +51,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.STELLER_FOSSIL.get(),
                 MMItems.ELEBIRD_FOSSIL.get(),
                 MMItems.DOEDICURUS_FOSSIL.get(),
-                MMItems.SNIFFER_FOSSIL.get()
+                MMItems.SNIFFER_FOSSIL.get(),
+                MMItems.FLUBBER_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(

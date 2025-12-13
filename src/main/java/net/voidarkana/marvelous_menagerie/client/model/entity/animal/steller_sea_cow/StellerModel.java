@@ -91,14 +91,13 @@ public class StellerModel<T extends StellerSeaCow> extends MarvelousModel<T> {
 		if (entity.isInWaterOrBubble()){
 			this.animateWalk(StellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
 
-			this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
-
 			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F)/8;
 		}else {
 			this.swim_rot.resetPose();
-
-			this.animate(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F);
 		}
+
+		this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
 
 		this.head.yRot = (netHeadYaw * (float)Math.PI / 180F)/2;
 		this.head.xRot = (headPitch * (float)Math.PI / 180F)/2;

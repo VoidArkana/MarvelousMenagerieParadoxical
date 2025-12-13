@@ -49,6 +49,7 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.DOEDICURUS.get())
                 .add(MMEntities.JOSEPHO.get())
                 .add(MMEntities.STELLER_SEA_COW.get())
-                .add(MMEntities.OPHTHALMO.get());
+                .add(MMEntities.OPHTHALMO.get())
+                .add(MMEntities.BOREALOPELTA.get());
     }
 }

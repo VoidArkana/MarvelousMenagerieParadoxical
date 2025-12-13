@@ -28,24 +28,24 @@ import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
 import javax.annotation.Nullable;
 
-public class Doedicurus extends Animal implements IAnimatedAttacker {
+public class Doedicurus extends MarvelousAnimal implements IAnimatedAttacker {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState attackAnimationState1 = new AnimationState();
     public final AnimationState attackAnimationState2 = new AnimationState();
     public final AnimationState idleShakeState = new AnimationState();
     public int attackAnimationTimeout;
-    private int idleShakeTimeout;
+    private int idleShakeTimeout = this.getRandom().nextInt(160) + 160;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(ItemTags.LEAVES);
 
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Doedicurus.class, EntityDataSerializers.BOOLEAN);
 
-    public Doedicurus(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    public Doedicurus(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -80,7 +80,11 @@ public class Doedicurus extends Animal implements IAnimatedAttacker {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 40.0F).add(Attributes.KNOCKBACK_RESISTANCE, 1).add(Attributes.MOVEMENT_SPEED, 0.2F).add(Attributes.ATTACK_DAMAGE, 14.0F);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 40.0F)
+                .add(Attributes.ARMOR, 6)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1)
+                .add(Attributes.MOVEMENT_SPEED, 0.2F)
+                .add(Attributes.ATTACK_DAMAGE, 14.0F);
     }
 
     public void tick (){
@@ -91,8 +95,8 @@ public class Doedicurus extends Animal implements IAnimatedAttacker {
         }
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 70;
@@ -166,10 +170,6 @@ public class Doedicurus extends Animal implements IAnimatedAttacker {
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {

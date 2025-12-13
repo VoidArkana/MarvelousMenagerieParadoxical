@@ -74,15 +74,11 @@ public class DawnHorseModel<T extends DawnHorse> extends MarvelousModel<T> {
 	public void setupAnim(DawnHorse entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
+		if (!entity.isInWaterOrBubble())
+			animateWalk(DawnHorseAnims.RUN, limbSwing, limbSwingAmount, 2f, 1);
 
-		animateWalk(DawnHorseAnims.RUN, limbSwing, limbSwingAmount, 2f, 1);
-//		if (entity.isSprinting()){
-//			animateWalk(DawnHorseAnims.RUN, limbSwing, limbSwingAmount, 2f, 1);
-//		}else {
-//			animateWalk(DawnHorseAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
-//		}
-
-		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
 
 		this.animate(entity.idleEarsState, DawnHorseAnims.IDLE_EARS, ageInTicks, 1.0F);
 

@@ -46,6 +46,7 @@ public class MMEvents {
         event.put(MMEntities.JOSEPHO.get(), Josephoartigasia.createAttributes().build());
         event.put(MMEntities.STELLER_SEA_COW.get(), StellerSeaCow.createAttributes().build());
         event.put(MMEntities.OPHTHALMO.get(), Ophthalmosaurus.createAttributes().build());
+        event.put(MMEntities.BOREALOPELTA.get(), Borealopelta.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

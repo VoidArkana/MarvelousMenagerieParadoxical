@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.PikaiaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Pikaia;
@@ -81,20 +82,24 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 	public void setupAnim(Pikaia entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isInWater()){
+		if (entity.isInWaterOrBubble()){
 			this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
+
+			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
+
+			this.tail_rot.yRot = -entity.currentRoll;
+
+			this.tail_tip_rot.yRot = -entity.currentRoll;
+
+		}else {
+			this.swim_control.resetPose();
+			this.tail_rot.resetPose();
+			this.tail_tip_rot.resetPose();
 		}
 
-		if (entity.isInWaterOrBubble())
-			this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
-		else
-			this.animate(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F);
+		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
 
-		this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
-
-		this.tail_rot.yRot = -entity.currentRoll;
-
-		this.tail_tip_rot.yRot = -entity.currentRoll;
 	}
 
 	@Override

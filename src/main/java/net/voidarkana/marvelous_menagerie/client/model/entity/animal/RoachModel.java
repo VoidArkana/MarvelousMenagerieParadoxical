@@ -94,19 +94,29 @@ public class RoachModel<T extends Apthoroblattina> extends MarvelousModel<T> {
 	public void setupAnim(Apthoroblattina entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, entity.isSprinting() ? 5f : 2.5f);
 
-		this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getTicksOffGround()/5f-Math.abs(limbSwingAmount)));
 
-		this.animate(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F);
 
-		this.animate(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F);
-		this.animate(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F);
-		this.animate(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F);
+		if (!entity.isInWaterOrBubble()){
+			animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, entity.isSprinting() ? 5f : 2.5f);
 
-		this.animateIdle(entity.fallFlyState, RoachAnims.FALL_FLY, ageInTicks, 1.0F, (entity.getTicksOffGround()/5f));
+			this.animate(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F);
 
-		this.animate(entity.johnAnimationState, RoachAnims.JOHN, ageInTicks, 1.0F);
+			this.animate(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F);
+			this.animate(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F);
+			this.animate(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F);
+
+			this.animate(entity.johnAnimationState, RoachAnims.JOHN, ageInTicks, 1.0F);
+
+		}
+
+		if (entity.isBaby()){
+			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-Math.abs(limbSwingAmount)));
+		}else
+		{
+			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getTicksOffGround()/5f-Math.abs(limbSwingAmount)));
+			this.animateIdle(entity.idleAnimationState, RoachAnims.FALL_FLY, ageInTicks, 1.0F, (entity.getTicksOffGround()/5f));
+		}
 
 		if (this.young){
 			applyStatic(RoachAnims.BABY);

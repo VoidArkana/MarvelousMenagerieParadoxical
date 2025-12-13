@@ -37,14 +37,21 @@ import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.CustomRideGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.MarvelousSitWhenOrderedToGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.TameableFollowOwnerGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.ICustomFollower;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.TamableMarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
-public class Josephoartigasia extends TamableAnimal implements ICustomFollower, Saddleable {
+public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleable {
 
     public Vec3 movement;
+
+    public Josephoartigasia (EntityType<? extends TamableMarvelousAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.setMaxUpStep(1.0F);
+        this.reassessTameGoals();
+    }
 
     static final TargetingConditions ADULT_TO_RIDE =
             TargetingConditions.forNonCombat().range(15.0D)
@@ -58,10 +65,7 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     private static final EntityDataAccessor<Integer> SITTING_LAG = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.INT);
 
     private static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> COMMAND = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.INT);
 
-
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState sitStartAnimationState = new AnimationState();
     public final AnimationState sitEndAnimationState = new AnimationState();
     public final AnimationState sitIdleAnimationState = new AnimationState();
@@ -70,14 +74,9 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     public final AnimationState leftEarWiggleAnimationState = new AnimationState();
     public final AnimationState headShakeAnimationState = new AnimationState();
 
-    public int earWiggleAnimationTimeout;
-    public int headShakeAnimationTimeout;
+    public int earWiggleAnimationTimeout = this.random.nextInt(40) + 80;
+    public int headShakeAnimationTimeout = this.random.nextInt(160) + 80;
 
-    public Josephoartigasia (EntityType<? extends TamableAnimal> entityType, Level level) {
-        super(entityType, level);
-        this.setMaxUpStep(1.0F);
-        this.reassessTameGoals();
-    }
     
     @javax.annotation.Nullable
     public LivingEntity getControllingPassenger() {
@@ -99,7 +98,7 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
+        this.goalSelector.addGoal(0, new MarvelousSitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(1, new DismountGoal(this));
         this.goalSelector.addGoal(1, new MountAdultGoal(this, 1.2D));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
@@ -128,7 +127,6 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SADDLED, false);
-        this.entityData.define(COMMAND, 0);
         this.entityData.define(SITTING_TIME, 0);
         this.entityData.define(SITTING_LAG, 0);
         this.entityData.define(STANDING_TIME, 0);
@@ -138,22 +136,12 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("Saddle", this.isSaddled());
-        compound.putInt("Command", this.getCommand());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setSaddled(compound.getBoolean("Saddle"));
-        this.setCommand(compound.getInt("Command"));
-    }
-
-    public int getCommand() {
-        return this.entityData.get(COMMAND);
-    }
-
-    public void setCommand(int command) {
-        this.entityData.set(COMMAND, command);
     }
 
     @Override
@@ -199,39 +187,11 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
         this.entityData.set(SITTING_LAG, command);
     }
 
-    public boolean shouldFollow() {
-        return this.getCommand() == 1;
-    }
-
     protected void dropEquipment() {
         super.dropEquipment();
         if (this.isSaddled()) {
             this.spawnAtLocation(Items.SADDLE);
         }
-    }
-
-    public boolean isAlliedTo(Entity entityIn) {
-        if (this.isTame()) {
-            LivingEntity livingentity = this.getOwner();
-            if (entityIn == livingentity) {
-                return true;
-            }
-
-            if (entityIn instanceof TamableAnimal) {
-                return ((TamableAnimal)entityIn).isOwnedBy(livingentity);
-            }
-
-            if (livingentity != null) {
-                return livingentity.isAlliedTo(entityIn);
-            }
-        }
-
-        return entityIn.is(this);
-    }
-
-    @Override
-    public boolean dismountsUnderwater() {
-        return true;
     }
 
     public void travel(Vec3 pos) {
@@ -352,9 +312,9 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
         }
     }
 
-    private void setupAnimationStates() {
+    public void setupAnimationStates() {
 
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+        super.setupAnimationStates();
 
         if (this.earWiggleAnimationTimeout <= 0) {
             this.earWiggleAnimationTimeout = this.random.nextInt(40) + 80;
@@ -407,10 +367,6 @@ public class Josephoartigasia extends TamableAnimal implements ICustomFollower, 
     public void tick() {
 
         super.tick();
-
-        if (this.level().isClientSide){
-            this.setupAnimationStates();
-        }
 
         if (this.isVehicle()){
             movement = new Vec3(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);

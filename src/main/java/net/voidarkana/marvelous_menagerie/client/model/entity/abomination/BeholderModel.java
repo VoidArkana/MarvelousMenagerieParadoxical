@@ -9,6 +9,8 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 
@@ -202,12 +204,12 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 			}
 		}
 
-		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
 
 		this.animate(entity.idleOverlay, BeholderAnims.IDLE_OVERLAY, ageInTicks, 1.0F);
 
 		this.animate(entity.idleSignalState, BeholderAnims.SIGNAL_BLEND, ageInTicks, 1);
-		this.animate(entity.swimAnimationState, BeholderAnims.SWIM, ageInTicks, 1);
 		this.animate(entity.idleTwitchState, BeholderAnims.TWITCH_SLOWED, ageInTicks, 2);
 		this.animate(entity.attackAnimationState, BeholderAnims.BITE_OVERLAY, ageInTicks, 1);
 		this.animate(entity.idleLookAround, BeholderAnims.LOOKAROUND_BLEND, ageInTicks, 1);
