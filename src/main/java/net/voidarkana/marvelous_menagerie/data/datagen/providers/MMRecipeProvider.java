@@ -48,9 +48,20 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .unlockedBy(getHasName(MMItems.PALEO_TOOLKIT.get()), has(MMItems.PALEO_TOOLKIT.get()))
                 .save(consumer);
 
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MMItems.CHRONOTITE.get(), 1)
+                .requires(MMItems.BEHOLDER_MANDIBLE.get())
+                .unlockedBy(getHasName(MMItems.BEHOLDER_MANDIBLE.get()), has(MMItems.BEHOLDER_MANDIBLE.get()))
+                .save(consumer, this.name("chronotite_from_beholder"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MMItems.CHRONOTITE.get(), 1)
+                .requires(MMItems.MOLTEN_SPINE.get())
+                .unlockedBy(getHasName(MMItems.MOLTEN_SPINE.get()), has(MMItems.MOLTEN_SPINE.get()))
+                .save(consumer, this.name("chronotite_from_molten"));
+
         //Chronotite Pillar
-        makeIngotToBlock(MMBlocks.CHRONOTITE, MMItems.CHRONOTITE).save(consumer);
-        makeBlockToIngot(MMItems.CHRONOTITE, MMBlocks.CHRONOTITE).save(consumer);
+        make4IngotToBlock(MMBlocks.CHRONOTITE.get(), MMItems.CHRONOTITE.get()).save(consumer);
+        makeBlockTo4Ingot(MMItems.CHRONOTITE.get(), MMBlocks.CHRONOTITE.get()).save(consumer);
 
         //Paleo Table
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.PALEO_TABLE.get(), 1)

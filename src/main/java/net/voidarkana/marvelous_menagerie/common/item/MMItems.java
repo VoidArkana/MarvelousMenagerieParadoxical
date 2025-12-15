@@ -39,10 +39,20 @@ public class MMItems {
     //Chud
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x4c2f33, new Item.Properties()));
+    public static final RegistryObject<Item> CHUD_FLESH = ITEMS.register("chud_flesh",
+            ()-> new Item(new Item.Properties().food(MMFoods.CHUD_FLESH)));
 
     //Beholder
     public static final RegistryObject<Item> BEHOLDER_SPAWN_EGG = ITEMS.register("beholder_spawn_egg",
             () -> new ForgeSpawnEggItem(MMEntities.BEHOLDER, 0x46b06a, 0x194d3f, new Item.Properties()));
+    public static final RegistryObject<Item> BEHOLDER_MANDIBLE = ITEMS.register("beholder_mandible",
+            ()-> new Item(new Item.Properties()));
+
+    //Molten
+    public static final RegistryObject<Item> MOLTEN_SPAWN_EGG = ITEMS.register("molten_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.MOLTEN, 0xc3593c, 0x3a3b65, new Item.Properties()));
+    public static final RegistryObject<Item> MOLTEN_SPINE = ITEMS.register("molten_spine",
+            ()-> new Item(new Item.Properties()));
 
     //Sacabambaspis
     public static final RegistryObject<Item> SACA_SPAWN_EGG = ITEMS.register("saca_spawn_egg",
@@ -169,7 +179,7 @@ public class MMItems {
     public static final RegistryObject<Item> PELTA_FOSSIL = ITEMS.register("pelta_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BOREALO_SPAWN_EGG = ITEMS.register("borealopelta_spawn_egg",
-            ()-> new FishSpawnEggItem(MMEntities.BOREALOPELTA, 0xbe2215, 0xe6742f, new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(MMEntities.BOREALOPELTA, 0xbe2215, 0xe6742f, new Item.Properties()));
 
     //Daeodon
     public static final RegistryObject<Item> DAEODON_FOSSIL = ITEMS.register("daeodon_fossil",

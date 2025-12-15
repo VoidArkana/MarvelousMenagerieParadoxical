@@ -25,6 +25,10 @@ public class MMItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
 
+        this.tag(Tags.Items.EGGS).add(
+                MMBlocks.BOREALOPELTA_EGG.get().asItem()
+        );
+
         this.tag(MMTags.Items.ANIMAL_FOSSILS).add(
                 MMItems.SACA_FOSSIL.get(),
                 MMItems.ARANDASPIS_FOSSIL.get(),

@@ -555,7 +555,6 @@
   "entity.marvelous_menagerie.lystro": "Lystrosaurus",
   "entity.marvelous_menagerie.theri": "Therizinosaurus",
   "entity.marvelous_menagerie.tlato": "Tlatolophus",
-  "entity.marvelous_menagerie.borealo": "Borealopelta",
   "entity.marvelous_menagerie.daeodon": "Daeodon",
 
   "entity.marvelous_menagerie.dawn_horse": "Dawn Horse",
@@ -713,7 +712,18 @@
 
   "entity.marvelous_menagerie.borealopelta": "Borealopelta",
   "item.marvelous_menagerie.borealopelta_spawn_egg": "Borealopelta Spawn Egg",
+  "block.marvelous_menagerie.borealopelta_egg": "Borealopelta Egg",
   "marvelous_menagerie.sound.subtitle.borealopelta_idle": "Borealopelta grunts",
   "marvelous_menagerie.sound.subtitle.borealopelta_hurt": "Borealopelta hurts",
-  "marvelous_menagerie.sound.subtitle.borealopelta_death": "Borealopelta dies"
+  "marvelous_menagerie.sound.subtitle.borealopelta_death": "Borealopelta dies",
+
+  "entity.marvelous_menagerie.molten": "Molten",
+  "item.marvelous_menagerie.molten_spawn_egg": "Molten Spawn Egg",
+  "item.marvelous_menagerie.molten_spine": "Molten Spine",
+  "marvelous_menagerie.sound.subtitle.molten_idle": "Molten growls",
+  "marvelous_menagerie.sound.subtitle.molten_hurt": "Molten hurts",
+  "marvelous_menagerie.sound.subtitle.molten_death": "Molten dies",
+  "marvelous_menagerie.sound.subtitle.molten_roar": "Molten roars",
+  "marvelous_menagerie.sound.subtitle.molten_breathe": "Molten breathes fire",
+  "marvelous_menagerie.sound.subtitle.molten_steps": "Molten stomps around"
 }

@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "marvelous_menagerie:ruined_altar",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+
+    "salt": 323104245,
+
+    "spacing": 25,
+
+    "separation": 8
+  }
+}

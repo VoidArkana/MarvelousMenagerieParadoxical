@@ -73,6 +73,8 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> BOREALOPELTA_HURT = registerSoundEvents(   "borealopelta_hurt");
     public static final RegistryObject<SoundEvent> BOREALOPELTA_DEATH = registerSoundEvents(  "borealopelta_death");
 
+    public static final RegistryObject<SoundEvent> MOLTEN_STEPS = registerSoundEvents(  "molten_steps");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

@@ -2,6 +2,9 @@ package net.voidarkana.marvelous_menagerie.common.entity.misc;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -33,12 +36,39 @@ public class RiftEntity extends Monster {
 
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(PLAYER);
 
+    private static final EntityDataAccessor<Boolean> IS_NATURAL = SynchedEntityData.defineId(RiftEntity.class, EntityDataSerializers.BOOLEAN);
+
     public RiftEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0);
+    }
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_NATURAL, true);
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("IsNatural", this.isNatural());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setIsNatural(pCompound.getBoolean("IsNatural"));
+    }
+
+    public boolean isNatural() {
+        return this.entityData.get(IS_NATURAL);
+    }
+
+    public void setIsNatural(boolean isNatural) {
+        this.entityData.set(IS_NATURAL, isNatural);
     }
 
     @Override
@@ -88,6 +118,10 @@ public class RiftEntity extends Monster {
             this.setPos(this.getX(), this.getY()+1f, this.getZ());
         }
 
+        if (pReason == MobSpawnType.STRUCTURE){
+            this.setIsNatural(false);
+        }
+
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
@@ -127,5 +161,9 @@ public class RiftEntity extends Monster {
     public static boolean checkRiftSpawn(EntityType<? extends Mob> pType, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
         BlockPos blockpos = pPos.below();
         return pSpawnType == MobSpawnType.SPAWNER || pLevel.getBlockState(blockpos).isValidSpawn(pLevel, blockpos, pType) && pPos.getY() > 62;
+    }
+
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return this.isNatural();
     }
 }

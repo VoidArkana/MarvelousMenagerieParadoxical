@@ -18,6 +18,7 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.BeholderModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.MoltenModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.DawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.SkeletonDawnHorseModel;
@@ -91,13 +92,14 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_STELLER_LAYER, BabyStellerModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.OPHTHALMO_LAYER, OphthalmoModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_PATTERN_LAYER, OphthalmoModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_SADDLE_LAYER, OphthalmoModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_ARMOR_LAYER, OphthalmoModel::createBodyLayer);
+//        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_PATTERN_LAYER, OphthalmoModel::createBodyLayer);
+//        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_SADDLE_LAYER, OphthalmoModel::createBodyLayer);
+//        event.registerLayerDefinition(MMModelLayers.OPHTHALMO_ARMOR_LAYER, OphthalmoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_LAYER, BabyOphthalmoModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER, BabyOphthalmoModel::createBodyLayer);
+//        event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER, BabyOphthalmoModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.BOREALOPELTA_LAYER, BorealoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.MOLTEN_LAYER, MoltenModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

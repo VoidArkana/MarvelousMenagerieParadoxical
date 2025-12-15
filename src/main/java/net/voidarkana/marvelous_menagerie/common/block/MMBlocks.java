@@ -16,10 +16,12 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.*;
 import net.voidarkana.marvelous_menagerie.common.block.custom.flammable.FlammableWoodLogBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.plant.*;
+import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.CalamitesTreeGrower;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.MMWoodTypes;
 
 import java.util.function.Function;
@@ -42,6 +44,11 @@ public class MMBlocks {
 
     public static final RegistryObject<PaintingVariant> DODO_PAINTING = PAINTINGS.register("louisses_dodo",
             () -> new PaintingVariant(48, 32));
+
+    //Borealopelta
+    public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",
+            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG),
+                    MMEntities.BOREALOPELTA, MMTags.Blocks.DINOSAUR_NEST));
 
     //Sigillaria plank blocks
     public static final RegistryObject<Block> SIGILLARIA_PLANKS = registerBlock("sigillaria_planks",

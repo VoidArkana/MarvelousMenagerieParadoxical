@@ -25,21 +25,19 @@ import java.util.function.Supplier;
 public class AddItemsModifier extends LootModifier {
 
     public static final Supplier<Codec<AddItemsModifier>> CODEC = Suppliers.memoize(()
-            -> RecordCodecBuilder.create(inst -> codecStart(inst).and(ExtraCodecs.nonEmptyList(ForgeRegistries.ITEMS.getCodec().listOf())
-            .fieldOf("item").forGetter(m -> m.items)).apply(inst, AddItemsModifier::new)));
-    public static final List<ResourceLocation> SNIFFERENT_ITEMS_LOC = List.of(snifferentLoc("spindlefern_seeds"), snifferentLoc("spineflower_seeds"), snifferentLoc("lumibulb_seeds"), snifferentLoc("sniffberry_seedling"), snifferentLoc("bloom_plant_nut"), snifferentLoc("globar_sapling"), snifferentLoc("club_moss_patch"), snifferentLoc("amber"));
-    public static final List<ResourceLocation> HELLIONS_ITEMS_LOC = List.of(hellionsLoc("stone_pine_sapling"), hellionsLoc("fiddlefern"), hellionsLoc("ivy"));
-    public static final List<ResourceLocation> QUARK_ITEMS_LOC = List.of(new ResourceLocation("quark", "ancient_sapling"));
-    public static final List<ResourceLocation> MSF_ITEMS_LOC = List.of(moreSnifferFlowers("dawnberry_vine_seeds"),
-            moreSnifferFlowers("ambush_seeds"), moreSnifferFlowers("bonmeelia_seeds"),
-            moreSnifferFlowers("dyespria_seeds"), moreSnifferFlowers("caulorflower"));
-
+            -> RecordCodecBuilder.create(inst -> codecStart(inst)
+            .and(ExtraCodecs.nonEmptyList(ForgeRegistries.ITEMS.getCodec().listOf())
+            .fieldOf("item").forGetter(m -> m.items))
+            .and(Codec.FLOAT.fieldOf("chance").forGetter(m -> m.chance))
+            .apply(inst, AddItemsModifier::new)));
 
     private final List<Item> items;
+    private final float chance;
 
-    public AddItemsModifier(LootItemCondition[] conditionsIn, List<Item> items) {
+    public AddItemsModifier(LootItemCondition[] conditionsIn, List<Item> items, float chance) {
         super(conditionsIn);
         this.items = items;
+        this.chance = chance;
     }
 
     @Override
@@ -52,46 +50,13 @@ public class AddItemsModifier extends LootModifier {
             }
         }
 
-        generatedLoot.clear();
-        generatedLoot.add(Items.PITCHER_POD.getDefaultInstance());
-        generatedLoot.add(Items.TORCHFLOWER_SEEDS.getDefaultInstance());
-        modSupport(SNIFFERENT_ITEMS_LOC, generatedLoot);
-        modSupport(HELLIONS_ITEMS_LOC, generatedLoot);
-        modSupport(QUARK_ITEMS_LOC, generatedLoot);
-        modSupport(MSF_ITEMS_LOC, generatedLoot);
-
-        items.forEach(item -> generatedLoot.add(item.getDefaultInstance()));
-        newLoot.add(Util.getRandom(generatedLoot, context.getRandom()));
-        return newLoot;
-    }
-
-    private void modSupport(List<ResourceLocation> itemsLocList, ObjectArrayList<ItemStack> generatedLoot) {
-        List<ItemStack> itemList = new ArrayList<>();
-
-        itemsLocList.forEach(resourceLocation -> {
-            var item = ForgeRegistries.ITEMS.getValue(resourceLocation);
-            if(item != null && !item.getDefaultInstance().is(Items.AIR)) {
-                itemList.add(item.getDefaultInstance());
-            }
-        });
-
-        if(itemList.isEmpty()) {
-            return;
+        if (context.getRandom().nextFloat() < chance){
+            generatedLoot.clear();
+            items.forEach(item -> generatedLoot.add(item.getDefaultInstance()));
         }
 
-        generatedLoot.addAll(itemList);
-    }
-
-    private static ResourceLocation snifferentLoc(String path) {
-        return new ResourceLocation("snifferent", path);
-    }
-
-    private static ResourceLocation hellionsLoc(String path) {
-        return new ResourceLocation("snifferplus", path);
-    }
-
-    private static ResourceLocation moreSnifferFlowers(String path) {
-        return new ResourceLocation("moresnifferflowers", path);
+        newLoot.add(Util.getRandom(generatedLoot, context.getRandom()));
+        return newLoot;
     }
 
     @Override

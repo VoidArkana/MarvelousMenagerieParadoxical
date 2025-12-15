@@ -4,7 +4,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
@@ -25,6 +27,8 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+
+                MMBlocks.BOREALOPELTA_EGG.get(),
 
                 MMBlocks.CHRONO_ALTAR.get(),
                 MMBlocks.CHRONO_PEDESTAL.get(),
@@ -627,5 +631,11 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.BRECCIA_FOSSIL_BLOCK.get(),
                 MMBlocks.PERMAFROST_FOSSIL_BLOCK.get()
         );
+
+        this.tag(MMTags.Blocks.DINOSAUR_NEST)
+                .addTag(BlockTags.DIRT)
+                .addTag(Tags.Blocks.GRAVEL)
+                .addTag(BlockTags.SAND)
+                .add(Blocks.CLAY);
     }
 }

@@ -27,6 +27,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.block.AltarRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.CharniaRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PaleoTableRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.PedestalRenderer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.MoltenRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.FractureRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.MMBoatRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.RiftRenderer;
@@ -94,6 +95,7 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.STELLER_SEA_COW.get(), StellerRenderer::new);
         EntityRenderers.register(MMEntities.OPHTHALMO.get(), OphthalmoRenderer::new);
         EntityRenderers.register(MMEntities.BOREALOPELTA.get(), BorealopeltaRenderer::new);
+        EntityRenderers.register(MMEntities.MOLTEN.get(), MoltenRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);

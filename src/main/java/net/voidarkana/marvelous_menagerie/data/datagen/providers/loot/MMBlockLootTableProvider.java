@@ -332,7 +332,8 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
 
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));
-        
+
+        this.dropSelf(MMBlocks.BOREALOPELTA_EGG.get());
     }
 
     public LootTable.Builder createCharniaDrops(Block charniaBlock) {

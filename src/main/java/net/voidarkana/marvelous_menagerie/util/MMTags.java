@@ -26,6 +26,8 @@ public class MMTags {
     }
 
     public static class Biomes {
+        public static final TagKey<Biome> RUINED_ALTAR_BIOMES = create("has_structure/ruined_altar_biomes");
+
         public static final TagKey<Biome> DODO_BIOMES = create("is_dodo_biome");
         public static final TagKey<Biome> ELEPHANT_BIRD_BIOMES = create("is_elephant_bird_biome");
         public static final TagKey<Biome> THYLACINE_BIOMES = create("is_thylacine_biome");
@@ -60,6 +62,8 @@ public class MMTags {
     }
 
     public static class Blocks {
+        public static final TagKey<Block> DINOSAUR_NEST = tag("is_valid_block_for_dino_egg_hatching");
+
         public static final TagKey<Block> SIGILLARIA_LOG_BLOCK = tag("sigillaria_log_block");
 
         public static final TagKey<Block> CALAMITES_LOG_BLOCK = tag("calamites_log_block");

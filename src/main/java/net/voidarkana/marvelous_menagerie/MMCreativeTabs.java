@@ -19,12 +19,18 @@ public class MMCreativeTabs {
                     .title(Component.translatable("creativetab.marvelous_menagerie_tab_mobs"))
                     .displayItems((itemDisplayParameters, output) -> {
 
+                        output.accept(MMItems.BEHOLDER_MANDIBLE.get());
+                        output.accept(MMItems.CHUD_FLESH.get());
+                        output.accept(MMItems.MOLTEN_SPINE.get());
+
                         output.accept(MMItems.CARIS_BUCKET.get());
                         output.accept(MMItems.CARIS_LENS.get());
                         output.accept(MMItems.CARIS_SCUTE.get());
                         output.accept(MMItems.ANOMALOUS_GOGGLES.get());
 
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
+
+                        output.accept(MMBlocks.BOREALOPELTA_EGG.get());
 
                         output.accept(MMItems.RAW_DAWN_HORSE.get());
                         output.accept(MMItems.COOKED_DAWN_HORSE.get());
@@ -117,6 +123,7 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.BEHOLDER_SPAWN_EGG.get());
                         output.accept(MMItems.CHUD_SPAWN_EGG.get());
+                        output.accept(MMItems.MOLTEN_SPAWN_EGG.get());
                     })
                     .build());
 

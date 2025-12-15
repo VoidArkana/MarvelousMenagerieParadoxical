@@ -23,6 +23,8 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
     }
 
     protected void addTags() {
+        tag(MMTags.Biomes.RUINED_ALTAR_BIOMES).addTag(BiomeTags.IS_OVERWORLD);
+
         tag(MMTags.Biomes.DODO_BIOMES).addTag(BiomeTags.IS_JUNGLE).add(Biomes.MUSHROOM_FIELDS);
         tag(MMTags.Biomes.ELEPHANT_BIRD_BIOMES).addTag(BiomeTags.IS_JUNGLE);
         tag(MMTags.Biomes.THYLACINE_BIOMES).addTag(BiomeTags.IS_SAVANNA).add(Biomes.PLAINS).add(Biomes.SUNFLOWER_PLAINS);

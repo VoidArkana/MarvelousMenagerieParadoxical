@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-30T11:38:29.9443552	Tags for minecraft:block mod id marvelous_menagerie
+// 1.20.1	2025-12-13T12:21:23.098574	Tags for minecraft:block mod id marvelous_menagerie
 bac522db269992f0d71c3ecb9cc50c98a1344053 data/marvelous_menagerie/tags/blocks/calamites_bundle_block.json
 232f7a0a8e201d0b4440898feef646e14b146c7e data/marvelous_menagerie/tags/blocks/calamites_log_block.json
 f05fb6df733203cf381553966b3f94424f0e4c1b data/marvelous_menagerie/tags/blocks/dye_depot_amber_wool.json
@@ -19,6 +19,7 @@ ceaee686e341fec38897b899a4093eeeba1570b0 data/marvelous_menagerie/tags/blocks/dy
 4e9565ec368dac238ddc5389e2e8be270531220e data/marvelous_menagerie/tags/blocks/dye_depot_verdant_wool.json
 91a6ffe1ba6c1b9c525b3994d8bedeb916904345 data/marvelous_menagerie/tags/blocks/dye_depot_wool.json
 4ccd94b31f19e837c9c85501d3b6952a9a3a0db8 data/marvelous_menagerie/tags/blocks/fossil_blocks.json
+3f32f8c08d7393f4ed2a8dd8824c5509b6d79574 data/marvelous_menagerie/tags/blocks/is_valid_block_for_dino_egg_hatching.json
 59d69af29e21450946ca29a6be759ab4a2a05c95 data/marvelous_menagerie/tags/blocks/pikaia_coral_target.json
 1105b8780627abc34c43d2c973d7dda863e1b646 data/marvelous_menagerie/tags/blocks/sigillaria_log_block.json
 54addc3df612b5c28eb35d9d18402dfd5ae8a845 data/minecraft/tags/blocks/ceiling_hanging_signs.json
@@ -27,7 +28,7 @@ b165d0539761ac07b12eed85b1100ccc2a80d488 data/minecraft/tags/blocks/leaves.json
 c012d9bdf9a32ad715bccba79e7a1376b7bf1dfc data/minecraft/tags/blocks/logs_that_burn.json
 526e2f0dd2a78fb2dbd66aca80dd35cb6fdfc29f data/minecraft/tags/blocks/mineable/axe.json
 19bdd7932f0a47f5075699d92136101c7332f5c7 data/minecraft/tags/blocks/mineable/hoe.json
-ff1e25fc8625d1c949a17425ddff8b74614d3013 data/minecraft/tags/blocks/mineable/pickaxe.json
+4e607d79105fd2698e4161968c26119d04e23751 data/minecraft/tags/blocks/mineable/pickaxe.json
 bdc3f6c8b008c0e1645343a14a2e68fc63af5d68 data/minecraft/tags/blocks/mineable/shovel.json
 4ecff124fc11412cfeebd98e3e9bf6fef1923654 data/minecraft/tags/blocks/planks.json
 0a1b6f8ec80d2a18e356391b992792af993d2f2a data/minecraft/tags/blocks/signs.json

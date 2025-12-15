@@ -116,12 +116,12 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0)
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.35F)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5F)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25F)
                 .add(Attributes.ATTACK_DAMAGE, 5.0)
                 .add(Attributes.FOLLOW_RANGE, 24)
-                .add(Attributes.ARMOR, 7.5F);
+                .add(Attributes.ARMOR, 5);
     }
 
     protected void defineSynchedData() {

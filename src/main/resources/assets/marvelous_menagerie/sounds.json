@@ -636,5 +636,21 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.borealopelta_death"
+  },
+
+  "molten_steps": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:molten_footstep_1"
+      },
+      {
+        "name": "marvelous_menagerie:molten_footstep_2"
+      },
+      {
+        "name": "marvelous_menagerie:molten_footstep_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.molten_steps"
   }
 }

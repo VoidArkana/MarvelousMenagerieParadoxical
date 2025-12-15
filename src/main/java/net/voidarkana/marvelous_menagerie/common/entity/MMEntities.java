@@ -10,6 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
+import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
@@ -166,6 +167,12 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Borealopelta::new, MobCategory.CREATURE)
                             .sized(2.25F, 1.8F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "borealopelta").toString()));
+
+    public static final RegistryObject<EntityType<Molten>> MOLTEN =
+            ENTITY_TYPES.register("molten",
+                    () -> EntityType.Builder.of(Molten::new, MobCategory.CREATURE)
+                            .sized(2, 2.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "molten").toString()));
 
 
 

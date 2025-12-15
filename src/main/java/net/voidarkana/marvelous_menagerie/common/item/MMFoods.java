@@ -46,6 +46,18 @@ public class MMFoods {
             .effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20*30, 1), 1.0F)
             .effect(new MobEffectInstance(MobEffects.DIG_SPEED, 20*30, 1), 1.0F).build();
 
+    public static final FoodProperties CHUD_FLESH = (new FoodProperties.Builder())
+            .nutrition(2)
+            .saturationMod(0.1F)
+            .effect(new MobEffectInstance(MobEffects.WITHER, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.CONFUSION, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.WEAKNESS, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.BLINDNESS, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.HUNGER, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20*15, 0), 1.0F)
+            .effect(new MobEffectInstance(MobEffects.UNLUCK, 20*60*2, 0), 1.0F)
+            .build();
 
     public static final FoodProperties RAW_DAWN_HORSE = (new FoodProperties.Builder())
             .nutrition(3)

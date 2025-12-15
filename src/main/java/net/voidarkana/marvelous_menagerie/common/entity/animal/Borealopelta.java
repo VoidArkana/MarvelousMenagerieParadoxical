@@ -23,27 +23,39 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TurtleEggBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
+import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.EggLayerBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.LayEggGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
 import javax.annotation.Nullable;
 
-public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker {
+public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, IEggLayer {
 
     public final AnimationState attackAnimationState1 = new AnimationState();
     public final AnimationState attackAnimationState2 = new AnimationState();
     public final AnimationState idleShakeState = new AnimationState();
     public int attackAnimationTimeout;
+    int layEggCounter;
+
     private int idleShakeTimeout = this.getRandom().nextInt(160) + 160;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.FERN, Items.LARGE_FERN);
 
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Borealopelta.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(Borealopelta.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_LAYING_EGG = SynchedEntityData.defineId(Borealopelta.class, EntityDataSerializers.BOOLEAN);
 
     public Borealopelta(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -55,7 +67,10 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker {
         this.goalSelector.addGoal(0, new AnimatedAttackGoal(this, 1.35D, true, 27, 53));
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
-        this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
+
+        this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG));
+
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -67,16 +82,22 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_ATTACKING, false);
+        this.entityData.define(IS_PREGNANT, false);
+        this.entityData.define(IS_LAYING_EGG, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("IsAttacking", this.isAttacking());
+        compound.putBoolean("IsPregnant", this.isPregnant());
+        compound.putBoolean("IsLayingEgg", this.isLayingEgg());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setAttacking(compound.getBoolean("IsAttacking"));
+        this.setPregnant(compound.getBoolean("IsPregnant"));
+        this.setLayingEgg(compound.getBoolean("IsLayingEgg"));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -155,6 +176,37 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker {
     }
 
     @Override
+    public boolean isPregnant() {
+        return this.entityData.get(IS_PREGNANT);
+    }
+
+    @Override
+    public void setPregnant(boolean pregnant) {
+        this.entityData.set(IS_PREGNANT, pregnant);
+    }
+
+    @Override
+    public int getLayEggCounter() {
+        return this.layEggCounter;
+    }
+
+    @Override
+    public void setLayEggCounter(int layEggCounter) {
+        this.layEggCounter = layEggCounter;
+    }
+
+    @Override
+    public boolean isLayingEgg() {
+        return this.entityData.get(IS_LAYING_EGG);
+    }
+
+    @Override
+    public void setLayingEgg(boolean pIsLayingEgg) {
+        this.layEggCounter = pIsLayingEgg ? 1 : 0;
+        this.entityData.set(IS_LAYING_EGG, pIsLayingEgg);
+    }
+
+    @Override
     public int attackAnimationTimeout() {
         return this.attackAnimationTimeout;
     }
@@ -177,5 +229,16 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker {
             this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+    }
+
+    public void aiStep() {
+        super.aiStep();
+        if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0) {
+            BlockPos blockpos = this.blockPosition();
+            if (this.level().getBlockState(blockpos).is(MMTags.Blocks.DINOSAUR_NEST)) {
+                this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
+            }
+        }
+
     }
 }
