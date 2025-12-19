@@ -78,6 +78,15 @@ public class Sacabambaspis extends AbstractBasicFish {
     }
 
     @Override
+    public void loadFromBucketTag(CompoundTag pTag) {
+        super.loadFromBucketTag(pTag);
+
+        this.setVariant(pTag.getInt("Variant"));
+
+        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
+    }
+
+    @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 

@@ -263,9 +263,22 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         }
     }
 
+
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
+
+        this.setVariantModel(pTag.getInt("Model"));
+        this.setVariantBaseColor(pTag.getInt("BaseColor"));
+        this.setVariantSecondColor(pTag.getInt("SecondColor"));
+        this.setHighlightColor(pTag.getInt("HighlightColor"));
+        this.setLGBTVariant(pTag.getInt("LGBTVariant"));
+        this.setHasHighlight(pTag.getBoolean("HasHighlight"));
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
+        }
+
+        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     @Override

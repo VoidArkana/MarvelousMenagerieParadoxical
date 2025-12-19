@@ -76,6 +76,7 @@ public class SingleEggBlock extends Block {
                 level.levelEvent(2001, pos, Block.getId(state));
                 MarvelousAnimal baby = (MarvelousAnimal) creature.get().create(level);
                 if (baby != null) {
+                    baby.setAge(-24000);
                     Vec3 vec3 = pos.getCenter();
                     baby.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.BREEDING, null, null);
                     baby.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(level.random.nextFloat() * 360.0F), 0.0F);

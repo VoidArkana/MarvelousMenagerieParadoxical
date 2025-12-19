@@ -14,9 +14,9 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.Ophthalmosaurus;
 public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T> {
 
 	private final ModelPart root;
-	private final ModelPart swim_control;
+	public final ModelPart swim_control;
 	private final ModelPart body_overlay;
-	private final ModelPart body;
+	public final ModelPart body;
 	private final ModelPart tail_rot;
 	private final ModelPart tail_overlay;
 	private final ModelPart tail;
@@ -34,7 +34,7 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 	private final ModelPart f_flipper_l;
 	private final ModelPart b_flipper_r;
 	private final ModelPart b_flipper_l;
-	private final ModelPart passenger;
+	public final ModelPart passenger;
 
 	public OphthalmoModel(ModelPart root) {
         super(1, 1);

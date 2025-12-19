@@ -168,6 +168,9 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 		this.animate(entity.swirlAttackAnimationState1, MoltenAnims.TAIL_SWIRL_1, ageInTicks, 1);
 		this.animate(entity.swirlAttackAnimationState2, MoltenAnims.TAIL_SWIRL_2, ageInTicks, 1);
 
+		this.animate(entity.breatheFireAnimationState, MoltenAnims.FIREBREATHE, ageInTicks, 1);
+		this.animate(entity.shootFireballAnimationState, MoltenAnims.FIREBALL, ageInTicks, 1);
+
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
 	}

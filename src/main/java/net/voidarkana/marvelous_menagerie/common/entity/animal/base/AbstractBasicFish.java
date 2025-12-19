@@ -87,6 +87,10 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
+
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
+        }
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {

@@ -1060,6 +1060,23 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
     }
 
+
+    @Override
+    public void loadFromBucketTag(CompoundTag pTag) {
+        super.loadFromBucketTag(pTag);
+
+        this.setBaseColor(pTag.getInt("BaseColor"));
+        this.setPattern(pTag.getInt("Pattern"));
+
+        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
+
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
+        }else {
+            this.setAge(-24000);
+        }
+    }
+
     @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {

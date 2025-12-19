@@ -151,7 +151,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         return new ItemStack(MMItems.STELLER_BUCKET.get());
     }
 
-    public class StellerSwimmingController extends MoveControl {
+    public static class StellerSwimmingController extends MoveControl {
         private static final float FULL_SPEED_TURN_THRESHOLD = 10.0F;
         private static final float STOP_TURN_THRESHOLD = 60.0F;
         private final int maxTurnX;
@@ -281,7 +281,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         }
     }
 
-    public class RandomShallowSwimmingGoal extends RandomStrollGoal {
+    public static class RandomShallowSwimmingGoal extends RandomStrollGoal {
         public RandomShallowSwimmingGoal(PathfinderMob mob, double speedMod, int interval) {
             super(mob, speedMod, interval);}
 
@@ -291,7 +291,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         }
     }
 
-    public class SeaCowBreachGoal extends Goal {
+    public static class SeaCowBreachGoal extends Goal {
         private final StellerSeaCow mob;
 
         public SeaCowBreachGoal(StellerSeaCow pMob) {
@@ -305,10 +305,6 @@ public class StellerSeaCow extends AbstractBasicFish {
 
         public boolean canContinueToUse() {
             return this.mob.isInWater() && !(this.mob.getLastHurtByMob() != null || this.mob.isFreezing() || this.mob.isOnFire());
-        }
-
-        public boolean isInterruptable() {
-            return true;
         }
 
         public boolean requiresUpdateEveryTick() {
@@ -331,6 +327,7 @@ public class StellerSeaCow extends AbstractBasicFish {
                 }
                 if (i==60){
                     this.mob.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
+                    this.mob.setDeltaMovement(0, -0.25, 0);
                     this.stop();
                 }
             }
@@ -352,7 +349,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         if (blockpos == null) {
             blockpos = BlockPos.containing(this.getX(), this.getY() + 8.0D, this.getZ());
         }
-        this.getNavigation().moveTo((double)blockpos.getX(), (double)(blockpos.getY() + 1), (double)blockpos.getZ(), 0.8D);
+        this.getNavigation().moveTo((double)blockpos.getX(), (double)(blockpos.getY()), (double)blockpos.getZ(), 0.8D);
     }
 
     private boolean givesAir(LevelReader pLevel, BlockPos pPos) {

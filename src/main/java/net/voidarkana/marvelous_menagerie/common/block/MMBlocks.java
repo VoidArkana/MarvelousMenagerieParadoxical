@@ -47,7 +47,7 @@ public class MMBlocks {
 
     //Borealopelta
     public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",
-            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG),
+            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
                     MMEntities.BOREALOPELTA, MMTags.Blocks.DINOSAUR_NEST));
 
     //Sigillaria plank blocks

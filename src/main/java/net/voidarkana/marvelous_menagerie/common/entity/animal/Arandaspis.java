@@ -138,6 +138,13 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
+
+        this.setVariant(pTag.getInt("Variant"));
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
+        }
+
+        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     public SoundEvent getPickupSound() {

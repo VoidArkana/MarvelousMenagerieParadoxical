@@ -45,6 +45,10 @@ public class LayEggGoal extends MoveToBlockGoal {
         super.tick();
         BlockPos blockpos = this.animal.blockPosition();
         if (!this.animal.isInWater() && this.isReachedTarget() && this.animal instanceof IEggLayer eggLayer) {
+
+            System.out.println(eggLayer.getLayEggCounter());
+            System.out.println(eggLayer.isLayingEgg());
+
             if (eggLayer.getLayEggCounter() < 1) {
                 eggLayer.setLayingEgg(true);
             } else if (eggLayer.getLayEggCounter() > this.adjustedTickDelay(200)) {

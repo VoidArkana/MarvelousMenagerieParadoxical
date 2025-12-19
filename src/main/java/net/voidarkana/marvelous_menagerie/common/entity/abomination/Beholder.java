@@ -213,12 +213,12 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
         if (!this.level().isClientSide){
 
-            if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0 && !this.isVehicle()){
+            if (!this.isInWater() && this.getInWaterTicks() > 0){
 
                 this.prevTicksInWater = this.getInWaterTicks();
                 this.setInWaterTicks(this.prevTicksInWater -1);
 
-            }else if (this.isInWater() && !this.onGround() && this.getInWaterTicks() < 5){
+            }else if (this.isInWater() && this.getInWaterTicks() < 5){
 
                 this.prevTicksInWater = this.getInWaterTicks();
                 this.setInWaterTicks(this.prevTicksInWater +1);
@@ -451,7 +451,7 @@ public class Beholder extends Monster implements IAnimatedAttacker {
             if (this.idleTwitchState.isStarted()) this.idleTwitchState.stop();
         }
 
-        this.idleAnimationState.animateWhen(!this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
+        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
         this.idleOverlay.animateWhen(!this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {

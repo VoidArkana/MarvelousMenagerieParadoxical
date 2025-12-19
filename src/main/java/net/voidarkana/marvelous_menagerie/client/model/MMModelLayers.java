@@ -91,14 +91,14 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_OPHTHALMO_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_ophthalmo"), "main");
 
-//    public static final ModelLayerLocation OPHTHALMO_PATTERN_LAYER =
-//            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_pattern"), "main");
-//    public static final ModelLayerLocation BABY_OPHTHALMO_PATTERN_LAYER =
-//            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_ophthalmo_pattern"), "main");
-//    public static final ModelLayerLocation OPHTHALMO_SADDLE_LAYER =
-//            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_saddle"), "main");
-//    public static final ModelLayerLocation OPHTHALMO_ARMOR_LAYER =
-//            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_armor"), "main");
+    public static final ModelLayerLocation OPHTHALMO_PATTERN_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_pattern"), "main");
+    public static final ModelLayerLocation BABY_OPHTHALMO_PATTERN_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_ophthalmo_pattern"), "main");
+    public static final ModelLayerLocation OPHTHALMO_SADDLE_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_saddle"), "main");
+    public static final ModelLayerLocation OPHTHALMO_ARMOR_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "ophthalmo_armor"), "main");
 
     public static final ModelLayerLocation BOREALOPELTA_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "borealopelta"), "main");

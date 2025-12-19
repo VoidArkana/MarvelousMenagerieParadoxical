@@ -20,8 +20,8 @@ public class OphthalmoPatternLayer extends RenderLayer<Ophthalmosaurus, Marvelou
 
     public OphthalmoPatternLayer(RenderLayerParent<Ophthalmosaurus, MarvelousModel<Ophthalmosaurus>> pRenderer, EntityRendererProvider.Context pContext) {
         super(pRenderer);
-        this.babyModel = new BabyOphthalmoModel<>(pContext.bakeLayer(MMModelLayers.BABY_OPHTHALMO_LAYER));
-        this.model = new OphthalmoModel<>(pContext.bakeLayer(MMModelLayers.OPHTHALMO_LAYER));
+        this.babyModel = new BabyOphthalmoModel<>(pContext.bakeLayer(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER));
+        this.model = new OphthalmoModel<>(pContext.bakeLayer(MMModelLayers.OPHTHALMO_PATTERN_LAYER));
     }
 
     @Override

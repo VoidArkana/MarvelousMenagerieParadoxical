@@ -25,6 +25,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
+import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -162,6 +163,18 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
+    }
+
+    @Override
+    public void loadFromBucketTag(CompoundTag pTag) {
+        super.loadFromBucketTag(pTag);
+
+        this.setVariant(pTag.getInt("Variant"));
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
+        }
+
+        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     @Override

@@ -26,6 +26,7 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
 
         this.tag(MMTags.EntityTypes.TIME_ABERRATIONS)
                 .add(MMEntities.CHUD.get())
+                .add(MMEntities.MOLTEN.get())
                 .add(MMEntities.BEHOLDER.get());
 
         this.tag(MMTags.EntityTypes.HAS_ENTRY)

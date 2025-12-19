@@ -33,13 +33,14 @@ public class OphthalmoPassengerLayer extends RenderLayer<Ophthalmosaurus, Marvel
                 MarvelousMenagerie.PROXY.releaseRenderingEntity(passenger.getUUID());
                 poseStack.pushPose();
 
-                getParentModel().root().translateAndRotate(poseStack);
-                ((OphthalmoModel)getParentModel()).passenger().translateAndRotate(poseStack);
+                ((OphthalmoModel)getParentModel()).swim_control.translateAndRotate(poseStack);
+                ((OphthalmoModel)getParentModel()).body.translateAndRotate(poseStack);
 
                 poseStack.mulPose(Axis.YP.rotationDegrees(180F));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(180F));
                 poseStack.mulPose(Axis.XP.rotationDegrees(90F));
-                poseStack.translate(0, -1.7F, 0.3);
+
+                poseStack.translate(0, -1.75, -0.5);
+
 
                 renderPassenger(passenger, 0, 0, 0, 0, partialTicks, poseStack, bufferIn, packedLightIn);
                 poseStack.popPose();
@@ -50,12 +51,18 @@ public class OphthalmoPassengerLayer extends RenderLayer<Ophthalmosaurus, Marvel
     }
 
     public static <E extends Entity> void renderPassenger(E entityIn, double x, double y, double z, float yaw, float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, int packedLight) {
-
-        EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        EntityRenderer<? super E> renderer = entityRenderDispatcher.getRenderer(entityIn);
-
+        EntityRenderer<? super E> render = null;
+        EntityRenderDispatcher manager = Minecraft.getInstance().getEntityRenderDispatcher();
         try {
-            renderer.render(entityIn, yaw, partialTicks, matrixStack, bufferIn, packedLight);
+            render = manager.getRenderer(entityIn);
+
+            if (render != null) {
+                try {
+                    render.render(entityIn, yaw, partialTicks, matrixStack, bufferIn, packedLight);
+                } catch (Throwable throwable1) {
+                    throw new ReportedException(CrashReport.forThrowable(throwable1, "Rendering entity in world"));
+                }
+            }
         } catch (Throwable throwable3) {
             CrashReport crashreport = CrashReport.forThrowable(throwable3, "Rendering entity in world");
             CrashReportCategory crashreportcategory = crashreport.addCategory("Entity being rendered");
