@@ -304,8 +304,10 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         if (!this.level().isClientSide()) {
 
             if (this.getTarget() != null && !this.wantsToGrab() && this.getRandom().nextInt(150) == 0){
-                if (!this.getTarget().isPassenger())
+                if (!this.getTarget().isPassenger()){
+                    this.playSound(MMSounds.BEHOLDER_CLOSE.get());
                     this.setWantsToGrab(true);
+                }
             }
 
             if (this.canGrabOrGrabbing() && !this.isAggressive() && this.getPassengers().isEmpty()){
@@ -323,11 +325,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         }
     }
 
-//    @Override
-//    public void baseTick() {
-//        super.baseTick();
-//
-//    }
 
     public void positionRider(Entity passenger, Entity.MoveFunction moveFunc) {
         if (!this.getPassengers().isEmpty()) {
@@ -467,15 +464,15 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.SPIDER_AMBIENT;
+        return this.isGrabbing() ? MMSounds.BEHOLDER_GRABBING.get() : MMSounds.BEHOLDER_IDLE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return MMSounds.ARTHROPOD_HURT.get();
+        return MMSounds.BEHOLDER_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return MMSounds.ARTHROPOD_DEATH.get();
+        return MMSounds.BEHOLDER_DEATH.get();
     }
 
     @Override
@@ -660,6 +657,7 @@ public class Beholder extends Monster implements IAnimatedAttacker {
             double d0 = this.getAttackReachSqr(pEnemy);
 
             if (pDistToEnemySqr <= d0 && this.getTicksUntilNextAttack() <= 0) {
+                beholder.playSound(MMSounds.BEHOLDER_CLOSE.get());
                 pEnemy.startRiding(this.beholder, true);
                 beholder.lookControl.setLookAt(0, 0, 0);
                 beholder.setIsGrabbing(true);

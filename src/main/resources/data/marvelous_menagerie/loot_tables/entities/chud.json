@@ -2,7 +2,6 @@
   "type": "minecraft:entity",
   "pools": [
     {
-      "name": "chud",
       "rolls": 1,
       "entries": [
         {
@@ -51,7 +50,7 @@
               "function": "minecraft:looting_enchant"
             }
           ],
-          "name": "minecraft:rotten_flesh"
+          "name": "marvelous_menagerie:chud_flesh"
         }
       ],
       "rolls": 1.0

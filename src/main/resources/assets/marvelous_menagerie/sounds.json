@@ -691,5 +691,77 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.molten_death"
+  },
+
+
+
+  "beholder_idle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:beholder_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:beholder_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_idle"
+  },
+  "beholder_grabbing": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_grabbing_1"
+      },
+      {
+        "name": "marvelous_menagerie:beholder_grabbing_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_growl"
+  },
+  "beholder_hurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:beholder_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:beholder_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_hurt"
+  },
+  "beholder_death": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_death"
+  },
+  "beholder_open": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_open"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_open_jaws"
+  },
+  "beholder_close": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:beholder_close"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.beholder_close_jaws"
   }
 }

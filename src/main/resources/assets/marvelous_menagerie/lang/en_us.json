@@ -287,8 +287,9 @@
 
   "item.marvelous_menagerie.chud_spawn_egg": "Chud Spawn Egg",
   "entity.marvelous_menagerie.chud": "Chud",
+  "item.marvelous_menagerie.chud_flesh": "Chud Flesh",
   "block.marvelous_menagerie.chud_block": "Chud Block",
-  "item.marvelous_menagerie.raw_chud": "Chud",
+  "item.marvelous_menagerie.raw_chud": "Raw Chud",
   "item.marvelous_menagerie.cooked_chud": "Cooked Chud",
 
   "item.marvelous_menagerie.beholder_spawn_egg": "Beholder Spawn Egg",
@@ -725,5 +726,13 @@
   "marvelous_menagerie.sound.subtitle.molten_death": "Molten dies",
   "marvelous_menagerie.sound.subtitle.molten_roar": "Molten roars",
   "marvelous_menagerie.sound.subtitle.molten_breathe": "Molten breathes fire",
-  "marvelous_menagerie.sound.subtitle.molten_steps": "Molten stomps around"
+  "marvelous_menagerie.sound.subtitle.molten_steps": "Molten stomps around",
+
+  "item.marvelous_menagerie.beholder_mandible": "Beholder Mandible",
+  "marvelous_menagerie.sound.subtitle.beholder_idle": "Beholder hisses",
+  "marvelous_menagerie.sound.subtitle.beholder_growl": "Beholder growls",
+  "marvelous_menagerie.sound.subtitle.beholder_hurt": "Beholder hurts",
+  "marvelous_menagerie.sound.subtitle.beholder_death": "Beholder dies",
+  "marvelous_menagerie.sound.subtitle.beholder_open_jaws": "Beholder readies to catch",
+  "marvelous_menagerie.sound.subtitle.beholder_close_jaws": "Beholder catches prey"
 }

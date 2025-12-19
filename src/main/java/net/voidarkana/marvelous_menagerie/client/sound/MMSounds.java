@@ -78,6 +78,13 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> MOLTEN_HURT = registerSoundEvents(  "molten_hurt");
     public static final RegistryObject<SoundEvent> MOLTEN_DEATH = registerSoundEvents(  "molten_death");
 
+    public static final RegistryObject<SoundEvent> BEHOLDER_IDLE = registerSoundEvents(   "beholder_idle");
+    public static final RegistryObject<SoundEvent> BEHOLDER_GRABBING = registerSoundEvents(   "beholder_grabbing");
+    public static final RegistryObject<SoundEvent> BEHOLDER_HURT = registerSoundEvents(   "beholder_hurt");
+    public static final RegistryObject<SoundEvent> BEHOLDER_DEATH = registerSoundEvents(  "beholder_death");
+    public static final RegistryObject<SoundEvent> BEHOLDER_OPEN = registerSoundEvents(  "beholder_open");
+    public static final RegistryObject<SoundEvent> BEHOLDER_CLOSE = registerSoundEvents(  "beholder_close");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {
