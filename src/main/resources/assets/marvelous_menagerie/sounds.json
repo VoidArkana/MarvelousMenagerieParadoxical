@@ -652,5 +652,44 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.molten_steps"
+  },
+  "molten_idle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:molten_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:molten_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:molten_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.molten_idle"
+  },
+  "molten_hurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:molten_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:molten_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:molten_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.molten_hurt"
+  },
+  "molten_death": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:molten_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.molten_death"
   }
 }

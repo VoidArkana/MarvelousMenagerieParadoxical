@@ -74,6 +74,9 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> BOREALOPELTA_DEATH = registerSoundEvents(  "borealopelta_death");
 
     public static final RegistryObject<SoundEvent> MOLTEN_STEPS = registerSoundEvents(  "molten_steps");
+    public static final RegistryObject<SoundEvent> MOLTEN_IDLE = registerSoundEvents(  "molten_idle");
+    public static final RegistryObject<SoundEvent> MOLTEN_HURT = registerSoundEvents(  "molten_hurt");
+    public static final RegistryObject<SoundEvent> MOLTEN_DEATH = registerSoundEvents(  "molten_death");
 
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 

@@ -299,8 +299,12 @@ public class Molten extends Monster implements IAnimatedAttacker {
         public void tick() {
             LivingEntity livingentity = this.molten.getTarget();
             if (livingentity != null) {
+
+
                 double d0 = 64.0D;
                 if (livingentity.distanceToSqr(this.molten) < 4096.0D && this.molten.hasLineOfSight(livingentity)) {
+
+                    this.molten.lookAt(livingentity, 10, 10);
 
                     this.molten.setShootingFireball(true);
                     Level level = this.molten.level();
@@ -338,19 +342,19 @@ public class Molten extends Monster implements IAnimatedAttacker {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.BLAZE_DEATH;
+        return MMSounds.MOLTEN_DEATH.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource p_21239_) {
-        return MMSounds.BOREALOPELTA_HURT.get();
+        return MMSounds.MOLTEN_HURT.get();
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.CAMPFIRE_CRACKLE;
+        return MMSounds.MOLTEN_IDLE.get();
     }
 
     public void customServerAiStep() {
@@ -477,6 +481,7 @@ public class Molten extends Monster implements IAnimatedAttacker {
                     }
 
                     this.molten.getLookControl().setLookAt(livingentity, 10.0F, 10.0F);
+                    this.molten.lookAt(livingentity, 10, 10);
 
                 } else if (this.lastSeen < 5) {
                     this.molten.getMoveControl().setWantedPosition(livingentity.getX(), livingentity.getY(), livingentity.getZ(), 1.5D);
