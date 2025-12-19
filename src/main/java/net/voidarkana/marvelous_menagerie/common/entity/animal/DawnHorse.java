@@ -1,11 +1,15 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -23,8 +27,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
@@ -110,6 +116,51 @@ public class DawnHorse extends MarvelousAnimal {
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.HORSE_AMBIENT;
+    }
+
+    @Override
+    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
+
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+
+        if (itemstack.is(MMTags.Items.DOMESTICATION_INNOVATION_ROTTEN_APPLE)){
+
+            this.playSound(SoundEvents.HORSE_DEATH, 0.8F, this.getVoicePitch());
+            this.playSound(SoundEvents.ZOMBIE_INFECT, 0.8F, this.getVoicePitch());
+
+            CompoundTag horseExtras = new CompoundTag();
+
+            this.addAdditionalSaveData(horseExtras);
+
+            for(int i = 0; i < 6 + this.getRandom().nextInt(5); i++){
+                this.level().addParticle(ParticleTypes.SNEEZE, this.getRandomX(1.0F), this.getRandomY(), this.getRandomZ(1.0F), 0F, 0F, 0F);
+            }
+
+            ZombieDawnHorse zombie = MMEntities.ZOMBIE_DAWN_HORSE.get().create(this.level());
+
+            if(this.isLeashed()){
+                zombie.setLeashedTo(this.getLeashHolder(), true);
+            }
+
+            zombie.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
+            zombie.setNoAi(this.isNoAi());
+            zombie.setBaby(this.isBaby());
+            if (this.hasCustomName()) {
+                zombie.setCustomName(this.getCustomName());
+                zombie.setCustomNameVisible(this.isCustomNameVisible());
+            }
+            zombie.readAdditionalSaveData(horseExtras);
+            zombie.setPersistenceRequired();
+            net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, zombie);
+            pPlayer.level().addFreshEntity(zombie);
+            this.discard();
+            if(!pPlayer.isCreative()){
+                itemstack.shrink(1);
+            }
+            return InteractionResult.CONSUME;
+        }
+
+        return super.interactAt(pPlayer, pVec, pHand);
     }
 
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {

@@ -98,6 +98,7 @@ public class MMTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> DOMESTICATION_INNOVATION_ROTTEN_APPLE = tag("domestication_innovation_rotten_apple");
 
         public static final TagKey<Item> FINTASTIC_BAD_FEED = tag("fintastic_bad_feed");
         public static final TagKey<Item> FINTASTIC_ALL_FEEDS = tag("fintastic_all_feeds");
