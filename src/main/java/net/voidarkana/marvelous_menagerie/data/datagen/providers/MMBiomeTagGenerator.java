@@ -23,7 +23,24 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
     }
 
     protected void addTags() {
-        tag(MMTags.Biomes.RUINED_ALTAR_BIOMES).addTag(BiomeTags.IS_OVERWORLD);
+        tag(MMTags.Biomes.RUINED_ALTAR_BIOMES)
+                .addTag(BiomeTags.IS_BEACH)
+                .addTag(BiomeTags.IS_TAIGA)
+                .addTag(BiomeTags.IS_FOREST)
+                .add(Biomes.MUSHROOM_FIELDS)
+                .add(Biomes.ICE_SPIKES)
+                .add(Biomes.DRIPSTONE_CAVES)
+                .add(Biomes.LUSH_CAVES)
+                .add(Biomes.SAVANNA)
+                .add(Biomes.SNOWY_PLAINS)
+                .add(Biomes.PLAINS)
+                .add(Biomes.SUNFLOWER_PLAINS)
+                .addTag(BiomeTags.IS_JUNGLE)
+                .addTag(Tags.Biomes.IS_DESERT)
+                .addTag(BiomeTags.IS_BADLANDS)
+                .addTag(BiomeTags.IS_MOUNTAIN)
+                .addTag(Tags.Biomes.IS_SWAMP)
+                .addTag(Tags.Biomes.IS_PEAK);
 
         tag(MMTags.Biomes.DODO_BIOMES).addTag(BiomeTags.IS_JUNGLE).add(Biomes.MUSHROOM_FIELDS);
         tag(MMTags.Biomes.ELEPHANT_BIRD_BIOMES).addTag(BiomeTags.IS_JUNGLE);

@@ -1,0 +1,13 @@
+{
+  "entity_name": "marvelous_menagerie:diplocaulus",
+  "icon": "marvelous_menagerie:diplocaulus_fossil",
+  "link": "mobs/diplocaulus.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.permian"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.carboniferous"
+    }
+  ]
+}

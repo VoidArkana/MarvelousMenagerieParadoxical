@@ -35,6 +35,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.RAW_DAWN_HORSE.get());
                         output.accept(MMItems.COOKED_DAWN_HORSE.get());
 
+                        output.accept(MMItems.DIPLOCAULUS_BUCKET.get());
+
                         output.accept(MMItems.ELEPHANT_BIRD_EGG.get());
                         output.accept(MMItems.BOILED_ELEPHANT_EGG.get());
                         output.accept(MMItems.JUMBO_OMELETTE.get());
@@ -71,13 +73,14 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_FOSSIL.get());
                         output.accept(MMItems.ROACH_FOSSIL.get());
                         output.accept(MMItems.ARANDASPIS_FOSSIL.get());
-                        output.accept(MMItems.FLUBBER_FOSSIL.get());
                         output.accept(MMItems.PELTA_FOSSIL.get());
                         output.accept(MMItems.DAEODON_FOSSIL.get());
                         output.accept(MMItems.DAWN_FOSSIL.get());
+                        output.accept(MMItems.DIPLOCAULUS_FOSSIL.get());
                         output.accept(MMItems.DODO_FOSSIL.get());
                         output.accept(MMItems.DOEDICURUS_FOSSIL.get());
                         output.accept(MMItems.ELEBIRD_FOSSIL.get());
+                        output.accept(MMItems.FLUBBER_FOSSIL.get());
                         output.accept(MMItems.EOLACTORIA_FOSSIL.get());
                         output.accept(MMItems.FALCA_FOSSIL.get());
                         output.accept(MMItems.HALLU_FOSSIL.get());
@@ -105,6 +108,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.SKELETON_DAWN_HORSE_SPAWN_EGG.get());
                         output.accept(MMItems.ZOMBIE_DAWN_HORSE_SPAWN_EGG.get());
+                        output.accept(MMItems.DIPLOCAULUS_SPAWN_EGG.get());
                         output.accept(MMItems.DODO_SPAWN_EGG.get());
                         output.accept(MMItems.DOEDICURUS_SPAWN_EGG.get());
                         output.accept(MMItems.ELE_SPAWN_EGG.get());

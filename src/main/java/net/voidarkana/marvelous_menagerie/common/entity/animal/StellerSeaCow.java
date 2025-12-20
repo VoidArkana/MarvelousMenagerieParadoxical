@@ -3,6 +3,8 @@ package net.voidarkana.marvelous_menagerie.common.entity.animal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -30,8 +32,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -45,6 +49,7 @@ import java.util.EnumSet;
 public class StellerSeaCow extends AbstractBasicFish {
 
     static final TargetingConditions SWIM_WITH_PLAYER_TARGETING = TargetingConditions.forNonCombat().range(10.0D).ignoreLineOfSight();
+    private static final EntityDataAccessor<Boolean> IS_BREACHING = SynchedEntityData.defineId(StellerSeaCow.class, EntityDataSerializers.BOOLEAN);
 
     public StellerSeaCow(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -85,6 +90,30 @@ public class StellerSeaCow extends AbstractBasicFish {
             return super.getDimensions(pPose);
         }
     }
+
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(IS_BREACHING, false);
+    }
+
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("isBreaching", this.isBreaching());
+    }
+
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setIsBreaching(pCompound.getBoolean("isBreaching"));
+    }
+
+    public boolean isBreaching() {
+        return this.entityData.get(IS_BREACHING);
+    }
+
+    public void setIsBreaching(boolean isBreaching) {
+        this.entityData.set(IS_BREACHING, isBreaching);
+    }
+
 
     public Ingredient foodIngredients(){
         return Ingredient.of(Items.KELP, Items.DRIED_KELP, Items.DRIED_KELP_BLOCK);
@@ -149,6 +178,16 @@ public class StellerSeaCow extends AbstractBasicFish {
     @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(MMItems.STELLER_BUCKET.get());
+    }
+
+    @Override
+    public void travel(Vec3 pTravelVector) {
+        if (this.isEffectiveAi() && this.isInWater() ) {
+            if (!this.isEyeInFluidType(net.minecraftforge.common.ForgeMod.WATER_TYPE.get()) && !this.isBreaching()) {
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D,  -0.005D, 0.0D));
+            }
+        }
+        super.travel(pTravelVector);
     }
 
     public static class StellerSwimmingController extends MoveControl {
@@ -293,6 +332,7 @@ public class StellerSeaCow extends AbstractBasicFish {
 
     public static class SeaCowBreachGoal extends Goal {
         private final StellerSeaCow mob;
+        int ticksBreaching;
 
         public SeaCowBreachGoal(StellerSeaCow pMob) {
             this.mob = pMob;
@@ -313,6 +353,7 @@ public class StellerSeaCow extends AbstractBasicFish {
 
         public void start() {
             this.mob.findAirPosition();
+            this.ticksBreaching = 0;
         }
 
         public void tick() {
@@ -320,17 +361,23 @@ public class StellerSeaCow extends AbstractBasicFish {
             this.mob.moveRelative(0.02F, new Vec3((double)this.mob.xxa, (double)this.mob.yya, (double)this.mob.zza));
             this.mob.move(MoverType.SELF, this.mob.getDeltaMovement());
             if (this.mob.getFluidHeight(FluidTags.WATER) <= 0.5){
-                int i;
-                for (i=0; i<60; i++){
+                if (this.ticksBreaching>=60){
+                    this.mob.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
+                    this.stop();
+                }else {
                     this.mob.getNavigation().stop();
                     this.mob.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
+                    if (!this.mob.isBreaching())
+                        this.mob.setIsBreaching(true);
                 }
-                if (i==60){
-                    this.mob.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
-                    this.mob.setDeltaMovement(0, -0.25, 0);
-                    this.stop();
-                }
+                ++ticksBreaching;
             }
+        }
+
+        @Override
+        public void stop() {
+            super.stop();
+            this.mob.setIsBreaching(false);
         }
     }
 
@@ -362,7 +409,7 @@ public class StellerSeaCow extends AbstractBasicFish {
     }
 
     public boolean canBeCollidedWith() {
-        return !this.isEyeInFluid(FluidTags.WATER) && !this.onGround() && !this.isBaby();
+        return !this.isEyeInFluid(FluidTags.WATER) && !this.onGround() && !this.isBaby() && this.isBreaching();
     }
     
     protected SoundEvent getAmbientSound() {

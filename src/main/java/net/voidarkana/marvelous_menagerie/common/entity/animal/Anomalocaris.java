@@ -160,6 +160,7 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
         Bucketable.saveDefaultDataToBucketTag(this, bucket);
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putInt("Age", this.getAge());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }

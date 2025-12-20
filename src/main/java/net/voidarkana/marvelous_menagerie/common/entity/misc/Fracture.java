@@ -400,7 +400,7 @@ public class Fracture extends LivingEntity {
                 new BlockPos(this.blockPosition().getX() + (this.isNatural() ? this.getRandom().nextInt(3) : 0),
                         this.blockPosition().getY()+1,
                         this.blockPosition().getZ() + (this.isNatural() ? this.getRandom().nextInt(3) : 0)),
-                MobSpawnType.SPAWN_EGG);
+                MobSpawnType.TRIGGERED);
 
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }

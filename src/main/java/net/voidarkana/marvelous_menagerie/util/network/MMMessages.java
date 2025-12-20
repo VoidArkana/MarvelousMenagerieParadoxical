@@ -14,12 +14,13 @@ public class MMMessages {
 
     private static final String PROTOCOL_VERSION = "1";
 
-    public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(MarvelousMenagerie.MOD_ID, "channel"),
-            () -> PROTOCOL_VERSION,
-            PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals
-    );
+    private static final ResourceLocation PACKET_NETWORK_NAME = new ResourceLocation(MarvelousMenagerie.MOD_ID, "main_channel");
+    public static final SimpleChannel CHANNEL =  NetworkRegistry.ChannelBuilder
+            .named(PACKET_NETWORK_NAME)
+            .clientAcceptedVersions(PROTOCOL_VERSION::equals)
+            .serverAcceptedVersions(PROTOCOL_VERSION::equals)
+            .networkProtocolVersion(() -> PROTOCOL_VERSION)
+            .simpleChannel();
 
     private static int packetId = 0;
     private static int id() {

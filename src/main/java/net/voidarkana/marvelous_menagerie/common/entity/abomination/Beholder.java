@@ -305,7 +305,7 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
             if (this.getTarget() != null && !this.wantsToGrab() && this.getRandom().nextInt(150) == 0){
                 if (!this.getTarget().isPassenger()){
-                    this.playSound(MMSounds.BEHOLDER_CLOSE.get());
+                    this.playSound(MMSounds.BEHOLDER_OPEN.get());
                     this.setWantsToGrab(true);
                 }
             }

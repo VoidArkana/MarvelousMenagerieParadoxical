@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-15T16:01:12.0234876	Item Models: marvelous_menagerie
+// 1.20.1	2025-12-20T14:35:45.1976456	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -67,6 +67,9 @@ f5d9cbd2f271b3eb9946df03d5c7e75d373c56cf assets/marvelous_menagerie/models/item/
 662f619ab40f040ea1f378ec6bdf1211bcaf0fdb assets/marvelous_menagerie/models/item/diatomite_slab.json
 4af7a0e5a0ea9488ebbdbc8ba240622798f4bf99 assets/marvelous_menagerie/models/item/diatomite_stairs.json
 3a3513f1e5b0dd42ab84ad23bbd40329b4b48815 assets/marvelous_menagerie/models/item/diatomite_wall.json
+e0f8d881381c7796fc604000524e9cf378b28eb0 assets/marvelous_menagerie/models/item/diplocaulus_bucket.json
+b66b8117492fe75ec8bdb3bbac2f1e212ba213c4 assets/marvelous_menagerie/models/item/diplocaulus_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/diplocaulus_spawn_egg.json
 e8c99144c686205800b7d26b3aa05b2c5a81d0a7 assets/marvelous_menagerie/models/item/dodo_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/dodo_spawn_egg.json
 5ae22c85cf0649e9a979e0ff1e382e4b7875f4a8 assets/marvelous_menagerie/models/item/doedicurus_fossil.json

@@ -763,5 +763,43 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.beholder_close_jaws"
+  },
+
+
+  "chud_idle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:chud_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:chud_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:chud_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.chud_idle"
+  },
+  "chud_hurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:chud_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:chud_hurt_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.chud_hurt"
+  },
+  "chud_death": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:chud_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.chud_death"
   }
 }

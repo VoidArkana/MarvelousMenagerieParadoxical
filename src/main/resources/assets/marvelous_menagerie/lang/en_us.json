@@ -734,5 +734,14 @@
   "marvelous_menagerie.sound.subtitle.beholder_hurt": "Beholder hurts",
   "marvelous_menagerie.sound.subtitle.beholder_death": "Beholder dies",
   "marvelous_menagerie.sound.subtitle.beholder_open_jaws": "Beholder readies to catch",
-  "marvelous_menagerie.sound.subtitle.beholder_close_jaws": "Beholder catches prey"
+  "marvelous_menagerie.sound.subtitle.beholder_close_jaws": "Beholder catches prey",
+
+  "marvelous_menagerie.sound.subtitle.chud_idle": "Chud snorts",
+  "marvelous_menagerie.sound.subtitle.chud_hurt": "Chud agonizes",
+  "marvelous_menagerie.sound.subtitle.chud_death": "Chud shamefully dies",
+
+  "entity.marvelous_menagerie.diplocaulus": "Diplocaulus",
+  "item.marvelous_menagerie.diplocaulus_bucket": "Bucket of Diplocaulus",
+  "item.marvelous_menagerie.diplocaulus_spawn_egg": "Diplocaulus Spawn Egg",
+  "item.marvelous_menagerie.diplocaulus_fossil": "Diplocaulus Fossil"
 }

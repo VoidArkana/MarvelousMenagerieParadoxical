@@ -1,15 +1,15 @@
 {
   "parent": "early_paleo/index.json",
-  "text": "animals/sacabambaspis.txt",
-  "title": "entity.marvelous_menagerie.sacabambaspis",
+  "text": "early_paleo/mobs/diplocaulus.txt",
+  "title": "entity.marvelous_menagerie.diplocaulus",
   "widgets": [
     {
       "display_page" : 1,
       "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/sacabambaspis.png",
+      "image": "marvelous_menagerie:textures/gui/book/diplocaulus_book.png",
       "sepia": true,
       "x": 64,
-      "y": 64,
+      "y": 60,
       "scale": 0.6,
       "u0": 0,
       "v0": 0,
@@ -20,6 +20,7 @@
     },
 
 
+
     {
       "display_page" : 1,
       "type": "image",
@@ -37,17 +38,6 @@
     },
     {
       "display_page" : 1,
-      "type": "item",
-      "item": "marvelous_menagerie:saca_fossil",
-      "sepia": true,
-      "x": 30,
-      "y": 25,
-      "scale": 1
-    },
-
-
-    {
-      "display_page" : 1,
       "type": "image",
       "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
       "sepia": true,
@@ -61,17 +51,6 @@
       "width": 32,
       "height": 32
     },
-    {
-      "display_page" : 1,
-      "type": "item",
-      "item": "minecraft:lapis_block",
-      "sepia": true,
-      "x": 98,
-      "y": 25,
-      "scale": 1
-    },
-
-
     {
       "display_page" : 1,
       "type": "image",
@@ -89,29 +68,47 @@
     },
     {
       "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 96,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 16,
+      "v1": 18,
+      "width": 32,
+      "height": 32
+    },
+
+
+    {
+      "display_page" : 1,
       "type": "item",
-      "item": "minecraft:tropical_fish",
+      "item": "marvelous_menagerie:caris_fossil",
+      "sepia": true,
+      "x": 30,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:trilo_bite",
+      "sepia": true,
+      "x": 98,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:spider_eye",
       "sepia": true,
       "x": 30,
       "y": 89,
       "scale": 1
-    },
-
-
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 98,
-      "y": 96,
-      "scale": 1,
-      "u0": 0,
-      "v0": 0,
-      "u1": 16,
-      "v1": 18,
-      "width": 32,
-      "height": 32
     },
     {
       "display_page" : 1,
@@ -120,26 +117,6 @@
       "sepia": true,
       "x": 98,
       "y": 89,
-      "scale": 1
-    },
-
-    {
-      "display_page" : 2,
-      "type": "crafting_recipe",
-      "recipe_id": "marvelous_menagerie:cooked_saca",
-      "sepia": true,
-      "x": 55,
-      "y": 144,
-      "scale": 1
-    },
-
-    {
-      "display_page" : 3,
-      "type": "crafting_recipe",
-      "recipe_id": "marvelous_menagerie:golden_saca",
-      "sepia": true,
-      "x": 55,
-      "y": 112,
       "scale": 1
     }
   ]

@@ -287,6 +287,14 @@ public class MMItems {
     public static final RegistryObject<Item> FLUBBER_FOSSIL = ITEMS.register("flubber_fossil",
             ()-> new Item(new Item.Properties()));
 
+    //Diplocaulus
+    public static final RegistryObject<Item> DIPLOCAULUS_FOSSIL = ITEMS.register("diplocaulus_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DIPLOCAULUS_SPAWN_EGG = ITEMS.register("diplocaulus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.DIPLOCAULUS, 0xffae6b, 0xd2683b, new Item.Properties()));
+    public static final RegistryObject<Item> DIPLOCAULUS_BUCKET = ITEMS.register("diplocaulus_bucket",
+            () -> new FishBucketItem(MMEntities.DIPLOCAULUS, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Plants
 

@@ -2,6 +2,10 @@
   "input": ["marvelous_menagerie:siltstone_fossil"],
   "entries": [
     {
+      "weight": 5,
+      "item": "marvelous_menagerie:diplocaulus_fossil"
+    },
+    {
       "weight": 15,
       "item": "marvelous_menagerie:falca_fossil"
     },
@@ -10,7 +14,7 @@
       "item": "marvelous_menagerie:roach_fossil"
     },
     {
-      "weight": 15,
+      "weight": 17,
       "item": "marvelous_menagerie:trilo_fossil"
     }
   ]

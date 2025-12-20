@@ -2,6 +2,10 @@
   "input": ["marvelous_menagerie:gabbro_fossil"],
   "entries": [
     {
+      "weight": 12,
+      "item": "marvelous_menagerie:diplocaulus_fossil"
+    },
+    {
       "weight": 10,
       "item": "marvelous_menagerie:gorgon_fossil"
     },

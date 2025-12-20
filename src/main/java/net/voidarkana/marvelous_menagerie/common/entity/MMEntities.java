@@ -174,6 +174,11 @@ public class MMEntities {
                             .sized(2, 2.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "molten").toString()));
 
+    public static final RegistryObject<EntityType<Diplocaulus>> DIPLOCAULUS =
+            ENTITY_TYPES.register("diplocaulus",
+                    () -> EntityType.Builder.of(Diplocaulus::new, MobCategory.CREATURE)
+                            .sized(0.5F, 0.3F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "diplocaulus").toString()));
 
 
 

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 
 public class Chud extends Monster {
 
@@ -93,14 +94,14 @@ public class Chud extends Monster {
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.FROG_AMBIENT;
+        return MMSounds.CHUD_IDLE.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
-        return SoundEvents.COD_HURT;
+        return MMSounds.CHUD_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.COD_DEATH;
+        return MMSounds.CHUD_DEATH.get();
     }
 }
