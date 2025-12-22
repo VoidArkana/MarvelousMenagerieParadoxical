@@ -1,0 +1,6 @@
+{
+  "parent": "marvelous_menagerie:block/single_egg",
+  "textures": {
+    "texture": "marvelous_menagerie:block/flubber_egg_not_cracked"
+  }
+}

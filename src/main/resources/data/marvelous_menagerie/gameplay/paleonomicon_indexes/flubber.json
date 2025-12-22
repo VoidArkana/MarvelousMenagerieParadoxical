@@ -1,0 +1,13 @@
+{
+  "entity_name": "marvelous_menagerie:flubber",
+  "icon": "marvelous_menagerie:flubber_fossil",
+  "link": "mobs/flubber.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.permian"
+    },
+    {
+      "index_name": "book.marvelous_menagerie.triassic"
+    }
+  ]
+}

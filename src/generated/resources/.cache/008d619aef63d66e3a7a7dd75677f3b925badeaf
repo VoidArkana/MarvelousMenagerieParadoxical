@@ -1,4 +1,5 @@
-// 1.20.1	2025-12-13T12:21:23.098574	Tags for minecraft:block mod id marvelous_menagerie
+// 1.20.1	2025-12-20T17:13:08.8283543	Tags for minecraft:block mod id marvelous_menagerie
+07e50a089d3a3811d51c52ed7e68086a30f14af0 data/marvelous_menagerie/tags/blocks/animal_blocks.json
 bac522db269992f0d71c3ecb9cc50c98a1344053 data/marvelous_menagerie/tags/blocks/calamites_bundle_block.json
 232f7a0a8e201d0b4440898feef646e14b146c7e data/marvelous_menagerie/tags/blocks/calamites_log_block.json
 f05fb6df733203cf381553966b3f94424f0e4c1b data/marvelous_menagerie/tags/blocks/dye_depot_amber_wool.json
@@ -18,6 +19,7 @@ bcd23a9c1b7ddc0a067be71c6fdbfd547cdf89d0 data/marvelous_menagerie/tags/blocks/dy
 ceaee686e341fec38897b899a4093eeeba1570b0 data/marvelous_menagerie/tags/blocks/dye_depot_teal_wool.json
 4e9565ec368dac238ddc5389e2e8be270531220e data/marvelous_menagerie/tags/blocks/dye_depot_verdant_wool.json
 91a6ffe1ba6c1b9c525b3994d8bedeb916904345 data/marvelous_menagerie/tags/blocks/dye_depot_wool.json
+f34436533c79c38e5fb86dc8f098a6a48d1d0454 data/marvelous_menagerie/tags/blocks/flubber_digs.json
 4ccd94b31f19e837c9c85501d3b6952a9a3a0db8 data/marvelous_menagerie/tags/blocks/fossil_blocks.json
 3f32f8c08d7393f4ed2a8dd8824c5509b6d79574 data/marvelous_menagerie/tags/blocks/is_valid_block_for_dino_egg_hatching.json
 59d69af29e21450946ca29a6be759ab4a2a05c95 data/marvelous_menagerie/tags/blocks/pikaia_coral_target.json

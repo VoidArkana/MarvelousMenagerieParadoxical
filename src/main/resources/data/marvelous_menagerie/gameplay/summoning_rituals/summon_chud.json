@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:chronotite"
+  },
+  "input3": {
+    "item": "marvelous_menagerie:chud_flesh"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:chud_flesh"
+  },
+  "output": "marvelous_menagerie:chud"
+}

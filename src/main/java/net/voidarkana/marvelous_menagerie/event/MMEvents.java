@@ -50,6 +50,7 @@ public class MMEvents {
         event.put(MMEntities.BOREALOPELTA.get(), Borealopelta.createAttributes().build());
         event.put(MMEntities.MOLTEN.get(), Molten.createAttributes().build());
         event.put(MMEntities.DIPLOCAULUS.get(), Diplocaulus.createAttributes().build());
+        event.put(MMEntities.FLUBBER.get(), Flubber.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

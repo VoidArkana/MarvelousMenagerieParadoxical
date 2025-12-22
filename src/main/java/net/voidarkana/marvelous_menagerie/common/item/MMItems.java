@@ -38,13 +38,13 @@ public class MMItems {
 
     //Chud
     public static final RegistryObject<Item> CHUD_SPAWN_EGG = ITEMS.register("chud_spawn_egg",
-            ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x4c2f33, new Item.Properties()));
+            ()-> new ForgeSpawnEggItem(MMEntities.CHUD, 0xb39a98, 0x3a3b65, new Item.Properties()));
     public static final RegistryObject<Item> CHUD_FLESH = ITEMS.register("chud_flesh",
             ()-> new Item(new Item.Properties().food(MMFoods.CHUD_FLESH)));
 
     //Beholder
     public static final RegistryObject<Item> BEHOLDER_SPAWN_EGG = ITEMS.register("beholder_spawn_egg",
-            () -> new ForgeSpawnEggItem(MMEntities.BEHOLDER, 0x46b06a, 0x194d3f, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(MMEntities.BEHOLDER, 0x46b06a, 0x3a3b65, new Item.Properties()));
     public static final RegistryObject<Item> BEHOLDER_MANDIBLE = ITEMS.register("beholder_mandible",
             ()-> new Item(new Item.Properties()));
 
@@ -286,6 +286,11 @@ public class MMItems {
     //Blubber
     public static final RegistryObject<Item> FLUBBER_FOSSIL = ITEMS.register("flubber_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FLUBBER_SPAWN_EGG = ITEMS.register("flubber_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.FLUBBER, 0xc4ee8f, 0x007a67, new Item.Properties()));
+    public static final RegistryObject<Item> BABY_FLUBBER_BUCKET = ITEMS.register("baby_flubber_bucket",
+            () -> new FishBucketItem(MMEntities.FLUBBER, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Diplocaulus
     public static final RegistryObject<Item> DIPLOCAULUS_FOSSIL = ITEMS.register("diplocaulus_fossil",

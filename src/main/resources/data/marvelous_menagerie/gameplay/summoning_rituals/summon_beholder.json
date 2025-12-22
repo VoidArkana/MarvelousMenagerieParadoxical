@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "marvelous_menagerie:anomalocaris_lens"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:chronotite"
+  },
+  "input3": {
+    "item": "minecraft:water_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:beholder_mandible"
+  },
+  "output": "marvelous_menagerie:beholder"
+}

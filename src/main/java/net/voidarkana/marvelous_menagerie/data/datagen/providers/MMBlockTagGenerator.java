@@ -637,5 +637,16 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .addTag(Tags.Blocks.GRAVEL)
                 .addTag(BlockTags.SAND)
                 .add(Blocks.CLAY);
+
+        this.tag(MMTags.Blocks.ANIMAL_BLOCKS)
+                .add(MMBlocks.CHARNIA.get())
+                .add(MMBlocks.DICKINSONIA.get())
+                .add(MMBlocks.WIWAXIA.get());
+
+        this.tag(MMTags.Blocks.FLUBBER_DIG)
+                .add(MMBlocks.CHARNIA.get())
+                .add(MMBlocks.DICKINSONIA.get())
+                .add(MMBlocks.WIWAXIA.get())
+                .add(Blocks.SEA_PICKLE);
     }
 }

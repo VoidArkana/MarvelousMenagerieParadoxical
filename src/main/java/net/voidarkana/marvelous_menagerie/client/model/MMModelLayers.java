@@ -106,6 +106,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "molten"), "main");
     public static final ModelLayerLocation DIPLOCAULUS_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "diplocaulus"), "main");
+    public static final ModelLayerLocation FLUBBER_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "flubber"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

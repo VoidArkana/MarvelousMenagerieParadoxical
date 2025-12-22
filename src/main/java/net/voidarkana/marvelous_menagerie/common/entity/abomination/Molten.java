@@ -85,7 +85,7 @@ public class Molten extends Monster implements IAnimatedAttacker {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30)
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 50)
                 .add(Attributes.MOVEMENT_SPEED, 0.2F)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.75F)
                 .add(Attributes.ATTACK_DAMAGE, 7.0)

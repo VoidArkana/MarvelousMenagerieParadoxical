@@ -55,6 +55,8 @@ public class MMTags {
         public static final TagKey<Biome> LEPTI_BIOMES = create("is_leptictidium_biome");
         public static final TagKey<Biome> DOEDICURUS_BIOMES = create("is_doedicurus_biome");
         public static final TagKey<Biome> BOREALOPELTA_BIOMES = create("is_borealopelta_biome");
+        public static final TagKey<Biome> DIPLOCAULUS_BIOMES = create("is_diplocaulus_biome");
+        public static final TagKey<Biome> FLUBBER_BIOMES = create("is_flubber_biome");
 
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MOD_ID, pName));
@@ -70,6 +72,10 @@ public class MMTags {
         public static final TagKey<Block> CALAMITES_BUNDLE_BLOCK = tag("calamites_bundle_block");
 
         public static final TagKey<Block> DYE_DEPOT_WOOL = tag("dye_depot_wool");
+
+        public static final TagKey<Block> FLUBBER_DIG = tag("flubber_digs");
+
+        public static final TagKey<Block> ANIMAL_BLOCKS = tag("animal_blocks");
 
         public static final TagKey<Block> DYE_DEPOT_MAROON_WOOL = tag("dye_depot_maroon_wool");
         public static final TagKey<Block> DYE_DEPOT_ROSE_WOOL = tag("dye_depot_rose_wool");
@@ -138,6 +144,10 @@ public class MMTags {
         public static final TagKey<Item> CORAL_BLOCK_ITEMS = tag("coral_block_items");
 
         public static final TagKey<Item> OPHTHALMO_FOOD = tag("ophthalmo_food");
+
+        public static final TagKey<Item> FLUBBER_DIG_ITEM = tag("flubber_digs_item");
+
+        public static final TagKey<Item> ANIMAL_BLOCKS_ITEM = tag("animal_blocks_item");
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));

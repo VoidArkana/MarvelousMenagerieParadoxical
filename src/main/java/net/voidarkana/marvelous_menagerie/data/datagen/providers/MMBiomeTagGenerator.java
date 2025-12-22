@@ -75,5 +75,9 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
         tag(MMTags.Biomes.DOEDICURUS_BIOMES).addTag(BiomeTags.HAS_VILLAGE_PLAINS).addTag(BiomeTags.IS_SAVANNA);
 
         tag(MMTags.Biomes.BOREALOPELTA_BIOMES).addTag(BiomeTags.IS_TAIGA).addTag(BiomeTags.IS_FOREST);
+
+        tag(MMTags.Biomes.DIPLOCAULUS_BIOMES).addTag(Tags.Biomes.IS_SWAMP);
+
+        tag(MMTags.Biomes.FLUBBER_BIOMES).add(Biomes.BEACH).add(Biomes.STONY_SHORE);
     }
 }

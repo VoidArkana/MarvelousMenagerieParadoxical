@@ -277,12 +277,12 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
         super.tick();
 
-        final boolean ground = !this.isInWater();
+        final boolean inWater = this.isInWaterOrBubble();
 
-        if (!ground && this.isLandNavigator) {
+        if (inWater && this.isLandNavigator) {
             switchNavigator(false);
         }
-        if (ground && !this.isLandNavigator) {
+        if (!inWater && !this.isLandNavigator) {
             switchNavigator(true);
         }
 
@@ -350,6 +350,11 @@ public class Beholder extends Monster implements IAnimatedAttacker {
             }
 
             this.calculateEntityAnimation(true);
+
+            if (this.horizontalCollision && this.isEyeInFluidType(net.minecraftforge.common.ForgeMod.WATER_TYPE.get())){
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.05D, 0.0D));
+            }
+
         } else {
             super.travel(pTravelVector);
         }

@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.Flubber;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
@@ -170,7 +171,7 @@ public class MMEntities {
 
     public static final RegistryObject<EntityType<Molten>> MOLTEN =
             ENTITY_TYPES.register("molten",
-                    () -> EntityType.Builder.of(Molten::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(Molten::new, MobCategory.MONSTER)
                             .sized(2, 2.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "molten").toString()));
 
@@ -179,6 +180,12 @@ public class MMEntities {
                     () -> EntityType.Builder.of(Diplocaulus::new, MobCategory.CREATURE)
                             .sized(0.5F, 0.3F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "diplocaulus").toString()));
+
+    public static final RegistryObject<EntityType<Flubber>> FLUBBER =
+            ENTITY_TYPES.register("flubber",
+                    () -> EntityType.Builder.of(Flubber::new, MobCategory.CREATURE)
+                            .sized(1.2f, 1.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "flubber").toString()));
 
 
 

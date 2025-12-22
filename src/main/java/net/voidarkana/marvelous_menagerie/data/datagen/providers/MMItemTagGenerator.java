@@ -56,7 +56,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.ELEBIRD_FOSSIL.get(),
                 MMItems.DOEDICURUS_FOSSIL.get(),
                 MMItems.SNIFFER_FOSSIL.get(),
-                MMItems.FLUBBER_FOSSIL.get()
+                MMItems.FLUBBER_FOSSIL.get(),
+                MMItems.DIPLOCAULUS_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(
@@ -71,7 +72,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.PERMAFROST_FOSSIL.get());
 
         this.tag(Tags.Items.EGGS).add(
-                MMItems.ELEPHANT_BIRD_EGG.get());
+                MMItems.ELEPHANT_BIRD_EGG.get(),
+                MMBlocks.BOREALOPELTA_EGG.get().asItem()
+                );
 
         this.tag(Tags.Items.ARMORS_HELMETS).add(
                 MMItems.EGG_SHELLMET.get(),
@@ -249,5 +252,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.tag(MMTags.Items.OPHTHALMO_FOOD).add(
                 MMItems.SACABAMBASPIS.get(),
                 MMItems.TRILO_BITE.get());
+
+        this.copy(MMTags.Blocks.ANIMAL_BLOCKS, MMTags.Items.ANIMAL_BLOCKS_ITEM);
+
+        this.copy(MMTags.Blocks.FLUBBER_DIG, MMTags.Items.FLUBBER_DIG_ITEM);
     }
 }

@@ -276,11 +276,21 @@ public class Fracture extends LivingEntity {
                 if (this.isNatural()){
                     for (int i = this.getRandom().nextInt(1, 6); i>0; i--){
 
-                        BuiltInRegistries.ENTITY_TYPE.getTag(MMTags.EntityTypes.TIME_ABERRATIONS).flatMap((entityTypeNamed) -> {
+                        BuiltInRegistries.ENTITY_TYPE.getTag(MMTags.EntityTypes.TIME_ABERRATIONS).
+                                flatMap((entityTypeNamed) -> {
                             return entityTypeNamed.getRandomElement(this.level().random);
                         }).ifPresent((entityTypeHolder) -> {
                             this.entityType = entityTypeHolder.get();
                         });
+
+                        if (this.entityType == MMEntities.MOLTEN.get() && this.random.nextInt(4) == 0){
+                            if (this.getRandom().nextInt(3)==0){
+                                this.entityType = MMEntities.CHUD.get();
+                            }else
+                            {
+                                this.entityType = MMEntities.BEHOLDER.get();
+                            }
+                        }
 
                         this.spawnCreature();
                     }

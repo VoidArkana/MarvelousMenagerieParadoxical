@@ -101,6 +101,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BOREALOPELTA_LAYER, BorealoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.MOLTEN_LAYER, MoltenModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.DIPLOCAULUS_LAYER, DiplocaulusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.FLUBBER_LAYER, FlubberModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

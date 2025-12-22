@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_diplocaulus_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:diplocaulus",
+    "weight": 10,
+    "minCount": 3,
+    "maxCount": 5,
+    "category": "water_creature"
+  }
+}

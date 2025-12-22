@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.block;
 
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -49,6 +50,11 @@ public class MMBlocks {
     public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",
             () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
                     MMEntities.BOREALOPELTA, MMTags.Blocks.DINOSAUR_NEST));
+
+    //Flubber
+    public static final RegistryObject<Block> FLUBBER_EGG = registerBlock("flubber_egg",
+            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
+                    MMEntities.FLUBBER, BlockTags.SAND));
 
     //Sigillaria plank blocks
     public static final RegistryObject<Block> SIGILLARIA_PLANKS = registerBlock("sigillaria_planks",

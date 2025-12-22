@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,13 +29,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 public class Diplocaulus extends MarvelousAnimal implements Bucketable {
@@ -129,7 +134,7 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
             this.setFromBucket(true);
         }
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
             this.setFromBucket(true);
@@ -260,5 +265,11 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
 
     public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
         return !this.fromBucket() && !this.hasCustomName();
+    }
+
+    public static boolean checkSurfaceWaterCreatureRules(EntityType<? extends MarvelousAnimal> pWaterAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        int i = pLevel.getSeaLevel();
+        int j = i - 13;
+        return pPos.getY() >= j && pPos.getY() <= i && pLevel.getFluidState(pPos.below()).is(FluidTags.WATER) && pLevel.getBlockState(pPos.above()).is(Blocks.WATER) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }

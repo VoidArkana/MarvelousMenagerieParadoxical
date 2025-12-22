@@ -34,6 +34,9 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.OPHTHALMO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Ophthalmosaurus::checkSurfaceWaterCreatureRules);
         SpawnPlacements.register(MMEntities.STELLER_SEA_COW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, StellerSeaCow::checkSurfaceWaterCreatureRules);
         SpawnPlacements.register(MMEntities.BOREALOPELTA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Borealopelta::checkAnimalSpawnRules);
+        SpawnPlacements.register(MMEntities.DIPLOCAULUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Diplocaulus::checkSurfaceWaterCreatureRules);
+        SpawnPlacements.register(MMEntities.FLUBBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Flubber::checkAnimalSpawnRules);
+
     }
 
 }

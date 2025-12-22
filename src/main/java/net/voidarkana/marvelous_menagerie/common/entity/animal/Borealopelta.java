@@ -69,7 +69,7 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
 
         this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG));
+        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 2d));
 
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -235,7 +235,7 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         super.aiStep();
         if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0) {
             BlockPos blockpos = this.blockPosition();
-            if (this.level().getBlockState(blockpos).is(MMTags.Blocks.DINOSAUR_NEST)) {
+            if (this.level().getBlockState(blockpos.below()).is(MMTags.Blocks.DINOSAUR_NEST)) {
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
         }

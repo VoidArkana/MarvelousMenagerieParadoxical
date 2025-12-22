@@ -1,4 +1,4 @@
-// 1.20.1	2025-12-20T14:35:45.1976456	Item Models: marvelous_menagerie
+// 1.20.1	2025-12-21T22:03:48.022211	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -6,6 +6,7 @@ ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/
 478d01819bbec98e6f7c0d656f310df1423a26d2 assets/marvelous_menagerie/models/item/arandaspis_bucket.json
 b3f6f2a6d2c27f207199979b3b929967e7f90e5d assets/marvelous_menagerie/models/item/arandaspis_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/arandaspis_spawn_egg.json
+cb4f55b31b473c52dd4b3b95baf4ddadcdb3bc2a assets/marvelous_menagerie/models/item/baby_flubber_bucket.json
 6f0a489a87e4698d26e843231cdf9e35d87e69f7 assets/marvelous_menagerie/models/item/baby_ophthalmo_bucket.json
 55b0a0efa88ddda4ccfe2d5e0db2f6dadec9e635 assets/marvelous_menagerie/models/item/beholder_mandible.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/beholder_spawn_egg.json
@@ -86,6 +87,7 @@ d3e4dc76bec5d4bb3e55c1c4c54067a38b9b5d45 assets/marvelous_menagerie/models/item/
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/falcatus_spawn_egg.json
 1cb99d0e9f2e528e2edec7abad521c347f4cf1e1 assets/marvelous_menagerie/models/item/falca_fossil.json
 38fc5c6d9b014f217ec0737fb2480368675e32f4 assets/marvelous_menagerie/models/item/flubber_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/flubber_spawn_egg.json
 d2b08f2cbc1194d56279c762fe3c0a1c5ec0c8a9 assets/marvelous_menagerie/models/item/gabbro_bricks_slab.json
 451749f6ab76db5a1268e7619a5d5dd62d4129c0 assets/marvelous_menagerie/models/item/gabbro_bricks_stairs.json
 65c6d633ec7aba66f9e158717c2f927cfd01dedf assets/marvelous_menagerie/models/item/gabbro_bricks_wall.json

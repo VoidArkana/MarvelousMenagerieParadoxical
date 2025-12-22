@@ -743,5 +743,9 @@
   "entity.marvelous_menagerie.diplocaulus": "Diplocaulus",
   "item.marvelous_menagerie.diplocaulus_bucket": "Bucket of Diplocaulus",
   "item.marvelous_menagerie.diplocaulus_spawn_egg": "Diplocaulus Spawn Egg",
-  "item.marvelous_menagerie.diplocaulus_fossil": "Diplocaulus Fossil"
+  "item.marvelous_menagerie.diplocaulus_fossil": "Diplocaulus Fossil",
+
+  "entity.marvelous_menagerie.flubber": "Flubber",
+  "item.marvelous_menagerie.baby_flubber_bucket": "Bucket of Flubber",
+  "item.marvelous_menagerie.flubber_spawn_egg": "Flubber Spawn Egg"
 }

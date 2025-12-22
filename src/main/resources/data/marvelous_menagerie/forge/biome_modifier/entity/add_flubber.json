@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_flubber_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:flubber",
+    "weight": 4,
+    "minCount": 3,
+    "maxCount": 5,
+    "category": "creature"
+  }
+}

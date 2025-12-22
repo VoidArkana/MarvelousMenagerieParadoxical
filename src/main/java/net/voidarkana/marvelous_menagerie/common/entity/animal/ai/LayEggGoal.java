@@ -19,12 +19,14 @@ public class LayEggGoal extends MoveToBlockGoal {
     private final MarvelousAnimal animal;
     private final TagKey<Block> nestBlock;
     private final Supplier<Block> eggBlock;
+    private final double acceptedDistance;
 
-    public LayEggGoal(MarvelousAnimal pEggLayer, double pSpeedModifier, TagKey<Block> pNestBlock, Supplier<Block> pEgg) {
+    public LayEggGoal(MarvelousAnimal pEggLayer, double pSpeedModifier, TagKey<Block> pNestBlock, Supplier<Block> pEgg, double acceptedDistance) {
         super(pEggLayer, pSpeedModifier, 16);
         this.animal = pEggLayer;
         this.nestBlock = pNestBlock;
         this.eggBlock = pEgg;
+        this.acceptedDistance = acceptedDistance;
     }
 
     public boolean canUse() {
@@ -44,14 +46,11 @@ public class LayEggGoal extends MoveToBlockGoal {
     public void tick() {
         super.tick();
         BlockPos blockpos = this.animal.blockPosition();
-        if (!this.animal.isInWater() && this.isReachedTarget() && this.animal instanceof IEggLayer eggLayer) {
-
-            System.out.println(eggLayer.getLayEggCounter());
-            System.out.println(eggLayer.isLayingEgg());
+        if (!this.animal.isInWater() && this.animal instanceof IEggLayer eggLayer) {
 
             if (eggLayer.getLayEggCounter() < 1) {
                 eggLayer.setLayingEgg(true);
-            } else if (eggLayer.getLayEggCounter() > this.adjustedTickDelay(200)) {
+            } else if (eggLayer.getLayEggCounter() > this.adjustedTickDelay(100)) {
                 Level level = this.animal.level();
                 level.playSound(null, blockpos, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
                 BlockPos blockpos1 = this.blockPos.above();
@@ -73,5 +72,9 @@ public class LayEggGoal extends MoveToBlockGoal {
 
     protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
         return !pLevel.isEmptyBlock(pPos.above()) ? false : pLevel.getBlockState(pPos).is(nestBlock);
+    }
+
+    public double acceptedDistance() {
+        return acceptedDistance;
     }
 }
