@@ -789,6 +789,9 @@
       },
       {
         "name": "marvelous_menagerie:chud_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:chud_hurt_3"
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.chud_hurt"

@@ -69,7 +69,7 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
 
         this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 2d));
+        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));

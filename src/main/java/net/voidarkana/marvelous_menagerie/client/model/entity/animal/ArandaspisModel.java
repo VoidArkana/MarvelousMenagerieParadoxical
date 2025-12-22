@@ -10,6 +10,7 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
@@ -54,17 +55,10 @@ public class ArandaspisModel<T extends Arandaspis> extends MarvelousModel<T> {
 	public void setupAnim(Arandaspis entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(ArandaspisAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
-
-			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
-		}else {
-
-			this.swim_rot.resetPose();
-		}
-
+		this.animateWalk(ArandaspisAnims.SWIM, limbSwing, limbSwingAmount*4f*(1-entity.getOutOfWaterTicks()/5f), 1.5f, 3f);
 		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
 		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.swim_rot.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, headPitch * ((float)Math.PI / 180F), 0);
 
 	}
 

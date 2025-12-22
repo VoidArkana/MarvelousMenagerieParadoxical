@@ -114,15 +114,15 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.LAND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f)));
 		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
 
-		this.animateWalk(FlubberAnimsBasics.SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 4, 2.5f);
-		this.animateWalk(FlubberAnimsBasics.WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 4, 2.5f);
+		this.animateWalk(FlubberAnimsBasics.SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 2, 2.5f);
+		this.animateWalk(FlubberAnimsBasics.WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 2, 2.5f);
 
 		float prevHeadxRot = this.neck.xRot;
 		float prevHeadyRot = this.neck.yRot;
 		this.neck.xRot = prevHeadxRot + headPitch * ((float)Math.PI / 180F)/2;
 		this.neck.yRot = prevHeadyRot + netHeadYaw * ((float)Math.PI / 180F)/2;
 
-		this.swim_rot.xRot = Mth.lerp( entity.getInWaterTicks()/5f, 0, -headPitch * ((float)Math.PI / 180F));
+		this.swim_rot.xRot = Mth.lerp( entity.getInWaterTicks()/5f, 0, headPitch * ((float)Math.PI / 180F));
 	}
 
 	@Override
