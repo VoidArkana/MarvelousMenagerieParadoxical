@@ -23,6 +23,7 @@ public class MMMessages {
             .simpleChannel();
 
     private static int packetId = 0;
+
     private static int id() {
         return packetId++;
     }
@@ -52,6 +53,11 @@ public class MMMessages {
                 OpenElephantBirdScreenPacket::write,
                 OpenElephantBirdScreenPacket::read,
                 OpenElephantBirdScreenPacket.Handler::handle);
+
+        CHANNEL.registerMessage(id(), SyncSummoningRituals.class,
+                SyncSummoningRituals::write,
+                SyncSummoningRituals::read,
+                SyncSummoningRituals::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

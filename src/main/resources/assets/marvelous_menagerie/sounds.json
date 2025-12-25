@@ -804,5 +804,105 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.chud_death"
+  },
+
+
+
+
+  "flubber_idle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_idle"
+  },
+  "flubber_hurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_hurt"
+  },
+  "flubber_death": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_death"
+  },
+  "flubber_celebrate": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_celebrate"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_celebrate"
+  },
+  "flubber_underwater_idle": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_underwater_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_underwater_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_underwater_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_idle"
+  },
+  "flubber_underwater_hurt": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_underwater_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_underwater_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:flubber_underwater_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_hurt"
+  },
+  "flubber_underwater_death": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_underwater_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_death"
+  },
+  "flubber_underwater_celebrate": {
+    "category": "hostile",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:flubber_underwater_celebrate"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_celebrate"
   }
 }

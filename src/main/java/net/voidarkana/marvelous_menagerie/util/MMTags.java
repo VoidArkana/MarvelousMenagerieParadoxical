@@ -64,6 +64,8 @@ public class MMTags {
     }
 
     public static class Blocks {
+        public static final TagKey<Block> FLUBBER_DIG_TARGET = tag("flubber_diggable_blocks");
+
         public static final TagKey<Block> DINOSAUR_NEST = tag("is_valid_block_for_dino_egg_hatching");
 
         public static final TagKey<Block> SIGILLARIA_LOG_BLOCK = tag("sigillaria_log_block");
@@ -73,7 +75,7 @@ public class MMTags {
 
         public static final TagKey<Block> DYE_DEPOT_WOOL = tag("dye_depot_wool");
 
-        public static final TagKey<Block> FLUBBER_DIG = tag("flubber_digs");
+        public static final TagKey<Block> FLUBBER_DIG = tag("flubber_dig_results");
 
         public static final TagKey<Block> ANIMAL_BLOCKS = tag("animal_blocks");
 

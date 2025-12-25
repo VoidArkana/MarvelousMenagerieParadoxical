@@ -297,13 +297,21 @@ public class MMBlocks {
 
     //Wiwaxia
     public static final RegistryObject<Block> WIWAXIA = registerBlock("wiwaxia",
-            ()-> new WiwaxiaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_PURPLE).noOcclusion().instabreak().lightLevel((p_152684_) -> {return 6;})));
+            ()-> new WiwaxiaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)
+                    .mapColor(MapColor.COLOR_PURPLE).noOcclusion().instabreak()
+                    .lightLevel((p_152684_) -> {return 6;})));
 
     //Charnia
     public static final RegistryObject<Block> CHARNIA = registerBlock("charnia",
             ()-> new CharniaBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_ORANGE)
                     .noOcclusion().sound(SoundType.MOSS).instabreak().noCollission()
                     .lightLevel((pState) -> {return 3 + 3 * pState.getValue(CharniaBlock.PICKLES);})));
+
+    //Herpetogaster
+    public static final RegistryObject<Block> HERPETOGASTER = registerBlock("herpetogaster",
+            ()-> new HerpetogasterBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK).mapColor(MapColor.COLOR_PURPLE)
+                    .noOcclusion().sound(SoundType.SLIME_BLOCK).instabreak().noCollission()
+                    .lightLevel((pState) -> {return 6;})));
 
 
     //April Fools

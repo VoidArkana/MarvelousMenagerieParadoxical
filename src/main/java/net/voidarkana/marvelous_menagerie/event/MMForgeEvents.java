@@ -11,5 +11,6 @@ public class MMForgeEvents {
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
         MarvelousMenagerie.PROXY.getPaleonomiconIndexManager().onDatapackSync(event.getPlayer());
+        MarvelousMenagerie.PROXY.getRitualManager().onDatapackSync(event.getPlayer());
     }
 }

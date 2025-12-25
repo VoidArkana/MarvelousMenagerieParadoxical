@@ -142,11 +142,9 @@ public class MMCreativeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
 
                         output.accept(MMBlocks.CHARNIA.get());
-
                         output.accept(MMBlocks.COOKSONIA.get());
-
                         output.accept(MMBlocks.DICKINSONIA.get());
-
+                        output.accept(MMBlocks.HERPETOGASTER.get());
                         output.accept(MMBlocks.WIWAXIA.get());
 
                         output.accept(MMBlocks.CALAMITES_LOG.get());

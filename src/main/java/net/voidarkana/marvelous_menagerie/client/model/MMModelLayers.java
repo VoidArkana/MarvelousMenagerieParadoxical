@@ -10,6 +10,8 @@ public class MMModelLayers {
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "skull"), "main");
     public static final ModelLayerLocation CHARNIA_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "charnia"), "main");
+    public static final ModelLayerLocation HERPETOGASTER_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "herpetogaster"), "main");
 
     public static final ModelLayerLocation CHUD_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "chud"), "main");

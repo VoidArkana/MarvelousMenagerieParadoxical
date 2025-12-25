@@ -746,6 +746,18 @@
   "item.marvelous_menagerie.diplocaulus_fossil": "Diplocaulus Fossil",
 
   "entity.marvelous_menagerie.flubber": "Flubber",
-  "item.marvelous_menagerie.baby_flubber_bucket": "Bucket of Flubber",
-  "item.marvelous_menagerie.flubber_spawn_egg": "Flubber Spawn Egg"
+  "item.marvelous_menagerie.baby_flubber_bucket": "Bucket of Baby Flubber",
+  "item.marvelous_menagerie.flubber_spawn_egg": "Flubber Spawn Egg",
+  "item.marvelous_menagerie.flubber_fossil": "Flubber Fossil",
+  "block.marvelous_menagerie.flubber_egg": "Flubber Egg",
+  "marvelous_menagerie.sound.subtitle.flubber_idle":  "Flubber flubs",
+  "marvelous_menagerie.sound.subtitle.flubber_hurt":  "Flubber hurts",
+  "marvelous_menagerie.sound.subtitle.flubber_death": "Flubber dies",
+  "marvelous_menagerie.sound.subtitle.flubber_celebrate": "Flubber celebrates",
+  "marvelous_menagerie.sound.subtitle.flubber_underwater_idle":  "Flubber flubs",
+  "marvelous_menagerie.sound.subtitle.flubber_underwater_hurt":  "Flubber hurts",
+  "marvelous_menagerie.sound.subtitle.flubber_underwater_death": "Flubber dies",
+  "marvelous_menagerie.sound.subtitle.flubber_underwater_celebrate": "Flubber celebrates",
+
+  "block.marvelous_menagerie.herpetogaster": "Herpetogaster"
 }

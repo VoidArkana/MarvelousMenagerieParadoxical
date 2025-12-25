@@ -56,7 +56,7 @@ public class RitualRecipeCategory implements IRecipeCategory<RitualManager.Ritua
 
     @Override
     public RecipeType<RitualManager.RitualProcessData> getRecipeType() {
-        return new RecipeType<>(UID, RitualManager.RitualProcessData.class);
+        return JEIPlugin.SUMMONING_RITUALS;
     }
 
     @Override

@@ -59,6 +59,7 @@ public class LayEggGoal extends MoveToBlockGoal {
                 level.gameEvent(GameEvent.BLOCK_PLACE, blockpos1, GameEvent.Context.of(this.animal, blockstate));
                 eggLayer.setPregnant(false);
                 eggLayer.setLayingEgg(false);
+                eggLayer.onEggLaid();
                 this.animal.setInLoveTime(600);
             }
 
@@ -71,7 +72,7 @@ public class LayEggGoal extends MoveToBlockGoal {
     }
 
     protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
-        return !pLevel.isEmptyBlock(pPos.above()) ? false : pLevel.getBlockState(pPos).is(nestBlock);
+        return pLevel.isEmptyBlock(pPos.above()) && pLevel.getBlockState(pPos).is(nestBlock);
     }
 
     public double acceptedDistance() {

@@ -332,6 +332,10 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
+        if (reason == MobSpawnType.TRIGGERED){
+            this.setFromBucket(true);
+        }
+
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Model", 3)) {
 
             System.out.println(dataTag.getInt("Age"));

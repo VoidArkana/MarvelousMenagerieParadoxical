@@ -207,6 +207,9 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
     }
 
     @Override
+    public void onEggLaid() {}
+
+    @Override
     public int attackAnimationTimeout() {
         return this.attackAnimationTimeout;
     }

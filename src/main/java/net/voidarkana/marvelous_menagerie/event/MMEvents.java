@@ -70,9 +70,9 @@ public class MMEvents {
     @SubscribeEvent
     public void register(AddReloadListenerEvent event) {
         event.addListener(new PikaiaCoralManager());
-        event.addListener(new RitualManager());
         event.addListener(new FossilCleaningManager());
 
         event.addListener(MarvelousMenagerie.PROXY.getPaleonomiconIndexManager());
+        event.addListener(MarvelousMenagerie.PROXY.getRitualManager());
     }
 }

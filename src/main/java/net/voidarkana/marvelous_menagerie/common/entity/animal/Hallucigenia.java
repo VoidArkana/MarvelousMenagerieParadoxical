@@ -223,6 +223,10 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
+        if (reason == MobSpawnType.TRIGGERED){
+            this.setFromBucket(true);
+        }
+
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             this.setFromBucket(true);
             if (dataTag.contains("Age")) {

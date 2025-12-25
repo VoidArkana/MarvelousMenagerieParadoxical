@@ -55,6 +55,11 @@ public class MMBlockEntities {
                     BlockEntityType.Builder.of(CharniaBlockEntity::new,
                             MMBlocks.CHARNIA.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<HerpetogasterBlockEntity>> HERPETOGASTER_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("herpetogaster", () ->
+                    BlockEntityType.Builder.of(HerpetogasterBlockEntity::new,
+                            MMBlocks.HERPETOGASTER.get()).build(null));
+
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);
     }

@@ -7,6 +7,14 @@
     {
       "type": "minecraft:single",
       "resource": "marvelous_menagerie:entity/charnia"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "marvelous_menagerie:entity/herpetogaster"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "marvelous_menagerie:entity/herpetogaster_christmas"
     }
   ]
 }

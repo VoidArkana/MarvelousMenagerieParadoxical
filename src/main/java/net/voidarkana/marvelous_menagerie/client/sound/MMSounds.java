@@ -70,24 +70,33 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> LEPTICTIDIUM_SCARED = registerSoundEvents("leptictidium_scared");
 
     public static final RegistryObject<SoundEvent> BOREALOPELTA_AMBIENT = registerSoundEvents("borealopelta_idle");
-    public static final RegistryObject<SoundEvent> BOREALOPELTA_HURT = registerSoundEvents(   "borealopelta_hurt");
-    public static final RegistryObject<SoundEvent> BOREALOPELTA_DEATH = registerSoundEvents(  "borealopelta_death");
+    public static final RegistryObject<SoundEvent> BOREALOPELTA_HURT = registerSoundEvents("borealopelta_hurt");
+    public static final RegistryObject<SoundEvent> BOREALOPELTA_DEATH = registerSoundEvents("borealopelta_death");
 
-    public static final RegistryObject<SoundEvent> MOLTEN_STEPS = registerSoundEvents(  "molten_steps");
-    public static final RegistryObject<SoundEvent> MOLTEN_IDLE = registerSoundEvents(  "molten_idle");
-    public static final RegistryObject<SoundEvent> MOLTEN_HURT = registerSoundEvents(  "molten_hurt");
-    public static final RegistryObject<SoundEvent> MOLTEN_DEATH = registerSoundEvents(  "molten_death");
+    public static final RegistryObject<SoundEvent> MOLTEN_STEPS = registerSoundEvents("molten_steps");
+    public static final RegistryObject<SoundEvent> MOLTEN_IDLE = registerSoundEvents("molten_idle");
+    public static final RegistryObject<SoundEvent> MOLTEN_HURT = registerSoundEvents("molten_hurt");
+    public static final RegistryObject<SoundEvent> MOLTEN_DEATH = registerSoundEvents("molten_death");
 
-    public static final RegistryObject<SoundEvent> BEHOLDER_IDLE = registerSoundEvents(   "beholder_idle");
-    public static final RegistryObject<SoundEvent> BEHOLDER_GRABBING = registerSoundEvents(   "beholder_grabbing");
-    public static final RegistryObject<SoundEvent> BEHOLDER_HURT = registerSoundEvents(   "beholder_hurt");
-    public static final RegistryObject<SoundEvent> BEHOLDER_DEATH = registerSoundEvents(  "beholder_death");
-    public static final RegistryObject<SoundEvent> BEHOLDER_OPEN = registerSoundEvents(  "beholder_open");
-    public static final RegistryObject<SoundEvent> BEHOLDER_CLOSE = registerSoundEvents(  "beholder_close");
+    public static final RegistryObject<SoundEvent> BEHOLDER_IDLE = registerSoundEvents("beholder_idle");
+    public static final RegistryObject<SoundEvent> BEHOLDER_GRABBING = registerSoundEvents("beholder_grabbing");
+    public static final RegistryObject<SoundEvent> BEHOLDER_HURT = registerSoundEvents("beholder_hurt");
+    public static final RegistryObject<SoundEvent> BEHOLDER_DEATH = registerSoundEvents("beholder_death");
+    public static final RegistryObject<SoundEvent> BEHOLDER_OPEN = registerSoundEvents("beholder_open");
+    public static final RegistryObject<SoundEvent> BEHOLDER_CLOSE = registerSoundEvents("beholder_close");
 
-    public static final RegistryObject<SoundEvent> CHUD_IDLE = registerSoundEvents(   "chud_idle");
-    public static final RegistryObject<SoundEvent> CHUD_HURT = registerSoundEvents(   "chud_hurt");
-    public static final RegistryObject<SoundEvent> CHUD_DEATH = registerSoundEvents(  "chud_death");
+    public static final RegistryObject<SoundEvent> CHUD_IDLE = registerSoundEvents("chud_idle");
+    public static final RegistryObject<SoundEvent> CHUD_HURT = registerSoundEvents("chud_hurt");
+    public static final RegistryObject<SoundEvent> CHUD_DEATH = registerSoundEvents("chud_death");
+
+    public static final RegistryObject<SoundEvent> FLUBBER_IDLE = registerSoundEvents("flubber_idle");
+    public static final RegistryObject<SoundEvent> FLUBBER_HURT = registerSoundEvents("flubber_hurt");
+    public static final RegistryObject<SoundEvent> FLUBBER_DEATH = registerSoundEvents("flubber_death");
+    public static final RegistryObject<SoundEvent> FLUBBER_CELEBRATE = registerSoundEvents("flubber_celebrate");
+    public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_IDLE = registerSoundEvents("flubber_underwater_idle");
+    public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_HURT = registerSoundEvents("flubber_underwater_hurt");
+    public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_DEATH = registerSoundEvents("flubber_underwater_death");
+    public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_CELEBRATE = registerSoundEvents("flubber_underwater_celebrate");
 
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 

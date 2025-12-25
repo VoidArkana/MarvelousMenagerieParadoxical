@@ -632,9 +632,21 @@ public class FossilMinigameScreen extends Screen {
             this.player.playSound(SoundEvents.ITEM_BREAK);
             this.breakFossils();
         }
-        if (this.successLevel>=3){
+        int fossilsAvailable = 3;
+
+        if (this.bone1Damage>=2)
+            fossilsAvailable--;
+        if (this.bone2Damage>=2)
+            fossilsAvailable--;
+        if (this.bone3Damage>=2)
+            fossilsAvailable--;
+
+        if (this.successLevel>=fossilsAvailable){
             this.minecraft.player.closeContainer();
-            this.player.playSound(SoundEvents.PLAYER_LEVELUP);
+            if (fossilsAvailable == 3)
+                this.player.playSound(SoundEvents.PLAYER_LEVELUP);
+            else
+                this.player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP);
             this.breakFossils();
         }
         if (this.minecraft.player.isAlive() && !this.minecraft.player.isRemoved()) {
@@ -960,7 +972,7 @@ public class FossilMinigameScreen extends Screen {
                                         }
                                     }
                                 }
-                                if (!isCovered && bone1Undiscovered){
+                                if (!isCovered && bone1Undiscovered && bone1Damage<2){
                                     bone1Undiscovered = false;
                                     fossilProgress1 = 10;
                                     successLevel++;
@@ -978,7 +990,7 @@ public class FossilMinigameScreen extends Screen {
                                     }
                                 }
 
-                                if (!isCovered && bone2Undiscovered){
+                                if (!isCovered && bone2Undiscovered && bone2Damage<2){
                                     bone2Undiscovered = false;
                                     fossilProgress2 = 10;
                                     successLevel++;
@@ -997,7 +1009,7 @@ public class FossilMinigameScreen extends Screen {
                                         }
                                     }
                                 }
-                                if (!isCovered && bone3Undiscovered){
+                                if (!isCovered && bone3Undiscovered && bone3Damage<2){
                                     bone3Undiscovered = false;
                                     fossilProgress3 = 10;
                                     successLevel++;

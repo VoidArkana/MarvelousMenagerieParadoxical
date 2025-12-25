@@ -112,10 +112,16 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 		}
 
 		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.LAND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f)));
-		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount));
 
-		this.animateWalk(FlubberAnimsBasics.SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 2, 2.5f);
+		this.animateWalk(FlubberAnimsBasics.SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 1.5f, 2.5f);
 		this.animateWalk(FlubberAnimsBasics.WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 2, 2.5f);
+
+		this.animate(entity.landDanceAnimationState, FlubberAnimsBasics.CELEBRATION_LAND, ageInTicks);
+		this.animate(entity.waterDanceAnimationState1, FlubberAnimsBasics.CELEBRATION_WATER_1, ageInTicks);
+		this.animate(entity.waterDanceAnimationState2, FlubberAnimsBasics.CELEBRATION_WATER_2, ageInTicks);
+		this.animate(entity.waterDigAnimationState, FlubberAnimsBasics.SWIM_DIG_OVERLAY, ageInTicks);
+		this.animate(entity.landDigAnimationState, FlubberAnimsBasics.LAND_DIG, ageInTicks);
 
 		float prevHeadxRot = this.neck.xRot;
 		float prevHeadyRot = this.neck.yRot;

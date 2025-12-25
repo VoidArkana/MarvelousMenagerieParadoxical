@@ -333,6 +333,8 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));
 
+        this.dropSelf(MMBlocks.HERPETOGASTER.get());
+
         this.dropSelf(MMBlocks.BOREALOPELTA_EGG.get());
         this.dropSelf(MMBlocks.FLUBBER_EGG.get());
     }

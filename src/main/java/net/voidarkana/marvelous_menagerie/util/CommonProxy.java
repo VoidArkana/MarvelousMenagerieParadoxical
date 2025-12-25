@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.data.codec.PaleonomiconIndexManager;
+import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
 
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class CommonProxy {
 
     private final PaleonomiconIndexManager paleonomiconIndexManager = new PaleonomiconIndexManager();
+    private final RitualManager ritualManager = new RitualManager();
 
     public CommonProxy() {
     }
@@ -44,6 +46,10 @@ public class CommonProxy {
 
     public PaleonomiconIndexManager getPaleonomiconIndexManager(){
         return paleonomiconIndexManager;
+    }
+
+    public RitualManager getRitualManager(){
+        return ritualManager;
     }
 
     public void blockRenderingEntity(UUID id) {

@@ -13,4 +13,6 @@ public interface IEggLayer {
     boolean isLayingEgg();
 
     void setLayingEgg(boolean pregnant);
+
+    void onEggLaid();
 }
