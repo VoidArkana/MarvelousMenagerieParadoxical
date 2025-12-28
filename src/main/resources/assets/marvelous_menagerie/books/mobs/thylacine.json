@@ -1,12 +1,12 @@
 {
-  "parent": "neogene/index.json",
-  "text": "quaternary/mobs/thylacine.txt",
+  "parent": "quaternary/index.json",
+  "text": "animals/thylacine.txt",
   "title": "entity.marvelous_menagerie.thylacine",
   "widgets": [
     {
       "display_page" : 1,
       "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/chud.png",
+      "image": "marvelous_menagerie:textures/gui/book/thylacine_book.png",
       "sepia": true,
       "x": 64,
       "y": 60,
@@ -17,6 +17,107 @@
       "v1": 128,
       "width": 128,
       "height": 128
+    },
+
+
+
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+
+
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:thylacine_fossil",
+      "sepia": true,
+      "x": 30,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:rabbit",
+      "sepia": true,
+      "x": 98,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:bell",
+      "sepia": true,
+      "x": 30,
+      "y": 93,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:bone",
+      "sepia": true,
+      "x": 98,
+      "y": 93,
+      "scale": 1
     }
   ]
 }

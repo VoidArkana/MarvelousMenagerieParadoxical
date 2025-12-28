@@ -44,8 +44,8 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         //Paleonomicon
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, MMItems.PALEONOMICON.get(), 1)
                 .requires(Items.BOOK)
-                .requires(MMTags.Items.ANIMAL_FOSSILS)
-                .unlockedBy(getHasName(MMItems.PALEO_TOOLKIT.get()), has(MMItems.PALEO_TOOLKIT.get()))
+                .requires(MMTags.Items.PALEONOMICON_INGREDIENTS)
+                .unlockedBy(getHasName(Items.BOOK), has(Items.BOOK))
                 .save(consumer);
 
 
@@ -166,7 +166,12 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
         //Egg Shellmet
-        makeHelmet(MMItems.EGG_SHELLMET, MMItems.EGG_SHELL_FRAGMENT);
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, MMItems.EGG_SHELLMET.get(), 1)
+                .pattern("MMM")
+                .pattern("M M")
+                .define('M', MMItems.EGG_SHELL_FRAGMENT.get())
+                .unlockedBy(getHasName(MMItems.EGG_SHELL_FRAGMENT.get()), has(MMItems.EGG_SHELL_FRAGMENT.get()))
+                .save(consumer);
 
         //Jumbo Omelette
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, MMItems.JUMBO_OMELETTE.get(), 1)
@@ -315,6 +320,12 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         //Opal
         this.makeIngotToBlock(MMBlocks.OPAL_BLOCK, MMItems.OPAL).save(consumer);
         this.makeBlockToIngot(MMItems.OPAL, MMBlocks.OPAL_BLOCK).save(consumer);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.OPAL_BRICKS.get(), 16)
+                .pattern("SS")
+                .pattern("SS")
+                .define('S', MMBlocks.OPAL_BLOCK.get())
+                .unlockedBy(getHasName(MMItems.OPAL.get()), has(MMItems.OPAL.get()))
+                .save(consumer);
 
         //Shale
         this.makeSlab(MMBlocks.SHALE, MMBlocks.SHALE_SLAB).save(consumer);

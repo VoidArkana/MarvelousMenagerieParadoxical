@@ -253,6 +253,7 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.OPAL.get());
                         output.accept(MMBlocks.OPAL_BLOCK.get());
+                        output.accept(MMBlocks.OPAL_BRICKS.get());
 
                         output.accept(MMItems.CHRONO_WATCH.get());
 

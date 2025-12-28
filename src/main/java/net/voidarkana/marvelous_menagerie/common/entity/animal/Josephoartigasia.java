@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -239,7 +240,9 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
 
-        if (hand == InteractionHand.MAIN_HAND && itemstack.is(Items.APPLE) && !this.isTame() && !this.isBaby()) {
+        if (this.isFood(itemstack)){
+            return super.mobInteract(player, hand);
+        } else if (hand == InteractionHand.MAIN_HAND && itemstack.is(Items.APPLE) && !this.isTame() && !this.isBaby()) {
 
             if (!player.getAbilities().instabuild) {
                 itemstack.shrink(1);
@@ -259,7 +262,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
         } else if (hand == InteractionHand.MAIN_HAND && !this.level().isClientSide && this.isTame() && this.isOwnedBy(player)
                 && this.getStandingTime()==0 && this.getSittingTime()==0) {
-            if (this.isFood(itemstack) || itemstack.is(Items.APPLE) && this.getHealth() < this.getMaxHealth()) {
+            if (itemstack.is(Items.APPLE) && this.getHealth() < this.getMaxHealth()) {
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
@@ -274,7 +277,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.spawnAtLocation(Items.SADDLE);
             } else if (!player.isShiftKeyDown() && !this.isBaby() && this.isSaddled() && !this.isInSittingPose() &&
-                    this.getStandingTime() == 0 && this.getSittingTime() == 0 && !this.isInWater()) {
+                    this.getStandingTime() == 0 && this.getSittingTime() == 0) {
                 player.startRiding(this);
             } else {
                 this.setCommand((this.getCommand() + 1) % 3);
@@ -310,6 +313,11 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         } else {
             return super.getDimensions(pPose);
         }
+    }
+
+    @Override
+    public double getPassengersRidingOffset() {
+        return Mth.lerp(this.getInWaterTicks(), super.getPassengersRidingOffset(), super.getPassengersRidingOffset()*0.95D);
     }
 
     public void setupAnimationStates() {

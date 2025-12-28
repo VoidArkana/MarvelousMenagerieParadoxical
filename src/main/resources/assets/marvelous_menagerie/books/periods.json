@@ -3,6 +3,20 @@
   "text": "periods.txt",
   "title": "book.marvelous_menagerie.periods",
   "widgets": [
-
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/eras.png",
+      "sepia": true,
+      "x": 65,
+      "y": 90,
+      "scale": 0.65,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 192,
+      "width": 128,
+      "height": 192
+    }
   ]
 }

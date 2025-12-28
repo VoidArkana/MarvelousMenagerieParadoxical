@@ -1,0 +1,61 @@
+
+
+
+
+
+    Once you have gotten your hands on a
+§lPaleontology §lToolkit,
+it's time to start digging!
+    With a Paleontology Toolkit in hand, by
+    interacting with a §lFossil block§r an
+excavation will be started.
+    One must be careful, however, as starting an excavation wears off your paleontology kit even if nothing is uncovered or dug.
+
+
+
+
+
+
+
+
+
+
+    First we need to know our tools. Inside the paleontology toolkit you will find the §lchisel§r, §lpick§r and §lhammer§r, each of them having different areas of effect.
+
+
+
+    When having a tool in hand, one can quickly return it by §lLeft Clicking§r
+
+    These tools are used to break the sediment in the excavation in order to uncover and collect fossils by §lclicking§r on them.
+
+
+
+
+
+
+
+
+
+    When uncovering fossils, we must be careful as to not overlap their areas of effect with fossils, as hitting a fossil with one of
+
+
+
+
+
+
+
+
+
+our tools will damage them, breaking the second time they're damaged.
+    An excavation will come to an end if you either break or collect
+
+
+
+
+
+
+
+
+
+all available fossils or if the excavation's integrity meter runs out. For an excavation to be of the highest success level one must uncover and collect §lthree§r fossils without breaking them and before the excavation's integrity runs out.
+    Once ended, the excavation will break surrounding fossil blocks, revealing a reward according to the level of success one had.

@@ -34,6 +34,9 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.CHRONO_PEDESTAL.get(),
                 MMBlocks.CHRONOTITE.get(),
 
+                MMBlocks.OPAL_BRICKS.get(),
+                MMBlocks.OPAL_BLOCK.get(),
+
                 MMBlocks.SHALE.get(),
                 MMBlocks.SHALE_WALL.get(),
                 MMBlocks.SHALE_STAIRS.get(),

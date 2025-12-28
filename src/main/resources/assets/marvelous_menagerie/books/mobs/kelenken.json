@@ -1,6 +1,6 @@
 {
   "parent": "neogene/index.json",
-  "text": "paleogene/mobs/kelenken.txt",
+  "text": "animals/kelenken.txt",
   "title": "entity.marvelous_menagerie.kelenken",
   "widgets": [
     {

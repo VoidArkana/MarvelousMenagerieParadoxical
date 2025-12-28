@@ -44,7 +44,7 @@ public abstract class MarvelousAnimal extends Animal {
 
         if (!this.level().isClientSide){
 
-            if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0 && !this.isVehicle()){
+            if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0){
 
                 this.prevTicksInWater = this.getInWaterTicks();
                 this.setInWaterTicks(this.prevTicksInWater -1);

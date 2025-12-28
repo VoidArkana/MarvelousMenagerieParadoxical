@@ -116,6 +116,7 @@ public class MMTags {
         public static final TagKey<Item> FINTASTIC_PREMIUM_FEED = tag("fintastic_premium_feed");
 
         public static final TagKey<Item> ANIMAL_FOSSILS = tag("animal_fossils");
+        public static final TagKey<Item> PALEONOMICON_INGREDIENTS = tag("paleonomicon_ingredients");
 
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
         public static final TagKey<Item> CALAMITES_LOG_ITEM = tag("calamites_log_item");

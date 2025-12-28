@@ -1,0 +1,26 @@
+{
+  "parent": "paleontology/chapter.json",
+  "text": "paleontology/paleo_table.txt",
+  "title": "book.marvelous_menagerie.paleontology.paleo_table",
+  "widgets": [
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:paleo_table_book",
+      "sepia": true,
+      "x": 64,
+      "y": 30,
+      "scale": 1.5
+    },
+
+    {
+      "display_page" : 2,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:paleo_table",
+      "sepia": true,
+      "x": 55,
+      "y": 125,
+      "scale": 1
+    }
+  ]
+}

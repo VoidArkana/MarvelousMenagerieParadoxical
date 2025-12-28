@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.renderer.rendertypes.MMRenderTypes;
+import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -88,7 +90,13 @@ public class CraftingRecipeWidget extends BookWidget {
                 poseStack.pushPose();
                 poseStack.translate(43, -15, 0);
                 poseStack.scale(1.35F, 1.35F, 1);
-                ItemWidget.renderItem(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()), poseStack, bufferSource, sepia, itemScale * 1.25F);
+                ItemStack output = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
+                if (output.is(Items.CHEST))
+                    output = new ItemStack(MMBlocks.CHEST_BOOK.get());
+                if (output.is(MMBlocks.PALEO_TABLE.get().asItem()))
+                    output = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+
+                ItemWidget.renderItem(output, poseStack, bufferSource, sepia, itemScale * 1.25F);
                 poseStack.popPose();
 
                 Ingredient ing = (Ingredient) recipe.getIngredients().get(0);
@@ -104,6 +112,12 @@ public class CraftingRecipeWidget extends BookWidget {
 
                 poseStack.pushPose();
                 poseStack.translate(-27.5F, -12.5F, 0);
+
+                if (stack.is(Items.CHEST))
+                    stack = new ItemStack(MMBlocks.CHEST_BOOK.get());
+                if (stack.is(MMBlocks.PALEO_TABLE.get().asItem()))
+                    stack = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+
                 ItemWidget.renderItem(stack, poseStack, bufferSource, sepia, itemScale);
                 poseStack.popPose();
 
@@ -111,7 +125,14 @@ public class CraftingRecipeWidget extends BookWidget {
                 poseStack.pushPose();
                 poseStack.translate(60, -1, 0);
                 poseStack.scale(1.35F, 1.35F, 1);
-                ItemWidget.renderItem(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()), poseStack, bufferSource, sepia, itemScale * 1.25F);
+
+                ItemStack output = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
+                if (output.is(Items.CHEST))
+                    output = new ItemStack(MMBlocks.CHEST_BOOK.get());
+                if (output.is(MMBlocks.PALEO_TABLE.get().asItem()))
+                    output = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+
+                ItemWidget.renderItem(output, poseStack, bufferSource, sepia, itemScale * 1.25F);
                 poseStack.popPose();
 
                 NonNullList<Ingredient> ingredients =  recipe.getIngredients();
@@ -147,6 +168,12 @@ public class CraftingRecipeWidget extends BookWidget {
                             renderX++;
                         }
                         if (!stack.isEmpty()) {
+
+                            if (stack.is(Items.CHEST))
+                                stack = new ItemStack(MMBlocks.CHEST_BOOK.get());
+                            if (stack.is(MMBlocks.PALEO_TABLE.get().asItem()))
+                                stack = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+
                             poseStack.pushPose();
                             poseStack.translate(-33 + renderX * 19, -18.5F + renderY * 19, 0);
                             ItemWidget.renderItem(stack, poseStack, bufferSource, sepia, itemScale);

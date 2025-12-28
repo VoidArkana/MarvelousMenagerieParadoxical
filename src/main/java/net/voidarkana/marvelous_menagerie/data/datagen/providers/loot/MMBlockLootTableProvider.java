@@ -27,9 +27,13 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
 
+        this.dropSelf(MMBlocks.CHEST_BOOK.get());
+        this.dropSelf(MMBlocks.PALEO_TABLE_BOOK.get());
+
         this.dropSelf(MMBlocks.CHUD_BLOCK.get());
 
         this.dropSelf(MMBlocks.OPAL_BLOCK.get());
+        this.dropSelf(MMBlocks.OPAL_BRICKS.get());
 
         this.dropSelf(MMBlocks.PALEO_TABLE.get());
         this.dropSelf(MMBlocks.CHRONO_ALTAR.get());

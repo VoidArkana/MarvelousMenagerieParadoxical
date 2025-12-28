@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:molten",
+  "icon": "marvelous_menagerie:molten_spine",
+  "link": "mobs/molten.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.anomalies_index"
+    }
+  ]
+}

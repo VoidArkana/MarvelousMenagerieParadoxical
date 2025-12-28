@@ -1,0 +1,96 @@
+{
+  "parent": "paleontology/chapter.json",
+  "text": "paleontology/tutorial.txt",
+  "title": "book.marvelous_menagerie.paleontology.tutorial",
+  "widgets": [
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:paleo_toolkit",
+      "sepia": true,
+      "x": 64,
+      "y": 40,
+      "scale": 1
+    },
+
+    {
+      "display_page" : 2,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/fossil_tutorial_1.png",
+      "sepia": true,
+      "x": 65,
+      "y": 105,
+      "scale": 0.5,
+      "u0": 0,
+      "v0": 0,
+      "u1": 272,
+      "v1": 208,
+      "width": 272,
+      "height": 208
+    },
+
+    {
+      "display_page" : 3,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/fossil_tutorial_2.png",
+      "sepia": true,
+      "x": 65,
+      "y": 95,
+      "scale": 0.75,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 48,
+      "width": 128,
+      "height": 48
+    },
+
+    {
+      "display_page" : 4,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/fossil_tutorial_3.png",
+      "sepia": true,
+      "x": 65,
+      "y": 105,
+      "scale": 0.5,
+      "u0": 0,
+      "v0": 0,
+      "u1": 240,
+      "v1": 176,
+      "width": 240,
+      "height": 176
+    },
+
+    {
+      "display_page" : 5,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/fossil_tutorial_4.png",
+      "sepia": true,
+      "x": 65,
+      "y": 105,
+      "scale": 0.5,
+      "u0": 0,
+      "v0": 0,
+      "u1": 240,
+      "v1": 176,
+      "width": 240,
+      "height": 176
+    },
+
+    {
+      "display_page" : 6,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/fossil_tutorial_5.png",
+      "sepia": true,
+      "x": 65,
+      "y": 105,
+      "scale": 0.5,
+      "u0": 0,
+      "v0": 0,
+      "u1": 240,
+      "v1": 176,
+      "width": 240,
+      "height": 176
+    }
+  ]
+}

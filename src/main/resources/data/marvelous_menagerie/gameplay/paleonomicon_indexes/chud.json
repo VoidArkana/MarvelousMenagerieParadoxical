@@ -1,6 +1,6 @@
 {
   "entity_name": "marvelous_menagerie:chud",
-  "icon": "marvelous_menagerie:chronotite",
+  "icon": "marvelous_menagerie:chud_flesh",
   "link": "mobs/chud.json",
   "indexes": [
     {

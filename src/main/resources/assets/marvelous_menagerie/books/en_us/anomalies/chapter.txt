@@ -16,7 +16,6 @@
 
 §lAnomalies §lfrom §ldeep §ltime
 
-
     • {Introduction|anomalies/general.json}
 
     • {Time Fractures|anomalies/fracture.json}
@@ -24,3 +23,5 @@
     • {Resources|anomalies/resources.json}
 
     • {Abominations|anomalies/index.json}
+
+    • {Harnessing Time|anomalies/ritual.json}

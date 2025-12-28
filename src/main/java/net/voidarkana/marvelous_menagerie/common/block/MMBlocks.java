@@ -46,6 +46,12 @@ public class MMBlocks {
     public static final RegistryObject<PaintingVariant> DODO_PAINTING = PAINTINGS.register("louisses_dodo",
             () -> new PaintingVariant(48, 32));
 
+    //Book items
+    public static final RegistryObject<Block> CHEST_BOOK = registerBlock("chest_book",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> PALEO_TABLE_BOOK = registerBlock("paleo_table_book",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+
     //Borealopelta
     public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",
             () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
@@ -321,7 +327,9 @@ public class MMBlocks {
     //opal
 
     public static final RegistryObject<Block> OPAL_BLOCK = registerBlock("opal_block",
-            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_BLOCK).sound(SoundType.AMETHYST)));
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_BLOCK).sound(SoundType.AMETHYST).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> OPAL_BRICKS = registerBlock("opal_bricks",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.EMERALD_BLOCK).sound(SoundType.AMETHYST).requiresCorrectToolForDrops()));
 
     //shale
     public static final RegistryObject<Block> SHALE = registerBlock("shale",

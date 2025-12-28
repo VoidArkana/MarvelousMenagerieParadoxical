@@ -5,7 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "marvelous_menagerie.refmap.json",
   "mixins": [
-    "common.BrushItemMixin"
+    "common.BrushItemMixin",
+    "common.EntityMixin",
+    "common.LivingEntityMixin"
   ],
   "client": [
     "client.HumanoidModelMixin",

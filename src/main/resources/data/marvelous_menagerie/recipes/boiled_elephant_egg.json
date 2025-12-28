@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "marvelous_menagerie:cracked_elephant_egg"
+    "item": "marvelous_menagerie:elephant_bird_egg"
   },
   "result": "marvelous_menagerie:boiled_elephant_egg",
   "experience": 0.35,

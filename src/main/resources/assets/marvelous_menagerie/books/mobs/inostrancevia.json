@@ -1,6 +1,6 @@
 {
   "parent": "permian/index.json",
-  "text": "permian/mobs/inostrancevia.txt",
+  "text": "animals/inostrancevia.txt",
   "title": "entity.marvelous_menagerie.inostrancevia",
   "widgets": [
     {

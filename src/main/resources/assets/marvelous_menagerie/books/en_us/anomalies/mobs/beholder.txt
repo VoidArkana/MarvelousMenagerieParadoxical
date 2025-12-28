@@ -9,4 +9,11 @@
 
 
 
-    Those who behold
+    Beholders are
+dangerous beasts
+spawning from the depths of time.
+Their hard shell provides them with protection against damage and knockback.
+    One must be wary of their mandibles, for they can grab any target with them and immobilize them, making them dangerous foes when other enemies are around.
+    When fighting them, water is not a safe space to go to either, as they will be just as nimble as they were in land, if not more so than before.
+    Upon death, there's a chance they leave behind §lChronotite§r and §lBeholder Mandibles§r. I suspect one could use these to craft things, but so far I have only been able to extract extra
+Chronotite from them.

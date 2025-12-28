@@ -1,0 +1,47 @@
+
+
+
+
+
+    The first step to
+get into the world of
+paleontology is to get
+yourself a good guide
+that can fill you with
+the knowledge you need.
+Congratulations! You've
+already taken that
+step by reading this.
+
+    Across the overworld,
+especially underground,
+you will notice that
+particular deposits
+of rocks are laid
+across the overworld.
+   Each sediment type
+will represent different
+eras;
+
+    {Shale|early_paleo/index.json}
+    {Siltstone|carboniferous/index.json}
+    {Gabbro|permian/index.json}
+    {Mudstone|triassic/index.json}
+    {Limestone|jurassic/index.json}
+    {Chalk|cretaceous/index.json}
+    {Breccia|paleogene/index.json}
+    {Diatomite|neogene/index.json}
+    {Permafrost|quaternary/index.json}
+
+    These different rocks have different resources embedded in them, and in order to get the goods trapped in their rocky prisons you'll to have to craft for yourself a trusty §lPaleontology §lKit.
+
+
+
+
+
+
+
+
+
+    With this set of tools you will be able to
+§lInteract with any fossil block to begin an excavation! Complete an excavation to uncover rewards.

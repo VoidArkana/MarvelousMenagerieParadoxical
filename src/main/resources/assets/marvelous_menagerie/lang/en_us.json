@@ -537,6 +537,8 @@
   "book.marvelous_menagerie.anomalies": "Time Anomalies",
   "book.marvelous_menagerie.fracture": "Time Fracture",
   "book.marvelous_menagerie.anomalies_index": "Abominations",
+  "book.marvelous_menagerie.anomalies.ritual": "Harnessing Time",
+  "book.marvelous_menagerie.anomalies.resources": "Resources",
   "book.marvelous_menagerie.early_paleo": "Early Paleozoic",
   "book.marvelous_menagerie.carboniferous": "Carboniferous",
   "book.marvelous_menagerie.permian": "Permian",
@@ -548,6 +550,12 @@
   "book.marvelous_menagerie.quaternary": "Quaternary",
   "book.marvelous_menagerie.paleontology": "Paleontology",
   "book.marvelous_menagerie.periods": "The Overworld's Past",
+
+  "book.marvelous_menagerie.paleontology.index": "Paleontology",
+  "book.marvelous_menagerie.paleontology.getting_started": "Getting Started",
+  "book.marvelous_menagerie.paleontology.tutorial": "The Key to a Good Dig",
+  "book.marvelous_menagerie.paleontology.paleo_table": "Identifying Fossils",
+  "book.marvelous_menagerie.paleontology.misc": "Other Resources",
 
   "entity.marvelous_menagerie.apthoroblattina": "Apthoroblattina",
   "item.marvelous_menagerie.roach_spawn_egg": "Apthoroblattina Spawn Egg",

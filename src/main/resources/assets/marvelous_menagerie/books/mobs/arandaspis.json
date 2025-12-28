@@ -1,6 +1,6 @@
 {
   "parent": "early_paleo/index.json",
-  "text": "early_paleo/mobs/arandaspis.txt",
+  "text": "animals/arandaspis.txt",
   "title": "entity.marvelous_menagerie.arandaspis",
   "widgets": [
     {
@@ -27,12 +27,12 @@
       "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
       "sepia": true,
       "x": 30,
-      "y": 32,
-      "scale": 1,
+      "y": 26,
+      "scale": 1.2,
       "u0": 0,
       "v0": 0,
-      "u1": 16,
-      "v1": 18,
+      "u1": 26,
+      "v1": 20,
       "width": 32,
       "height": 32
     },
@@ -42,12 +42,12 @@
       "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
       "sepia": true,
       "x": 98,
-      "y": 32,
-      "scale": 1,
+      "y": 26,
+      "scale": 1.2,
       "u0": 0,
       "v0": 0,
-      "u1": 16,
-      "v1": 18,
+      "u1": 26,
+      "v1": 20,
       "width": 32,
       "height": 32
     },
@@ -57,12 +57,12 @@
       "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
       "sepia": true,
       "x": 30,
-      "y": 96,
-      "scale": 1,
+      "y": 94,
+      "scale": 1.2,
       "u0": 0,
       "v0": 0,
-      "u1": 16,
-      "v1": 18,
+      "u1": 26,
+      "v1": 20,
       "width": 32,
       "height": 32
     },
@@ -72,12 +72,12 @@
       "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
       "sepia": true,
       "x": 98,
-      "y": 96,
-      "scale": 1,
+      "y": 94,
+      "scale": 1.2,
       "u0": 0,
       "v0": 0,
-      "u1": 16,
-      "v1": 18,
+      "u1": 26,
+      "v1": 20,
       "width": 32,
       "height": 32
     },
@@ -107,7 +107,7 @@
       "item": "minecraft:salmon",
       "sepia": true,
       "x": 30,
-      "y": 89,
+      "y": 93,
       "scale": 1
     },
     {
@@ -116,7 +116,7 @@
       "item": "minecraft:water_bucket",
       "sepia": true,
       "x": 98,
-      "y": 89,
+      "y": 93,
       "scale": 1
     }
   ]

@@ -1,0 +1,7 @@
+{
+  "parent": "anomalies/chapter.json",
+  "text": "anomalies/ritual.txt",
+  "title": "book.marvelous_menagerie.anomalies.ritual",
+  "widgets": [
+  ]
+}

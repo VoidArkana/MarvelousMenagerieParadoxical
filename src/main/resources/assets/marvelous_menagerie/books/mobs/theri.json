@@ -1,6 +1,6 @@
 {
   "parent": "cretaceous/index.json",
-  "text": "cretaceous/mobs/theri.txt",
+  "text": "animals/theri.txt",
   "title": "entity.marvelous_menagerie.theri",
   "widgets": [
     {
@@ -17,6 +17,69 @@
       "v1": 128,
       "width": 128,
       "height": 128
+    },
+
+
+
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
     }
   ]
 }

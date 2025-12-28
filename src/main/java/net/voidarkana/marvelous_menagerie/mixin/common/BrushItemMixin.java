@@ -1,35 +1,33 @@
 package net.voidarkana.marvelous_menagerie.mixin.common;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.BrushItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.block.custom.PaleontologyTableBlock;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.PaleontologyTableBlockEntity;
-import net.voidarkana.marvelous_menagerie.util.DustParticlesDelta;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BrushItem.class)
 public class BrushItemMixin extends Item {
@@ -42,7 +40,6 @@ public class BrushItemMixin extends Item {
 
     @Inject(
             method = {"onUseTick"},
-            cancellable = true,
             at = @At(value = "HEAD")
     )
     private void brushPaleoTable(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration, CallbackInfo ci){
@@ -55,56 +52,70 @@ public class BrushItemMixin extends Item {
                     if (flag) {
                         BlockPos blockpos = blockhitresult.getBlockPos();
                         BlockState blockstate = pLevel.getBlockState(blockpos);
-                        //HumanoidArm humanoidarm = pLivingEntity.getUsedItemHand() == InteractionHand.MAIN_HAND ? player.getMainArm() : player.getMainArm().getOpposite();
-                        //this.spawnDustParticles(pLevel, blockhitresult, blockstate, pLivingEntity.getViewVector(0.0F), humanoidarm);
-                        Block $$18 = blockstate.getBlock();
-                        SoundEvent soundevent;
-                        if ($$18 instanceof PaleontologyTableBlock) {
-                            PaleontologyTableBlock brushableblock = (PaleontologyTableBlock)$$18;
-                            soundevent = brushableblock.getBrushSound();
-                        } else {
-                            soundevent = SoundEvents.BRUSH_GENERIC;
-                        }
 
-                        pLevel.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
-                        if (!pLevel.isClientSide()) {
+                        Block $$18 = blockstate.getBlock();
+
+                        if ($$18 instanceof PaleontologyTableBlock brushableblock) {
                             BlockEntity blockentity = pLevel.getBlockEntity(blockpos);
+
                             if (blockentity instanceof PaleontologyTableBlockEntity) {
-                                PaleontologyTableBlockEntity brushableblockentity = (PaleontologyTableBlockEntity)blockentity;
-                                boolean flag1 = brushableblockentity.brush(pLevel.getGameTime(), player, blockhitresult.getDirection());
-                                if (flag1) {
-                                    EquipmentSlot equipmentslot = pStack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
-                                    pStack.hurtAndBreak(1, pLivingEntity, (p_279044_) -> {
-                                        p_279044_.broadcastBreakEvent(equipmentslot);
-                                    });
+                                PaleontologyTableBlockEntity brushableblockentity = (PaleontologyTableBlockEntity)pLevel.getBlockEntity(blockpos);
+
+                                SoundEvent soundevent = brushableblock.getBrushSound();
+
+                                pLevel.playSound(player, blockpos, soundevent, SoundSource.BLOCKS);
+                                if (!pLevel.isClientSide()) {
+                                    boolean flag1 = brushableblockentity.brush(pLevel.getGameTime(), player, blockhitresult.getDirection());
+                                    if (flag1) {
+                                        EquipmentSlot equipmentslot = pStack.equals(player.getItemBySlot(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
+                                        pStack.hurtAndBreak(1, pLivingEntity, (p_279044_) -> {
+                                            p_279044_.broadcastBreakEvent(equipmentslot);
+                                        });
+                                    }
                                 }
                             }
                         }
                     }
-                    return;
+                }
+            }
+        }
+    }
+
+    @Inject(
+            method = {"useOn"},
+            at = @At(value = "HEAD"),
+            cancellable = true)
+    private void useOn(UseOnContext pContext, CallbackInfoReturnable<InteractionResult> cir){
+        Player player = pContext.getPlayer();
+
+        if (player != null){
+            ItemStack offhand = player.getItemInHand(InteractionHand.OFF_HAND);
+
+            HitResult hitresult = calculateHitResult(player);
+
+            if (hitresult instanceof BlockHitResult blockhitresult && !player.level().isClientSide) {
+
+                Level level = player.level();
+                BlockPos blockpos = blockhitresult.getBlockPos();
+                BlockState blockstate = level.getBlockState(blockpos);
+                Block $$18 = blockstate.getBlock();
+
+                if ($$18 instanceof PaleontologyTableBlock) {
+                    BlockEntity blockentity = level.getBlockEntity(blockpos);
+
+                    if (blockentity instanceof PaleontologyTableBlockEntity brushableblockentity) {
+                        if (!brushableblockentity.stack.isEmpty() && offhand.is(MMTags.Items.ANIMAL_FOSSILS)){
+                            cir.setReturnValue(InteractionResult.FAIL);
+                        }
+                    }
                 }
             }
         }
     }
 
     private HitResult calculateHitResult(LivingEntity pEntity) {
-        return ProjectileUtil.getHitResultOnViewVector(pEntity, (p_281111_) -> {
-            return !p_281111_.isSpectator() && p_281111_.isPickable();
-        }, MAX_BRUSH_DISTANCE);
+    return ProjectileUtil.getHitResultOnViewVector(pEntity, (p_281111_) -> {
+        return !p_281111_.isSpectator() && p_281111_.isPickable();
+    }, MAX_BRUSH_DISTANCE);
     }
-
-//    public void spawnDustParticles(Level pLevel, BlockHitResult pHitResult, BlockState pState, Vec3 pPos, HumanoidArm pArm) {
-//        double d0 = 3.0D;
-//        int i = pArm == HumanoidArm.RIGHT ? 1 : -1;
-//        int j = pLevel.getRandom().nextInt(7, 12);
-//        BlockParticleOption blockparticleoption = new BlockParticleOption(ParticleTypes.BLOCK, pState);
-//        Direction direction = pHitResult.getDirection();
-//        DustParticlesDelta brushitem$dustparticlesdelta = DustParticlesDelta.fromDirection(pPos, direction);
-//        Vec3 vec3 = pHitResult.getLocation();
-//
-//        for(int k = 0; k < j; ++k) {
-//            pLevel.addParticle(blockparticleoption, vec3.x - (double)(direction == Direction.WEST ? 1.0E-6F : 0.0F), vec3.y, vec3.z - (double)(direction == Direction.NORTH ? 1.0E-6F : 0.0F), brushitem$dustparticlesdelta.xd() * (double)i * 3.0D * pLevel.getRandom().nextDouble(), 0.0D, brushitem$dustparticlesdelta.zd() * (double)i * 3.0D * pLevel.getRandom().nextDouble());
-//        }
-//
-//    }
 }

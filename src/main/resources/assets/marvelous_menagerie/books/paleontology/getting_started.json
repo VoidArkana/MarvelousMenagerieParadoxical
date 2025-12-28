@@ -1,0 +1,16 @@
+{
+  "parent": "paleontology/chapter.json",
+  "text": "paleontology/getting_started.txt",
+  "title": "book.marvelous_menagerie.paleontology.getting_started",
+  "widgets": [
+    {
+      "display_page" : 4,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:paleo_toolkit",
+      "sepia": true,
+      "x": 55,
+      "y": 30,
+      "scale": 1
+    }
+  ]
+}

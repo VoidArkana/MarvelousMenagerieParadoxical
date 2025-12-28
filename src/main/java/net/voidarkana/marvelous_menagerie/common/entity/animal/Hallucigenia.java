@@ -107,7 +107,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
             for(Mob mob : this.level().getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(0.3D), (p_149013_) -> {
                 return targetingConditions.test(this, p_149013_);
             })) {
-                if (mob.isAlive()) {
+                if (mob.isAlive() && this.canAttack(mob)) {
                     this.touch(mob);
                 }
             }

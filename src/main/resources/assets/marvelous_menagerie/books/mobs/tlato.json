@@ -1,6 +1,6 @@
 {
   "parent": "cretaceous/index.json",
-  "text": "cretaceous/mobs/tlato.txt",
+  "text": "animals/tlato.txt",
   "title": "entity.marvelous_menagerie.tlato",
   "widgets": [
     {

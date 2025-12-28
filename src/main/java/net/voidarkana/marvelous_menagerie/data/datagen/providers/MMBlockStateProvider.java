@@ -25,6 +25,7 @@ public class MMBlockStateProvider extends BlockStateProvider {
 
         //Opal
         blockWithItem(MMBlocks.OPAL_BLOCK);
+        blockWithItem(MMBlocks.OPAL_BRICKS);
 
         //sigillaria woodset
         blockWithItem(MMBlocks.SIGILLARIA_PLANKS);

@@ -1,6 +1,6 @@
 {
   "parent": "permian/index.json",
-  "text": "permian/mobs/lystro.txt",
+  "text": "animals/lystro.txt",
   "title": "entity.marvelous_menagerie.lystro",
   "widgets": [
     {

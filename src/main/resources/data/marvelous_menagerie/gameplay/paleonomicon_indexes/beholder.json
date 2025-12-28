@@ -1,6 +1,6 @@
 {
   "entity_name": "marvelous_menagerie:beholder",
-  "icon": "marvelous_menagerie:chronotite",
+  "icon": "marvelous_menagerie:beholder_mandible",
   "link": "mobs/beholder.json",
   "indexes": [
     {

@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ §lTABLE §lOF §lCONTENTS
+
+  • {Getting Started|paleontology/getting_started.json}
+
+  • {The Key to a Good Dig|paleontology/tutorial.json}
+
+  • {Identifying Fossils|paleontology/paleo_table.json}
+
+  • {Other Resources|paleontology/misc.json}
