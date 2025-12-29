@@ -1,5 +1,5 @@
 {
-  "parent": "early_paleo/index.json",
+  "parent": "triassic/index.json",
   "text": "animals/flubber.txt",
   "title": "entity.marvelous_menagerie.flubber",
   "widgets": [

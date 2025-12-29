@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
@@ -123,7 +124,7 @@ public class DawnHorse extends MarvelousAnimal {
 
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
 
-        if (itemstack.is(MMTags.Items.DOMESTICATION_INNOVATION_ROTTEN_APPLE)){
+        if (itemstack.is(MMTags.Items.DOMESTICATION_INNOVATION_ROTTEN_APPLE) || itemstack.is(MMItems.CHUD_FLESH.get())){
 
             this.playSound(SoundEvents.HORSE_DEATH, 0.8F, this.getVoicePitch());
             this.playSound(SoundEvents.ZOMBIE_INFECT, 0.8F, this.getVoicePitch());

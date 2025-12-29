@@ -3,5 +3,14 @@
   "text": "anomalies/ritual.txt",
   "title": "book.marvelous_menagerie.anomalies.ritual",
   "widgets": [
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:chrono_altar_book",
+      "sepia": true,
+      "x": 64,
+      "y": 30,
+      "scale": 1
+    }
   ]
 }

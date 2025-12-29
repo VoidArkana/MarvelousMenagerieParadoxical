@@ -767,5 +767,9 @@
   "marvelous_menagerie.sound.subtitle.flubber_underwater_death": "Flubber dies",
   "marvelous_menagerie.sound.subtitle.flubber_underwater_celebrate": "Flubber celebrates",
 
-  "block.marvelous_menagerie.herpetogaster": "Herpetogaster"
+  "block.marvelous_menagerie.herpetogaster": "Herpetogaster",
+
+  "marvelous_menagerie.sound.subtitle.paleo_toolkit_open": "Paleontology Toolkit Opens",
+  "marvelous_menagerie.sound.subtitle.paleo_toolkit_close": "Paleontology Toolkit Closes",
+  "marvelous_menagerie.sound.subtitle.paleo_toolkit_break_fossil": "Fossil Cracks"
 }

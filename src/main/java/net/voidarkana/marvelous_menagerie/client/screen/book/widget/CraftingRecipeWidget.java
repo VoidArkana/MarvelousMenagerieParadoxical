@@ -95,6 +95,10 @@ public class CraftingRecipeWidget extends BookWidget {
                     output = new ItemStack(MMBlocks.CHEST_BOOK.get());
                 if (output.is(MMBlocks.PALEO_TABLE.get().asItem()))
                     output = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+                if (output.is(MMBlocks.CHRONO_ALTAR.get().asItem()))
+                    output = new ItemStack(MMBlocks.CHRONO_ALTAR_BOOK.get());
+                if (output.is(MMBlocks.CHRONO_PEDESTAL.get().asItem()))
+                    output = new ItemStack(MMBlocks.CHRONO_PEDESTAL_BOOK.get());
 
                 ItemWidget.renderItem(output, poseStack, bufferSource, sepia, itemScale * 1.25F);
                 poseStack.popPose();
@@ -117,6 +121,10 @@ public class CraftingRecipeWidget extends BookWidget {
                     stack = new ItemStack(MMBlocks.CHEST_BOOK.get());
                 if (stack.is(MMBlocks.PALEO_TABLE.get().asItem()))
                     stack = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+                if (stack.is(MMBlocks.CHRONO_ALTAR.get().asItem()))
+                    stack = new ItemStack(MMBlocks.CHRONO_ALTAR_BOOK.get());
+                if (stack.is(MMBlocks.CHRONO_PEDESTAL.get().asItem()))
+                    stack = new ItemStack(MMBlocks.CHRONO_PEDESTAL_BOOK.get());
 
                 ItemWidget.renderItem(stack, poseStack, bufferSource, sepia, itemScale);
                 poseStack.popPose();
@@ -131,6 +139,10 @@ public class CraftingRecipeWidget extends BookWidget {
                     output = new ItemStack(MMBlocks.CHEST_BOOK.get());
                 if (output.is(MMBlocks.PALEO_TABLE.get().asItem()))
                     output = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+                if (output.is(MMBlocks.CHRONO_ALTAR.get().asItem()))
+                    output = new ItemStack(MMBlocks.CHRONO_ALTAR_BOOK.get());
+                if (output.is(MMBlocks.CHRONO_PEDESTAL.get().asItem()))
+                    output = new ItemStack(MMBlocks.CHRONO_PEDESTAL_BOOK.get());
 
                 ItemWidget.renderItem(output, poseStack, bufferSource, sepia, itemScale * 1.25F);
                 poseStack.popPose();
@@ -173,6 +185,10 @@ public class CraftingRecipeWidget extends BookWidget {
                                 stack = new ItemStack(MMBlocks.CHEST_BOOK.get());
                             if (stack.is(MMBlocks.PALEO_TABLE.get().asItem()))
                                 stack = new ItemStack(MMBlocks.PALEO_TABLE_BOOK.get());
+                            if (stack.is(MMBlocks.CHRONO_ALTAR.get().asItem()))
+                                stack = new ItemStack(MMBlocks.CHRONO_ALTAR_BOOK.get());
+                            if (stack.is(MMBlocks.CHRONO_PEDESTAL.get().asItem()))
+                                stack = new ItemStack(MMBlocks.CHRONO_PEDESTAL_BOOK.get());
 
                             poseStack.pushPose();
                             poseStack.translate(-33 + renderX * 19, -18.5F + renderY * 19, 0);

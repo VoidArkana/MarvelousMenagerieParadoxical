@@ -13,6 +13,10 @@ public class MMSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MarvelousMenagerie.MOD_ID);
 
+    public static final RegistryObject<SoundEvent> PALEO_TOOLKIT_OPEN = registerSoundEvents("paleo_toolkit_open");
+    public static final RegistryObject<SoundEvent> PALEO_TOOLKIT_CLOSE = registerSoundEvents("paleo_toolkit_close");
+    public static final RegistryObject<SoundEvent> PALEO_TOOLKIT_FOSSIL_BREAK = registerSoundEvents("paleo_toolkit_fossil_break");
+
     public static final RegistryObject<SoundEvent> DODO_IDLE = registerSoundEvents("dodo_idle");
     public static final RegistryObject<SoundEvent> DODO_HURT = registerSoundEvents("dodo_hurt");
     public static final RegistryObject<SoundEvent> DODO_DEATH = registerSoundEvents("dodo_death");

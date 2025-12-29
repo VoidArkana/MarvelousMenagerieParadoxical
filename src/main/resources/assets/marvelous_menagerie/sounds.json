@@ -810,7 +810,7 @@
 
 
   "flubber_idle": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_idle_1"
@@ -825,7 +825,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_idle"
   },
   "flubber_hurt": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_hurt_1"
@@ -840,7 +840,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_hurt"
   },
   "flubber_death": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_death"
@@ -849,7 +849,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_death"
   },
   "flubber_celebrate": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_celebrate"
@@ -858,7 +858,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_celebrate"
   },
   "flubber_underwater_idle": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_underwater_idle_1"
@@ -873,7 +873,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_idle"
   },
   "flubber_underwater_hurt": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_underwater_hurt_1"
@@ -888,7 +888,7 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_hurt"
   },
   "flubber_underwater_death": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_underwater_death"
@@ -897,12 +897,44 @@
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_death"
   },
   "flubber_underwater_celebrate": {
-    "category": "hostile",
+    "category": "neutral",
     "sounds": [
       {
         "name": "marvelous_menagerie:flubber_underwater_celebrate"
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.flubber_underwater_celebrate"
+  },
+
+
+  "paleo_toolkit_open": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:paleo_toolkit_open"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.paleo_toolkit_open"
+  },
+  "paleo_toolkit_close": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:paleo_toolkit_close"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.paleo_toolkit_close"
+  },
+  "paleo_toolkit_fossil_break": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:paleo_toolkit_fossil_break"
+      },
+      {
+        "name": "marvelous_menagerie:paleo_toolkit_fossil_break_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.paleo_toolkit_fossil_break"
   }
 }

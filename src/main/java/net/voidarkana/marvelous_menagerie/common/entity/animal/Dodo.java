@@ -170,6 +170,11 @@ public class Dodo extends MarvelousAnimal {
         return s != null && s.toLowerCase().contains("nugget");
     }
 
+    public boolean isSpawn() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && s.toLowerCase().contains("spawn");
+    }
+
     //is pecking
     public boolean getIsPecking() {
         return this.entityData.get(PECKING);

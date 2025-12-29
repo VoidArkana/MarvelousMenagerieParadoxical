@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
 
 import javax.annotation.Nullable;
@@ -51,7 +52,7 @@ public class PaleoToolkit extends Item {
                 });
             }
 
-            pContext.getPlayer().playSound(SoundEvents.SHULKER_BOX_OPEN);
+            pContext.getPlayer().playSound(MMSounds.PALEO_TOOLKIT_OPEN.get());
 
             if (pContext.getPlayer() instanceof ServerPlayer) {
                 ServerPlayer serverplayerentity = (ServerPlayer)pContext.getPlayer();

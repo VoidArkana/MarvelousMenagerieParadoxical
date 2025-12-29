@@ -10,7 +10,7 @@
 
 
     Anomalocaris was a genus of Arthropod from the Cambrian, and for a while was thought to be the very first apex predator.
-    Despite early belief, Anomalocaris prefer soft prey unlike Trilobites, so they will not attack them but will eat §lTrilo Bites if§r fed by someone, making it shake with excitement and dropping a §lSclerite§r in the process.
+    Despite early belief, Anomalocaris prefer soft prey unlike Trilobites, so they will not attack them but will eat §lTrilo Bites§r if fed by someone, making it shake with excitement and dropping a §lSclerite§r in the process.
     These Sclerites can be combined to create armor for water mounts, which can protect them from almost any kind of damage, and can be repaired with more Sclerites without having to take it off.
 
 

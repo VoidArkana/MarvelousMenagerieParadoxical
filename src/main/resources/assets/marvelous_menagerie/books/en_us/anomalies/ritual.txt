@@ -1,0 +1,12 @@
+
+
+
+
+    Many before have attempted to harness time, and as such clues as to how to create an altar can be found scattered across the overworld in the form of §lRitual§r §lRuins§r.
+    Much like these ruins, we must build a structure with a §lChronotite§r §lAltar§r in the center, with four §lChronotite§r §lPedestals§r on each of its corner to a distance of up to 3 blocks, with the pedestals able to be one block off the ground.
+    In order to first activate an altar, one must put any item on the pedestals and interact with the altar itself, allowing for a §lFracture§r to appear.
+    This fracture will be tied to the altar and will disappear if the altar is broken, but will remain even if pedestals are not around.
+    For one to successfully summon a creature, one must fill all four pedestals with the correct components and then interact with the altar using a §lChronotite§r §lWatch§r.
+    Only when all four pedestals are full will one be able to go through with the summoning process.
+    If one were to activate the altar with the wrong components, however, one will find themselves with a §lTemporal§r
+§lAbomination§r in their hands instead of the desire creature, making the process of summoning a risky one.

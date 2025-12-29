@@ -49,7 +49,7 @@ public class ModPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, SHALE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SHALE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64),
                         VerticalAnchor.absolute(-34))));
 
         register(context, SHALE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SHALE_FOSSIL_KEY),
@@ -59,7 +59,7 @@ public class ModPlacedFeatures {
 
 
         register(context, SILTSTONE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SILTSTONE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-44),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-44),
                         VerticalAnchor.absolute(-25))));
 
         register(context, SILTSTONE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SILTSTONE_FOSSIL_KEY),
@@ -69,7 +69,7 @@ public class ModPlacedFeatures {
 
 
         register(context, GABBRO_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GABBRO_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-25),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-25),
                         VerticalAnchor.absolute(5))));
 
         register(context, GABBRO_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.GABBRO_FOSSIL_KEY),
@@ -79,7 +79,7 @@ public class ModPlacedFeatures {
 
 
         register(context, MUDSTONE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MUDSTONE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-5),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-5),
                         VerticalAnchor.absolute(25))));
 
         register(context, MUDSTONE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MUDSTONE_FOSSIL_KEY),
@@ -89,7 +89,7 @@ public class ModPlacedFeatures {
 
 
         register(context, LIMESTONE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LIMESTONE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(20),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(20),
                         VerticalAnchor.absolute(45))));
 
         register(context, LIMESTONE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LIMESTONE_FOSSIL_KEY),
@@ -99,7 +99,7 @@ public class ModPlacedFeatures {
 
 
         register(context, CHALK_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHALK_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(40),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(40),
                         VerticalAnchor.absolute(65))));
 
         register(context, CHALK_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.CHALK_FOSSIL_KEY),
@@ -109,7 +109,7 @@ public class ModPlacedFeatures {
 
 
         register(context, BRECCIA_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BRECCIA_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(50),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(50),
                         VerticalAnchor.absolute(85))));
 
         register(context, BRECCIA_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BRECCIA_FOSSIL_KEY),
@@ -119,7 +119,7 @@ public class ModPlacedFeatures {
 
 
         register(context, DIATOMITE_VEIN_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DIATOMITE_KEY),
-                ModOrePlacement.rareOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(70),
+                ModOrePlacement.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(70),
                         VerticalAnchor.absolute(100))));
 
         register(context, DIATOMITE_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DIATOMITE_FOSSIL_KEY),
@@ -137,7 +137,7 @@ public class ModPlacedFeatures {
                         VerticalAnchor.absolute(150))));
 
         register(context, PERMAFROST_FOSSIL_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PERMAFROST_FOSSIL_KEY),
-                ModOrePlacement.commonOrePlacement(100, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
+                ModOrePlacement.commonOrePlacement(75, HeightRangePlacement.uniform(VerticalAnchor.absolute(80),
                         VerticalAnchor.absolute(150))));
     }
 

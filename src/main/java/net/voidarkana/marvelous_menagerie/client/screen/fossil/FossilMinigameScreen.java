@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.guiparticle.*;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 import net.voidarkana.marvelous_menagerie.util.network.message.ChangeFossilMessage;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
@@ -261,15 +262,6 @@ public class FossilMinigameScreen extends Screen {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 
-//        attractionPoint = (ParticleAttractor)new ParticleAttractor(200,this.leftPos+88, this.topPos+176,0.1f).setStartTime(5).setToLayer(1);
-//        //repulsionPoint = (ParticleAttractor)new ParticleAttractor(40,leftPos+88,this.topPos+88+50,-0.1f).setEndTime(50).setToLayer(1);
-//        particles.addAffector(attractionPoint);
-        //particles.addAffector(ParticleDeleter.create(85,this.leftPos+88,this.topPos+88).setInvert(true).setToLayer(1));
-        //particles.addAffector(repulsionPoint);
-//        particles.addAffector(new ParticleAccelerator(100,this.leftPos+88,this.topPos+50,0.90f).setEndTime(50).setToLayer(1));
-//        particles.addAffector(new ParticleAttractor(100,this.leftPos+88,this.topPos+50,0.15f));
-//        particles.addAffector(new ParticleAccelerator(100,this.leftPos+88,this.topPos+50,0.97f));
-
         chiselPosX = this.leftPos + 185;
         chiselPosXInit = prevChiselPosX = chiselPosX;
         chiselPosY = this.topPos + 63;
@@ -285,9 +277,6 @@ public class FossilMinigameScreen extends Screen {
         pickPosY = this.topPos + 63;
         pickPosYInit = prevPickPosY = pickPosY;
 
-//        for (SpelunkeryTableWordButton button : wordButtons) {
-//            this.addRenderableWidget(button);
-//        }
     }
 
     @Override
@@ -334,10 +323,6 @@ public class FossilMinigameScreen extends Screen {
 
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
-
-//    public void updateLogic(){
-//
-//    }
 
     //13 x 13
     //7 x 7 uneven
@@ -411,30 +396,6 @@ public class FossilMinigameScreen extends Screen {
             pGuiGraphics.blit(VIGNETTE, -16-8, -16, 80, 192+(32*bone3Damage), 48, 32);
             poseStack.popPose();
         }
-
-        //medium bone
-//        if (bone1Damage<2 && (bone1Undiscovered || fossilProgress1 > 0)){
-//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone1TileX*16), this.leftPos+32+(bone1TileX*16)+32,
-//                    this.topPos+32+(bone1TileY*16), this.topPos+32+(bone1TileY*16)+32, 0,
-//                    isDud ? 0 : 48/256F, isDud ? 32/256F : (48+32)/256F, (192+(32*bone1Damage))/256F,
-//                    (192+32+(32*bone1Damage))/256F, 1, 1, 1, 1f);
-//        }
-//
-//        //small bone
-//        if (bone2Damage<2 && (bone2Undiscovered || fossilProgress2 > 0)){
-//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone2TileX*16), this.leftPos+32+(bone2TileX*16)+16,
-//                    this.topPos+32+(bone2TileY*16), this.topPos+32+(bone2TileY*16)+32, 0,
-//                    32/256F, (32+16)/256F, (192+(32*bone2Damage))/256F,
-//                    (192+32+(32*bone2Damage))/256F, 1, 1, 1, 1f);
-//        }
-//
-//        //big bone
-//        if (bone3Damage<2 && (bone3Undiscovered || fossilProgress3 > 0)){
-//            drawTexturedQuadColor(pGuiGraphics, VIGNETTE, this.leftPos+32+(bone3TileX*16), this.leftPos+32+(bone3TileX*16)+48,
-//                    this.topPos+32+(bone3TileY*16), this.topPos+32+(bone3TileY*16)+32, 0,
-//                    80/256F, (80+48)/256F, (192+(32*bone3Damage))/256F,
-//                    (192+32+(32*bone3Damage))/256F, 1, 1, 1, 1f);
-//        }
     }
 
     public void renderSelection(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY){
@@ -629,7 +590,10 @@ public class FossilMinigameScreen extends Screen {
         super.tick();
         if (this.currentHits>this.maxHits){
             this.minecraft.player.closeContainer();
-            this.player.playSound(SoundEvents.ITEM_BREAK);
+            if (this.successLevel==0)
+                this.player.playSound(SoundEvents.ITEM_BREAK);
+            else
+                this.player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP);
             this.breakFossils();
         }
         int fossilsAvailable = 3;
@@ -1029,7 +993,7 @@ public class FossilMinigameScreen extends Screen {
     }
 
     private void damageFossil() {
-        player.playSound(SoundEvents.IRON_GOLEM_DAMAGE);
+        player.playSound(MMSounds.PALEO_TOOLKIT_FOSSIL_BREAK.get(), 1, (this.player.getRandom().nextFloat() - this.player.getRandom().nextFloat()) * 0.2F + 1.0F);
         shakeAmount = 10;
         shakeProgress = 20;
         shakeX = player.getRandom().nextBoolean() ? 1 : -1;
@@ -1069,25 +1033,17 @@ public class FossilMinigameScreen extends Screen {
         if (this.currentHits>0){
             breakFossils();
         }
-        this.player.playSound(SoundEvents.SHULKER_BOX_CLOSE);
+        this.player.playSound(MMSounds.PALEO_TOOLKIT_CLOSE.get());
     }
 
     public void breakFossils(){
-       //System.out.println(clickedPos);
-
         MMMessages.CHANNEL.sendToServer(new ChangeFossilMessage(this.successLevel, this.clickedPos));
-
-//        if (player.level().getBlockState(clickedPos).getBlock() instanceof FossilBlock fossilBlock){
-//            fossilBlock.destroyOriginalWithSuccessLevel(player, successLevel, clickedPos);
-//        }
-
     }
 
     public void drawTexturedQuad(Matrix4f matrices, float[][] pos, float u0, float u1, float v0, float v1) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         BufferBuilder bufferBuilder = Tesselator.getInstance().getBuilder();
         bufferBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        //Matrix4f matrices = guiGraphics.pose().last().pose();
         bufferBuilder.vertex(matrices, pos[0][0], pos[0][1], 0).uv(u0, v1).endVertex();
         bufferBuilder.vertex(matrices, pos[1][0], pos[1][1], 0).uv(u1, v1).endVertex();
         bufferBuilder.vertex(matrices, pos[2][0], pos[2][1], 0).uv(u1, v0).endVertex();

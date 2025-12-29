@@ -3,5 +3,42 @@
   "text": "anomalies/resources.txt",
   "title": "book.marvelous_menagerie.anomalies.resources",
   "widgets": [
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:chronotite",
+      "sepia": true,
+      "x": 64,
+      "y": 40,
+      "scale": 1
+    },
+
+    {
+      "display_page" : 2,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:chrono_watch",
+      "sepia": true,
+      "x": 55,
+      "y": 120,
+      "scale": 1
+    },
+    {
+      "display_page" : 3,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:chrono_pedestal",
+      "sepia": true,
+      "x": 55,
+      "y": 120,
+      "scale": 1
+    },
+    {
+      "display_page" : 4,
+      "type": "crafting_recipe",
+      "recipe_id": "marvelous_menagerie:chrono_altar",
+      "sepia": true,
+      "x": 55,
+      "y": 120,
+      "scale": 1
+    }
   ]
 }

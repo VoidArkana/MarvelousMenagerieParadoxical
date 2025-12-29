@@ -87,10 +87,11 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.CHRONO_ALTAR.get(), 1)
                 .pattern(" F ")
                 .pattern("OCO")
-                .pattern("CCC")
+                .pattern("CPC")
                 .define('F', MMTags.Items.ANIMAL_FOSSILS)
                 .define('O', MMItems.OPAL.get())
                 .define('C', MMBlocks.CHRONOTITE.get())
+                .define('P', MMBlocks.CHRONO_PEDESTAL.get())
                 .unlockedBy(getHasName(MMBlocks.CHRONO_PEDESTAL.get()), has(MMBlocks.CHRONO_PEDESTAL.get()))
                 .save(consumer);
 
@@ -318,8 +319,8 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .save(consumer);
 
         //Opal
-        this.makeIngotToBlock(MMBlocks.OPAL_BLOCK, MMItems.OPAL).save(consumer);
-        this.makeBlockToIngot(MMItems.OPAL, MMBlocks.OPAL_BLOCK).save(consumer);
+        this.make4IngotToBlock(MMBlocks.OPAL_BLOCK.get(), MMItems.OPAL.get()).save(consumer);
+        this.makeBlockTo4Ingot(MMItems.OPAL.get(), MMBlocks.OPAL_BLOCK.get()).save(consumer);
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.OPAL_BRICKS.get(), 16)
                 .pattern("SS")
                 .pattern("SS")

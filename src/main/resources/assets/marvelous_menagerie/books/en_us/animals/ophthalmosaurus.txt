@@ -13,6 +13,7 @@
 Ichthyosaur from the Jurassic, characterized from their huge eyes and being known to superficially resemble dolphins and sharks in their body shape.
     These marine reptiles can be tamed with a Golden Sacabambaspis and saddled to make for a very fast
 underwater mount that can also jump out of the water for short periods.
+
     They will also follow their owners if they're swimming around, but cannot be commanded like other creatures, but will defend themselves and their owners if attacked.
     To further protect them, one can armor them up with
 Ophthalmosaurus Armor, which will absorb almost all types of damage.

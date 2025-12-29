@@ -1,0 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
+    Flubbers are mysterious creatures from the overworld's ancient past, living before even the time of the dinosaurs.
+    These beasts used to roam ancient beaches, laying on the sand and going for a swim.
+    Much like the Sniffer, the Flubber has an affinity for digging up things from the past in a mysterious manner, although it seems like flubbers much prefer animal blocks.
+
+Flubbers will dig:
+    • §lSea Pickles
+    • §lDickinsonia
+    • §lHerpetogaster
+    • §lCharnia
+    • §lWiwaxia
+    One can breed them with any of these items, at which point they will find a sandy spot to lay an egg.
+    Their eggs will only hatch if laid on sand.

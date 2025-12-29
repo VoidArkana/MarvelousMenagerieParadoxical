@@ -26,6 +26,9 @@ public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
     private static final ResourceLocation TEXTURE_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_nugget.png");
     private static final ResourceLocation TEXTURE_BABY_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_nugget.png");
 
+    private static final ResourceLocation TEXTURE_SPAWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_spawn.png");
+    private static final ResourceLocation TEXTURE_BABY_SPAWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_spawn.png");
+
     public DodoRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new DodoModel<>(pContext.bakeLayer(MMModelLayers.DODO_LAYER)), 0.4f);
 
@@ -35,6 +38,10 @@ public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
 
     @Override
     public ResourceLocation getTextureLocation(Dodo entity) {
+
+        if (entity.isSpawn()){
+            return entity.isBaby() ? TEXTURE_BABY_SPAWN : TEXTURE_SPAWN;
+        }
         if (entity.isNugget()){
             return entity.isBaby() ? TEXTURE_BABY_NUGGET : TEXTURE_NUGGET;
         }

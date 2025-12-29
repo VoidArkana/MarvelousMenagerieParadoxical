@@ -51,6 +51,10 @@ public class MMBlocks {
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
     public static final RegistryObject<Block> PALEO_TABLE_BOOK = registerBlock("paleo_table_book",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> CHRONO_ALTAR_BOOK = registerBlock("chrono_altar_book",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+    public static final RegistryObject<Block> CHRONO_PEDESTAL_BOOK = registerBlock("chrono_pedestal_book",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     //Borealopelta
     public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",

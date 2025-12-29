@@ -1,0 +1,24 @@
+
+
+
+
+
+
+
+
+
+
+
+    Sniffers were once tamed by a bygone civilization of ancient builders, their eggs still found around some of their ruins to this day.
+    These beasts use their highly specialized sense of smell to find ancient seeds and plants, how they manage to find plants from a bygone age is something that's still a mystery to myself as well, but they will be able to find many plants.
+
+    Some of the plants they'll dig are:
+    • §lTorch Flowers
+    • §lPitcher Pods
+    • §lCooksonia
+    • §lSigillaria
+    • §lCalamites
+    • §lPrototaxites
+    One can breed them with some of their favorite seeds, at which point they will leave an egg for someone to place.
+    These eggs can be used to then summon other creatures as well, and their hatching process will be
+accelerated by placing them on moss blocks.
