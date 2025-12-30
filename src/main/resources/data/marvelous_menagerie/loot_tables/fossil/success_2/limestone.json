@@ -6,8 +6,13 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "marvelous_menagerie:limestone",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:bone",
-          "weight": 10
+          "weight": 8
         },
         {
           "type": "minecraft:item",
@@ -17,7 +22,7 @@
         {
           "type": "minecraft:item",
           "name": "marvelous_menagerie:opal",
-          "weight": 1
+          "weight": 3
         }
       ],
       "rolls": 1.0

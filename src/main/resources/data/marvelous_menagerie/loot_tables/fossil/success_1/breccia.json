@@ -6,7 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "marvelous_menagerie:breccia"
+          "name": "marvelous_menagerie:breccia",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone_meal"
         },
         {
           "type": "minecraft:item",
