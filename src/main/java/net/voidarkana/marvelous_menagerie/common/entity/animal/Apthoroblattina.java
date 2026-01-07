@@ -411,4 +411,9 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
     }
 
+    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return ((pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos))
+                || pLevel.getBlockState(pPos.below()).is(Blocks.DRIPSTONE_BLOCK)) && CommonConfig.NATURAL_SPAWNS.get();
+    }
+
 }

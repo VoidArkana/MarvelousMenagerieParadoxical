@@ -39,6 +39,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishFollowParentGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
@@ -69,6 +70,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.1, foodIngredients(), false));
+        this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.1));
         this.goalSelector.addGoal(3, new FishFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(3, new SeaCowSwimWithPlayerGoal(this, 2D));
         this.goalSelector.addGoal(4, new RandomShallowSwimmingGoal(this, 1, 10));

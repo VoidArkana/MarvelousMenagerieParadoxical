@@ -23,6 +23,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,27 +205,27 @@ public class MMModEvents {
         //desert
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/desert/houses"),
-                "marvelous_menagerie:village_museum_desert", 30);
+                "marvelous_menagerie:village_museum_desert", CommonConfig.DESERT_VILLAGE_WEIGHT.get());
 
         //plains
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/plains/houses"),
-                "marvelous_menagerie:village_museum_plains", 20);
+                "marvelous_menagerie:village_museum_plains", CommonConfig.PLAINS_VILLAGE_WEIGHT.get());
 
         //savanna
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/savanna/houses"),
-                "marvelous_menagerie:village_museum_savanna", 25);
+                "marvelous_menagerie:village_museum_savanna", CommonConfig.SAVANNA_VILLAGE_WEIGHT.get());
 
         //snowy
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/snowy/houses"),
-                "marvelous_menagerie:village_museum_snowy", 20);
+                "marvelous_menagerie:village_museum_snowy", CommonConfig.SNOWY_VILLAGE_WEIGHT.get());
 
         //taiga
         addBuildingToPool(templatePoolRegistry, processorListRegistry,
                 new ResourceLocation("minecraft:village/taiga/houses"),
-                "marvelous_menagerie:village_museum_taiga", 30);
+                "marvelous_menagerie:village_museum_taiga", CommonConfig.TAIGA_VILLAGE_WEIGHT.get());
     }
 
     private static final ResourceKey<StructureProcessorList> EMPTY_PROCESSOR_LIST_KEY = ResourceKey.create(
