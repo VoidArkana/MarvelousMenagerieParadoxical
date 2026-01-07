@@ -28,6 +28,8 @@ import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -81,6 +83,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
             }
         });
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.fintasticFoodIngredients(), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
     }
 
@@ -97,6 +100,11 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(Items.BONE_MEAL);
     }
 
     @Override

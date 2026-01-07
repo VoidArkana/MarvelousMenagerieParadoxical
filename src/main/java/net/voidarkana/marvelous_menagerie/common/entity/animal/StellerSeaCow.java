@@ -32,10 +32,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -116,7 +114,12 @@ public class StellerSeaCow extends AbstractBasicFish {
         this.entityData.set(IS_BREACHING, isBreaching);
     }
 
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return foodIngredients().test(pStack);
+    }
 
+    @Override
     public Ingredient foodIngredients(){
         return Ingredient.of(Items.KELP, Items.DRIED_KELP, Items.DRIED_KELP_BLOCK);
     }

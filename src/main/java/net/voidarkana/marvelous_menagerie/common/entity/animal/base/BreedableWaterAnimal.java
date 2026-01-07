@@ -13,7 +13,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +23,6 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -734,10 +732,14 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     }
 
     public boolean isFood(ItemStack pStack) {
-        return foodIngredients().test(pStack);
+        return fintasticFoodIngredients().test(pStack) || foodIngredients().test(pStack);
     }
 
     public Ingredient foodIngredients(){
+        return this.fintasticFoodIngredients();
+    }
+
+    public Ingredient fintasticFoodIngredients(){
         return Ingredient.of(MMTags.Items.FINTASTIC_ALL_FEEDS);
     }
 

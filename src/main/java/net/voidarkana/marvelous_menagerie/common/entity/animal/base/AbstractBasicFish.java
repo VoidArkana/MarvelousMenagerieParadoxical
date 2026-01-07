@@ -39,6 +39,7 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
         this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.foodIngredients(), false));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.fintasticFoodIngredients(), false));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.5D));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
     }

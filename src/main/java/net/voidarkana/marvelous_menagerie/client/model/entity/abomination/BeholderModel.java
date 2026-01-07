@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
@@ -195,6 +196,9 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(Beholder entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
+
+		if (!entity.isAlive())
+			this.applyStatic(BeholderAnims.POSE);
 
 		if (entity.isLandNavigator){
 			if (entity.isSprinting()){

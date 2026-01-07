@@ -3,7 +3,9 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 // Paste this class into your mod and generate all required imports
 
 import net.minecraft.util.Mth;
+import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsBasics;
+import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsIdle;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Flubber;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -109,6 +111,13 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 
 		if (this.young){
 			this.applyStatic(FlubberAnimsBasics.BABY);
+		}
+
+		if (!entity.isAlive()){
+			if (entity.isInWaterOrBubble())
+				this.applyStatic(FlubberAnimsIdle.SWIM_POSE);
+			else
+				this.applyStatic(FlubberAnimsIdle.IDLE_POSE);
 		}
 
 		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.LAND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f)));

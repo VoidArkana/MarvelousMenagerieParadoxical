@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -59,7 +61,9 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         this.targetSelector.addGoal(0, (new HurtByTargetGoal(this)).setAlertOthers());
 
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5D));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.fintasticFoodIngredients(), false));
         this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.foodIngredients(), false));
+
         this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.5D));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, Player.class, 8.0F, 1.6D, 1.4D, EntitySelector.NO_SPECTATORS::test));
         this.goalSelector.addGoal(1, new OrganizeBoidsGoal(this));
@@ -71,6 +75,12 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1, 10));
         //this.goalSelector.addGoal(6, new FishSwimGoal(this));
     }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(ItemTags.FISHES);
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.8F);

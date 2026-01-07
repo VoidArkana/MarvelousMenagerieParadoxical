@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseCoralPlantBlock;
@@ -51,6 +53,11 @@ public class Pikaia extends AbstractBasicFish {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(4, new Pikaia.ReviveCoralGoal(this));
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(Items.BONE_MEAL);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

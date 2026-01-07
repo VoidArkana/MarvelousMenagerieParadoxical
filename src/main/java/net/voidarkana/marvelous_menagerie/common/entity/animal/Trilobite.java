@@ -22,6 +22,8 @@ import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -35,6 +37,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BottomDwellerWaterCreature;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -68,14 +71,14 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5){
+        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5) {
             @Override
             protected boolean shouldPanic() {
                 return super.shouldPanic() && Trilobite.this.isInWaterOrBubble();
             }
         });
         this.goalSelector.addGoal(1, new MoveToWaterGoal(this, 0.5D));
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80){
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80) {
             @Nullable
             @Override
             protected Vec3 getPosition() {
@@ -89,6 +92,12 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         });
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.fintasticFoodIngredients(), false));
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(Items.BONE_MEAL);
     }
 
     protected void defineSynchedData() {

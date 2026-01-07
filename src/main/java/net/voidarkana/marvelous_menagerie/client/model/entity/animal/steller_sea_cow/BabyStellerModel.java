@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyStellerAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.StellerAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.StellerSeaCow;
 
@@ -66,6 +67,9 @@ public class BabyStellerModel<T extends StellerSeaCow> extends MarvelousModel<T>
 	@Override
 	public void setupAnim(StellerSeaCow entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
+
+		if (!entity.isAlive())
+			this.applyStatic(BabyStellerAnims.POSE);
 
 		if (entity.isInWaterOrBubble()){
 			this.animateWalk(BabyStellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);

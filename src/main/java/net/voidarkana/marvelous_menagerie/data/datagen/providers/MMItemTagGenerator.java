@@ -260,10 +260,10 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.tag(MMTags.Items.DOMESTICATION_INNOVATION_ROTTEN_APPLE).addOptional(new ResourceLocation("domesticationinnovation:rotten_apple"));
 
         this.tag(MMTags.Items.FINTASTIC_ALL_FEEDS)
-                .addTags(MMTags.Items.FINTASTIC_FEED,
-                MMTags.Items.FINTASTIC_QUALITY_FEED,
-                        MMTags.Items.FINTASTIC_GREAT_FEED,
-                        MMTags.Items.FINTASTIC_PREMIUM_FEED);
+                .addOptional(new ResourceLocation("fintastic:regular_feed"))
+                .addOptional(new ResourceLocation("fintastic:quality_feed"))
+                .addOptional(new ResourceLocation("fintastic:great_feed"))
+                .addOptional(new ResourceLocation("fintastic:premium_feed"));
 
         this.tag(MMTags.Items.CORAL_ITEMS).add(
                 Blocks.TUBE_CORAL.asItem(),

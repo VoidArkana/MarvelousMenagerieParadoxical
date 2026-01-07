@@ -2,7 +2,6 @@ package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -449,8 +448,9 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         return true;
     }
 
+    @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(MMTags.Items.OPHTHALMO_FOOD);
+        return pStack.is(MMTags.Items.OPHTHALMO_FOOD) || fintasticFoodIngredients().test(pStack);
     }
 
     public boolean isHealingFood(ItemStack pStack) {
