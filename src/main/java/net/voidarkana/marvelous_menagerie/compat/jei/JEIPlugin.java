@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.RitualManager;
 
 import java.util.List;
 

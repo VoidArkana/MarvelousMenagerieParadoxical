@@ -11,7 +11,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +33,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
+import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
 

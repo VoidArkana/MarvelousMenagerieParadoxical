@@ -1,6 +1,6 @@
 package net.voidarkana.marvelous_menagerie.client.screen.book.widget;
 
-import net.voidarkana.marvelous_menagerie.data.codec.IndexTagsCodec;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.IndexTagsCodec;
 
 import java.util.List;
 

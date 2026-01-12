@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.data.codec;
+package net.voidarkana.marvelous_menagerie.data.manager;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -18,6 +18,7 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.network.PacketDistributor;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.IndexTagsCodec;
 import net.voidarkana.marvelous_menagerie.util.network.message.PaleonomiconIndexSyncPacket;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 

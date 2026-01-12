@@ -40,6 +40,7 @@ import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModFoliagePlacers
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
 import net.voidarkana.marvelous_menagerie.data.datagen.MMLootModifiers;
 import net.voidarkana.marvelous_menagerie.event.MMEvents;
+import net.voidarkana.marvelous_menagerie.event.MMForgeEvents;
 import net.voidarkana.marvelous_menagerie.event.ServerEvents;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 import net.voidarkana.marvelous_menagerie.util.CommonProxy;
@@ -102,6 +103,7 @@ public class MarvelousMenagerie
         PROXY.init();
 
         eventBus.register(new MMEvents());
+        eventBus.register(new MMForgeEvents());
         eventBus.register(new ServerEvents());
         eventBus.addListener(this::addEntityGoals);
 

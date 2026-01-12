@@ -1,0 +1,7 @@
+{
+  "input1":"minecraft:jungle_sapling",
+  "input2":"minecraft:golden_carrot",
+  "input3":"minecraft:chest",
+  "input4":"marvelous_menagerie:elebird_fossil",
+  "output": "marvelous_menagerie:elephant_bird"
+}

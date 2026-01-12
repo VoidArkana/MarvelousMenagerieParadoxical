@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.RitualManager;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -56,7 +56,7 @@ public class RitualRecipeCategory implements IRecipeCategory<RitualManager.Ritua
 
     @Override
     public RecipeType<RitualManager.RitualProcessData> getRecipeType() {
-        return JEIPlugin.SUMMONING_RITUALS;
+        return new RecipeType<>(UID, RitualManager.RitualProcessData.class);
     }
 
     @Override
@@ -116,8 +116,8 @@ public class RitualRecipeCategory implements IRecipeCategory<RitualManager.Ritua
 
                 int scale = entity.getDimensions(Pose.STANDING).height < 0.75 && entity.getDimensions(Pose.STANDING).width < 0.75 ? 35 :
                         entity.getDimensions(Pose.STANDING).height < 1 ? 25 :
-                        (int) Math.max((Math.max(1/entity.getDimensions(Pose.STANDING).height, 1)
-                        * Math.max(1/entity.getDimensions(Pose.STANDING).width, 1)),1) * 10;
+                                (int) Math.max((Math.max(1/entity.getDimensions(Pose.STANDING).height, 1)
+                                        * Math.max(1/entity.getDimensions(Pose.STANDING).width, 1)),1) * 10;
                 InventoryScreen.renderEntityInInventoryFollowsAngle(graphics, 73, 30, scale, (float) Math.toRadians(-75), (float) Math.toRadians(-45), entity);
             }
         }

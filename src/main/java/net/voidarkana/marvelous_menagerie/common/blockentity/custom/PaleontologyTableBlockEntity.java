@@ -13,13 +13,11 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BrushableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
-import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
+import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.NotNull;
 

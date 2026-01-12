@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.data.codec;
+package net.voidarkana.marvelous_menagerie.data.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,9 +14,10 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.FossilCleaningRecipeCodec;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.WeightedItemCodec;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import net.minecraft.core.Registry;
 
 import java.util.*;
 
