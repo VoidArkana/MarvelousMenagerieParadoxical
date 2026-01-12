@@ -37,10 +37,10 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.CustomRideGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.MarvelousSitWhenOrderedToGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.TameableFollowOwnerGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.TamableMarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.CustomRideGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSitWhenOrderedToGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.TameableFollowOwnerGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 

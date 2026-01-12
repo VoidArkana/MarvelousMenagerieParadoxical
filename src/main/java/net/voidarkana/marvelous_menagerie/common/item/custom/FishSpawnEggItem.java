@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 
 import java.util.Optional;
 import java.util.function.Supplier;

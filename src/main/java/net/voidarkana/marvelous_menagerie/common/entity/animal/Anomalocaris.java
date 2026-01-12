@@ -31,11 +31,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 

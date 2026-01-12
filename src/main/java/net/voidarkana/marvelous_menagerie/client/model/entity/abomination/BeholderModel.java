@@ -197,7 +197,7 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 	public void setupAnim(Beholder entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isAlive())
+		if (entity.isFromInventory())
 			this.applyStatic(BeholderAnims.POSE);
 
 		if (entity.isLandNavigator){

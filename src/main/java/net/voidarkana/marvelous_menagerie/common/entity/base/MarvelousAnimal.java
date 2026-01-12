@@ -1,25 +1,27 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
+package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class MarvelousAnimal extends Animal {
 
     public final AnimationState idleAnimationState = new AnimationState();
     int prevTicksInWater;
 
+    private static final EntityDataAccessor<Boolean> IS_INVENTORY = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
 
     protected MarvelousAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
@@ -29,6 +31,25 @@ public abstract class MarvelousAnimal extends Animal {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IN_WATER_TICKS, 0);
+        this.entityData.define(IS_INVENTORY, true);
+    }
+
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
+        pCompound.putBoolean("IsFromInventory", this.isFromInventory());
+    }
+
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
+        this.setFromInventory(pCompound.getBoolean("IsFromInventory"));
+    }
+
+    public Boolean isFromInventory() {
+        return this.entityData.get(IS_INVENTORY);
+    }
+
+    public void setFromInventory(boolean variant) {
+        this.entityData.set(IS_INVENTORY, variant);
     }
 
     public int getInWaterTicks() {
@@ -79,6 +100,12 @@ public abstract class MarvelousAnimal extends Animal {
             this.setupAnimationStates();
         }
         super.tick();
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        this.setFromInventory(false);
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
     public void setupAnimationStates() {

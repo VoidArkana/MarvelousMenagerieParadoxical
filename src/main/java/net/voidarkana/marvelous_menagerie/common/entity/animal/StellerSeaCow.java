@@ -37,10 +37,10 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishFollowParentGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishFollowParentGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.EnumSet;

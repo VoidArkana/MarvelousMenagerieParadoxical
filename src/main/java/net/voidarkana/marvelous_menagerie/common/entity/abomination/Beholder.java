@@ -33,14 +33,14 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 
 import javax.annotation.Nullable;
 
-public class Beholder extends Monster implements IAnimatedAttacker {
+public class Beholder extends Abomination implements IAnimatedAttacker {
 
     public Boolean hasJawsOpened;
     public Boolean hasJawsClosed;
@@ -59,7 +59,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
     public int attackAnimationTimeout;
     int prevTicksInWater;
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleTwitchState = new AnimationState();
     int idleTwitchTimeout;
     public final AnimationState idleSignalState = new AnimationState();
@@ -266,10 +265,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
 
     public void tick (){
 
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
-
         if (this.getGrabbingTicks()>0){
             int prevGrabbingTicks = this.getGrabbingTicks();
             this.setGrabbingTicks(prevGrabbingTicks-1);
@@ -368,8 +363,8 @@ public class Beholder extends Monster implements IAnimatedAttacker {
         return this.wantsToGrab() && this.isVehicle() && this.isGrabbing() && this.getGrabbingTicks()>0;
     }
 
-    private void setupAnimationStates() {
-
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
         if (this.wantsToGrab()){
 
             if (this.hasReleased) this.hasReleased = false;
@@ -453,7 +448,6 @@ public class Beholder extends Monster implements IAnimatedAttacker {
             if (this.idleTwitchState.isStarted()) this.idleTwitchState.stop();
         }
 
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
         this.idleOverlay.animateWhen(!this.isInWaterOrBubble() && this.isAlive(), this.tickCount);
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {

@@ -1,10 +1,10 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;

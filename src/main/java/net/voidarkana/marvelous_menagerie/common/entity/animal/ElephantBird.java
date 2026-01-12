@@ -11,10 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -22,14 +19,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -37,16 +32,13 @@ import net.minecraftforge.network.PacketDistributor;
 import net.voidarkana.marvelous_menagerie.client.screen.ElephantBirdMenu;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.ElephantBirdFollowCaravanGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.ElephantBirdFollowCaravanGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
-import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 import net.voidarkana.marvelous_menagerie.util.network.message.OpenElephantBirdScreenPacket;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Iterator;
 
 public class ElephantBird extends MarvelousAnimal implements ContainerListener, HasCustomInventoryScreen {
 

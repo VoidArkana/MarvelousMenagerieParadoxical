@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,7 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.JumpGoal;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 
 public class FishJumpGoal extends JumpGoal {
     private static final int[] STEPS_TO_CHECK = new int[]{0, 1, 4, 5, 6, 7};

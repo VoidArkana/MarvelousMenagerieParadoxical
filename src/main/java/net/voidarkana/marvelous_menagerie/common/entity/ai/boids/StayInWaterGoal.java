@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids;
+package net.voidarkana.marvelous_menagerie.common.entity.ai.boids;
 
 
 import net.minecraft.util.Mth;

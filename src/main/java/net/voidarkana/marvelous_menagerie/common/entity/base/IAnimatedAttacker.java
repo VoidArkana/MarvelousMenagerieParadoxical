@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
+package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 public interface IAnimatedAttacker {
 

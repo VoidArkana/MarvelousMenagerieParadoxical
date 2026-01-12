@@ -7,10 +7,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobType;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import org.jetbrains.annotations.Nullable;
 
 public class ZombieDawnHorse extends DawnHorse{

@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;

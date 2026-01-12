@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
@@ -8,8 +8,8 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.level.GameRules;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IEggLayer;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 
 public class EggLayerBreedGoal extends BreedGoal {
     private final MarvelousAnimal animal;

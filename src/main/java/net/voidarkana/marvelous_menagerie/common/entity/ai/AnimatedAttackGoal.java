@@ -1,10 +1,10 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 
 public class AnimatedAttackGoal extends MeleeAttackGoal {
     private final LivingEntity entity;

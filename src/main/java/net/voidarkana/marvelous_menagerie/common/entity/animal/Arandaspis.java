@@ -27,11 +27,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.BoidGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.LimitSpeedAndLookInVelocityDirectionGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.boids.StayInWaterGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.BoidGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.LimitSpeedAndLookInVelocityDirectionGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.StayInWaterGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 

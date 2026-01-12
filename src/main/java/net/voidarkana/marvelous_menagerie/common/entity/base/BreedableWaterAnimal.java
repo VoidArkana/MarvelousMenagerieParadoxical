@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
+package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -47,6 +47,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public float currentRoll = 0.0F;
 
+    private static final EntityDataAccessor<Boolean> IS_INVENTORY = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> OUT_OF_WATER_TICKS = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
     public static final int BABY_START_AGE = -24000;
@@ -57,6 +58,8 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     int prevTicksOutOfWater;
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+
+        this.setFromInventory(false);
 
         if (pSpawnData == null) {
             pSpawnData = new AgeableFishGroupData(true);
@@ -486,6 +489,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         super.defineSynchedData();
         this.entityData.define(FEED_TYPE, 0);
         this.entityData.define(CAN_GROW_UP, true);
+        this.entityData.define(IS_INVENTORY, true);
         this.entityData.define(DATA_BABY_ID, false);
         this.entityData.define(OUT_OF_WATER_TICKS, 0);
     }
@@ -495,6 +499,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         pCompound.putInt("Age", this.getAge());
         pCompound.putInt("ForcedAge", this.forcedAge);
         pCompound.putBoolean("CanGrowUp", this.getCanGrowUp());
+        pCompound.putBoolean("IsFromInventory", this.isFromInventory());
 
         pCompound.putInt("FeedQuality", this.getFeedQuality());
 
@@ -509,6 +514,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.setAge(pCompound.getInt("Age"));
         this.forcedAge = pCompound.getInt("ForcedAge");
         this.setCanGrowUp(pCompound.getBoolean("CanGrowUp"));
+        this.setFromInventory(pCompound.getBoolean("IsFromInventory"));
 
         this.setFeedQuality(pCompound.getInt("FeedQuality"));
 
@@ -535,6 +541,14 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public void setCanGrowUp(boolean variant) {
         this.entityData.set(CAN_GROW_UP, variant);
+    }
+
+    public Boolean isFromInventory() {
+        return this.entityData.get(IS_INVENTORY);
+    }
+
+    public void setFromInventory(boolean variant) {
+        this.entityData.set(IS_INVENTORY, variant);
     }
 
     @Override

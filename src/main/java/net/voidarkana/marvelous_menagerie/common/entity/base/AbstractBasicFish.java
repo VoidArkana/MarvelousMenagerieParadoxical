@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.base;
+package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractBasicFish extends BreedableWaterAnimal implements Bucketable{

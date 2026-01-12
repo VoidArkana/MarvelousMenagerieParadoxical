@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.TamableMarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
 
 import java.util.EnumSet;
 

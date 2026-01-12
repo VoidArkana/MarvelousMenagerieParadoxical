@@ -1,8 +1,8 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.TamableMarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
 
 import java.util.EnumSet;
 

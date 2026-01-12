@@ -70,7 +70,7 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isAlive())
+		if (entity.isFromInventory())
 			this.applyStatic(BabyOphthalmoAnims.POSE);
 
 		if (entity.isInWaterOrBubble()){

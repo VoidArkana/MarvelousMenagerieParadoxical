@@ -155,7 +155,7 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isAlive()){
+		if (entity.isFromInventory()){
 			this.applyStatic(MoltenAnims.POSE);
 		}
 

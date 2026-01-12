@@ -113,7 +113,7 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 			this.applyStatic(FlubberAnimsBasics.BABY);
 		}
 
-		if (!entity.isAlive()){
+		if (entity.isFromInventory()){
 			if (entity.isInWaterOrBubble())
 				this.applyStatic(FlubberAnimsIdle.SWIM_POSE);
 			else

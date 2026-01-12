@@ -1,7 +1,7 @@
-package net.voidarkana.marvelous_menagerie.common.entity.animal.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyOphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Ophthalmosaurus;
@@ -126,7 +125,7 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isAlive())
+		if (entity.isFromInventory())
 			this.applyStatic(OphthalmoAnims.POSE);
 
 		if (entity.isInWaterOrBubble() || entity.isVehicle()){

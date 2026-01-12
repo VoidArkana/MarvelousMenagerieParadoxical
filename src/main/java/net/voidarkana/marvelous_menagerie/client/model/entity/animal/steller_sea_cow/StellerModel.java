@@ -88,7 +88,7 @@ public class StellerModel<T extends StellerSeaCow> extends MarvelousModel<T> {
 	public void setupAnim(StellerSeaCow entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isAlive())
+		if (entity.isFromInventory())
 			this.applyStatic(StellerAnims.POSE);
 
 		if (entity.isInWaterOrBubble()){
