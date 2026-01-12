@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:kelp"
-  },
-  "input2": {
-    "item": "minecraft:blue_ice"
-  },
-  "input3": {
-    "item": "minecraft:milk_bucket"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:steller_fossil"
-  },
+  "input1":"minecraft:kelp",
+  "input2":"minecraft:blue_ice",
+  "input3":"minecraft:milk_bucket",
+  "input4":"marvelous_menagerie:steller_fossil",
   "output": "marvelous_menagerie:steller_sea_cow"
 }

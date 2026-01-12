@@ -1,9 +1,7 @@
-package net.voidarkana.marvelous_menagerie.data.codec;
+package net.voidarkana.marvelous_menagerie.data.manager.codec;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.Item;
 
 import java.util.List;
 import java.util.Map;

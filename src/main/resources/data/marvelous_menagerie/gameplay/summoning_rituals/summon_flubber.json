@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:sea_pickle"
-  },
-  "input2": {
-    "item": "minecraft:sniffer_egg"
-  },
-  "input3": {
-    "item": "minecraft:sand"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:flubber_fossil"
-  },
+  "input1":"minecraft:sea_pickle",
+  "input2":"minecraft:sniffer_egg",
+  "input3":"minecraft:sand",
+  "input4":"marvelous_menagerie:flubber_fossil",
   "output": "marvelous_menagerie:flubber"
 }

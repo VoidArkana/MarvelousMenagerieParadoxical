@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:axolotl_bucket"
-  },
-  "input2": {
-    "item": "minecraft:clay"
-  },
-  "input3": {
-    "item": "minecraft:iron_pickaxe"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:diplocaulus_fossil"
-  },
+  "input1":"minecraft:axolotl_bucket",
+  "input2":"minecraft:clay",
+  "input3":"minecraft:iron_pickaxe",
+  "input4":"marvelous_menagerie:diplocaulus_fossil",
   "output": "marvelous_menagerie:diplocaulus"
 }

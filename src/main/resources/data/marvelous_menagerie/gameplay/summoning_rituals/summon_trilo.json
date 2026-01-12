@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:clay"
-  },
-  "input2": {
-    "item": "minecraft:water_bucket"
-  },
-  "input3": {
-    "item": "minecraft:spider_eye"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:trilo_fossil"
-  },
+  "input1":"minecraft:clay",
+  "input2":"minecraft:water_bucket",
+  "input3":"minecraft:spider_eye",
+  "input4":"marvelous_menagerie:trilo_fossil",
   "output": "marvelous_menagerie:trilobite"
 }

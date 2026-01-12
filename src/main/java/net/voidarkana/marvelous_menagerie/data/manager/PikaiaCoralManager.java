@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.data.codec;
+package net.voidarkana.marvelous_menagerie.data.manager;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;

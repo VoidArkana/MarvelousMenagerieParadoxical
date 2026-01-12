@@ -12,20 +12,24 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.RitualManager;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -76,10 +80,28 @@ public class RitualRecipeCategory implements IRecipeCategory<RitualManager.Ritua
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RitualManager.RitualProcessData recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT,   4,   6+10).addIngredients(recipe.input1());
-        builder.addSlot(RecipeIngredientRole.INPUT,  34,  26+10).addIngredients(recipe.input2());
-        builder.addSlot(RecipeIngredientRole.INPUT, 100,  26+10).addIngredients(recipe.input3());
-        builder.addSlot(RecipeIngredientRole.INPUT, 130,   6+10).addIngredients(recipe.input4());
+        String[] encodedInputs = new String[4];
+
+        encodedInputs[0] = recipe.input1();
+        encodedInputs[1] = recipe.input2();
+        encodedInputs[2] = recipe.input3();
+        encodedInputs[3] = recipe.input4();
+
+        Ingredient[] inputs = new Ingredient[4];
+
+        for (int i = 0; i<4; i++){
+            if (encodedInputs[i].startsWith("#")){
+                ResourceLocation resource = new ResourceLocation(encodedInputs[i].replace("#", ""));
+                inputs[i] = Ingredient.of(TagKey.create(Registries.ITEM, resource));
+            }else {
+                inputs[i] = Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(encodedInputs[i])));
+            }
+        }
+
+        builder.addSlot(RecipeIngredientRole.INPUT,   4,   6+10).addIngredients(inputs[0]);
+        builder.addSlot(RecipeIngredientRole.INPUT,  34,  26+10).addIngredients(inputs[1]);
+        builder.addSlot(RecipeIngredientRole.INPUT, 100,  26+10).addIngredients(inputs[2]);
+        builder.addSlot(RecipeIngredientRole.INPUT, 130,   6+10).addIngredients(inputs[3]);
         builder.addSlot(RecipeIngredientRole.INPUT, 65,   50).addItemStack(new ItemStack(MMItems.CHRONO_WATCH.get()))
                 .addTooltipCallback((view, tooltip) -> {
                     tooltip.add(Component.translatable("jei.marvelous_menagerie.chrono_watch_tooltip").setStyle(Style.EMPTY.withColor(0x00c2f9)));

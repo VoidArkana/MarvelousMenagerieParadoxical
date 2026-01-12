@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:wheat"
-  },
-  "input2": {
-    "item": "minecraft:golden_apple"
-  },
-  "input3": {
-    "item": "minecraft:leather"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:dawn_fossil"
-  },
+  "input1":"minecraft:wheat",
+  "input2":"minecraft:golden_apple",
+  "input3":"minecraft:leather",
+  "input4":"marvelous_menagerie:dawn_fossil",
   "output": "marvelous_menagerie:dawn_horse"
 }

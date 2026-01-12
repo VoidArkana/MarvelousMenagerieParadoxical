@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "marvelous_menagerie:golden_saca"
-  },
-  "input2": {
-    "item": "marvelous_menagerie:anomalous_goggles"
-  },
-  "input3": {
-    "item": "minecraft:water_bucket"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:ophthalmo_fossil"
-  },
+  "input1":"marvelous_menagerie:golden_saca",
+  "input2":"marvelous_menagerie:anomalous_goggles",
+  "input3":"minecraft:water_bucket",
+  "input4":"marvelous_menagerie:ophthalmo_fossil",
   "output": "marvelous_menagerie:ophthalmo"
 }

@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:lapis_block"
-  },
-  "input2": {
-    "item": "minecraft:tropical_fish"
-  },
-  "input3": {
-    "item": "minecraft:water_bucket"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:saca_fossil"
-  },
+  "input1":"minecraft:lapis_block",
+  "input2":"minecraft:tropical_fish",
+  "input3":"minecraft:water_bucket",
+  "input4":"marvelous_menagerie:saca_fossil",
   "output": "marvelous_menagerie:sacabambaspis"
 }

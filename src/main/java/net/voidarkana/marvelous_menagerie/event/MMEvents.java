@@ -14,9 +14,8 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
-import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
+import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {

@@ -1,12 +1,15 @@
 package net.voidarkana.marvelous_menagerie.common.blockentity.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -15,20 +18,19 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.RitualManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -100,11 +102,31 @@ public class AltarBlockEntity extends BlockEntityBase {
 
                             int itemCount = 0;
 
+
+
+                            String[] encodedInputs = new String[4];
+
+                            encodedInputs[0] = data.input1();
+                            encodedInputs[1] = data.input2();
+                            encodedInputs[2] = data.input3();
+                            encodedInputs[3] = data.input4();
+
                             Ingredient[] inputs = new Ingredient[4];
-                            inputs[0] = data.input1();
-                            inputs[1] = data.input2();
-                            inputs[2] = data.input3();
-                            inputs[3] = data.input4();
+
+                            for (int i = 0; i<4; i++){
+                                if (encodedInputs[i].startsWith("#")){
+                                    ResourceLocation resource = new ResourceLocation(encodedInputs[i].replace("#", ""));
+                                    inputs[i] = Ingredient.of(TagKey.create(Registries.ITEM, resource));
+                                }else {
+                                    inputs[i] = Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(encodedInputs[i])));
+                                }
+                            }
+
+
+//                            inputs[0] = data.input1();
+//                            inputs[1] = data.input2();
+//                            inputs[2] = data.input3();
+//                            inputs[3] = data.input4();
 
                             for (int i = 0; i<4; i++){
                                 for (int s = 0; s<4; s++){

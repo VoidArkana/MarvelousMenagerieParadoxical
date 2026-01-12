@@ -10,8 +10,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.util.network.message.FossilRecipeS2C;
-import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
-import net.voidarkana.marvelous_menagerie.data.codec.WeightedItemCodec;
+import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.WeightedItemCodec;
 import net.voidarkana.marvelous_menagerie.util.network.MMMessages;
 
 import java.util.List;

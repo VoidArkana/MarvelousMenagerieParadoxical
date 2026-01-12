@@ -1,15 +1,7 @@
 {
-  "input1": {
-    "item": "minecraft:honeycomb"
-  },
-  "input2": {
-    "item": "minecraft:fern"
-  },
-  "input3": {
-    "item": "minecraft:spider_eye"
-  },
-  "input4": {
-    "item": "marvelous_menagerie:roach_fossil"
-  },
+  "input1":"minecraft:honeycomb",
+  "input2":"minecraft:fern",
+  "input3":"minecraft:spider_eye",
+  "input4":"marvelous_menagerie:roach_fossil",
   "output": "marvelous_menagerie:apthoroblattina"
 }
