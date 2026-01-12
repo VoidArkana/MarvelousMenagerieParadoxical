@@ -1,7 +1,15 @@
 {
-  "input1":"minecraft:rabbit",
-  "input2":"#forge:seeds",
-  "input3":"minecraft:spider_eye",
-  "input4":"marvelous_menagerie:lepti_fossil",
+  "input1": {
+    "item": "minecraft:rabbit"
+  },
+  "input2": {
+    "tag": "forge:seeds"
+  },
+  "input3": {
+    "item": "minecraft:spider_eye"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:lepti_fossil"
+  },
   "output": "marvelous_menagerie:leptictidium"
 }

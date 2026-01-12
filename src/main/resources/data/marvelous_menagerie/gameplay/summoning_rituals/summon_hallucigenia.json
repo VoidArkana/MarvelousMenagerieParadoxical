@@ -1,7 +1,15 @@
 {
-  "input1":"minecraft:red_mushroom",
-  "input2":"minecraft:slime_ball",
-  "input3":"minecraft:water_bucket",
-  "input4":"marvelous_menagerie:hallu_fossil",
+  "input1": {
+    "item": "minecraft:red_mushroom"
+  },
+  "input2": {
+    "item": "minecraft:slime_ball"
+  },
+  "input3": {
+    "item": "minecraft:water_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:hallu_fossil"
+  },
   "output": "marvelous_menagerie:hallucigenia"
 }

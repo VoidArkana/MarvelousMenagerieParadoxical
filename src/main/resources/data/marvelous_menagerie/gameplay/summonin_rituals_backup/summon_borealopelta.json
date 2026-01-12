@@ -1,0 +1,7 @@
+{
+  "input1":"minecraft:iron_chestplate",
+  "input2":"marvelous_menagerie:anomalocaris_scute",
+  "input3":"minecraft:shield",
+  "input4":"marvelous_menagerie:pelta_fossil",
+  "output": "marvelous_menagerie:borealopelta"
+}

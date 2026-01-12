@@ -26,7 +26,7 @@ public class SyncSummoningRituals extends SyncJsonResourcePacket<RitualManager.R
 
     @Override
     protected void writeJsonObject(FriendlyByteBuf buf, RitualManager.RitualProcessData toWrite) {
-        toWrite.toNetwork(buf);
+        toWrite.toNetwork(buf, toWrite);
     }
 
     public static SyncSummoningRituals read(FriendlyByteBuf buf) {

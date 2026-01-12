@@ -104,29 +104,29 @@ public class AltarBlockEntity extends BlockEntityBase {
 
 
 
-                            String[] encodedInputs = new String[4];
-
-                            encodedInputs[0] = data.input1();
-                            encodedInputs[1] = data.input2();
-                            encodedInputs[2] = data.input3();
-                            encodedInputs[3] = data.input4();
-
+//                            String[] encodedInputs = new String[4];
+//
+//                            encodedInputs[0] = data.input1();
+//                            encodedInputs[1] = data.input2();
+//                            encodedInputs[2] = data.input3();
+//                            encodedInputs[3] = data.input4();
+//
                             Ingredient[] inputs = new Ingredient[4];
+//
+//                            for (int i = 0; i<4; i++){
+//                                if (encodedInputs[i].startsWith("#")){
+//                                    ResourceLocation resource = new ResourceLocation(encodedInputs[i].replace("#", ""));
+//                                    inputs[i] = Ingredient.of(TagKey.create(Registries.ITEM, resource));
+//                                }else {
+//                                    inputs[i] = Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(encodedInputs[i])));
+//                                }
+//                            }
 
-                            for (int i = 0; i<4; i++){
-                                if (encodedInputs[i].startsWith("#")){
-                                    ResourceLocation resource = new ResourceLocation(encodedInputs[i].replace("#", ""));
-                                    inputs[i] = Ingredient.of(TagKey.create(Registries.ITEM, resource));
-                                }else {
-                                    inputs[i] = Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation(encodedInputs[i])));
-                                }
-                            }
 
-
-//                            inputs[0] = data.input1();
-//                            inputs[1] = data.input2();
-//                            inputs[2] = data.input3();
-//                            inputs[3] = data.input4();
+                            inputs[0] = data.input1();
+                            inputs[1] = data.input2();
+                            inputs[2] = data.input3();
+                            inputs[3] = data.input4();
 
                             for (int i = 0; i<4; i++){
                                 for (int s = 0; s<4; s++){

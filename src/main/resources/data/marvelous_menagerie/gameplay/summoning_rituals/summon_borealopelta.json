@@ -1,7 +1,15 @@
 {
-  "input1":"minecraft:iron_chestplate",
-  "input2":"marvelous_menagerie:anomalocaris_scute",
-  "input3":"minecraft:shield",
-  "input4":"marvelous_menagerie:pelta_fossil",
+  "input1": {
+    "item": "minecraft:iron_chestplate"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:anomalocaris_scute"
+  },
+  "input3": {
+    "item": "minecraft:shield"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:pelta_fossil"
+  },
   "output": "marvelous_menagerie:borealopelta"
 }

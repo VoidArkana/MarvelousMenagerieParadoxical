@@ -1,0 +1,7 @@
+{
+  "input1":"minecraft:wheat",
+  "input2":"minecraft:golden_apple",
+  "input3":"minecraft:leather",
+  "input4":"marvelous_menagerie:dawn_fossil",
+  "output": "marvelous_menagerie:dawn_horse"
+}

@@ -1,7 +1,15 @@
 {
-  "input1":"minecraft:bowl",
-  "input2":"minecraft:dead_bush",
-  "input3":"minecraft:scute",
-  "input4":"marvelous_menagerie:doedicurus_fossil",
+  "input1": {
+    "item": "minecraft:bowl"
+  },
+  "input2": {
+    "item": "minecraft:dead_bush"
+  },
+  "input3": {
+    "item": "minecraft:scute"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:doedicurus_fossil"
+  },
   "output": "marvelous_menagerie:doedicurus"
 }
