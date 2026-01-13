@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,10 +21,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.BabyPanicGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.EggLayerBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.LayEggGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
@@ -32,6 +35,8 @@ import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
 
 public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, IEggLayer {
 
@@ -60,6 +65,8 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
 
+        this.targetSelector.addGoal(1, new BabyPanicGoal(this, 1.25).setAlertOthers());
+
         this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
@@ -68,6 +75,25 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+    }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        this.refreshDimensions();
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pPose) {
+        if (this.isBaby()) {
+            return super.getDimensions(pPose).scale(0.65F, 0.65F);
+        }else {
+            return super.getDimensions(pPose);
+        }
+    }
+
+    @Override
+    public boolean canAttack(LivingEntity pLivingentity, TargetingConditions pCondition) {
+        return super.canAttack(pLivingentity, pCondition) && !this.isBaby();
     }
 
     @Override

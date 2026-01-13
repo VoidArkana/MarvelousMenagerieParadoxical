@@ -53,10 +53,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishFollowParentGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.WaterMountLookControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
@@ -133,6 +130,9 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new FishFollowParentGoal(this, 1.25f));
+
+        this.targetSelector.addGoal(1, new BabyPanicGoal(this, 1.25).setAlertOthers());
+
         this.goalSelector.addGoal(2, new AnimatedAttackGoal(this, 1.25f, true, 6, 4));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.15f, foodIngredients(), false));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.15f));

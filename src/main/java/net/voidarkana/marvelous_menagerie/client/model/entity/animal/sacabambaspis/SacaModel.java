@@ -1,11 +1,11 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
@@ -46,15 +46,15 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		if (this.young){
-			poseStack.scale(0.6f, 0.6f, 0.6f);
-			poseStack.translate(0, 0.9, 0);
-		}
+//		poseStack.pushPose();
+//
+//		if (this.young){
+//			poseStack.scale(0.6f, 0.6f, 0.6f);
+//			poseStack.translate(0, 0.9, 0);
+//		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();
+//		poseStack.popPose();
 	}
 
 	@Override
@@ -68,10 +68,9 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 
 		if (pEntity.isInWaterOrBubble()){
 			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 3f);
-			this.swim_control.xRot = pHeadPitch * ((float)Math.PI / 180F);
-		}else {
-			this.swim_control.resetPose();
 		}
+
+		this.swim_control.xRot = Mth.lerp( pEntity.getOutOfWaterTicks()/5f, pHeadPitch * ((float)Math.PI / 180F), 0);
 
 		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, 1-pEntity.getOutOfWaterTicks()/5f-Math.abs(pLimbSwingAmount)));
 		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (pEntity.getOutOfWaterTicks()/5f));

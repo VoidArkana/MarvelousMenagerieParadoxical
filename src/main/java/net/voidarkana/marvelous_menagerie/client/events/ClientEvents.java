@@ -21,6 +21,10 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.Behold
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.MoltenModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.ArandaspisModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.BabyArandaspisModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BabyBorealopeltaModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BorealoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.DawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.SkeletonDawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.ZombieDawnHorseModel;
@@ -30,6 +34,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bi
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.BabyOphthalmoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.OphthalmoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.BabySacaModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.SacaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.BabyStellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.StellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
@@ -55,8 +61,13 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.HERPETOGASTER_LAYER, HerpetogasterModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.CHUD_LAYER, ChudModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.SACA_LAYER, SacaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_SACA_LAYER, BabySacaModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.ARANDASPIS_LAYER, ArandaspisModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ARANDASPIS_LAYER, BabyArandaspisModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.FALCATUS_LAYER, FalcatusModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.EOLACTORIA_LAYER, EolactoriaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SLOVENICUS_LAYER, SlovenicusModel::createBodyLayer);
@@ -101,6 +112,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_OPHTHALMO_PATTERN_LAYER, BabyOphthalmoModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.BOREALOPELTA_LAYER, BorealoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_BOREALOPELTA_LAYER, BabyBorealopeltaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.MOLTEN_LAYER, MoltenModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.DIPLOCAULUS_LAYER, DiplocaulusModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.FLUBBER_LAYER, FlubberModel::createBodyLayer);

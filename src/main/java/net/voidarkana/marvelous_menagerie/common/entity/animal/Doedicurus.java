@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.BabyPanicGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 
@@ -47,6 +48,9 @@ public class Doedicurus extends MarvelousAnimal implements IAnimatedAttacker {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new AnimatedAttackGoal(this, 1.35D, true, 27, 43));
+
+        this.targetSelector.addGoal(1, new BabyPanicGoal(this, 1.25).setAlertOthers());
+
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));

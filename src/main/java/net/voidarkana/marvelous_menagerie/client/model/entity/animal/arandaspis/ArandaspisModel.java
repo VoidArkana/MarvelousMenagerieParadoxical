@@ -1,19 +1,14 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.2
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis;// Made with Blockbench 4.12.2
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AgeableHierarchicalModel;
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.SacaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Arandaspis;
 
@@ -56,23 +51,23 @@ public class ArandaspisModel<T extends Arandaspis> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		this.animateWalk(ArandaspisAnims.SWIM, limbSwing, limbSwingAmount*4f*(1-entity.getOutOfWaterTicks()/5f), 1.5f, 3f);
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
 		this.swim_rot.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, headPitch * ((float)Math.PI / 180F), 0);
 
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		if (this.young){
-			poseStack.scale(0.5f, 0.5f, 0.5f);
-			poseStack.translate(0, 1.5, 0);
-		}
+//		poseStack.pushPose();
+//
+//		if (this.young){
+//			poseStack.scale(0.5f, 0.5f, 0.5f);
+//			poseStack.translate(0, 1.5, 0);
+//		}
 
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();
+//		poseStack.popPose();
 	}
 
 	@Override

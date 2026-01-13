@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -6,7 +6,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.DoedicurusAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Borealopelta;
 
@@ -111,10 +110,6 @@ public class BorealoModel<T extends Borealopelta> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(Borealopelta entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
-		if (this.young){
-			this.applyStatic(BorealoAnims.BABY);
-		}
 
 		if (!entity.isInWaterOrBubble()){
 			this.animateWalk(BorealoAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f);
