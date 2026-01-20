@@ -201,7 +201,7 @@ public class MMEntities {
     public static final RegistryObject<EntityType<RiftEntity>> RIFT =
             ENTITY_TYPES.register("rift",
                     () -> EntityType.Builder.of(RiftEntity::new, MobCategory.MONSTER)
-                            .sized(0.5f, 0.5f)
+                            .sized(0.5f, 0.75f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "rift").toString()));
 
     public static final RegistryObject<EntityType<Fracture>> FRACTURE =

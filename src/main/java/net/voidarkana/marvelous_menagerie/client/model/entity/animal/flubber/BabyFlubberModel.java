@@ -120,8 +120,8 @@ public class BabyFlubberModel<T extends Flubber> extends MarvelousModel<T> {
 
 		float prevHeadxRot = this.neck.xRot;
 		float prevHeadyRot = this.neck.yRot;
-		this.neck.xRot = prevHeadxRot + headPitch * ((float)Math.PI / 180F)/2;
-		this.neck.yRot = prevHeadyRot + netHeadYaw * ((float)Math.PI / 180F)/2;
+		this.neck.xRot = prevHeadxRot + (headPitch * ((float)Math.PI / 180F)/2);
+		this.neck.yRot = prevHeadyRot + (netHeadYaw * ((float)Math.PI / 180F)/2);
 
 		this.swim_rot.xRot = Mth.lerp( entity.getInWaterTicks()/5f, 0, headPitch * ((float)Math.PI / 180F));
 	}

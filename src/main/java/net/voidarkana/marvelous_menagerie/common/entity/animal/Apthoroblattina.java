@@ -113,6 +113,8 @@ public class Apthoroblattina extends MarvelousAnimal {
         });
     }
 
+
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -162,10 +164,8 @@ public class Apthoroblattina extends MarvelousAnimal {
                 this.getNavigation().stop();
             }
             pTravelVector = Vec3.ZERO;
-            super.travel(pTravelVector);
-        } else {
-            super.travel(pTravelVector);
         }
+        super.travel(pTravelVector);
     }
 
     public void setupAnimationStates() {
@@ -203,8 +203,6 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
 
         this.johnAnimationState.animateWhen(this.isAlive() && this.isJohn(), this.tickCount);
-
-
     }
 
     @Override
@@ -219,13 +217,17 @@ public class Apthoroblattina extends MarvelousAnimal {
     public void tick() {
         super.tick();
 
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 5D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
+            this.setIsJohn(false);
+            this.jukebox = null;
+        }
+
         if ((this.isInWater() || this.isInLove()) && this.isJohn()){
             this.setIsJohn(false);
         }
 
         if (this.isJohn()){
             this.getNavigation().stop();
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
         }
     }
 

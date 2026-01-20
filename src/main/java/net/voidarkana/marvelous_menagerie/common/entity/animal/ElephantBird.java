@@ -200,13 +200,15 @@ public class ElephantBird extends MarvelousAnimal implements ContainerListener, 
     public void setWoolItem(ItemStack pStack, Player player) {
         if (!pStack.isEmpty()) {
             pStack = pStack.copyWithCount(1);
+        }
 
-            if (this.hasSwag() && !player.getAbilities().instabuild){
+        if (!player.getAbilities().instabuild){
+            if (this.hasSwag()){
                 spawnAtLocation(this.getWoolItem());
             }
-
-            this.getEntityData().set(WOOL_ITEM, pStack);
         }
+
+        this.getEntityData().set(WOOL_ITEM, pStack);
     }
 
     //handkerchief
@@ -332,6 +334,9 @@ public class ElephantBird extends MarvelousAnimal implements ContainerListener, 
 
                 this.playSound(SoundEvents.LLAMA_SWAG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.setWoolItem(itemstack, player);
+                if(!player.isCreative()){
+                    itemstack.shrink(1);
+                }
                 return InteractionResult.sidedSuccess(this.level().isClientSide);
 
             }else if (itemstack.is(Items.SHEARS) && (this.hasSwag() || this.hasChest())) {
