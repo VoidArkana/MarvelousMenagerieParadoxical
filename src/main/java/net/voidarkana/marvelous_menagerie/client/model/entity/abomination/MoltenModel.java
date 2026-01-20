@@ -5,6 +5,7 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.abomination;// Ma
 import net.minecraft.client.model.geom.ModelPart;
 import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.MoltenAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.MoltenAnimsExtra;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -156,7 +157,7 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		if (entity.isFromInventory()){
-			this.applyStatic(MoltenAnims.POSE);
+			this.applyStatic(MoltenAnimsExtra.POSE);
 		}
 
 		if (entity.isSprinting()){
