@@ -681,7 +681,7 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         @Override
         public boolean canUse() {
             BlockPos blockPos = flubber.getHeadBlockPos().below();
-            return this.level.getBlockState(blockPos).is(MMTags.Blocks.FLUBBER_DIG_TARGET)
+            return !this.flubber.isBaby() && this.level.getBlockState(blockPos).is(MMTags.Blocks.FLUBBER_DIG_TARGET)
                     && this.flubber.getDiggingCooldown() == 0 && this.flubber.isInWaterOrBubble();
         }
 

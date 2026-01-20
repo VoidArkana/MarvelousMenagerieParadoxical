@@ -104,9 +104,10 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 				entity.getTicksOffGround()/5f-entity.getInWaterTicks()/5f);
 
 
-
-		this.neck.xRot = -headPitch * ((float)Math.PI / 180F);
-		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		float prevNeckX = this.neck.xRot;
+		float prevNeckY = this.neck.yRot;
+		this.neck.xRot = prevNeckX -headPitch * ((float)Math.PI / 180F);
+		this.neck.yRot = prevNeckY + netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override

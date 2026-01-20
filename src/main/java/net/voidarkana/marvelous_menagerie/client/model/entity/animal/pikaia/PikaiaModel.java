@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.3
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.pikaia;// Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.PikaiaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
@@ -30,7 +31,7 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 
 	public PikaiaModel(ModelPart root) {
         super(0.6f, 0.9f);
-        this.root = root.getChild("root");
+		this.root = root.getChild("root");
 		this.swim_control = this.root.getChild("swim_control");
 		this.body = this.swim_control.getChild("body");
 		this.head = this.body.getChild("head");
@@ -55,17 +56,17 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 
 		PartDefinition body = swim_control.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, -2.0F));
 
-		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(18, 0).addBox(-1.5F, -1.5F, -3.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(18, 0).addBox(-1.5F, -0.5F, -3.0F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -0.5F, 0.0F));
 
-		PartDefinition antennae_l = head.addOrReplaceChild("antennae_l", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.5F, -2.0F, 0.0F, 3.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offset(1.0F, -1.0F, -3.0F));
+		PartDefinition antennae_l = head.addOrReplaceChild("antennae_l", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -3.0F, -1.0F, 0.0F, 3.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offset(1.0F, -0.5F, -3.0F));
 
-		PartDefinition antennae_r = head.addOrReplaceChild("antennae_r", CubeListBuilder.create().texOffs(9, 0).addBox(0.0F, -2.5F, -2.0F, 0.0F, 3.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offset(-1.0F, -1.0F, -3.0F));
+		PartDefinition antennae_r = head.addOrReplaceChild("antennae_r", CubeListBuilder.create().texOffs(9, 0).addBox(0.0F, -3.0F, -1.0F, 0.0F, 3.0F, 2.0F, new CubeDeformation(0.001F)), PartPose.offset(-1.0F, -0.5F, -3.0F));
 
-		PartDefinition gill1 = head.addOrReplaceChild("gill1", CubeListBuilder.create().texOffs(12, 0).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -1.5F, -2.5F));
+		PartDefinition gill1 = head.addOrReplaceChild("gill1", CubeListBuilder.create().texOffs(12, 0).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -0.5F, -1.5F));
 
-		PartDefinition gill2 = head.addOrReplaceChild("gill2", CubeListBuilder.create().texOffs(9, 6).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -1.5F, -1.5F));
+		PartDefinition gill2 = head.addOrReplaceChild("gill2", CubeListBuilder.create().texOffs(9, 6).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -0.5F, -1.0F));
 
-		PartDefinition gill3 = head.addOrReplaceChild("gill3", CubeListBuilder.create().texOffs(0, 6).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -1.5F, -0.5F));
+		PartDefinition gill3 = head.addOrReplaceChild("gill3", CubeListBuilder.create().texOffs(0, 6).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 1.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -0.5F, -0.5F));
 
 		PartDefinition tail_rot = body.addOrReplaceChild("tail_rot", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
@@ -84,39 +85,21 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 
 		if (entity.isInWaterOrBubble()){
 			this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
-
-			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
-
-			this.tail_rot.yRot = -entity.currentRoll;
-
-			this.tail_tip_rot.yRot = -entity.currentRoll;
-
-		}else {
-			this.swim_control.resetPose();
-			this.tail_rot.resetPose();
-			this.tail_tip_rot.resetPose();
 		}
 
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+
+		this.swim_control.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, headPitch * ((float)Math.PI / 180F), 0);
+
+		this.tail_rot.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, -entity.currentRoll, 0);
+		this.tail_tip_rot.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, -entity.currentRoll, 0);
 
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		poseStack.scale(0.6F, 0.6F, 0.6F);
-
-		poseStack.translate(0, 0.8F, 0);
-
-		if (this.young){
-			poseStack.scale(0.6f, 0.6f, 0.6f);
-			poseStack.translate(0, 1.25F, 0);
-		}
-
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();
 	}
 
 	@Override

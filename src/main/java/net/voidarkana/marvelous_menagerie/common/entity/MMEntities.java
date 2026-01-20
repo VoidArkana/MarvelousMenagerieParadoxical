@@ -69,7 +69,7 @@ public class MMEntities {
     public static final RegistryObject<EntityType<Pikaia>> PIKAIA =
             ENTITY_TYPES.register("pikaia",
                     () -> EntityType.Builder.of(Pikaia::new, MobCategory.WATER_AMBIENT)
-                            .sized(0.7f, 0.3f)
+                            .sized(0.6f, 0.4f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "pikaia").toString()));
 
     public static final RegistryObject<EntityType<Apthoroblattina>> ROACH

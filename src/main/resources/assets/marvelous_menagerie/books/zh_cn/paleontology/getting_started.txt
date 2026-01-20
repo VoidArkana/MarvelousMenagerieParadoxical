@@ -1,0 +1,41 @@
+
+
+
+
+
+踏入古生物学世界的第一步，是
+找到一本能为你灌注必备知识的
+可靠指南。
+祝贺你！阅读此书，便已迈出了
+第一步。
+
+在主世界中，尤其在地下，你会
+注意到特殊的沉积岩层遍布各处。
+每种岩石代表着不同的地质年代：
+
+    {页岩|early_paleo/index.json}
+    {粉砂岩|carboniferous/index.json}
+    {辉长岩|permian/index.json}
+    {泥岩|triassic/index.json}
+    {石灰岩|jurassic/index.json}
+    {白垩岩|cretaceous/index.json}
+    {角砾岩|paleogene/index.json}
+    {硅藻土|neogene/index.json}
+    {永久冻土|quaternary/index.json}
+
+这些不同的岩层中埋藏着各异的
+资源。若想获取尘封于岩层中的
+宝藏，你需要制作一个§l古生物学§r
+§l工具箱§r。
+
+
+
+
+
+
+
+
+
+有了这套工具，你便能与任何嵌
+入化石的方块互动，开启挖掘工
+作！完成挖掘就能获得丰厚回报。

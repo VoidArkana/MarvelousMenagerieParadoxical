@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -29,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Fracture extends LivingEntity {
+public class Fracture extends Mob {
 
     private static final Predicate<LivingEntity> PLAYER = (entity) -> {
         return entity instanceof Player;
@@ -74,18 +75,12 @@ public class Fracture extends LivingEntity {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("IsNatural", this.isNatural());
-        pCompound.putInt("OpeningTime", this.getOpeningTime());
-        pCompound.putInt("OpeningTimeLag", this.getOpeningTimeLag());
-        pCompound.putInt("ClosingTime", this.getClosingTime());
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setIsNatural(pCompound.getBoolean("IsNatural"));
-        this.setOpeningTime(pCompound.getInt("OpeningTime"));
-        this.setOpeningTimeLag(pCompound.getInt("OpeningTimeLag"));
-        this.setClosingTime(pCompound.getInt("ClosingTime"));
     }
 
     public boolean isNatural() {
@@ -445,4 +440,11 @@ public class Fracture extends LivingEntity {
         return false;
     }
 
+    protected boolean shouldDespawnInPeaceful() {
+        return !this.isNatural();
+    }
+
+    public boolean removeWhenFarAway(double pDistanceToClosestPlayer) {
+        return this.isNatural();
+    }
 }

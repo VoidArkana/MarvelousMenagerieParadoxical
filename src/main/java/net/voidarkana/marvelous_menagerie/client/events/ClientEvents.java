@@ -21,6 +21,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.Behold
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.ChudModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.MoltenModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.AnomalocarisModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.BabyAnomalocarisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.ArandaspisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.BabyArandaspisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BabyBorealopeltaModel;
@@ -28,12 +30,20 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelt
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.DawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.SkeletonDawnHorseModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.ZombieDawnHorseModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.diplocaulus.BabyDiplocaulusModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.diplocaulus.DiplocaulusModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyEleBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.BabyFlubberModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.FlubberModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.BabyJosephoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.JosephoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.BabyOphthalmoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.OphthalmoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.pikaia.BabyPikaiaModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.pikaia.PikaiaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.BabySacaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.SacaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.BabyStellerModel;
@@ -54,13 +64,17 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(MMModelLayers.SKULL_LAYER, AltarSkullModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.CHARNIA_LAYER, CharniaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.HERPETOGASTER_LAYER, HerpetogasterModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.FRACTURE_LAYER, FractureModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.FRACTURE_EMMISSIVE, FractureModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.RIFT_LAYER, RiftModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.HERPETOGASTER_LAYER, HerpetogasterModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.CHUD_LAYER, ChudModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.MOLTEN_LAYER, MoltenModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BEHOLDER_LAYER, BeholderModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.SACA_LAYER, SacaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_SACA_LAYER, BabySacaModel::createBodyLayer);
@@ -69,13 +83,18 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_ARANDASPIS_LAYER, BabyArandaspisModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.FALCATUS_LAYER, FalcatusModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.EOLACTORIA_LAYER, EolactoriaModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.SLOVENICUS_LAYER, SlovenicusModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.ANOMALOCARIS_LAYER, AnomalocarisModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ANOMALOCARIS_LAYER, BabyAnomalocarisModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.PIKAIA_LAYER, PikaiaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_PIKAIA_LAYER, BabyPikaiaModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.ROACH_LAYER, RoachModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.BEHOLDER_LAYER, BeholderModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.DAWNHORSE_LAYER, DawnHorseModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.SKELETON_DAWNHORSE_LAYER, SkeletonDawnHorseModel::createBodyLayer);
@@ -94,13 +113,20 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.TRILO_MID_LAYER_HIGHLIGHT, TrilobiteMidModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.LEPTI_LAYER, LeptiModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.THYLACINE_LAYER, ThylacineModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.DODO_LAYER, DodoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_DODO_LAYER, BabyDodoModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.ELEBIRD_LAYER, EleBirdModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_ELEBIRD_LAYER, BabyEleBirdModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.DOEDICURUS_LAYER, DoedicurusModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.JOSEPHO_LAYER, JosephoModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_JOSEPHO_LAYER, BabyJosephoModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.STELLER_LAYER, StellerModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_STELLER_LAYER, BabyStellerModel::createBodyLayer);
 
@@ -113,9 +139,12 @@ public class ClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.BOREALOPELTA_LAYER, BorealoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_BOREALOPELTA_LAYER, BabyBorealopeltaModel::createBodyLayer);
-        event.registerLayerDefinition(MMModelLayers.MOLTEN_LAYER, MoltenModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.DIPLOCAULUS_LAYER, DiplocaulusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_DIPLOCAULUS_LAYER, BabyDiplocaulusModel::createBodyLayer);
+
         event.registerLayerDefinition(MMModelLayers.FLUBBER_LAYER, FlubberModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_FLUBBER_LAYER, BabyFlubberModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

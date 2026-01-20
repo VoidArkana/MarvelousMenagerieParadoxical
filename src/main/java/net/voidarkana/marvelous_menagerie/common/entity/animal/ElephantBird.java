@@ -198,15 +198,15 @@ public class ElephantBird extends MarvelousAnimal implements ContainerListener, 
     }
 
     public void setWoolItem(ItemStack pStack, Player player) {
-        if (this.hasSwag() && !player.getAbilities().instabuild){
-            spawnAtLocation(this.getWoolItem());
-        }
-
         if (!pStack.isEmpty()) {
             pStack = pStack.copyWithCount(1);
-        }
 
-        this.getEntityData().set(WOOL_ITEM, pStack);
+            if (this.hasSwag() && !player.getAbilities().instabuild){
+                spawnAtLocation(this.getWoolItem());
+            }
+
+            this.getEntityData().set(WOOL_ITEM, pStack);
+        }
     }
 
     //handkerchief

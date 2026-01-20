@@ -32,7 +32,12 @@ public class LimitSpeedAndLookInVelocityDirectionGoal extends Goal {
 //            velocity = velocity.normalize().scale(maxSpeed/2);
 
         mob.setDeltaMovement(velocity);
-        mob.lookAt(EntityAnchorArgument.Anchor.EYES, mob.position().add(velocity.x, velocity.y+0.25, velocity.z)); // Scale by 3 just to be sure it is roughly the right direction
+
+        if (mob.isBaby())
+            mob.lookAt(EntityAnchorArgument.Anchor.EYES, mob.position().add(velocity.x, velocity.y, velocity.z)); // Scale by 3 just to be sure it is roughly the right direction
+        else
+            mob.lookAt(EntityAnchorArgument.Anchor.EYES, mob.position().add(velocity.x, velocity.y+0.15, velocity.z)); // Scale by 3 just to be sure it is roughly the right direction
+
     }
 
     @Override

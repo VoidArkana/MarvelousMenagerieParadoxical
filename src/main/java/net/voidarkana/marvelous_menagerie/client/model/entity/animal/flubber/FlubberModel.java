@@ -1,9 +1,8 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 5.0.6
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber;// Made with Blockbench 5.0.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsBasics;
 import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsIdle;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
@@ -109,10 +108,6 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 	public void setupAnim(Flubber entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (this.young){
-			this.applyStatic(FlubberAnimsBasics.BABY);
-		}
-
 		if (entity.isFromInventory()){
 			if (entity.isInWaterOrBubble())
 				this.applyStatic(FlubberAnimsIdle.SWIM_POSE);
@@ -142,15 +137,7 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		if (this.young){
-			poseStack.scale(0.6f, 0.6f, 0.6f);
-			poseStack.translate(0, 1, 0);
-		}
-
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();
 	}
 
 	@Override

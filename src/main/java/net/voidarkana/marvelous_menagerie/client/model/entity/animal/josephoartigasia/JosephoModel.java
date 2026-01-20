@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.6
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia;// Made with Blockbench 4.12.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -8,8 +8,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.DodoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.JosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Josephoartigasia;
@@ -98,9 +96,6 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		this.animate(entity.leftEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_LEFT, ageInTicks, 1);
 		this.animate(entity.rightEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_RIGHT, ageInTicks, 1);
 
-		if (this.young)
-			this.applyStatic(JosephoAnims.BABY);
-
 		if (!entity.isInWaterOrBubble()){
 			if (!entity.isInSittingPose()){
 				animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
@@ -115,8 +110,10 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
 
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
-		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		float prevHeadX = this.head.xRot;
+		float prevHeadY = this.head.yRot;
+		this.head.xRot = prevHeadX + headPitch * ((float)Math.PI / 180F);
+		this.head.yRot = prevHeadY + netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override

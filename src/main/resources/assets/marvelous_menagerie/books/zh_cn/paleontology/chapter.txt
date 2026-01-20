@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ §l总目录
+
+  • {开始着手|paleontology/getting_started.json}
+
+  • {好的挖掘关键|paleontology/tutorial.json}
+
+  • {寻找化石|paleontology/paleo_table.json}
+
+  • {其他资源|paleontology/misc.json}

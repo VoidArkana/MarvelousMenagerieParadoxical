@@ -55,6 +55,20 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
         this.setMaxUpStep(1.0F);
     }
 
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        this.refreshDimensions();
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pPose) {
+        if (this.isBaby()) {
+            return super.getDimensions(pPose).scale(1.5F, 1.5F);
+        }else {
+            return super.getDimensions(pPose);
+        }
+    }
+
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
@@ -257,7 +271,7 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
 
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return this.random.nextBoolean()
+        return this.random.nextInt(3)==0
                 ? 5f : pLevel.getFluidState(pPos).is(FluidTags.WATER) && pLevel.getBlockState(pPos.below()).isSolid()
                 ? 5f : 0f;
     }

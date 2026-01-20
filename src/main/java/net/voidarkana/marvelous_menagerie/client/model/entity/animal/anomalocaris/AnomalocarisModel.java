@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.3
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris;// Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -8,7 +8,6 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Anomalocaris;
 
@@ -140,24 +139,11 @@ public class AnomalocarisModel<T extends Anomalocaris> extends MarvelousModel<T>
 
 		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
 		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
-
-		if (this.young){
-			applyStatic(AnomalocarisAnims.BABY);
-		}
-
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		if (this.young){
-			poseStack.scale(0.6f, 0.6f, 0.6f);
-			poseStack.translate(0, 1, 0);
-		}
-
 		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();
 	}
 
 	@Override
