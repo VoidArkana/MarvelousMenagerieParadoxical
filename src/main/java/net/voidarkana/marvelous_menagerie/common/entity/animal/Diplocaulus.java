@@ -36,8 +36,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
@@ -54,6 +53,20 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.1F, 0.5F, false);
         this.lookControl = new SmoothSwimmingLookControl(this, 20);
         this.setMaxUpStep(1.0F);
+    }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        this.refreshDimensions();
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pPose) {
+        if (this.isBaby()) {
+            return super.getDimensions(pPose).scale(1.5F, 1.5F);
+        }else {
+            return super.getDimensions(pPose);
+        }
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -258,7 +271,7 @@ public class Diplocaulus extends MarvelousAnimal implements Bucketable {
 
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return this.random.nextBoolean()
+        return this.random.nextInt(3)==0
                 ? 5f : pLevel.getFluidState(pPos).is(FluidTags.WATER) && pLevel.getBlockState(pPos.below()).isSolid()
                 ? 5f : 0f;
     }

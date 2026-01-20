@@ -11,6 +11,14 @@ import net.minecraft.client.animation.KeyframeAnimations;
  * @author Author
  */
 public class StellerAnims {
+	public static final AnimationDefinition POSE = AnimationDefinition.Builder.withLength(0.0F)
+			.addAnimation("flipper_l", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 45.0F), AnimationChannel.Interpolations.LINEAR)
+			))
+			.addAnimation("flipper_r", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, -45.0F), AnimationChannel.Interpolations.LINEAR)
+			))
+			.build();
 	public static final AnimationDefinition IDLE = AnimationDefinition.Builder.withLength(4.0F).looping()
 		.addAnimation("body", new AnimationChannel(AnimationChannel.Targets.ROTATION, 
 			new Keyframe(0.0F, KeyframeAnimations.degreeVec(-5.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),

@@ -27,10 +27,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.config.ModConfig;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
@@ -114,6 +113,8 @@ public class Apthoroblattina extends MarvelousAnimal {
         });
     }
 
+
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -163,10 +164,8 @@ public class Apthoroblattina extends MarvelousAnimal {
                 this.getNavigation().stop();
             }
             pTravelVector = Vec3.ZERO;
-            super.travel(pTravelVector);
-        } else {
-            super.travel(pTravelVector);
         }
+        super.travel(pTravelVector);
     }
 
     public void setupAnimationStates() {
@@ -204,8 +203,6 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
 
         this.johnAnimationState.animateWhen(this.isAlive() && this.isJohn(), this.tickCount);
-
-
     }
 
     @Override
@@ -220,13 +217,17 @@ public class Apthoroblattina extends MarvelousAnimal {
     public void tick() {
         super.tick();
 
+        if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 5D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
+            this.setIsJohn(false);
+            this.jukebox = null;
+        }
+
         if ((this.isInWater() || this.isInLove()) && this.isJohn()){
             this.setIsJohn(false);
         }
 
         if (this.isJohn()){
             this.getNavigation().stop();
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
         }
     }
 
@@ -409,6 +410,11 @@ public class Apthoroblattina extends MarvelousAnimal {
             }
             return super.canContinueToUse();
         }
+    }
+
+    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return ((pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos))
+                || pLevel.getBlockState(pPos.below()).is(Blocks.DRIPSTONE_BLOCK)) && CommonConfig.NATURAL_SPAWNS.get();
     }
 
 }

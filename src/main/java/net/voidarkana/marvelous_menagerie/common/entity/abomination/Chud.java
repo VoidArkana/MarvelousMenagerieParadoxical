@@ -11,17 +11,17 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
+import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
 
-public class Chud extends Monster {
+public class Chud extends Abomination {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState idleNoseState = new AnimationState();
     public final AnimationState rotateAnimationState = new AnimationState();
     private int idleNoseTimeout = 0;
     private int rotateAnimationTimeout = 0;
 
 
-    public Chud(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public Chud(EntityType<? extends Abomination> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -39,8 +39,8 @@ public class Chud extends Monster {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
 
         if (this.idleNoseTimeout <= 0) {
             this.idleNoseTimeout = this.random.nextInt(40) + 80;
@@ -71,14 +71,6 @@ public class Chud extends Monster {
         }
 
         this.walkAnimation.update(f, 0.2f);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
     }
 
     public void customServerAiStep() {

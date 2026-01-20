@@ -53,10 +53,12 @@ public class MMChestBoatEntity extends ChestBoat {
     }
 
     protected void addAdditionalSaveData(CompoundTag pCompound) {
+        super.addAdditionalSaveData(pCompound);
         pCompound.putString("Type", this.getMMVariant().getSerializedName());
     }
 
     protected void readAdditionalSaveData(CompoundTag pCompound) {
+        super.readAdditionalSaveData(pCompound);
         if (pCompound.contains("Type", 8)) {
             this.setVariant(MMBoatEntity.Type.byName(pCompound.getString("Type")));
         }

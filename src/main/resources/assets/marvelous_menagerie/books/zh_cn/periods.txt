@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+灭绝的古生物和出现的§l地质年代§r
+
+    • §l古生代
+        • {早古生代|early_paleo/index.json}
+        • {石炭纪|carboniferous/index.json}
+        • {二叠纪|permian/index.json}
+    • §l中生代
+        • {三叠纪|triassic/index.json}
+        • {侏罗纪|jurassic/index.json}
+        • {白垩纪|cretaceous/index.json}
+    • §l新生代
+        • {古近纪|paleogene/index.json}
+        • {新近纪|neogene/index.json}
+        • {第四纪|quaternary/index.json}

@@ -53,10 +53,10 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.EggLayerBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.LayEggGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IEggLayer;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.EggLayerBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.LayEggGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
@@ -681,7 +681,7 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         @Override
         public boolean canUse() {
             BlockPos blockPos = flubber.getHeadBlockPos().below();
-            return this.level.getBlockState(blockPos).is(MMTags.Blocks.FLUBBER_DIG_TARGET)
+            return !this.flubber.isBaby() && this.level.getBlockState(blockPos).is(MMTags.Blocks.FLUBBER_DIG_TARGET)
                     && this.flubber.getDiggingCooldown() == 0 && this.flubber.isInWaterOrBubble();
         }
 

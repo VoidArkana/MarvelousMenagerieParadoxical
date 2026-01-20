@@ -2,7 +2,6 @@ package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -54,13 +53,10 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishFollowParentGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.WaterMountLookControl;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
@@ -134,6 +130,9 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new FishFollowParentGoal(this, 1.25f));
+
+        this.targetSelector.addGoal(1, new BabyPanicGoal(this, 1.25).setAlertOthers());
+
         this.goalSelector.addGoal(2, new AnimatedAttackGoal(this, 1.25f, true, 6, 4));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.15f, foodIngredients(), false));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.15f));
@@ -449,8 +448,9 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         return true;
     }
 
+    @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(MMTags.Items.OPHTHALMO_FOOD);
+        return pStack.is(MMTags.Items.OPHTHALMO_FOOD) || fintasticFoodIngredients().test(pStack);
     }
 
     public boolean isHealingFood(ItemStack pStack) {

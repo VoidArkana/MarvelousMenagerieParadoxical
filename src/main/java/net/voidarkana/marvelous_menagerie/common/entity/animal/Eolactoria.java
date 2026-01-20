@@ -10,10 +10,12 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +30,11 @@ public class Eolactoria extends AbstractBasicFish {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.6F);
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(Items.DRIED_KELP);
     }
 
     protected void defineSynchedData() {

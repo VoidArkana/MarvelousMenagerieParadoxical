@@ -22,6 +22,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseCoralPlantBlock;
@@ -29,10 +30,10 @@ import net.minecraft.world.level.block.BaseCoralPlantTypeBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
-import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
+import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +52,11 @@ public class Pikaia extends AbstractBasicFish {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(4, new Pikaia.ReviveCoralGoal(this));
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(Items.BONE_MEAL);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

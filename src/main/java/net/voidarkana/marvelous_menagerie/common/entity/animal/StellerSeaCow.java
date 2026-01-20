@@ -32,16 +32,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishFollowParentGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishFollowParentGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.EnumSet;
@@ -69,6 +68,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.1, foodIngredients(), false));
+        this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.1));
         this.goalSelector.addGoal(3, new FishFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(3, new SeaCowSwimWithPlayerGoal(this, 2D));
         this.goalSelector.addGoal(4, new RandomShallowSwimmingGoal(this, 1, 10));
@@ -114,7 +114,12 @@ public class StellerSeaCow extends AbstractBasicFish {
         this.entityData.set(IS_BREACHING, isBreaching);
     }
 
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return foodIngredients().test(pStack);
+    }
 
+    @Override
     public Ingredient foodIngredients(){
         return Ingredient.of(Items.KELP, Items.DRIED_KELP, Items.DRIED_KELP_BLOCK);
     }

@@ -9,18 +9,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.JosephoModel;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.JosephoModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Josephoartigasia;
 
 @OnlyIn(Dist.CLIENT)
-public class JosephoSaddleLayer extends RenderLayer<Josephoartigasia, JosephoModel<Josephoartigasia>> {
+public class JosephoSaddleLayer<T extends Josephoartigasia> extends RenderLayer<T, MarvelousModel<T>> {
 
-    public JosephoSaddleLayer(RenderLayerParent<Josephoartigasia, JosephoModel<Josephoartigasia>> pRenderer, EntityRendererProvider.Context pContext) {
+    public JosephoSaddleLayer(RenderLayerParent<T, MarvelousModel<T>> pRenderer, EntityRendererProvider.Context pContext) {
         super(pRenderer);
     }
 
     @Override
-    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, Josephoartigasia entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 
         if (entityLivingBaseIn.isSaddled()) {
 

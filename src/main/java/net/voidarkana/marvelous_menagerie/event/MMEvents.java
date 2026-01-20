@@ -13,10 +13,10 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Beholder;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Chud;
 import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
-import net.voidarkana.marvelous_menagerie.data.codec.PikaiaCoralManager;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
+import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {
@@ -52,7 +52,7 @@ public class MMEvents {
         event.put(MMEntities.DIPLOCAULUS.get(), Diplocaulus.createAttributes().build());
         event.put(MMEntities.FLUBBER.get(), Flubber.createAttributes().build());
 
-        event.put(MMEntities.FRACTURE.get(), LivingEntity.createLivingAttributes().build());
+        event.put(MMEntities.FRACTURE.get(), Fracture.createAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());
     }
 

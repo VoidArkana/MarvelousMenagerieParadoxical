@@ -2229,22 +2229,4 @@ public class BorealoAnims {
 			new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 		))
 		.build();
-
-	public static final AnimationDefinition BABY = AnimationDefinition.Builder.withLength(0.0F)
-		.addAnimation("neck", new AnimationChannel(AnimationChannel.Targets.POSITION, 
-			new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR)
-		))
-		.addAnimation("neck", new AnimationChannel(AnimationChannel.Targets.SCALE, 
-			new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.15F, 1.15F, 1.15F), AnimationChannel.Interpolations.LINEAR)
-		))
-		.addAnimation("head", new AnimationChannel(AnimationChannel.Targets.POSITION, 
-			new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, -0.5F, 0.0F), AnimationChannel.Interpolations.LINEAR)
-		))
-		.addAnimation("head", new AnimationChannel(AnimationChannel.Targets.SCALE, 
-			new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.25F, 1.25F, 1.25F), AnimationChannel.Interpolations.LINEAR)
-		))
-		.addAnimation("spikes2", new AnimationChannel(AnimationChannel.Targets.SCALE, 
-			new Keyframe(0.0F, KeyframeAnimations.scaleVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR)
-		))
-		.build();
 }

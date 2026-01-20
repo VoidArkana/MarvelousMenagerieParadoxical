@@ -1,5 +1,5 @@
 {
-  "parent": "early_paleo/index.json",
+  "parent": "permian/index.json",
   "text": "animals/diplocaulus.txt",
   "title": "entity.marvelous_menagerie.diplocaulus",
   "widgets": [

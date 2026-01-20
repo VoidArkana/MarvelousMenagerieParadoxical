@@ -8,8 +8,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.FossilCleaningManager;
-import net.voidarkana.marvelous_menagerie.data.codec.WeightedItemCodec;
+import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.WeightedItemCodec;
 
 import java.util.HashMap;
 import java.util.List;

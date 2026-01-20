@@ -7,29 +7,24 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
-import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.BabyPanicGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 
 import javax.annotation.Nullable;
 
@@ -53,6 +48,9 @@ public class Doedicurus extends MarvelousAnimal implements IAnimatedAttacker {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new AnimatedAttackGoal(this, 1.35D, true, 27, 43));
+
+        this.targetSelector.addGoal(1, new BabyPanicGoal(this, 1.25).setAlertOthers());
+
         this.goalSelector.addGoal(1, new MoveTowardsTargetGoal(this, 0.9D, 32.0F));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));

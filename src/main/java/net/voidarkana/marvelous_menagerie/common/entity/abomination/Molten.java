@@ -1,19 +1,15 @@
 package net.voidarkana.marvelous_menagerie.common.entity.abomination;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,26 +22,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.projectile.ThrownPotion;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
-import java.util.List;
 
-public class Molten extends Monster implements IAnimatedAttacker {
+public class Molten extends Abomination implements IAnimatedAttacker {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState biteAttackAnimationState = new AnimationState();
     public final AnimationState slamAttackAnimationState = new AnimationState();
     public final AnimationState swirlAttackAnimationState1 = new AnimationState();
@@ -203,7 +192,6 @@ public class Molten extends Monster implements IAnimatedAttacker {
         }
 
         if (this.level().isClientSide){
-            this.setupAnimationStates();
 
             Vec3 vec3 = this.getViewVector(0.0F);
             float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
@@ -244,7 +232,7 @@ public class Molten extends Monster implements IAnimatedAttacker {
 
     public void setupAnimationStates(){
 
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+        super.setupAnimationStates();
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 20;

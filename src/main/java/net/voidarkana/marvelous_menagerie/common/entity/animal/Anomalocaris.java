@@ -1,6 +1,5 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -8,7 +7,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.DifficultyInstance;
@@ -25,20 +24,18 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.BreedableWaterAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
+import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -68,11 +65,17 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new AnimatedAttackGoal(this, 1.25D, true, 7, 13));
         this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.foodIngredients(), false));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.25D, this.fintasticFoodIngredients(), false));
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.5D));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.0D, 10));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
+    }
+
+    @Override
+    public Ingredient foodIngredients() {
+        return Ingredient.of(ItemTags.FISHES);
     }
 
     public static AttributeSupplier.Builder createAttributes() {

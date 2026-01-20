@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BabyOphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Ophthalmosaurus;
@@ -69,8 +70,11 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
+		if (entity.isFromInventory())
+			this.applyStatic(BabyOphthalmoAnims.POSE);
+
 		if (entity.isInWaterOrBubble()){
-			this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
+			this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
 
 			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
 
@@ -78,8 +82,8 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 			this.swim_control.resetPose();
 		}
 
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
 
 	}
 

@@ -125,6 +125,9 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
+		if (entity.isFromInventory())
+			this.applyStatic(OphthalmoAnims.POSE);
+
 		if (entity.isInWaterOrBubble() || entity.isVehicle()){
 			this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
 

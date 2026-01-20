@@ -38,11 +38,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.EnumSet;
 
@@ -70,6 +68,10 @@ public class Dodo extends MarvelousAnimal {
     public int shakingAnimationTimeout;
     public int peckingAnimationTimeout;
 
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return FOOD_ITEMS.test(pStack);
+    }
 
     //attributes
     public static AttributeSupplier.Builder createAttributes() {
@@ -525,5 +527,10 @@ public class Dodo extends MarvelousAnimal {
         } else {
             --this.shakingAnimationTimeout;
         }
+    }
+
+    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return (pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) || pLevel.getBlockState(pPos.below()).is(Blocks.MYCELIUM))
+                && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }

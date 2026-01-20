@@ -7,8 +7,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.data.codec.PaleonomiconIndexManager;
-import net.voidarkana.marvelous_menagerie.data.codec.RitualManager;
+import net.voidarkana.marvelous_menagerie.data.manager.PaleonomiconIndexManager;
+import net.voidarkana.marvelous_menagerie.data.manager.RitualManager;
 
 import java.util.UUID;
 

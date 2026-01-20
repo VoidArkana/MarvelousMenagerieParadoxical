@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -77,4 +78,10 @@ public class TrilobiteRenderer extends MobRenderer<Trilobite, MarvelousModel<Tri
         }
     }
 
+    @Override
+    protected void setupRotations(Trilobite pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
+        super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
+        if (pEntityLiving.isFromInventory())
+            pPoseStack.mulPose(Axis.XN.rotationDegrees(25));
+    }
 }

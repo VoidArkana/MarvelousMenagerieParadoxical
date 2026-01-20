@@ -17,8 +17,8 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.EntityData;
-import net.voidarkana.marvelous_menagerie.data.codec.IndexTagsCodec;
-import net.voidarkana.marvelous_menagerie.data.codec.PaleonomiconIndexManager;
+import net.voidarkana.marvelous_menagerie.data.manager.codec.IndexTagsCodec;
+import net.voidarkana.marvelous_menagerie.data.manager.PaleonomiconIndexManager;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
