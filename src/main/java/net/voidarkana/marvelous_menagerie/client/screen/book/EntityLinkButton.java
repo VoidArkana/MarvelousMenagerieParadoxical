@@ -84,7 +84,7 @@ public class EntityLinkButton extends Button {
         //guiGraphics.disableScissor();
 
         if (this.isHovered) {
-            bookGUI.setEntityTooltip(Component.translatable(name).getString());
+            bookGUI.setCurrentItemTooltip(Component.translatable(name).getString());
             lvt_5_1_ = 48;
         } else {
             lvt_5_1_ = 24;

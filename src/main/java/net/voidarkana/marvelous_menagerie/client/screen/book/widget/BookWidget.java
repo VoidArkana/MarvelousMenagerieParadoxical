@@ -70,4 +70,8 @@ public abstract class BookWidget {
         }
 
     }
+
+    public boolean isHovered(){
+        return this.isHovered;
+    }
 }

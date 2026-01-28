@@ -138,6 +138,12 @@ public class BabyFlubberAnims {
 		.addAnimation("arm_r", new AnimationChannel(AnimationChannel.Targets.POSITION, 
 			new Keyframe(0.0F, KeyframeAnimations.posVec(1.0F, -1.75F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 		))
+		.addAnimation("arm_l", new AnimationChannel(AnimationChannel.Targets.POSITION,
+				new Keyframe(0.0F, KeyframeAnimations.posVec(-1.0F, -1.75F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
+		))
+		.addAnimation("arm_l", new AnimationChannel(AnimationChannel.Targets.ROTATION,
+				new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 30.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
+		))
 		.addAnimation("tail_end", new AnimationChannel(AnimationChannel.Targets.ROTATION, 
 			new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 17.32F, 4.33F), AnimationChannel.Interpolations.CATMULLROM),
 			new Keyframe(1.6667F, KeyframeAnimations.degreeVec(0.0F, -20.0F, -5.0F), AnimationChannel.Interpolations.CATMULLROM),
@@ -145,12 +151,6 @@ public class BabyFlubberAnims {
 			new Keyframe(5.6667F, KeyframeAnimations.degreeVec(0.0F, -20.0F, -5.0F), AnimationChannel.Interpolations.CATMULLROM),
 			new Keyframe(7.4583F, KeyframeAnimations.degreeVec(0.0F, 18.94F, 4.73F), AnimationChannel.Interpolations.CATMULLROM),
 			new Keyframe(8.0F, KeyframeAnimations.degreeVec(0.0F, 17.32F, 4.33F), AnimationChannel.Interpolations.CATMULLROM)
-		))
-		.addAnimation("arm_l", new AnimationChannel(AnimationChannel.Targets.ROTATION, 
-			new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 30.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-		))
-		.addAnimation("arm_l", new AnimationChannel(AnimationChannel.Targets.POSITION, 
-			new Keyframe(0.0F, KeyframeAnimations.posVec(-1.0F, -1.75F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 		))
 		.build();
 

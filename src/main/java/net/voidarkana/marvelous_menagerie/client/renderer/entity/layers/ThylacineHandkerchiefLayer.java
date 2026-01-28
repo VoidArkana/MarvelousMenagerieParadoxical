@@ -6,102 +6,118 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ThylacineModel;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;
 
 @OnlyIn(Dist.CLIENT)
-public class ThylacineHandkerchiefLayer extends RenderLayer<Thylacine, ThylacineModel<Thylacine>> {
+public class ThylacineHandkerchiefLayer<T extends Thylacine> extends RenderLayer<T, MarvelousModel<T>> {
 
-    private static final ResourceLocation RED = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/red.png");
-    private static final ResourceLocation ORANGE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/orange.png");
-    private static final ResourceLocation YELLOW = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/yellow.png");
-    private static final ResourceLocation LIME = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/lime.png");
-    private static final ResourceLocation GREEN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/green.png");
-    private static final ResourceLocation CYAN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/cyan.png");
-    private static final ResourceLocation LIGHT_BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/light_blue.png");
-    private static final ResourceLocation BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/blue.png");
-    private static final ResourceLocation PURPLE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/purple.png");
-    private static final ResourceLocation MAGENTA = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/magenta.png");
-    private static final ResourceLocation PINK = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/pink.png");
-    private static final ResourceLocation BROWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/brown.png");
-    private static final ResourceLocation BLACK = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/black.png");
-    private static final ResourceLocation GRAY = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/gray.png");
-    private static final ResourceLocation LIGHT_GRAY = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/light_gray.png");
-    private static final ResourceLocation WHITE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/white.png");
-
-
-    private static final ResourceLocation AMBER = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/amber.png");
-    private static final ResourceLocation AQUA = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/aqua.png");
-    private static final ResourceLocation BEIGE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/beige.png");
-    private static final ResourceLocation CORAL = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/coral.png");
-    private static final ResourceLocation FOREST = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/forest.png");
-    private static final ResourceLocation GINGER = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/ginger.png");
-    private static final ResourceLocation INDIGO = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/indigo.png");
-    private static final ResourceLocation MAROON = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/maroon.png");
-    private static final ResourceLocation MINT = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/mint.png");
-    private static final ResourceLocation NAVY = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/navy.png");
-    private static final ResourceLocation OLIVE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/olive.png");
-    private static final ResourceLocation ROSE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/rose.png");
-    private static final ResourceLocation SLATE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/slate.png");
-    private static final ResourceLocation TAN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/tan.png");
-    private static final ResourceLocation TEAL = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/teal.png");
-    private static final ResourceLocation VERDANT = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/handkerchief/dye_depot/verdant.png");
-
-
-    public ThylacineHandkerchiefLayer(RenderLayerParent<Thylacine, ThylacineModel<Thylacine>> pRenderer, EntityRendererProvider.Context pContext) {
+    public ThylacineHandkerchiefLayer(RenderLayerParent<T, MarvelousModel<T>> pRenderer, EntityRendererProvider.Context pContext) {
         super(pRenderer);
     }
 
     @Override
-    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, Thylacine entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+    public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 
         ResourceLocation texture;
 
         if (entityLivingBaseIn.hasHandkerchief()) {
 
-            switch (entityLivingBaseIn.getHandkerchiefColor()) {
-                case 1 -> texture = RED;
-                case 2 -> texture = ORANGE;
-                case 3 -> texture = YELLOW;
-                case 4 -> texture = LIME;
-                case 5 -> texture = GREEN;
-                case 6 -> texture = CYAN;
-                case 7 -> texture = LIGHT_BLUE;
-                case 8 -> texture = BLUE;
-                case 9 -> texture = PURPLE;
-                case 10 -> texture = MAGENTA;
-                case 11 -> texture = PINK;
-                case 12 -> texture = BROWN;
-                case 13 -> texture = BLACK;
-                case 14 -> texture = GRAY;
-                case 15 -> texture = LIGHT_GRAY;
-
-                case 16 -> texture = AMBER;
-                case 17 -> texture = AQUA;
-                case 18 -> texture = BEIGE;
-                case 19 -> texture = CORAL;
-                case 20 -> texture = FOREST;
-                case 21 -> texture = GINGER;
-                case 22 -> texture = INDIGO;
-                case 23 -> texture = MAROON;
-                case 24 -> texture = MINT;
-                case 25 -> texture = NAVY;
-                case 26 -> texture = OLIVE;
-                case 27 -> texture = ROSE;
-                case 28 -> texture = SLATE;
-                case 29 -> texture = TAN;
-                case 30 -> texture = TEAL;
-                case 31 -> texture = VERDANT;
-
-                default -> texture = WHITE;
+            float[] afloat = switch (entityLivingBaseIn.getHandkerchiefColor()) {
+                case 1 -> {
+                    afloat = DyeColor.RED.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 2 -> {
+                    afloat = DyeColor.ORANGE.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 3 -> {
+                    afloat = DyeColor.YELLOW.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 4 -> {
+                    afloat = DyeColor.LIME.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 5 -> {
+                    afloat = DyeColor.GREEN.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 6 -> {
+                    afloat = DyeColor.CYAN.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 7 -> {
+                    afloat = DyeColor.LIGHT_BLUE.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 8 -> {
+                    afloat = DyeColor.BLUE.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 9 -> {
+                    afloat = DyeColor.PURPLE.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 10 -> {
+                    afloat = DyeColor.MAGENTA.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 11 -> {
+                    afloat = DyeColor.PINK.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 12 -> {
+                    afloat = DyeColor.BROWN.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 13 -> {
+                    afloat = DyeColor.BLACK.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 14 -> {
+                    afloat = DyeColor.GRAY.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 15 -> {
+                    afloat = DyeColor.LIGHT_GRAY.getTextureDiffuseColors();
+                    yield new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+                }
+                case 16 -> new float[]{195 / 255f, 157 / 255f, 17 / 255f};
+                case 17 -> new float[]{93 / 255f, 230 / 255f, 202 / 255f};
+                case 18 -> new float[]{231 / 255f, 199 / 255f, 135 / 255f};
+                case 19 -> new float[]{231 / 255f, 120 / 255f, 83 / 255f};
+                case 20 -> new float[]{71 / 255f, 159 / 255f, 35 / 255f};
+                case 21 -> new float[]{181 / 255f, 68 / 255f, 16 / 255f};
+                case 22 -> new float[]{44 / 255f, 27 / 255f, 73 / 255f};
+                case 23 -> new float[]{117 / 255f, 35 / 255f, 18 / 255f};
+                case 24 -> new float[]{51 / 255f, 185 / 255f, 103 / 255f};
+                case 25 -> new float[]{37 / 255f, 52 / 255f, 85 / 255f};
+                case 26 -> new float[]{134 / 255f, 135 / 255f, 42 / 255f};
+                case 27 -> new float[]{224 / 255f, 74 / 255f, 81 / 255f};
+                case 28 -> new float[]{84 / 255f, 100 / 255f, 143 / 255f};
+                case 29 -> new float[]{223 / 255f, 137 / 255f, 80 / 255f};
+                case 30 -> new float[]{42 / 255f, 104 / 255f, 90 / 255f};
+                case 31 -> new float[]{19 / 255f, 82 / 255f, 37 / 255f};
+                default -> new float[]{0.9019608F, 0.9019608F, 0.9019608F};
             };
+
+            texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/thylacine/thylacine_handkerchief"+(entityLivingBaseIn.isBaby()?"_baby":"")+".png");
+
+            float f = afloat[0];
+            float f1 = afloat[1];
+            float f2 = afloat[2];
 
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.getParentModel(), texture, pPoseStack, pBuffer, pPackedLight,
                     entityLivingBaseIn, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch,
-                    pPartialTick, 1, 1, 1);
+                    pPartialTick, f, f1, f2);
 
         }
     }

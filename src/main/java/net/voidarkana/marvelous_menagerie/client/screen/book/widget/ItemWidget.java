@@ -25,6 +25,7 @@ import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.voidarkana.marvelous_menagerie.client.renderer.item.MMItemstackRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.rendertypes.MMRenderTypes;
+import net.voidarkana.marvelous_menagerie.client.screen.BookLink;
 import net.voidarkana.marvelous_menagerie.client.screen.book.PaleonomiconScreen;
 
 import javax.annotation.Nullable;
@@ -39,6 +40,9 @@ public class ItemWidget extends BookWidget {
     @Expose
     private boolean sepia;
 
+    private int width;
+    private int height;
+
     @Expose(serialize = false, deserialize = false)
     private ItemStack actualItem = ItemStack.EMPTY;
 
@@ -49,6 +53,8 @@ public class ItemWidget extends BookWidget {
         this.item = item;
         this.nbt = nbt;
         this.sepia = sepia;
+        this.width = 16;
+        this.height = 16;
     }
 
     public void render(PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, float partialTicks, boolean onFlippingPage, int mouseX, int mouseY) {
@@ -66,12 +72,32 @@ public class ItemWidget extends BookWidget {
         }
         float scale = 16.0F * getScale();
 
+//        this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + 18 && mouseY < this.getY() + 18;
+
         poseStack.pushPose();
         poseStack.translate(getX(), getY(), 0);
         poseStack.translate(0, 0, 50);
         renderItem(actualItem, poseStack, bufferSource, sepia, scale);
         poseStack.popPose();
 
+    }
+
+    public void mouseOver(PaleonomiconScreen screen, int page, float mouseX, float mouseY, boolean rightPage){
+        boolean hoverFlag = false;
+        screen.unlockTooltip = false;
+
+        this.isHovered = false;
+
+        float itemStartsX = rightPage ? screen.leftPos+175-8 : screen.leftPos+20;
+        float itemStartsY = screen.topPos + 15;
+        float wordStartAt = itemStartsX;
+        float wordEndAt = wordStartAt + 16F * 0.9f;
+        float wordTopAt = itemStartsY;
+        float wordBottomAt = wordTopAt + 16F;
+
+        if(mouseX > wordStartAt && mouseX < wordEndAt && mouseY > wordTopAt && mouseY < wordBottomAt){
+            this.isHovered = true;
+        }
     }
 
     public static void renderItem(ItemStack itemStack, PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, boolean sepia, float scale){
@@ -94,7 +120,7 @@ public class ItemWidget extends BookWidget {
             if (sepia && !bakedmodel.isCustomRenderer()) {
                 renderSepiaItem(poseStack, bakedmodel, itemStack, bufferSource);
             } else {
-                Minecraft.getInstance().getItemRenderer().render(itemStack, ItemDisplayContext.GUI, false, poseStack, bufferSource, 240, OverlayTexture.NO_OVERLAY, bakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemStack, ItemDisplayContext.GUI, false, poseStack, bufferSource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
             }
             if (sepia) {
                 MMItemstackRenderer.sepiaFlag = false;
@@ -110,7 +136,7 @@ public class ItemWidget extends BookWidget {
         bakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(poseStack, bakedmodel, ItemDisplayContext.GUI, false);
         poseStack.translate(-0.5F, -0.5F, -0.5F);
         for (net.minecraft.client.renderer.RenderType rt : bakedmodel.getRenderTypes(itemStack, false)) {
-            renderModel(poseStack.last(), bufferSource.getBuffer(SEPIA_ITEM_RENDER_TYPE), 1.0F, null, bakedmodel, 1.0F, 1.0F, 1.0F, 240, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
+            renderModel(poseStack.last(), bufferSource.getBuffer(SEPIA_ITEM_RENDER_TYPE), 1.0F, null, bakedmodel, 1.0F, 1.0F, 1.0F, 150, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
         }
         poseStack.popPose();
     }
@@ -137,5 +163,17 @@ public class ItemWidget extends BookWidget {
             f2 = Mth.clamp(b, 0.0F, 1.0F);
             vertexConsumer.putBulkData(pose, bakedquad, f, f1, f2, alpha, packedLight, packedOverlay, false);
         }
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public String getItemName() {
+        if (item != null) {
+            ItemStack itemstack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(item)));
+            return itemstack.getDisplayName().getString();
+        }
+        return "";
     }
 }

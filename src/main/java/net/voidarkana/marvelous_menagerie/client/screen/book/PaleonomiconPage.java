@@ -1,14 +1,18 @@
 package net.voidarkana.marvelous_menagerie.client.screen.book;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.voidarkana.marvelous_menagerie.client.screen.BookLink;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.BookWidget;
+import net.voidarkana.marvelous_menagerie.client.screen.book.widget.ItemWidget;
+import org.joml.Matrix4f;
 
 public class PaleonomiconPage {
 
@@ -42,7 +46,7 @@ public class PaleonomiconPage {
         this.entry = entry;
     }
 
-    protected void renderPage(PaleonomiconScreen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks, boolean onFlippingPage) {
+    protected void renderPage(PaleonomiconScreen screen, GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks, boolean isLeftPage) {
         PoseStack poseStack = guiGraphics.pose();
         int pgNumber = getDisplayPageNumber();
         MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
@@ -72,9 +76,23 @@ public class PaleonomiconPage {
                     PaleonomiconScreen.TEXT_COLOR, false, poseStack.last().pose(), bufferSource, Font.DisplayMode.NORMAL,
                     0, 15728880);
             poseStack.popPose();
+
             for (BookWidget widget : entry.getWidgets()) {
                 if (widget.getDisplayPage() == pgNumber) {
-                    widget.render(poseStack, bufferSource, partialTicks, onFlippingPage, mouseX, mouseY);
+                    widget.render(poseStack, bufferSource, partialTicks, isLeftPage, mouseX, mouseY);
+
+                    int k = screen.leftPos + 38;
+                    int l = screen.topPos + 18;
+                    float scale = 0.85f;
+
+                    if (widget instanceof ItemWidget itemWidget &&
+                            (mouseX >= (k + widget.getX())*scale && mouseY >= (l + widget.getY())*scale
+                                    && mouseX < (k + widget.getX() + (16*widget.getScale()))*scale && mouseY < (l + widget.getY() + (16*widget.getScale()))*scale )){
+
+
+                        screen.setCurrentItemTooltip(itemWidget.getItemName());
+
+                    }
                 }
             }
         }

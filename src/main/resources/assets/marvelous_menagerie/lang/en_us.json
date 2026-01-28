@@ -479,11 +479,14 @@
   "block.marvelous_menagerie.chiseled_permafrost": "Chiseled Permafrost",
 
   "block.marvelous_menagerie.paleo_table": "Paleontology Table",
+  "block.marvelous_menagerie.paleo_table_book": "Paleontology Table",
 
   "item.marvelous_menagerie.chronotite": "Chronotite",
   "block.marvelous_menagerie.chronotite_block": "Chronotite Block",
   "block.marvelous_menagerie.chrono_pedestal": "Chronotite Pedestal",
+  "block.marvelous_menagerie.chrono_pedestal_book": "Chronotite Pedestal",
   "block.marvelous_menagerie.chrono_altar": "Chronotite Altar",
+  "block.marvelous_menagerie.chrono_altar_book": "Chronotite Altar",
 
   "item.marvelous_menagerie.sigillaria_fossil": "Sigillaria Fossil",
   "item.marvelous_menagerie.cooksonia_fossil": "Cooksonia Fossil",
@@ -700,6 +703,7 @@
   "translatable.marvelous_menagerie.trilo_color.teal" : "Teal",
   "translatable.marvelous_menagerie.trilo_color.white" : "White",
   "translatable.marvelous_menagerie.trilo_color.yellow" : "Yellow",
+  "translatable.marvelous_menagerie.trilo_color.brown" : "Brown",
 
   "translatable.marvelous_menagerie.lgbt.ace" : "Asexual",
   "translatable.marvelous_menagerie.lgbt.agender" : "Agender",
@@ -771,5 +775,7 @@
 
   "marvelous_menagerie.sound.subtitle.paleo_toolkit_open": "Paleontology Toolkit Opens",
   "marvelous_menagerie.sound.subtitle.paleo_toolkit_close": "Paleontology Toolkit Closes",
-  "marvelous_menagerie.sound.subtitle.paleo_toolkit_break_fossil": "Fossil Cracks"
+  "marvelous_menagerie.sound.subtitle.paleo_toolkit_break_fossil": "Fossil Cracks",
+
+  "block.marvelous_menagerie.chest_book": "Chest"
 }

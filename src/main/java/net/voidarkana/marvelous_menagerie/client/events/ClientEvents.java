@@ -48,6 +48,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambasp
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.SacaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.BabyStellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.StellerModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.BabyThylacineModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.ThylacineModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
@@ -115,6 +117,7 @@ public class ClientEvents {
         event.registerLayerDefinition(MMModelLayers.LEPTI_LAYER, LeptiModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.THYLACINE_LAYER, ThylacineModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_THYLACINE_LAYER, BabyThylacineModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.DODO_LAYER, DodoModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_DODO_LAYER, BabyDodoModel::createBodyLayer);

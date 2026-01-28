@@ -46,10 +46,10 @@ public class PaleonomiconScreen extends Screen {
     protected ResourceLocation nextEntryJSON;
     protected final ResourceLocation rootEntryJSON = new ResourceLocation(MarvelousMenagerie.MOD_ID, "books/root.json");
 
-    int imageWidth;
-    int imageHeight;
-    int leftPos;
-    int topPos;
+    public int imageWidth;
+    public int imageHeight;
+    public int leftPos;
+    public int topPos;
 
     int nextButtonStartX=282;
     int nextButtonEndX=302;
@@ -65,7 +65,7 @@ public class PaleonomiconScreen extends Screen {
     int homeButtonStartY=185;
     int homeButtonEndY=185+36;
 
-    protected String entityTooltip;
+    protected String currentItemTooltip;
 
     private boolean incrementingPage;
     private boolean decrementingPage;
@@ -98,7 +98,7 @@ public class PaleonomiconScreen extends Screen {
 
     public PaleonomiconScreen(String openTo) {
         super(Component.translatable("item.marvelous_menagerie.paleonomicon"));
-        System.out.println(new ResourceLocation(getBookFileDirectory() + openTo));
+//        System.out.println(new ResourceLocation(getBookFileDirectory() + openTo));
         currentEntryJSON = new ResourceLocation(getBookFileDirectory() + openTo);
         this.imageWidth = 314;
         this.imageHeight = 207;
@@ -106,7 +106,7 @@ public class PaleonomiconScreen extends Screen {
 
         for (PaleonomiconIndexManager.EntityCodec data : PaleonomiconIndexManager.DATA) {
             this.indexLinkData.add(new EntityData(data.entityName().toString(), data.icon(), data.link(), data.tags()));
-            System.out.println(data.icon());
+//            System.out.println(data.icon());
         }
 
         Collections.sort(this.indexLinkData, Comparator.comparing(EntityData::getEntity));
@@ -259,12 +259,12 @@ public class PaleonomiconScreen extends Screen {
 
         addLinkButtons();
 
-        if (this.entityTooltip != null) {
+        if (this.currentItemTooltip != null) {
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(-5, 10, 550);
-            guiGraphics.renderTooltip(font, Minecraft.getInstance().font.split(Component.translatable(entityTooltip),
+            guiGraphics.renderTooltip(font, Minecraft.getInstance().font.split(Component.translatable(currentItemTooltip),
                     Math.max(this.width / 2 - 43, 170)), mouseX, mouseY);
-            entityTooltip = null;
+            currentItemTooltip = null;
             guiGraphics.pose().popPose();
         }
 
@@ -290,7 +290,7 @@ public class PaleonomiconScreen extends Screen {
         if (kind == 1){
             poseStack.translate(173F, 0, 0);
         }
-        contents.renderPage(this, graphics, mouseX, mouseY, partialTick, kind >= 2);
+        contents.renderPage(this, graphics, mouseX, mouseY, partialTick, kind == 0);
         poseStack.popPose();
     }
 
@@ -318,6 +318,11 @@ public class PaleonomiconScreen extends Screen {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean prev = super.mouseClicked(mouseX, mouseY, button);
         if (!prev) {
+
+            System.out.println("Clicked Mouse X: " + mouseX);
+            System.out.println("Clicked Mouse X: " + mouseY);
+
+
             if(currentEntry != null && currentEntry.consumeMouseClick(this)){
                 return true;
             }else{
@@ -396,8 +401,8 @@ public class PaleonomiconScreen extends Screen {
         RenderSystem.setShaderLights(light0, light1);
     }
 
-    public void setEntityTooltip(String hoverText) {
-        this.entityTooltip = hoverText;
+    public void setCurrentItemTooltip(String hoverText) {
+        this.currentItemTooltip = hoverText;
     }
 
     protected int getBindingColor() {

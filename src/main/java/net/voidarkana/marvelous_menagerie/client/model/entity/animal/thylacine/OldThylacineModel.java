@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made with Blockbench 4.12.6
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine;// Made with Blockbench 4.12.6
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -7,12 +7,11 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.LeptiAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ThylacineAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;
 
-public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
+public class OldThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart main;
@@ -37,7 +36,7 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 	private final ModelPart leg_left;
 	private final ModelPart leg_right;
 
-	public ThylacineModel(ModelPart root) {
+	public OldThylacineModel(ModelPart root) {
         super(1, 1);
         this.root = root.getChild("root");
 		this.main = this.root.getChild("main");
@@ -121,10 +120,6 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(Thylacine entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
-		if (this.young){
-			this.applyStatic(ThylacineAnims.BABY);
-		}
 
 		if (!entity.isInWaterOrBubble()){
 

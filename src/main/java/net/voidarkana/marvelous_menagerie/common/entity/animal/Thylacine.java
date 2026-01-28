@@ -56,10 +56,7 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     public Player playerWhoFedIt;
 
     private static final EntityDataAccessor<Integer> HOWLING_TIME = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> HOWLING = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> YAWNING_TIME = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> YAWNING = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> HAS_HANDKERCHIEF = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> HANDKERCHIEF_COLOR = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<ItemStack> WOOL_ITEM = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Thylacine.class, EntityDataSerializers.BOOLEAN);
@@ -67,7 +64,6 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     public int prevHowlTime;
     public int prevYawnTime;
     public int howlTickDuration = 80;
-
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -103,10 +99,7 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(HOWLING_TIME, 0);
-        this.entityData.define(HOWLING, false);
         this.entityData.define(YAWNING_TIME, 0);
-        this.entityData.define(YAWNING, false);
-        this.entityData.define(HAS_HANDKERCHIEF, false);
         this.entityData.define(HANDKERCHIEF_COLOR, 0);
         this.getEntityData().define(WOOL_ITEM, ItemStack.EMPTY);
         this.entityData.define(IS_ATTACKING, false);
@@ -114,36 +107,23 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putInt("howlingTime", this.getHowlingTime());
-        compound.putBoolean("isHowling", this.getIsHowling());
-        compound.putInt("yawningTime", this.getYawningTime());
-        compound.putBoolean("isYawning", this.getIsYawning());
-        compound.putBoolean("hasHandkerchief", this.getHasHandkerchief());
+        compound.putInt("handkerchiefColor", this.getHandkerchiefColor());
 
         if (!this.getWoolItem().isEmpty()) {
             compound.put("woolItem", this.getWoolItem().save(new CompoundTag()));
         }
-
         compound.putBoolean("IsAttacking", this.isAttacking());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setHowlingTime(compound.getInt("howlingTime"));
-        this.setIsHowling(compound.getBoolean("isHowling"));
-        this.setYawningTime(compound.getInt("yawningTime"));
-        this.setIsYawning(compound.getBoolean("isYawning"));
-        this.setIsYawning(compound.getBoolean("hasHandkerchief"));
+
         this.setHandkerchiefColor(compound.getInt("handkerchiefColor"));
-
         CompoundTag compoundtag = compound.getCompound("woolItem");
-
         if (compoundtag != null && !compoundtag.isEmpty()) {
             ItemStack itemstack = ItemStack.of(compoundtag);
             this.setWoolItem(itemstack);
         }
-
-        this.setAttacking(compound.getBoolean("IsAttacking"));
     }
 
     //wool item
@@ -168,16 +148,8 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         this.entityData.set(HANDKERCHIEF_COLOR, color);
     }
 
-    public boolean getHasHandkerchief(){
-        return this.entityData.get(HAS_HANDKERCHIEF);
-    }
-
     public boolean hasHandkerchief(){
-        return getHasHandkerchief();
-    }
-
-    public void setHasHandkerchief(boolean hasHandkerchief){
-        this.entityData.set(HAS_HANDKERCHIEF, hasHandkerchief);
+        return this.getWoolItem() != ItemStack.EMPTY;
     }
 
     //howling
@@ -187,12 +159,9 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     public void setHowlingTime(int howlingTicksTime){
         this.entityData.set(HOWLING_TIME, howlingTicksTime);}
 
-    public boolean getIsHowling() {
-        return this.entityData.get(HOWLING);}
-
-    public void setIsHowling(boolean howling) {
-        this.entityData.set(HOWLING, howling);}
-
+    public boolean isHowling() {
+        return this.getHowlingTime()>0;
+    }
 
     //yawning
     public int getYawningTime(){
@@ -201,14 +170,12 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     public void setYawningTime(int yawningTicksTime){
         this.entityData.set(YAWNING_TIME, yawningTicksTime);}
 
-    public boolean getIsYawning() {
-        return this.entityData.get(YAWNING);}
-
-    public void setIsYawning(boolean yawning) {
-        this.entityData.set(YAWNING, yawning);}
+    public boolean isYawning() {
+        return this.getYawningTime()>0;
+    }
 
     public void travel(Vec3 pTravelVector) {
-        if (this.getIsHowling() || this.getIsYawning()) {
+        if (this.isHowling() || this.isYawning()) {
             if (this.getNavigation().getPath() != null) {
                 this.getNavigation().stop();
             }
@@ -225,6 +192,11 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         return s != null && s.toLowerCase().contains("metropolitan");
     }
 
+    public boolean isEndling() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && (s.toLowerCase().contains("benjamin") || s.toLowerCase().contains("ben") || s.toLowerCase().contains("hobart"));
+    }
+
     protected void dropEquipment() {
         super.dropEquipment();
         if (this.hasHandkerchief()) {
@@ -238,7 +210,7 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         InteractionResult type = super.mobInteract(player, hand);
         if ((itemstack.is(Items.CHICKEN) || itemstack.is(Items.RABBIT)
                 || itemstack.is(Items.COOKED_CHICKEN) || itemstack.is(Items.COOKED_RABBIT))
-                && !this.getIsHowling() && this.onGround() && !this.getIsYawning()) {
+                && !this.isHowling() && this.onGround() && !this.isYawning()) {
             this.usePlayerItem(player, hand, itemstack);
             this.setHowlingTime(80);
             this.playerWhoFedIt = player;
@@ -248,9 +220,6 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
 
             if (this.hasHandkerchief()){
                 this.spawnAtLocation(this.getWoolItem());
-            }
-            else {
-                this.setHasHandkerchief(true);
             }
 
             if (itemstack.is(Items.RED_CARPET)){ this.setHandkerchiefColor(1); }
@@ -267,9 +236,9 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             else if (itemstack.is(Items.BROWN_CARPET)){this.setHandkerchiefColor(12);}
             else if (itemstack.is(Items.BLACK_CARPET)){this.setHandkerchiefColor(13);}
             else if (itemstack.is(Items.GRAY_CARPET)){this.setHandkerchiefColor(14);}
-            else if (itemstack.is(Items.LIGHT_GRAY_CARPET)){this.setHandkerchiefColor(15);
-            }
-            else if (itemstack.is(MMTags.Items.DYE_DEPOT_AMBER_WOOL_ITEM)){ this.setHandkerchiefColor(16); }
+            else if (itemstack.is(Items.LIGHT_GRAY_CARPET)){this.setHandkerchiefColor(15);}
+
+            else if (itemstack.is(MMTags.Items.DYE_DEPOT_AMBER_WOOL_ITEM)){ this.setHandkerchiefColor(16);}
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_AQUA_WOOL_ITEM )){this.setHandkerchiefColor(17);}
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_BEIGE_WOOL_ITEM )){this.setHandkerchiefColor(18);}
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_CORAL_WOOL_ITEM )){this.setHandkerchiefColor(19);}
@@ -284,9 +253,8 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_SLATE_WOOL_ITEM )){this.setHandkerchiefColor(28);}
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_TAN_WOOL_ITEM )){this.setHandkerchiefColor(29);}
             else if (itemstack.is(MMTags.Items.DYE_DEPOT_TEAL_WOOL_ITEM )){this.setHandkerchiefColor(30);}
-            else if (itemstack.is(MMTags.Items.DYE_DEPOT_VERDANT_WOOL_ITEM )){this.setHandkerchiefColor(31);
-            }
-            else {this.setHandkerchiefColor(32);}
+            else if (itemstack.is(MMTags.Items.DYE_DEPOT_VERDANT_WOOL_ITEM )){this.setHandkerchiefColor(31);}
+            else {this.setHandkerchiefColor(0);}
 
             this.playSound(SoundEvents.LLAMA_SWAG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 
@@ -297,8 +265,6 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             return InteractionResult.SUCCESS;
 
         } else if (itemstack.is(Items.SHEARS) && this.hasHandkerchief()){
-
-            this.setHasHandkerchief(false);
 
             this.spawnAtLocation(this.getWoolItem());
 
@@ -342,14 +308,14 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             --this.attackAnimationTimeout;
         }
 
-        if(this.getIsHowling() && howlAnimationTimeout <= 0) {
+        if(this.isHowling() && howlAnimationTimeout <= 0) {
             howlAnimationTimeout = 80;
             howlAnimationState.start(this.tickCount);
         } else {
             --this.howlAnimationTimeout;
         }
 
-        if(this.getIsYawning() && yawnAnimationTimeout <= 0) {
+        if(this.isYawning() && yawnAnimationTimeout <= 0) {
             yawnAnimationTimeout = 60;
             yawnAnimationState.start(this.tickCount);
         } else {
@@ -361,13 +327,10 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         super.tick();
 
         //handles howling
-        if (this.getHowlingTime() > 0){
-            if (this.getIsHowling()){
-                this.getNavigation().stop();
-                this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
-            } else {
-                this.setIsHowling(true);
-            }
+        if (this.isHowling()){
+            this.getNavigation().stop();
+            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
+
             if (this.getHowlingTime()==65 && !this.level().isClientSide){
                 this.playSound(MMSounds.THYLACINE_ALERT.get());
             }
@@ -379,31 +342,25 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             }
             prevHowlTime = this.getHowlingTime();
             this.setHowlingTime(prevHowlTime - 1);
-        } else if (getIsHowling()){
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
-            this.setIsHowling(false);
+
+            if (this.getHowlingTime() == 0)
+                this.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
         }
 
         //handles yawning
-        if (this.getRandom().nextInt(5000) == 0 && !this.getIsYawning() && this.onGround() && !this.getIsHowling()){
+        if (this.getRandom().nextInt(5000) == 0 && !this.isYawning() && this.onGround() && !this.isHowling()){
             this.setYawningTime(60);
+            this.playSound(MMSounds.THYLACINE_YAWN.get());
         }
-        if (this.getYawningTime()>0){
 
+        if (isYawning()){
             this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
-
-            if (this.getIsYawning()){
-                this.getNavigation().stop();
-            } else {
-                this.playSound(MMSounds.THYLACINE_YAWN.get());
-                this.setIsYawning(true);
-            }
+            this.getNavigation().stop();
             prevYawnTime = this.getYawningTime();
             this.setYawningTime(prevYawnTime - 1);
-        }
-        else if (getIsYawning()){
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
-            this.setIsYawning(false);
+
+            if (this.getYawningTime() == 0)
+                this.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
         }
 
     }

@@ -86,6 +86,8 @@ public class MMModelLayers {
 
     public static final ModelLayerLocation THYLACINE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "thylacine"), "main");
+    public static final ModelLayerLocation BABY_THYLACINE_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_thylacine"), "main");
 
     public static final ModelLayerLocation DODO_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "dodo"), "main");

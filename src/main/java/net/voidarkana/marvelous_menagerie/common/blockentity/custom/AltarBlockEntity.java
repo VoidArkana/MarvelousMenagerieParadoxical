@@ -94,7 +94,7 @@ public class AltarBlockEntity extends BlockEntityBase {
 
                         for (RitualManager.RitualProcessData data : RitualManager.DATA) {
 
-                            System.out.println(data);
+//                            System.out.println(data);
 
                             boolean[] itemUsed = new boolean[4];
 

@@ -441,6 +441,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             CriteriaTriggers.BRED_ANIMALS.trigger(p_277486_, (p_18653_) -> p_18653_.matches($$4, $$5, $$6));
         });
         this.setAge(6000);
+        this.setFromInventory(false);
         pAnimal.setAge(6000);
         this.resetLove();
         pAnimal.resetLove();

@@ -346,7 +346,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Model", 3)) {
 
-            System.out.println(dataTag.getInt("Age"));
+//            System.out.println(dataTag.getInt("Age"));
 
             this.setVariantModel(dataTag.getInt("Model"));
             this.setVariantBaseColor(dataTag.getInt("BaseColor"));
