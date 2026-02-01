@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo;// Made with Blockbench 4.12.6
+package net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo;// Made with Blockbench 5.0.7
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -16,11 +16,10 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 	private final ModelPart root;
 	private final ModelPart main;
 	private final ModelPart body;
+	private final ModelPart tail;
 	private final ModelPart leftwing;
 	private final ModelPart rightwing;
-	private final ModelPart tail;
 	private final ModelPart neck;
-	private final ModelPart head;
 	private final ModelPart legs;
 	private final ModelPart leftleg;
 	private final ModelPart rightleg;
@@ -30,11 +29,10 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
         this.root = root.getChild("root");
 		this.main = this.root.getChild("main");
 		this.body = this.main.getChild("body");
+		this.tail = this.body.getChild("tail");
 		this.leftwing = this.body.getChild("leftwing");
 		this.rightwing = this.body.getChild("rightwing");
-		this.tail = this.body.getChild("tail");
 		this.neck = this.body.getChild("neck");
-		this.head = this.neck.getChild("head");
 		this.legs = this.main.getChild("legs");
 		this.leftleg = this.legs.getChild("leftleg");
 		this.rightleg = this.legs.getChild("rightleg");
@@ -46,34 +44,38 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 
 		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition main = root.addOrReplaceChild("main", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -7.5F, 0.0F, 0.0F, 3.1416F, 0.0F));
+		PartDefinition main = root.addOrReplaceChild("main", CubeListBuilder.create(), PartPose.offset(0.0F, -7.0F, 2.0F));
 
-		PartDefinition body = main.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, -1.0F));
+		PartDefinition body = main.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.0F, -8.0F, 9.0F, 9.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition leftwing = body.addOrReplaceChild("leftwing", CubeListBuilder.create().texOffs(17, 30).addBox(-1.0F, -0.5F, -4.0F, 1.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.0F, -1.5F, 2.0F));
+		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 21).addBox(0.0F, -10.0F, 0.0F, 0.0F, 10.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -4.0F, 2.0F));
 
-		PartDefinition rightwing = body.addOrReplaceChild("rightwing", CubeListBuilder.create().texOffs(29, 13).addBox(0.0F, -0.5F, -4.0F, 1.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(4.0F, -1.5F, 2.0F));
+		PartDefinition cube_r1 = tail.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(46, 17).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.5F, -1.5F, 1.5F, 0.5713F, -0.5724F, -0.8706F));
 
-		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(21, 15).addBox(0.0F, -7.0F, -7.159F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, -1.0F, -2.841F));
+		PartDefinition cube_r2 = tail.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(36, 38).addBox(0.0F, -7.0F, -1.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, -1.0F, 1.0F, 0.1572F, -0.3614F, -0.4215F));
 
-		PartDefinition tail_r1 = tail.addOrReplaceChild("tail_r1", CubeListBuilder.create().texOffs(21, 15).addBox(0.0F, -16.0F, -11.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.001F)), PartPose.offsetAndRotation(0.5F, 9.0F, 3.841F, 0.0F, -0.2618F, 0.0F));
+		PartDefinition cube_r3 = tail.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(11, 42).addBox(0.0F, -4.0F, -1.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, -1.5F, 1.5F, 0.5713F, 0.5724F, 0.8706F));
 
-		PartDefinition tail_r2 = tail.addOrReplaceChild("tail_r2", CubeListBuilder.create().texOffs(21, 15).addBox(0.0F, -16.0F, -11.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.001F)), PartPose.offsetAndRotation(-0.5F, 9.0F, 3.841F, 0.0F, 0.2618F, 0.0F));
+		PartDefinition cube_r4 = tail.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(21, 38).addBox(0.0F, -7.0F, -1.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, -1.0F, 1.0F, 0.1572F, 0.3614F, 0.4215F));
 
-		PartDefinition neck = body.addOrReplaceChild("neck", CubeListBuilder.create(), PartPose.offset(0.0F, -2.0F, 4.0F));
+		PartDefinition leftwing = body.addOrReplaceChild("leftwing", CubeListBuilder.create().texOffs(41, 8).addBox(0.0F, -0.5F, -0.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(4.6F, -4.5F, -5.5F));
 
-		PartDefinition head = neck.addOrReplaceChild("head", CubeListBuilder.create().texOffs(25, 0).addBox(-1.0F, -6.0F, 4.0F, 2.0F, 3.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 17).addBox(-2.5F, -8.0F, -1.0F, 5.0F, 9.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition rightwing = body.addOrReplaceChild("rightwing", CubeListBuilder.create().texOffs(0, 42).addBox(0.0F, -0.5F, -0.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-4.6F, -4.5F, -5.5F));
 
-		PartDefinition legs = main.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(0.0F, 3.475F, -2.0F));
+		PartDefinition neck = body.addOrReplaceChild("neck", CubeListBuilder.create().texOffs(21, 21).addBox(-3.0F, -8.0F, -4.0F, 6.0F, 10.0F, 6.0F, new CubeDeformation(0.0F))
+		.texOffs(46, 30).addBox(-1.5F, -6.0F, -6.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(41, 0).addBox(-1.5F, -7.0F, -9.0F, 3.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
+		.texOffs(51, 36).addBox(-1.5F, -3.0F, -9.0F, 3.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -5.0F, -7.0F));
 
-		PartDefinition leftleg = legs.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(3, 0).addBox(-0.5F, -1.0F, 0.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.001F))
-		.texOffs(0, 32).addBox(-1.5F, 4.0F, 0.0F, 3.0F, 0.0F, 3.0F, new CubeDeformation(0.001F)), PartPose.offset(-2.5F, 0.0F, 0.0F));
+		PartDefinition legs = main.addOrReplaceChild("legs", CubeListBuilder.create(), PartPose.offset(2.5F, 3.0F, -1.0F));
 
-		PartDefinition rightleg = legs.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(24, 30).addBox(-1.5F, 4.0F, 0.0F, 3.0F, 0.0F, 3.0F, new CubeDeformation(0.001F))
-		.texOffs(0, 0).addBox(-0.5F, -1.0F, 0.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.001F)), PartPose.offset(2.5F, 0.0F, 0.0F));
+		PartDefinition leftleg = legs.addOrReplaceChild("leftleg", CubeListBuilder.create().texOffs(13, 51).addBox(-0.5F, -1.05F, 0.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(-3, 51).addBox(-1.5F, 3.95F, -3.0F, 3.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition, 48, 48);
+		PartDefinition rightleg = legs.addOrReplaceChild("rightleg", CubeListBuilder.create().texOffs(16, 51).addBox(-0.5F, -1.05F, 0.0F, 1.0F, 5.0F, 0.0F, new CubeDeformation(0.0F))
+		.texOffs(-3, 51).addBox(-1.5F, 3.95F, -3.0F, 3.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, 0.0F, 0.0F));
+
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
 	@Override
@@ -90,11 +92,10 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 				animateWalk(DodoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
 
-
 			this.animate(entity.shakingAnimationState, DodoAnims.SHAKE, ageInTicks, 1);
-			this.animate(entity.lookAnimationState, DodoAnims.IDLE_LOOK, ageInTicks, 1);
 		}
 
+		this.animate(entity.lookAnimationState, DodoAnims.IDLE_LOOK, ageInTicks, 1);
 		this.animateIdle(entity.idleAnimationState, DodoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
 
 		this.animateIdle(entity.idleAnimationState, DodoAnims.IDLE, ageInTicks, 1.0f,
@@ -106,7 +107,7 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 
 		float prevNeckX = this.neck.xRot;
 		float prevNeckY = this.neck.yRot;
-		this.neck.xRot = prevNeckX -headPitch * ((float)Math.PI / 180F);
+		this.neck.xRot = prevNeckX + headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = prevNeckY + netHeadYaw * ((float)Math.PI / 180F);
 	}
 

@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -11,23 +12,12 @@ import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Dodo;
-
+import org.jetbrains.annotations.Nullable;
 
 public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
 
     private final DodoModel<Dodo> dodoModel;
     private final BabyDodoModel<Dodo> babyDodoModel;
-
-    private static final ResourceLocation TEXTURE_BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo.png");
-    private static final ResourceLocation TEXTURE_BROWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_variant.png");
-    private static final ResourceLocation TEXTURE_BABY_BLUE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo.png");
-    private static final ResourceLocation TEXTURE_BABY_BROWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_variant.png");
-
-    private static final ResourceLocation TEXTURE_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_nugget.png");
-    private static final ResourceLocation TEXTURE_BABY_NUGGET = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_nugget.png");
-
-    private static final ResourceLocation TEXTURE_SPAWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/dodo_spawn.png");
-    private static final ResourceLocation TEXTURE_BABY_SPAWN = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/baby_dodo_spawn.png");
 
     public DodoRenderer(EntityRendererProvider.Context pContext) {
         super(pContext, new DodoModel<>(pContext.bakeLayer(MMModelLayers.DODO_LAYER)), 0.4f);
@@ -38,20 +28,7 @@ public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
 
     @Override
     public ResourceLocation getTextureLocation(Dodo entity) {
-
-        if (entity.isSpawn()){
-            return entity.isBaby() ? TEXTURE_BABY_SPAWN : TEXTURE_SPAWN;
-        }
-        if (entity.isNugget()){
-            return entity.isBaby() ? TEXTURE_BABY_NUGGET : TEXTURE_NUGGET;
-        }
-        else
-        {
-            return switch (entity.getVariant()) {
-                case 1 -> entity.isBaby() ? TEXTURE_BABY_BLUE : TEXTURE_BLUE;
-                default -> entity.isBaby() ? TEXTURE_BABY_BROWN : TEXTURE_BROWN;
-            };
-        }
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/dodo/" +(entity.isBaby() ? "baby_" : "") + "dodo_" + entity.getVariantName() + ".png");
     }
 
     @Override
@@ -63,5 +40,10 @@ public class DodoRenderer extends MobRenderer<Dodo, MarvelousModel<Dodo>> {
             this.model = dodoModel;
 
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+    }
+
+    @Override
+    protected @Nullable RenderType getRenderType(Dodo pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
+        return RenderType.entityCutout(this.getTextureLocation(pLivingEntity));
     }
 }

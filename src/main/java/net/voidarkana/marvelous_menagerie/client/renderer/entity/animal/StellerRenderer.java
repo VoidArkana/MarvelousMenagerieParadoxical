@@ -9,12 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.BabyDodoModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dodo.DodoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.BabyStellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.StellerModel;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Anomalocaris;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Dodo;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.StellerSeaCow;
 
 

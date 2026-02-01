@@ -115,6 +115,14 @@ public class Dodo extends MarvelousAnimal {
         return this.entityData.get(VARIANT);
     }
 
+    public String getVariantName(){
+        if (this.isSpawn())
+            return "spawn";
+        if (this.isNugget())
+            return "nugget";
+        return this.getVariant() == 0 ? "grey" : "brown";
+    }
+
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
     }
@@ -175,6 +183,11 @@ public class Dodo extends MarvelousAnimal {
     public boolean isSpawn() {
         String s = ChatFormatting.stripFormatting(this.getName().getString());
         return s != null && s.toLowerCase().contains("spawn");
+    }
+
+    public boolean isNika() {
+        String s = ChatFormatting.stripFormatting(this.getName().getString());
+        return s != null && s.toLowerCase().contains("nika");
     }
 
     //is pecking
