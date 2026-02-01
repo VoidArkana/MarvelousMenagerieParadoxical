@@ -209,7 +209,7 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
             this.setFromBucket(true);
         }
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
             this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
