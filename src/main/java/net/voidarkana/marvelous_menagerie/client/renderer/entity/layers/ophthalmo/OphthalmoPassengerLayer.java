@@ -33,14 +33,16 @@ public class OphthalmoPassengerLayer extends RenderLayer<Ophthalmosaurus, Marvel
                 MarvelousMenagerie.PROXY.releaseRenderingEntity(passenger.getUUID());
                 poseStack.pushPose();
 
+                (getParentModel()).root().translateAndRotate(poseStack);
                 ((OphthalmoModel)getParentModel()).swim_control.translateAndRotate(poseStack);
+                ((OphthalmoModel)getParentModel()).body_overlay.translateAndRotate(poseStack);
                 ((OphthalmoModel)getParentModel()).body.translateAndRotate(poseStack);
 
-                poseStack.mulPose(Axis.YP.rotationDegrees(180F));
-                poseStack.mulPose(Axis.XP.rotationDegrees(90F));
+                poseStack.mulPose(Axis.XN.rotationDegrees(90F));
 
-                poseStack.translate(0, -1.75, -0.5);
+                poseStack.translate(0, -1.75, -1);
 
+                poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot()));
 
                 renderPassenger(passenger, 0, 0, 0, 0, partialTicks, poseStack, bufferIn, packedLightIn);
                 poseStack.popPose();

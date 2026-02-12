@@ -75,15 +75,13 @@ public class Sacabambaspis extends AbstractBasicFish {
     public void loadFromBucketTag(CompoundTag pTag) {
         super.loadFromBucketTag(pTag);
 
-        this.setVariant(pTag.getInt("Variant"));
-
-        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
+        if (pTag.contains("Variant"))
+            this.setVariant(pTag.getInt("Variant"));
     }
 
     @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-
 
         if (reason==MobSpawnType.TRIGGERED || reason==MobSpawnType.BREEDING){
             this.setFromBucket(true);
@@ -92,11 +90,23 @@ public class Sacabambaspis extends AbstractBasicFish {
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
-            this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
+            this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
             this.setVariant(dataTag.getInt("Variant"));
             this.setFromBucket(true);
         }else{
+            int chance = this.getRandom().nextInt(100);
+            int variant;
+            if (chance>94){
+                variant = 2;
+            }else {
+                variant = this.getRandom().nextInt(2);
+            }
 
+            this.setVariant(variant);
+        }
+
+        if (reason == MobSpawnType.BUCKET && dataTag == null) {
+            this.setFromBucket(true);
             int chance = this.getRandom().nextInt(100);
             int variant;
             if (chance>94){

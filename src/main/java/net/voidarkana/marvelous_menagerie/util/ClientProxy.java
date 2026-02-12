@@ -59,7 +59,7 @@ public class ClientProxy extends CommonProxy{
         Sheets.addWoodType(MMWoodTypes.PROTOTAXITES);
         Sheets.addWoodType(MMWoodTypes.CALAMITES);
 
-        MinecraftForge.EVENT_BUS.register(new MMClientEvents());
+        MinecraftForge.EVENT_BUS.register(new ClientEvents());
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -137,8 +137,8 @@ public class ClientProxy extends CommonProxy{
 
     private void registerShaders(RegisterShadersEvent event) {
         try {
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "glowing"), DefaultVertexFormat.POSITION_COLOR), ClientEvents::setRenderTypeGlowingShader);
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "sepia"), DefaultVertexFormat.NEW_ENTITY), ClientEvents::setRenderTypeSepiaShader);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "glowing"), DefaultVertexFormat.POSITION_COLOR), MMClientEvents::setRenderTypeGlowingShader);
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), new ResourceLocation(MarvelousMenagerie.MOD_ID, "sepia"), DefaultVertexFormat.NEW_ENTITY), MMClientEvents::setRenderTypeSepiaShader);
             MarvelousMenagerie.LOGGER.info("registered internal shaders");
         } catch (IOException exception) {
             MarvelousMenagerie.LOGGER.error("could not register internal shaders");

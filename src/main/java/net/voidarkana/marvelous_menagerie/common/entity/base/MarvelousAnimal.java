@@ -64,6 +64,9 @@ public abstract class MarvelousAnimal extends Animal {
     @Override
     public void aiStep() {
 
+        if (this.isFromInventory())
+            this.setFromInventory(false);
+
         if (!this.level().isClientSide){
 
             if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0){

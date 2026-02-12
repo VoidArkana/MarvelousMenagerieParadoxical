@@ -108,7 +108,7 @@ public class MMEntities {
     public static final RegistryObject<EntityType<Hallucigenia>> HALLUCIGENIA =
             ENTITY_TYPES.register("hallucigenia",
                     () -> EntityType.Builder.of(Hallucigenia::new, MobCategory.WATER_AMBIENT)
-                            .sized(1f, 0.7f)
+                            .sized(1.5f, 1.5f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "hallucigenia").toString()));
 
     public static final RegistryObject<EntityType<Trilobite>> TRILOBITE =

@@ -319,9 +319,6 @@ public class PaleonomiconScreen extends Screen {
         boolean prev = super.mouseClicked(mouseX, mouseY, button);
         if (!prev) {
 
-            System.out.println("Clicked Mouse X: " + mouseX);
-            System.out.println("Clicked Mouse X: " + mouseY);
-
 
             if(currentEntry != null && currentEntry.consumeMouseClick(this)){
                 return true;

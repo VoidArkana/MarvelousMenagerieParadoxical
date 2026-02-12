@@ -41,13 +41,15 @@ import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterC
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
+import org.stringtemplate.v4.ST;
 
 import java.util.function.Predicate;
 
 public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketable {
 
     public final AnimationState idleAnimationState = new AnimationState();
-    public final AnimationState flopAnimationState = new AnimationState();
+    public final AnimationState stingAnimationState = new AnimationState();
+    int stingTimeout;
 
     private static final Predicate<LivingEntity> SCARY_MOB = (p_289442_) -> {
         if (p_289442_ instanceof Player && ((Player)p_289442_).isCreative()) {
@@ -60,10 +62,23 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(SCARY_MOB);
 
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> FLOP_SIDE = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> STINGING = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.INT);
 
     public Hallucigenia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.switchNavigator(false);
+    }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        this.refreshDimensions();
+        super.onSyncedDataUpdated(pKey);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pPose) {
+        return super.getDimensions(pPose);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -90,16 +105,57 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FROM_BUCKET, false);
+        this.entityData.define(FLOP_SIDE, false);
+        this.entityData.define(STINGING, false);
+        this.entityData.define(VARIANT, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("FromBucket", this.fromBucket());
+        pCompound.putBoolean("FlopSide", this.flopSide());
+        pCompound.putInt("Variant", this.getVariant());
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
+        this.setFlopSide(pCompound.getBoolean("FlopSide"));
+        this.setVariant(pCompound.getInt("Variant"));
+    }
+
+    @Override
+    public boolean fromBucket() {
+        return this.entityData.get(FROM_BUCKET);
+    }
+
+    @Override
+    public void setFromBucket(boolean pFromBucket) {
+        this.entityData.set(FROM_BUCKET, pFromBucket);
+    }
+
+    public boolean flopSide() {
+        return this.entityData.get(FLOP_SIDE);
+    }
+
+    public void setFlopSide(boolean flopSide){
+        this.entityData.set(FLOP_SIDE, flopSide);
+    }
+
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
+    }
+
+    public void setVariant(int var){
+        this.entityData.set(VARIANT, var);
+    }
+
+    public boolean isStinging() {
+        return this.entityData.get(STINGING);
+    }
+
+    public void setStinging(boolean stinging){
+        this.entityData.set(STINGING, stinging);
     }
 
     @Override
@@ -128,10 +184,19 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
             this.setupAnimationStates();
         }
         super.tick();
+        if (this.isStinging())
+            this.setStinging(false);
     }
 
     private void setupAnimationStates() {
         this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+
+        if (this.isStinging() && stingTimeout == 0){
+            this.stingAnimationState.start(this.tickCount);
+            stingTimeout = 10;
+        }else if (stingTimeout>0){
+            stingTimeout--;
+        }
     }
 
     @Override
@@ -153,8 +218,8 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
             pMob.addEffect(new MobEffectInstance(MMEffects.HALLUCINATING.get(), 120, 0), this);
             pMob.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0), this);
             this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
+            this.setStinging(true);
         }
-
     }
 
     public void playerTouch(Player pEntity) {
@@ -177,16 +242,6 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
 
     }
 
-    @Override
-    public boolean fromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-    @Override
-    public void setFromBucket(boolean pFromBucket) {
-        this.entityData.set(FROM_BUCKET, pFromBucket);
-    }
-
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
         this.playSound(SoundEvents.SPIDER_STEP, 0.005F, 1.25F);
     }
@@ -202,7 +257,8 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("Age", this.getAge());
-        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putInt("Variant", this.getVariant());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -211,6 +267,10 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
+        if (pTag.contains("Age"))
+            this.setAge(pTag.getInt("Age"));
+        if (pTag.contains("Variant"))
+            this.setVariant(pTag.getInt("Variant"));
     }
 
     @Override
@@ -231,6 +291,9 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
+        this.setFlopSide(this.random.nextBoolean());
+        this.setVariant(this.random.nextInt(0, 2));
+
         if (reason == MobSpawnType.TRIGGERED){
             this.setFromBucket(true);
         }
@@ -239,7 +302,10 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
             this.setFromBucket(true);
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
-            this.setCanGrowUp(dataTag.getBoolean("CanGrow"));
+            if (dataTag.contains("Variant"))
+                this.setVariant(dataTag.getInt("Variant"));
+            if (dataTag.contains("CanGrowUp"))
+                this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
         }
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -248,7 +314,19 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
 
     @Override
     public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
-        return MMEntities.HALLUCIGENIA.get().create(pLevel);
+        Hallucigenia baby = MMEntities.HALLUCIGENIA.get().create(pLevel);
+        Hallucigenia otherParent = (Hallucigenia) pOtherParent;
+        if (baby!=null)
+            baby.setVariant(this.random.nextBoolean() ? this.getVariant() : otherParent.getVariant());
+        return baby;
+    }
+
+    public String getVariantName(){
+        if (this.getVariant() == 0){
+            return "pink";
+        }else {
+            return "purple";
+        }
     }
 
     public boolean removeWhenFarAway(double p_213397_1_) {

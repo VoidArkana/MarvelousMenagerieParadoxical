@@ -26,7 +26,9 @@ import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
@@ -164,6 +166,7 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("Variant", this.getVariant());
         compoundnbt.putInt("Age", this.getAge());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
         }
@@ -172,13 +175,17 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
     @Override
     public void loadFromBucketTag(CompoundTag pTag) {
         super.loadFromBucketTag(pTag);
+        if (pTag.contains("Variant"))
+            this.setVariant(pTag.getInt("Variant"));
+    }
 
-        this.setVariant(pTag.getInt("Variant"));
-        if (pTag.contains("Age")) {
-            this.setAge(pTag.getInt("Age"));
+    protected void ageBoundaryReached() {
+        super.ageBoundaryReached();
+        if (!this.isBaby() && this.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
+            this.spawnAtLocation(MMItems.CARIS_LENS.get(), 1);
+            this.spawnAtLocation(MMItems.CARIS_LENS.get(), 1);
         }
 
-        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     @Override
@@ -190,31 +197,32 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-        int chance = this.getRandom().nextInt(100);
-        int variant;
-        if (chance<50){
-            variant = 0;
-        }else if (chance < 75){
-            variant = 1;
-        }else if (chance < 85){
-            variant = 2;
-        }else if (chance < 95){
-            variant = 3;
-        }else {
-            variant = 4;
-        }
-        this.setVariant(variant);
-
         if (reason==MobSpawnType.TRIGGERED){
             this.setFromBucket(true);
         }
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
-            this.setFromBucket(dataTag.getBoolean("CanGrowUp"));
+
+            this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
             this.setVariant(dataTag.getInt("Variant"));
             this.setFromBucket(true);
+        }else {
+            int chance = this.getRandom().nextInt(100);
+            int variant;
+            if (chance<50){
+                variant = 0;
+            }else if (chance < 75){
+                variant = 1;
+            }else if (chance < 85){
+                variant = 2;
+            }else if (chance < 95){
+                variant = 3;
+            }else {
+                variant = 4;
+            }
+            this.setVariant(variant);
         }
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);

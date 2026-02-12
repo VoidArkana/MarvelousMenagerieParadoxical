@@ -68,7 +68,7 @@ public class StellerSeaCow extends AbstractBasicFish {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.1, foodIngredients(), false));
-        this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.1));
+        this.goalSelector.addGoal(1, new FishBreedGoal(this, 1.1, 0.5));
         this.goalSelector.addGoal(3, new FishFollowParentGoal(this, 1.1));
         this.goalSelector.addGoal(3, new SeaCowSwimWithPlayerGoal(this, 2D));
         this.goalSelector.addGoal(4, new RandomShallowSwimmingGoal(this, 1, 10));

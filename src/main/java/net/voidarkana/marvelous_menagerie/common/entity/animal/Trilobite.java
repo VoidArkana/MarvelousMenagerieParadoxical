@@ -83,11 +83,6 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             protected Vec3 getPosition() {
                 return DefaultRandomPos.getPos(this.mob, 10, 1);
             }
-
-            @Override
-            public boolean canUse() {
-                return Trilobite.this.isInWaterOrBubble() && super.canUse();
-            }
         });
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
@@ -259,7 +254,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
         compoundnbt.putInt("Age", this.getAge());
-        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
         compoundnbt.putInt("Model", this.getVariantModel());
         compoundnbt.putInt("BaseColor", this.getVariantBaseColor());
         compoundnbt.putInt("SecondColor", this.getVariantSecondColor());
@@ -276,17 +271,19 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
 
-        this.setVariantModel(pTag.getInt("Model"));
-        this.setVariantBaseColor(pTag.getInt("BaseColor"));
-        this.setVariantSecondColor(pTag.getInt("SecondColor"));
-        this.setHighlightColor(pTag.getInt("HighlightColor"));
-        this.setLGBTVariant(pTag.getInt("LGBTVariant"));
-        this.setHasHighlight(pTag.getBoolean("HasHighlight"));
+        if (pTag.contains("Model")){
+            this.setVariantModel(pTag.getInt("Model"));
+            this.setVariantBaseColor(pTag.getInt("BaseColor"));
+            this.setVariantSecondColor(pTag.getInt("SecondColor"));
+            this.setHighlightColor(pTag.getInt("HighlightColor"));
+            this.setLGBTVariant(pTag.getInt("LGBTVariant"));
+            this.setHasHighlight(pTag.getBoolean("HasHighlight"));
+        }
         if (pTag.contains("Age")) {
             this.setAge(pTag.getInt("Age"));
+            this.setCanGrowUp(pTag.getBoolean("CanGrowUp"));
         }
 
-        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     @Override
@@ -345,15 +342,12 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         }
 
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Model", 3)) {
-
-//            System.out.println(dataTag.getInt("Age"));
-
             this.setVariantModel(dataTag.getInt("Model"));
             this.setVariantBaseColor(dataTag.getInt("BaseColor"));
             this.setVariantSecondColor(dataTag.getInt("SecondColor"));
             this.setLGBTVariant(dataTag.getInt("LGBTVariant"));
             this.setFromBucket(true);
-            this.setCanGrowUp(dataTag.getBoolean("CanGrow"));
+            this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
             this.setAge(dataTag.getInt("Age"));
             this.setHighlightColor(dataTag.getInt("HighlightColor"));
             this.setHasHighlight(dataTag.getBoolean("HasHighlight"));
@@ -395,7 +389,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
         if (baby != null){
             int lowerQuality = Math.min(this.getFeedQuality(), otherParent.getFeedQuality());
-
+            baby.setFromInventory(false);
             switch (lowerQuality){
                 case 1:
                     if (this.random.nextBoolean()){

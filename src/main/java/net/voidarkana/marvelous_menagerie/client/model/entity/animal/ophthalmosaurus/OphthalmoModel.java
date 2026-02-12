@@ -15,7 +15,7 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 
 	private final ModelPart root;
 	public final ModelPart swim_control;
-	private final ModelPart body_overlay;
+	public final ModelPart body_overlay;
 	public final ModelPart body;
 	private final ModelPart tail_rot;
 	private final ModelPart tail_overlay;

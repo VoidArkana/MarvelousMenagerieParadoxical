@@ -61,6 +61,10 @@ public class MMModelLayers {
 
     public static final ModelLayerLocation HALLU_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "hallucigenia"), "main");
+    public static final ModelLayerLocation BABY_HALLU_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_hallucigenia"), "main");
+    public static final ModelLayerLocation HALLU_EYES_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "hallucigenia_eyes"), "main");
 
     public static final ModelLayerLocation TRILO_FAT_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "trilo_fat"), "main");

@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.animations;// Save this class in your mod and generate all required imports
+package net.voidarkana.marvelous_menagerie.client.animations;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

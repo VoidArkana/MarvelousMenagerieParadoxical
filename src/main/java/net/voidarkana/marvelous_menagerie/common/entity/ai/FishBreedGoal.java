@@ -19,16 +19,22 @@ public class FishBreedGoal extends Goal {
     protected BreedableWaterAnimal partner;
     private int loveTime;
     private final double speedModifier;
+    private final double inflation;
 
     public FishBreedGoal(BreedableWaterAnimal pAnimal, double pSpeedModifier) {
-        this(pAnimal, pSpeedModifier, pAnimal.getClass());
+        this(pAnimal, pSpeedModifier, pAnimal.getClass(), 0.1);
     }
 
-    public FishBreedGoal(BreedableWaterAnimal pAnimal, double pSpeedModifier, Class<? extends BreedableWaterAnimal> pPartnerClass) {
+    public FishBreedGoal(BreedableWaterAnimal pAnimal, double pSpeedModifier, double inflation) {
+        this(pAnimal, pSpeedModifier, pAnimal.getClass(), inflation);
+    }
+
+    public FishBreedGoal(BreedableWaterAnimal pAnimal, double pSpeedModifier, Class<? extends BreedableWaterAnimal> pPartnerClass, double inflation) {
         this.animal = pAnimal;
         this.level = pAnimal.level();
         this.partnerClass = pPartnerClass;
         this.speedModifier = pSpeedModifier;
+        this.inflation = inflation;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
     }
 
@@ -54,7 +60,7 @@ public class FishBreedGoal extends Goal {
         this.animal.getLookControl().setLookAt(this.partner, 10.0F, (float)this.animal.getMaxHeadXRot());
         this.animal.getNavigation().moveTo(this.partner, this.speedModifier);
         ++this.loveTime;
-        if (this.loveTime >= this.adjustedTickDelay(60) && this.animal.distanceToSqr(this.partner) < 9.0D) {
+        if (this.loveTime >= this.adjustedTickDelay(60) && this.animal.getBoundingBox().inflate(inflation).intersects(this.partner.getBoundingBox().inflate(inflation))) {
             this.breed();
         }
 

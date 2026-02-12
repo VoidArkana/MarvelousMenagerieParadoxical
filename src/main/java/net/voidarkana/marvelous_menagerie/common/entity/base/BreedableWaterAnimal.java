@@ -555,6 +555,9 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     @Override
     public void aiStep() {
 
+        if (this.isFromInventory())
+            this.setFromInventory(false);
+
         if (!this.isInWater() && this.onGround() && this.verticalCollision && this.canFlop()) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
             this.setOnGround(false);

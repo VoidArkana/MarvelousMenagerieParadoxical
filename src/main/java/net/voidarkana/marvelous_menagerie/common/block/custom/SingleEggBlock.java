@@ -87,7 +87,7 @@ public class SingleEggBlock extends Block {
     }
 
     private boolean shouldUpdateHatchLevel(Level level, BlockPos ground) {
-        return level.random.nextInt(500) == 0 && level.getBlockState(ground).is(validBlock);
+        return level.random.nextInt(350) == 0 && level.getBlockState(ground).is(validBlock);
     }
 
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {

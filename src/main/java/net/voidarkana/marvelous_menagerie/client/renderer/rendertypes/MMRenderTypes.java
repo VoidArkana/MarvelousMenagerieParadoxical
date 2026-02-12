@@ -9,11 +9,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.ForgeRenderTypes;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.events.ClientEvents;
+import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
 
 public class MMRenderTypes extends RenderType {
 
-    protected static final RenderStateShard.ShaderStateShard RENDERTYPE_SEPIA_SHADER = new RenderStateShard.ShaderStateShard(ClientEvents::getSepiaShader);
+    protected static final RenderStateShard.ShaderStateShard RENDERTYPE_SEPIA_SHADER = new RenderStateShard.ShaderStateShard(MMClientEvents::getSepiaShader);
 
     public MMRenderTypes(String s, VertexFormat format, VertexFormat.Mode mode, int i, boolean b1, boolean b2, Runnable runnable1, Runnable runnable2) {
         super(s, format, mode, i, b1, b2, runnable1, runnable2);
@@ -50,8 +50,23 @@ public class MMRenderTypes extends RenderType {
                     .setWriteMaskState(new RenderStateShard.WriteMaskStateShard(true, false))
                     .setLightmapState(new RenderStateShard.LightmapStateShard(false))
                     .setTransparencyState(ADDITIVE_TRANSPARENCY)
-                    .setShaderState(new RenderStateShard.ShaderStateShard(ClientEvents::getGlowingShader))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(MMClientEvents::getGlowingShader))
                     .createCompositeState(false)
     );
 
+    public static RenderType ScrollingTex(ResourceLocation resourceLocation, float uOffset, float vOffset) {
+        return create(MarvelousMenagerie.MOD_ID + "scrolling_texture",
+                DefaultVertexFormat.NEW_ENTITY,
+                VertexFormat.Mode.QUADS,
+                256, false, true,
+                RenderType.CompositeState.builder()
+                        .setShaderState(RenderStateShard.RENDERTYPE_ENERGY_SWIRL_SHADER)
+                        .setTextureState(new RenderStateShard.TextureStateShard(resourceLocation, false, false))
+                        .setTexturingState(new RenderStateShard.OffsetTexturingStateShard(uOffset, vOffset))
+                        .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                        .setCullState(NO_CULL)
+                        .setLightmapState(LIGHTMAP)
+                        .setOverlayState(OVERLAY)
+                        .createCompositeState(false));
+    }
 }

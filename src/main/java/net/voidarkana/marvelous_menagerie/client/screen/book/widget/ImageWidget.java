@@ -68,7 +68,7 @@ public class ImageWidget extends BookWidget {
         float texWidth = (u1 - u0) / 2F;
         float texHeight = (v1 - v0) / 2F;
         float alpha = 1.0F;
-        Lighting.setupForFlatItems();
+        Lighting.setupFor3DItems();
 
         poseStack.pushPose();
         poseStack.translate(getX(), getY(), -15);

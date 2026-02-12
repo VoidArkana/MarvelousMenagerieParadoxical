@@ -45,171 +45,207 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.SHALE.get());
         this.dropSelf(MMBlocks.SHALE_WALL.get());
         this.dropSelf(MMBlocks.SHALE_STAIRS.get());
-        this.dropSelf(MMBlocks.SHALE_SLAB.get());
+        this.add(MMBlocks.SHALE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SHALE_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_SHALE.get());
         this.dropSelf(MMBlocks.POLISHED_SHALE_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_SHALE_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_SHALE_SLAB.get());
+        this.add(MMBlocks.POLISHED_SHALE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_SHALE_SLAB.get()));
         this.dropSelf(MMBlocks.SHALE_BRICKS.get());
         this.dropSelf(MMBlocks.SHALE_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.SHALE_BRICKS_SLAB.get());
+        this.add(MMBlocks.SHALE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SHALE_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.SHALE_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.SHALE_MOSAIC.get());
         this.dropSelf(MMBlocks.SHALE_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.SHALE_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.SHALE_MOSAIC_SLAB.get());
+        this.add(MMBlocks.SHALE_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SHALE_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_SHALE.get());
         this.dropOther(MMBlocks.SHALE_FOSSIL_BLOCK.get(), MMBlocks.SHALE.get());
 
         this.dropSelf(MMBlocks.SILTSTONE.get());
         this.dropSelf(MMBlocks.SILTSTONE_WALL.get());
         this.dropSelf(MMBlocks.SILTSTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.SILTSTONE_SLAB.get());
+        this.add(MMBlocks.SILTSTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SILTSTONE_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_SILTSTONE.get());
         this.dropSelf(MMBlocks.POLISHED_SILTSTONE_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_SILTSTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_SILTSTONE_SLAB.get());
+        this.add(MMBlocks.POLISHED_SILTSTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_SILTSTONE_SLAB.get()));
         this.dropSelf(MMBlocks.SILTSTONE_BRICKS.get());
         this.dropSelf(MMBlocks.SILTSTONE_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.SILTSTONE_BRICKS_SLAB.get());
+        this.add(MMBlocks.SILTSTONE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SILTSTONE_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.SILTSTONE_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.SILTSTONE_MOSAIC.get());
         this.dropSelf(MMBlocks.SILTSTONE_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.SILTSTONE_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.SILTSTONE_MOSAIC_SLAB.get());
+        this.add(MMBlocks.SILTSTONE_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.SILTSTONE_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_SILTSTONE.get());
         this.dropOther(MMBlocks.SILTSTONE_FOSSIL_BLOCK.get(), MMBlocks.SILTSTONE.get());
 
         this.dropSelf(MMBlocks.GABBRO.get());
         this.dropSelf(MMBlocks.GABBRO_WALL.get());
         this.dropSelf(MMBlocks.GABBRO_STAIRS.get());
-        this.dropSelf(MMBlocks.GABBRO_SLAB.get());
+        this.add(MMBlocks.GABBRO_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.GABBRO_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_GABBRO.get());
         this.dropSelf(MMBlocks.POLISHED_GABBRO_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_GABBRO_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_GABBRO_SLAB.get());
+        this.add(MMBlocks.POLISHED_GABBRO_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_GABBRO_SLAB.get()));
         this.dropSelf(MMBlocks.GABBRO_BRICKS.get());
         this.dropSelf(MMBlocks.GABBRO_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.GABBRO_BRICKS_SLAB.get());
+        this.add(MMBlocks.GABBRO_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.GABBRO_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.GABBRO_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.GABBRO_MOSAIC.get());
         this.dropSelf(MMBlocks.GABBRO_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.GABBRO_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.GABBRO_MOSAIC_SLAB.get());
+        this.add(MMBlocks.GABBRO_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.GABBRO_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_GABBRO.get());
         this.dropOther(MMBlocks.GABBRO_FOSSIL_BLOCK.get(), MMBlocks.GABBRO.get());
 
         this.dropSelf(MMBlocks.MUDSTONE.get());
         this.dropSelf(MMBlocks.MUDSTONE_WALL.get());
         this.dropSelf(MMBlocks.MUDSTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.MUDSTONE_SLAB.get());
+        this.add(MMBlocks.MUDSTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.MUDSTONE_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_MUDSTONE.get());
         this.dropSelf(MMBlocks.POLISHED_MUDSTONE_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_MUDSTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_MUDSTONE_SLAB.get());
+        this.add(MMBlocks.POLISHED_MUDSTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_MUDSTONE_SLAB.get()));
         this.dropSelf(MMBlocks.MUDSTONE_BRICKS.get());
         this.dropSelf(MMBlocks.MUDSTONE_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.MUDSTONE_BRICKS_SLAB.get());
+        this.add(MMBlocks.MUDSTONE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.MUDSTONE_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.MUDSTONE_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.MUDSTONE_MOSAIC.get());
         this.dropSelf(MMBlocks.MUDSTONE_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.MUDSTONE_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.MUDSTONE_MOSAIC_SLAB.get());
+        this.add(MMBlocks.MUDSTONE_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.MUDSTONE_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_MUDSTONE.get());
         this.dropOther(MMBlocks.MUDSTONE_FOSSIL_BLOCK.get(), MMBlocks.MUDSTONE.get());
 
         this.dropSelf(MMBlocks.LIMESTONE.get());
         this.dropSelf(MMBlocks.LIMESTONE_WALL.get());
         this.dropSelf(MMBlocks.LIMESTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.LIMESTONE_SLAB.get());
+        this.add(MMBlocks.LIMESTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.LIMESTONE_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_LIMESTONE.get());
         this.dropSelf(MMBlocks.POLISHED_LIMESTONE_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_LIMESTONE_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_LIMESTONE_SLAB.get());
+        this.add(MMBlocks.POLISHED_LIMESTONE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_LIMESTONE_SLAB.get()));
         this.dropSelf(MMBlocks.LIMESTONE_BRICKS.get());
         this.dropSelf(MMBlocks.LIMESTONE_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.LIMESTONE_BRICKS_SLAB.get());
+        this.add(MMBlocks.LIMESTONE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.LIMESTONE_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.LIMESTONE_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.LIMESTONE_MOSAIC.get());
         this.dropSelf(MMBlocks.LIMESTONE_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.LIMESTONE_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.LIMESTONE_MOSAIC_SLAB.get());
+        this.add(MMBlocks.LIMESTONE_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.LIMESTONE_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_LIMESTONE.get());
         this.dropOther(MMBlocks.LIMESTONE_FOSSIL_BLOCK.get(), MMBlocks.LIMESTONE.get());
 
         this.dropSelf(MMBlocks.CHALK.get());
         this.dropSelf(MMBlocks.CHALK_WALL.get());
         this.dropSelf(MMBlocks.CHALK_STAIRS.get());
-        this.dropSelf(MMBlocks.CHALK_SLAB.get());
+        this.add(MMBlocks.CHALK_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.CHALK_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_CHALK.get());
         this.dropSelf(MMBlocks.POLISHED_CHALK_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_CHALK_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_CHALK_SLAB.get());
+        this.add(MMBlocks.POLISHED_CHALK_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_CHALK_SLAB.get()));
         this.dropSelf(MMBlocks.CHALK_BRICKS.get());
         this.dropSelf(MMBlocks.CHALK_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.CHALK_BRICKS_SLAB.get());
+        this.add(MMBlocks.CHALK_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.CHALK_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.CHALK_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.CHALK_MOSAIC.get());
         this.dropSelf(MMBlocks.CHALK_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.CHALK_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.CHALK_MOSAIC_SLAB.get());
+        this.add(MMBlocks.CHALK_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.CHALK_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_CHALK.get());
         this.dropOther(MMBlocks.CHALK_FOSSIL_BLOCK.get(), MMBlocks.CHALK.get());
 
         this.dropSelf(MMBlocks.BRECCIA.get());
         this.dropSelf(MMBlocks.BRECCIA_WALL.get());
         this.dropSelf(MMBlocks.BRECCIA_STAIRS.get());
-        this.dropSelf(MMBlocks.BRECCIA_SLAB.get());
+        this.add(MMBlocks.BRECCIA_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.BRECCIA_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_BRECCIA.get());
         this.dropSelf(MMBlocks.POLISHED_BRECCIA_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_BRECCIA_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_BRECCIA_SLAB.get());
+        this.add(MMBlocks.POLISHED_BRECCIA_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_BRECCIA_SLAB.get()));
         this.dropSelf(MMBlocks.BRECCIA_BRICKS.get());
         this.dropSelf(MMBlocks.BRECCIA_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.BRECCIA_BRICKS_SLAB.get());
+        this.add(MMBlocks.BRECCIA_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.BRECCIA_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.BRECCIA_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.BRECCIA_MOSAIC.get());
         this.dropSelf(MMBlocks.BRECCIA_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.BRECCIA_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.BRECCIA_MOSAIC_SLAB.get());
+        this.add(MMBlocks.BRECCIA_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.BRECCIA_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_BRECCIA.get());
         this.dropOther(MMBlocks.BRECCIA_FOSSIL_BLOCK.get(), MMBlocks.BRECCIA.get());
 
         this.dropSelf(MMBlocks.DIATOMITE.get());
         this.dropSelf(MMBlocks.DIATOMITE_WALL.get());
         this.dropSelf(MMBlocks.DIATOMITE_STAIRS.get());
-        this.dropSelf(MMBlocks.DIATOMITE_SLAB.get());
+        this.add(MMBlocks.DIATOMITE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.DIATOMITE_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_DIATOMITE.get());
         this.dropSelf(MMBlocks.POLISHED_DIATOMITE_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_DIATOMITE_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_DIATOMITE_SLAB.get());
+        this.add(MMBlocks.POLISHED_DIATOMITE_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_DIATOMITE_SLAB.get()));
         this.dropSelf(MMBlocks.DIATOMITE_BRICKS.get());
         this.dropSelf(MMBlocks.DIATOMITE_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.DIATOMITE_BRICKS_SLAB.get());
+        this.add(MMBlocks.DIATOMITE_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.DIATOMITE_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.DIATOMITE_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.DIATOMITE_MOSAIC.get());
         this.dropSelf(MMBlocks.DIATOMITE_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.DIATOMITE_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.DIATOMITE_MOSAIC_SLAB.get());
+        this.add(MMBlocks.DIATOMITE_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.DIATOMITE_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_DIATOMITE.get());
         this.dropOther(MMBlocks.DIATOMITE_FOSSIL_BLOCK.get(), MMBlocks.DIATOMITE.get());
 
         this.dropSelf(MMBlocks.PERMAFROST.get());
         this.dropSelf(MMBlocks.PERMAFROST_WALL.get());
         this.dropSelf(MMBlocks.PERMAFROST_STAIRS.get());
-        this.dropSelf(MMBlocks.PERMAFROST_SLAB.get());
+        this.add(MMBlocks.PERMAFROST_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.PERMAFROST_SLAB.get()));
         this.dropSelf(MMBlocks.POLISHED_PERMAFROST.get());
         this.dropSelf(MMBlocks.POLISHED_PERMAFROST_WALL.get());
         this.dropSelf(MMBlocks.POLISHED_PERMAFROST_STAIRS.get());
-        this.dropSelf(MMBlocks.POLISHED_PERMAFROST_SLAB.get());
+        this.add(MMBlocks.POLISHED_PERMAFROST_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.POLISHED_PERMAFROST_SLAB.get()));
         this.dropSelf(MMBlocks.PERMAFROST_BRICKS.get());
         this.dropSelf(MMBlocks.PERMAFROST_BRICKS_WALL.get());
-        this.dropSelf(MMBlocks.PERMAFROST_BRICKS_SLAB.get());
+        this.add(MMBlocks.PERMAFROST_BRICKS_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.PERMAFROST_BRICKS_SLAB.get()));
         this.dropSelf(MMBlocks.PERMAFROST_BRICKS_STAIRS.get());
         this.dropSelf(MMBlocks.PERMAFROST_MOSAIC.get());
         this.dropSelf(MMBlocks.PERMAFROST_MOSAIC_WALL.get());
         this.dropSelf(MMBlocks.PERMAFROST_MOSAIC_STAIRS.get());
-        this.dropSelf(MMBlocks.PERMAFROST_MOSAIC_SLAB.get());
+        this.add(MMBlocks.PERMAFROST_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.PERMAFROST_MOSAIC_SLAB.get()));
         this.dropSelf(MMBlocks.CHISELED_PERMAFROST.get());
         this.dropOther(MMBlocks.PERMAFROST_FOSSIL_BLOCK.get(), MMBlocks.PERMAFROST.get());
 

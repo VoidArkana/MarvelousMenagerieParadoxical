@@ -263,20 +263,27 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
     }
 
     public void ate() {
-        super.ate();
-
         if (this.level() instanceof ServerLevel serverLevel) {
-            LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, this.getHeadPos(false, 0)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
-            LootParams lootParams = builder.withParameter(LootContextParams.BLOCK_STATE,
-                    serverLevel.getBlockState(this.getHeadBlockPos().below())).create(LootContextParamSets.BLOCK);
+            boolean hasDugOutItem = false;
 
-            LootTable lootTable = lootParams.getLevel().getServer().getLootData().getLootTable(LOOT_COMMON);
-            ObjectArrayList<ItemStack> list = lootTable.getRandomItems(lootParams);
-            for (ItemStack stack : list) {
-                this.spawnAtHeadLocation(stack);
+            while (!hasDugOutItem){
+                LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.ORIGIN, this.getHeadPos(false, 0)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
+                LootParams lootParams = builder.withParameter(LootContextParams.BLOCK_STATE,
+                        serverLevel.getBlockState(this.getHeadBlockPos().below())).create(LootContextParamSets.BLOCK);
+
+                LootTable lootTable = lootParams.getLevel().getServer().getLootData().getLootTable(LOOT_COMMON);
+                ObjectArrayList<ItemStack> list = lootTable.getRandomItems(lootParams);
+                if (!list.isEmpty()){
+                    for (ItemStack stack : list) {
+                        this.spawnAtHeadLocation(stack);
+                        hasDugOutItem = true;
+                    }
+                }
             }
+
             this.setDiggingCooldown(this.random.nextInt(20*60*5) + 20*60*2);
         }
+        super.ate();
     }
 
     public void spawnAtHeadLocation(ItemStack itemStack) {
@@ -385,13 +392,13 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
                 );
             }
 
-            if (this.getDiggingTicks()==0)
+            if (this.getDiggingTicks()==4)
                 if (this.isLandNavigator()){
                     this.setDancingTicks(40);
                     this.playSound(MMSounds.FLUBBER_CELEBRATE.get(), 0.8F, this.getVoicePitch());
                 }
                 else{
-                    this.setDancingTicks(60);
+                    this.setDancingTicks(59);
                     this.playSound(MMSounds.FLUBBER_UNDERWATER_CELEBRATE.get(), 0.8F, this.getVoicePitch());
                 }
         }
@@ -428,7 +435,7 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
             if (this.isInWaterOrBubble() && this.wantsToBeInLand() && this.horizontalCollision
                     && !this.isEyeInFluidType(net.minecraftforge.common.ForgeMod.WATER_TYPE.get())){
 
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.05D, 0.0D));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.1D, 0.05D));
             }
 
         } else {
@@ -498,13 +505,11 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
-        if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
+        if (reason == MobSpawnType.BUCKET && dataTag == null) {
+            this.setAge(-24000);
+        }else if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
-        }
-
-        if (reason == MobSpawnType.BUCKET && dataTag == null) {
-                this.setAge(-24000);
         }
 
         spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
@@ -687,8 +692,8 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
 
         @Override
         public void start() {
-            this.eatAnimationTick = 120;
-            this.flubber.setDiggingTicks(120);
+            this.eatAnimationTick = 100;
+            this.flubber.setDiggingTicks(100);
             this.level.broadcastEntityEvent(this.flubber, (byte)10);
             this.flubber.getNavigation().stop();
         }
@@ -709,7 +714,7 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
 
             this.eatAnimationTick = Math.max(0, this.eatAnimationTick - 1);
 
-            if (this.eatAnimationTick==4)
+            if (this.eatAnimationTick==10)
                 if (this.level.getBlockState(blockPos).is(MMTags.Blocks.FLUBBER_DIG_TARGET)) {
                     this.flubber.ate();
                 }

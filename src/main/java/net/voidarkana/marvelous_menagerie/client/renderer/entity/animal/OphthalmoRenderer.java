@@ -2,14 +2,10 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
@@ -19,11 +15,9 @@ import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ophthalm
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ophthalmo.OphthalmoPassengerLayer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ophthalmo.OphthalmoPatternLayer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ophthalmo.OphthalmoSaddleLayer;
-import net.voidarkana.marvelous_menagerie.util.render.ICustomPlayerRidePose;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Ophthalmosaurus;
-import org.jetbrains.annotations.NotNull;
 
-public class OphthalmoRenderer extends MobRenderer<Ophthalmosaurus, MarvelousModel<Ophthalmosaurus>> implements ICustomPlayerRidePose {
+public class OphthalmoRenderer extends MobRenderer<Ophthalmosaurus, MarvelousModel<Ophthalmosaurus>> {
 
     private final OphthalmoModel<Ophthalmosaurus> adultModel;
     private final BabyOphthalmoModel<Ophthalmosaurus> babyModel;
@@ -46,30 +40,6 @@ public class OphthalmoRenderer extends MobRenderer<Ophthalmosaurus, MarvelousMod
                 + ((pEntity.isBaby() ? "baby_" : "") + "ophthalmo_" +
                 ((pEntity.isAngry() && !pEntity.isBaby() && !pEntity.isTamed()) ? "angry_" : "")
                 + pEntity.getColorName(pEntity.getBaseColor())) + ".png");
-    }
-
-    @Override
-    public <T extends LivingEntity> void applyRiderPose(HumanoidModel<T> pHumanoidModel, @NotNull T pRider) {
-        //TODO: figure out animations and head rotation
-        pHumanoidModel.rightArm.xRot = this.rad(-155.0F);
-        pHumanoidModel.leftArm.xRot = this.rad(-155.0F);
-        pHumanoidModel.rightLeg.xRot = this.rad(5.0F);
-        pHumanoidModel.rightLeg.zRot = this.rad(10.0F);
-        pHumanoidModel.leftLeg.xRot = this.rad(5.0F);
-        pHumanoidModel.leftLeg.zRot = this.rad(-10.0F);
-        pHumanoidModel.head.xRot = this.rad( -80.0F);
-        pHumanoidModel.head.yRot = Mth.clamp(pHumanoidModel.head.yRot, this.rad(-35.0F), this.rad(35.0F));
-
-        pHumanoidModel.hat.xRot = pHumanoidModel.head.xRot;
-        pHumanoidModel.hat.yRot = pHumanoidModel.head.yRot;
-    }
-
-    @Override
-    public <T extends Entity> void applyRiderMatrixStack(@NotNull T pVehicle, @NotNull PoseStack pMatrixStack) {
-        //this.getModel().setMatrixStack(pMatrixStack);
-        pMatrixStack.translate(0.0F, 0.05F - pVehicle.getBbHeight(), 1.7F);
-        pMatrixStack.mulPose(Axis.YN.rotationDegrees(180.0F));
-        pMatrixStack.mulPose(Axis.XN.rotationDegrees(295.0F));
     }
 
     @Override

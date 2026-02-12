@@ -138,7 +138,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         compoundnbt.putFloat("Health", this.getHealth());
 
         compoundnbt.putInt("Age", this.getAge());
-        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
         compoundnbt.putInt("Variant", this.getVariant());
 
         if (this.hasCustomName()) {
@@ -149,12 +149,13 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     public void loadFromBucketTag(CompoundTag pTag) {
         Bucketable.loadDefaultDataFromBucketTag(this, pTag);
 
-        this.setVariant(pTag.getInt("Variant"));
+        if (pTag.contains("Variant"))
+            this.setVariant(pTag.getInt("Variant"));
+
         if (pTag.contains("Age")) {
             this.setAge(pTag.getInt("Age"));
+            this.setCanGrowUp(pTag.getBoolean("CanGrowUp"));
         }
-
-        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
     }
 
     public SoundEvent getPickupSound() {
@@ -300,16 +301,15 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
             this.setFromBucket(true);
         }
 
-        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("CanGrowUp", 3)) {
+        if (pReason == MobSpawnType.BUCKET && pDataTag != null && pDataTag.contains("Variant", 3)) {
             if (pDataTag.contains("Age")) {
                 this.setAge(pDataTag.getInt("Age"));}
             this.setVariant(pDataTag.getInt("Variant"));
-            this.setFromBucket(pDataTag.getBoolean("CanGrowUp"));
+            this.setCanGrowUp(pDataTag.getBoolean("CanGrowUp"));
             this.setFromBucket(true);
         }else {
             this.setVariant(this.getRandom().nextInt(2));
         }
-
 
         return pSpawnData;
     }

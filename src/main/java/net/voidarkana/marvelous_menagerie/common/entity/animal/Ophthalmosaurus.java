@@ -105,15 +105,17 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
         Ophthalmosaurus otherParent = (Ophthalmosaurus) pOtherParent;
         Ophthalmosaurus baby = MMEntities.OPHTHALMO.get().create(pLevel);
+        baby.setFromBucket(true);
 
-        if (this.getRandom().nextInt(10)==0){
+        if (this.getRandom().nextInt(10)==0)
             baby.setBaseColor(this.random.nextInt(0, 3));
-            baby.setPattern(this.random.nextInt(0, 4));
-        }else
-        {
-            baby.setBaseColor(this.random.nextBoolean() ? this.getBaseColor() : otherParent.getBaseColor());
+        else
             baby.setPattern(this.random.nextBoolean() ? this.getPattern() : otherParent.getPattern());
-        }
+
+        if (this.getRandom().nextInt(10)==0)
+            baby.setPattern(this.random.nextInt(0, 4));
+        else
+            baby.setBaseColor(this.random.nextBoolean() ? this.getBaseColor() : otherParent.getBaseColor());
 
         return baby;
     }
@@ -1057,7 +1059,7 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         compoundnbt.putInt("BaseColor", this.getBaseColor());
         compoundnbt.putInt("Pattern", this.getPattern());
 
-        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
     }
 
 
@@ -1065,13 +1067,14 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     public void loadFromBucketTag(CompoundTag pTag) {
         super.loadFromBucketTag(pTag);
 
-        this.setBaseColor(pTag.getInt("BaseColor"));
-        this.setPattern(pTag.getInt("Pattern"));
-
-        this.setCanGrowUp(pTag.getBoolean("CanGrow"));
+        if (pTag.contains("BaseColor")) {
+            this.setBaseColor(pTag.getInt("BaseColor"));
+            this.setPattern(pTag.getInt("Pattern"));
+        }
 
         if (pTag.contains("Age")) {
             this.setAge(pTag.getInt("Age"));
+            this.setCanGrowUp(pTag.getBoolean("CanGrowUp"));
         }else {
             this.setAge(-24000);
         }
@@ -1080,7 +1083,6 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Age", 3)) {
             if (dataTag.contains("Age")) {
                 this.setAge(dataTag.getInt("Age"));}
@@ -1090,9 +1092,6 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
             this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
             this.setFromBucket(true);
         }else {
-            if (reason == MobSpawnType.BUCKET && dataTag == null){
-                this.setAge(-24000);
-            }
             this.setBaseColor(this.random.nextInt(0, 3));
             this.setPattern(this.random.nextInt(0, 4));
         }
@@ -1122,4 +1121,15 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         return this.isBaby();
     }
 
+    @Override
+    public void onInsideBubbleColumn(boolean pDownwards) {
+        if (!this.isVehicle())
+            super.onInsideBubbleColumn(pDownwards);
+    }
+
+    @Override
+    public void onAboveBubbleCol(boolean pDownwards) {
+        if (!this.isVehicle())
+            super.onAboveBubbleCol(pDownwards);
+    }
 }

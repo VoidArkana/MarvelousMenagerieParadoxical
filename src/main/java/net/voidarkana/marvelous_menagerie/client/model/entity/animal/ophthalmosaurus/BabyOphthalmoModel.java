@@ -74,7 +74,7 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 			this.applyStatic(BabyOphthalmoAnims.POSE);
 
 		if (entity.isInWaterOrBubble()){
-			this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
+			this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing/2, limbSwingAmount*4f, 1.5f, 3f);
 
 			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
 

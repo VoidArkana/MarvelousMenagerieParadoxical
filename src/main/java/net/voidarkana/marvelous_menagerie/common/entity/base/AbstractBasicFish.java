@@ -74,7 +74,7 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
         compoundnbt.putFloat("Health", this.getHealth());
 
         compoundnbt.putInt("Age", this.getAge());
-        compoundnbt.putBoolean("CanGrow", this.getCanGrowUp());
+        compoundnbt.putBoolean("CanGrowUp", this.getCanGrowUp());
 
         if (this.hasCustomName()) {
             bucket.setHoverName(this.getCustomName());
@@ -91,6 +91,10 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
 
         if (pTag.contains("Age")) {
             this.setAge(pTag.getInt("Age"));
+        }
+
+        if (pTag.contains("CanGrowUp")) {
+            this.setCanGrowUp(pTag.getBoolean("CanGrowUp"));
         }
     }
 
@@ -130,7 +134,7 @@ public abstract class AbstractBasicFish extends BreedableWaterAnimal implements 
             this.setFromBucket(true);
         }
 
-        if (reason==MobSpawnType.TRIGGERED){
+        if (reason==MobSpawnType.TRIGGERED || reason == MobSpawnType.BREEDING){
             this.setFromBucket(true);
         }
 

@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.client.screen.book.widget;
 
 import com.google.gson.annotations.Expose;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -109,6 +110,7 @@ public class ItemWidget extends BookWidget {
         try {
             poseStack.scale(scale, scale, scale);
             PaleonomiconScreen.fixLighting();
+            Lighting.setupFor3DItems();
             if (!sepia) {
                 poseStack.mulPose(Axis.YP.rotationDegrees(180F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(180F));
@@ -118,9 +120,10 @@ public class ItemWidget extends BookWidget {
                 MMItemstackRenderer.sepiaFlag = true;
             }
             if (sepia && !bakedmodel.isCustomRenderer()) {
+//                Minecraft.getInstance().getItemRenderer().render(itemStack, ItemDisplayContext.GUI, false, poseStack, bufferSource, 255, OverlayTexture.NO_OVERLAY, bakedmodel);
                 renderSepiaItem(poseStack, bakedmodel, itemStack, bufferSource);
             } else {
-                Minecraft.getInstance().getItemRenderer().render(itemStack, ItemDisplayContext.GUI, false, poseStack, bufferSource, 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+                Minecraft.getInstance().getItemRenderer().render(itemStack, ItemDisplayContext.GUI, false, poseStack, bufferSource, 255, OverlayTexture.NO_OVERLAY, bakedmodel);
             }
             if (sepia) {
                 MMItemstackRenderer.sepiaFlag = false;
@@ -136,13 +139,13 @@ public class ItemWidget extends BookWidget {
         bakedmodel = net.minecraftforge.client.ForgeHooksClient.handleCameraTransforms(poseStack, bakedmodel, ItemDisplayContext.GUI, false);
         poseStack.translate(-0.5F, -0.5F, -0.5F);
         for (net.minecraft.client.renderer.RenderType rt : bakedmodel.getRenderTypes(itemStack, false)) {
-            renderModel(poseStack.last(), bufferSource.getBuffer(SEPIA_ITEM_RENDER_TYPE), 1.0F, null, bakedmodel, 1.0F, 1.0F, 1.0F, 150, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
+            renderModel(poseStack.last(), bufferSource.getBuffer(SEPIA_ITEM_RENDER_TYPE), 1F, null, bakedmodel, 1.0F, 1.0F, 1.0F, 150, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
         }
         poseStack.popPose();
     }
 
     private static void renderModel(PoseStack.Pose pose, VertexConsumer vertexConsumer, float alpha, @Nullable BlockState pState, BakedModel bakedModel, float r, float g, float b, int packedLight, int packedOverlay, ModelData modelData, net.minecraft.client.renderer.RenderType renderType) {
-        RandomSource randomsource = RandomSource.create();
+        RandomSource randomsource = RandomSource.createNewThreadLocalInstance();
         long i = 42L;
 
         randomsource.setSeed(i);
