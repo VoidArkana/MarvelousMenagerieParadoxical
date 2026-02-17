@@ -194,6 +194,13 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
     }
 
     @Override
+    public void ageUp(int pAmount, boolean pForced, ItemStack stack) {
+        if (stack.is(MMItems.TRILO_BITE.get()))
+            pAmount = pAmount * 5;
+        super.ageUp(pAmount, pForced, stack);
+    }
+
+    @Override
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 
@@ -202,10 +209,10 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
         }
 
         if (reason == MobSpawnType.BUCKET && dataTag != null && dataTag.contains("Variant", 3)) {
-            if (dataTag.contains("Age")) {
-                this.setAge(dataTag.getInt("Age"));}
-
-            this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
+            if (dataTag.contains("Age"))
+                this.setAge(dataTag.getInt("Age"));
+            if (dataTag.contains("CanGrowUp"))
+                this.setCanGrowUp(dataTag.getBoolean("CanGrowUp"));
             this.setVariant(dataTag.getInt("Variant"));
             this.setFromBucket(true);
         }else {

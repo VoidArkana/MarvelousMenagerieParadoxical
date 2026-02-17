@@ -85,7 +85,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
     }
 
-    public void ageUp(int pAmount, boolean pForced) {
+    public void ageUp(int pAmount, boolean pForced, ItemStack stack) {
         int i = this.getAge();
         i += pAmount * 20;
         if (i > 0) {
@@ -107,9 +107,9 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     }
 
-    public void ageUp(int pAmount) {
-        this.ageUp(pAmount, false);
-    }
+//    public void ageUp(int pAmount) {
+//        this.ageUp(pAmount, false);
+//    }
 
     public void setAge(int pAge) {
         int i = this.getAge();
@@ -695,19 +695,19 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
             if (itemstack.is(MMTags.Items.FINTASTIC_FEED)){
                 this.setFeedQuality(0);
-            }
-            if (itemstack.is(MMTags.Items.FINTASTIC_QUALITY_FEED)){
+            }else if (itemstack.is(MMTags.Items.FINTASTIC_QUALITY_FEED)){
                 this.setFeedQuality(1);
-            }
-            if (itemstack.is(MMTags.Items.FINTASTIC_GREAT_FEED)){
+            }else if (itemstack.is(MMTags.Items.FINTASTIC_GREAT_FEED)){
                 this.setFeedQuality(2);
-            }
-            if (itemstack.is(MMTags.Items.FINTASTIC_PREMIUM_FEED)){
+            }else if (itemstack.is(MMTags.Items.FINTASTIC_PREMIUM_FEED)){
                 this.setFeedQuality(3);
+            }else if ((!itemstack.is(MMTags.Items.FINTASTIC_ALL_FEEDS) || itemstack.is(MMTags.Items.FINTASTIC_BAD_FEED)) && this.getFeedQuality() != 0){
+                this.setFeedQuality(0);
             }
 
             if (this.isBaby() && this.getCanGrowUp()){
-                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true);
+                this.ageUp(getSpeedUpSecondsWhenFeedingFish(-i, this.getFeedQuality()), true, itemstack);
+                this.usePlayerItem(pPlayer, pHand, itemstack);
                 return InteractionResult.SUCCESS;
             }else if (this.isBaby()){
                 if (itemstack.is(MMTags.Items.FINTASTIC_PREMIUM_FEED)){
@@ -729,12 +729,6 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
                 this.usePlayerItem(pPlayer, pHand, itemstack);
                 this.setInLove(pPlayer);
                 return InteractionResult.SUCCESS;
-            }
-
-            if (this.isBaby()) {
-                this.usePlayerItem(pPlayer, pHand, itemstack);
-                this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
-                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
             if (this.level().isClientSide) {
