@@ -1,0 +1,33 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/creatures",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:warning"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.warning.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.warning.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["picked_up_item"]
+  ],
+  "criteria": {
+    "picked_up_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:hallu_fossil"
+          ]
+        }]
+      }
+    }
+  }
+}

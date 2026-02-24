@@ -1,0 +1,44 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/creatures",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:josepho_fossil"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.josephoartigasia.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.josephoartigasia.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "witness_entity": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "marvelous_menagerie:josepho"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "witness_entity"
+    ]
+  ]
+}

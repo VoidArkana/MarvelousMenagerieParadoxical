@@ -9,6 +9,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import java.util.function.Supplier;
 
@@ -42,17 +43,18 @@ public class ChangeFossilMessage {
         else {
             if (sender == null) return;
             level = sender.level();
+
+            if (message.success == 3)
+                MMCriterion.EXCAVATE_FOSSIL_PERFECT.trigger(sender);
         }
             //Level level = player.level();
 
         if (level != null){
             if (level.hasChunkAt(message.pos) && level.getBlockState(message.pos).getBlock() instanceof FossilBlock fossil) {
 
-                //fossil.updateState(this.packed, this.recipient, this.sender, this.description, player);
 
                 BlockState state = level.getBlockState(message.pos);
                 fossil.destroyOriginalWithSuccessLevel(level ,message.success, message.pos);
-                //also sends new block to clients. maybe not needed since blockstate changes
                 level.sendBlockUpdated(message.pos, state, state, 3);
 
             }

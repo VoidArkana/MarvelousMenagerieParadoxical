@@ -10,10 +10,7 @@ import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BabyBorealopeltaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BorealoModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyEleBirdModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Borealopelta;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
 
 public class BorealopeltaRenderer extends MobRenderer<Borealopelta, MarvelousModel<Borealopelta>> {
 

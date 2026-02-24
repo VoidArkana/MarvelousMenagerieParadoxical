@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -19,6 +20,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.voidarkana.marvelous_menagerie.common.blockentity.MMBlockEntities;
 import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
+import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -89,7 +91,7 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
             if (pStartTick >= this.coolDownEndsAtTick && this.level instanceof ServerLevel) {
                 this.coolDownEndsAtTick = pStartTick + 10L;
                 if (++this.brushCount >= 2) {
-                    this.brushingCompleted();
+                    this.brushingCompleted(pPlayer);
                     return true;
                 } else {
                     return false;
@@ -102,9 +104,9 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
         }
     }
 
-    private void brushingCompleted() {
+    private void brushingCompleted(Player pPlayer) {
         if (this.level != null && this.level.getServer() != null) {
-            this.dropContent();
+            this.dropContent(pPlayer);
             BlockState blockstate = this.getBlockState();
             this.level.levelEvent(3008, this.getBlockPos(), Block.getId(blockstate));
             this.brushCountResetsAtTick = 0;
@@ -113,7 +115,7 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
         }
     }
 
-    private void dropContent() {
+    private void dropContent(Player pPlayer) {
         if (this.level != null && this.level.getServer() != null) {
             boolean hasRecipe = FossilCleaningManager.containsRecipe(this.stack.getItem());
             ItemStack result = ItemStack.EMPTY;
@@ -138,6 +140,9 @@ public class PaleontologyTableBlockEntity extends BlockEntityBase {
                 this.level.addFreshEntity(itementity);
                 ExperienceOrb.award((ServerLevel) this.level, new Vec3(d3, d4, d5), 1);
                 this.stack = ItemStack.EMPTY;
+
+                if (pPlayer instanceof ServerPlayer serverPlayer)
+                    MMCriterion.USE_PALEO_TABLE.trigger(serverPlayer);
             }
 
         }

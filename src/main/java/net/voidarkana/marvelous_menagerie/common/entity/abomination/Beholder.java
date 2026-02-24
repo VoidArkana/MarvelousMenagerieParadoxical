@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -37,6 +38,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
+import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import javax.annotation.Nullable;
 
@@ -660,6 +662,8 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
                 pEnemy.startRiding(this.beholder, true);
                 beholder.lookControl.setLookAt(0, 0, 0);
                 beholder.setIsGrabbing(true);
+                if (pEnemy instanceof ServerPlayer player)
+                    MMCriterion.BEHOLDER_GRAB.trigger(player);
                 beholder.setGrabbingTicks(60 + (beholder.getRandom().nextInt(1, 5) * 20));
             }
 

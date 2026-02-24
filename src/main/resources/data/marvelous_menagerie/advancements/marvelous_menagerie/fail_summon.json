@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/successful_altar",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:chud_flesh"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.fail_summon.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.fail_summon.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "requirements": [
+    ["fail_summon"]
+  ],
+  "criteria": {
+    "fail_summon": {
+      "trigger": "marvelous_menagerie:fail_summon"
+    }
+  }
+}

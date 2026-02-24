@@ -1,0 +1,68 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/time_rift",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:molten_spine"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.molten.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.molten.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "damage_entity": {
+      "conditions": {
+        "damage": {
+          "type": {
+            "direct_entity": {
+              "type": "marvelous_menagerie:molten"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:player_hurt_entity"
+    },
+    "interact_entity": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "marvelous_menagerie:molten"
+            }
+          }
+        ],
+        "item": {}
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "killed_entity": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "marvelous_menagerie:molten"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "requirements": [
+    [
+      "damage_entity",
+      "interact_entity",
+      "killed_entity"
+    ]
+  ]
+}

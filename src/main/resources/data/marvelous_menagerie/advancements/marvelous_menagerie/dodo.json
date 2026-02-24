@@ -1,0 +1,44 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/creatures",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:dodo_fossil"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.dodo.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.dodo.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "witness_entity": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "marvelous_menagerie:dodo"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "witness_entity"
+    ]
+  ]
+}

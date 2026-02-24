@@ -17,10 +17,10 @@ public class FractureModel<T extends Fracture> extends EntityModel<T> {
 
 	private final ModelPart root;
 	private final ModelPart fracture;
-	private final ModelPart slice_1;
-	private final ModelPart slice_2;
-	private final ModelPart slice_4;
-	private final ModelPart slice_3;
+	public final ModelPart slice_1;
+	public final ModelPart slice_2;
+	public final ModelPart slice_4;
+	public final ModelPart slice_3;
 
 	public FractureModel(ModelPart root) {
 		this.root = root.getChild("root");

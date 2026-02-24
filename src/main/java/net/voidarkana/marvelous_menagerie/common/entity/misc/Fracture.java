@@ -8,16 +8,16 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Difficulty;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +28,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
+import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,6 +57,10 @@ public class Fracture extends Mob {
     public float rot;
     public float oRot;
     public float tRot;
+    public float shakeAmount;
+    public float shakeAmount2;
+    public float oShakeAmount;
+    public float tShakeAmount;
 
     public Fracture(EntityType<Fracture> fractureEntityType, Level level) {
         super(fractureEntityType, level);
@@ -370,6 +375,21 @@ public class Fracture extends Mob {
                 this.summonCreature(entityTypeHolder.get());
             });
         }
+
+
+        this.oShakeAmount = this.shakeAmount;
+        Player player = this.level().getNearestPlayer(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), 5.0D, false);
+        if (player != null) {
+            float d0 = Math.abs((float) (player.getX() - (this.blockPosition().getX())));
+            float d1 = Math.abs((float) (player.getZ() - (this.blockPosition().getZ())));
+            float d2 = Math.abs((float) (player.getY() - (this.blockPosition().getY())));
+            this.tShakeAmount = Math.min(1, (24/(d0*d0+d1*d1+d2*d2))/13);
+            this.shakeAmount = (float) (Math.cos(this.tickCount*0.5)*tShakeAmount/8);
+            this.shakeAmount2 = (float) (Math.sin(this.tickCount*0.5)*tShakeAmount/8);
+        } else if (this.shakeAmount>1){
+            float prev = this.shakeAmount;
+            this.shakeAmount = Math.max(1, prev-0.02F);
+        }
     }
 
     public void push(Entity pEntity) {
@@ -404,8 +424,15 @@ public class Fracture extends Mob {
     }
 
     public void spawnCreature(){
+        Player player = this.level().getNearestPlayer(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), 15.0D, false);
+
+
         if (entityType==null){
             entityType = MMEntities.CHUD.get();
+        }else {
+            if (!this.isNatural() && player != null && player instanceof ServerPlayer player1) {
+                MMCriterion.SUCCESSFUL_SUMMON.trigger(player1);
+            }
         }
 
         entityType.spawn((ServerLevel) this.level(),

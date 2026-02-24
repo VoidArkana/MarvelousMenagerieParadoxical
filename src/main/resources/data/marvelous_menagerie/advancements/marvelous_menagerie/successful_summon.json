@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/successful_altar",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:borealopelta_egg"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.successful_summon.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.successful_summon.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["successful_summon"]
+  ],
+  "criteria": {
+    "successful_summon": {
+      "trigger": "marvelous_menagerie:successful_summon"
+    }
+  }
+}

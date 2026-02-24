@@ -1,0 +1,78 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/paleo_toolkit",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:limestone_fossil"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.obtain_fossil.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.obtain_fossil.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "paleo_fossil",
+      "carbon_fossil",
+      "permian_fossil",
+      "tri_fossil",
+      "jur_fossil",
+      "cret_fossil",
+      "paleog_fossil",
+      "neog_fossil",
+      "quat_fossil"
+    ]
+  ],
+  "criteria": {
+    "paleo_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:shale_fossil"]}]}
+    },
+    "carbon_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:siltstone_fossil"]}]}
+    },
+    "permian_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:gabbro_fossil"]}]}
+    },
+    "tri_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:mudstone_fossil"]}]}
+    },
+    "jur_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:limestone_fossil"]}]}
+    },
+    "cret_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:chalk_fossil"]}]}
+    },
+    "paleog_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:breccia_fossil"]}]}
+    },
+    "neog_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:diatomite_fossil"]}]}
+    },
+    "quat_fossil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{"items": ["marvelous_menagerie:permafrost_fossil"]}]}
+    }
+  }
+}

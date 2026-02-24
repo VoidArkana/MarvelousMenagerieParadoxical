@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "consumed_item": {
+      "conditions": {},
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "requirements": [
+    [
+      "consumed_item"
+    ]
+  ],
+  "sends_telemetry_event": true,
+  "display": {
+    "announce_to_chat": false,
+    "background": "marvelous_menagerie:textures/block/sigillaria_stem.png",
+    "description": {
+      "translate": "advancements.marvelous_menagerie.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "marvelous_menagerie:logo"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.marvelous_menagerie.root.title"
+    }
+  }
+}

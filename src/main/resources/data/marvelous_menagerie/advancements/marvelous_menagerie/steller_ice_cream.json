@@ -1,0 +1,33 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/steller_sea_cow",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:steller_ice_cream"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.steller_ice_cream.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.steller_ice_cream.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["picked_up_item"]
+  ],
+  "criteria": {
+    "picked_up_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:steller_ice_cream"
+          ]
+        }]
+      }
+    }
+  }
+}

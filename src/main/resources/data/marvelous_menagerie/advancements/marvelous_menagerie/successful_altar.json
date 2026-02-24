@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/chrono_altar",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:chrono_altar"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.successful_altar.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.successful_altar.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["successful_altar"]
+  ],
+  "criteria": {
+    "successful_altar": {
+      "trigger": "marvelous_menagerie:successful_altar"
+    }
+  }
+}

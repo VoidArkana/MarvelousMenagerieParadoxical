@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/obtain_fossil",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:paleo_table"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.paleo_table.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.paleo_table.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["use_paleo_table"]
+  ],
+  "criteria": {
+    "use_paleo_table": {
+      "trigger": "marvelous_menagerie:use_paleo_table"
+    }
+  }
+}

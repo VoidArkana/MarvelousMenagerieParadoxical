@@ -1,0 +1,44 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/time_magic",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:logo"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.time_rift.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.time_rift.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "time_rift": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "looking_at": {
+                  "type": "marvelous_menagerie:rift"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "time_rift"
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/hallucigenia",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:magic_roll"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.magic_roll.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.magic_roll.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["picked_up_item"]
+  ],
+  "criteria": {
+    "picked_up_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:magic_roll"
+          ]
+        }]
+      }
+    }
+  }
+}

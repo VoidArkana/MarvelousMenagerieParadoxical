@@ -371,6 +371,10 @@ public class MMItems {
     public static final RegistryObject<Item> CHRONOTITE = ITEMS.register("chronotite",
             ()-> new Item(new Item.Properties()));
 
+    //other
+    public static final RegistryObject<Item> LOGO = ITEMS.register("logo",
+            ()-> new Item(new Item.Properties().rarity(Rarity.EPIC).stacksTo(1).fireResistant()));
+
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }

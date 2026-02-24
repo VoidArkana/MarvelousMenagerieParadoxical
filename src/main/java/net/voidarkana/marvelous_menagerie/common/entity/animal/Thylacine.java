@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
@@ -33,6 +34,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
+import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -214,6 +216,8 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
             this.usePlayerItem(player, hand, itemstack);
             this.setHowlingTime(80);
             this.playerWhoFedIt = player;
+            if (player instanceof ServerPlayer serverPlayer)
+                MMCriterion.THYLA_ALERT.trigger(serverPlayer);
             return InteractionResult.SUCCESS;
 
         } else if (itemstack.is(ItemTags.WOOL_CARPETS) || itemstack.is(MMTags.Items.DYE_DEPOT_WOOL_ITEM)){

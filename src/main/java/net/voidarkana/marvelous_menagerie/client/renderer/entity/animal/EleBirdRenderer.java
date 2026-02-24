@@ -2,31 +2,33 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.animal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyEleBirdModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.EleBirdModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyElephantBirdModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.ElephantBirdModel;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.EleBirdChestLayer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.EleBirdSwagLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
+import org.jetbrains.annotations.Nullable;
 
 public class EleBirdRenderer extends MobRenderer<ElephantBird, MarvelousModel<ElephantBird>> {
 
-    private final EleBirdModel<ElephantBird> elebirdModel;
-    private final BabyEleBirdModel<ElephantBird> babyElebirdModel;
+    private final ElephantBirdModel<ElephantBird> elebirdModel;
+    private final BabyElephantBirdModel<ElephantBird> babyElebirdModel;
 
     private static final ResourceLocation REGULAR_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird.png");
     private static final ResourceLocation BABY_TEXTURE = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/baby_elephant_bird.png");
 
     public EleBirdRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new EleBirdModel<>(pContext.bakeLayer(MMModelLayers.ELEBIRD_LAYER)), 1f);
+        super(pContext, new ElephantBirdModel<>(pContext.bakeLayer(MMModelLayers.ELEBIRD_LAYER)), 0.75f);
 
-        this.elebirdModel = new EleBirdModel<>(pContext.bakeLayer(MMModelLayers.ELEBIRD_LAYER));
-        this.babyElebirdModel = new BabyEleBirdModel<>(pContext.bakeLayer(MMModelLayers.BABY_ELEBIRD_LAYER));
+        this.elebirdModel = new ElephantBirdModel<>(pContext.bakeLayer(MMModelLayers.ELEBIRD_LAYER));
+        this.babyElebirdModel = new BabyElephantBirdModel<>(pContext.bakeLayer(MMModelLayers.BABY_ELEBIRD_LAYER));
 
         this.addLayer(new EleBirdSwagLayer(this, pContext));
         this.addLayer(new EleBirdChestLayer(this, pContext));
@@ -47,5 +49,10 @@ public class EleBirdRenderer extends MobRenderer<ElephantBird, MarvelousModel<El
             this.model = elebirdModel;
 
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+    }
+
+    @Override
+    protected @Nullable RenderType getRenderType(ElephantBird pLivingEntity, boolean pBodyVisible, boolean pTranslucent, boolean pGlowing) {
+        return RenderType.entityCutout(this.getTextureLocation(pLivingEntity));
     }
 }

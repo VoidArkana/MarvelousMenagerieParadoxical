@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/obtain_fossil",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:limestone_fossil_block"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.perfect_fossil.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.perfect_fossil.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "requirements": [
+    ["perfect_fossil"]
+  ],
+  "criteria": {
+    "perfect_fossil": {
+      "trigger": "marvelous_menagerie:excavate_fossil_perfect"
+    }
+  }
+}

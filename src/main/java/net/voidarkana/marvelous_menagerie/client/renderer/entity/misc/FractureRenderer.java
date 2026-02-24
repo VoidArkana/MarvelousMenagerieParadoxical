@@ -113,6 +113,8 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
                 scaleOpening * scaleClosing* 0.85f);
         pPoseStack.scale(1+summonRot*summonRot/2, 1+summonRot*summonRot/2, 1+summonRot*summonRot/2);
 
+        pPoseStack.scale(1+pEntity.shakeAmount/2, 1+pEntity.shakeAmount/2, 1+pEntity.shakeAmount/2);
+
         pPoseStack.translate(0.0F, -0.5F, 0F);
             float f5 = 0.5F;
             float f7 = Math.min(f5 > 0.8F ? (f5 - 0.8F) / 0.2F : 0.0F, 1.0F);
@@ -153,6 +155,12 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
             }
             pPoseStack.popPose();
             super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
+
+            this.getModel().slice_1.xRot = this.getModel().slice_1.xRot + 75*pEntity.shakeAmount;
+            this.getModel().slice_2.xRot = this.getModel().slice_1.xRot + 75*pEntity.shakeAmount2;
+            this.getModel().slice_3.xRot = this.getModel().slice_1.xRot + 75*pEntity.shakeAmount;
+            this.getModel().slice_4.xRot = this.getModel().slice_1.xRot + 75*pEntity.shakeAmount2;
+
         pPoseStack.popPose();
         pPoseStack.popPose();
     }

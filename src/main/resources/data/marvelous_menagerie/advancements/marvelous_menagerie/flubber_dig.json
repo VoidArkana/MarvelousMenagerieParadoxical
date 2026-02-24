@@ -1,0 +1,68 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/flubber",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:charnia"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.flubber_dig.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.flubber_dig.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    [
+      "wiwaxia",
+      "charnia",
+      "dickinsonia",
+      "herpetogaster"
+    ]
+  ],
+  "criteria": {
+    "wiwaxia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:wiwaxia"
+          ]
+        }]
+      }
+    },
+    "charnia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:charnia"
+          ]
+        }]
+      }
+    },
+    "dickinsonia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:dickinsonia"
+          ]
+        }]
+      }
+    },
+    "herpetogaster": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:herpetogaster"
+          ]
+        }]
+      }
+    }
+  }
+}

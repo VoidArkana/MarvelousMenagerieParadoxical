@@ -1,0 +1,33 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/time_rift",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:chronotite"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.chronotite.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.chronotite.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["picked_up_item"]
+  ],
+  "criteria": {
+    "picked_up_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:chronotite"
+          ]
+        }]
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/time_rift",
+  "criteria": {
+    "in_altar": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structure": "marvelous_menagerie:ruined_altar"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.marvelous_menagerie.ruined_altar.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "marvelous_menagerie:chronotite_block"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.marvelous_menagerie.ruined_altar.title"
+    }
+  },
+  "requirements": [
+    [
+      "in_altar"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

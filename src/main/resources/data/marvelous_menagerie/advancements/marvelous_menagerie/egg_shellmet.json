@@ -1,0 +1,33 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/jumbo_omelette",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:egg_shellmet"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.egg_shellmet.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.egg_shellmet.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["picked_up_item"]
+  ],
+  "criteria": {
+    "picked_up_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "items": [
+            "marvelous_menagerie:egg_shellmet"
+          ]
+        }]
+      }
+    }
+  }
+}

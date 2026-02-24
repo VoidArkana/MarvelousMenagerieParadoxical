@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/thylacine",
+  "display": {
+    "icon": {
+      "item": "minecraft:rabbit"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.thyla_alert.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.thyla_alert.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "requirements": [
+    ["thyla_alert"]
+  ],
+  "criteria": {
+    "thyla_alert": {
+      "trigger": "marvelous_menagerie:thylacine_alert"
+    }
+  }
+}

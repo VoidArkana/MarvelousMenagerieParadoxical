@@ -1,0 +1,26 @@
+{
+  "parent": "marvelous_menagerie:marvelous_menagerie/time_rift",
+  "display": {
+    "icon": {
+      "item": "marvelous_menagerie:beholder_mandible"
+    },
+    "title": {
+      "translate": "advancements.marvelous_menagerie.beholder.title"
+    },
+    "description": {
+      "translate": "advancements.marvelous_menagerie.beholder.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "requirements": [
+    ["beholder"]
+  ],
+  "criteria": {
+    "beholder": {
+      "trigger": "marvelous_menagerie:beholder_grab"
+    }
+  }
+}
