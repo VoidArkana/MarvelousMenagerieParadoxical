@@ -191,14 +191,6 @@ public class EleBirdAnims {
 					new Keyframe(1.5833F, KeyframeAnimations.scaleVec(1.0F, 1.1F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(2.0F, KeyframeAnimations.scaleVec(1.0F, 0.9134F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 			))
-			.addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.SCALE,
-					new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 0.975F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.1667F, KeyframeAnimations.scaleVec(1.0F, 0.95F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.6667F, KeyframeAnimations.scaleVec(1.0F, 1.05F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(1.125F, KeyframeAnimations.scaleVec(1.0F, 0.9517F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(1.6667F, KeyframeAnimations.scaleVec(1.0F, 1.05F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(2.0F, KeyframeAnimations.scaleVec(1.0F, 0.975F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
-			))
 			.addAnimation("foot_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(0.5F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
@@ -367,29 +359,6 @@ public class EleBirdAnims {
 					new Keyframe(0.5833F, KeyframeAnimations.scaleVec(1.0F, 1.197F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(0.75F, KeyframeAnimations.scaleVec(1.0F, 0.8268F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 			))
-			.addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.ROTATION,
-					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.0833F, KeyframeAnimations.degreeVec(1.23F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.2917F, KeyframeAnimations.degreeVec(-1.23F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.4583F, KeyframeAnimations.degreeVec(1.23F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.625F, KeyframeAnimations.degreeVec(-1.08F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.75F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-			))
-			.addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.POSITION,
-					new Keyframe(0.0F, KeyframeAnimations.posVec(0.0F, 0.75F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.125F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.2917F, KeyframeAnimations.posVec(0.0F, 0.97F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.5F, KeyframeAnimations.posVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.6667F, KeyframeAnimations.posVec(0.0F, 0.97F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.75F, KeyframeAnimations.posVec(0.0F, 0.75F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-			))
-			.addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.SCALE,
-					new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 0.9134F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.2083F, KeyframeAnimations.scaleVec(1.0F, 1.0985F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.4167F, KeyframeAnimations.scaleVec(1.0F, 0.9015F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.5833F, KeyframeAnimations.scaleVec(1.0F, 1.0985F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
-					new Keyframe(0.75F, KeyframeAnimations.scaleVec(1.0F, 0.9134F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
-			))
 			.addAnimation("foot_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(0.2083F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
@@ -556,9 +525,6 @@ public class EleBirdAnims {
 					new Keyframe(1.2917F, KeyframeAnimations.scaleVec(1.0F, 0.8466F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(1.75F, KeyframeAnimations.scaleVec(1.0F, 0.65F, 1.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(2.0F, KeyframeAnimations.scaleVec(1.0F, 0.75F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
-			))
-			.addAnimation("hat", new AnimationChannel(AnimationChannel.Targets.SCALE,
-					new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.CATMULLROM)
 			))
 			.addAnimation("foot_left", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(-12.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),

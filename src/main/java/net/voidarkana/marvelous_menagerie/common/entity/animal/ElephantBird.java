@@ -230,25 +230,7 @@ public class ElephantBird extends MarvelousAnimal implements ContainerListener, 
         else if (itemstack.is(Items.BLACK_CARPET)){return("black");}
         else if (itemstack.is(Items.GRAY_CARPET)){return("gray");}
         else if (itemstack.is(Items.LIGHT_GRAY_CARPET)){return("light_gray");
-        }
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_AMBER_WOOL_ITEM)){ return("amber"); }
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_AQUA_WOOL_ITEM )){return("aqua");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_BEIGE_WOOL_ITEM )){return("beige");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_CORAL_WOOL_ITEM )){return("coral");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_FOREST_WOOL_ITEM )){return("forest");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_GINGER_WOOL_ITEM )){return("ginger");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_INDIGO_WOOL_ITEM )){return("indigo");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_MAROON_WOOL_ITEM )){return("maroon");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_MINT_WOOL_ITEM )){return("mint");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_NAVY_WOOL_ITEM )){return("navy");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_OLIVE_WOOL_ITEM )){return("olive");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_ROSE_WOOL_ITEM )){return("rose");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_SLATE_WOOL_ITEM )){return("slate");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_TAN_WOOL_ITEM )){return("tan");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_TEAL_WOOL_ITEM )){return("teal");}
-        else if (itemstack.is(MMTags.Items.DYE_DEPOT_VERDANT_WOOL_ITEM )){return("verdant");
-        }
-        else {return("white");}
+        } else {return("white");}
     }
 
     public boolean hasSwag(){

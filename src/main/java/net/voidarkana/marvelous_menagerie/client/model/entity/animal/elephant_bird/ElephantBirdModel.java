@@ -16,7 +16,6 @@ public class ElephantBirdModel<T extends ElephantBird> extends MarvelousModel<T>
 	private final ModelPart body;
 	private final ModelPart neck;
 	private final ModelPart neck_shag;
-	private final ModelPart hat;
 	private final ModelPart hair;
 	private final ModelPart body_shag;
 	private final ModelPart carpet;
@@ -35,7 +34,6 @@ public class ElephantBirdModel<T extends ElephantBird> extends MarvelousModel<T>
 		this.body = this.elephant_bird.getChild("body");
 		this.neck = this.body.getChild("neck");
 		this.neck_shag = this.neck.getChild("neck_shag");
-		this.hat = this.neck.getChild("hat");
 		this.hair = this.neck.getChild("hair");
 		this.body_shag = this.body.getChild("body_shag");
 		this.carpet = this.body.getChild("carpet");
@@ -66,8 +64,6 @@ public class ElephantBirdModel<T extends ElephantBird> extends MarvelousModel<T>
 		.texOffs(123, 115).addBox(-2.0F, -34.0F, -16.0F, 4.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -7.0F, -12.0F));
 
 		PartDefinition neck_shag = neck.addOrReplaceChild("neck_shag", CubeListBuilder.create().texOffs(100, 24).addBox(4.0F, 0.0F, -6.0F, 0.0F, 4.0F, 15.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 3.0F, -5.0F));
-
-		PartDefinition hat = neck.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(0, 93).addBox(-4.0F, 0.0F, -4.0F, 8.0F, 12.0F, 8.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, -34.0F, -7.0F));
 
 		PartDefinition hair = neck.addOrReplaceChild("hair", CubeListBuilder.create().texOffs(123, 87).addBox(-2.0F, -3.5F, -4.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(123, 101).addBox(2.0F, -3.5F, -4.0F, 0.0F, 5.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -33.5F, -7.0F));

@@ -24,7 +24,7 @@ public class EleBirdSwagLayer extends RenderLayer<ElephantBird, MarvelousModel<E
 
         if (entityLivingBaseIn.hasSwag()) {
 
-            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird_"+entityLivingBaseIn.getSwagColor()+".png");
+            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/elephant_bird/elephant_bird_carpet_"+entityLivingBaseIn.getSwagColor()+".png");
 
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.getParentModel(), texture, pPoseStack, pBuffer, pPackedLight,
                     entityLivingBaseIn, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch,
