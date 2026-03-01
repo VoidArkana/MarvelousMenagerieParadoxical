@@ -39,12 +39,14 @@ public class MMBlocks {
 
     public static final RegistryObject<PaintingVariant> CHUD_PAINTING = PAINTINGS.register("chud",
             () -> new PaintingVariant(64, 48));
-
     public static final RegistryObject<PaintingVariant> OVERWORLDLINGS_PAINTING = PAINTINGS.register("two_overworldlings",
             () -> new PaintingVariant(48, 48));
-
     public static final RegistryObject<PaintingVariant> DODO_PAINTING = PAINTINGS.register("louisses_dodo",
             () -> new PaintingVariant(48, 32));
+    public static final RegistryObject<PaintingVariant> MARBELLE_PAINTING = PAINTINGS.register("professor",
+            () -> new PaintingVariant(48, 64));
+    public static final RegistryObject<PaintingVariant> GEOLOGY_PAINTING = PAINTINGS.register("geology",
+            () -> new PaintingVariant(32, 48));
 
     //Book items
     public static final RegistryObject<Block> CHEST_BOOK = registerBlock("chest_book",

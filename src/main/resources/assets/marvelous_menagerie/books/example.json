@@ -24,7 +24,7 @@
     {
       "display_page" : 6,
       "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/chud.png",
+      "image": "marvelous_menagerie:textures/gui/book/chud_book.png",
       "sepia": false,
       "x": 70,
       "y": 15,
