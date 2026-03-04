@@ -646,6 +646,8 @@
   "book.marvelous_menagerie.paleontology.paleo_table": "Identifying Fossils",
   "book.marvelous_menagerie.paleontology.misc": "Other Resources",
 
+  "book.marvelous_menagerie.missing": "Missing Entry!",
+
   "painting.marvelous_menagerie.chud.title": "Chud Anatomy",
   "painting.marvelous_menagerie.chud.author": "Ninni",
 
@@ -686,8 +688,8 @@
   "advancements.marvelous_menagerie.paleo_table.title" : "Dusting Off",
   "advancements.marvelous_menagerie.paleo_table.description" : "Use a Brush to clean a Fossil in the Paleontology Table to identify it!",
 
-  "advancements.marvelous_menagerie.ritual_ruins.title" : "The Time Ritual That Time Forgot",
-  "advancements.marvelous_menagerie.ritual_ruins.description" : "Find a Ruined Altar while wandering in the world",
+  "advancements.marvelous_menagerie.ruined_altar.title" : "The Time Ritual That Time Forgot",
+  "advancements.marvelous_menagerie.ruined_altar.description" : "Find a Ruined Altar while wandering in the world",
   "advancements.marvelous_menagerie.chrono_altar.title" : "Time To Summon",
   "advancements.marvelous_menagerie.chrono_altar.description" : "Craft a Chronotite Altar, the key piece for summoning creatures from the past",
   "advancements.marvelous_menagerie.time_rift.title" : "A Rift In Time And Space",
@@ -768,5 +770,7 @@
   "advancements.marvelous_menagerie.steller_ice_cream.title" : "Not Low In Fat",
   "advancements.marvelous_menagerie.steller_ice_cream.description" : "Craft some Steller Ice Cream to gain the beneficial effects of Steller Sea Cow's milk without the downsides",
   "advancements.marvelous_menagerie.thyla_alert.title" : "Awoooo!",
-  "advancements.marvelous_menagerie.thyla_alert.description" : "Feed a Thylacine some of its favorite foods to alert you of any nearby potential threats"
+  "advancements.marvelous_menagerie.thyla_alert.description" : "Feed a Thylacine some of its favorite foods to alert you of any nearby potential threats",
+  "advancements.marvelous_menagerie.flubber_dig.title" : "A Blast From The Past",
+  "advancements.marvelous_menagerie.flubber_dig.description" : "Harvest the sweet products of a Flubber dig; Sessile animals!"
 }

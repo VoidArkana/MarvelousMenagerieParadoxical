@@ -364,6 +364,11 @@ public class PaleonomiconScreen extends Screen {
             if (resource.isPresent()) {
                 BufferedReader inputstream = resource.get().openAsReader();
                 page = BookEntry.deserialize(inputstream);
+            }else{
+                resource = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation(getBookFileDirectory() + "missing.json"));
+
+                BufferedReader inputstream = resource.get().openAsReader();
+                page = BookEntry.deserialize(inputstream);
             }
         } catch (IOException e1) {
             if(!(e1 instanceof AccessDeniedException)){

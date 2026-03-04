@@ -1,0 +1,22 @@
+{
+  "parent": "",
+  "text": "missing.txt",
+  "title": "book.marvelous_menagerie.missing",
+  "widgets": [
+    {
+      "display_page" : 6,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/chud_book.png",
+      "sepia": false,
+      "x": 70,
+      "y": 15,
+      "scale": 1,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 128,
+      "width": 128,
+      "height": 128
+    }
+  ]
+}
