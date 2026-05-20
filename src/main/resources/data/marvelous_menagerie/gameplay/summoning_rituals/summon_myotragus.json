@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "tag": "marvelous_menagerie:myotragus_ingredient"
+  },
+  "input2": {
+    "item": "minecraft:brown_dye"
+  },
+  "input3": {
+    "item": "minecraft:milk_bucket"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:myotragus_fossil"
+  },
+  "output": "marvelous_menagerie:myotragus"
+}

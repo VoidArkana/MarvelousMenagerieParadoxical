@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -57,7 +58,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.DOEDICURUS_FOSSIL.get(),
                 MMItems.SNIFFER_FOSSIL.get(),
                 MMItems.FLUBBER_FOSSIL.get(),
-                MMItems.DIPLOCAULUS_FOSSIL.get()
+                MMItems.DIPLOCAULUS_FOSSIL.get(),
+                MMItems.MYOTRAGUS_FOSSIL.get(),
+                MMItems.TIKTAALIK_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.PALEONOMICON_INGREDIENTS).add(
@@ -92,7 +95,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.CHRONOTITE.get(),
                 MMItems.MOLTEN_SPINE.get(),
                 MMItems.BEHOLDER_MANDIBLE.get(),
-                MMItems.CHUD_FLESH.get()
+                MMItems.CHUD_FLESH.get(),
+                MMItems.TIKTAALIK_FOSSIL.get(),
+                MMItems.MYOTRAGUS_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(
@@ -237,8 +242,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         );
 
         this.tag(ItemTags.FISHES).add(
-                MMItems.SACABAMBASPIS.get(),
-                MMItems.TRILO_BITE.get()
+                MMItems.SACABAMBASPIS.get()
         );
 
         this.tag(ItemTags.PIGLIN_LOVED).add(
@@ -291,5 +295,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.copy(MMTags.Blocks.ANIMAL_BLOCKS, MMTags.Items.ANIMAL_BLOCKS_ITEM);
 
         this.copy(MMTags.Blocks.FLUBBER_DIG, MMTags.Items.FLUBBER_DIG_ITEM);
+
+        this.tag(MMTags.Items.MYOTRAGUS_INGREDIENT)
+                .add(Items.GOAT_HORN)
+                .addOptional(new ResourceLocation("myxinis_mobs:dudpowder"));
     }
 }

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -44,7 +45,7 @@ public class HallucigeniaEyesLayer<T extends Hallucigenia> extends RenderLayer<T
             EntityModel<T> entitymodel = this.model();
             entitymodel.prepareMobModel(pLivingEntity, pLimbSwing, pLimbSwingAmount, pPartialTicks);
             this.getParentModel().copyPropertiesTo(entitymodel);
-            VertexConsumer vertexconsumer = pBuffer.getBuffer(MMRenderTypes.ScrollingTex(this.getTextureLocation(), this.xOffset(f) % 1.0F, f * 0.01F % 1.0F));
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.energySwirl(this.getTextureLocation(), this.xOffset(f) % 1.0F, f * 0.01F % 1.0F));
             entitymodel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
             entitymodel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1F, 1F, 1F, 1.0F);
         }

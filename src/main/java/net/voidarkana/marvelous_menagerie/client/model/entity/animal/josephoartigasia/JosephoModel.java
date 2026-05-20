@@ -97,13 +97,13 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		this.animate(entity.rightEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_RIGHT, ageInTicks, 1);
 
 		if (!entity.isInWaterOrBubble()){
-			if (!entity.isInSittingPose()){
+			if (!entity.isSitting()){
 				animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
 			}
 
-			this.animate(entity.sitEndAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
-			this.animate(entity.sitStartAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
-			this.animate(entity.sitIdleAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
+			this.animate(entity.standUpAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
+			this.animate(entity.sitAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
+			this.animate(entity.sitPoseAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
 		}
 
 		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);

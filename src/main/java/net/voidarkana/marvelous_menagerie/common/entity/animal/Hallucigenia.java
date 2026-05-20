@@ -19,10 +19,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.PanicGoal;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
-import net.minecraft.world.entity.ai.goal.TemptGoal;
-import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -41,21 +38,27 @@ import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterC
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
-import org.stringtemplate.v4.ST;
 
 import java.util.function.Predicate;
 
 public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketable {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState stingAnimationState = new AnimationState();
     int stingTimeout;
+
+    public final AnimationState stretchState = new AnimationState();
+    private int stretchTimeout;
+    private int stretchCounter;
+    public final AnimationState admireState = new AnimationState();
+    private int admireTimeout;
+    private int admireCounter;
+
 
     private static final Predicate<LivingEntity> SCARY_MOB = (p_289442_) -> {
         if (p_289442_ instanceof Player && ((Player)p_289442_).isCreative()) {
             return false;
         } else {
-            return p_289442_.getType() == EntityType.AXOLOTL || p_289442_.getMobType() != MobType.WATER;
+            return p_289442_.getType() != MMEntities.FLUBBER.get() && p_289442_.getType() != EntityType.AXOLOTL && p_289442_.getMobType() != MobType.WATER;
         }
     };
 
@@ -65,6 +68,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     private static final EntityDataAccessor<Boolean> FLOP_SIDE = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> STINGING = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BYTE);
 
     public Hallucigenia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -100,6 +104,8 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.fintasticFoodIngredients(), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
+
+        this.goalSelector.addGoal(9, new Hallucigenia.RandomIdleGoal(this));
     }
 
     protected void defineSynchedData() {
@@ -108,6 +114,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
         this.entityData.define(FLOP_SIDE, false);
         this.entityData.define(STINGING, false);
         this.entityData.define(VARIANT, 0);
+        this.entityData.define(DATA_ID_FLAGS, (byte)0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -122,6 +129,36 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
         this.setFromBucket(pCompound.getBoolean("FromBucket"));
         this.setFlopSide(pCompound.getBoolean("FlopSide"));
         this.setVariant(pCompound.getInt("Variant"));
+    }
+
+    public void setAdmiring(boolean pStanding) {
+        this.setFlag(32, pStanding);
+    }
+
+    public void setStretching(boolean pStanding) {
+        this.setFlag(16, pStanding);
+    }
+
+    protected boolean getFlag(int pFlagId) {
+        return (this.entityData.get(DATA_ID_FLAGS) & pFlagId) != 0;
+    }
+
+    public boolean isAdmiring() {
+        return this.getFlag(32);
+    }
+
+    public boolean isStretching() {
+        return this.getFlag(16);
+    }
+
+    protected void setFlag(int pFlagId, boolean pValue) {
+        byte b0 = this.entityData.get(DATA_ID_FLAGS);
+        if (pValue) {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 | pFlagId));
+        } else {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 & ~pFlagId));
+        }
+
     }
 
     @Override
@@ -180,22 +217,63 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
 
     @Override
     public void tick() {
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
         super.tick();
+
         if (this.isStinging())
             this.setStinging(false);
+
+        if (this.isEffectiveAi()){
+            if (this.admireCounter > 0 && ++this.admireCounter > 110) {
+                this.admireCounter = 0;
+                this.setAdmiring(false);
+            }
+            if (this.stretchCounter > 0 && ++this.stretchCounter > 120) {
+                this.stretchCounter = 0;
+                this.setStretching(false);
+            }
+        }
     }
 
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
-
+    public void setupAnimationStates() {
+        super.setupAnimationStates();
         if (this.isStinging() && stingTimeout == 0){
             this.stingAnimationState.start(this.tickCount);
             stingTimeout = 10;
         }else if (stingTimeout>0){
             stingTimeout--;
+        }
+
+        if (this.isAdmiring() && this.admireTimeout <= 0){
+            this.admireTimeout = 110;
+            this.admireState.start(this.tickCount);
+        }else if (0 < this.admireTimeout ){
+            --this.admireTimeout;
+        }
+
+        if (this.isStretching() && this.stretchTimeout <= 0){
+            this.stretchTimeout = 120;
+            this.stretchState.start(this.tickCount);
+        }else if (0 < this.stretchTimeout ){
+            --this.stretchTimeout;
+        }
+    }
+
+    @Override
+    public boolean isImmobile() {
+        return super.isImmobile() || this.isAdmiring() || this.isStretching();
+    }
+
+    public void admireIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.admireCounter = 1;
+            this.setAdmiring(true);
+        }
+    }
+
+    public void stretchIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.stretchCounter = 1;
+            this.setStretching(true);
         }
     }
 
@@ -343,5 +421,50 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
 
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {
         return SoundEvents.COD_HURT;
+    }
+
+    public static class RandomIdleGoal extends Goal {
+        private final Hallucigenia mob;
+        private int nextIdle;
+
+        public RandomIdleGoal(Hallucigenia mob) {
+            this.mob = mob;
+            this.resetStandInterval();
+        }
+
+        public void start() {
+            if (this.mob.getRandom().nextBoolean())
+                this.mob.stretchIfPossible();
+            else
+                this.mob.admireIfPossible();
+
+            this.playStandSound();
+        }
+
+        private void playStandSound() {
+            this.mob.playSound(SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, 0.75f, this.mob.getVoicePitch());
+        }
+
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        public boolean canUse() {
+            --this.nextIdle;
+            if (this.nextIdle > 0 && this.mob.getRandom().nextInt(this.nextIdle) == 0 ) {
+                this.resetStandInterval();
+                return !this.mob.isImmobile() && this.mob.onGround();
+            } else {
+                return false;
+            }
+        }
+
+        private void resetStandInterval() {
+            this.nextIdle = 900;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 }

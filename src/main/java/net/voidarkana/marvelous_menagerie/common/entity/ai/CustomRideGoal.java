@@ -16,12 +16,12 @@ public class CustomRideGoal extends Goal {
     private final double speed;
     private final boolean strafe;
 
-    public CustomRideGoal(PathfinderMob dragon, double speed) {
-        this(dragon, speed, true);
+    public CustomRideGoal(PathfinderMob mob, double speed) {
+        this(mob, speed, true);
     }
 
-    public CustomRideGoal(PathfinderMob dragon, double speed, boolean strafe) {
-        this.tameableEntity = dragon;
+    public CustomRideGoal(PathfinderMob mob, double speed, boolean strafe) {
+        this.tameableEntity = mob;
         this.speed = speed;
         this.strafe = strafe;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));

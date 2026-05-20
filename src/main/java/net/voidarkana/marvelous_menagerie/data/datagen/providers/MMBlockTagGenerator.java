@@ -4,7 +4,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -659,5 +658,10 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .add(MMBlocks.HERPETOGASTER.get())
                 .add(MMBlocks.WIWAXIA.get())
                 .add(Blocks.SEA_PICKLE);
+        
+        this.tag(MMTags.Blocks.MARVELOUS_SPAWNABLE_ON)
+                .addTag(BlockTags.GOATS_SPAWNABLE_ON)
+                .addTag(BlockTags.DIRT)
+                .addTag(BlockTags.TERRACOTTA);
     }
 }

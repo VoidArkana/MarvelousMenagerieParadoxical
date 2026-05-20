@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:tiktaalik",
+  "icon": "marvelous_menagerie:tiktaalik_fossil",
+  "link": "mobs/tiktaalik.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.carboniferous"
+    }
+  ]
+}

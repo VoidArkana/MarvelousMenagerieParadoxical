@@ -372,12 +372,11 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 
     @Nullable
@@ -416,5 +415,10 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
+    }
+
+    @Override
+    public @Nullable SoundEvent getAttackSound() {
+        return SoundEvents.FOX_BITE;
     }
 }

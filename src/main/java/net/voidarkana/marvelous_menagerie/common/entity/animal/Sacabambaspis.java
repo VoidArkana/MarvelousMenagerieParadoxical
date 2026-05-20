@@ -10,22 +10,41 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.function.Predicate;
+
 public class Sacabambaspis extends AbstractBasicFish {
+
+    private Sacabambaspis chasePartner;
+    private int chaseTime = 0;
+    private boolean chaseDriver;
+    private int chaseCooldown = 0;
+    private int maxChaseTime = 300;
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Sacabambaspis.class, EntityDataSerializers.INT);
 
     public Sacabambaspis(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(3, new ChaseGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -77,6 +96,14 @@ public class Sacabambaspis extends AbstractBasicFish {
 
         if (pTag.contains("Variant"))
             this.setVariant(pTag.getInt("Variant"));
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(chaseCooldown > 0){
+            chaseCooldown--;
+        }
     }
 
     @Override
@@ -153,5 +180,89 @@ public class Sacabambaspis extends AbstractBasicFish {
     @Override
     public ItemStack getBucketItemStack() {
         return new ItemStack(MMItems.SACA_BUCKET.get());
+    }
+
+    //Alec mob
+    private class ChaseGoal extends Goal {
+        private final Sacabambaspis sacabambaspis;
+        private final Predicate<Entity> validChasePartner;
+        private int executionCooldown = 50;
+
+        public ChaseGoal(Sacabambaspis pupfish) {
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
+            this.sacabambaspis = pupfish;
+            this.validChasePartner = (pupfish1 -> pupfish1 instanceof Sacabambaspis otherFish
+                    && otherFish.getId() != this.sacabambaspis.getId() && otherFish.chasePartner == null && otherFish.chaseCooldown <= 0);
+        }
+
+        @Override
+        public boolean canUse() {
+            if(!sacabambaspis.isInWaterOrBubble() || sacabambaspis.chaseTime > sacabambaspis.maxChaseTime || sacabambaspis.chaseCooldown > 0){
+                return false;
+            }
+            if(sacabambaspis.chasePartner != null && sacabambaspis.chasePartner.isAlive()){
+                return true;
+            }
+            if(executionCooldown > 0){
+                executionCooldown--;
+            }else{
+                executionCooldown = 50 + random.nextInt(50);
+                if(sacabambaspis.chasePartner == null || !sacabambaspis.chasePartner.isAlive()){
+                    List<Sacabambaspis> list = sacabambaspis.level().getEntitiesOfClass(Sacabambaspis.class, sacabambaspis.getBoundingBox().inflate(10, 8, 10), EntitySelector.NO_SPECTATORS.and(validChasePartner));
+                    list.sort(Comparator.comparingDouble(sacabambaspis::distanceToSqr));
+                    if(!list.isEmpty()){
+                        Sacabambaspis closestPupfish = list.get(0);
+                        if(closestPupfish != null){
+                            sacabambaspis.chasePartner = closestPupfish;
+                            closestPupfish.chasePartner = sacabambaspis;
+                            sacabambaspis.chaseDriver = true;
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean canContinueToUse() {
+            return sacabambaspis.chasePartner != null && sacabambaspis.chasePartner.isAlive() && sacabambaspis.chaseTime < sacabambaspis.maxChaseTime;
+        }
+
+        @Override
+        public void start() {
+            sacabambaspis.chaseDriver = !sacabambaspis.chasePartner.chaseDriver;
+            sacabambaspis.chaseTime = 0;
+            sacabambaspis.maxChaseTime = 600;
+        }
+
+        @Override
+        public void stop() {
+            sacabambaspis.chaseTime = 0;
+            sacabambaspis.chaseCooldown = 100 + random.nextInt(100);
+            executionCooldown = 50 + random.nextInt(20);
+            sacabambaspis.chasePartner = null;
+        }
+
+        @Override
+        public void tick() {
+            sacabambaspis.chaseTime++;
+            if(sacabambaspis.chasePartner == null || !sacabambaspis.chaseDriver){
+                return;
+            }
+            float chaserSpeed = 1.2F + random.nextFloat() * 0.45F;
+            float chasedSpeed = 0.2F + chaserSpeed * 0.7F;
+            Sacabambaspis flee = sacabambaspis.chaseDriver ? sacabambaspis.chasePartner : sacabambaspis;
+            Sacabambaspis driver = sacabambaspis.chaseDriver ? sacabambaspis : sacabambaspis.chasePartner;
+            driver.getNavigation().moveTo(flee.getX(), flee.getY(0.5F), flee.getZ(), chaserSpeed);
+            Vec3 from = flee.position().add(random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F).subtract(driver.position()).normalize().scale(2F + random.nextFloat() * 2F);
+            Vec3 to = flee.position().add(from);
+            flee.getNavigation().moveTo(to.x, to.y, to.z, chasedSpeed);
+            if(random.nextInt(50) == 0){
+                sacabambaspis.chaseDriver = !sacabambaspis.chaseDriver;
+                sacabambaspis.chasePartner.chaseDriver = !sacabambaspis.chasePartner.chaseDriver;
+            }
+        }
     }
 }

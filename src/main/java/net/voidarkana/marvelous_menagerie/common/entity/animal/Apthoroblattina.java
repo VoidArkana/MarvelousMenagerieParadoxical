@@ -27,9 +27,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
@@ -328,7 +330,7 @@ public class Apthoroblattina extends MarvelousAnimal {
         return !this.isJohn();
     }
 
-    protected boolean isImmobile() {
+    public boolean isImmobile() {
         return this.isDeadOrDying() || this.isJohn();
     }
 
@@ -346,6 +348,8 @@ public class Apthoroblattina extends MarvelousAnimal {
             this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+
+        super.customServerAiStep();
     }
 
     @Override
@@ -413,8 +417,9 @@ public class Apthoroblattina extends MarvelousAnimal {
     }
 
     public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return ((pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos))
-                || pLevel.getBlockState(pPos.below()).is(Blocks.DRIPSTONE_BLOCK)) && CommonConfig.NATURAL_SPAWNS.get();
+        return ((pLevel.getBlockState(pPos.below()).is(MMTags.Blocks.MARVELOUS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos))
+                || pLevel.getBlockState(pPos.below()).is(Blocks.DRIPSTONE_BLOCK) || pLevel.getBlockState(pPos.below()).is(Tags.Blocks.STONE))
+                && CommonConfig.NATURAL_SPAWNS.get();
     }
 
 }

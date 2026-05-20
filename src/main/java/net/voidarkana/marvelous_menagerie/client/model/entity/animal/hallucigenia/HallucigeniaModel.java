@@ -296,6 +296,9 @@ public class HallucigeniaModel<T extends Hallucigenia> extends MarvelousModel<T>
 
 		if (entity.isInWaterOrBubble()){
 			animateWalk(HallucigeniaAnims.WALK, limbSwing*10, limbSwingAmount*5, 2.5f, 12);
+
+			this.animate(entity.stretchState, HallucigeniaAnims.STRETCH, ageInTicks, 1);
+			this.animate(entity.admireState, HallucigeniaAnims.ADMIRE, ageInTicks, 1);
 		}
 
 		this.head.xRot = Mth.lerp(entity.getOutOfWaterTicks()/5f, head.xRot + headPitch * ((float)Math.PI / 180F)/2,0);

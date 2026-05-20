@@ -1,22 +1,20 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity;// Made with Blockbench 4.12.3
-// Exported for Minecraft version 1.17 or later with Mojang mappings
-// Paste this class into your mod and generate all required imports
+package net.voidarkana.marvelous_menagerie.client.model.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Camera;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.RenderType;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import org.joml.Quaternionf;
 
 public class RiftModel<T extends RiftEntity> extends EntityModel<T> {
 
 	private final ModelPart rift;
 
 	public RiftModel(ModelPart root) {
+		super(RenderType::entityTranslucentEmissive);
 		this.rift = root.getChild("rift");
 	}
 
@@ -24,7 +22,9 @@ public class RiftModel<T extends RiftEntity> extends EntityModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition rift = partdefinition.addOrReplaceChild("rift", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-8.0F, -8.0F, 0.0F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 16.0F, 0.0F));
+		PartDefinition rift = partdefinition.addOrReplaceChild("rift", CubeListBuilder.create().texOffs(0, 0).addBox(-8.0F, -16.0F, 0.0F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+
+		PartDefinition cube_r1 = rift.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 16).addBox(-8.0F, -16.0F, 0.0F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -1.5708F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}

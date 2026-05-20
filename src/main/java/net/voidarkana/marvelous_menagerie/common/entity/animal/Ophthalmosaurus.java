@@ -836,7 +836,7 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
         return MMSounds.CREATURE_SWIM.get();
     }
 
-    private SoundEvent getAttackSound() {
+    public SoundEvent getAttackSound() {
         return SoundEvents.PHANTOM_BITE;
     }
 

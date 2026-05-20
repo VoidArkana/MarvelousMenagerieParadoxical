@@ -15,7 +15,7 @@ public class MarvelousSitWhenOrderedToGoal extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return this.mob.isOrderedToSit();
+        return this.mob.isSitting();
     }
 
     public boolean canUse() {
@@ -30,17 +30,17 @@ public class MarvelousSitWhenOrderedToGoal extends Goal {
             if (livingentity == null) {
                 return true;
             } else {
-                return this.mob.distanceToSqr(livingentity) < 144.0D && livingentity.getLastHurtByMob() != null ? false : this.mob.isOrderedToSit();
+                return this.mob.distanceToSqr(livingentity) < 144.0D && livingentity.getLastHurtByMob() != null ? false : this.mob.isSitting();
             }
         }
     }
 
     public void start() {
         this.mob.getNavigation().stop();
-        this.mob.setInSittingPose(true);
+        this.mob.sitDown();
     }
 
     public void stop() {
-        this.mob.setInSittingPose(false);
+        this.mob.standUp();
     }
 }

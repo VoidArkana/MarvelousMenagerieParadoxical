@@ -77,6 +77,10 @@ public class BabyBorealopeltaModel<T extends Borealopelta> extends MarvelousMode
 			this.animateWalk(BabyBorealopeltaAnims.WALK, limbSwing, limbSwingAmount*2f, 2, 2.5f);
 
 			this.animate(entity.idleShakeState, BabyBorealopeltaAnims.SHAKE, ageInTicks, 1);
+
+			this.animate(entity.standUpAnimationState, BabyBorealopeltaAnims.SIT_END, ageInTicks, 1);
+			this.animate(entity.sitAnimationState, BabyBorealopeltaAnims.SIT_START, ageInTicks, 1);
+			this.animate(entity.sitPoseAnimationState, BabyBorealopeltaAnims.SIT_POSE, ageInTicks, 1);
 		}
 
 		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);

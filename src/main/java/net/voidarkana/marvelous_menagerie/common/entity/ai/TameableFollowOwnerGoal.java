@@ -73,7 +73,7 @@ public class TameableFollowOwnerGoal extends Goal {
     }
 
     private boolean unableToMove() {
-        return this.tamable.isOrderedToSit() || this.tamable.isPassenger() || this.tamable.isLeashed();
+        return this.tamable.isSitting() || this.tamable.isPassenger() || this.tamable.isLeashed();
     }
 
     public void start() {

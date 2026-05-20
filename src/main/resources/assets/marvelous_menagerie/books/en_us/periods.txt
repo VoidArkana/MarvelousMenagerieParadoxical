@@ -17,7 +17,7 @@
 
     • §lPaleozoic
         • {Early Paleozoic|early_paleo/index.json}
-        • {Carboniferous|carboniferous/index.json}
+        • {Mid-Paleozoic|carboniferous/index.json}
         • {Permian|permian/index.json}
     • §lMezosoic
         • {Triassic|triassic/index.json}

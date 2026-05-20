@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.event;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
@@ -51,6 +52,8 @@ public class MMEvents {
         event.put(MMEntities.MOLTEN.get(), Molten.createAttributes().build());
         event.put(MMEntities.DIPLOCAULUS.get(), Diplocaulus.createAttributes().build());
         event.put(MMEntities.FLUBBER.get(), Flubber.createAttributes().build());
+        event.put(MMEntities.MYOTRAGUS.get(), Goat.createAttributes().build());
+        event.put(MMEntities.TIKTAALIK.get(), Tiktaalik.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), Fracture.createAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

@@ -4,9 +4,11 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmos
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Ophthalmosaurus;
@@ -131,10 +133,10 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 		if (entity.isInWaterOrBubble() || entity.isVehicle()){
 			this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
 
-			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F)/2;
-			this.head_overlay.yRot = entity.currentRoll;
-			this.tail_rot.yRot = -entity.currentRoll;
-			this.tail_tip_rot.yRot = -entity.currentRoll;
+//			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F)/2;
+//			this.head_overlay.yRot = entity.currentRoll;
+//			this.tail_rot.yRot = -entity.currentRoll;
+//			this.tail_tip_rot.yRot = -entity.currentRoll;
 
 			this.animate(entity.leftAttackAnimationState, OphthalmoAnims.ATTACK_1, ageInTicks, 1.0F);
 			this.animate(entity.rightAttackAnimationState, OphthalmoAnims.ATTACK_2, ageInTicks, 1.0F);
@@ -143,6 +145,17 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 			if (!entity.isVehicle()){
 				this.head_rot.yRot = (netHeadYaw * (float)Math.PI / 180F)/4;
 				this.head_rot.xRot = (headPitch * (float)Math.PI / 180F)/4;
+
+				float deltaTime = Minecraft.getInstance().getDeltaFrameTime();
+				float tilt = Mth.clamp(Mth.lerp(deltaTime, entity.xRotO, entity.getXRot()), -45f, 45f);
+				float roll = Mth.lerp(deltaTime, entity.prevRoll, entity.currentRoll);
+
+				head.yRot += roll * -Mth.DEG_TO_RAD;
+				body.zRot += roll * -Mth.DEG_TO_RAD;
+				body.yRot += roll * Mth.DEG_TO_RAD;
+				tail.yRot += roll * Mth.DEG_TO_RAD;
+				tail_tip_rot.yRot += roll * 2.0f * Mth.DEG_TO_RAD;
+
 			}else {
 				this.head_rot.resetPose();
 			}

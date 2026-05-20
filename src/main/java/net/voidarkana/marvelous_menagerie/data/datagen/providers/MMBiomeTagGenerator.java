@@ -79,5 +79,8 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
         tag(MMTags.Biomes.DIPLOCAULUS_BIOMES).addTag(Tags.Biomes.IS_SWAMP);
 
         tag(MMTags.Biomes.FLUBBER_BIOMES).add(Biomes.BEACH).add(Biomes.STONY_SHORE);
+
+        tag(MMTags.Biomes.MYOTRAGUS_BIOMES).addTag(BiomeTags.IS_MOUNTAIN).addTag(BiomeTags.IS_BADLANDS);
+        tag(MMTags.Biomes.TIKTAALIK_BIOMES).addTag(Tags.Biomes.IS_SWAMP);
     }
 }

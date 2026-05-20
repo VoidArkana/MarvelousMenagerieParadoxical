@@ -22,7 +22,7 @@ public class HallucigeniaPupilsLayer<T extends Hallucigenia> extends RenderLayer
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T entityLivingBaseIn, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        if (!entityLivingBaseIn.isInvisible()){
+        if (!entityLivingBaseIn.isInvisible() && !entityLivingBaseIn.isBaby()){
             ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/hallucigenia/hallucigenia_pupils.png");
 
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.getParentModel(), texture, pPoseStack, pBuffer, pPackedLight,

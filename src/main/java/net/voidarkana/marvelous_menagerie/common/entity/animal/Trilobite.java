@@ -10,6 +10,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,9 +32,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.WaterCreatureRandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterCreature;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
@@ -42,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 
 public class Trilobite extends BottomDwellerWaterCreature implements Bucketable {
 
-    public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState spinIdleAnimationState = new AnimationState();
     private int idleSpinTimeout = 0;
 
@@ -70,14 +72,19 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5) {
-            @Override
-            protected boolean shouldPanic() {
-                return super.shouldPanic() && Trilobite.this.isInWaterOrBubble();
-            }
-        });
+        this.goalSelector.addGoal(0, new TriloPanicGoal(this, 1.5));
         this.goalSelector.addGoal(1, new MoveToWaterGoal(this, 0.5D));
         this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !(Trilobite.this.isSitting() || Trilobite.this.isInPoseTransition());
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !(Trilobite.this.isSitting() || Trilobite.this.isInPoseTransition());
+            }
+
             @Nullable
             @Override
             protected Vec3 getPosition() {
@@ -87,6 +94,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.fintasticFoodIngredients(), false));
+        this.goalSelector.addGoal(5, new TriloSitGoal(this, 400));
     }
 
     @Override
@@ -177,19 +185,21 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
         if (this.getVariantModel() == 6) {
-            return super.getDimensions(pPose).scale(1.5F, 1.75F);
+            return super.getDimensions(pPose).scale(pPose == Pose.SITTING ? 0.75f : 1.5F, pPose == Pose.SITTING ? 1F : 1.75F);
         } else if (this.getVariantModel() == 5){
-            return super.getDimensions(pPose).scale(0.5F, 1F);
+            return super.getDimensions(pPose).scale(0.5F, pPose == Pose.SITTING ? 0.65F : 1F);
         }else {
-            return super.getDimensions(pPose);
+            return super.getDimensions(pPose).scale(1, pPose == Pose.SITTING ? 0.65F : 1F);
         }
     }
 
     @Override
+    public boolean isPushable() {
+        return super.isPushable() && !(this.isSitting() || this.isInPoseTransition());
+    }
+
+    @Override
     public void tick() {
-        if (this.level().isClientSide()){
-            this.setupAnimationStates();
-        }
         super.tick();
 
         if (this.isInWaterOrBubble() && this.isLandNavigator) {
@@ -198,13 +208,19 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         if (!this.isInWaterOrBubble() && !this.isLandNavigator) {
             switchNavigator(true);
         }
+        if (this.isSitting()){
+            BlockState groundstate = this.level().getBlockState(this.blockPosition().below());
+            if (!this.onGround() || groundstate.is(Blocks.MUD) || !groundstate.is(BlockTags.MINEABLE_WITH_SHOVEL) || this.getOutOfWaterTicks()>0){
+                this.standUpInstantly();
+            }
+        }
     }
 
-    private void setupAnimationStates() {
+    public void setupAnimationStates() {
 
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
+        super.setupAnimationStates();
 
-        if (this.idleSpinTimeout <= 0 && this.getNavigation().isDone()) {
+        if (this.idleSpinTimeout <= 0 && this.getNavigation().isDone() && !this.isSitting()) {
             this.idleSpinTimeout = this.random.nextInt(40) + 80;
             this.spinIdleAnimationState.start(this.tickCount);
         } else {
@@ -212,16 +228,47 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         }
     }
 
+    @Override
+    public boolean canBeCollidedWith() {
+        return super.canBeCollidedWith() && !this.isSitting();
+    }
+
+    @Override
+    public boolean canSit() {
+        return true;
+    }
+
+    @Override
+    public int getSitDuration() {
+        return 20;
+    }
+
+    @Override
+    public int getStandDuration() {
+        return 20;
+    }
+
+    @Override
+    public boolean canBeSeenAsEnemy() {
+        return super.canBeSeenAsEnemy() && !(this.isSitting() || this.isInPoseTransition());
+    }
+
+    @Override
+    public boolean isInvulnerableTo(DamageSource pSource) {
+        if (this.isSitting() || this.isInPoseTransition()){
+            return true;
+        }
+        return super.isInvulnerableTo(pSource);
+    }
+
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.33D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
-
+        super.customServerAiStep();
     }
 
     @Override
@@ -245,7 +292,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
     @Override
     public boolean canBeLeashed(Player pPlayer) {
-        return true;
+        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
     }
 
     @Override
@@ -506,17 +553,10 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             this.verticalSearchStart = -1;
         }
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
         public boolean canContinueToUse() {
             return !this.turtle.isInWater() && this.tryTicks <= 1200 && this.isValidTarget(this.turtle.level(), this.blockPos);
         }
 
-        /**
-         * Returns whether execution should begin. You can also read and cache any state necessary for execution in this
-         * method as well.
-         */
         public boolean canUse() {
             return !this.turtle.isInWater() && super.canUse();
         }
@@ -525,9 +565,6 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             return this.tryTicks % 160 == 0;
         }
 
-        /**
-         * Return {@code true} to set given position as destination
-         */
         protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
             return pLevel.getBlockState(pPos).is(Blocks.WATER);
         }
@@ -586,5 +623,43 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
             case 24 -> "yellow";
             default -> "brown";
         };
+    }
+
+    class TriloSitGoal extends WaterCreatureRandomlySitUpOrDownGoal{
+
+        final Trilobite trilobite;
+        public TriloSitGoal(Trilobite mob, int interval) {
+            super(mob, interval);
+            this.trilobite = mob;
+        }
+
+        @Override
+        public boolean canUse() {
+            BlockState groundstate = trilobite.level().getBlockState(trilobite.blockPosition().below());
+            if (groundstate.is(BlockTags.MINEABLE_WITH_SHOVEL) && !groundstate.is(Blocks.MUD)
+                    && trilobite.getOutOfWaterTicks() == 0) {
+                return super.canUse();
+            }
+            return false;
+        }
+    }
+
+    class TriloPanicGoal extends PanicGoal{
+
+        final Trilobite trilo;
+        public TriloPanicGoal(Trilobite pMob, double pSpeedModifier) {
+            super(pMob, pSpeedModifier);
+            this.trilo = pMob;
+        }
+
+        @Override
+        public void start() {
+            if (!this.trilo.level().isClientSide){
+                if (this.trilo.getOutOfWaterTicks()==0 && this.trilo.level().getBlockState(this.trilo.blockPosition().below()).is(BlockTags.MINEABLE_WITH_SHOVEL))
+                    this.trilo.sitDown();
+            }
+            else
+                super.start();
+        }
     }
 }

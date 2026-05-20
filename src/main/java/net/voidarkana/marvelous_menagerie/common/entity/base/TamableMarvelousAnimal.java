@@ -21,11 +21,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements OwnableEntity {
-    protected static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(TamableMarvelousAnimal.class, EntityDataSerializers.BYTE);
+    protected static final EntityDataAccessor<Byte> TAMEABLE_DATA_FLAGS_ID = SynchedEntityData.defineId(TamableMarvelousAnimal.class, EntityDataSerializers.BYTE);
     protected static final EntityDataAccessor<Optional<UUID>> DATA_OWNERUUID_ID = SynchedEntityData.defineId(TamableMarvelousAnimal.class, EntityDataSerializers.OPTIONAL_UUID);
     private static final EntityDataAccessor<Integer> COMMAND = SynchedEntityData.defineId(TamableMarvelousAnimal.class, EntityDataSerializers.INT);
-
-    private boolean orderedToSit;
 
     protected TamableMarvelousAnimal(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -34,7 +32,7 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(DATA_FLAGS_ID, (byte)0);
+        this.entityData.define(TAMEABLE_DATA_FLAGS_ID, (byte)0);
         this.entityData.define(DATA_OWNERUUID_ID, Optional.empty());
         this.entityData.define(COMMAND, 0);
     }
@@ -45,7 +43,6 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
             pCompound.putUUID("Owner", this.getOwnerUUID());
         }
 
-        pCompound.putBoolean("Sitting", this.orderedToSit);
         pCompound.putInt("Command", this.getCommand());
     }
 
@@ -67,9 +64,6 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
                 this.setTame(false);
             }
         }
-
-        this.orderedToSit = pCompound.getBoolean("Sitting");
-        this.setInSittingPose(this.orderedToSit);
         this.setCommand(pCompound.getInt("Command"));
     }
 
@@ -112,35 +106,21 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
     }
 
     public boolean isTame() {
-        return (this.entityData.get(DATA_FLAGS_ID) & 4) != 0;
+        return (this.entityData.get(TAMEABLE_DATA_FLAGS_ID) & 4) != 0;
     }
 
     public void setTame(boolean pTamed) {
-        byte b0 = this.entityData.get(DATA_FLAGS_ID);
+        byte b0 = this.entityData.get(TAMEABLE_DATA_FLAGS_ID);
         if (pTamed) {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(b0 | 4));
+            this.entityData.set(TAMEABLE_DATA_FLAGS_ID, (byte)(b0 | 4));
         } else {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(b0 & -5));
+            this.entityData.set(TAMEABLE_DATA_FLAGS_ID, (byte)(b0 & -5));
         }
 
         this.reassessTameGoals();
     }
 
     protected void reassessTameGoals() {
-    }
-
-    public boolean isInSittingPose() {
-        return (this.entityData.get(DATA_FLAGS_ID) & 1) != 0;
-    }
-
-    public void setInSittingPose(boolean pSitting) {
-        byte b0 = this.entityData.get(DATA_FLAGS_ID);
-        if (pSitting) {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(b0 | 1));
-        } else {
-            this.entityData.set(DATA_FLAGS_ID, (byte)(b0 & -2));
-        }
-
     }
 
     @Nullable
@@ -217,14 +197,6 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
                 this.getOwner().sendSystemMessage(deathMessage);
             }
 
-    }
-
-    public boolean isOrderedToSit() {
-        return this.orderedToSit;
-    }
-
-    public void setOrderedToSit(boolean pOrderedToSit) {
-        this.orderedToSit = pOrderedToSit;
     }
 
     public boolean shouldFollow() {

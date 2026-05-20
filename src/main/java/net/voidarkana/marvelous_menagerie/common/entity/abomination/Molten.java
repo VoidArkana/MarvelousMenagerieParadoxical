@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -172,6 +173,11 @@ public class Molten extends Abomination implements IAnimatedAttacker {
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
+    }
+
+    @Override
+    public @org.jetbrains.annotations.Nullable SoundEvent getAttackSound() {
+        return SoundEvents.EVOKER_FANGS_ATTACK;
     }
 
     @Override
@@ -370,7 +376,7 @@ public class Molten extends Abomination implements IAnimatedAttacker {
         this.playSound(MMSounds.MOLTEN_STEPS.get(), 0.1F, this.getVoicePitch() + this.random.nextFloat() * 0.4F);
     }
 
-    static class MoltenMeeleeAttackGoal extends AnimatedAttackGoal{
+    static class MoltenMeeleeAttackGoal extends AnimatedAttackGoal {
         private final Molten molten;
         public MoltenMeeleeAttackGoal(Molten pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen, int pAttackDelay, int pTicksUntilNextAttack) {
             super(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen, pAttackDelay, pTicksUntilNextAttack);

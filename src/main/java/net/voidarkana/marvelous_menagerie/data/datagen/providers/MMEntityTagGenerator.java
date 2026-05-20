@@ -54,6 +54,8 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.BOREALOPELTA.get())
                 .add(MMEntities.MOLTEN.get())
                 .add(MMEntities.DIPLOCAULUS.get())
-                .add(MMEntities.FLUBBER.get());
+                .add(MMEntities.FLUBBER.get())
+                .add(MMEntities.MYOTRAGUS.get())
+                .add(MMEntities.TIKTAALIK.get());
     }
 }

@@ -3,6 +3,9 @@ package net.voidarkana.marvelous_menagerie.common.entity.animal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -15,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -36,6 +40,9 @@ public class DawnHorse extends MarvelousAnimal {
     public final AnimationState idleTailState = new AnimationState();
     public final AnimationState idleEarsState = new AnimationState();
     public final AnimationState neighState = new AnimationState();
+    private int standCounter;
+
+    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(DawnHorse.class, EntityDataSerializers.BYTE);
 
     public DawnHorse(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -60,15 +67,53 @@ public class DawnHorse extends MarvelousAnimal {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1D));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
+
+        this.goalSelector.addGoal(9, new DawnHorse.RandomStandGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0F).add(Attributes.MOVEMENT_SPEED, 0.25F);
     }
 
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(DATA_ID_FLAGS, (byte)0);
+    }
+
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.GOLDEN_CARROT);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.isEffectiveAi() && this.standCounter > 0 && ++this.standCounter > 30) {
+            this.standCounter = 0;
+            this.setStanding(false);
+        }
+    }
+
+    public void setStanding(boolean pStanding) {
+        this.setFlag(32, pStanding);
+    }
+
+    protected boolean getFlag(int pFlagId) {
+        return (this.entityData.get(DATA_ID_FLAGS) & pFlagId) != 0;
+    }
+
+    public boolean isStanding() {
+        return this.getFlag(32);
+    }
+
+    protected void setFlag(int pFlagId, boolean pValue) {
+        byte b0 = this.entityData.get(DATA_ID_FLAGS);
+        if (pValue) {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 | pFlagId));
+        } else {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 & ~pFlagId));
+        }
+
     }
 
     public void setupAnimationStates() {
@@ -88,6 +133,17 @@ public class DawnHorse extends MarvelousAnimal {
             --this.idleTailTimeout;
         }
 
+        if (this.isStanding() && this.neighTimeout <= 0){
+            this.neighTimeout = 30;
+            this.neighState.start(this.tickCount);
+        }else if (0 < this.neighTimeout ){
+            --this.neighTimeout;
+        }
+    }
+
+    @Override
+    public boolean isImmobile() {
+        return super.isImmobile() || this.isStanding();
     }
 
     @Nullable
@@ -182,18 +238,17 @@ public class DawnHorse extends MarvelousAnimal {
 
     @Override
     public float getVoicePitch() {
-        return this.isBaby() ? 4.2f : 2.2F;
+        return this.isBaby() ? (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 5F : (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.5F;
     }
 
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 
     protected void playStepSound(BlockPos pPos, BlockState pBlock) {
@@ -225,5 +280,53 @@ public class DawnHorse extends MarvelousAnimal {
 
     protected void playGallopSound(SoundType pSoundType) {
         this.playSound(SoundEvents.HORSE_GALLOP, pSoundType.getVolume() * 0.15F, pSoundType.getPitch());
+    }
+
+    public void standIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.standCounter = 1;
+            this.setStanding(true);
+        }
+    }
+
+    public class RandomStandGoal extends Goal {
+        private final DawnHorse mob;
+        private int nextStand;
+
+        public RandomStandGoal(DawnHorse mob) {
+            this.mob = mob;
+            this.resetStandInterval();
+        }
+
+        public void start() {
+            this.mob.standIfPossible();
+            this.playStandSound();
+        }
+
+        private void playStandSound() {
+            this.mob.playSound(this.mob.getAmbientSound(), 1, this.mob.getVoicePitch());
+        }
+
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        public boolean canUse() {
+            --this.nextStand;
+            if (this.nextStand > 0 && this.mob.getRandom().nextInt(this.nextStand) == 0 ) {
+                this.resetStandInterval();
+                return !this.mob.isImmobile() && this.mob.onGround();
+            } else {
+                return false;
+            }
+        }
+
+        private void resetStandInterval() {
+            this.nextStand = 600;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 }

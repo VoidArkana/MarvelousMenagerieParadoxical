@@ -26,7 +26,6 @@ import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -141,6 +140,11 @@ public class Anomalocaris extends AbstractBasicFish implements IAnimatedAttacker
     @Override
     public void setAttackAnimationTimeout(int attackAnimationTimeout) {
         this.attackAnimationTimeout = attackAnimationTimeout;
+    }
+
+    @Override
+    public @Nullable SoundEvent getAttackSound() {
+        return null;
     }
 
     public int getVariant() {

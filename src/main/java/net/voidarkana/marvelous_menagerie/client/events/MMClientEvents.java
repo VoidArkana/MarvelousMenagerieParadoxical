@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.client.events;
 
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.model.GoatModel;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -40,6 +41,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.Bab
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.FlubberModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.BabyJosephoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.JosephoModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.myotragus.BabyMyotragusModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.myotragus.MyotragusModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.BabyOphthalmoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.ophthalmosaurus.OphthalmoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.pikaia.BabyPikaiaModel;
@@ -50,6 +53,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.StellerModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.BabyThylacineModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.ThylacineModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.tiktaalik.BabyTiktaalikModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.tiktaalik.TiktaalikModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
@@ -152,6 +157,15 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.FLUBBER_LAYER, FlubberModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_FLUBBER_LAYER, BabyFlubberModel::createBodyLayer);
+
+
+        event.registerLayerDefinition(MMModelLayers.MYOTRAGUS_LAYER, GoatModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_MYOTRAGUS_LAYER, BabyMyotragusModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.TIKTAALIK_LAYER, TiktaalikModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_TIKTAALIK_LAYER, BabyTiktaalikModel::createBodyLayer);
+
+
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);
 

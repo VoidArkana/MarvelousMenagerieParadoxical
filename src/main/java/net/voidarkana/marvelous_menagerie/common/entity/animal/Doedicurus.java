@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -21,8 +22,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.BabyPanicGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 
@@ -170,6 +171,11 @@ public class Doedicurus extends MarvelousAnimal implements IAnimatedAttacker {
         this.attackAnimationTimeout = attackAnimationTimeout;
     }
 
+    @Override
+    public @org.jetbrains.annotations.Nullable SoundEvent getAttackSound() {
+        return SoundEvents.PLAYER_ATTACK_SWEEP;
+    }
+
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
             this.playSound(MMSounds.LARGE_STEPS.get(), 0.25F, 1.0F);
     }
@@ -177,11 +183,10 @@ public class Doedicurus extends MarvelousAnimal implements IAnimatedAttacker {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 }

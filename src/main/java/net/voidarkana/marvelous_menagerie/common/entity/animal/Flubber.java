@@ -42,7 +42,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -55,47 +54,47 @@ import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.EggLayerBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.LayEggGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousTemptGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.RandomlySitUpOrDownGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractAmphibianCreature;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
-import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
-public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
+public class Flubber extends AbstractAmphibianCreature implements IEggLayer, Bucketable {
 
     public static final ResourceLocation LOOT_COMMON = new ResourceLocation(MarvelousMenagerie.MOD_ID, "flubber/flubber_dig");
 
-    private static final EntityDataAccessor<Boolean> IS_LAND_NAVIGATOR = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> IS_LAYING_EGG = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> WANTS_TO_BE_IN_LAND = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DIGGING_COOLDOWN = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DANCING_TICKS = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DIGGING_TICKS = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BYTE);
+    private static final EntityDataAccessor<Boolean> IS_LAYING_EGG = SynchedEntityData.defineId(Flubber.class, EntityDataSerializers.BOOLEAN);
 
     public final AnimationState waterDigAnimationState = new AnimationState();
     public final AnimationState landDigAnimationState = new AnimationState();
     public final AnimationState landDanceAnimationState = new AnimationState();
     public final AnimationState waterDanceAnimationState1 = new AnimationState();
     public final AnimationState waterDanceAnimationState2 = new AnimationState();
+    public final AnimationState bellyDrumAnimationState = new AnimationState();
     public int digAnimationTimeout;
     public int danceAnimationTimeout;
+    public int bellyDrumAnimationTimeout = this.random.nextInt(320) + 160;
+    public final AnimationState sniffState = new AnimationState();
+    public final AnimationState snortState = new AnimationState();
+    private int sniffTimeout = 0;
+    private int snortTimeout = 0;
+    private int snortCounter;
+    private int sniffCounter;
 
     int layEggCounter;
-    public float currentRoll = 0.0F;
 
     public Flubber(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.WATER_BORDER, 0.0F);
-        this.setPathfindingMalus(BlockPathTypes.DOOR_IRON_CLOSED, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DOOR_WOOD_CLOSED, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DOOR_OPEN, -1.0F);
-
-        this.switchNavigator(true);
-        this.setMaxUpStep(1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -104,50 +103,48 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
     }
 
     @Override
-    public boolean canBreatheUnderwater() {
-        return true;
-    }
-
-    public boolean isPushedByFluid() {
-        return false;
-    }
-
-    private void switchNavigator(boolean onLand) {
-        if (onLand) {
-            this.moveControl = new MoveControl(this);
-            PathNavigation prevNav = this.navigation;
-            this.navigation = new GroundPathNavigation(this, level());
-            this.lookControl = new LookControl(this);
-            this.setIsLandNavigator(true);
-        } else {
-            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2F, 0.1F, true);
-            PathNavigation prevNav = this.navigation;
-            this.navigation = new AmphibiousPathNavigation(this, level());
-            this.lookControl = new SmoothSwimmingLookControl(this, 10);
-            this.setIsLandNavigator(false);
-        }
-    }
-
-    @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new Flubber.FlubberPanicGoal(this, 1.2D));
+        this.goalSelector.addGoal(0, new AmphibianPanicGoal(this, 1.2D));
         this.goalSelector.addGoal(0, new EggLayerBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(0, new LayEggGoal(this, 1.0D, BlockTags.SAND, MMBlocks.FLUBBER_EGG, 1D));
 
         this.goalSelector.addGoal(1, new FlubberGoToWaterGoal(this, 1));
-        this.goalSelector.addGoal(1, new FlubberExitWaterGoal(this, 1.5));
-        this.goalSelector.addGoal(1, new TemptGoal(this, 1.2D, Ingredient.of(MMTags.Items.FLUBBER_DIG_ITEM), false));
+        this.goalSelector.addGoal(1, new AmphibianExitWaterGoal(this, 1.5));
+        this.goalSelector.addGoal(1, new MarvelousTemptGoal(this, 1.2D, Ingredient.of(MMTags.Items.FLUBBER_DIG_ITEM), false));
 
-        this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.0F));
+        this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.0F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Flubber.this.isSitting();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !Flubber.this.isSitting();
+            }
+        });
         this.goalSelector.addGoal(2, new DigUpSedimentGoal(this));
         this.goalSelector.addGoal(2, new MoveToSedimentGoal(this, 1.2f, 12, 3));
 
-        this.goalSelector.addGoal(3, new FlubberStrollGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new FlubberSwimGoal(this, 1.5, 7));
+        this.goalSelector.addGoal(3, new AmphibianStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new AmphibianSwimGoal(this, 1.5, 7));
 
-        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 400, 650));
+        this.goalSelector.addGoal(5, new SniffAndSnortGoal(this));
 
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Flubber.this.isSitting();
+            }
+        });
+
+        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this){
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !Flubber.this.isSitting();
+            }
+        });
     }
 
     @Override
@@ -159,19 +156,17 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_PREGNANT, false);
-        this.entityData.define(IS_LAND_NAVIGATOR, true);
-        this.entityData.define(IS_LAYING_EGG, false);
-        this.entityData.define(WANTS_TO_BE_IN_LAND, true);
         this.entityData.define(DIGGING_COOLDOWN, 5*20*60);
         this.entityData.define(DANCING_TICKS, 0);
         this.entityData.define(DIGGING_TICKS, 0);
+        this.entityData.define(DATA_ID_FLAGS, (byte)0);
+        this.entityData.define(IS_LAYING_EGG, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("IsPregnant", this.isPregnant());
         compound.putBoolean("IsLayingEgg", this.isLayingEgg());
-        compound.putBoolean("WantsToBeInLand", this.wantsToBeInLand());
         compound.putInt("DiggingCooldown", this.getDiggingCooldown());
     }
 
@@ -179,16 +174,7 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         super.readAdditionalSaveData(compound);
         this.setPregnant(compound.getBoolean("IsPregnant"));
         this.setLayingEgg(compound.getBoolean("IsLayingEgg"));
-        this.setWantsToBeInLand(compound.getBoolean("WantsToBeInLand"));
         this.setDiggingCooldown(compound.getInt("DiggingCooldown"));
-    }
-
-    public boolean isLandNavigator() {
-        return this.entityData.get(IS_LAND_NAVIGATOR);
-    }
-
-    public void setIsLandNavigator(boolean isLandNavigator) {
-        this.entityData.set(IS_LAND_NAVIGATOR, isLandNavigator);
     }
 
     public int getDiggingCooldown() {
@@ -213,14 +199,6 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
 
     public void setDiggingTicks(int diggingCooldown) {
         this.entityData.set(DIGGING_TICKS, diggingCooldown);
-    }
-
-    public boolean wantsToBeInLand() {
-        return this.entityData.get(WANTS_TO_BE_IN_LAND);
-    }
-
-    public void setWantsToBeInLand(boolean wantsToBeInLand) {
-        this.entityData.set(WANTS_TO_BE_IN_LAND, wantsToBeInLand);
     }
 
     @Override
@@ -296,23 +274,49 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
 
     @Override
     public void tick() {
-        super.tick();
 
-        final boolean inWater = this.isInWaterOrBubble();
-
-        if (inWater && this.isLandNavigator()) {
-            switchNavigator(false);
-        }
-        if (!inWater && !this.isLandNavigator()) {
-            switchNavigator(true);
-        }
-
-        if ((this.getRandom().nextInt(500) == 0 && this.isInWaterOrBubble() && !this.wantsToBeInLand()) || this.isPregnant()){
+        if ((!this.wantsToBeInLand()) && this.isPregnant()){
             this.setWantsToBeInLand(true);
         }
 
-        if (this.getRandom().nextInt(500) == 0 && !this.isInWaterOrBubble() && this.wantsToBeInLand()){
-            this.setWantsToBeInLand(false);
+        super.tick();
+
+        if (this.isEffectiveAi() && this.sniffCounter > 0 && ++this.sniffCounter > 30) {
+            this.sniffCounter = 0;
+            this.setSniffing(false);
+        }
+        if (this.isEffectiveAi() && this.snortCounter > 0 && ++this.snortCounter > 10) {
+            this.snortCounter = 0;
+            this.setSnorting(false);
+        }
+    }
+
+    public void setSniffing(boolean pStanding) {
+        this.setFlag(32, pStanding);
+    }
+
+    public void setSnorting(boolean pStanding) {
+        this.setFlag(16, pStanding);
+    }
+
+    protected boolean getFlag(int pFlagId) {
+        return (this.entityData.get(DATA_ID_FLAGS) & pFlagId) != 0;
+    }
+
+    public boolean isSniffing() {
+        return this.getFlag(32);
+    }
+
+    public boolean isSnorting() {
+        return this.getFlag(16);
+    }
+
+    protected void setFlag(int pFlagId, boolean pValue) {
+        byte b0 = this.entityData.get(DATA_ID_FLAGS);
+        if (pValue) {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 | pFlagId));
+        } else {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 & ~pFlagId));
         }
 
     }
@@ -344,11 +348,54 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         }else if (danceAnimationTimeout>0){
             this.danceAnimationTimeout--;
         }
+
+        if (this.isSitting()){
+            if (this.bellyDrumAnimationTimeout <= 0) {
+                this.bellyDrumAnimationTimeout = this.random.nextInt(320) * this.random.nextInt(8);
+                this.bellyDrumAnimationState.start(this.tickCount);
+            } else if (0 < this.bellyDrumAnimationTimeout){
+                this.bellyDrumAnimationTimeout--;
+            }
+        }
+
+        if (this.isSniffing() && this.sniffTimeout <= 0){
+            this.sniffTimeout = 30;
+            this.sniffState.start(this.tickCount);
+        }else if (0 < this.sniffTimeout ){
+            --this.sniffTimeout;
+        }
+
+        if (this.isSnorting() && this.snortTimeout <= 0){
+            this.snortTimeout = 10;
+            this.snortState.start(this.tickCount);
+        }else if (0 < this.snortTimeout ){
+            --this.snortTimeout;
+        }
     }
 
     @Override
-    protected boolean isImmobile() {
-        return super.isImmobile() && this.getDiggingTicks() > 0 && this.getDancingTicks() > 0;
+    public boolean isImmobile() {
+        return super.isImmobile() || this.getDiggingTicks() > 0 || this.getDancingTicks() > 0 || this.isInPoseTransition() || this.isSitting();
+    }
+
+    @Override
+    public boolean canBeLeashed(Player player) {
+        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
+    }
+
+    @Override
+    public boolean canSit() {
+        return true;
+    }
+
+    @Override
+    public int getSitDuration() {
+        return 20;
+    }
+
+    @Override
+    public int getStandDuration() {
+        return 20;
     }
 
     public void aiStep() {
@@ -357,11 +404,6 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
             int prevDiggingCooldown = this.getDiggingCooldown();
             this.setDiggingCooldown(Math.max(0, prevDiggingCooldown - 1));
         }
-
-        if (this.isImmobile() && !this.isLandNavigator()){
-            this.setDeltaMovement(this.getDeltaMovement().add(0.0, -0.005f, 0.0));
-        }
-
 
         if (this.getDancingTicks()>0){
             int prevDancingTicks = this.getDancingTicks();
@@ -403,8 +445,6 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
                 }
         }
 
-
-
         super.aiStep();
 
         if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0) {
@@ -412,34 +452,6 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
             if (this.level().getBlockState(blockpos.below()).is(BlockTags.SAND)) {
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
-        }
-
-        float prevRoll =  this.currentRoll;
-        float targetRoll = Math.max(-0.45F, Math.min(0.45F, (this.getYRot() - this.yRotO) * 0.1F));
-        targetRoll = -targetRoll;
-        this.currentRoll = prevRoll + (targetRoll - prevRoll) * 0.05F;
-    }
-
-    @Override
-    public void travel(Vec3 pTravelVector) {
-        if (this.isEffectiveAi() && this.isInWater()) {
-            this.moveRelative(this.getSpeed(), pTravelVector);
-            this.move(MoverType.SELF, this.getDeltaMovement());
-            this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
-            if (this.getTarget() == null) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
-            }
-
-            this.calculateEntityAnimation(true);
-
-            if (this.isInWaterOrBubble() && this.wantsToBeInLand() && this.horizontalCollision
-                    && !this.isEyeInFluidType(net.minecraftforge.common.ForgeMod.WATER_TYPE.get())){
-
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0D, 0.1D, 0.05D));
-            }
-
-        } else {
-            super.travel(pTravelVector);
         }
     }
 
@@ -516,123 +528,17 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
-    public static class FlubberStrollGoal extends RandomStrollGoal{
-
-        private final Flubber flubber;
-
-        public FlubberStrollGoal(Flubber pMob, double pSpeedModifier) {
-            super(pMob, pSpeedModifier);
-            this.flubber = pMob;
-        }
-
-        @Override
-        public boolean canUse() {
-            return super.canUse() && this.flubber.isLandNavigator();
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return super.canContinueToUse() && this.flubber.isLandNavigator();
-        }
-    }
-
-    public class FlubberSwimGoal extends RandomSwimmingGoal {
-        private final Flubber flubber;
-
-        public FlubberSwimGoal(Flubber creature, double speed, int chance) {
-            super(creature, speed, chance);
-            this.flubber = creature;
-        }
-
-        public boolean canUse() {
-            return super.canUse() && !flubber.isLandNavigator();
-        }
-
-        @Override
-        public boolean canContinueToUse() {
-            return super.canContinueToUse() && !flubber.isLandNavigator();
-        }
-    }
-
-    static class FlubberGoToWaterGoal extends MoveToBlockGoal {
-        private static final int GIVE_UP_TICKS = 1200;
+    static class FlubberGoToWaterGoal extends AmphibianGoToWaterGoal {
         private final Flubber turtle;
 
         FlubberGoToWaterGoal(Flubber pTurtle, double pSpeedModifier) {
-            super(pTurtle, pSpeedModifier, 24);
-            this.turtle = pTurtle;
-            this.verticalSearchStart = -1;
-        }
-
-        public boolean canContinueToUse() {
-            return !this.turtle.isInWater() && !this.turtle.wantsToBeInLand() && this.tryTicks <= 1200
-                    && this.isValidTarget(this.turtle.level(), this.blockPos);
-        }
-
-        public boolean canUse() {
-            return !this.turtle.isInWater() && !this.turtle.isPregnant() && !this.turtle.wantsToBeInLand() ? super.canUse() : false;
-        }
-
-        public boolean shouldRecalculatePath() {
-            return this.tryTicks % 160 == 0;
-        }
-
-        protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
-            return pLevel.getBlockState(pPos).is(Blocks.WATER);
-        }
-    }
-
-    static class FlubberExitWaterGoal extends MoveToBlockGoal {
-        private static final int GIVE_UP_TICKS = 1200;
-        private final Flubber turtle;
-
-        FlubberExitWaterGoal(Flubber pTurtle, double pSpeedModifier) {
-            super(pTurtle, pSpeedModifier, 24);
-            this.turtle = pTurtle;
-        }
-
-        public boolean canContinueToUse() {
-            return (this.turtle.isInWater() || this.turtle.wantsToBeInLand()) && this.tryTicks <= 1200
-                    && this.isValidTarget(this.turtle.level(), this.blockPos);
-        }
-
-        public boolean canUse() {
-            return (this.turtle.isInWater() || this.turtle.isPregnant() || this.turtle.wantsToBeInLand()) && super.canUse();
-        }
-
-        public boolean shouldRecalculatePath() {
-            return this.tryTicks % 160 == 0;
-        }
-
-        protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
-            return pLevel.getBlockState(pPos.above()).isAir() && pLevel.getBlockState(pPos).isSolid();
-        }
-    }
-
-    static class FlubberPanicGoal extends PanicGoal {
-        FlubberPanicGoal(Flubber pTurtle, double pSpeedModifier) {
             super(pTurtle, pSpeedModifier);
+            this.turtle = pTurtle;
         }
 
         public boolean canUse() {
-            if (!this.shouldPanic()) {
-                return false;
-            } else {
-                BlockPos blockpos = this.lookForWater(this.mob.level(), this.mob, 7);
-                if (blockpos != null) {
-                    this.posX = (double)blockpos.getX();
-                    this.posY = (double)blockpos.getY();
-                    this.posZ = (double)blockpos.getZ();
-                    return true;
-                } else {
-                    return this.findRandomPosition();
-                }
-            }
+            return !this.turtle.isPregnant() && super.canUse();
         }
-    }
-
-    protected PathNavigation createNavigation(Level pLevel) {
-        return new AmphibiousPathNavigation(this, pLevel);
     }
 
     @Override
@@ -648,10 +554,6 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
     @Override
     protected @Nullable SoundEvent getDeathSound() {
         return this.isEyeInFluidType(ForgeMod.WATER_TYPE.get()) ? MMSounds.FLUBBER_UNDERWATER_DEATH.get() : MMSounds.FLUBBER_DEATH.get();
-    }
-
-    public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
-        return 0.0F;
     }
 
     public Vec3 getHeadPos(boolean random, float randomValue) {
@@ -737,6 +639,66 @@ public class Flubber extends MarvelousAnimal implements IEggLayer, Bucketable {
         protected boolean isValidTarget(LevelReader levelReader, BlockPos blockPos) {
             BlockPos blockPos1 = flubber.getHeadBlockPos();
             return levelReader.getFluidState(blockPos1).is(Fluids.WATER) && levelReader.getBlockState(blockPos1.below()).is(MMTags.Blocks.FLUBBER_DIG_TARGET);
+        }
+    }
+
+    public void snortIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.snortCounter = 1;
+            this.setSnorting(true);
+        }
+    }
+    public void sniffIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.sniffCounter = 1;
+            this.setSniffing(true);
+        }
+    }
+
+    public class SniffAndSnortGoal extends Goal {
+        private final Flubber mob;
+        private int nextIdle;
+
+        public SniffAndSnortGoal(Flubber mob) {
+            this.mob = mob;
+            this.resetStandInterval();
+        }
+
+        public void start() {
+            if (this.mob.getRandom().nextInt(4)==0){
+                this.mob.sniffIfPossible();
+                this.playSound(SoundEvents.SNIFFER_SNIFFING);
+            }
+            else{
+                this.mob.snortIfPossible();
+                this.playSound(SoundEvents.SNIFFER_SCENTING);
+            }
+        }
+
+        private void playSound(SoundEvent event) {
+            this.mob.playSound(event, 1, this.mob.getVoicePitch());
+        }
+
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        public boolean canUse() {
+            --this.nextIdle;
+            if (this.nextIdle > 0 && this.mob.getRandom().nextInt(this.nextIdle) == 0 ) {
+                this.resetStandInterval();
+                return this.mob.onGround() && this.mob.isLandNavigator();
+            } else {
+                return false;
+            }
+        }
+
+        private void resetStandInterval() {
+            this.nextIdle = 200;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
         }
     }
 }

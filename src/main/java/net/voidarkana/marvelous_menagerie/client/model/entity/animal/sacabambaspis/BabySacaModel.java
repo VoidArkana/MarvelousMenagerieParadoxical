@@ -56,7 +56,7 @@ public class BabySacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
 		if (pEntity.isInWaterOrBubble()){
-			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 1.5f);
+			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount/2, 2f, 1.5f);
 		}
 
 		this.swim_control.xRot = Mth.lerp( pEntity.getOutOfWaterTicks()/5f, pHeadPitch * ((float)Math.PI / 180F), 0);

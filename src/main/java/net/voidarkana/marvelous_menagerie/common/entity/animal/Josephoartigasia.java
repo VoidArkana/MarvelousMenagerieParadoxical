@@ -39,14 +39,13 @@ import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.CustomRideGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSitWhenOrderedToGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.RandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.TameableFollowOwnerGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleable {
-
-    public Vec3 movement;
 
     public Josephoartigasia (EntityType<? extends TamableMarvelousAnimal> entityType, Level level) {
         super(entityType, level);
@@ -58,18 +57,8 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             TargetingConditions.forNonCombat().range(15.0D)
                     .ignoreLineOfSight();
 
-    //80
-    private static final EntityDataAccessor<Integer> SITTING_TIME = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.INT);
-    //140
-    private static final EntityDataAccessor<Integer> STANDING_TIME = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.INT);
-
-    private static final EntityDataAccessor<Integer> SITTING_LAG = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.INT);
-
     private static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(Josephoartigasia.class, EntityDataSerializers.BOOLEAN);
 
-    public final AnimationState sitStartAnimationState = new AnimationState();
-    public final AnimationState sitEndAnimationState = new AnimationState();
-    public final AnimationState sitIdleAnimationState = new AnimationState();
     public final AnimationState earsWiggleAnimationState = new AnimationState();
     public final AnimationState rightEarWiggleAnimationState = new AnimationState();
     public final AnimationState leftEarWiggleAnimationState = new AnimationState();
@@ -121,6 +110,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 return super.canUse() && (!Josephoartigasia.this.isVehicle() || !Josephoartigasia.this.isPassenger());
             }
         });
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 6000, 3000));
         super.registerGoals();
     }
 
@@ -128,9 +118,6 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SADDLED, false);
-        this.entityData.define(SITTING_TIME, 0);
-        this.entityData.define(SITTING_LAG, 0);
-        this.entityData.define(STANDING_TIME, 0);
     }
 
     @Override
@@ -162,30 +149,6 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     public void setSaddled(boolean saddled) {
         this.entityData.set(SADDLED, saddled);
-    }
-
-    public int getStandingTime() {
-        return this.entityData.get(STANDING_TIME);
-    }
-
-    public void setStandingTime(int command) {
-        this.entityData.set(STANDING_TIME, command);
-    }
-
-    public int getSittingTime() {
-        return this.entityData.get(SITTING_TIME);
-    }
-
-    public void setSittingTime(int command) {
-        this.entityData.set(SITTING_TIME, command);
-    }
-
-    public int getSittingLag() {
-        return this.entityData.get(SITTING_LAG);
-    }
-
-    public void setSittingLag(int command) {
-        this.entityData.set(SITTING_LAG, command);
     }
 
     protected void dropEquipment() {
@@ -225,12 +188,12 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     @Override
     public boolean canBeCollidedWith() {
-        return this.isInSittingPose() || this.getStandingTime()>0 || this.getSittingTime()>0;
+        return !(this.isInPoseTransition()) && this.isSitting();
     }
 
     @Override
     public boolean canBeLeashed(Player player) {
-        return !this.isInSittingPose() && !(this.getSittingTime()>0 || this.getStandingTime()>0) && !this.isVehicle();
+        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
     }
 
     public boolean isFood(ItemStack stack) {
@@ -261,7 +224,8 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             return InteractionResult.SUCCESS;
 
         } else if (hand == InteractionHand.MAIN_HAND && !this.level().isClientSide && this.isTame() && this.isOwnedBy(player)
-                && this.getStandingTime()==0 && this.getSittingTime()==0) {
+                && !this.isInPoseTransition()) {
+
             if (itemstack.is(Items.APPLE) && this.getHealth() < this.getMaxHealth()) {
                 if (!player.getAbilities().instabuild) {
                     itemstack.shrink(1);
@@ -276,8 +240,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 this.setSaddled(false);
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.spawnAtLocation(Items.SADDLE);
-            } else if (!player.isShiftKeyDown() && !this.isBaby() && this.isSaddled() && !this.isInSittingPose() &&
-                    this.getStandingTime() == 0 && this.getSittingTime() == 0) {
+            } else if (!player.isShiftKeyDown() && !this.isBaby() && this.isSaddled() && !this.isSitting() && !this.isInPoseTransition()) {
                 player.startRiding(this);
             } else {
                 this.setCommand((this.getCommand() + 1) % 3);
@@ -288,17 +251,13 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 int var10001 = this.getCommand();
                 player.displayClientMessage(Component.translatable("entity.marvelous_menagerie.tameable.command_" + var10001, new Object[]{this.getName()}), true);
                 boolean sit = this.getCommand() == 2;
-                if (sit) {
-                    this.setOrderedToSit(true);
-                    if (!this.isInSittingPose() && this.onGround()){
-                        this.setSittingTime(60);
-                    }
-                } else {
-                    if (this.isInSittingPose() && this.onGround()){
-                        this.setStandingTime(70);
-                    }
-                    this.setOrderedToSit(false);
+
+                if (sit && !this.isSitting() && this.onGround()){
+                    this.sitDown();
+                } else if (this.isSitting() && this.onGround()){
+                    this.standUp();
                 }
+
             }
             return InteractionResult.SUCCESS;
         }
@@ -308,7 +267,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
-        if (this.isInSittingPose()) {
+        if (pPose == Pose.SITTING) {
             return super.getDimensions(pPose).scale(1.0F, 0.575F);
         } else {
             return super.getDimensions(pPose);
@@ -317,6 +276,9 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     @Override
     public double getPassengersRidingOffset() {
+        if (this.isSitting()) {
+            return this.getDimensions(Pose.SITTING).height;
+        }
         return Mth.lerp(this.getInWaterTicks(), super.getPassengersRidingOffset(), super.getPassengersRidingOffset()*0.95D);
     }
 
@@ -348,76 +310,31 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             --this.headShakeAnimationTimeout;
         }
 
-        if (!(this.onGround() && (this.isInSittingPose() || (this.getSittingLag() < 7 && this.getSittingLag() > 0)))){
-            if (this.getSittingTime()>0){
-                if (this.sitEndAnimationState.isStarted())
-                    this.sitEndAnimationState.stop();
-                if (!this.sitStartAnimationState.isStarted())
-                    this.sitStartAnimationState.start(this.tickCount);
-            }else if (this.getStandingTime()>0){
-                if (this.sitIdleAnimationState.isStarted())
-                    this.sitIdleAnimationState.stop();
-                if (this.sitStartAnimationState.isStarted())
-                    this.sitStartAnimationState.stop();
-                if (!this.sitEndAnimationState.isStarted())
-                    this.sitEndAnimationState.start(this.tickCount);
-            }
-        }
-
-        if (this.isInSittingPose() && !this.sitStartAnimationState.isStarted()){
-            if (!this.sitIdleAnimationState.isStarted())
-                this.sitIdleAnimationState.start(this.tickCount);
-        }
-
     }
 
     @Override
-    public void tick() {
-
-        super.tick();
-
-        if (this.isVehicle()){
-            movement = new Vec3(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
-        }
-
-        if (this.isTame() && this.getSittingTime()==0 && this.getStandingTime()==0){
-            refreshDimensions();
-        }
-
-        if (this.getSittingTime()>0){
-            if (!this.getNavigation().isDone()){
-                this.getNavigation().stop();
-            }
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
-            int prev = this.getSittingTime();
-
-            if (this.getSittingTime()<6)
-                this.setSittingLag(getSittingTime()+5);
-
-            this.setSittingTime(prev-1);
-        } else if (this.getSittingLag()>0) {
-            if(this.getSittingLag()==1){
-                this.goalSelector.getRunningGoals().forEach(WrappedGoal::start);
-            }
-            int prev = this.getSittingLag();
-            this.setSittingLag(prev-1);
-        }
-
-        if (this.isInSittingPose()){
-            this.getNavigation().stop();
-        }
-
-        if (this.getStandingTime()>0){
-            if (!this.getNavigation().isDone()){
-                this.getNavigation().stop();
-            }
-            this.goalSelector.getRunningGoals().forEach(WrappedGoal::stop);
-            int prev = this.getStandingTime();
-            this.setStandingTime(prev-1);
-        }
-
-
+    public boolean canSit() {
+        return true;
     }
+
+    @Override
+    public int getSitDuration() {
+        return 40;
+    }
+
+    @Override
+    public int getStandDuration() {
+        return 60;
+    }
+
+    @Override
+    public void standUpInstantly() {
+        if (this.isVehicle()) {
+            this.ejectPassengers();
+        }
+        super.standUpInstantly();
+        this.setCommand(0);
+    } 
 
     @Override
     protected void tickRidden(Player pPlayer, Vec3 pTravelVector) {
@@ -480,7 +397,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
             if(!this.childAnimal.isPassenger() && this.childAnimal.isBaby()) {
                 this.josepho = this.childAnimal.level().getNearestEntity(Josephoartigasia.class, Josephoartigasia.ADULT_TO_RIDE, this.childAnimal, this.childAnimal.getX(), this.childAnimal.getY(), this.childAnimal.getZ(), this.childAnimal.getBoundingBox().inflate(6.0D, 2.0D, 6.0D));
-                if (josepho != null && !josepho.isBaby() && !josepho.isVehicle() && josepho.isInSittingPose()) {
+                if (josepho != null && !josepho.isBaby() && !josepho.isVehicle() && josepho.isSitting()) {
                     this.childAnimal.getNavigation().moveTo(this.childAnimal.getNavigation().createPath(josepho, 0), this.moveSpeed);
                     return true;
                 }
@@ -496,6 +413,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             if (adult!= null){
                 if (!adult.equals(this.childAnimal) && !adult.isBaby() && !adult.isVehicle()) {
                     this.childAnimal.startRiding(adult);
+                    this.childAnimal.sitDown();
                 }
             }
         }
@@ -512,9 +430,9 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     static class DismountGoal extends Goal {
 
-        private final Animal childAnimal;
+        private final Josephoartigasia childAnimal;
 
-        public DismountGoal(Animal child) {
+        public DismountGoal(Josephoartigasia child) {
             this.childAnimal = child;
         }
 
@@ -522,7 +440,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         public boolean canUse() {
             Entity entity = this.childAnimal.getVehicle();
             if (entity instanceof Josephoartigasia josepho){
-                if ((this.childAnimal.getRandom().nextInt(250) == 0 || (this.childAnimal.isPassenger() && !this.childAnimal.isBaby())) || !josepho.isInSittingPose()) {
+                if ((this.childAnimal.getRandom().nextInt(250) == 0 || (this.childAnimal.isPassenger() && !this.childAnimal.isBaby())) || !josepho.isSitting()) {
                     return true;
                 }
             }
@@ -535,11 +453,8 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         public void tick() {
             if (this.childAnimal.isPassenger()) {
                 this.childAnimal.stopRiding();
+                this.childAnimal.standUpInstantly();
             }
         }
-    }
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
     }
 }

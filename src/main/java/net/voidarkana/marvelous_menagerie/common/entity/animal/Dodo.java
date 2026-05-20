@@ -38,6 +38,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousAvoidWaterWanderGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.RandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
@@ -49,6 +51,7 @@ public class Dodo extends MarvelousAnimal {
     private int eggLayTime;
     private int initialEggTime;
     int prevTicksOffGround;
+    private int peckCounter;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE, Items.MELON, Items.PUMPKIN);
 
@@ -87,18 +90,19 @@ public class Dodo extends MarvelousAnimal {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new MarvelousAvoidWaterWanderGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new Dodo.DestroyMelonAndPumpkinGoal(this));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 2000));
         this.goalSelector.addGoal(5, new Dodo.DodoLookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new Dodo.DodoRandomLookAroundGoal(this));
-        super.registerGoals();
+        this.goalSelector.addGoal(9, new Dodo.RandomPeckGoal(this));
     }
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> PECKING_TIME = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> TICKS_OFF_GROUND = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> PECKING = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> CAN_PECK = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.BYTE);
 
     @Override
     protected void defineSynchedData() {
@@ -106,8 +110,9 @@ public class Dodo extends MarvelousAnimal {
         this.entityData.define(VARIANT, 0);
         this.entityData.define(PECKING_TIME, 0);
         this.entityData.define(TICKS_OFF_GROUND, 0);
-        this.entityData.define(PECKING, false);
         this.entityData.define(CAN_PECK, true);
+
+        this.entityData.define(DATA_ID_FLAGS, (byte)0);
     }
 
     //variants
@@ -138,14 +143,12 @@ public class Dodo extends MarvelousAnimal {
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("Variant", this.getVariant());
-        compound.putBoolean("isPecking", this.getIsPecking());
         compound.putBoolean("canPeck", this.getCanPeck());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setVariant(compound.getInt("Variant"));
-        this.setIsPecking(compound.getBoolean("isPecking"));
         this.setCanPeck(compound.getBoolean("canPeck"));
     }
 
@@ -188,15 +191,6 @@ public class Dodo extends MarvelousAnimal {
     public boolean isNika() {
         String s = ChatFormatting.stripFormatting(this.getName().getString());
         return s != null && s.toLowerCase().contains("nika");
-    }
-
-    //is pecking
-    public boolean getIsPecking() {
-        return this.entityData.get(PECKING);
-    }
-
-    public void setIsPecking(boolean pecking) {
-        this.entityData.set(PECKING, pecking);
     }
 
     //can peck
@@ -248,6 +242,16 @@ public class Dodo extends MarvelousAnimal {
             initialEggTime = eggLayTime;
         }
 
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.isEffectiveAi() && this.peckCounter > 0 && ++this.peckCounter > 30) {
+            this.peckCounter = 0;
+            this.setPecking(false);
+        }
     }
 
     protected SoundEvent getAmbientSound() {
@@ -311,6 +315,50 @@ public class Dodo extends MarvelousAnimal {
         return super.mobInteract(pPlayer, pHand);
     }
 
+    //SIT STUFF
+    @Override
+    public boolean canBeLeashed(Player player) {
+        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
+    }
+
+    @Override
+    public boolean canSit() {
+        return true;
+    }
+
+    @Override
+    public int getSitDuration() {
+        return 20;
+    }
+
+    @Override
+    public int getStandDuration() {
+        return 15;
+    }
+
+    //PECKING STUFF
+    public void setPecking(boolean pStanding) {
+        this.setFlag(32, pStanding);
+    }
+
+    protected boolean getFlag(int pFlagId) {
+        return (this.entityData.get(DATA_ID_FLAGS) & pFlagId) != 0;
+    }
+
+    public boolean isPecking() {
+        return this.getFlag(32);
+    }
+
+    protected void setFlag(int pFlagId, boolean pValue) {
+        byte b0 = this.entityData.get(DATA_ID_FLAGS);
+        if (pValue) {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 | pFlagId));
+        } else {
+            this.entityData.set(DATA_ID_FLAGS, (byte)(b0 & ~pFlagId));
+        }
+
+    }
+
     static class DestroyMelonAndPumpkinGoal extends MoveToBlockGoal {
         private final Dodo dodo;
         private int eatAnimationTick;
@@ -337,8 +385,8 @@ public class Dodo extends MarvelousAnimal {
 
             if (this.isReachedTarget()) {
 
-                if (!this.dodo.getIsPecking()){
-                    this.dodo.setIsPecking(true);
+                if (!this.dodo.isPecking()){
+                    this.dodo.setPecking(true);
                 }
 
                 if (this.dodo.getNavigation().getPath() != null) {
@@ -355,9 +403,6 @@ public class Dodo extends MarvelousAnimal {
                     }
 
                     this.nextStartTick = 10;
-                    this.dodo.setIsPecking(false);
-                } else if (this.eatAnimationTick == 0) {
-                    this.dodo.setIsPecking(false);
                 }
 
                 this.eatAnimationTick--;
@@ -367,7 +412,6 @@ public class Dodo extends MarvelousAnimal {
         public void stop() {
             this.nextStartTick = 10;
             this.eatAnimationTick = 0;
-            this.dodo.setIsPecking(false);
         }
 
         protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
@@ -377,131 +421,44 @@ public class Dodo extends MarvelousAnimal {
 
     }
 
-    public class DodoRandomLookAroundGoal extends Goal {
-        private final Mob mob;
-        private double relX;
-        private double relZ;
-        private int lookTime;
-
-        public DodoRandomLookAroundGoal(Mob mob) {
-            this.mob = mob;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+    public class DodoRandomLookAroundGoal extends RandomLookAroundGoal {
+        public DodoRandomLookAroundGoal(Mob pMob) {
+            super(pMob);
         }
 
         public boolean canUse() {
-            return !Dodo.this.getIsPecking() && this.mob.getRandom().nextFloat() < 0.02F;
+            if (Dodo.this.isPecking()){
+                return false;
+            }
+            return super.canUse();
         }
 
         public boolean canContinueToUse() {
-            return !Dodo.this.getIsPecking() && this.lookTime >= 0;
-        }
-
-        public void start() {
-            double d0 = (Math.PI * 2D) * this.mob.getRandom().nextDouble();
-            this.relX = Math.cos(d0);
-            this.relZ = Math.sin(d0);
-            this.lookTime = 20 + this.mob.getRandom().nextInt(20);
-        }
-
-        public boolean requiresUpdateEveryTick() {
-            return true;
-        }
-
-        public void tick() {
-            --this.lookTime;
-            this.mob.getLookControl().setLookAt(this.mob.getX() + this.relX, this.mob.getEyeY(), this.mob.getZ() + this.relZ);
+            if (Dodo.this.isPecking()){
+                return false;
+            }
+            return super.canUse();
         }
     }
 
 
-    public class DodoLookAtPlayerGoal extends Goal {
-        public static final float DEFAULT_PROBABILITY = 0.02F;
-        protected final Mob mob;
-        @javax.annotation.Nullable
-        protected Entity lookAt;
-        protected final float lookDistance;
-        private int lookTime;
-        protected final float probability;
-        private final boolean onlyHorizontal;
-        protected final Class<? extends LivingEntity> lookAtType;
-        protected final TargetingConditions lookAtContext;
-
+    public class DodoLookAtPlayerGoal extends LookAtPlayerGoal {
         public DodoLookAtPlayerGoal(Mob pMob, Class<? extends LivingEntity> pLookAtType, float pLookDistance) {
-            this(pMob, pLookAtType, pLookDistance, 0.02F);
-        }
-
-        public DodoLookAtPlayerGoal(Mob pMob, Class<? extends LivingEntity> pLookAtType, float pLookDistance, float pProbability) {
-            this(pMob, pLookAtType, pLookDistance, pProbability, false);
-        }
-
-        public DodoLookAtPlayerGoal(Mob pMob, Class<? extends LivingEntity> pLookAtType, float pLookDistance, float pProbability, boolean pOnlyHorizontal) {
-            this.mob = pMob;
-            this.lookAtType = pLookAtType;
-            this.lookDistance = pLookDistance;
-            this.probability = pProbability;
-            this.onlyHorizontal = pOnlyHorizontal;
-            this.setFlags(EnumSet.of(Goal.Flag.LOOK));
-            if (pLookAtType == Player.class) {
-                this.lookAtContext = TargetingConditions.forNonCombat().range((double)pLookDistance).selector((p_25531_) -> {
-                    return EntitySelector.notRiding(pMob).test(p_25531_);
-                });
-            } else {
-                this.lookAtContext = TargetingConditions.forNonCombat().range((double)pLookDistance);
-            }
-
+            super(pMob, pLookAtType, pLookDistance);
         }
 
         public boolean canUse() {
-
-            if (Dodo.this.getIsPecking()){
+            if (Dodo.this.isPecking()){
                 return false;
             }
-            if (this.mob.getRandom().nextFloat() >= this.probability) {
-                return false;
-            } else {
-                if (this.mob.getTarget() != null) {
-                    this.lookAt = this.mob.getTarget();
-                }
-
-                if (this.lookAtType == Player.class) {
-                    this.lookAt = this.mob.level().getNearestPlayer(this.lookAtContext, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
-                } else {
-                    this.lookAt = this.mob.level().getNearestEntity(this.mob.level().getEntitiesOfClass(this.lookAtType, this.mob.getBoundingBox().inflate((double)this.lookDistance, 3.0D, (double)this.lookDistance), (p_148124_) -> {
-                        return true;
-                    }), this.lookAtContext, this.mob, this.mob.getX(), this.mob.getEyeY(), this.mob.getZ());
-                }
-
-                return this.lookAt != null;
-            }
+            return super.canUse();
         }
 
         public boolean canContinueToUse() {
-            if (Dodo.this.getIsPecking()){
+            if (Dodo.this.isPecking()){
                 return false;
             }
-            if (!this.lookAt.isAlive()) {
-                return false;
-            } else if (this.mob.distanceToSqr(this.lookAt) > (double)(this.lookDistance * this.lookDistance)) {
-                return false;
-            } else {
-                return this.lookTime > 0;
-            }
-        }
-
-        public void start() {
-            this.lookTime = this.adjustedTickDelay(40 + this.mob.getRandom().nextInt(40));
-        }
-
-        public void stop() {
-            this.lookAt = null;
-        }
-
-        public void tick() {
-            if (this.lookAt.isAlive()) {
-                double d0 = this.onlyHorizontal ? this.mob.getEyeY() : this.lookAt.getEyeY();
-                this.mob.getLookControl().setLookAt(this.lookAt.getX(), d0, this.lookAt.getZ());
-                --this.lookTime;
-            }
+            return super.canUse();
         }
     }
     
@@ -526,7 +483,7 @@ public class Dodo extends MarvelousAnimal {
             --this.lookAnimationTimeout;
         }
 
-        if (this.getIsPecking() && this.peckingAnimationTimeout <= 0) {
+        if (this.isPecking() && this.peckingAnimationTimeout <= 0) {
             this.peckingAnimationTimeout = 30;
             this.peckingAnimationState.start(this.tickCount);
         } else {
@@ -542,8 +499,51 @@ public class Dodo extends MarvelousAnimal {
         }
     }
 
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return (pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) || pLevel.getBlockState(pPos.below()).is(Blocks.MYCELIUM))
-                && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
+    public void peckIfPossible() {
+        if (this.isEffectiveAi()) {
+            this.peckCounter = 1;
+            this.setPecking(true);
+        }
+    }
+
+    public class RandomPeckGoal extends Goal {
+        private final Dodo mob;
+        private int nextStand;
+
+        public RandomPeckGoal(Dodo mob) {
+            this.mob = mob;
+            this.resetStandInterval();
+        }
+
+        public void start() {
+            this.mob.peckIfPossible();
+            this.playStandSound();
+        }
+
+        private void playStandSound() {
+            this.mob.playSound(this.mob.getAmbientSound(), 1, this.mob.getVoicePitch());
+        }
+
+        public boolean canContinueToUse() {
+            return false;
+        }
+
+        public boolean canUse() {
+            --this.nextStand;
+            if (this.nextStand > 0 && this.mob.getRandom().nextInt(this.nextStand) == 0 ) {
+                this.resetStandInterval();
+                return !this.mob.isImmobile() && this.mob.onGround();
+            } else {
+                return false;
+            }
+        }
+
+        private void resetStandInterval() {
+            this.nextStand = 600;
+        }
+
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
     }
 }

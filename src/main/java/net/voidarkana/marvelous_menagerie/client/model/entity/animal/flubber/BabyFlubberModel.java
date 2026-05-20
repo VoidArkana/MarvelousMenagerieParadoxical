@@ -4,11 +4,14 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber;//
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyFlubberAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsBasics;
+import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsIdle;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Flubber;
 
@@ -106,17 +109,22 @@ public class BabyFlubberModel<T extends Flubber> extends MarvelousModel<T> {
 				this.applyStatic(BabyFlubberAnims.LAND_IDLE_POSE);
 		}
 
-		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_LAND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f)));
+		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_LAND_IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f))));
+
+		this.animate(entity.standUpAnimationState, BabyFlubberAnims.BABY_ROLL_END, ageInTicks);
+		this.animate(entity.sitAnimationState, BabyFlubberAnims.BABY_ROLL_START_OVERLAY, ageInTicks);
+		this.animate(entity.sitPoseAnimationState, BabyFlubberAnims.BABY_ROLL_POSE_OVERLAY, ageInTicks);
+		this.animate(entity.bellyDrumAnimationState, BabyFlubberAnims.BELLY_SLAP, ageInTicks);
+
 		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount));
 
 		this.animateWalk(BabyFlubberAnims.BABY_SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 1.5f, 2.5f);
-		this.animateWalk(BabyFlubberAnims.BABY_WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 2, 2.5f);
 
-//		this.animate(entity.landDanceAnimationState, FlubberAnimsBasics.CELEBRATION_LAND, ageInTicks);
-//		this.animate(entity.waterDanceAnimationState1, FlubberAnimsBasics.CELEBRATION_WATER_1, ageInTicks);
-//		this.animate(entity.waterDanceAnimationState2, FlubberAnimsBasics.CELEBRATION_WATER_2, ageInTicks);
-//		this.animate(entity.waterDigAnimationState, FlubberAnimsBasics.SWIM_DIG_OVERLAY, ageInTicks);
-//		this.animate(entity.landDigAnimationState, FlubberAnimsBasics.LAND_DIG, ageInTicks);
+		if (!entity.isSitting())
+			this.animateWalk(BabyFlubberAnims.BABY_WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 2, 2.5f);
+
+		this.animate(entity.sniffState, FlubberAnimsIdle.SNIFF, ageInTicks);
+		this.animate(entity.snortState, FlubberAnimsIdle.SNORT, ageInTicks);
 
 		float prevHeadxRot = this.neck.xRot;
 		float prevHeadyRot = this.neck.yRot;

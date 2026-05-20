@@ -42,9 +42,6 @@ import java.util.stream.Stream;
 //TODO: only join leader in boids if the school is of the right size
 public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
-
-    public final AnimationState idleAnimationState = new AnimationState();
-
     @javax.annotation.Nullable
     public Arandaspis leader;
     public int schoolSize = 1;
@@ -248,10 +245,6 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }
-    }
-
-    private void setupAnimationStates() {
-        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
     }
 
     @Override

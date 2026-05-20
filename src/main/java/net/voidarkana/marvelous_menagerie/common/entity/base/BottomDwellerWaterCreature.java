@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.control.*;
 import net.minecraft.world.entity.ai.navigation.AmphibiousPathNavigation;
@@ -96,5 +97,10 @@ public abstract class BottomDwellerWaterCreature extends BreedableWaterAnimal {
     @Override
     public float getWalkTargetValue(BlockPos pPos, LevelReader pLevel) {
         return pLevel.getFluidState(pPos.above()).is(FluidTags.WATER) ? 0F : super.getWalkTargetValue(pPos, pLevel);
+    }
+
+    public void calculateEntityAnimation(boolean pIncludeHeight) {
+        float f = (float) Mth.length(this.getX() - this.xo, 0.0D, this.getZ() - this.zo);
+        this.updateWalkAnimation(f);
     }
 }

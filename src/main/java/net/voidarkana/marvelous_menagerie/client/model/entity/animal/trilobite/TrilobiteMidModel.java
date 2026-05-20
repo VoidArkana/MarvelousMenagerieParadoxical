@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteExtraAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteMidAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
@@ -122,6 +123,10 @@ public class TrilobiteMidModel<T extends Trilobite> extends MarvelousModel<T> {
 		}
 
 		this.animateIdle(entity.idleAnimationState, TrilobiteMidAnims.IDLE_MID, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
+
+		this.animate(entity.standUpAnimationState, TrilobiteExtraAnims.BURROW_END_MID, ageInTicks);
+		this.animate(entity.sitAnimationState, TrilobiteExtraAnims.BURROW_START_MID, ageInTicks);
+		this.animate(entity.sitPoseAnimationState, TrilobiteExtraAnims.BURROW_MID, ageInTicks);
 
 		applyStatic(TrilobiteMidAnims.BASE_MID);
 	}

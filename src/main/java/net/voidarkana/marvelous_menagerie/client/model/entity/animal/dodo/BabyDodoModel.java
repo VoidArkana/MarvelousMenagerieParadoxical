@@ -75,11 +75,15 @@ public class BabyDodoModel<T extends Dodo> extends MarvelousModel<T> {
 
 		if (!entity.isInWaterOrBubble()){
 
-			if (entity.isSprinting()){
-				animateWalk(BabyDodoAnims.RUN, limbSwing/2, limbSwingAmount, 1.5f, 1);
-			}else {
-				animateWalk(BabyDodoAnims.WALK, limbSwing/2, limbSwingAmount, 2f, 2.5f);
-			}
+			this.animate(entity.standUpAnimationState, BabyDodoAnims.STAND_UP, ageInTicks, 1);
+			this.animate(entity.sitAnimationState, BabyDodoAnims.SIT, ageInTicks, 1);
+			this.animate(entity.sitPoseAnimationState, BabyDodoAnims.SIT_POSE, ageInTicks, 1);
+			if (!entity.isSitting())
+				if (entity.isSprinting()){
+					animateWalk(BabyDodoAnims.RUN, limbSwing/2, limbSwingAmount, 1.5f, 1);
+				}else {
+					animateWalk(BabyDodoAnims.WALK, limbSwing/2, limbSwingAmount, 2f, 2.5f);
+				}
 
 			this.animate(entity.peckingAnimationState, BabyDodoAnims.PECK, ageInTicks, 1);
 		}

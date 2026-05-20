@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.entity.base;
 
+import com.google.common.annotations.VisibleForTesting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.BlockPos;
@@ -13,12 +14,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -46,16 +49,31 @@ import java.util.UUID;
 public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public float currentRoll = 0.0F;
+    public float prevRoll;
 
     private static final EntityDataAccessor<Boolean> IS_INVENTORY = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> OUT_OF_WATER_TICKS = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Long> LAST_POSE_CHANGE_TICK = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.LONG);
+
     public static final int BABY_START_AGE = -24000;
     private static final int FORCED_AGE_PARTICLE_TICKS = 40;
     protected int age;
     protected int forcedAge;
     protected int forcedAgeTimer;
     int prevTicksOutOfWater;
+
+    public final AnimationState idleAnimationState = new AnimationState();
+    public final AnimationState sitAnimationState = new AnimationState();
+    public final AnimationState standUpAnimationState = new AnimationState();
+    public final AnimationState sitPoseAnimationState = new AnimationState();
+
+    @Override
+    public boolean isImmobile() {
+        if (this.canSit())
+            return this.isSitting() || this.isInPoseTransition() || super.isImmobile();
+        return super.isImmobile();
+    }
 
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
 
@@ -68,6 +86,9 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         AgeableFishGroupData ageablemob$ageablemobgroupdata = (AgeableFishGroupData)pSpawnData;
         if (ageablemob$ageablemobgroupdata.isShouldSpawnBaby() && ageablemob$ageablemobgroupdata.getGroupSize() > 0 && pLevel.getRandom().nextFloat() <= ageablemob$ageablemobgroupdata.getBabySpawnChance()) {
             this.setAge(-24000);
+        }
+        if (this.canSit()){
+            this.resetLastPoseChangeTickToFullStand(pLevel.getLevel().getGameTime());
         }
 
         ageablemob$ageablemobgroupdata.increaseGroupSizeByOne();
@@ -198,9 +219,62 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
     }
 
+    @Override
+    public void tick() {
+        if (this.level().isClientSide()){
+            this.setupAnimationStates();
+        }
+        super.tick();
+        if (this.canSit()){
+            if (this.refuseToMove()) {
+                this.clampHeadRotationToBody(this, 30.0F);
+            }
 
+            if (this.isSitting() && !this.isInWaterOrBubble()) {
+                this.standUpInstantly();
+            }
+        }
+    }
 
+    public void setupAnimationStates() {
+        this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
 
+        if (this.canSit()){
+            if (this.isVisuallySitting()) {
+                this.standUpAnimationState.stop();
+                if (this.isVisuallySittingDown()) {
+                    this.sitAnimationState.startIfStopped(this.tickCount);
+                    this.sitPoseAnimationState.stop();
+                } else {
+                    this.sitAnimationState.stop();
+                    this.sitPoseAnimationState.startIfStopped(this.tickCount);
+                }
+            } else {
+                this.sitAnimationState.stop();
+                this.sitPoseAnimationState.stop();
+                this.standUpAnimationState.animateWhen(this.isInPoseTransition() && this.getPoseTime() >= 0L, this.tickCount);
+            }
+        }
+    }
+
+    private void clampHeadRotationToBody(Entity pEntity, float p_265541_) {
+        float f = pEntity.getYHeadRot();
+        float f1 = Mth.wrapDegrees(this.yBodyRot - f);
+        float f2 = Mth.clamp(Mth.wrapDegrees(this.yBodyRot - f), -p_265541_, p_265541_);
+        float f3 = f + f1 - f2;
+        pEntity.setYHeadRot(f3);
+    }
+
+    protected void onLeashDistance(float pDistance) {
+        if (pDistance > 6.0F && this.isSitting() && !this.isInPoseTransition()) {
+            this.standUp();
+        }
+    }
+
+    protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
+        this.standUpInstantly();
+        super.actuallyHurt(pDamageSource, pDamageAmount);
+    }
 
     //animal
 
@@ -480,6 +554,107 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
             this.lookControl = new SmoothSwimmingLookControl(this, 10);
         }
+
+    }
+
+    protected BodyRotationControl createBodyControl() {
+        if (this.canSit())
+            return new BreedableWaterAnimal.SittingAnimalBodyRotationControl(this);
+        else
+            return super.createBodyControl();
+    }
+
+    class SittingAnimalBodyRotationControl extends BodyRotationControl {
+        public SittingAnimalBodyRotationControl(BreedableWaterAnimal pCamel) {
+            super(pCamel);
+        }
+
+        public void clientTick() {
+            if (!BreedableWaterAnimal.this.refuseToMove()) {
+                super.clientTick();
+            }
+
+        }
+    }
+
+    public boolean canSit(){
+        return false;
+    }
+
+    public boolean refuseToMove() {
+        return this.isSitting() || this.isInPoseTransition();
+    }
+
+    public boolean isSitting() {
+        return this.entityData.get(LAST_POSE_CHANGE_TICK) < 0L;
+    }
+
+    public boolean isVisuallySitting() {
+        return this.getPoseTime() < 0L != this.isSitting();
+    }
+
+    public int getSitDuration(){
+        return 0;
+    }
+
+    public int getStandDuration(){
+        return 0;
+    }
+
+    public boolean isInPoseTransition() {
+        long i = this.getPoseTime();
+        return i < (long)(this.isSitting() ? this.getSitDuration() : this.getStandDuration());
+    }
+
+    public boolean isVisuallySittingDown() {
+        return this.isSitting() && this.getPoseTime() < this.getSitDuration() && this.getPoseTime() >= 0L;
+    }
+
+    public void sitDown() {
+        if (!this.isSitting()) {
+            this.setPose(Pose.SITTING);
+            this.resetLastPoseChangeTick(-this.level().getGameTime());
+            this.refreshDimensions();
+        }
+    }
+
+    public void standUp() {
+        if (this.isSitting()) {
+            this.setPose(Pose.STANDING);
+            this.resetLastPoseChangeTick(this.level().getGameTime());
+            if (this.isVehicle()){
+                for(int i = this.getPassengers().size() - 1; i >= 0; --i) {
+                    if (!(this.getPassengers().get(i) instanceof Player))
+                        this.getPassengers().get(i).stopRiding();
+                }
+            }
+            this.refreshDimensions();
+        }
+    }
+
+    public void standUpInstantly() {
+        this.setPose(Pose.STANDING);
+        this.resetLastPoseChangeTickToFullStand(this.level().getGameTime());
+    }
+
+    protected void tickRidden(Player pPlayer, Vec3 pTravelVector) {
+        super.tickRidden(pPlayer, pTravelVector);
+        if (this.canSit()&& pPlayer.zza > 0.0F && this.isSitting() && !this.isInPoseTransition()) {
+            this.standUp();
+        }
+    }
+
+    @VisibleForTesting
+    public void resetLastPoseChangeTick(long pLastPoseChangeTick) {
+        this.entityData.set(LAST_POSE_CHANGE_TICK, pLastPoseChangeTick);
+    }
+
+    private void resetLastPoseChangeTickToFullStand(long pLastPoseChangedTick) {
+        this.resetLastPoseChangeTick(Math.max(0L, pLastPoseChangedTick - this.getStandDuration() - 1L));
+    }
+
+    public long getPoseTime() {
+        return this.level().getGameTime() - Math.abs(this.entityData.get(LAST_POSE_CHANGE_TICK));
     }
 
     public boolean hasNormalControls(){
@@ -493,6 +668,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.entityData.define(IS_INVENTORY, true);
         this.entityData.define(DATA_BABY_ID, false);
         this.entityData.define(OUT_OF_WATER_TICKS, 0);
+        this.entityData.define(LAST_POSE_CHANGE_TICK, 0L);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -508,6 +684,10 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         if (this.loveCause != null) {
             pCompound.putUUID("LoveCause", this.loveCause);
         }
+
+        if (this.canSit()){
+            pCompound.putLong("LastPoseTick", this.entityData.get(LAST_POSE_CHANGE_TICK));
+        }
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
@@ -521,6 +701,15 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
         this.inLove = pCompound.getInt("InLove");
         this.loveCause = pCompound.hasUUID("LoveCause") ? pCompound.getUUID("LoveCause") : null;
+
+        if (this.canSit()){
+            long i = pCompound.getLong("LastPoseTick");
+            if (i < 0L) {
+                this.setPose(Pose.SITTING);
+            }
+
+            this.resetLastPoseChangeTick(i);
+        }
     }
 
     @Override
@@ -620,10 +809,10 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
         //fish
 
-        float prevRoll =  this.currentRoll;
+        this.prevRoll =  this.currentRoll;
         float targetRoll = Math.max(-0.45F, Math.min(0.45F, (this.getYRot() - this.yRotO) * 0.1F));
         targetRoll = -targetRoll;
-        this.currentRoll = prevRoll + (targetRoll - prevRoll) * 0.05F;
+        this.currentRoll += (targetRoll - this.currentRoll) * 0.05F;
 
         if (this.isAlive() && !this.getCanGrowUp()) {
             if (this.getAge() >- 500){
@@ -759,6 +948,11 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         int i = pLevel.getSeaLevel();
         int j = i - 13;
         return pPos.getY() >= j && pPos.getY() <= i && pLevel.getFluidState(pPos.below()).is(FluidTags.WATER) && pLevel.getBlockState(pPos.above()).is(Blocks.WATER) && CommonConfig.NATURAL_SPAWNS.get();
+    }
+
+    public void calculateEntityAnimation(boolean pIncludeHeight) {
+        float f = (float) Mth.length(this.getX() - this.xo, this.getY() - this.yo, this.getZ() - this.zo);
+        this.updateWalkAnimation(f);
     }
 
 }

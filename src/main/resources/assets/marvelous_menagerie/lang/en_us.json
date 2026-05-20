@@ -252,6 +252,14 @@
   "marvelous_menagerie.sound.subtitle.doedicurus_hurt": "Doedicurus hurts",
   "marvelous_menagerie.sound.subtitle.doedicurus_death": "Doedicurus dies",
 
+  "entity.marvelous_menagerie.myotragus": "Myotragus",
+  "item.marvelous_menagerie.myotragus_fossil": "Myotragus Fossil",
+  "item.marvelous_menagerie.myotragus_spawn_egg": "Myotragus Spawn Egg",
+
+  "entity.marvelous_menagerie.tiktaalik": "Tiktaalik",
+  "item.marvelous_menagerie.tiktaalik_fossil": "Tiktaalik Fossil",
+  "item.marvelous_menagerie.tiktaalik_spawn_egg": "Tiktaalik Spawn Egg",
+
   "entity.marvelous_menagerie.inostrancevia": "Inostrancevia",
   "item.marvelous_menagerie.gorgon_fossil": "Inostrancevia Fossil",
 
@@ -629,7 +637,7 @@
   "book.marvelous_menagerie.anomalies.ritual": "Harnessing Time",
   "book.marvelous_menagerie.anomalies.resources": "Resources",
   "book.marvelous_menagerie.early_paleo": "Early Paleozoic",
-  "book.marvelous_menagerie.carboniferous": "Carboniferous",
+  "book.marvelous_menagerie.carboniferous": "Mid-Paleozoic",
   "book.marvelous_menagerie.permian": "Permian",
   "book.marvelous_menagerie.triassic": "Triassic",
   "book.marvelous_menagerie.jurassic": "Jurassic",
@@ -754,6 +762,10 @@
   "advancements.marvelous_menagerie.thylacine.description" : "Bring back a Thylacine, a skittish wolf-like marsupial",
   "advancements.marvelous_menagerie.trilobite.title" : "Let's Go Gambling!",
   "advancements.marvelous_menagerie.trilobite.description" : "Encounter a Trilobite, a creature that can come in many shapes and colors",
+  "advancements.marvelous_menagerie.myotragus.title" : "Not Very Goated",
+  "advancements.marvelous_menagerie.myotragus.description" : "Encounter a Myotragus, a strange goat with forward-facing eyes",
+  "advancements.marvelous_menagerie.tiktaalik.title" : "Go, Grandpa!",
+  "advancements.marvelous_menagerie.tiktaalik.description" : "Bear witness to Tikaalik, one of the first fish to be able to go on land",
 
   "advancements.marvelous_menagerie.warning.title" : "Flashing Lights Warning!",
   "advancements.marvelous_menagerie.warning.description" : "Interacting with Hallucigenia might cause bright flashes in your screen. Proceed with caution!",

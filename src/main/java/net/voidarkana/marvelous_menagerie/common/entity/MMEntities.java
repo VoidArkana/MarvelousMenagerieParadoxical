@@ -3,6 +3,7 @@ package net.voidarkana.marvelous_menagerie.common.entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -187,6 +188,18 @@ public class MMEntities {
                             .sized(1.2f, 1.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "flubber").toString()));
 
+    public static final RegistryObject<EntityType<Myotragus>> MYOTRAGUS =
+            ENTITY_TYPES.register("myotragus",
+                    () -> EntityType.Builder.of(Myotragus::new, MobCategory.CREATURE)
+                            .sized(0.9F, 1.3F)
+                            .clientTrackingRange(10)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "myotragus").toString()));
+
+    public static final RegistryObject<EntityType<Tiktaalik>> TIKTAALIK =
+            ENTITY_TYPES.register("tiktaalik",
+                    () -> EntityType.Builder.of(Tiktaalik::new, MobCategory.CREATURE)
+                            .sized(0.75F, 0.35F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tiktaalik").toString()));
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =

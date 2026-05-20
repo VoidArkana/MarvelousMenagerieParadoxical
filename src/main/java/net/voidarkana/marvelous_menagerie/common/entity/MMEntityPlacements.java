@@ -36,6 +36,8 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.BOREALOPELTA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Borealopelta::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.DIPLOCAULUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Diplocaulus::checkSurfaceWaterCreatureRules);
         SpawnPlacements.register(MMEntities.FLUBBER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Flubber::checkAnimalSpawnRules);
+        SpawnPlacements.register(MMEntities.MYOTRAGUS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Myotragus::checkAnimalSpawnRules);
+        SpawnPlacements.register(MMEntities.TIKTAALIK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Tiktaalik::checkSurfaceWaterCreatureRules);
 
     }
 

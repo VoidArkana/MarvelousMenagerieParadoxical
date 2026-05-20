@@ -70,6 +70,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.STELLER_MILK.get());
                         output.accept(MMItems.STELLER_ICE_CREAM.get());
 
+                        output.accept(MMItems.TIKTAALIK_BUCKET.get());
+
                         output.accept(MMItems.TRILO_BUCKET.get());
                         output.accept(MMItems.TRILO_BITE.get());
 
@@ -90,6 +92,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.GORGON_FOSSIL.get());
                         output.accept(MMItems.JOSEPHO_FOSSIL.get());
                         output.accept(MMItems.KELENKEN_FOSSIL.get());
+                        output.accept(MMItems.MYOTRAGUS_FOSSIL.get());
                         output.accept(MMItems.LEPTI_FOSSIL.get());
                         output.accept(MMItems.LYSTRO_FOSSIL.get());
                         output.accept(MMItems.OPHTHALMO_FOSSIL.get());
@@ -98,6 +101,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.SLOV_FOSSIL.get());
                         output.accept(MMItems.SNIFFER_FOSSIL.get());
                         output.accept(MMItems.STELLER_FOSSIL.get());
+                        output.accept(MMItems.TIKTAALIK_FOSSIL.get());
                         output.accept(MMItems.THERI_FOSSIL.get());
                         output.accept(MMItems.THYLACINE_FOSSIL.get());
                         output.accept(MMItems.TLATO_FOSSIL.get());
@@ -121,11 +125,13 @@ public class MMCreativeTabs {
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
                         output.accept(MMItems.JOSEPHO_SPAWN_EGG.get());
                         output.accept(MMItems.LEPTICTIDIUM_SPAWN_EGG.get());
+                        output.accept(MMItems.MYOTRAGUS_SPAWN_EGG.get());
                         output.accept(MMItems.OPHTHALMO_SPAWN_EGG.get());
                         output.accept(MMItems.PIKAIA_SPAWN_EGG.get());
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
                         output.accept(MMItems.STELLER_SPAWN_EGG.get());
+                        output.accept(MMItems.TIKTAALIK_SPAWN_EGG.get());
                         output.accept(MMItems.THYLA_SPAWN_EGG.get());
                         output.accept(MMItems.TRILOBITE_SPAWN_EGG.get());
 

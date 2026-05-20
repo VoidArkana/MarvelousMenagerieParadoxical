@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#marvelous_menagerie:is_tiktaalik_biome",
+  "spawners": {
+    "type": "marvelous_menagerie:tiktaalik",
+    "weight": 5,
+    "minCount": 2,
+    "maxCount": 4,
+    "category": "creature"
+  }
+}

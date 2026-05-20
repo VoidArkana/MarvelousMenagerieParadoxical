@@ -45,6 +45,7 @@ public class RiftEntity extends Monster {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, 0);
     }
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -121,6 +122,8 @@ public class RiftEntity extends Monster {
         if (pReason == MobSpawnType.STRUCTURE){
             this.setIsNatural(false);
         }
+
+        this.setYRot(this.getRandom().nextInt(0, 360));
 
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }

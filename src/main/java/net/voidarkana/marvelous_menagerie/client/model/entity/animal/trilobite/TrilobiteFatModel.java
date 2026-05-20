@@ -8,9 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.HallucigeniaAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.*;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
 
@@ -118,6 +116,10 @@ public class TrilobiteFatModel<T extends Trilobite> extends MarvelousModel<T> {
 		this.animateIdle(entity.idleAnimationState, TrilobiteAnims.IDLE_FAT, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
 
 		this.animate(entity.spinIdleAnimationState, TrilobiteAnims.SPIN_FAT, ageInTicks, 1.0F);
+
+		this.animate(entity.standUpAnimationState, TrilobiteExtraAnims.BURROW_END_FAT, ageInTicks);
+		this.animate(entity.sitAnimationState, TrilobiteExtraAnims.BURROW_START_FAT, ageInTicks);
+		this.animate(entity.sitPoseAnimationState, TrilobiteExtraAnims.BURROW_FAT, ageInTicks);
 
 		applyStatic(TrilobiteAnims.BASE_FAT);
 	}

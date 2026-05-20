@@ -1,0 +1,123 @@
+{
+  "parent": "carboniferous/index.json",
+  "text": "animals/tiktaalik.txt",
+  "title": "entity.marvelous_menagerie.tiktaalik",
+  "widgets": [
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/tiktaalik_book.png",
+      "sepia": true,
+      "x": 64,
+      "y": 60,
+      "scale": 0.6,
+      "u0": 0,
+      "v0": 0,
+      "u1": 128,
+      "v1": 128,
+      "width": 128,
+      "height": 128
+    },
+
+
+
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 26,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 30,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+    {
+      "display_page" : 1,
+      "type": "image",
+      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
+      "sepia": true,
+      "x": 98,
+      "y": 94,
+      "scale": 1.2,
+      "u0": 0,
+      "v0": 0,
+      "u1": 26,
+      "v1": 20,
+      "width": 32,
+      "height": 32
+    },
+
+
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:tiktaalik_fossil",
+      "sepia": true,
+      "x": 30,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:sigillaria_log",
+      "sepia": true,
+      "x": 98,
+      "y": 25,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:cod_bucket",
+      "sepia": true,
+      "x": 30,
+      "y": 93,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:mud",
+      "sepia": true,
+      "x": 98,
+      "y": 93,
+      "scale": 1
+    }
+  ]
+}

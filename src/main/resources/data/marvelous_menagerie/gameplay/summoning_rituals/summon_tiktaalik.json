@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "tag": "minecraft:axolotl_tempt_items"
+  },
+  "input2": {
+    "tag": "marvelous_menagerie:sigillaria_log_item"
+  },
+  "input3": {
+    "item": "minecraft:mud"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:tiktaalik_fossil"
+  },
+  "output": "marvelous_menagerie:tiktaalik"
+}

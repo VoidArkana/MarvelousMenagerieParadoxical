@@ -83,6 +83,7 @@ public class DawnHorseModel<T extends DawnHorse> extends MarvelousModel<T> {
 		this.animate(entity.idleEarsState, DawnHorseAnims.IDLE_EARS, ageInTicks, 1.0F);
 
 		this.animate(entity.idleTailState, DawnHorseAnims.IDLE_TAIL, ageInTicks, 1.0F);
+		this.animate(entity.neighState, DawnHorseAnims.NEIGH, ageInTicks, 1.0F);
 
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F);

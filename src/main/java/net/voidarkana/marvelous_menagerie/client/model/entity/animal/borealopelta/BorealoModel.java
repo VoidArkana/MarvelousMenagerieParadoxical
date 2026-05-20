@@ -118,6 +118,10 @@ public class BorealoModel<T extends Borealopelta> extends MarvelousModel<T> {
 			this.animate(entity.attackAnimationState2, BorealoAnims.ATTACK_2, ageInTicks, 1F);
 
 			this.animate(entity.idleShakeState, BorealoAnims.SHAKE, ageInTicks, 1);
+
+			this.animate(entity.standUpAnimationState, BorealoAnims.SIT_END, ageInTicks, 1);
+			this.animate(entity.sitAnimationState, BorealoAnims.SIT_START, ageInTicks, 1);
+			this.animate(entity.sitPoseAnimationState, BorealoAnims.SIT_POSE, ageInTicks, 1);
 		}
 
 		this.animateIdle(entity.idleAnimationState, BorealoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);

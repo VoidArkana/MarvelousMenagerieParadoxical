@@ -22,6 +22,10 @@
       "item": "marvelous_menagerie:elebird_fossil"
     },
     {
+      "weight": 10,
+      "item": "marvelous_menagerie:myotragus_fossil"
+    },
+    {
       "weight": 13,
       "item": "marvelous_menagerie:doedicurus_fossil"
     },

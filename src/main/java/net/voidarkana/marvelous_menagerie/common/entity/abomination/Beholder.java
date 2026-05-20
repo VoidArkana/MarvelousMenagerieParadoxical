@@ -265,6 +265,11 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
         this.attackAnimationTimeout = attackAnimationTimeout;
     }
 
+    @Override
+    public @org.jetbrains.annotations.Nullable SoundEvent getAttackSound() {
+        return SoundEvents.EVOKER_FANGS_ATTACK;
+    }
+
     public void tick (){
 
         if (this.getGrabbingTicks()>0){
@@ -616,7 +621,7 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
         }
     }
 
-    public class BeholderAttackGoal extends AnimatedAttackGoal{
+    public class BeholderAttackGoal extends AnimatedAttackGoal {
 
         private final Beholder beholder;
 

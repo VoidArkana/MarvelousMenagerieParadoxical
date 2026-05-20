@@ -16,6 +16,10 @@
     {
       "weight": 17,
       "item": "marvelous_menagerie:trilo_fossil"
+    },
+    {
+      "weight": 11,
+      "item": "marvelous_menagerie:tiktaalik_fossil"
     }
   ]
 }

@@ -10,6 +10,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.TrilobiteExtraAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
 
@@ -102,6 +103,10 @@ public class TrilobiteIttyModel<T extends Trilobite> extends MarvelousModel<T> {
 		this.animateWalk(TrilobiteAnims.WALK_SMALL, limbSwing, limbSwingAmount, 10f, 100);
 
 		this.animateIdle(entity.idleAnimationState, TrilobiteAnims.IDLE_SMALL, ageInTicks, 1, 1-Math.abs(limbSwingAmount));
+
+		this.animate(entity.standUpAnimationState, TrilobiteExtraAnims.BURROW_END_SMALL, ageInTicks);
+		this.animate(entity.sitAnimationState, TrilobiteExtraAnims.BURROW_START_SMALL, ageInTicks);
+		this.animate(entity.sitPoseAnimationState, TrilobiteExtraAnims.BURROW_SMALL, ageInTicks);
 
 		applyStatic(TrilobiteAnims.BASE_SMALL);
 	}

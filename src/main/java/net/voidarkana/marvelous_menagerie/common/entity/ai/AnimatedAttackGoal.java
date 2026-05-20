@@ -1,52 +1,137 @@
 package net.voidarkana.marvelous_menagerie.common.entity.ai;
 
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.pathfinder.Path;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 
-public class AnimatedAttackGoal extends MeleeAttackGoal {
-    private final LivingEntity entity;
-    private int attackDelay;
+import java.util.EnumSet;
+
+public class AnimatedAttackGoal extends Goal {
+    protected final PathfinderMob mob;
+    private final double speedModifier;
+    private final boolean followingTargetEvenIfNotSeen;
+    private Path path;
+    private int ticksUntilNextPathRecalculation;
     private int ticksUntilNextAttack;
+    private final int attackInterval = 20;
+    private long lastCanUseCheck;
+    private static final long COOLDOWN_BETWEEN_CAN_USE_CHECKS = 20L;
+
+    private int attackDelay;
     private int attackDelayStored; //7
     private int ticksUntilNextAttackStored; //13
     private boolean shouldCountTillNextAttack = false;
 
     public AnimatedAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen, int pAttackDelay, int pTicksUntilNextAttack) {
-        super(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen);
-        entity = pMob;
-        attackDelayStored = pAttackDelay;
-        ticksUntilNextAttackStored = pTicksUntilNextAttack;
+        this.mob = pMob;
+        this.speedModifier = pSpeedModifier;
+        this.followingTargetEvenIfNotSeen = pFollowingTargetEvenIfNotSeen;
+        this.attackDelayStored = pAttackDelay;
+        this.ticksUntilNextAttackStored = pTicksUntilNextAttack;
+        this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
     }
 
-    @Override
+    public boolean canUse() {
+        long i = this.mob.level().getGameTime();
+        if (i - this.lastCanUseCheck < 20L) {
+            return false;
+        } else {
+            this.lastCanUseCheck = i;
+            LivingEntity livingentity = this.mob.getTarget();
+            if (livingentity == null) {
+                return false;
+            } else {
+                return livingentity.isAlive();
+            }
+        }
+    }
+
+    public boolean canContinueToUse() {
+        LivingEntity livingentity = this.mob.getTarget();
+        if (livingentity == null) {
+            return false;
+        } else if (!livingentity.isAlive()) {
+            return false;
+        } else if (!this.followingTargetEvenIfNotSeen) {
+            return !this.mob.getNavigation().isDone();
+        } else if (!this.mob.isWithinRestriction(livingentity.blockPosition())) {
+            return false;
+        } else {
+            return !(livingentity instanceof Player) || !livingentity.isSpectator() && !((Player)livingentity).isCreative();
+        }
+    }
+
     public void start() {
-        super.start();
-        attackDelay = attackDelayStored;
-        ticksUntilNextAttack = ticksUntilNextAttackStored;
+        this.mob.getNavigation().moveTo(this.path, this.speedModifier);
+        this.mob.setAggressive(true);
+        this.ticksUntilNextPathRecalculation = 0;
+        this.ticksUntilNextAttack = 0;
+        this.attackDelay = this.attackDelayStored;
+        this.ticksUntilNextAttack = this.ticksUntilNextAttackStored;
     }
 
-    @Override
+    public void stop() {
+        LivingEntity livingentity = this.mob.getTarget();
+        if (!EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(livingentity)) {
+            this.mob.setTarget(null);
+        }
+
+        this.mob.setAggressive(false);
+        this.mob.getNavigation().stop();
+
+        if (this.mob instanceof IAnimatedAttacker attacker)
+            attacker.setAttacking(false);
+    }
+
+    public boolean requiresUpdateEveryTick() {
+        return true;
+    }
+
+    public void tick() {
+        LivingEntity livingentity = this.mob.getTarget();
+        if (livingentity != null) {
+            double distance = this.mob.distanceToSqr(livingentity);
+
+            if(shouldCountTillNextAttack) {
+                this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
+            }
+
+            this.checkAndPerformAttack(livingentity, distance);
+
+            if ((this.followingTargetEvenIfNotSeen || this.mob.getSensing().hasLineOfSight(livingentity)) && distance > 0.5f){
+                this.mob.getLookControl().setLookAt(livingentity, 30.0F, 30.0F);
+                this.mob.getNavigation().moveTo(livingentity, this.speedModifier);
+            }else {
+                this.mob.getNavigation().stop();
+            }
+        }
+    }
+
     protected void checkAndPerformAttack(LivingEntity pEnemy, double pDistToEnemySqr) {
         if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
             shouldCountTillNextAttack = true;
 
             if(isTimeToStartAttackAnimation()) {
-                if (entity instanceof IAnimatedAttacker attacker)
+                if (this.mob instanceof IAnimatedAttacker attacker)
                     attacker.setAttacking(true);
             }
 
             if(isTimeToAttack()) {
-                this.mob.getLookControl().setLookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
                 performAttack(pEnemy);
+                if (this.mob instanceof IAnimatedAttacker attacker)
+                    if (attacker.getAttackSound() != null)
+                        this.mob.playSound(attacker.getAttackSound(), 0.75f, this.mob.getVoicePitch());
             }
         } else {
             resetAttackCooldown();
             shouldCountTillNextAttack = false;
 
-            if (entity instanceof IAnimatedAttacker attacker){
+            if (this.mob instanceof IAnimatedAttacker attacker){
                 attacker.setAttacking(false);
                 attacker.setAttackAnimationTimeout(0);
             }
@@ -56,6 +141,12 @@ public class AnimatedAttackGoal extends MeleeAttackGoal {
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
         return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
+    }
+
+    protected void performAttack(LivingEntity pEnemy) {
+        this.resetAttackCooldown();
+        this.mob.swing(InteractionHand.MAIN_HAND);
+        this.mob.doHurtTarget(pEnemy);
     }
 
     protected void resetAttackCooldown() {
@@ -74,26 +165,7 @@ public class AnimatedAttackGoal extends MeleeAttackGoal {
         return this.ticksUntilNextAttack;
     }
 
-
-    protected void performAttack(LivingEntity pEnemy) {
-        this.resetAttackCooldown();
-        this.mob.swing(InteractionHand.MAIN_HAND);
-        this.mob.doHurtTarget(pEnemy);
+    protected double getAttackReachSqr(LivingEntity pAttackTarget) {
+        return this.mob.getBbWidth() * 2.0F * this.mob.getBbWidth() * 2.0F + pAttackTarget.getBbWidth();
     }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if(shouldCountTillNextAttack) {
-            this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
-        }
-    }
-
-    @Override
-    public void stop() {
-        if (entity instanceof IAnimatedAttacker attacker)
-            attacker.setAttacking(false);
-        super.stop();
-    }
-
 }

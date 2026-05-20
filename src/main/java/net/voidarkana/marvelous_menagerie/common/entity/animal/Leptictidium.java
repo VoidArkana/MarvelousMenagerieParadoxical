@@ -39,6 +39,10 @@ public class Leptictidium extends MarvelousAnimal {
     private int idleTiltTimeout = this.random.nextInt(160) + 160;
     private int idleNoseTimeout = this.random.nextInt(40) + 80;
 
+    @Override
+    public int getMaxYRot() {
+        return 1;
+    }
 
     @Override
     protected void registerGoals() {
@@ -127,16 +131,10 @@ public class Leptictidium extends MarvelousAnimal {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.15D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
-    }
-
-
-    public static boolean checkAnimalSpawnRules(EntityType<? extends Animal> pAnimal, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getBlockState(pPos.below()).is(BlockTags.ANIMALS_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos) && CommonConfig.NATURAL_SPAWNS.get();
+        super.customServerAiStep();
     }
 }

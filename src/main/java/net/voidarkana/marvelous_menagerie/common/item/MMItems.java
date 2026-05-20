@@ -301,6 +301,21 @@ public class MMItems {
             () -> new FishBucketItem(MMEntities.DIPLOCAULUS, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
 
+    //Myotragus
+    public static final RegistryObject<Item> MYOTRAGUS_FOSSIL = ITEMS.register("myotragus_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MYOTRAGUS_SPAWN_EGG = ITEMS.register("myotragus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.MYOTRAGUS, 0x6f473d, 0x826058, new Item.Properties()));
+
+    //Tiktaalik
+    public static final RegistryObject<Item> TIKTAALIK_FOSSIL = ITEMS.register("tiktaalik_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TIKTAALIK_SPAWN_EGG = ITEMS.register("tiktaalik_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.TIKTAALIK, 0x595959, 0x67b39f, new Item.Properties()));
+    public static final RegistryObject<Item> TIKTAALIK_BUCKET = ITEMS.register("tiktaalik_bucket",
+            () -> new FishBucketItem(MMEntities.TIKTAALIK, () -> Fluids.WATER, Items.BUCKET, false,
+                    (new Item.Properties()).stacksTo(1)));
+
     //Plants
 
     //Sigillaria

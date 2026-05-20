@@ -7,6 +7,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -21,28 +22,23 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.BabyPanicGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.EggLayerBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.LayEggGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
-import java.util.List;
 
 public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, IEggLayer {
 
     public final AnimationState attackAnimationState1 = new AnimationState();
     public final AnimationState attackAnimationState2 = new AnimationState();
     public final AnimationState idleShakeState = new AnimationState();
+
     public int attackAnimationTimeout;
     int layEggCounter;
 
@@ -71,8 +67,16 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D){
+            @Override
+            public boolean canUse() {
+                return !Borealopelta.this.isSitting() && !Borealopelta.this.isInPoseTransition() && super.canUse();
+            }
+        });
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 5000));
+
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
     }
@@ -85,9 +89,9 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
     @Override
     public EntityDimensions getDimensions(Pose pPose) {
         if (this.isBaby()) {
-            return super.getDimensions(pPose).scale(0.65F, 0.65F);
+            return pPose == Pose.SITTING ? super.getDimensions(pPose).scale(0.65F, 0.25F) : super.getDimensions(pPose).scale(0.65F, 0.65F);
         }else {
-            return super.getDimensions(pPose);
+            return pPose == Pose.SITTING ? super.getDimensions(pPose).scale(1.0F, 0.575F) : super.getDimensions(pPose);
         }
     }
 
@@ -142,11 +146,37 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         }
 
         if(idleShakeTimeout <= 0) {
-            idleShakeTimeout = this.getRandom().nextInt(160) + 160;
+            idleShakeTimeout = this.getRandom().nextInt(160) * this.getRandom().nextInt();
             idleShakeState.start(this.tickCount);
         } else {
             --this.idleShakeTimeout;
         }
+    }
+
+    //SITTING STUFF
+    @Override
+    public boolean canBeCollidedWith() {
+        return !(this.isInPoseTransition()) && this.isSitting();
+    }
+
+    @Override
+    public boolean canBeLeashed(Player player) {
+        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
+    }
+
+    @Override
+    public boolean canSit() {
+        return true;
+    }
+
+    @Override
+    public int getSitDuration() {
+        return 20;
+    }
+
+    @Override
+    public int getStandDuration() {
+        return 40;
     }
 
     @Override
@@ -237,6 +267,11 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.attackAnimationTimeout = attackAnimationTimeout;
     }
 
+    @Override
+    public @org.jetbrains.annotations.Nullable SoundEvent getAttackSound() {
+        return SoundEvents.PLAYER_ATTACK_SWEEP;
+    }
+
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
             this.playSound(MMSounds.LARGE_STEPS.get(), 0.25F, 1.0F);
     }
@@ -244,12 +279,11 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 
     public void aiStep() {

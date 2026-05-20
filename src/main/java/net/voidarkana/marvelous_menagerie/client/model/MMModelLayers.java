@@ -145,6 +145,17 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_FLUBBER_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_flubber"), "main");
 
+    public static final ModelLayerLocation MYOTRAGUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "myotragus"), "main");
+    public static final ModelLayerLocation BABY_MYOTRAGUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_myotragus"), "main");
+
+    public static final ModelLayerLocation TIKTAALIK_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tiktaalik"), "main");
+    public static final ModelLayerLocation BABY_TIKTAALIK_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_tiktaalik"), "main");
+
+
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");
     public static final ModelLayerLocation RIFT_LAYER =
