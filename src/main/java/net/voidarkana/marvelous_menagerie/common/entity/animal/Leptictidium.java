@@ -20,14 +20,28 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.ChaseGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IChaserAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.function.Predicate;
 
-public class Leptictidium extends MarvelousAnimal {
+
+public class Leptictidium extends MarvelousAnimal implements IChaserAnimal {
+
+    private Leptictidium chasePartner;
+    private int chaseTime = 0;
+    private boolean chaseDriver;
+    private int chaseCooldown = 0;
+    private int maxChaseTime = 300;
 
     public final AnimationState idleTiltState = new AnimationState();
     public final AnimationState idleNoseState = new AnimationState();
@@ -41,7 +55,7 @@ public class Leptictidium extends MarvelousAnimal {
 
     @Override
     public int getMaxYRot() {
-        return 1;
+        return 90;
     }
 
     @Override
@@ -49,7 +63,7 @@ public class Leptictidium extends MarvelousAnimal {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
         this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 6.0F, 1.15D, 1.4D,
-                e -> (e instanceof Wolf || e instanceof Fox || e instanceof Cat || e instanceof Player)) {
+                e -> (e instanceof Thylacine || e instanceof Wolf || e instanceof Fox || e instanceof Cat || e instanceof Player)) {
             @Override
             public void start() {
                 super.start();
@@ -73,6 +87,7 @@ public class Leptictidium extends MarvelousAnimal {
                 return super.canUse() && Leptictidium.this.getNavigation().isDone();
             }
         });
+        this.goalSelector.addGoal(7, new ChaseGoal(this,1200, 1.5f));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -82,6 +97,15 @@ public class Leptictidium extends MarvelousAnimal {
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.SPIDER_EYE);
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if(chaseCooldown > 0){
+            chaseCooldown--;
+        }
     }
 
     public void setupAnimationStates() {
@@ -136,5 +160,55 @@ public class Leptictidium extends MarvelousAnimal {
             this.setSprinting(false);
         }
         super.customServerAiStep();
+    }
+
+    @Override
+    public int getChaseTime() {
+        return this.chaseTime;
+    }
+
+    @Override
+    public void setChaseTime(int time) {
+        this.chaseTime = time;
+    }
+
+    @Override
+    public int getChaseCooldown() {
+        return this.chaseCooldown;
+    }
+
+    @Override
+    public void setChaseCooldown(int cooldown) {
+        this.chaseCooldown = cooldown;
+    }
+
+    @Override
+    public boolean isChaseDriver() {
+        return this.chaseDriver;
+    }
+
+    @Override
+    public void setIsChaseDriver(boolean driver) {
+        this.chaseDriver = driver;
+    }
+
+    @Override
+    public int getMaxChaseTime() {
+        return this.maxChaseTime;
+    }
+
+    @Override
+    public void setMaxChaseTime(int time) {
+        this.maxChaseTime = time;
+    }
+
+    @Override
+    public @Nullable PathfinderMob getChasePartner() {
+        return this.chasePartner;
+    }
+
+    @Override
+    public void setChasePartner(PathfinderMob partner) {
+        this.chasePartner = (Leptictidium) partner;
     }
 }

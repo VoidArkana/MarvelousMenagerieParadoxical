@@ -48,10 +48,11 @@ public abstract class MarvelousAnimal extends Animal {
         if (this.canSit())
             this.moveControl = new SittingAnimalMoveControl();
         this.moveControl = new MarvelousMoveControl(this);
+        this.setMaxUpStep(1);
     }
 
     public int getMaxYRot(){
-        return 15;
+        return 25;
     }
 
     protected BodyRotationControl createBodyControl() {
@@ -331,7 +332,7 @@ public abstract class MarvelousAnimal extends Animal {
         return super.isImmobile();
     }
 
-    class MarvelousMoveControl extends MoveControl {
+    static class MarvelousMoveControl extends MoveControl {
 
         final float maxYRot;
 

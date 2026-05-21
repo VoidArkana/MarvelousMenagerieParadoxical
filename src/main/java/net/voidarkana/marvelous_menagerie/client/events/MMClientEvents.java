@@ -159,7 +159,7 @@ public class MMClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_FLUBBER_LAYER, BabyFlubberModel::createBodyLayer);
 
 
-        event.registerLayerDefinition(MMModelLayers.MYOTRAGUS_LAYER, GoatModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.MYOTRAGUS_LAYER, MyotragusModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_MYOTRAGUS_LAYER, BabyMyotragusModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.TIKTAALIK_LAYER, TiktaalikModel::createBodyLayer);

@@ -77,16 +77,21 @@ public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
         this.entityData.set(WANTS_TO_BE_IN_LAND, wantsToBeInLand);
     }
 
+    @Override
+    public int getMaxYRot() {
+        return 10;
+    }
+
     public void switchNavigator(boolean onLand) {
         if (onLand) {
-            this.moveControl = new MoveControl(this);
+            this.moveControl = new MarvelousMoveControl(this);
             this.navigation = new GroundPathNavigation(this, level());
             this.lookControl = new LookControl(this);
             this.setIsLandNavigator(true);
         } else {
-            this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.2F, 0.1F, true);
+            this.moveControl = new SmoothSwimmingMoveControl(this, 65, this.getMaxYRot(), 0.2F, 0.1F, true);
             this.navigation = new AmphibiousPathNavigation(this, level());
-            this.lookControl = new SmoothSwimmingLookControl(this, 10);
+            this.lookControl = new SmoothSwimmingLookControl(this, this.getMaxYRot());
             this.setIsLandNavigator(false);
         }
     }
@@ -102,6 +107,12 @@ public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
     @Override
     public void tick() {
         super.tick();
+
+        if (!this.level().isClientSide && this.wantsToBeInLand()){
+            if (this.horizontalCollision && this.isInWaterOrBubble()){
+                this.addDeltaMovement(new Vec3(0, 0.2D, 0));
+            }
+        }
 
         final boolean inWater = this.isInWaterOrBubble();
 
@@ -123,6 +134,7 @@ public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
             if (this.isSitting())
                 this.standUp();
         }
+
     }
 
     @Override

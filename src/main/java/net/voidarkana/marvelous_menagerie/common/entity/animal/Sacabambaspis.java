@@ -17,8 +17,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.ChaseGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IChaserAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,7 +29,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Sacabambaspis extends AbstractBasicFish {
+public class Sacabambaspis extends AbstractBasicFish implements IChaserAnimal {
 
     private Sacabambaspis chasePartner;
     private int chaseTime = 0;
@@ -44,7 +46,7 @@ public class Sacabambaspis extends AbstractBasicFish {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(3, new ChaseGoal(this));
+        this.goalSelector.addGoal(3, new ChaseGoal(this,500, 1));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -182,87 +184,54 @@ public class Sacabambaspis extends AbstractBasicFish {
         return new ItemStack(MMItems.SACA_BUCKET.get());
     }
 
-    //Alec mob
-    private class ChaseGoal extends Goal {
-        private final Sacabambaspis sacabambaspis;
-        private final Predicate<Entity> validChasePartner;
-        private int executionCooldown = 50;
 
-        public ChaseGoal(Sacabambaspis pupfish) {
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE));
-            this.sacabambaspis = pupfish;
-            this.validChasePartner = (pupfish1 -> pupfish1 instanceof Sacabambaspis otherFish
-                    && otherFish.getId() != this.sacabambaspis.getId() && otherFish.chasePartner == null && otherFish.chaseCooldown <= 0);
-        }
+    @Override
+    public int getChaseTime() {
+        return this.chaseTime;
+    }
 
-        @Override
-        public boolean canUse() {
-            if(!sacabambaspis.isInWaterOrBubble() || sacabambaspis.chaseTime > sacabambaspis.maxChaseTime || sacabambaspis.chaseCooldown > 0){
-                return false;
-            }
-            if(sacabambaspis.chasePartner != null && sacabambaspis.chasePartner.isAlive()){
-                return true;
-            }
-            if(executionCooldown > 0){
-                executionCooldown--;
-            }else{
-                executionCooldown = 50 + random.nextInt(50);
-                if(sacabambaspis.chasePartner == null || !sacabambaspis.chasePartner.isAlive()){
-                    List<Sacabambaspis> list = sacabambaspis.level().getEntitiesOfClass(Sacabambaspis.class, sacabambaspis.getBoundingBox().inflate(10, 8, 10), EntitySelector.NO_SPECTATORS.and(validChasePartner));
-                    list.sort(Comparator.comparingDouble(sacabambaspis::distanceToSqr));
-                    if(!list.isEmpty()){
-                        Sacabambaspis closestPupfish = list.get(0);
-                        if(closestPupfish != null){
-                            sacabambaspis.chasePartner = closestPupfish;
-                            closestPupfish.chasePartner = sacabambaspis;
-                            sacabambaspis.chaseDriver = true;
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            }
-            return false;
-        }
+    @Override
+    public void setChaseTime(int time) {
+        this.chaseTime = time;
+    }
 
-        @Override
-        public boolean canContinueToUse() {
-            return sacabambaspis.chasePartner != null && sacabambaspis.chasePartner.isAlive() && sacabambaspis.chaseTime < sacabambaspis.maxChaseTime;
-        }
+    @Override
+    public int getChaseCooldown() {
+        return this.chaseCooldown;
+    }
 
-        @Override
-        public void start() {
-            sacabambaspis.chaseDriver = !sacabambaspis.chasePartner.chaseDriver;
-            sacabambaspis.chaseTime = 0;
-            sacabambaspis.maxChaseTime = 600;
-        }
+    @Override
+    public void setChaseCooldown(int cooldown) {
+        this.chaseCooldown = cooldown;
+    }
 
-        @Override
-        public void stop() {
-            sacabambaspis.chaseTime = 0;
-            sacabambaspis.chaseCooldown = 100 + random.nextInt(100);
-            executionCooldown = 50 + random.nextInt(20);
-            sacabambaspis.chasePartner = null;
-        }
+    @Override
+    public boolean isChaseDriver() {
+        return this.chaseDriver;
+    }
 
-        @Override
-        public void tick() {
-            sacabambaspis.chaseTime++;
-            if(sacabambaspis.chasePartner == null || !sacabambaspis.chaseDriver){
-                return;
-            }
-            float chaserSpeed = 1.2F + random.nextFloat() * 0.45F;
-            float chasedSpeed = 0.2F + chaserSpeed * 0.7F;
-            Sacabambaspis flee = sacabambaspis.chaseDriver ? sacabambaspis.chasePartner : sacabambaspis;
-            Sacabambaspis driver = sacabambaspis.chaseDriver ? sacabambaspis : sacabambaspis.chasePartner;
-            driver.getNavigation().moveTo(flee.getX(), flee.getY(0.5F), flee.getZ(), chaserSpeed);
-            Vec3 from = flee.position().add(random.nextFloat() - 0.5F, random.nextFloat() - 0.5F, random.nextFloat() - 0.5F).subtract(driver.position()).normalize().scale(2F + random.nextFloat() * 2F);
-            Vec3 to = flee.position().add(from);
-            flee.getNavigation().moveTo(to.x, to.y, to.z, chasedSpeed);
-            if(random.nextInt(50) == 0){
-                sacabambaspis.chaseDriver = !sacabambaspis.chaseDriver;
-                sacabambaspis.chasePartner.chaseDriver = !sacabambaspis.chasePartner.chaseDriver;
-            }
-        }
+    @Override
+    public void setIsChaseDriver(boolean driver) {
+        this.chaseDriver = driver;
+    }
+
+    @Override
+    public int getMaxChaseTime() {
+        return this.maxChaseTime;
+    }
+
+    @Override
+    public void setMaxChaseTime(int time) {
+        this.maxChaseTime = time;
+    }
+
+    @Override
+    public @Nullable PathfinderMob getChasePartner() {
+        return this.chasePartner;
+    }
+
+    @Override
+    public void setChasePartner(PathfinderMob partner) {
+        this.chasePartner = (Sacabambaspis) partner;
     }
 }
