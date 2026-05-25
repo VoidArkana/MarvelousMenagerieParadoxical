@@ -1,16 +1,12 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Wolf;
@@ -19,20 +15,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.ChaseGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.ChaseGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IChaserAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
-import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.function.Predicate;
 
 
 public class Leptictidium extends MarvelousAnimal implements IChaserAnimal {

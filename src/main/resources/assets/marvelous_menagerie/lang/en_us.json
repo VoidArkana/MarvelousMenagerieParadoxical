@@ -263,8 +263,9 @@
   "entity.marvelous_menagerie.inostrancevia": "Inostrancevia",
   "item.marvelous_menagerie.gorgon_fossil": "Inostrancevia Fossil",
 
-  "entity.marvelous_menagerie.lystro": "Lystrosaurus",
+  "entity.marvelous_menagerie.lystrosaurus": "Lystrosaurus",
   "item.marvelous_menagerie.lystro_fossil": "Lystrosaurus Fossil",
+  "item.marvelous_menagerie.lystro_spawn_egg": "Lystrosaurus Spawn Egg",
 
   "entity.marvelous_menagerie.theri": "Therizinosaurus",
   "item.marvelous_menagerie.theri_fossil": "Therizinosaurus Fossil",
@@ -762,10 +763,13 @@
   "advancements.marvelous_menagerie.thylacine.description" : "Bring back a Thylacine, a skittish wolf-like marsupial",
   "advancements.marvelous_menagerie.trilobite.title" : "Let's Go Gambling!",
   "advancements.marvelous_menagerie.trilobite.description" : "Encounter a Trilobite, a creature that can come in many shapes and colors",
-  "advancements.marvelous_menagerie.myotragus.title" : "Not Very Goated",
+
+  "advancements.marvelous_menagerie.myotragus.title" : "Goated Recolors",
   "advancements.marvelous_menagerie.myotragus.description" : "Encounter a Myotragus, a strange goat with forward-facing eyes",
   "advancements.marvelous_menagerie.tiktaalik.title" : "Go, Grandpa!",
   "advancements.marvelous_menagerie.tiktaalik.description" : "Bear witness to Tikaalik, one of the first fish to be able to go on land",
+  "advancements.marvelous_menagerie.lystrosaurus.title" : "Invincible",
+  "advancements.marvelous_menagerie.lystrosaurus.description" : "Encounter a Lystrosaurus, an extremely resilient creature capable of reproducing on its own",
 
   "advancements.marvelous_menagerie.warning.title" : "Flashing Lights Warning!",
   "advancements.marvelous_menagerie.warning.description" : "Interacting with Hallucigenia might cause bright flashes in your screen. Proceed with caution!",

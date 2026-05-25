@@ -43,6 +43,6 @@ public class SacaRenderer<T extends Sacabambaspis> extends MobRenderer<T, Marvel
     @Override
     protected void setupRotations(T pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp((float) pEntityLiving.getOutOfWaterTicks()/5, pEntityLiving.currentRoll*360/4, 0)));
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(this.model.getInWaterMultiplier()*(1-this.model.getOnGroundMultiplier()), pEntityLiving.currentRoll*360/4, 0)));
     }
 }

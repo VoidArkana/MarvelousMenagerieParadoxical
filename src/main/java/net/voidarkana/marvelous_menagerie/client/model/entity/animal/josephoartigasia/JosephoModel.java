@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BabyJosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.JosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Josephoartigasia;
@@ -88,32 +89,33 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 	}
 
 	@Override
-	public void setupAnim(Josephoartigasia entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
 		this.animate(entity.headShakeAnimationState, JosephoAnims.HEAD_SHAKE, ageInTicks, 1);
 		this.animate(entity.earsWiggleAnimationState, JosephoAnims.EAR_WIGGLE_BOTH, ageInTicks, 1);
 		this.animate(entity.leftEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_LEFT, ageInTicks, 1);
 		this.animate(entity.rightEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_RIGHT, ageInTicks, 1);
 
-		if (!entity.isInWaterOrBubble()){
-			if (!entity.isSitting()){
-				animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
-			}
+		animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-getInWaterMultiplier())*(1-getSittingMultiplier()));
 
-			this.animate(entity.standUpAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
-			this.animate(entity.sitAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
-			this.animate(entity.sitPoseAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
-		}
+		this.animate(entity.standUpAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
+		this.animate(entity.sitAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
+		this.animate(entity.sitPoseAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 
 		float prevHeadX = this.head.xRot;
 		float prevHeadY = this.head.yRot;
 		this.head.xRot = prevHeadX + headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = prevHeadY + netHeadYaw * ((float)Math.PI / 180F);
+	}
+
+	@Override
+	public float getInWaterTickBase() {
+		return 5;
 	}
 
 	@Override

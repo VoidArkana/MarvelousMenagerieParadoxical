@@ -11,10 +11,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,25 +22,22 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.CustomRideGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSitWhenOrderedToGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.RandomlySitUpOrDownGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.TameableFollowOwnerGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.CustomRideGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.MarvelousSitWhenOrderedToGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.RandomlySitUpOrDownGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.TameableFollowOwnerGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
-import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
 
 public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleable {
@@ -52,6 +47,8 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         this.setMaxUpStep(1.0F);
         this.reassessTameGoals();
     }
+
+    int inWaterTicks;
 
     static final TargetingConditions ADULT_TO_RIDE =
             TargetingConditions.forNonCombat().range(15.0D)
@@ -279,7 +276,12 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         if (this.isSitting()) {
             return this.getDimensions(Pose.SITTING).height;
         }
-        return Mth.lerp(this.getInWaterTicks(), super.getPassengersRidingOffset(), super.getPassengersRidingOffset()*0.95D);
+        if (this.isInWater() && this.inWaterTicks<5){
+            this.inWaterTicks++;
+        }else if (!this.isInWater() && this.inWaterTicks>0){
+            this.inWaterTicks--;
+        }
+        return Mth.lerp(this.inWaterTicks/5f, super.getPassengersRidingOffset(), super.getPassengersRidingOffset()*0.95D);
     }
 
     public void setupAnimationStates() {

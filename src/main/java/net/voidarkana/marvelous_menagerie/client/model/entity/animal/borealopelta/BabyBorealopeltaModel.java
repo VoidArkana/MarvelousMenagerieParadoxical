@@ -70,21 +70,19 @@ public class BabyBorealopeltaModel<T extends Borealopelta> extends MarvelousMode
 	}
 
 	@Override
-	public void setupAnim(Borealopelta entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (!entity.isInWaterOrBubble()){
-			this.animateWalk(BabyBorealopeltaAnims.WALK, limbSwing, limbSwingAmount*2f, 2, 2.5f);
+		this.animateWalk(BabyBorealopeltaAnims.WALK, limbSwing, limbSwingAmount*2f, 2, 2.5f*(1-this.getInWaterMultiplier()));
 
-			this.animate(entity.idleShakeState, BabyBorealopeltaAnims.SHAKE, ageInTicks, 1);
+		this.animateIdle(entity.idleShakeState, BabyBorealopeltaAnims.SHAKE, ageInTicks, 1, 1-this.getInWaterMultiplier());
 
-			this.animate(entity.standUpAnimationState, BabyBorealopeltaAnims.SIT_END, ageInTicks, 1);
-			this.animate(entity.sitAnimationState, BabyBorealopeltaAnims.SIT_START, ageInTicks, 1);
-			this.animate(entity.sitPoseAnimationState, BabyBorealopeltaAnims.SIT_POSE, ageInTicks, 1);
-		}
+		this.animate(entity.standUpAnimationState, BabyBorealopeltaAnims.SIT_END, ageInTicks, 1);
+		this.animate(entity.sitAnimationState, BabyBorealopeltaAnims.SIT_START, ageInTicks, 1);
+		this.animate(entity.sitPoseAnimationState, BabyBorealopeltaAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1*(1-this.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);

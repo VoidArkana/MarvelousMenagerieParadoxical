@@ -27,11 +27,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.BoidGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.LimitSpeedAndLookInVelocityDirectionGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.boids.StayInWaterGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.boids.BoidGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.boids.LimitSpeedAndLookInVelocityDirectionGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.boids.StayInWaterGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 //TODO: only join leader in boids if the school is of the right size
-public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
+public class Arandaspis extends MarvelousWaterAnimal implements Bucketable {
 
     @javax.annotation.Nullable
     public Arandaspis leader;
@@ -49,7 +49,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Arandaspis.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Arandaspis.class, EntityDataSerializers.INT);
 
-    public Arandaspis(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Arandaspis(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -164,7 +164,7 @@ public class Arandaspis extends BreedableWaterAnimal implements Bucketable {
 
     @Nullable
     @Override
-    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Arandaspis otherParent = (Arandaspis) pOtherParent;
         Arandaspis baby = MMEntities.ARANDASPIS.get().create(pLevel);
         baby.setFromBucket(true);

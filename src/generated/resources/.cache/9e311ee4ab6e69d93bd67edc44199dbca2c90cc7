@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-19T17:44:23.2333202	Item Models: marvelous_menagerie
+// 1.20.1	2026-05-24T20:08:38.4344471	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -122,6 +122,7 @@ d4d0acfaeacd562118a5de0fa951b95fdac744dd assets/marvelous_menagerie/models/item/
 407fc571a57afebfbfb08eb710f0351f24be84a1 assets/marvelous_menagerie/models/item/limestone_wall.json
 ce3318832fa8369426ecf2ea9d79350abf0d7309 assets/marvelous_menagerie/models/item/logo.json
 d470620e7d60feeb024cc85d6acd05587eae87ef assets/marvelous_menagerie/models/item/lystro_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/lystro_spawn_egg.json
 cf5a18bd88f9249c77dd8557694ed5639826cca3 assets/marvelous_menagerie/models/item/magic_roll.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/molten_spawn_egg.json
 1d6d64d7efb926f34dcc2cc28f41b4f649d08b2c assets/marvelous_menagerie/models/item/molten_spine.json

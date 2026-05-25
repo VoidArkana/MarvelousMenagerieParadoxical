@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BabyDodoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.DodoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Dodo;
@@ -79,34 +80,30 @@ public class DodoModel<T extends Dodo> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Dodo entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		
+		this.animateIdle(entity.peckingAnimationState, DodoAnims.PECK, ageInTicks, 1, 1-this.getInWaterMultiplier());
 
-		if (!entity.isInWaterOrBubble()){
-			this.animate(entity.peckingAnimationState, DodoAnims.PECK, ageInTicks, 1);
+		this.animate(entity.standUpAnimationState, DodoAnims.STAND_UP, ageInTicks, 1);
+		this.animate(entity.sitAnimationState, DodoAnims.SIT, ageInTicks, 1);
+		this.animate(entity.sitPoseAnimationState, DodoAnims.SIT_POSE, ageInTicks, 1);
 
-			this.animate(entity.standUpAnimationState, DodoAnims.STAND_UP, ageInTicks, 1);
-			this.animate(entity.sitAnimationState, DodoAnims.SIT, ageInTicks, 1);
-			this.animate(entity.sitPoseAnimationState, DodoAnims.SIT_POSE, ageInTicks, 1);
-			if (!entity.isSitting())
-				if (entity.isSprinting()){
-					animateWalk(DodoAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
-				}else {
-					animateWalk(DodoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
-				}
+		animateWalk(DodoAnims.WALK, limbSwing, limbSwingAmount, 2f,
+				2.5f*(1-this.getSittingMultiplier())*(1-this.getInWaterMultiplier())*getOnGroundMultiplier());
+		animateWalk(DodoAnims.RUN, limbSwing, limbSwingAmount, 1.5f,
+				this.getSprintingMultiplier()*(1-this.getSittingMultiplier())*(1-this.getInWaterMultiplier()));
 
-			this.animate(entity.shakingAnimationState, DodoAnims.SHAKE, ageInTicks, 1);
-		}
+		this.animate(entity.shakingAnimationState, DodoAnims.SHAKE, ageInTicks, 1);
 
 		this.animate(entity.lookAnimationState, DodoAnims.IDLE_LOOK, ageInTicks, 1);
-		this.animateIdle(entity.idleAnimationState, DodoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, DodoAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
 
 		this.animateIdle(entity.idleAnimationState, DodoAnims.IDLE, ageInTicks, 1.0f,
-				Math.max(0, 1-entity.getTicksOffGround()/5f-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+				Math.max(0, this.getOnGroundMultiplier()*(1-this.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
 
 		this.animateIdle(entity.idleAnimationState, DodoAnims.FLAP, ageInTicks, 1.0f,
-				Math.max(0, entity.getTicksOffGround()/5f-entity.getInWaterTicks()/5f));
-
+				(1-this.getOnGroundMultiplier())*(1-this.getInWaterMultiplier())*(1-this.getSprintingMultiplier()));
 
 		float prevNeckX = this.neck.xRot;
 		float prevNeckY = this.neck.yRot;

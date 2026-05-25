@@ -99,8 +99,8 @@ public class BabyFlubberModel<T extends Flubber> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Flubber entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
 		if (entity.isFromInventory()){
 			if (entity.isInWaterOrBubble())
@@ -109,19 +109,18 @@ public class BabyFlubberModel<T extends Flubber> extends MarvelousModel<T> {
 				this.applyStatic(BabyFlubberAnims.LAND_IDLE_POSE);
 		}
 
-		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_LAND_IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount*3f))));
+		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_LAND_IDLE, ageInTicks, 1.0f, Math.max(0, (1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount*3f))));
 
 		this.animate(entity.standUpAnimationState, BabyFlubberAnims.BABY_ROLL_END, ageInTicks);
 		this.animate(entity.sitAnimationState, BabyFlubberAnims.BABY_ROLL_START_OVERLAY, ageInTicks);
 		this.animate(entity.sitPoseAnimationState, BabyFlubberAnims.BABY_ROLL_POSE_OVERLAY, ageInTicks);
 		this.animate(entity.bellyDrumAnimationState, BabyFlubberAnims.BELLY_SLAP, ageInTicks);
 
-		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, BabyFlubberAnims.BABY_SWIM_IDLE, ageInTicks, 1.0f, this.getInWaterMultiplier()-Math.abs(limbSwingAmount));
 
-		this.animateWalk(BabyFlubberAnims.BABY_SWIM, limbSwing, limbSwingAmount*entity.getInWaterTicks()/5f, 1.5f, 2.5f);
+		this.animateWalk(BabyFlubberAnims.BABY_SWIM, limbSwing, limbSwingAmount*this.getInWaterMultiplier(), 1.5f, 2.5f);
 
-		if (!entity.isSitting())
-			this.animateWalk(BabyFlubberAnims.BABY_WALK, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f), 2, 2.5f);
+		this.animateWalk(BabyFlubberAnims.BABY_WALK, limbSwing, limbSwingAmount*2f*(1-this.getInWaterMultiplier()), 2, 2.5f*(1-getSittingMultiplier()));
 
 		this.animate(entity.sniffState, FlubberAnimsIdle.SNIFF, ageInTicks);
 		this.animate(entity.snortState, FlubberAnimsIdle.SNORT, ageInTicks);
@@ -131,7 +130,7 @@ public class BabyFlubberModel<T extends Flubber> extends MarvelousModel<T> {
 		this.neck.xRot = prevHeadxRot + (headPitch * ((float)Math.PI / 180F)/2);
 		this.neck.yRot = prevHeadyRot + (netHeadYaw * ((float)Math.PI / 180F)/2);
 
-		this.swim_rot.xRot = Mth.lerp( entity.getInWaterTicks()/5f, 0, headPitch * ((float)Math.PI / 180F));
+		this.swim_rot.xRot = Mth.lerp( this.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
 	}
 
 	@Override

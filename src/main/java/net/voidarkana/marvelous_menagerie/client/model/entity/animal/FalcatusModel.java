@@ -10,6 +10,7 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ArandaspisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
@@ -100,20 +101,15 @@ public class FalcatusModel<T extends Falcatus> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Falcatus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch);
 
+		this.animateWalk(FalcatusAnims.swim, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(FalcatusAnims.swim, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
-			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
-		}
-		else{
-			this.swim_rot.resetPose();
-		}
-
-		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		
+		this.swim_rot.xRot = Mth.lerp(getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F));
 
 	}
 

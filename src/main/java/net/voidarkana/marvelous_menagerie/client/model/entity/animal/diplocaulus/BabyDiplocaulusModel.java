@@ -65,18 +65,18 @@ public class BabyDiplocaulusModel<T extends Diplocaulus> extends MarvelousModel<
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		this.animateWalk(DiplocaulusAnims.SWIM, limbSwing, limbSwingAmount*4f*entity.getInWaterTicks()/5f, 4, 2.5f);
-		this.animateWalk(DiplocaulusAnims.WALK, limbSwing, limbSwingAmount*4f*(1-entity.getInWaterTicks()/5f), 4, 2.5f);
+		this.animateWalk(DiplocaulusAnims.SWIM, limbSwing, limbSwingAmount*4f*this.getInWaterMultiplier(), 4, 2.5f);
+		this.animateWalk(DiplocaulusAnims.WALK, limbSwing, limbSwingAmount*4f*(1-this.getInWaterMultiplier()), 4, 2.5f);
 
-		this.animateIdle(entity.idleAnimationState, DiplocaulusAnims.SWIM_IDLE, ageInTicks, 1.0f, entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount));
-		this.animateIdle(entity.idleAnimationState, DiplocaulusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, DiplocaulusAnims.SWIM_IDLE, ageInTicks, 1.0f, this.getInWaterMultiplier()-Math.abs(limbSwingAmount));
+		this.animateIdle(entity.idleAnimationState, DiplocaulusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.head.xRot = headPitch * ((float)Math.PI / 180F)/2;
 		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F)/2;
 
-		this.swim_ctrl.xRot = Mth.rotLerp(entity.getInWaterTicks()/5f, 0, headPitch * ((float)Math.PI / 180F)/2);
+		this.swim_ctrl.xRot = Mth.rotLerp(this.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F)/2);
 	}
 
 	@Override

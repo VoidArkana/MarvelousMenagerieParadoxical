@@ -154,17 +154,13 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
 		if (entity.isFromInventory()){
 			this.applyStatic(MoltenAnimsExtra.POSE);
 		}
-
-		if (entity.isSprinting()){
-			animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount, 2f, 1);
-		}else {
-			animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f);
-		}
+		animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount*0.75f, 2f, this.getSprintingMultiplier());
+		animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-this.getSprintingMultiplier()));
 
 		this.animateIdle(entity.idleAnimationState, MoltenAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 
@@ -176,8 +172,8 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 		this.animate(entity.breatheFireAnimationState, MoltenAnims.FIREBREATHE, ageInTicks, 1);
 		this.animate(entity.shootFireballAnimationState, MoltenAnims.FIREBALL, ageInTicks, 1);
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
-		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.head.xRot = head.xRot+headPitch * ((float)Math.PI / 180F);
+		this.head.yRot = head.yRot+netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override

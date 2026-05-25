@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.RoachAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Apthoroblattina;
@@ -91,31 +92,24 @@ public class RoachModel<T extends Apthoroblattina> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Apthoroblattina entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
+		animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, Mth.lerp(this.getSprintingMultiplier(), 2.5f, 5f));
 
+		this.animateIdle(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F, 1-getInWaterMultiplier());
 
+		this.animateIdle(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F, 1-getInWaterMultiplier());
+		this.animateIdle(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F, 1-getInWaterMultiplier());
+		this.animateIdle(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F, 1-getInWaterMultiplier());
 
-		if (!entity.isInWaterOrBubble()){
-			animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, entity.isSprinting() ? 5f : 2.5f);
-
-			this.animate(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F);
-
-			this.animate(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F);
-			this.animate(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F);
-			this.animate(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F);
-
-			this.animate(entity.johnAnimationState, RoachAnims.JOHN, ageInTicks, 1.0F);
-
-		}
+		this.animate(entity.johnAnimationState, RoachAnims.JOHN, ageInTicks, 1.0F);
 
 		if (entity.isBaby()){
 			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-Math.abs(limbSwingAmount)));
-		}else
-		{
-			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getTicksOffGround()/5f-Math.abs(limbSwingAmount)));
-			this.animateIdle(entity.idleAnimationState, RoachAnims.FALL_FLY, ageInTicks, 1.0F, (entity.getTicksOffGround()/5f));
+		}else {
+			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, getOnGroundMultiplier()-Math.abs(limbSwingAmount)));
+			this.animateIdle(entity.idleAnimationState, RoachAnims.FALL_FLY, ageInTicks, 1.0F, 1-getOnGroundMultiplier());
 		}
 
 		if (this.young){

@@ -660,6 +660,7 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .add(Blocks.SEA_PICKLE);
         
         this.tag(MMTags.Blocks.MARVELOUS_SPAWNABLE_ON)
+                .addTag(BlockTags.SAND)
                 .addTag(BlockTags.GOATS_SPAWNABLE_ON)
                 .addTag(BlockTags.DIRT)
                 .addTag(BlockTags.TERRACOTTA);

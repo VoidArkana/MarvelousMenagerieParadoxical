@@ -15,13 +15,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
 public class Eolactoria extends AbstractBasicFish {
 
-    public Eolactoria(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Eolactoria(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -62,7 +62,7 @@ public class Eolactoria extends AbstractBasicFish {
 
     @Nullable
     @Override
-    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Eolactoria baby = MMEntities.EOLACTORIA.get().create(pLevel);
         baby.setFromBucket(true);
         return baby;

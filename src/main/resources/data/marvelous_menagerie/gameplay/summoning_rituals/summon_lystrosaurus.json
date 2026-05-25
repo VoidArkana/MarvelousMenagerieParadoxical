@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:porkchop"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:mudstone"
+  },
+  "input3": {
+    "item": "minecraft:leather"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:lystro_fossil"
+  },
+  "output": "marvelous_menagerie:lystrosaurus"
+}

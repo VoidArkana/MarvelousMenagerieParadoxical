@@ -10,8 +10,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,14 +18,11 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -38,19 +33,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousAvoidWaterWanderGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.RandomlySitUpOrDownGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.RandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
-import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.EnumSet;
 
 public class Dodo extends MarvelousAnimal {
 
     private int eggLayTime;
     private int initialEggTime;
-    int prevTicksOffGround;
     private int peckCounter;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.MELON_SLICE, Items.GLISTERING_MELON_SLICE, Items.MELON, Items.PUMPKIN);
@@ -90,9 +80,9 @@ public class Dodo extends MarvelousAnimal {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new MarvelousAvoidWaterWanderGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new Dodo.DestroyMelonAndPumpkinGoal(this));
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 2000));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 800));
         this.goalSelector.addGoal(5, new Dodo.DodoLookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new Dodo.DodoRandomLookAroundGoal(this));
         this.goalSelector.addGoal(9, new Dodo.RandomPeckGoal(this));
@@ -100,7 +90,6 @@ public class Dodo extends MarvelousAnimal {
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> PECKING_TIME = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> TICKS_OFF_GROUND = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> CAN_PECK = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Dodo.class, EntityDataSerializers.BYTE);
 
@@ -109,7 +98,6 @@ public class Dodo extends MarvelousAnimal {
         super.defineSynchedData();
         this.entityData.define(VARIANT, 0);
         this.entityData.define(PECKING_TIME, 0);
-        this.entityData.define(TICKS_OFF_GROUND, 0);
         this.entityData.define(CAN_PECK, true);
 
         this.entityData.define(DATA_ID_FLAGS, (byte)0);
@@ -130,14 +118,6 @@ public class Dodo extends MarvelousAnimal {
 
     public void setVariant(int variant) {
         this.entityData.set(VARIANT, variant);
-    }
-
-    public int getTicksOffGround() {
-        return this.entityData.get(TICKS_OFF_GROUND);
-    }
-
-    public void setTicksOffGround(int variant) {
-        this.entityData.set(TICKS_OFF_GROUND, variant);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -215,23 +195,6 @@ public class Dodo extends MarvelousAnimal {
 
         if (!this.onGround() && vec3.y < (-0.1D) && !this.isInWater()) {
             this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
-
-            if (!this.level().isClientSide()){
-                if (this.getTicksOffGround() < 5){
-                    this.prevTicksOffGround = this.getTicksOffGround();
-                    this.setTicksOffGround(this.prevTicksOffGround+1);
-                }
-            }
-
-        } else {
-
-            if (!this.level().isClientSide()){
-                if (this.getTicksOffGround() > 0){
-                    this.prevTicksOffGround = this.getTicksOffGround();
-                    this.setTicksOffGround(this.prevTicksOffGround-1);
-                }
-            }
-
         }
 
         if (isAlive() && !isBaby() && --eggLayTime <= 0) {
@@ -318,7 +281,7 @@ public class Dodo extends MarvelousAnimal {
     //SIT STUFF
     @Override
     public boolean canBeLeashed(Player player) {
-        return !this.isSitting() && !(this.isInPoseTransition()) && !this.isVehicle();
+        return !this.isSitting() || !(this.isInPoseTransition()) || !this.isVehicle() && super.canBeLeashed(player);
     }
 
     @Override
@@ -465,12 +428,11 @@ public class Dodo extends MarvelousAnimal {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 
     public void setupAnimationStates() {
@@ -532,7 +494,7 @@ public class Dodo extends MarvelousAnimal {
             --this.nextStand;
             if (this.nextStand > 0 && this.mob.getRandom().nextInt(this.nextStand) == 0 ) {
                 this.resetStandInterval();
-                return !this.mob.isImmobile() && this.mob.onGround();
+                return !this.mob.isSitting() && this.mob.onGround() && this.mob.getNavigation().isDone();
             } else {
                 return false;
             }

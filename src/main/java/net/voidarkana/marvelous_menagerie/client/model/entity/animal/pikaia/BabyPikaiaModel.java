@@ -64,18 +64,15 @@ public class BabyPikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Pikaia entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
-		}
+		this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f*getInWaterMultiplier());
 
-		this.swim_control.xRot = Mth.lerp( entity.getOutOfWaterTicks()/5f, headPitch * ((float)Math.PI / 180F), 0);
+		this.swim_control.xRot = Mth.lerp( 1-getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
 
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
-
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (1-getInWaterMultiplier()));
 	}
 
 	@Override

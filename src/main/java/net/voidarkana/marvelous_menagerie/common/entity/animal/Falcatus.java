@@ -11,13 +11,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
 public class Falcatus extends AbstractBasicFish {
 
-    public Falcatus(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Falcatus(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -33,7 +33,7 @@ public class Falcatus extends AbstractBasicFish {
 
     @Nullable
     @Override
-    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Falcatus baby = MMEntities.FALCATUS.get().create(pLevel);
         baby.setFromBucket(true);
         return baby;

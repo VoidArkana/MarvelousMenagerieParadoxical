@@ -27,7 +27,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 
@@ -363,12 +363,11 @@ public class Molten extends Abomination implements IAnimatedAttacker {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.25D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
     }
 
 

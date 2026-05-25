@@ -54,8 +54,12 @@ import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.BabyPanicGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishFollowParentGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
@@ -83,9 +87,9 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
 
     public Vec3 movement;
 
-    public Ophthalmosaurus(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Ophthalmosaurus(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.01F, true);
+        this.moveControl = new MarvelousSwimmingMoveControl(this, 85, 10, 0.02F, 0.01F, true);
         this.lookControl = new WaterMountLookControl(this,10);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
     }
@@ -102,7 +106,7 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Ophthalmosaurus.class, EntityDataSerializers.BOOLEAN);
 
     @Override
-    public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public @Nullable MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Ophthalmosaurus otherParent = (Ophthalmosaurus) pOtherParent;
         Ophthalmosaurus baby = MMEntities.OPHTHALMO.get().create(pLevel);
         baby.setFromBucket(true);

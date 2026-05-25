@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -24,8 +24,8 @@ public class FishSpawnEggItem extends ForgeSpawnEggItem {
             return Optional.empty();
         } else {
             Mob mob;
-            if (pMob instanceof BreedableWaterAnimal) {
-                mob = ((BreedableWaterAnimal)pMob).getBreedOffspring(pServerLevel, (BreedableWaterAnimal)pMob);
+            if (pMob instanceof MarvelousWaterAnimal) {
+                mob = ((MarvelousWaterAnimal)pMob).getBreedOffspring(pServerLevel, (MarvelousWaterAnimal)pMob);
             } else {
                 mob = pEntityType.create(pServerLevel);
             }

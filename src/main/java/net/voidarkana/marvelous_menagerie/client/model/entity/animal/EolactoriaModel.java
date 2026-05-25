@@ -10,6 +10,7 @@ import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.EolactoriaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.SlovenicusAnims;
@@ -81,21 +82,19 @@ public class EolactoriaModel<T extends Eolactoria> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Eolactoria entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch);
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(EolactoriaAnims.SWIM, limbSwing, limbSwingAmount,2f, 3f);
-			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F);
-		}
+		this.animateWalk(EolactoriaAnims.SWIM, limbSwing, limbSwingAmount,2f, 3f*this.getInWaterMultiplier());
 
-		this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, EolactoriaAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		if (entity.flopSide())
-			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP1, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
 		else
-			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+			this.animateIdle(entity.idleAnimationState, EolactoriaAnims.FLOP2, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
 
+		this.swim_rot.xRot = Mth.lerp(this.getInWaterMultiplier(), 0,headPitch * ((float)Math.PI / 180F));
 	}
 
 	@Override

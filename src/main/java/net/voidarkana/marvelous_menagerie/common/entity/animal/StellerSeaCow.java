@@ -37,10 +37,10 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishFollowParentGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishFollowParentGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.EnumSet;
@@ -50,7 +50,7 @@ public class StellerSeaCow extends AbstractBasicFish {
     static final TargetingConditions SWIM_WITH_PLAYER_TARGETING = TargetingConditions.forNonCombat().range(10.0D).ignoreLineOfSight();
     private static final EntityDataAccessor<Boolean> IS_BREACHING = SynchedEntityData.defineId(StellerSeaCow.class, EntityDataSerializers.BOOLEAN);
 
-    public StellerSeaCow(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public StellerSeaCow(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.lookControl = new SmoothSwimmingLookControl(this, 5);
         this.moveControl = new StellerSwimmingController(this, 85, 10, 0.02F, 0.01F, true);
@@ -145,7 +145,7 @@ public class StellerSeaCow extends AbstractBasicFish {
     }
 
     @Override
-    public @org.jetbrains.annotations.Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public @org.jetbrains.annotations.Nullable MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         return MMEntities.STELLER_SEA_COW.get().create(pLevel);
     }
 

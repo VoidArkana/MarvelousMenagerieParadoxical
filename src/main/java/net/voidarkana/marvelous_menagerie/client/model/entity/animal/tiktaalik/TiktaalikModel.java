@@ -82,8 +82,7 @@ public class TiktaalikModel<T extends Tiktaalik> extends MarvelousModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
-
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
 		if (entity.getActualSize() == 1)
 			this.applyStatic(TiktaalikAnimsExtra.SizeMid);
@@ -91,19 +90,19 @@ public class TiktaalikModel<T extends Tiktaalik> extends MarvelousModel<T> {
 			this.applyStatic(TiktaalikAnimsExtra.SizeBig);
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnims.idle, ageInTicks, 1.0f,
-				Math.min(1, Math.max(0, 1-((entity.getSittingTicks()/10f)*(1-(entity.getInWaterTicks()/5f)))-Math.abs(limbSwingAmount))));
+				Mth.clamp(1-this.getSittingMultiplier()*(1-(this.getInWaterMultiplier())-Math.abs(limbSwingAmount)),0, 1));
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnimsExtra.basking, ageInTicks, 1.0f,
-				Math.min(1,Math.max(0, ((entity.getSittingTicks()/10f)*(1-entity.getInWaterTicks()/5f)))));
+				Mth.clamp(this.getSittingMultiplier()*(1-this.getInWaterMultiplier()), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnims.swim_idle, ageInTicks, 1.0f,
-				Math.max(0, ((entity.getInWaterTicks()/5f)*(1-entity.getSittingTicks()/10f)*(1-entity.getTicksOnGround()/10f))-Math.abs(limbSwingAmount)));
+				Mth.clamp((this.getInWaterMultiplier()*(1-this.getSittingMultiplier())*(1-this.getOnGroundMultiplier()))-Math.abs(limbSwingAmount), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnimsExtra.WATER_GROUND_IDLE, ageInTicks, 1.0f,
-				Math.max(0, ((entity.getInWaterTicks()/5f)*(1-entity.getSittingTicks()/10f)*(entity.getTicksOnGround()/10f))-Math.abs(limbSwingAmount)));
+				Mth.clamp((this.getInWaterMultiplier()*(1-this.getSittingMultiplier())*this.getOnGroundMultiplier())-Math.abs(limbSwingAmount), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnimsExtra.WATER_OPEN_MOUTH_IDLE, ageInTicks, 1.0f,
-				Math.min(1,Math.max(0, entity.getSittingTicks()/10f*entity.getInWaterTicks()/5f)));
+				this.getSittingMultiplier()*this.getInWaterMultiplier());
 
 		this.animate(entity.attackAnimationState, TiktaalikAnims.attack, ageInTicks, 1.0F);
 
@@ -111,23 +110,33 @@ public class TiktaalikModel<T extends Tiktaalik> extends MarvelousModel<T> {
 		this.animate(entity.sitAnimationState, TiktaalikAnimsExtra.basking_start, ageInTicks);
 		this.animate(entity.sitPoseAnimationState, TiktaalikAnimsExtra.BASK_POSE, ageInTicks);
 
+		this.animateWalk(TiktaalikAnims.swim, limbSwing,
+				limbSwingAmount*this.getInWaterMultiplier()*(1-this.getOnGroundMultiplier())*(1-this.getSittingMultiplier()),
+				1.5f, 2.5f);
 
-		this.animateWalk(TiktaalikAnims.swim, limbSwing, limbSwingAmount*(entity.getInWaterTicks()/5f)*(1-entity.getTicksOnGround()/10f)*(1-entity.getSittingTicks()/10f), 1.5f,
-				2.5f);
+		this.animateWalk(TiktaalikAnims.SWIM_GROUND, limbSwing,
+				limbSwingAmount*this.getInWaterMultiplier()*this.getOnGroundMultiplier()*(1-this.getSittingMultiplier()),
+				1.5f, 2.5f);
 
-		this.animateWalk(TiktaalikAnims.SWIM_GROUND, limbSwing, limbSwingAmount*(entity.getInWaterTicks()/5f)*(entity.getTicksOnGround()/10f)*(1-entity.getSittingTicks()/10f), 1.5f,
-				2.5f);
+		this.animateWalk(TiktaalikAnims.walk, limbSwing,
+				limbSwingAmount*2f*(1-this.getInWaterMultiplier())*this.getOnGroundMultiplier()*(1-this.getSittingMultiplier()),
+				2, 2.5f);
 
-		this.animateWalk(TiktaalikAnims.walk, limbSwing, limbSwingAmount*2f*(1-entity.getInWaterTicks()/5f)*(entity.getTicksOnGround()/10f)*(1-entity.getSittingTicks()/10f), 2,
-				2.5f);
+		this.animateIdle(entity.fallAnimationState, TiktaalikAnimsExtra.FALL, ageInTicks, 1.0f,
+				(1-this.getOnGroundMultiplier())*(1-this.getInWaterMultiplier()));
 
+		this.animateIdle(entity.squashAnimationState, TiktaalikAnimsExtra.SQUASH, ageInTicks,
+				1.0f, (1-this.getInWaterMultiplier()));
+
+		this.animateIdle(entity.idleAnimationState, TiktaalikAnimsExtra.AGGRO, ageInTicks,
+				1.0f, this.getAggroMultiplier());
 
 		float prevHeadxRot = this.head.xRot;
 		float prevHeadyRot = this.head.yRot;
-		this.head.xRot = prevHeadxRot + headPitch * ((float)Math.PI / 180F)/2;
-		this.head.yRot = prevHeadyRot + netHeadYaw * ((float)Math.PI / 180F)/2;
+		this.head.xRot =  Mth.lerp(this.getInWaterMultiplier(), prevHeadxRot, prevHeadxRot + headPitch * ((float)Math.PI / 180F)/2);
+		this.head.yRot = Mth.lerp(this.getInWaterMultiplier(), prevHeadyRot, prevHeadyRot + netHeadYaw * ((float)Math.PI / 180F)/2);
 
-		this.swim_rot.xRot = Mth.lerp( entity.getInWaterTicks()/5f*(1-entity.getTicksOnGround()/10f), 0, headPitch * ((float)Math.PI / 180F));
+		this.swim_rot.xRot = Mth.lerp( this.getInWaterMultiplier()*(1-this.getOnGroundMultiplier()), 0, headPitch * ((float)Math.PI / 180F)/2);
 	}
 
 	@Override

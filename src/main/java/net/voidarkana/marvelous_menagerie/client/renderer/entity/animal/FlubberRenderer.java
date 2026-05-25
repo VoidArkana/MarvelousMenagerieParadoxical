@@ -44,7 +44,7 @@ public class FlubberRenderer<T extends Flubber> extends MobRenderer<T, Marvelous
     @Override
     protected void setupRotations(T pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterTicks()/5f, 0, pEntityLiving.currentRoll*360/4)));
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(this.model.getInWaterMultiplier()*(1-this.model.getOnGroundMultiplier()), 0, pEntityLiving.currentRoll*360/4)));
     }
 
     @Override

@@ -150,6 +150,8 @@ public class MMItems {
     //Lystrosaurus
     public static final RegistryObject<Item> LYSTRO_FOSSIL = ITEMS.register("lystro_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> LYSTROSAURUS_SPAWN_EGG = ITEMS.register("lystro_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.LYSTROSAURUS, 0x6f394b, 0xe3d69d, new Item.Properties()));
 
     //Sniffer
     public static final RegistryObject<Item> SNIFFER_FOSSIL = ITEMS.register("sniffer_fossil",

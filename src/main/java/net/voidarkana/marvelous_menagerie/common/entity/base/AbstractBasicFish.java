@@ -22,13 +22,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractBasicFish extends BreedableWaterAnimal implements Bucketable{
+public abstract class AbstractBasicFish extends MarvelousWaterAnimal implements Bucketable{
 
 
-    public AbstractBasicFish(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public AbstractBasicFish(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

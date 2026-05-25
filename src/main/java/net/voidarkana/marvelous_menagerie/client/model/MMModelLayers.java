@@ -155,6 +155,11 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_TIKTAALIK_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_tiktaalik"), "main");
 
+    public static final ModelLayerLocation LYSTRO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "lystro"), "main");
+    public static final ModelLayerLocation BABY_LYSTRO_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_lystro"), "main");
+
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

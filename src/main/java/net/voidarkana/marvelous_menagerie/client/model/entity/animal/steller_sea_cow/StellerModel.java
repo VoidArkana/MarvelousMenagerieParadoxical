@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AnomalocarisAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyStellerAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.StellerAnims;
@@ -85,27 +86,22 @@ public class StellerModel<T extends StellerSeaCow> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(StellerSeaCow entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
 		if (entity.isFromInventory())
 			this.applyStatic(StellerAnims.POSE);
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(StellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
+		this.animateWalk(StellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
 
-			this.swim_rot.xRot = headPitch * ((float)Math.PI / 180F)/8;
-		}else {
-			this.swim_rot.resetPose();
-		}
+		this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
 
-		this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
-
-		this.head.yRot = (netHeadYaw * (float)Math.PI / 180F)/2;
-		this.head.xRot = (headPitch * (float)Math.PI / 180F)/2;
-		this.neck_rot.yRot = (netHeadYaw * (float)Math.PI / 180F)/2;
-		this.neck_rot.xRot = (headPitch * (float)Math.PI / 180F)/2;
+		this.swim_rot.xRot = Mth.lerp(getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F)/8);
+		this.head.yRot = head.yRot+(netHeadYaw * (float)Math.PI / 180F)/2;
+		this.head.xRot = head.xRot+(headPitch * (float)Math.PI / 180F)/2;
+		this.neck_rot.yRot = neck_rot.yRot+(netHeadYaw * (float)Math.PI / 180F)/2;
+		this.neck_rot.xRot = neck_rot.xRot+(headPitch * (float)Math.PI / 180F)/2;
 	}
 
 	@Override

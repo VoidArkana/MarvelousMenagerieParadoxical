@@ -32,6 +32,7 @@ import net.voidarkana.marvelous_menagerie.common.effect.potion.MMPotions;
 import net.voidarkana.marvelous_menagerie.common.enchantment.MMEnchantmentsClass;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntityPlacements;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.brains.MMMemoryModuleTypes;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.DawnHorse;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.MMVillagerProfessions;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
@@ -76,6 +77,7 @@ public class MarvelousMenagerie
 
         MMLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 
+        MMMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
         MMEntities.register(modEventBus);
         MMVillagerProfessions.register(modEventBus);
         MMParticles.register(modEventBus);
@@ -115,7 +117,6 @@ public class MarvelousMenagerie
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-//        MMNetworkHandler.init();
         MMMessages.register();
         event.enqueueWork(()->{
 

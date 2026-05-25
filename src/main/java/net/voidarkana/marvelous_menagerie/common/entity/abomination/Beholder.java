@@ -34,7 +34,7 @@ import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
@@ -52,7 +52,6 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
     public float tilt;
     public float currentRoll = 0.0F;
 
-    private static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> WANTS_TO_GRAB = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_GRABBING = SynchedEntityData.defineId(Beholder.class, EntityDataSerializers.BOOLEAN);
@@ -131,7 +130,6 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
         this.entityData.define(WANTS_TO_GRAB, false);
         this.entityData.define(IS_GRABBING, false);
         this.entityData.define(GRABBING_TICKS, 0);
-        this.entityData.define(IN_WATER_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -148,14 +146,6 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
         this.setWantsToGrab(pCompound.getBoolean("WantsToGrab"));
         this.setIsGrabbing(pCompound.getBoolean("IsGrabbing"));
         this.setGrabbingTicks(pCompound.getInt("GrabbingTicks"));
-    }
-
-    public int getInWaterTicks() {
-        return this.entityData.get(IN_WATER_TICKS);
-    }
-
-    public void setInWaterTicks(int variant) {
-        this.entityData.set(IN_WATER_TICKS, variant);
     }
 
     @Override
@@ -211,22 +201,6 @@ public class Beholder extends Abomination implements IAnimatedAttacker {
     @Override
     public void aiStep() {
         super.aiStep();
-
-        if (!this.level().isClientSide){
-
-            if (!this.isInWater() && this.getInWaterTicks() > 0){
-
-                this.prevTicksInWater = this.getInWaterTicks();
-                this.setInWaterTicks(this.prevTicksInWater -1);
-
-            }else if (this.isInWater() && this.getInWaterTicks() < 5){
-
-                this.prevTicksInWater = this.getInWaterTicks();
-                this.setInWaterTicks(this.prevTicksInWater +1);
-
-            }
-
-        }
 
         prevTilt = tilt;
         if (this.isInWater() && !this.onGround() && !this.isLandNavigator) {

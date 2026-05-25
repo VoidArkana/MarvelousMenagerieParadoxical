@@ -124,54 +124,33 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 	}
 
 	@Override
-	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks,netHeadYaw,headPitch);
 
 		if (entity.isFromInventory())
 			this.applyStatic(OphthalmoAnims.POSE);
 
-		if (entity.isInWaterOrBubble() || entity.isVehicle()){
-			this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f);
+		this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
+		this.animate(entity.leftAttackAnimationState, OphthalmoAnims.ATTACK_1, ageInTicks, 1.0F);
+		this.animate(entity.rightAttackAnimationState, OphthalmoAnims.ATTACK_2, ageInTicks, 1.0F);
+		this.animate(entity.eatAnimationState, OphthalmoAnims.EATING, ageInTicks, 1.0F);
 
-//			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F)/2;
-//			this.head_overlay.yRot = entity.currentRoll;
-//			this.tail_rot.yRot = -entity.currentRoll;
-//			this.tail_tip_rot.yRot = -entity.currentRoll;
+		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
-			this.animate(entity.leftAttackAnimationState, OphthalmoAnims.ATTACK_1, ageInTicks, 1.0F);
-			this.animate(entity.rightAttackAnimationState, OphthalmoAnims.ATTACK_2, ageInTicks, 1.0F);
-			this.animate(entity.eatAnimationState, OphthalmoAnims.EATING, ageInTicks, 1.0F);
+		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
 
-			if (!entity.isVehicle()){
-				this.head_rot.yRot = (netHeadYaw * (float)Math.PI / 180F)/4;
-				this.head_rot.xRot = (headPitch * (float)Math.PI / 180F)/4;
 
-				float deltaTime = Minecraft.getInstance().getDeltaFrameTime();
-				float tilt = Mth.clamp(Mth.lerp(deltaTime, entity.xRotO, entity.getXRot()), -45f, 45f);
-				float roll = Mth.lerp(deltaTime, entity.prevRoll, entity.currentRoll);
+		this.head_rot.yRot += Mth.lerp(getInWaterMultiplier(), 0,(netHeadYaw * (float)Math.PI / 180F)/4);
+		this.head_rot.xRot += Mth.lerp(getInWaterMultiplier(), 0,(headPitch * (float)Math.PI / 180F)/4);
 
-				head.yRot += roll * -Mth.DEG_TO_RAD;
-				body.zRot += roll * -Mth.DEG_TO_RAD;
-				body.yRot += roll * Mth.DEG_TO_RAD;
-				tail.yRot += roll * Mth.DEG_TO_RAD;
-				tail_tip_rot.yRot += roll * 2.0f * Mth.DEG_TO_RAD;
+		float deltaTime = Minecraft.getInstance().getDeltaFrameTime();
+		float roll = Mth.lerp(deltaTime, entity.prevRoll, entity.currentRoll);
 
-			}else {
-				this.head_rot.resetPose();
-			}
-
-		}else {
-			this.swim_control.resetPose();
-			this.head_overlay.resetPose();
-			this.tail_rot.resetPose();
-			this.tail_tip_rot.resetPose();
-			this.head_rot.resetPose();
-		}
-
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
-
+		head.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
+		body.zRot += Mth.lerp(getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
+		body.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
+		tail.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
+		tail_tip_rot.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * 2.0f * Mth.DEG_TO_RAD);
 	}
 
 	@Override

@@ -52,17 +52,15 @@ public class BabySacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Sacabambaspis pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
+		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
 
-		if (pEntity.isInWaterOrBubble()){
-			this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount/2, 2f, 1.5f);
-		}
+		this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount/2, 2f, 1.5f*getInWaterMultiplier());
 
-		this.swim_control.xRot = Mth.lerp( pEntity.getOutOfWaterTicks()/5f, pHeadPitch * ((float)Math.PI / 180F), 0);
+		this.swim_control.xRot = Mth.lerp( 1-this.getInWaterMultiplier(), pHeadPitch * ((float)Math.PI / 180F), 0);
 
-		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, 1-pEntity.getOutOfWaterTicks()/5f-Math.abs(pLimbSwingAmount))*0.75F);
-		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (pEntity.getOutOfWaterTicks()/5f)*0.75F);
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(pLimbSwingAmount))*0.75F);
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (1-this.getInWaterMultiplier())*0.75F);
 	}
 
 	@Override

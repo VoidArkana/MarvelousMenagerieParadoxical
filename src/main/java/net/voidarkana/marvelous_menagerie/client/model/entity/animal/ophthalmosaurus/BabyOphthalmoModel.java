@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyOphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
@@ -67,23 +68,18 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 	}
 
 	@Override
-	public void setupAnim(Ophthalmosaurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks,netHeadYaw,headPitch);
 
 		if (entity.isFromInventory())
 			this.applyStatic(BabyOphthalmoAnims.POSE);
 
-		if (entity.isInWaterOrBubble()){
-			this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing/2, limbSwingAmount*4f, 1.5f, 3f);
+		this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing/2, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
 
-			this.swim_control.xRot = headPitch * ((float)Math.PI / 180F);
+		this.swim_control.xRot = Mth.lerp(getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
 
-		}else {
-			this.swim_control.resetPose();
-		}
-
-		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.FLOP, ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
 
 	}
 

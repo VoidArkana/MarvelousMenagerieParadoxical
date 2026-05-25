@@ -8,9 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.control.LookControl;
-import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.entity.ai.goal.PanicGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
@@ -24,6 +22,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
 
 public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
 
@@ -84,12 +84,12 @@ public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
 
     public void switchNavigator(boolean onLand) {
         if (onLand) {
-            this.moveControl = new MarvelousMoveControl(this);
+            this.moveControl = new MarvelousLandMoveControl(this, this.getMaxYRot());
             this.navigation = new GroundPathNavigation(this, level());
             this.lookControl = new LookControl(this);
             this.setIsLandNavigator(true);
         } else {
-            this.moveControl = new SmoothSwimmingMoveControl(this, 65, this.getMaxYRot(), 0.2F, 0.1F, true);
+            this.moveControl = new MarvelousSwimmingMoveControl(this, 45, this.getMaxYRot(), 0.2F, 0.1F, true);
             this.navigation = new AmphibiousPathNavigation(this, level());
             this.lookControl = new SmoothSwimmingLookControl(this, this.getMaxYRot());
             this.setIsLandNavigator(false);

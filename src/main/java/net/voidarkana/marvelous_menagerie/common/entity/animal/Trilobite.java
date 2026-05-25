@@ -32,13 +32,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.WaterCreatureRandomlySitUpOrDownGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.WaterCreatureRandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterCreature;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +55,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     private static final EntityDataAccessor<Boolean> HAS_HIGHLIGHT = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> LGBT_VARIANT = SynchedEntityData.defineId(Trilobite.class, EntityDataSerializers.INT);
 
-    public Trilobite(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Trilobite(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
@@ -210,7 +209,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         }
         if (this.isSitting()){
             BlockState groundstate = this.level().getBlockState(this.blockPosition().below());
-            if (!this.onGround() || groundstate.is(Blocks.MUD) || !groundstate.is(BlockTags.MINEABLE_WITH_SHOVEL) || this.getOutOfWaterTicks()>0){
+            if (!this.onGround() || groundstate.is(Blocks.MUD) || !groundstate.is(BlockTags.MINEABLE_WITH_SHOVEL) || !this.isInWaterOrBubble()){
                 this.standUpInstantly();
             }
         }
@@ -425,7 +424,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     @Override
-    public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public @Nullable MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Trilobite otherParent = (Trilobite) pOtherParent;
         Trilobite baby = MMEntities.TRILOBITE.get().create(pLevel);
 
@@ -501,7 +500,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     }
 
     @Override
-    public boolean canMate(BreedableWaterAnimal pOtherAnimal) {
+    public boolean canMate(MarvelousWaterAnimal pOtherAnimal) {
         Trilobite mate = (Trilobite)pOtherAnimal;
         return this.getVariantModel() == mate.getVariantModel() && super.canMate(mate);
     }
@@ -637,7 +636,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         public boolean canUse() {
             BlockState groundstate = trilobite.level().getBlockState(trilobite.blockPosition().below());
             if (groundstate.is(BlockTags.MINEABLE_WITH_SHOVEL) && !groundstate.is(Blocks.MUD)
-                    && trilobite.getOutOfWaterTicks() == 0) {
+                    && trilobite.isInWaterOrBubble()) {
                 return super.canUse();
             }
             return false;
@@ -655,7 +654,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         @Override
         public void start() {
             if (!this.trilo.level().isClientSide){
-                if (this.trilo.getOutOfWaterTicks()==0 && this.trilo.level().getBlockState(this.trilo.blockPosition().below()).is(BlockTags.MINEABLE_WITH_SHOVEL))
+                if (this.trilo.isInWaterOrBubble() && this.trilo.level().getBlockState(this.trilo.blockPosition().below()).is(BlockTags.MINEABLE_WITH_SHOVEL))
                     this.trilo.sitDown();
             }
             else

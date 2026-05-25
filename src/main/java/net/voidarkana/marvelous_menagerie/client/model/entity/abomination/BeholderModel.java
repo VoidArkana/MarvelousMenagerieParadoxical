@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.BeholderAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.BorealoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.OphthalmoAnims;
@@ -200,16 +201,11 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		if (entity.isFromInventory())
 			this.applyStatic(BeholderAnims.POSE);
 
-		if (entity.isLandNavigator){
-			if (entity.isSprinting()){
-				animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, 1);
-			}else {
-				animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f);
-			}
-		}
+		animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, getSprintingMultiplier()*(1-getInWaterMultiplier()));
+		animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-getSprintingMultiplier())*(1-getInWaterMultiplier()));
 
-		this.animateIdle(entity.idleAnimationState, BeholderAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.animate(entity.idleOverlay, BeholderAnims.IDLE_OVERLAY, ageInTicks, 1.0F);
 
@@ -224,19 +220,15 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		this.animate(entity.keepGrabbingState, BeholderAnims.GRAB_OVERLAY, ageInTicks, 1);
 		this.animate(entity.releaseJawsState, BeholderAnims.GRAB_END, ageInTicks, 1);
 
-		if (entity.isLandNavigator){
-			this.body_main.resetPose();
-			if (entity.isGrabbing()){
-				this.look_control.resetPose();
-			}else{
-				this.look_control.xRot = headPitch * ((float)Math.PI / 180F);
-				this.look_control.yRot = netHeadYaw * ((float)Math.PI / 180F);
-			}
-		}else {
+		if (entity.isGrabbing()){
 			this.look_control.resetPose();
-			this.body_main.xRot = headPitch * ((float)Math.PI / 180F);
-			this.body_main.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		}else{
+			this.look_control.xRot = Mth.lerp(getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
+			this.look_control.yRot = Mth.lerp(getInWaterMultiplier(), netHeadYaw * ((float)Math.PI / 180F), 0);
 		}
+		
+		this.body_main.xRot = Mth.lerp(getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
+		this.body_main.yRot = Mth.lerp(getInWaterMultiplier(), 0, netHeadYaw * ((float)Math.PI / 180F));
 	}
 
 	@Override

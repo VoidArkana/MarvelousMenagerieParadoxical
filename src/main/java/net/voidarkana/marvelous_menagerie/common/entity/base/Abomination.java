@@ -22,7 +22,6 @@ public abstract class Abomination extends Monster {
     public final AnimationState idleAnimationState = new AnimationState();
     int prevTicksInWater;
     private static final EntityDataAccessor<Boolean> IS_INVENTORY = SynchedEntityData.defineId(Abomination.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(Abomination.class, EntityDataSerializers.INT);
 
     protected Abomination(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -30,7 +29,6 @@ public abstract class Abomination extends Monster {
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(IN_WATER_TICKS, 0);
         this.entityData.define(IS_INVENTORY, true);
     }
 
@@ -44,40 +42,12 @@ public abstract class Abomination extends Monster {
         this.setFromInventory(pCompound.getBoolean("IsFromInventory"));
     }
 
-    public int getInWaterTicks() {
-        return this.entityData.get(IN_WATER_TICKS);
-    }
-
-    public void setInWaterTicks(int variant) {
-        this.entityData.set(IN_WATER_TICKS, variant);
-    }
-
     public Boolean isFromInventory() {
         return this.entityData.get(IS_INVENTORY);
     }
 
     public void setFromInventory(boolean variant) {
         this.entityData.set(IS_INVENTORY, variant);
-    }
-
-    @Override
-    public void aiStep() {
-
-        if (!this.level().isClientSide){
-
-            if ((!this.isInWater() || this.onGround()) && this.getInWaterTicks() > 0){
-
-                this.prevTicksInWater = this.getInWaterTicks();
-                this.setInWaterTicks(this.prevTicksInWater -1);
-
-            }else if (this.isInWater() && !this.onGround() && this.getInWaterTicks() < 5){
-
-                this.prevTicksInWater = this.getInWaterTicks();
-                this.setInWaterTicks(this.prevTicksInWater +1);
-
-            }
-        }
-        super.aiStep();
     }
 
     @Override

@@ -292,27 +292,25 @@ public class HallucigeniaModel<T extends Hallucigenia> extends MarvelousModel<T>
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (entity.isInWaterOrBubble()){
-			animateWalk(HallucigeniaAnims.WALK, limbSwing*10, limbSwingAmount*5, 2.5f, 12);
+		animateWalk(HallucigeniaAnims.WALK, limbSwing*10, limbSwingAmount*5, 2.5f, 12*getInWaterMultiplier());
 
-			this.animate(entity.stretchState, HallucigeniaAnims.STRETCH, ageInTicks, 1);
-			this.animate(entity.admireState, HallucigeniaAnims.ADMIRE, ageInTicks, 1);
-		}
+		this.animateIdle(entity.stretchState, HallucigeniaAnims.STRETCH, ageInTicks, 1, getInWaterMultiplier());
+		this.animateIdle(entity.admireState, HallucigeniaAnims.ADMIRE, ageInTicks, 1, getInWaterMultiplier());
 
-		this.head.xRot = Mth.lerp(entity.getOutOfWaterTicks()/5f, head.xRot + headPitch * ((float)Math.PI / 180F)/2,0);
-		this.head.yRot = Mth.lerp(entity.getOutOfWaterTicks()/5f,head.yRot + netHeadYaw * ((float)Math.PI / 180F)/2,0);
+		this.head.xRot = Mth.lerp(1-getInWaterMultiplier(), head.xRot + headPitch * ((float)Math.PI / 180F)/2,0);
+		this.head.yRot = Mth.lerp(1-getInWaterMultiplier(),head.yRot + netHeadYaw * ((float)Math.PI / 180F)/2,0);
 
-		this.neck.xRot = Mth.lerp(entity.getOutOfWaterTicks()/5f, neck.xRot + headPitch * ((float)Math.PI / 180F)/2,0);
-		this.neck.yRot = Mth.lerp(entity.getOutOfWaterTicks()/5f, neck.yRot + netHeadYaw * ((float)Math.PI / 180F)/2,0);
+		this.neck.xRot = Mth.lerp(1-getInWaterMultiplier(), neck.xRot + headPitch * ((float)Math.PI / 180F)/2,0);
+		this.neck.yRot = Mth.lerp(1-getInWaterMultiplier(), neck.yRot + netHeadYaw * ((float)Math.PI / 180F)/2,0);
 
 		this.animate(entity.stingAnimationState, HallucigeniaAnims.STING, ageInTicks, 1);
-		this.animateIdle(entity.idleAnimationState, HallucigeniaAnims.IDLE, ageInTicks, 1, Math.max(0, 1-entity.getOutOfWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, HallucigeniaAnims.IDLE, ageInTicks, 1, Math.max(0, getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.animateIdle(entity.idleAnimationState,
 				entity.flopSide() ? HallucigeniaAnims.BEACHED_L : HallucigeniaAnims.BEACHED_R,
-				ageInTicks, 1.0F, (entity.getOutOfWaterTicks()/5f));
+				ageInTicks, 1.0F, (1-getInWaterMultiplier()));
 	}
 
 	@Override

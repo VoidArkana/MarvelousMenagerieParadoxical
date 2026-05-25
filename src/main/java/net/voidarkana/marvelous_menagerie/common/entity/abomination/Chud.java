@@ -76,12 +76,11 @@ public class Chud extends Abomination {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.33D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
+        super.customServerAiStep();
 
     }
 

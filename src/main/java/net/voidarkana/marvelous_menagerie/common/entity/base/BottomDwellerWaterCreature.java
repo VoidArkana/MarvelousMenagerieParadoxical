@@ -14,19 +14,21 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
 
 
-public abstract class BottomDwellerWaterCreature extends BreedableWaterAnimal {
+public abstract class BottomDwellerWaterCreature extends MarvelousWaterAnimal {
 
     public boolean isLandNavigator;
 
-    protected BottomDwellerWaterCreature(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    protected BottomDwellerWaterCreature(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     public void switchNavigator(boolean onLand) {
         if (onLand) {
-            this.moveControl = new MoveControl(this);
+            this.moveControl = new MarvelousLandMoveControl(this, 90f);
             PathNavigation prevNav = this.navigation;
             this.navigation = new GroundPathNavigation(this, level());
             this.lookControl = new LookControl(this);
@@ -34,7 +36,7 @@ public abstract class BottomDwellerWaterCreature extends BreedableWaterAnimal {
         } else {
             this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
             this.jumpControl = new FishJumpControl(this);
-            this.moveControl = new SmoothSwimmingMoveControl(this, 1, 1, 0.02F, 0.1F, true);
+            this.moveControl = new MarvelousSwimmingMoveControl(this, 1, 1, 0.02F, 0.1F, true);
             this.setMaxUpStep(1.0F);
             this.navigation = new AmphibiousPathNavigation(this, level());
             this.isLandNavigator = false;

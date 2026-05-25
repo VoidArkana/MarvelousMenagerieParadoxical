@@ -108,24 +108,22 @@ public class BorealoModel<T extends Borealopelta> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void setupAnim(Borealopelta entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (!entity.isInWaterOrBubble()){
-			this.animateWalk(BorealoAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f);
+		this.animate(entity.standUpAnimationState, BorealoAnims.SIT_END, ageInTicks, 1);
+		this.animate(entity.sitAnimationState, BorealoAnims.SIT_START, ageInTicks, 1);
+		this.animate(entity.sitPoseAnimationState, BorealoAnims.SIT_POSE, ageInTicks, 1);
 
-			this.animate(entity.attackAnimationState1, BorealoAnims.ATTACK_1, ageInTicks, 1F);
-			this.animate(entity.attackAnimationState2, BorealoAnims.ATTACK_2, ageInTicks, 1F);
+		this.animateWalk(BorealoAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-this.getInWaterMultiplier()));
 
-			this.animate(entity.idleShakeState, BorealoAnims.SHAKE, ageInTicks, 1);
+		this.animate(entity.attackAnimationState1, BorealoAnims.ATTACK_1, ageInTicks, 1F);
+		this.animate(entity.attackAnimationState2, BorealoAnims.ATTACK_2, ageInTicks, 1F);
 
-			this.animate(entity.standUpAnimationState, BorealoAnims.SIT_END, ageInTicks, 1);
-			this.animate(entity.sitAnimationState, BorealoAnims.SIT_START, ageInTicks, 1);
-			this.animate(entity.sitPoseAnimationState, BorealoAnims.SIT_POSE, ageInTicks, 1);
-		}
+		this.animateIdle(entity.idleShakeState, BorealoAnims.SHAKE, ageInTicks, 1, 1-this.getInWaterMultiplier());
 
-		this.animateIdle(entity.idleAnimationState, BorealoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, BorealoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BorealoAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BorealoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = headPitch * ((float)Math.PI / 180F)/4;
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F)/4;

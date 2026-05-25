@@ -42,8 +42,7 @@ public class TiktaalikRenderer<T extends Tiktaalik> extends MobRenderer<T, Marve
     @Override
     protected void setupRotations(T pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterTicks()/5f*(1-pEntityLiving.getTicksOnGround()/10f),
-                0, pEntityLiving.currentRoll*360/4)));
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(0));
     }
 
     @Override

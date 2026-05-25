@@ -33,9 +33,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.effect.MMEffects;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.FishBreedGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterCreature;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,7 +70,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Hallucigenia.class, EntityDataSerializers.BYTE);
 
-    public Hallucigenia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Hallucigenia(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.switchNavigator(false);
     }
@@ -391,7 +391,7 @@ public class Hallucigenia extends BottomDwellerWaterCreature implements Bucketab
     }
 
     @Override
-    public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public @Nullable MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Hallucigenia baby = MMEntities.HALLUCIGENIA.get().create(pLevel);
         Hallucigenia otherParent = (Hallucigenia) pOtherParent;
         if (baby!=null)

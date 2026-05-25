@@ -75,19 +75,14 @@ public class LeptiModel<T extends Leptictidium> extends MarvelousModel<T> {
 	public void setupAnim(Leptictidium entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (!entity.isInWaterOrBubble()){
-			if (entity.isSprinting()){
-				animateWalk(LeptiAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
-			}else {
-				animateWalk(LeptiAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
-			}
+		animateWalk(LeptiAnims.RUN, limbSwing, limbSwingAmount, 1.5f, this.getSprintingMultiplier());
+		animateWalk(LeptiAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-this.getSprintingMultiplier()));
 
-			this.animate(entity.idleNoseState, LeptiAnims.SNIFF, ageInTicks, 1.0F);
-			this.animate(entity.idleTiltState, LeptiAnims.LOOKDOWN, ageInTicks, 1.0F);
-		}
+		this.animateIdle(entity.idleNoseState, LeptiAnims.SNIFF, ageInTicks, 1.0F, 1-this.getInWaterMultiplier());
+		this.animateIdle(entity.idleTiltState, LeptiAnims.LOOKDOWN, ageInTicks, 1, 1-this.getInWaterMultiplier());
 
-		this.animateIdle(entity.idleAnimationState, LeptiAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, LeptiAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
+		this.animateIdle(entity.idleAnimationState, LeptiAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1*(1-this.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, LeptiAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
 
 		this.body.xRot = headPitch * ((float)Math.PI / 180F);
 		this.body.yRot = netHeadYaw * ((float)Math.PI / 180F)/2;

@@ -42,7 +42,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.*;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractAmphibianCreature;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
@@ -58,14 +58,17 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     public AnimationState attackAnimationState = new AnimationState();
     int attackAnimationTimeout;
+    public AnimationState fallAnimationState = new AnimationState();
+    int fallAnimationTimeout;
+    public AnimationState squashAnimationState = new AnimationState();
+    int squashAnimationTimeout;
+
 
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.BOOLEAN);
 
     private static final EntityDataAccessor<Boolean> WANTS_TO_SWIM = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Integer> TICKS_ON_GROUND = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> SITTING_TICKS = SynchedEntityData.defineId(Tiktaalik.class, EntityDataSerializers.INT);
 
     public Tiktaalik(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -88,7 +91,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         this.goalSelector.addGoal(3, new BottomDwellerSwimGoal(this));
         this.goalSelector.addGoal(3, new BottomMoveGoal(this, 1, 80));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 900, 600));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 900, 500));
 
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F){
             @Override
@@ -128,10 +131,8 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(WANTS_TO_SWIM, false);
-        this.entityData.define(TICKS_ON_GROUND, 0);
         this.entityData.define(VARIANT, 0);
         this.entityData.define(SIZE, 0);
-        this.entityData.define(SITTING_TICKS, 0);
         this.entityData.define(IS_ATTACKING, false);
     }
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -142,14 +143,6 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setVariant(pCompound.getInt("Variant"));
-    }
-
-    public int getSittingTicks() {
-        return this.entityData.get(SITTING_TICKS);
-    }
-
-    public void setSittingTicks(int variant) {
-        this.entityData.set(SITTING_TICKS, variant);
     }
 
     //variants
@@ -164,10 +157,6 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     public String getVariantName(){
         return Tiktaalik.TiktaalikVariant.byId(this.getVariant()).getSerializedName();
     };
-
-    public boolean canGrow(){
-        return this.getSize()==0;
-    }
 
     public int getSize() {
         return this.entityData.get(SIZE);
@@ -209,14 +198,6 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
         this.refreshDimensions();
         super.onSyncedDataUpdated(pKey);
-    }
-
-    public int getTicksOnGround() {
-        return this.entityData.get(TICKS_ON_GROUND);
-    }
-
-    public void setTicksOnGround(int ticks) {
-        this.entityData.set(TICKS_ON_GROUND, ticks);
     }
 
     public boolean wantsToSwim() {
@@ -262,12 +243,11 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
             this.setWantsToSwim(true);
         }
 
-        if (!this.isBaby() && this.getRandom().nextInt(1500) == 0 && this.canGrow()){
-            int prevSize = this.getSize();
+        if (!this.isBaby() && this.getRandom().nextInt(1500) == 0 && this.getSize()==0){
             if (this.getRandom().nextInt(3)>0)
-                this.setSize(prevSize+10);
+                this.setSize(10);
             else {
-                this.setSize(prevSize+11);
+                this.setSize(11);
             }
         }
     }
@@ -275,10 +255,14 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     @Override
     public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
         ItemStack stack = pPlayer.getItemInHand(pHand);
-        if (stack.is(MMItems.GOLDEN_SACA.get()) && this.getActualSize() == 1){
-            this.setSize(12);
+        if (stack.is(MMItems.GOLDEN_SACA.get()) && this.getActualSize() < 2){
+            int size = this.getSize();
+            if (size < 10){
+                size = size+10;
+            }
+            this.setSize(size+1);
 
-            this.playSound(SoundEvents.GENERIC_EAT);
+            this.playSound(SoundEvents.GENERIC_EAT, 0.75f, this.getVoicePitch());
 
             if (!pPlayer.isCreative())
                 stack.shrink(1);
@@ -296,6 +280,11 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         }
 
         super.actuallyHurt(pDamageSource, pDamageAmount);
+    }
+
+    @Override
+    public boolean hasToStandUpInstantly() {
+        return false;
     }
 
     public void travel(Vec3 pTravelVector) {
@@ -325,38 +314,25 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         } else {
             --this.attackAnimationTimeout;
         }
-    }
-
-    @Override
-    public void aiStep() {
 
         Vec3 vec3 = this.getDeltaMovement();
+        if (!this.onGround() && vec3.y < 0.0D && this.fallAnimationTimeout == 0 && !this.isInWaterOrBubble()) {
+            this.fallAnimationState.start(this.tickCount);
+            this.fallAnimationTimeout = 10;
+        }
 
-        if (!this.level().isClientSide()){
-            if (!this.onGround() && vec3.y < (-0.5D) && !this.isInWater()) {
+        if (this.fallAnimationTimeout > 0){
+            this.fallAnimationTimeout--;
 
-                if (this.getTicksOnGround() > 0){
-                    this.prevTicksOnGround = this.getTicksOnGround();
-                    this.setTicksOnGround(this.prevTicksOnGround-1);
-                }
-
-            } else if (this.onGround()){
-                if (this.getTicksOnGround() < 10){
-                    this.prevTicksOnGround = this.getTicksOnGround();
-                    this.setTicksOnGround(this.prevTicksOnGround+1);
-                }
-            }
-
-            if (this.isSitting() && this.getSittingTicks() < 10){
-                    int prevTicks = this.getSittingTicks();
-                    this.setSittingTicks(prevTicks+1);
-            } else if (!this.isSitting() && this.getSittingTicks() > 0){
-                    int prevTicks = this.getSittingTicks();
-                    this.setSittingTicks(prevTicks-1);
+            if (this.onGround() && this.squashAnimationTimeout == 0 && !this.isInWaterOrBubble()){
+                this.squashAnimationState.start(this.tickCount);
+                this.squashAnimationTimeout = 15;
             }
         }
 
-        super.aiStep();
+        if (this.squashAnimationTimeout > 0){
+            this.squashAnimationTimeout--;
+        }
     }
 
     @Override
@@ -414,14 +390,14 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
             this.setVariant(pDataTag.getInt("Variant"));
             this.setSize(pDataTag.getInt("Size"));
         }else if (pReason == MobSpawnType.TRIGGERED){
-            int size = this.getRandom().nextInt(2);
+            int size = this.getRandom().nextBoolean() ? 0 : 1;
             if (this.getRandom().nextBoolean()){
                 size = size+10;
             }
             this.setSize(size);
             this.setVariant(Util.getRandom(TiktaalikVariant.values(), this.getRandom()).id());
         }else {
-            int size = this.getRandom().nextInt(2);
+            int size = this.getRandom().nextBoolean() ? 0 : 1;
 
             if (this.getRandom().nextBoolean()){
                 size = size+10;
@@ -436,7 +412,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     }
 
     public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
-        if (this.getSize()<2 || this.isBaby())
+        if (this.getActualSize()<2 || this.isBaby())
             return Bucketable.bucketMobPickup(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
         return super.mobInteract(pPlayer, pHand);
     }

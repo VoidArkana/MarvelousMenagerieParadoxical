@@ -91,11 +91,9 @@ public class ChudModel<T extends Chud> extends MarvelousModel<T> {
 	public void setupAnim(Chud entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 
-		if (entity.isSprinting()){
-			animateWalk(ChudAnimations.run,limbSwing, limbSwingAmount, 2f, 1);
-		}else {
-			animateWalk(ChudAnimations.walk,limbSwing, limbSwingAmount, 2, 2.5f);
-		}
+		animateWalk(ChudAnimations.run,limbSwing, limbSwingAmount, 2f, 1);
+
+		animateWalk(ChudAnimations.walk,limbSwing, limbSwingAmount, 2, 2.5f);
 
 		this.animateIdle(entity.idleAnimationState, ChudAnimations.idle, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 

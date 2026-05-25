@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:lystrosaurus",
+  "icon": "marvelous_menagerie:lystro_fossil",
+  "link": "mobs/lystrosaurus.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.early_paleo"
+    }
+  ]
+}

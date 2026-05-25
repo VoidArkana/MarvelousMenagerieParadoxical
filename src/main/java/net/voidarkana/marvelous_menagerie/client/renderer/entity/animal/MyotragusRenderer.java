@@ -8,11 +8,12 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
+import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.myotragus.BabyMyotragusModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.myotragus.MyotragusModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Myotragus;
 
-public class MyotragusRenderer<T extends Myotragus> extends MobRenderer<T, QuadrupedModel<T>> {
+public class MyotragusRenderer<T extends Myotragus> extends MobRenderer<T, MarvelousModel<T>> {
 
     private final MyotragusModel<T> adultModel;
     private final BabyMyotragusModel<T> babyModel;
@@ -31,7 +32,8 @@ public class MyotragusRenderer<T extends Myotragus> extends MobRenderer<T, Quadr
 
     @Override
     public ResourceLocation getTextureLocation(T pEntity) {
-        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/myotragus/"+
-                (pEntity.isBaby() ? "baby_" : "") +"myotragus.png");
+        return new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/myotragus/"
+                + (pEntity.isMylo() ? "mylo" : pEntity.getVariantName()) +
+                (pEntity.isBaby() ? "_baby" : "") + "_myotragus.png");
     }
 }

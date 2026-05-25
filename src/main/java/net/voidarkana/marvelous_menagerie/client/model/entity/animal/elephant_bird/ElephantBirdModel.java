@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.voidarkana.marvelous_menagerie.client.animations.BabyEleBirdAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.EleBirdAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
@@ -103,24 +104,17 @@ public class ElephantBirdModel<T extends ElephantBird> extends MarvelousModel<T>
 	}
 
 	@Override
-	public void setupAnim(ElephantBird entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (!entity.isInWaterOrBubble()){
-
-			if (entity.isSprinting()){
-				animateWalk(EleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
-			}else {
-				animateWalk(EleBirdAnims.WALK, limbSwing*1.9f, limbSwingAmount, 2, 2.5f);
-			}
-
-		}
+		animateWalk(EleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, this.getSprintingMultiplier()-this.getInWaterMultiplier());
+		animateWalk(EleBirdAnims.WALK, limbSwing*1.9f, limbSwingAmount, 2, 2.5f*(1-this.getSprintingMultiplier())*(1-this.getInWaterMultiplier()));
 
 		this.animate(entity.smhAnimationState, EleBirdAnims.NUH_UH, ageInTicks, 1);
 
 		this.animate(entity.shakeAnimationState, EleBirdAnims.SHAKE, ageInTicks, 1);
-		this.animateIdle(entity.idleAnimationState, EleBirdAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, EleBirdAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, EleBirdAnims.SWIM, ageInTicks, 1.0f, getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, EleBirdAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = this.neck.xRot + headPitch * ((float)Math.PI / 180F)/2;
 		this.neck.yRot = this.neck.yRot + netHeadYaw * ((float)Math.PI / 180F)/2;

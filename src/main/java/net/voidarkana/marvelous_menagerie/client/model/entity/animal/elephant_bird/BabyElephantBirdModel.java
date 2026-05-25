@@ -61,20 +61,15 @@ public class BabyElephantBirdModel<T extends ElephantBird> extends MarvelousMode
 	}
 
 	@Override
-	public void setupAnim(ElephantBird entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.root().getAllParts().forEach(ModelPart::resetPose);
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		if (!entity.isInWaterOrBubble()){
-			if (entity.isSprinting()){
-				animateWalk(BabyEleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1);
-			}else {
-				animateWalk(BabyEleBirdAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f);
-			}
-		}
+		animateWalk(BabyEleBirdAnims.RUN, limbSwing, limbSwingAmount, 1.5f, this.getSprintingMultiplier()-this.getInWaterMultiplier());
+		animateWalk(BabyEleBirdAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-this.getSprintingMultiplier())*(1-this.getInWaterMultiplier()));
 
 		this.animate(entity.shakeAnimationState, BabyEleBirdAnims.SHAKE, ageInTicks, 1);
-		this.animateIdle(entity.idleAnimationState, BabyEleBirdAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterTicks()/5f);
-		this.animateIdle(entity.idleAnimationState, BabyEleBirdAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterTicks()/5f-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyEleBirdAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BabyEleBirdAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = this.neck.xRot + headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = this.neck.yRot + netHeadYaw * ((float)Math.PI / 180F);

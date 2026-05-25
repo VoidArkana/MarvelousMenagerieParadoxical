@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.*;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.*;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
@@ -38,11 +38,11 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
     public final AnimationState attackAnimationState1 = new AnimationState();
     public final AnimationState attackAnimationState2 = new AnimationState();
     public final AnimationState idleShakeState = new AnimationState();
+    private int idleShakeTimeout = this.getRandom().nextInt(160) + 160;
 
     public int attackAnimationTimeout;
     int layEggCounter;
 
-    private int idleShakeTimeout = this.getRandom().nextInt(160) + 160;
 
     private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.FERN, Items.LARGE_FERN);
 
@@ -67,15 +67,10 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
         this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D){
-            @Override
-            public boolean canUse() {
-                return !Borealopelta.this.isSitting() && !Borealopelta.this.isInPoseTransition() && super.canUse();
-            }
-        });
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 5000));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 300, 800));
 
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));

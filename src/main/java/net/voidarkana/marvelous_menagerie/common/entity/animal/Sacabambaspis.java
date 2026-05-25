@@ -10,24 +10,17 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.ChaseGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.ChaseGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IChaserAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.function.Predicate;
 
 public class Sacabambaspis extends AbstractBasicFish implements IChaserAnimal {
 
@@ -39,7 +32,7 @@ public class Sacabambaspis extends AbstractBasicFish implements IChaserAnimal {
 
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Sacabambaspis.class, EntityDataSerializers.INT);
 
-    public Sacabambaspis(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Sacabambaspis(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -161,7 +154,7 @@ public class Sacabambaspis extends AbstractBasicFish implements IChaserAnimal {
 
     @Nullable
     @Override
-    public BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
         Sacabambaspis baby = MMEntities.SACABAMBASPIS.get().create(pLevel);
         Sacabambaspis otherSaca = (Sacabambaspis)pOtherParent;
 

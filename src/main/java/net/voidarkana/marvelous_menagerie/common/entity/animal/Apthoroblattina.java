@@ -54,8 +54,6 @@ public class Apthoroblattina extends MarvelousAnimal {
     @javax.annotation.Nullable
     private BlockPos jukebox;
 
-    private static final EntityDataAccessor<Integer> TICKS_OFF_GROUND = SynchedEntityData.defineId(Apthoroblattina.class, EntityDataSerializers.INT);
-
     public Apthoroblattina(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.lookControl = new Apthoroblattina.RoachLookControl(this);
@@ -64,8 +62,12 @@ public class Apthoroblattina extends MarvelousAnimal {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
+        this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F){
+            @Override
+            protected boolean shouldPanic() {
+                return super.shouldPanic() || Apthoroblattina.this.isInWaterOrBubble();
+            }
+        });
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new DanceParty(this));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.HONEYCOMB), false)
@@ -115,13 +117,10 @@ public class Apthoroblattina extends MarvelousAnimal {
         });
     }
 
-
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_JOHN, false);
-        this.entityData.define(TICKS_OFF_GROUND, 0);
     }
 
     @Override
@@ -134,14 +133,6 @@ public class Apthoroblattina extends MarvelousAnimal {
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putBoolean("IsJohn", this.isJohn());
-    }
-
-    public int getTicksOffGround() {
-        return this.entityData.get(TICKS_OFF_GROUND);
-    }
-
-    public void setTicksOffGround(int variant) {
-        this.entityData.set(TICKS_OFF_GROUND, variant);
     }
 
     @Override
@@ -260,23 +251,10 @@ public class Apthoroblattina extends MarvelousAnimal {
             this.jukebox = null;
         }
         super.aiStep();
+
         if (isGlidingDown()) {
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
-
-            if (!this.level().isClientSide()){
-                if (this.getTicksOffGround() < 5){
-                    this.prevTicksOffGround = this.getTicksOffGround();
-                    this.setTicksOffGround(this.prevTicksOffGround+1);
-                }
-            }
-        }else{
-            if (!this.level().isClientSide()){
-                if (this.getTicksOffGround() > 0){
-                    this.prevTicksOffGround = this.getTicksOffGround();
-                    this.setTicksOffGround(this.prevTicksOffGround-1);
-                }
-            }
         }
     }
     

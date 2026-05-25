@@ -31,7 +31,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.BreedableWaterAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
@@ -45,7 +45,7 @@ public class Pikaia extends AbstractBasicFish {
     private static final EntityDataAccessor<Boolean> IS_POLLINATING = SynchedEntityData.defineId(Pikaia.class, EntityDataSerializers.BOOLEAN);
 
 
-    public Pikaia(EntityType<? extends BreedableWaterAnimal> pEntityType, Level pLevel) {
+    public Pikaia(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -81,7 +81,7 @@ public class Pikaia extends AbstractBasicFish {
     }
 
     @Override
-    public @Nullable BreedableWaterAnimal getBreedOffspring(ServerLevel pLevel, BreedableWaterAnimal pOtherParent) {
+    public @Nullable MarvelousWaterAnimal getBreedOffspring(ServerLevel pLevel, MarvelousWaterAnimal pOtherParent) {
 
         Pikaia baby = MMEntities.PIKAIA.get().create(pLevel);
         baby.setFromBucket(true);
