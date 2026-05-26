@@ -1,6 +1,5 @@
 package net.voidarkana.marvelous_menagerie.common.entity.base;
 
-import com.google.common.annotations.VisibleForTesting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.BlockPos;
@@ -23,7 +22,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
-import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
@@ -213,6 +211,66 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
 
     @Override
     public void tick() {
+
+        if (this.isInWaterOrBubble()){
+            if (this.getInWaterTicks()<this.getInWaterTickBase()){
+                int prevTicks = this.getInWaterTicks();
+                this.setInWaterTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getInWaterTicks()>0){
+                int prevTicks = this.getInWaterTicks();
+                this.setInWaterTicks(prevTicks-1);
+            }
+        }
+
+        if (this.onGround()){
+            if (this.getonGroundTicks()<this.getonGroundTickBase()){
+                int prevTicks = this.getonGroundTicks();
+                this.setonGroundTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getonGroundTicks()>0){
+                int prevTicks = this.getonGroundTicks();
+                this.setonGroundTicks(prevTicks-1);
+            }
+        }
+
+        if (this.isAggressive()){
+            if (this.getAggroTicks()<this.getAggroTickBase()){
+                int prevTicks = this.getAggroTicks();
+                this.setAggroTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getAggroTicks()>0){
+                int prevTicks = this.getAggroTicks();
+                this.setAggroTicks(prevTicks-1);
+            }
+        }
+
+        if (this.isSitting()){
+            if (this.getSittingTicks()<this.getSittingTickBase()){
+                int prevTicks = this.getSittingTicks();
+                this.setSittingTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getSittingTicks()>0){
+                int prevTicks = this.getSittingTicks();
+                this.setSittingTicks(prevTicks-1);
+            }
+        }
+
+        if (this.isSprinting()){
+            if (this.getSprintingTicks()<this.getSprintingTickBase()){
+                int prevTicks = this.getSprintingTicks();
+                this.setSprintingTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getSprintingTicks()>0){
+                int prevTicks = this.getSprintingTicks();
+                this.setSprintingTicks(prevTicks-1);
+            }
+        }
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }
@@ -657,6 +715,13 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
         return true;
     }
 
+    public static final EntityDataAccessor<Integer> ON_GROUND_TICKS = SynchedEntityData.defineId(MarvelousWaterAnimal.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(MarvelousWaterAnimal.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SITTING_TICKS = SynchedEntityData.defineId(MarvelousWaterAnimal.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> SPRINTING_TICKS = SynchedEntityData.defineId(MarvelousWaterAnimal.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Integer> AGGRO_TICKS = SynchedEntityData.defineId(MarvelousWaterAnimal.class, EntityDataSerializers.INT);
+
+
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(FEED_TYPE, 0);
@@ -664,6 +729,11 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
         this.entityData.define(IS_INVENTORY, true);
         this.entityData.define(DATA_BABY_ID, false);
         this.entityData.define(LAST_POSE_CHANGE_TICK, 0L);
+        this.entityData.define(AGGRO_TICKS, 0);
+        this.entityData.define(IN_WATER_TICKS, 0);
+        this.entityData.define(ON_GROUND_TICKS, 0);
+        this.entityData.define(SPRINTING_TICKS, 0);
+        this.entityData.define(SITTING_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -705,6 +775,86 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
 
             this.resetLastPoseChangeTick(i);
         }
+    }
+
+    public int getInWaterTicks(){
+        return this.entityData.get(IN_WATER_TICKS);
+    }
+
+    public void setInWaterTicks(int ticks){
+        this.entityData.set(IN_WATER_TICKS, ticks);
+    }
+
+    public int getInWaterTickBase(){
+        return 5;
+    }
+
+    public float getInWaterMultiplier(){
+        return (float) this.getInWaterTicks() /this.getInWaterTickBase();
+    }
+
+    public int getonGroundTicks(){
+        return this.entityData.get(ON_GROUND_TICKS);
+    }
+
+    public void setonGroundTicks(int ticks){
+        this.entityData.set(ON_GROUND_TICKS, ticks);
+    }
+
+    public int getonGroundTickBase(){
+        return 5;
+    }
+
+    public float getOnGroundMultiplier(){
+        return (float) this.getonGroundTicks() /this.getonGroundTickBase();
+    }
+
+    public int getSprintingTicks(){
+        return this.entityData.get(SPRINTING_TICKS);
+    }
+
+    public void setSprintingTicks(int ticks){
+        this.entityData.set(SPRINTING_TICKS, ticks);
+    }
+
+    public int getSprintingTickBase(){
+        return 5;
+    }
+
+    public float getSprintingMultiplier(){
+        return (float) this.getSprintingTicks() /this.getSprintingTickBase();
+    }
+
+    public int getAggroTicks(){
+        return this.entityData.get(AGGRO_TICKS);
+    }
+
+    public void setAggroTicks(int ticks){
+        this.entityData.set(AGGRO_TICKS, ticks);
+    }
+
+    public int getAggroTickBase(){
+        return 5;
+    }
+
+    public float getAggroMultiplier(){
+        return (float) this.getAggroTicks() /this.getAggroTickBase();
+    }
+
+    public int getSittingTicks(){
+        return this.entityData.get(SITTING_TICKS);
+    }
+
+    public void setSittingTicks(int ticks){
+        this.entityData.set(SITTING_TICKS, ticks);
+    }
+
+    public int getSittingTickBase(){
+        return 5;
+    }
+
+    public float getSittingMultiplier(){
+        return (float) this.getSittingTicks() /this.getSittingTickBase();
     }
 
     @Override

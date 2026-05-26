@@ -97,14 +97,14 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		this.animate(entity.leftEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_LEFT, ageInTicks, 1);
 		this.animate(entity.rightEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_RIGHT, ageInTicks, 1);
 
-		animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-getInWaterMultiplier())*(1-getSittingMultiplier()));
+		animateWalk(JosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier()));
 
 		this.animate(entity.standUpAnimationState, JosephoAnims.SIT_END, ageInTicks, 1);
 		this.animate(entity.sitAnimationState, JosephoAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, JosephoAnims.SIT_IDLE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
-		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, JosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 
 		float prevHeadX = this.head.xRot;
@@ -112,23 +112,6 @@ public class JosephoModel<T extends Josephoartigasia> extends MarvelousModel<T> 
 		this.head.xRot = prevHeadX + headPitch * ((float)Math.PI / 180F);
 		this.head.yRot = prevHeadY + netHeadYaw * ((float)Math.PI / 180F);
 	}
-
-	@Override
-	public float getInWaterTickBase() {
-		return 5;
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		poseStack.pushPose();
-
-		if (this.young){
-			poseStack.scale(0.45f, 0.45f, 0.45f);
-			poseStack.translate(0, 1.75, 0);
-		}
-
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		poseStack.popPose();	}
 
 	@Override
 	public ModelPart root() {

@@ -99,12 +99,11 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		animateWalk(ThylacineAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1-getInWaterMultiplier());
-		animateWalk(ThylacineAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-getInWaterMultiplier()));
+		animateWalk(ThylacineAnims.RUN, limbSwing, limbSwingAmount, 1.5f, 1-entity.getInWaterMultiplier());
+		animateWalk(ThylacineAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getInWaterMultiplier()));
 
-		this.animateIdle(entity.yawnAnimationState, ThylacineAnims.YAWN, ageInTicks, 1, 1-getInWaterMultiplier());
-
-		this.animateIdle(entity.howlAnimationState, ThylacineAnims.HOWL, ageInTicks, 1, 1-getInWaterMultiplier());
+		this.animateIdle(entity.yawnAnimationState, ThylacineAnims.YAWN, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.howlAnimationState, ThylacineAnims.HOWL, ageInTicks, 1, 1-entity.getInWaterMultiplier());
 
 		this.animate(entity.attackAnimationState1, ThylacineAnims.ATTACK_1, ageInTicks, 1);
 		this.animate(entity.attackAnimationState2, ThylacineAnims.ATTACK_2, ageInTicks, 1);
@@ -113,8 +112,8 @@ public class ThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 			this.animateIdle(entity.idleAnimationState, ThylacineAnims.HALO, ageInTicks, 1.0f, 1);
 		}
 
-		this.animateIdle(entity.idleAnimationState, ThylacineAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, ThylacineAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, ThylacineAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, ThylacineAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
 
 		float headX = this.head.xRot;
 		float headY = this.head.yRot;

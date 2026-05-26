@@ -159,8 +159,8 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 		if (entity.isFromInventory()){
 			this.applyStatic(MoltenAnimsExtra.POSE);
 		}
-		animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount*0.75f, 2f, this.getSprintingMultiplier());
-		animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-this.getSprintingMultiplier()));
+		animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount*0.75f, 2f, entity.getSprintingMultiplier());
+		animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier()));
 
 		this.animateIdle(entity.idleAnimationState, MoltenAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 

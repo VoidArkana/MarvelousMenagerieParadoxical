@@ -130,27 +130,27 @@ public class OphthalmoModel<T extends Ophthalmosaurus> extends MarvelousModel<T>
 		if (entity.isFromInventory())
 			this.applyStatic(OphthalmoAnims.POSE);
 
-		this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
+		this.animateWalk(OphthalmoAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier());
 		this.animate(entity.leftAttackAnimationState, OphthalmoAnims.ATTACK_1, ageInTicks, 1.0F);
 		this.animate(entity.rightAttackAnimationState, OphthalmoAnims.ATTACK_2, ageInTicks, 1.0F);
 		this.animate(entity.eatAnimationState, OphthalmoAnims.EATING, ageInTicks, 1.0F);
 
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
-		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, OphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 
 
-		this.head_rot.yRot += Mth.lerp(getInWaterMultiplier(), 0,(netHeadYaw * (float)Math.PI / 180F)/4);
-		this.head_rot.xRot += Mth.lerp(getInWaterMultiplier(), 0,(headPitch * (float)Math.PI / 180F)/4);
+		this.head_rot.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0,(netHeadYaw * (float)Math.PI / 180F)/4);
+		this.head_rot.xRot += Mth.lerp(entity.getInWaterMultiplier(), 0,(headPitch * (float)Math.PI / 180F)/4);
 
 		float deltaTime = Minecraft.getInstance().getDeltaFrameTime();
 		float roll = Mth.lerp(deltaTime, entity.prevRoll, entity.currentRoll);
 
-		head.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
-		body.zRot += Mth.lerp(getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
-		body.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
-		tail.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
-		tail_tip_rot.yRot += Mth.lerp(getInWaterMultiplier(), 0,roll * 2.0f * Mth.DEG_TO_RAD);
+		head.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
+		body.zRot += Mth.lerp(entity.getInWaterMultiplier(), 0,roll * -Mth.DEG_TO_RAD);
+		body.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
+		tail.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0,roll * Mth.DEG_TO_RAD);
+		tail_tip_rot.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0,roll * 2.0f * Mth.DEG_TO_RAD);
 	}
 
 	@Override

@@ -67,12 +67,12 @@ public class BabyPikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f*getInWaterMultiplier());
+		this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f*entity.getInWaterMultiplier());
 
-		this.swim_control.xRot = Mth.lerp( 1-getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
+		this.swim_control.xRot = Mth.lerp( 1-entity.getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
 
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (1-getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 	}
 
 	@Override

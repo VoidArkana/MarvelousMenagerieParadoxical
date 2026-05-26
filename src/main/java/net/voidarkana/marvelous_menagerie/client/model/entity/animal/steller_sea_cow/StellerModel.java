@@ -92,12 +92,12 @@ public class StellerModel<T extends StellerSeaCow> extends MarvelousModel<T> {
 		if (entity.isFromInventory())
 			this.applyStatic(StellerAnims.POSE);
 
-		this.animateWalk(StellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
+		this.animateWalk(StellerAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier());
 
-		this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, StellerAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, StellerAnims.BEACHED, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 
-		this.swim_rot.xRot = Mth.lerp(getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F)/8);
+		this.swim_rot.xRot = Mth.lerp(entity.getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F)/8);
 		this.head.yRot = head.yRot+(netHeadYaw * (float)Math.PI / 180F)/2;
 		this.head.xRot = head.xRot+(headPitch * (float)Math.PI / 180F)/2;
 		this.neck_rot.yRot = neck_rot.yRot+(netHeadYaw * (float)Math.PI / 180F)/2;

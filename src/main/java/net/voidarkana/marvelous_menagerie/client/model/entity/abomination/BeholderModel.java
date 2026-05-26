@@ -201,11 +201,11 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		if (entity.isFromInventory())
 			this.applyStatic(BeholderAnims.POSE);
 
-		animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, getSprintingMultiplier()*(1-getInWaterMultiplier()));
-		animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-getSprintingMultiplier())*(1-getInWaterMultiplier()));
+		animateWalk(BeholderAnims.RUN,limbSwing, limbSwingAmount, 2f, entity.getSprintingMultiplier()*(1-entity.getInWaterMultiplier()));
+		animateWalk(BeholderAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier())*(1-entity.getInWaterMultiplier()));
 
-		this.animateIdle(entity.idleAnimationState, BeholderAnims.SWIM, ageInTicks, 1.0f, this.getInWaterMultiplier());
-		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BeholderAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 
 		this.animate(entity.idleOverlay, BeholderAnims.IDLE_OVERLAY, ageInTicks, 1.0F);
 
@@ -223,12 +223,12 @@ public class BeholderModel<T extends Beholder> extends MarvelousModel<T> {
 		if (entity.isGrabbing()){
 			this.look_control.resetPose();
 		}else{
-			this.look_control.xRot = Mth.lerp(getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
-			this.look_control.yRot = Mth.lerp(getInWaterMultiplier(), netHeadYaw * ((float)Math.PI / 180F), 0);
+			this.look_control.xRot = Mth.lerp(entity.getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
+			this.look_control.yRot = Mth.lerp(entity.getInWaterMultiplier(), netHeadYaw * ((float)Math.PI / 180F), 0);
 		}
 		
-		this.body_main.xRot = Mth.lerp(getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
-		this.body_main.yRot = Mth.lerp(getInWaterMultiplier(), 0, netHeadYaw * ((float)Math.PI / 180F));
+		this.body_main.xRot = Mth.lerp(entity.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
+		this.body_main.yRot = Mth.lerp(entity.getInWaterMultiplier(), 0, netHeadYaw * ((float)Math.PI / 180F));
 	}
 
 	@Override

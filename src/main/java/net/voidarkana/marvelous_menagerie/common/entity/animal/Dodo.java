@@ -82,7 +82,7 @@ public class Dodo extends MarvelousAnimal {
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new Dodo.DestroyMelonAndPumpkinGoal(this));
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 800));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 20*60*5));
         this.goalSelector.addGoal(5, new Dodo.DodoLookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(6, new Dodo.DodoRandomLookAroundGoal(this));
         this.goalSelector.addGoal(9, new Dodo.RandomPeckGoal(this));

@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -62,7 +64,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, FOOD_ITEMS, false));
+        this.goalSelector.addGoal(2, new MarvelousTemptGoal(this, 1.25D, FOOD_ITEMS, false));
         this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D) {
             @Override
             public boolean canUse() {
@@ -71,7 +73,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         });
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 1500));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 20*60*5));
 
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
@@ -80,11 +82,6 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
     @Override
     public boolean refuseToMove() {
         return super.refuseToMove() || this.isLayingEgg();
-    }
-
-    @Override
-    public boolean isImmobile() {
-        return this.isLayingEgg() || super.isImmobile();
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -122,7 +119,6 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
     }
 
     public void setCanAutoLayEggs(boolean pIsLayingEgg) {
-        this.layEggCounter = pIsLayingEgg ? 1 : 0;
         this.entityData.set(CAN_AUTOLAY_EGGS, pIsLayingEgg);
     }
 
@@ -146,7 +142,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         if(layEggAnimTimeout <= 0 && this.isLayingEgg()) {
             layEggAnimTimeout = 70;
             this.layEggAnimationState.start(this.tickCount);
-        } else {
+        } else if (layEggAnimTimeout > 0){
             --this.layEggAnimTimeout;
         }
     }
@@ -155,6 +151,9 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
         if (pReason == MobSpawnType.BREEDING || pReason == MobSpawnType.MOB_SUMMONED){
             this.setCanAutoLayEggs(true);
+        }
+        if (pReason == MobSpawnType.NATURAL){
+            this.setCanAutoLayEggs(false);
         }
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
@@ -181,7 +180,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
 
     @Override
     public int getStandDuration() {
-        return 40;
+        return 30;
     }
 
     @javax.annotation.Nullable
@@ -245,6 +244,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
 
     @Override
     public void onEggLaid() {
+        this.setLayingEgg(false);
     }
 
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
@@ -268,6 +268,10 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
             if (this.level().getBlockState(blockpos.below()).is(MMTags.Blocks.DINOSAUR_NEST)) {
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
+        }
+
+        if ((this.layEggCounter == 0 || !this.isPregnant()) && this.isLayingEgg()){
+            this.setLayingEgg(false);
         }
 
     }

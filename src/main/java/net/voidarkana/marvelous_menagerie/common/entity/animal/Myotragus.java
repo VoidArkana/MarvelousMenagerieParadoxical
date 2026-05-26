@@ -37,6 +37,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveCont
 import net.voidarkana.marvelous_menagerie.common.entity.ai.brains.MMMemoryModuleTypes;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.brains.MyotragusAI;
 import net.voidarkana.marvelous_menagerie.common.entity.base.ISittingAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 
@@ -75,6 +76,23 @@ public class Myotragus extends Goat implements ISittingAnimal {
         super(pEntityType, pLevel);
         this.moveControl = new MarvelousLandMoveControl(this, 90);
     }
+    public static final EntityDataAccessor<Integer> SITTING_TICKS = SynchedEntityData.defineId(Myotragus.class, EntityDataSerializers.INT);
+
+    public int getSittingTicks(){
+        return this.entityData.get(SITTING_TICKS);
+    }
+
+    public void setSittingTicks(int ticks){
+        this.entityData.set(SITTING_TICKS, ticks);
+    }
+
+    public int getSittingTickBase(){
+        return 5;
+    }
+
+    public float getSittingMultiplier(){
+        return (float) this.getSittingTicks() /this.getSittingTickBase();
+    }
 
     public boolean isMylo() {
         String s = ChatFormatting.stripFormatting(this.getName().getString());
@@ -89,6 +107,7 @@ public class Myotragus extends Goat implements ISittingAnimal {
         super.defineSynchedData();
         this.entityData.define(LAST_POSE_CHANGE_TICK, 0L);
         this.entityData.define(VARIANT, 0);
+        this.entityData.define(SITTING_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -180,6 +199,17 @@ public class Myotragus extends Goat implements ISittingAnimal {
 
     @Override
     public void tick() {
+        if (this.isSitting()){
+            if (this.getSittingTicks()<this.getSittingTickBase()){
+                int prevTicks = this.getSittingTicks();
+                this.setSittingTicks(prevTicks+1);
+            }
+        }else {
+            if (this.getSittingTicks()>0){
+                int prevTicks = this.getSittingTicks();
+                this.setSittingTicks(prevTicks-1);
+            }
+        }
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }

@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.DifficultyInstance;
@@ -34,6 +35,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -122,7 +125,7 @@ public class Flubber extends AbstractAmphibianCreature implements IEggLayer, Buc
         this.goalSelector.addGoal(3, new AmphibianStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new AmphibianSwimGoal(this, 1.5, 7));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 400, 650));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 600, 1300));
         this.goalSelector.addGoal(5, new SniffAndSnortGoal(this));
 
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F){
@@ -368,7 +371,7 @@ public class Flubber extends AbstractAmphibianCreature implements IEggLayer, Buc
 
     @Override
     public boolean isImmobile() {
-        return super.isImmobile() || this.getDiggingTicks() > 0 || this.getDancingTicks() > 0 || this.isInPoseTransition() || this.isSitting();
+        return super.isImmobile() || this.getDancingTicks() > 0 || this.isInPoseTransition();
     }
 
     @Override

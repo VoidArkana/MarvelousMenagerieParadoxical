@@ -13,10 +13,7 @@ import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.AnomalocarisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.BabyAnomalocarisModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.BabySacaModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambaspis.SacaModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Anomalocaris;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Sacabambaspis;
 import org.jetbrains.annotations.Nullable;
 
 public class AnomalocarisRenderer<T extends Anomalocaris> extends MobRenderer<T, MarvelousModel<T>> {
@@ -44,7 +41,7 @@ public class AnomalocarisRenderer<T extends Anomalocaris> extends MobRenderer<T,
     @Override
     protected void setupRotations(T pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(this.model.getInWaterMultiplier()*(1-this.model.getOnGroundMultiplier()), pEntityLiving.currentRoll*360/4, 0)));
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier()*(1-pEntityLiving.getOnGroundMultiplier()), 0, pEntityLiving.currentRoll*360/4)));
     }
 
     @Override

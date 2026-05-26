@@ -89,9 +89,9 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         this.goalSelector.addGoal(3, new AmphibianStrollGoal(this, 1.0D));
 
         this.goalSelector.addGoal(3, new BottomDwellerSwimGoal(this));
-        this.goalSelector.addGoal(3, new BottomMoveGoal(this, 1, 80));
+        this.goalSelector.addGoal(3, new BottomMoveGoal(this, 1, 5));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 900, 500));
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 2500, 800));
 
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F){
             @Override
@@ -114,12 +114,12 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     @Override
     public int getOutOfWaterChance() {
-        return (int) (super.getOutOfWaterChance()*1.5);
+        return (int) (super.getOutOfWaterChance()*0.75);
     }
 
     @Override
     public int getIntoWaterChance() {
-        return (int) (super.getIntoWaterChance()*0.75);
+        return (int) (super.getIntoWaterChance()*1.5);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -138,11 +138,13 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getVariant());
+        pCompound.putInt("Size", this.getSize());
     }
 
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.setVariant(pCompound.getInt("Variant"));
+        this.setSize(pCompound.getInt("Size"));
     }
 
     //variants
@@ -167,11 +169,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     }
 
     public int getActualSize() {
-        if (this.getSize()>=10){
-            return getSize()-10;
-        }else {
-            return getSize();
-        }
+        return this.getSize() % 10;
     }
 
     public String getSizeName(){
@@ -206,7 +204,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     public void setWantsToSwim(boolean wantsToSwim) {
         if (wantsToSwim){
-            this.lookControl = new SmoothSwimmingLookControl(this, 10);
+            this.lookControl = new SmoothSwimmingLookControl(this, 15);
         }else {
             this.lookControl = new LookControl(this);
         }
@@ -215,7 +213,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     @Override
     public int getMaxYRot() {
-        return 45;
+        return 15*(3/(this.getActualSize()+1));
     }
 
     @Override
@@ -229,21 +227,23 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         if (this.isInWaterOrBubble() && !this.isLandNavigator()){
 
             if (this.wantsToSwim()){
-                if (this.onGround() || (!this.onGround() && (this.random.nextInt(800)==0)) ){
+                if ((this.random.nextInt(800)==0)){
                     this.setWantsToSwim(false);
                 }
+            }else if (this.wantsToBeInLand()){
+                this.setWantsToSwim(true);
             }
 
-            if (this.onGround() && !this.wantsToSwim() && this.getRandom().nextInt(1200)==0){
+            if (!this.wantsToSwim() && this.getRandom().nextInt(1200)==0){
                 this.setWantsToSwim(true);
             }
         }
 
-        if (!this.wantsToBeInLand() && this.isInWaterOrBubble()){
-            this.setWantsToSwim(true);
+        if (!this.wantsToSwim() && this.isInWater()){
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
         }
 
-        if (!this.isBaby() && this.getRandom().nextInt(1500) == 0 && this.getSize()==0){
+        if (!this.isBaby() && this.getRandom().nextInt(2500) == 0 && this.getSize()==0){
             if (this.getRandom().nextInt(3)>0)
                 this.setSize(10);
             else {
@@ -289,14 +289,14 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     public void travel(Vec3 pTravelVector) {
 
-        if (this.isEffectiveAi() && this.isInWater() && !this.wantsToSwim()) {
+        if (this.isEffectiveAi() && this.isInWater()) {
             if (this.getTarget() == null) {
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
             }
         }
 
         if (this.isEffectiveAi() && this.isInWater() && this.wantsToSwim()) {
-            if (this.getTarget() == null && this.random.nextInt(100)==0) {
+            if (this.getTarget() == null) {
                     this.setWantsToSwim(false);
             }
         }
@@ -315,24 +315,24 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
             --this.attackAnimationTimeout;
         }
 
-        Vec3 vec3 = this.getDeltaMovement();
-        if (!this.onGround() && vec3.y < 0.0D && this.fallAnimationTimeout == 0 && !this.isInWaterOrBubble()) {
-            this.fallAnimationState.start(this.tickCount);
-            this.fallAnimationTimeout = 10;
-        }
-
-        if (this.fallAnimationTimeout > 0){
-            this.fallAnimationTimeout--;
-
-            if (this.onGround() && this.squashAnimationTimeout == 0 && !this.isInWaterOrBubble()){
-                this.squashAnimationState.start(this.tickCount);
-                this.squashAnimationTimeout = 15;
-            }
-        }
-
-        if (this.squashAnimationTimeout > 0){
-            this.squashAnimationTimeout--;
-        }
+//        Vec3 vec3 = this.getDeltaMovement();
+//        if (!this.onGround() && vec3.y < 0.0D && this.fallAnimationTimeout == 0 && !this.isInWaterOrBubble()) {
+//            this.fallAnimationState.start(this.tickCount);
+//            this.fallAnimationTimeout = 10;
+//        }
+//
+//        if (this.fallAnimationTimeout > 0){
+//            this.fallAnimationTimeout--;
+//
+//            if (this.onGround() && this.squashAnimationTimeout == 0 && !this.isInWaterOrBubble()){
+//                this.squashAnimationState.start(this.tickCount);
+//                this.squashAnimationTimeout = 15;
+//            }
+//        }
+//
+//        if (this.squashAnimationTimeout > 0){
+//            this.squashAnimationTimeout--;
+//        }
     }
 
     @Override
@@ -429,7 +429,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
     @Override
     public boolean canSit() {
-        return true;
+        return this.onGround();
     }
 
     @Override
@@ -493,18 +493,18 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
         Tiktaalik pleco;
 
         public BottomDwellerSwimGoal(Tiktaalik mob) {
-            super(mob, 1.0D, 10);
+            super(mob, 1.0D, 80);
             this.pleco = mob;
         }
 
         @Override
         public boolean canUse() {
-            return this.pleco.wantsToSwim() && super.canUse();
+            return this.pleco.wantsToSwim() && !this.pleco.isSitting() && super.canUse();
         }
 
         @Override
         public boolean canContinueToUse() {
-            return this.pleco.wantsToSwim() && super.canContinueToUse();
+            return this.pleco.wantsToSwim() && !this.pleco.isSitting() && super.canContinueToUse();
         }
     }
 
@@ -517,7 +517,7 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
 
         @Override
         public boolean canUse() {
-            return !this.fish.wantsToSwim() && this.fish.onGround() && super.canUse();
+            return !this.fish.wantsToSwim() && !this.fish.isSitting() && super.canUse();
         }
 
         @Override

@@ -45,19 +45,6 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-//		poseStack.pushPose();
-//
-//		if (this.young){
-//			poseStack.scale(0.6f, 0.6f, 0.6f);
-//			poseStack.translate(0, 0.9, 0);
-//		}
-
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-//		poseStack.popPose();
-	}
-
-	@Override
 	public ModelPart root() {
 		return root;
 	}
@@ -66,12 +53,12 @@ public class SacaModel<T extends Sacabambaspis> extends MarvelousModel<T> {
 	public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
 
-		this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 1.5f*getInWaterMultiplier());
+		this.animateWalk(SacaAnims.SWIM, pLimbSwing, pLimbSwingAmount, 2f, 1.5f*pEntity.getInWaterMultiplier());
 
-		this.swim_control.xRot = Mth.lerp( 1-this.getInWaterMultiplier(), pHeadPitch * ((float)Math.PI / 180F), 0);
+		this.swim_control.xRot = Mth.lerp( 1-pEntity.getInWaterMultiplier(), pHeadPitch * ((float)Math.PI / 180F), 0);
 
-		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(pLimbSwingAmount))*0.75F);
-		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (1-this.getInWaterMultiplier())*0.75F);
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.IDLE, pAgeInTicks, 1, Math.max(0, pEntity.getInWaterMultiplier()-Math.abs(pLimbSwingAmount))*0.75F);
+		this.animateIdle(pEntity.idleAnimationState, SacaAnims.FLOP, pAgeInTicks, 1.0F, (1-pEntity.getInWaterMultiplier())*0.75F);
 	}
 
 }

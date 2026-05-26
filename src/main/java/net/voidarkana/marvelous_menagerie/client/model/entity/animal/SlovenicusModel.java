@@ -75,11 +75,11 @@ public class SlovenicusModel<T extends Slovenicus> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch);
 
-		this.animateWalk(SlovenicusAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f*getInWaterMultiplier());
-		this.swim_rot.xRot = Mth.lerp(getInWaterMultiplier(), 0,headPitch * (((float) Math.PI / 180F)/4));
+		this.animateWalk(SlovenicusAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f*entity.getInWaterMultiplier());
+		this.swim_rot.xRot = Mth.lerp(entity.getInWaterMultiplier(), 0,headPitch * (((float) Math.PI / 180F)/4));
 
-		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, SlovenicusAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 	}
 
 	@Override

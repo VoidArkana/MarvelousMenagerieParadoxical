@@ -104,12 +104,12 @@ public class FalcatusModel<T extends Falcatus> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity,limbSwing,limbSwingAmount,ageInTicks,netHeadYaw,headPitch);
 
-		this.animateWalk(FalcatusAnims.swim, limbSwing, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
+		this.animateWalk(FalcatusAnims.swim, limbSwing, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier());
 
-		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, FalcatusAnims.idle, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, FalcatusAnims.flop, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 		
-		this.swim_rot.xRot = Mth.lerp(getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F));
+		this.swim_rot.xRot = Mth.lerp(entity.getInWaterMultiplier(),0,headPitch * ((float)Math.PI / 180F));
 
 	}
 

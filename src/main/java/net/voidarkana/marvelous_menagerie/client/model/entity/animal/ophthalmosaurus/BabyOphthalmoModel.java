@@ -74,12 +74,12 @@ public class BabyOphthalmoModel<T extends Ophthalmosaurus> extends MarvelousMode
 		if (entity.isFromInventory())
 			this.applyStatic(BabyOphthalmoAnims.POSE);
 
-		this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing/2, limbSwingAmount*4f, 1.5f, 3f*getInWaterMultiplier());
+		this.animateWalk(BabyOphthalmoAnims.SWIM, limbSwing/2, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier());
 
-		this.swim_control.xRot = Mth.lerp(getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
+		this.swim_control.xRot = Mth.lerp(entity.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
 
-		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, this.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-this.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyOphthalmoAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
 
 	}
 

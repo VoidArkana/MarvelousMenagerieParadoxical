@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.common.entity.ai.goals;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.voidarkana.marvelous_menagerie.common.entity.animal.Tiktaalik;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.ISittingAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
@@ -40,6 +41,10 @@ public class RandomlySitUpOrDownGoal extends Goal {
     public boolean canUse() {
         if (this.mob instanceof ISittingAnimal animal){
 
+            if (animal.isInPoseTransition() || !animal.canSit()){
+                return false;
+            }
+
             if (this.mob instanceof IEggLayer eggLayer){
                 if (eggLayer.isPregnant()){
                     return animal.isSitting();
@@ -54,15 +59,21 @@ public class RandomlySitUpOrDownGoal extends Goal {
 
             this.nextMove--;
 
+
             if (this.nextMove > 0){
                 if (this.mob.getRandom().nextInt(0, this.nextMove) == 0 ) {
                     this.resetInterval();
-                    return true;
+                    return !animal.hasToStandUpInstantly();
                 }else {
                     return false;
                 }
             }else {
-                return true;
+                if (animal.hasToStandUpInstantly()){
+                    return false;
+                }else {
+                    this.resetInterval();
+                    return true;
+                }
             }
         }
         return false;

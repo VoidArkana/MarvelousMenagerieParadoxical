@@ -69,15 +69,15 @@ public class BabyMyotragusModel<T extends Myotragus> extends MarvelousModel<T> {
 		this.animate(pEntity.sitAnimationState, MyotragusAnims.SIT, pAgeInTicks);
 		this.animate(pEntity.sitPoseAnimationState, MyotragusAnims.SITTING, pAgeInTicks);
 
-		this.right_back_leg.xRot += Mth.lerp(getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount, 0);
-		this.left_back_leg.xRot += Mth.lerp(getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 1.4F * pLimbSwingAmount, 0);
-		this.right_front_leg.xRot += Mth.lerp(getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 1.4F * pLimbSwingAmount, 0);
-		this.left_front_leg.xRot += Mth.lerp(getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount, 0);
+		this.right_back_leg.xRot += Mth.lerp(pEntity.getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount, 0);
+		this.left_back_leg.xRot += Mth.lerp(pEntity.getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 1.4F * pLimbSwingAmount, 0);
+		this.right_front_leg.xRot += Mth.lerp(pEntity.getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F + (float)Math.PI) * 1.4F * pLimbSwingAmount, 0);
+		this.left_front_leg.xRot += Mth.lerp(pEntity.getSittingMultiplier(), Mth.cos(pLimbSwing * 0.6662F) * 1.4F * pLimbSwingAmount, 0);
 
 		this.head.xRot += pHeadPitch * ((float)Math.PI / 180F);
 		this.head.yRot += pNetHeadYaw * ((float)Math.PI / 180F);
 
-		this.body.y += Mth.lerp(getSittingMultiplier(), 0, 0.5f);
+		this.body.y += Mth.lerp(pEntity.getSittingMultiplier(), 0, 0.5f);
 	}
 
 	@Override
