@@ -3,7 +3,6 @@ package net.voidarkana.marvelous_menagerie.common.entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -201,11 +200,11 @@ public class MMEntities {
                             .sized(0.75F, 0.35F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tiktaalik").toString()));
 
-    public static final RegistryObject<EntityType<Lystrosaurus>> LYSTROSAURUS =
+    public static final RegistryObject<EntityType<Lystrosaurus>> LYSTRO =
             ENTITY_TYPES.register("lystrosaurus",
                     () -> EntityType.Builder.of(Lystrosaurus::new, MobCategory.CREATURE)
-                            .sized(0.95F, 0.6F)
-                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "lystrosaurus").toString()));
+                            .sized(0.5F, 0.5F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"lystrosaurus").toString()));
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =

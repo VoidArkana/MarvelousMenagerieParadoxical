@@ -266,6 +266,11 @@
   "entity.marvelous_menagerie.lystrosaurus": "Lystrosaurus",
   "item.marvelous_menagerie.lystro_fossil": "Lystrosaurus Fossil",
   "item.marvelous_menagerie.lystro_spawn_egg": "Lystrosaurus Spawn Egg",
+  "block.marvelous_menagerie.lystro_egg": "Lystrosaurus Egg",
+  "block.marvelous_menagerie.lystro_egg_fragments": "Lystrosaurus Egg Shell Fragments",
+  "marvelous_menagerie.sound.subtitle.lystro_idle": "Lystrosaurus grumbles",
+  "marvelous_menagerie.sound.subtitle.lystro_hurt": "Lystrosaurus hurts",
+  "marvelous_menagerie.sound.subtitle.lystro_death": "Lystrosaurus dies",
 
   "entity.marvelous_menagerie.theri": "Therizinosaurus",
   "item.marvelous_menagerie.theri_fossil": "Therizinosaurus Fossil",

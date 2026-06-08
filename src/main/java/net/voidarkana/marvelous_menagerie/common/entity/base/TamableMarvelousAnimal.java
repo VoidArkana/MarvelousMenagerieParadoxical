@@ -204,6 +204,6 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
     }
 
     void followEntity(TamableAnimal tameable, LivingEntity owner, double followSpeed) {
-        tameable.navigation.moveTo(owner, followSpeed);
+        tameable.getNavigation().moveTo(owner, followSpeed);
     }
 }

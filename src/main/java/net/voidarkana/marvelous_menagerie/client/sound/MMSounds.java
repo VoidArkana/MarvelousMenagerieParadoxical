@@ -102,6 +102,10 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_DEATH = registerSoundEvents("flubber_underwater_death");
     public static final RegistryObject<SoundEvent> FLUBBER_UNDERWATER_CELEBRATE = registerSoundEvents("flubber_underwater_celebrate");
 
+    public static final RegistryObject<SoundEvent> LYSTRO_IDLE = registerSoundEvents( "lystro_idle");
+    public static final RegistryObject<SoundEvent> LYSTRO_HURT = registerSoundEvents( "lystro_hurt");
+    public static final RegistryObject<SoundEvent> LYSTRO_DEATH = registerSoundEvents("lystro_death");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

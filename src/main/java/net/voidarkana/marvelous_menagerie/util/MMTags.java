@@ -20,6 +20,8 @@ public class MMTags {
 
         public static final TagKey<EntityType<?>> HAS_ENTRY = tag("has_paleonomicon_entry");
 
+        public static final TagKey<EntityType<?>> CANT_TRAMPLE = tag("cant_trample");
+
         private static TagKey<EntityType<?>> tag(String name){
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }

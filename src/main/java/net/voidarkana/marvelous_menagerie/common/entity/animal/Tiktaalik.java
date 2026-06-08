@@ -79,8 +79,8 @@ public class Tiktaalik extends AbstractAmphibianCreature implements Bucketable, 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new AmphibianPanicGoal(this, 1.2D));
-        this.goalSelector.addGoal(0, new EggLayerBreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(0, new LayEggGoal(this, 1.0D, BlockTags.SAND, MMBlocks.FLUBBER_EGG, 1D));
+        this.goalSelector.addGoal(0, new BreedGoal(this, 1.0D));
+//        this.goalSelector.addGoal(0, new LayEggGoal(this, 1.0D, BlockTags.SAND, MMBlocks.FLUBBER_EGG, 1D));
 
         this.goalSelector.addGoal(1, new AmphibianGoToWaterGoal(this, 1));
         this.goalSelector.addGoal(1, new AmphibianExitWaterGoal(this, 1.5));

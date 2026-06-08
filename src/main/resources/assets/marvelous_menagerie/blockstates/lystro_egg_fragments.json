@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "marvelous_menagerie:block/lystro_egg_fragments"
+      },
+      {
+        "model": "marvelous_menagerie:block/lystro_egg_fragments",
+        "y": 90
+      },
+      {
+        "model": "marvelous_menagerie:block/lystro_egg_fragments",
+        "y": 180
+      },
+      {
+        "model": "marvelous_menagerie:block/lystro_egg_fragments",
+        "y": 270
+      }
+    ]
+  }
+}

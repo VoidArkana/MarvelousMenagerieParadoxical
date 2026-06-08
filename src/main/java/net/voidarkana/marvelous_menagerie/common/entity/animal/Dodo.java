@@ -146,7 +146,6 @@ public class Dodo extends MarvelousAnimal {
 
     //determines a number when spawning
     @Override
-    @org.jetbrains.annotations.Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn,
                                         DifficultyInstance difficultyIn,
                                         MobSpawnType reason, @org.jetbrains.annotations.Nullable SpawnGroupData spawnDataIn,

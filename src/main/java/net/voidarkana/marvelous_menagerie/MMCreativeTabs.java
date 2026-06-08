@@ -54,6 +54,9 @@ public class MMCreativeTabs {
                         output.accept(MMItems.HALLUCIGENIC_SLIME.get());
                         output.accept(MMItems.MAGIC_ROLL.get());
 
+                        output.accept(MMBlocks.LYSTRO_EGG_FRAGMENTS.get());
+                        output.accept(MMBlocks.LYSTRO_EGG.get());
+
                         output.accept(MMItems.BABY_OPHTHALMO_BUCKET.get());
                         output.accept(MMItems.OPHTHALMO_ARMOR.get());
 

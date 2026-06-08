@@ -1,0 +1,7 @@
+{
+  "parent": "marvelous_menagerie:block/four_eggs_1",
+  "textures": {
+    "texture": "marvelous_menagerie:block/lystro_eggs_very_cracked",
+    "item": "marvelous_menagerie:item/lystro_egg"
+  }
+}

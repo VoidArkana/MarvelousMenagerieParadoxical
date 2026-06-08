@@ -936,5 +936,49 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.paleo_toolkit_fossil_break"
+  },
+
+
+  "lystro_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:lystro_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:lystro_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:lystro_idle_3"
+      },
+      {
+        "name": "marvelous_menagerie:lystro_idle_4"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.lystro_idle"
+  },
+  "lystro_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:lystro_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:lystro_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:lystro_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.lystro_hurt"
+  },
+  "lystro_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:lystro_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.lystro_death"
   }
 }

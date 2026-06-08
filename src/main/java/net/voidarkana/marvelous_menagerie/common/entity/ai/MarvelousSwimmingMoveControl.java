@@ -15,11 +15,15 @@ public class MarvelousSwimmingMoveControl extends SmoothSwimmingMoveControl {
 
     @Override
     public void tick() {
-        if (this.entity instanceof ISittingAnimal pAnimal && this.entity instanceof PathfinderMob mob && pAnimal.canSit()){
-            if (this.operation == MoveControl.Operation.MOVE_TO && !mob.isLeashed() && pAnimal.isSitting() && !pAnimal.isInPoseTransition()) {
-                pAnimal.standUp();
+        if (this.entity instanceof PathfinderMob mob && this.entity instanceof ISittingAnimal pAnimal){
+            if (!pAnimal.refuseToMove()) {
+                super.tick();
             }
+//            else if (pAnimal.refuseToMove() && this.operation == MoveControl.Operation.MOVE_TO && !mob.isLeashed() && pAnimal.isSitting() && !pAnimal.isInPoseTransition()) {
+//                pAnimal.standUp();
+//            }
+        }else {
+            super.tick();
         }
-        super.tick();
     }
 }

@@ -30,6 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
@@ -161,6 +162,11 @@ public class Apthoroblattina extends MarvelousAnimal {
         super.travel(pTravelVector);
     }
 
+    @Override
+    public boolean refuseToMove() {
+        return super.refuseToMove() || this.isJohn();
+    }
+
     public void setupAnimationStates() {
 
         if (!this.isJohn()){
@@ -240,11 +246,6 @@ public class Apthoroblattina extends MarvelousAnimal {
         this.playSound(SoundEvents.SPIDER_STEP, 0.05F, this.getVoicePitch());
     }
 
-    @Override
-    public boolean isFallFlying() {
-        return super.isFallFlying();
-    }
-
     public void aiStep() {
         if (this.jukebox == null || !this.jukebox.closerToCenterThan(this.position(), 3.46D) || !this.level().getBlockState(this.jukebox).is(Blocks.JUKEBOX)) {
             this.setIsJohn(false);
@@ -252,7 +253,7 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
         super.aiStep();
 
-        if (isGlidingDown()) {
+        if (this.isGlidingDown()) {
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.multiply(1.0D, 0.6D, 1.0D));
         }
@@ -276,11 +277,10 @@ public class Apthoroblattina extends MarvelousAnimal {
         this.entityData.set(IS_JOHN, isJohn);
     }
 
-
-    class RoachMoveControl extends MoveControl {
+    class RoachMoveControl extends MarvelousLandMoveControl {
         Apthoroblattina mob;
         public RoachMoveControl(Apthoroblattina pMob) {
-            super(pMob);
+            super(pMob, pMob.getMaxYRot());
             this.mob = pMob;
         }
 
@@ -304,14 +304,6 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
     }
 
-    boolean canMove() {
-        return !this.isJohn();
-    }
-
-    public boolean isImmobile() {
-        return this.isDeadOrDying() || this.isJohn();
-    }
-
     @Override
     public boolean causeFallDamage(float pFallDistance, float pMultiplier, DamageSource pSource) {
         return false;
@@ -320,10 +312,8 @@ public class Apthoroblattina extends MarvelousAnimal {
     public void customServerAiStep() {
         if (this.getMoveControl().hasWanted()) {
             double d0 = this.getMoveControl().getSpeedModifier();
-            this.setPose(Pose.STANDING);
             this.setSprinting(d0 >= 1.33D);
         } else {
-            this.setPose(Pose.STANDING);
             this.setSprinting(false);
         }
 

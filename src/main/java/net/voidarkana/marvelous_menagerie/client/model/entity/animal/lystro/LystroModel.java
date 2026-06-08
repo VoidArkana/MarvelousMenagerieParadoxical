@@ -111,9 +111,11 @@ public class LystroModel<T extends Lystrosaurus> extends MarvelousModel<T> {
 
 		this.animateIdle(entity.idleAnimationState, LystroAnims.IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getSittingMultiplier())*(1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
 		this.animate(entity.layEggAnimationState, LystroAnims.EGG_LAY, ageInTicks, 1);
+		this.animate(entity.eatAnimationState, LystroAnims.EAT, ageInTicks, 1);
+		this.animate(entity.digAnimationState, LystroAnims.DIG, ageInTicks, 1);
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
-		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.head.xRot += headPitch * ((float)Math.PI / 180F);
+		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override

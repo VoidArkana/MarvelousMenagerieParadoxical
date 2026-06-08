@@ -12,6 +12,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -44,6 +45,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     protected MarvelousAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new MarvelousLandMoveControl(this, this.getMaxYRot());
+//        this.lookControl = new SmoothSwimmingLookControl(this, this.getMaxYRot());
         this.setMaxUpStep(1);
     }
 
@@ -189,9 +191,6 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     }
 
     public boolean isSitting() {
-        if (!this.canSit()){
-            return false;
-        }
         return this.entityData.get(LAST_POSE_CHANGE_TICK) < 0L;
     }
 
@@ -220,7 +219,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     }
 
     public void sitDown() {
-        if (this.canSit() && !this.isSitting()) {
+        if (this.canSit() && !this.isSitting()){
             this.setPose(Pose.SITTING);
             this.resetLastPoseChangeTick(-this.level().getGameTime());
             this.refreshDimensions();
@@ -228,7 +227,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     }
 
     public void standUp() {
-        if (this.isSitting()) {
+        if (this.isSitting()){
             this.setPose(Pose.STANDING);
             this.resetLastPoseChangeTick(this.level().getGameTime());
             if (this.isVehicle()){
@@ -256,6 +255,15 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
 
     public long getPoseTime() {
         return this.level().getGameTime() - Math.abs(this.entityData.get(LAST_POSE_CHANGE_TICK));
+    }
+
+    public void travel(Vec3 pTravelVector) {
+//        if (this.refuseToMove() && this.onGround()) {
+//            this.setDeltaMovement(this.getDeltaMovement().multiply(0.0D, 1.0D, 0.0D));
+//            pTravelVector = pTravelVector.multiply(0.0D, 1.0D, 0.0D);
+//        }
+
+        super.travel(pTravelVector);
     }
 
     protected void tickRidden(Player pPlayer, Vec3 pTravelVector) {
@@ -371,7 +379,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
                 this.standUpInstantly();
             }
 
-            if (this.isAggressive() && this.isSitting()){
+            if (this.isAggressive() && this.isSitting() && !this.isInPoseTransition()){
                 if (this instanceof TamableMarvelousAnimal tamable){
                     if (!tamable.isTame())
                         this.standUp();

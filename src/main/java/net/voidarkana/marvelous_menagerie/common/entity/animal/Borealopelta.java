@@ -291,6 +291,9 @@ public class Borealopelta extends MarvelousAnimal implements IAnimatedAttacker, 
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
         }
+    }
 
+    public int getMaxYRot(){
+        return 15;
     }
 }

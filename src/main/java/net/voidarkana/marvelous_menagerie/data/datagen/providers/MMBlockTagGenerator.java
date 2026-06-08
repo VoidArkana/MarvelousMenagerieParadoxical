@@ -336,7 +336,10 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
         ;
 
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
+                MMBlocks.LYSTRO_EGG_FRAGMENTS.get(),
+                MMBlocks.LYSTRO_EGG.get(),
                 MMBlocks.SIGILLARIA_LEAVES.get(),
+                MMBlocks.PROTOTAXITES.get(),
                 MMBlocks.CALAMITES_BRANCH.get()
         );
 

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -58,14 +59,22 @@ public class MMBlocks {
     public static final RegistryObject<Block> CHRONO_PEDESTAL_BOOK = registerBlock("chrono_pedestal_book",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
+    //Lystrosaurus
+    public static final RegistryObject<Block> LYSTRO_EGG = registerBlock("lystro_egg",
+            () -> new LystroEggsBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).requiresCorrectToolForDrops().randomTicks(),
+                    MMEntities.LYSTRO, MMTags.Blocks.DINOSAUR_NEST));
+    public static final RegistryObject<Block> LYSTRO_EGG_FRAGMENTS = registerBlock("lystro_egg_fragments",
+            () -> new LystroEggFragments(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).requiresCorrectToolForDrops()
+                    .pushReaction(PushReaction.DESTROY).instabreak().noOcclusion().randomTicks()));
+
     //Borealopelta
     public static final RegistryObject<Block> BOREALOPELTA_EGG = registerBlock("borealopelta_egg",
-            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
+            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).requiresCorrectToolForDrops().randomTicks(),
                     MMEntities.BOREALOPELTA, MMTags.Blocks.DINOSAUR_NEST));
 
     //Flubber
     public static final RegistryObject<Block> FLUBBER_EGG = registerBlock("flubber_egg",
-            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).randomTicks(),
+            () -> new SingleEggBlock(BlockBehaviour.Properties.copy(Blocks.SNIFFER_EGG).requiresCorrectToolForDrops().randomTicks(),
                     MMEntities.FLUBBER, BlockTags.SAND));
 
     //Sigillaria plank blocks

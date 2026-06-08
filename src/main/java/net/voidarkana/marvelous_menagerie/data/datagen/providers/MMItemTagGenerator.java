@@ -27,7 +27,10 @@ public class MMItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         this.tag(Tags.Items.EGGS).add(
-                MMBlocks.BOREALOPELTA_EGG.get().asItem()
+                MMItems.ELEPHANT_BIRD_EGG.get(),
+                MMBlocks.BOREALOPELTA_EGG.get().asItem(),
+                MMBlocks.FLUBBER_EGG.get().asItem(),
+                MMBlocks.LYSTRO_EGG.get().asItem()
         );
 
         this.tag(MMTags.Items.ANIMAL_FOSSILS).add(
@@ -110,11 +113,6 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.BRECCIA_FOSSIL.get(),
                 MMItems.DIATOMITE_FOSSIL.get(),
                 MMItems.PERMAFROST_FOSSIL.get());
-
-        this.tag(Tags.Items.EGGS).add(
-                MMItems.ELEPHANT_BIRD_EGG.get(),
-                MMBlocks.BOREALOPELTA_EGG.get().asItem()
-                );
 
         this.tag(Tags.Items.ARMORS_HELMETS).add(
                 MMItems.EGG_SHELLMET.get(),

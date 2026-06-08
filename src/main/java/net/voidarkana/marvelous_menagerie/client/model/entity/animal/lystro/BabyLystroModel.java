@@ -5,7 +5,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.voidarkana.marvelous_menagerie.client.animations.BabyLystroAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.LystroAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Lystrosaurus;
 
@@ -92,8 +91,11 @@ public class BabyLystroModel<T extends Lystrosaurus> extends MarvelousModel<T> {
 
 		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getSittingMultiplier())*(1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
-		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.animate(entity.eatAnimationState, BabyLystroAnims.EAT, ageInTicks, 1);
+		this.animate(entity.digAnimationState, BabyLystroAnims.DIG, ageInTicks, 1);
+
+		this.head.xRot += headPitch * ((float)Math.PI / 180F);
+		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override

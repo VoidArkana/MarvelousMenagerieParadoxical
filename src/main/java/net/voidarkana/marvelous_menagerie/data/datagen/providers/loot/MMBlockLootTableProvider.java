@@ -379,6 +379,8 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
 
         this.dropSelf(MMBlocks.BOREALOPELTA_EGG.get());
         this.dropSelf(MMBlocks.FLUBBER_EGG.get());
+        this.dropSelf(MMBlocks.LYSTRO_EGG.get());
+        this.dropWhenSilkTouch(MMBlocks.LYSTRO_EGG_FRAGMENTS.get());
     }
 
     public LootTable.Builder createCharniaDrops(Block charniaBlock) {

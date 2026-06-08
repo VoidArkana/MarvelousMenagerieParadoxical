@@ -35,7 +35,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.WaterCreatureRandomlySitUpOrDownGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.RandomlySitUpOrDownGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.BottomDwellerWaterCreature;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
@@ -66,22 +66,17 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25f)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.5F);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.75F);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TriloPanicGoal(this, 1.5));
         this.goalSelector.addGoal(1, new MoveToWaterGoal(this, 0.5D));
-        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 80) {
+        this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1.0D, 10) {
             @Override
             public boolean canUse() {
-                return super.canUse() && !(Trilobite.this.isSitting() || Trilobite.this.isInPoseTransition());
-            }
-
-            @Override
-            public boolean canContinueToUse() {
-                return super.canContinueToUse() && !(Trilobite.this.isSitting() || Trilobite.this.isInPoseTransition());
+                return super.canUse() && !(Trilobite.this.refuseToMove());
             }
 
             @Nullable
@@ -93,7 +88,7 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.foodIngredients(), false));
         this.goalSelector.addGoal(3, new TemptGoal(this, 2D, this.fintasticFoodIngredients(), false));
-        this.goalSelector.addGoal(5, new TriloSitGoal(this, 400));
+        this.goalSelector.addGoal(5, new TriloSitGoal(this, 800));
     }
 
     @Override
@@ -624,7 +619,12 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
         };
     }
 
-    class TriloSitGoal extends WaterCreatureRandomlySitUpOrDownGoal{
+    @Override
+    public boolean standsWhenHurt() {
+        return false;
+    }
+
+    class TriloSitGoal extends RandomlySitUpOrDownGoal {
 
         final Trilobite trilobite;
         public TriloSitGoal(Trilobite mob, int interval) {
@@ -653,12 +653,8 @@ public class Trilobite extends BottomDwellerWaterCreature implements Bucketable 
 
         @Override
         public void start() {
-            if (!this.trilo.level().isClientSide){
-                if (this.trilo.isInWaterOrBubble() && this.trilo.level().getBlockState(this.trilo.blockPosition().below()).is(BlockTags.MINEABLE_WITH_SHOVEL))
-                    this.trilo.sitDown();
-            }
-            else
-                super.start();
+            if (this.trilo.isInWaterOrBubble() && this.trilo.level().getBlockState(this.trilo.blockPosition().below()).is(BlockTags.MINEABLE_WITH_SHOVEL))
+                this.trilo.sitDown();
         }
     }
 }

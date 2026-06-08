@@ -1,6 +1,10 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
+import com.mojang.datafixers.DataFixUtils;
+import com.mojang.serialization.Codec;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -8,34 +12,50 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.*;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedEater;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
-import org.jetbrains.annotations.Nullable;
 
-public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
+import javax.annotation.Nullable;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.function.IntFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimatedEater {
 
     public final AnimationState layEggAnimationState = new AnimationState();
     private int layEggAnimTimeout = 70;
@@ -43,76 +63,110 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
     private int sniffAnimTimeout = this.getRandom().nextInt(160) + 160;
     public final AnimationState headTurnAnimationState = new AnimationState();
     private int headTurnAnimTimeout = this.getRandom().nextInt(160) + 160;
+    public final AnimationState eatAnimationState = new AnimationState();
+    public final AnimationState digAnimationState = new AnimationState();
+    public int eatAnimationTimeout;
 
     int layEggCounter;
 
-    private static final EntityDataAccessor<Boolean> IS_PREGNANT = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.BOOLEAN);
+    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.CARROT, Items.POTATO, Items.BEETROOT);
+
+    private static final EntityDataAccessor<Integer> PREGNANT_TIME = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_LAYING_EGG = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> CAN_AUTOLAY_EGGS = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.BOOLEAN);
 
-    public Lystrosaurus(EntityType<? extends Animal> pEntityType, Level pLevel) {
+    private static final EntityDataAccessor<Integer> EATING_TIME = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> IS_DIGGING = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<String> VARIANT = SynchedEntityData.defineId(Lystrosaurus.class, EntityDataSerializers.STRING);
+
+    public Lystrosaurus(EntityType<? extends MarvelousAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-
-    private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.FERN, Items.LARGE_FERN);
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5));
-        this.goalSelector.addGoal(1, new EggLayerBreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D, MMTags.Blocks.DINOSAUR_NEST, MMBlocks.BOREALOPELTA_EGG, 1d));
 
-        this.goalSelector.addGoal(2, new MarvelousTemptGoal(this, 1.25D, FOOD_ITEMS, false));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D) {
-            @Override
-            public boolean canUse() {
-                return !Lystrosaurus.this.isInPoseTransition() && super.canUse();
-            }
-        });
-        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(2, new EggLayerBreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new LystroLayEggGoal(this, 1.0D, MMBlocks.LYSTRO_EGG, 0.5D));
 
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 20*60*5));
+        this.goalSelector.addGoal(3, new LystroTemptGoal(this, 1.25D, false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, Ingredient.of(Items.BEETROOT), false));
 
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new LystroHerdGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+
+        this.goalSelector.addGoal(6, new LystroEatBlockGoal());
+        this.goalSelector.addGoal(6, new RandomlySitUpOrDownGoal(this, 20*60*5));
+
+        this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
+    }
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        this.refreshDimensions();
+        super.onSyncedDataUpdated(pKey);
     }
 
     @Override
-    public boolean refuseToMove() {
-        return super.refuseToMove() || this.isLayingEgg();
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8)
-                .add(Attributes.ARMOR, 2)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.25)
-                .add(Attributes.MOVEMENT_SPEED, 0.125F);
+    public EntityDimensions getDimensions(Pose pPose) {
+        if (this.isBaby()) {
+            return pPose == Pose.SITTING ? super.getDimensions(pPose).scale(1F, 1F)
+                    : super.getDimensions(pPose).scale(1.15F, 1.15F);
+        }else {
+            return pPose == Pose.SITTING ? super.getDimensions(pPose).scale(1.0F, 0.85F) : super.getDimensions(pPose);
+        }
     }
 
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(IS_PREGNANT, false);
+        this.entityData.define(PREGNANT_TIME, 0);
+        this.entityData.define(CAN_AUTOLAY_EGGS, true);
         this.entityData.define(IS_LAYING_EGG, false);
-        this.entityData.define(CAN_AUTOLAY_EGGS, false);
+        this.entityData.define(EATING_TIME, 0);
+        this.entityData.define(IS_DIGGING, false);
+        this.entityData.define(VARIANT, "red");
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("IsPregnant", this.isPregnant());
         compound.putBoolean("IsLayingEgg", this.isLayingEgg());
-        compound.putBoolean("CanAutoLayEggs", this.canAutoLayEggs());
+        compound.putBoolean("CanAutoBreed", this.canAutoLayEggs());
+        compound.putString("Variant", LystroVariant.byId(this.getVariant()).getSerializedName());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setPregnant(compound.getBoolean("IsPregnant"));
         this.setLayingEgg(compound.getBoolean("IsLayingEgg"));
-        this.setCanAutoLayEggs(compound.getBoolean("CanAutoLayEggs"));
+        this.setCanAutoLayEggs(compound.getBoolean("CanAutoBreed"));
+        this.setVariant(LystroVariant.byName(compound.getString("Variant")).id());
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10)
+                .add(Attributes.MOVEMENT_SPEED, 0.125F);
+    }
+
+    public int getVariant() {
+        return LystroVariant.byName(this.getVariantName()).id();
+    }
+
+    public void setVariant(int variant) {
+        this.setVariantName(LystroVariant.byId(variant).getSerializedName());
+    }
+
+    public String getVariantName() {
+        return this.entityData.get(VARIANT);
+    }
+
+    public void setVariantName(String variantName) {
+        this.entityData.set(VARIANT, variantName);
+    }
 
     public boolean canAutoLayEggs() {
         return this.entityData.get(CAN_AUTOLAY_EGGS);
@@ -122,17 +176,18 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         this.entityData.set(CAN_AUTOLAY_EGGS, pIsLayingEgg);
     }
 
+
     public void setupAnimationStates() {
         super.setupAnimationStates();
 
-        if(headTurnAnimTimeout <= 0 && !this.getNavigation().isInProgress() && !this.isLayingEgg()) {
+        if(headTurnAnimTimeout <= 0 && this.getNavigation().isDone() && !this.isLayingEgg() && !this.isEating()) {
             headTurnAnimTimeout = this.getRandom().nextInt(160) * this.getRandom().nextInt();
             headTurnAnimationState.start(this.tickCount);
         } else {
             --this.headTurnAnimTimeout;
         }
 
-        if(sniffAnimTimeout <= 0 && !this.isSprinting() && !this.isInWaterOrBubble() && !this.isLayingEgg()) {
+        if(sniffAnimTimeout <= 0 && !this.isSprinting() && !this.isInWaterOrBubble() && !this.isLayingEgg() && !this.isEating()) {
             sniffAnimTimeout = this.getRandom().nextInt(160) * this.getRandom().nextInt();
             sniffAnimationState.start(this.tickCount);
         } else {
@@ -145,22 +200,22 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         } else if (layEggAnimTimeout > 0){
             --this.layEggAnimTimeout;
         }
+
+        if (this.isEating() && this.eatAnimationTimeout <= 0){
+            this.eatAnimationTimeout = 49;
+            if (this.isDigging())
+                this.digAnimationState.start(this.tickCount);
+            else
+                this.eatAnimationState.start(this.tickCount);
+        }else if (eatAnimationTimeout > 0){
+            --this.eatAnimationTimeout;
+        }
     }
 
-    @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        if (pReason == MobSpawnType.BREEDING || pReason == MobSpawnType.MOB_SUMMONED){
-            this.setCanAutoLayEggs(true);
-        }
-        if (pReason == MobSpawnType.NATURAL){
-            this.setCanAutoLayEggs(false);
-        }
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
-    }
-
+    //SITTING STUFF
     @Override
     public boolean canBeCollidedWith() {
-        return (!(this.isInPoseTransition()) && this.isSitting()) || this.isLayingEgg();
+        return !(this.isInPoseTransition()) && this.isSitting();
     }
 
     @Override
@@ -183,42 +238,65 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         return 30;
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return MMSounds.BOREALOPELTA_DEATH.get();
+        return MMSounds.LYSTRO_DEATH.get();
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource p_21239_) {
-        return MMSounds.BOREALOPELTA_HURT.get();
+        return MMSounds.LYSTRO_HURT.get();
     }
 
-    @javax.annotation.Nullable
+    @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return MMSounds.BOREALOPELTA_AMBIENT.get();
+        return MMSounds.LYSTRO_IDLE.get();
     }
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return FOOD_ITEMS.test(stack);
+        return stack.isEdible() && !stack.is(Items.POISONOUS_POTATO);
     }
 
     @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return MMEntities.LYSTROSAURUS.get().create(pLevel);
+    protected float getSoundVolume() {
+        return 1.25f;
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob) {
+        Lystrosaurus baby = MMEntities.LYSTRO.get().create(level);
+        Lystrosaurus otherParent = (Lystrosaurus) mob;
+        if (baby != null){
+            baby.setVariant(this.getRandom().nextBoolean() ? this.getVariant() : otherParent.getVariant());
+        }
+        return baby;
+    }
+
+    public int getPregnantTime() {
+        return this.entityData.get(PREGNANT_TIME);
+    }
+
+    public void setPregnantTime(int pregnant) {
+        this.entityData.set(PREGNANT_TIME, pregnant);
+    }
+
+    public boolean isPickyAboutNest(){
+        return this.getPregnantTime()>20*30;
     }
 
     @Override
     public boolean isPregnant() {
-        return this.entityData.get(IS_PREGNANT);
+        return this.getPregnantTime()>0;
     }
 
     @Override
     public void setPregnant(boolean pregnant) {
-        this.entityData.set(IS_PREGNANT, pregnant);
+        this.setPregnantTime(pregnant ? 20*60 : 0);
     }
 
     @Override
@@ -248,7 +326,7 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
     }
 
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
-        this.playSound(SoundEvents.PIG_STEP, 0.25F, 1.0F);
+            this.playSound(SoundEvents.PIG_STEP, 0.25F, 1.0F);
     }
 
     public void customServerAiStep() {
@@ -261,19 +339,432 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer {
         super.customServerAiStep();
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.isEating()){
+            int prev = this.getEatingTicks();
+            this.setEatingTicks(prev-1);
+        }
+
+        if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
+            List<? extends Animal> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
+            if (list.size() <= 1) {
+                this.schoolSize = 1;
+            }
+        }
+    }
+
     public void aiStep() {
+        if (!this.isPregnant() && this.isLayingEgg()){
+            this.setLayingEgg(false);
+        }
+
+        if (!this.isEating() && this.isDigging()){
+            this.setDigging(false);
+        }
+
         super.aiStep();
+
         if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0) {
             BlockPos blockpos = this.blockPosition();
             if (this.level().getBlockState(blockpos.below()).is(MMTags.Blocks.DINOSAUR_NEST)) {
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
         }
-
-        if ((this.layEggCounter == 0 || !this.isPregnant()) && this.isLayingEgg()){
-            this.setLayingEgg(false);
-        }
-
     }
 
+    public int getMaxYRot(){
+        return 25;
+    }
+
+    @Override
+    public int getEatingTicks() {
+        return this.entityData.get(EATING_TIME);
+    }
+
+    @Override
+    public void setEatingTicks(int eating) {
+        this.entityData.set(EATING_TIME, eating);
+    }
+
+    @Override
+    public boolean isEating() {
+        return this.getEatingTicks()>0;
+    }
+
+    @Override
+    public int eatAnimationTimeout() {
+        return this.eatAnimationTimeout;
+    }
+
+    @Override
+    public void setEatAnimationTimeout(int eatAnimationTimeout) {
+        this.eatAnimationTimeout = eatAnimationTimeout;
+    }
+
+    @Override
+    public @org.jetbrains.annotations.Nullable SoundEvent getEatSound() {
+        return SoundEvents.LLAMA_EAT;
+    }
+
+    public void setDigging(boolean eating) {
+        this.entityData.set(IS_DIGGING, eating);
+    }
+
+    public boolean isDigging() {
+        return this.entityData.get(IS_DIGGING);
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @org.jetbrains.annotations.Nullable SpawnGroupData pSpawnData, @org.jetbrains.annotations.Nullable CompoundTag pDataTag) {
+        if (pReason == MobSpawnType.NATURAL){
+            this.setCanAutoLayEggs(false);
+        }
+        this.setVariant(Util.getRandom(LystroVariant.values(), this.getRandom()).id());
+
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+
+    @Override
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemStack = pPlayer.getItemInHand(pHand);
+
+        if (itemStack.is(Items.POISONOUS_POTATO) && this.canAutoLayEggs()){
+            this.usePlayerItem(pPlayer, pHand, itemStack);
+            this.playSound(SoundEvents.GENERIC_EAT, 1.0F, (this.random.nextFloat() - (this.random.nextFloat()) * 0.2F) + 1.0F);
+            this.setCanAutoLayEggs(false);
+
+            for(int j = 0; j < 5; ++j) {
+                this.level().addParticle(ParticleTypes.ANGRY_VILLAGER, this.getRandomX(1.0), this.getRandomY() + 0.25, this.getRandomZ(1.0), 0.0, 0.0, 0.0);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+
+        if ((itemStack.is(Items.GOLDEN_APPLE) || itemStack.is(Items.GLISTERING_MELON_SLICE)) && !this.canAutoLayEggs()){
+            this.usePlayerItem(pPlayer, pHand, itemStack);
+            this.playSound(SoundEvents.GENERIC_EAT, 1.0F, (this.random.nextFloat() - (this.random.nextFloat()) * 0.2F) + 1.0F);
+            this.setCanAutoLayEggs(true);
+
+            for(int j = 0; j < 5; ++j) {
+                this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0), this.getRandomY() + 0.25, this.getRandomZ(1.0), 0.0, 0.0, 0.0);
+            }
+
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(pPlayer, pHand);
+    }
+
+    @Override
+    public void ate() {
+        super.ate();
+        if (this.isDigging()){
+            this.spawnAtLocation(new ItemStack(Items.HANGING_ROOTS));
+        }
+
+        if (!this.level().isClientSide){
+            if (this.isBaby()) {
+                this.ageUp(60);
+            }else if (this.canAutoLayEggs() && this.canFallInLove() && this.getRandom().nextBoolean()){
+                this.setInLove(null);
+            }
+        }
+    }
+
+    class LystroLayEggGoal extends LayEggGoal{
+        final Lystrosaurus lystro;
+
+        public LystroLayEggGoal(Lystrosaurus pEggLayer, double pSpeedModifier, Supplier<Block> pEgg, double acceptedDistance) {
+            super(pEggLayer, pSpeedModifier, MMTags.Blocks.DINOSAUR_NEST, pEgg, acceptedDistance);
+            this.lystro = pEggLayer;
+        }
+
+        @Override
+        public boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
+            if (Lystrosaurus.this.isPickyAboutNest())
+                return pLevel.isEmptyBlock(pPos.above()) && pLevel.getBlockState(pPos).is(Blocks.COARSE_DIRT);
+            else
+                return super.isValidTarget(pLevel, pPos);
+        }
+    }
+
+    class LystroTemptGoal extends Goal {
+        private static final TargetingConditions TEMP_TARGETING = TargetingConditions.forNonCombat().range(10.0D).ignoreLineOfSight();
+        private final TargetingConditions targetingConditions;
+        protected final Lystrosaurus mob;
+        private final double speedModifier;
+        private double px;
+        private double py;
+        private double pz;
+        private double pRotX;
+        private double pRotY;
+        @javax.annotation.Nullable
+        protected Player player;
+        private int calmDown;
+        private boolean isRunning;
+        private final boolean canScare;
+
+        public LystroTemptGoal(Lystrosaurus pMob, double pSpeedModifier, boolean pCanScare) {
+            this.mob = pMob;
+            this.speedModifier = pSpeedModifier;
+            this.canScare = pCanScare;
+            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+            this.targetingConditions = TEMP_TARGETING.copy().selector(this::shouldFollow);
+        }
+
+        public boolean canUse() {
+            if (this.calmDown > 0) {
+                --this.calmDown;
+                return false;
+            } else {
+                this.player = this.mob.level().getNearestPlayer(this.targetingConditions, this.mob);
+                return this.player != null;
+            }
+        }
+
+        private boolean shouldFollow(LivingEntity entity) {
+            return (entity.getMainHandItem().isEdible() || entity.getOffhandItem().isEdible()) && !entity.getMainHandItem().is(Items.POISONOUS_POTATO)
+                    && !entity.getOffhandItem().is(Items.POISONOUS_POTATO);
+        }
+
+        public boolean canContinueToUse() {
+            if (this.canScare()) {
+                if (this.mob.distanceToSqr(this.player) < 36.0D) {
+                    if (this.player.distanceToSqr(this.px, this.py, this.pz) > 0.010000000000000002D) {
+                        return false;
+                    }
+
+                    if (Math.abs((double) this.player.getXRot() - this.pRotX) > 5.0D || Math.abs((double) this.player.getYRot() - this.pRotY) > 5.0D) {
+                        return false;
+                    }
+                } else {
+                    this.px = this.player.getX();
+                    this.py = this.player.getY();
+                    this.pz = this.player.getZ();
+                }
+
+                this.pRotX = (double) this.player.getXRot();
+                this.pRotY = (double) this.player.getYRot();
+            }
+
+            return this.canUse();
+        }
+
+        protected boolean canScare() {
+            return this.canScare;
+        }
+
+        public void start() {
+            if (mob.isSitting())
+                mob.standUp();
+            this.px = this.player.getX();
+            this.py = this.player.getY();
+            this.pz = this.player.getZ();
+            this.isRunning = true;
+        }
+
+        public void stop() {
+            this.player = null;
+            this.mob.getNavigation().stop();
+            this.calmDown = reducedTickDelay(100);
+            this.isRunning = false;
+        }
+
+        public void tick() {
+            this.mob.getLookControl().setLookAt(this.player, (float) (this.mob.getMaxHeadYRot() + 20), (float) this.mob.getMaxHeadXRot());
+            if (this.mob.distanceToSqr(this.player) < 6.25D) {
+                this.mob.getNavigation().stop();
+            } else {
+                this.mob.getNavigation().moveTo(this.player, this.speedModifier);
+            }
+
+        }
+
+        public boolean isRunning() {
+            return this.isRunning;
+        }
+    }
+
+    class LystroEatBlockGoal extends MarvelousEatBlockGoal {
+        public LystroEatBlockGoal() {
+            super(Lystrosaurus.this, 30, 20, 250);
+        }
+
+        @Override
+        public void start() {
+            super.start();
+
+            BlockPos blockpos = this.mob.blockPosition().below();
+            if (this.level.getBlockState(blockpos).is(Blocks.DIRT) || this.level.getBlockState(blockpos).is(Blocks.PODZOL) || this.level.getBlockState(blockpos).is(Blocks.ROOTED_DIRT)) {
+                Lystrosaurus.this.setDigging(true);
+            }
+        }
+
+        public boolean isEdibleGroundBlock(BlockState state){
+            return state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.PODZOL) || state.is(Blocks.DIRT) || state.is(Blocks.ROOTED_DIRT);
+        }
+
+        @Override
+        public Block getLeftoverBlock(BlockState state) {
+            return state.is(Blocks.GRASS_BLOCK) ? super.getLeftoverBlock(state) : Blocks.COARSE_DIRT;
+        }
+    }
+
+    @Nullable
+    protected Lystrosaurus leader;
+    private int schoolSize = 1;
+
+
+    public int getMaxSpawnClusterSize() {
+        return this.getMaxSchoolSize();
+    }
+
+    public int getMaxSchoolSize() {
+        return super.getMaxSpawnClusterSize();
+    }
+
+    public boolean isFollower() {
+        return this.leader != null && this.leader.isAlive();
+    }
+
+    public Lystrosaurus startFollowing(Lystrosaurus pLeader) {
+        this.leader = pLeader;
+        pLeader.addFollower();
+        return pLeader;
+    }
+
+    public void stopFollowing() {
+        this.leader.removeFollower();
+        this.leader = null;
+    }
+
+    private void addFollower() {
+        ++this.schoolSize;
+    }
+
+    private void removeFollower() {
+        --this.schoolSize;
+    }
+
+    public boolean canBeFollowed() {
+        return this.hasFollowers() && this.schoolSize < this.getMaxSchoolSize();
+    }
+
+    public boolean hasFollowers() {
+        return this.schoolSize > 1;
+    }
+
+    public boolean inRangeOfLeader() {
+        return this.distanceToSqr(this.leader) <= 120.0D && this.distanceToSqr(this.leader) > 20.0D;
+    }
+
+    public void pathToLeader() {
+        if (this.isFollower()) {
+            this.getNavigation().moveTo(this.leader, 1.15D);
+        }
+    }
+
+    public void addFollowers(Stream<? extends Lystrosaurus> pFollowers) {
+        pFollowers.limit((long)(this.getMaxSchoolSize() - this.schoolSize)).filter((p_27538_) -> {
+            return p_27538_ != this;
+        }).forEach((fish) -> {
+            fish.startFollowing(this);
+        });
+    }
+    
+    public enum LystroVariant implements StringRepresentable {
+        RED(0, "red"),
+        GREEN(1, "green"),
+        BROWN(2, "brown"),
+        BLUE(3, "blue"),
+        SANDY(4, "sandy");
+
+        private static final IntFunction<LystroVariant> BY_ID = ByIdMap.sparse(LystroVariant::id, values(), RED);
+        public static final Codec<LystroVariant> CODEC = StringRepresentable.fromEnum(LystroVariant::values);
+        public static final EnumCodec<LystroVariant> NAME_CODEC = StringRepresentable.fromEnum(LystroVariant::values);
+        final int id;
+        private final String name;
+
+        LystroVariant(int pId, String pName) {
+            this.id = pId;
+            this.name = pName;
+        }
+
+        public String getSerializedName() {
+            return this.name;
+        }
+
+        public int id() {
+            return this.id;
+        }
+
+        public static LystroVariant byId(int pId) {
+            return BY_ID.apply(pId);
+        }
+
+        public static LystroVariant byName(String pName) {
+            return NAME_CODEC.byName(pName, RED);
+        }
+    }
+
+    class LystroHerdGoal extends Goal {
+        private static final int INTERVAL_TICKS = 200;
+        private final Lystrosaurus mob;
+        private int timeToRecalcPath;
+        private int nextStartTick;
+
+        public LystroHerdGoal(Lystrosaurus pFish) {
+            this.mob = pFish;
+            this.nextStartTick = this.nextStartTick(pFish);
+        }
+
+        protected int nextStartTick(Lystrosaurus pTaskOwner) {
+            return reducedTickDelay(200 + pTaskOwner.getRandom().nextInt(200) % 20);
+        }
+
+        public boolean canUse() {
+            if (this.mob.hasFollowers()) {
+                return false;
+            } else if (this.mob.isFollower()) {
+                return true;
+            } else if (this.nextStartTick > 0) {
+                --this.nextStartTick;
+                return false;
+            } else {
+                this.nextStartTick = this.nextStartTick(this.mob);
+                Predicate<Lystrosaurus> predicate = (fish) -> {
+                    return fish.canBeFollowed() || !fish.isFollower();
+                };
+                List<? extends Lystrosaurus> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+                Lystrosaurus abstractLystrosaurus = DataFixUtils.orElse(list.stream().filter(Lystrosaurus::canBeFollowed).findAny(), this.mob);
+                abstractLystrosaurus.addFollowers(list.stream().filter((fish) -> {
+                    return !fish.isFollower();
+                }));
+                return this.mob.isFollower() && this.mob.inRangeOfLeader() && !this.mob.isSitting();
+            }
+        }
+
+        public boolean canContinueToUse() {
+            return this.mob.isFollower() && this.mob.inRangeOfLeader();
+        }
+
+        public void start() {
+            this.timeToRecalcPath = 0;
+        }
+
+        public void stop() {
+            this.mob.stopFollowing();
+        }
+
+        public void tick() {
+            if (--this.timeToRecalcPath <= 0) {
+                this.timeToRecalcPath = this.adjustedTickDelay(10);
+                this.mob.pathToLeader();
+            }
+        }
+    }
 }

@@ -87,7 +87,16 @@ public class SingleEggBlock extends Block {
     }
 
     private boolean shouldUpdateHatchLevel(Level level, BlockPos ground) {
-        return level.random.nextInt(350) == 0 && level.getBlockState(ground).is(validBlock);
+        if (level.getBlockState(ground).is(validBlock)){
+            float f = level.getTimeOfDay(1.0F);
+            if ((double)f < 0.69D && (double)f > 0.65D) {
+                return true;
+            } else {
+                return level.random.nextInt(350) == 0;
+            }
+        }else {
+            return false;
+        }
     }
 
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
@@ -105,5 +114,10 @@ public class SingleEggBlock extends Block {
     @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState pState) {
+        return true;
     }
 }

@@ -212,7 +212,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
             if (this.random.nextInt(5) == 0) {
                 this.tame(player);
-                this.navigation.stop();
+                this.getNavigation().stop();
                 this.level().broadcastEntityEvent(this, (byte)7);
             }else{
                 this.level().broadcastEntityEvent(this, (byte)6);

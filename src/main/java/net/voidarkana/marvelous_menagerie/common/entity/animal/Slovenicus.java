@@ -6,6 +6,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
@@ -23,6 +25,9 @@ public class Slovenicus extends AbstractBasicFish {
 
     public Slovenicus(EntityType<? extends MarvelousWaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+
+        this.moveControl = new MarvelousSwimmingMoveControl(this, 85, 45, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 45);
     }
 
     protected void registerGoals() {
@@ -32,6 +37,11 @@ public class Slovenicus extends AbstractBasicFish {
         this.goalSelector.addGoal(2, new FishBreedGoal(this, 1.25));
         this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1, 50));
         this.goalSelector.addGoal(4 ,new SlovenicusGoToWaterPlant());
+    }
+
+    @Override
+    public boolean hasNormalControls() {
+        return false;
     }
 
     public static AttributeSupplier.Builder createAttributes() {

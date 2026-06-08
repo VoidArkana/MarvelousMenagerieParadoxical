@@ -2,16 +2,14 @@ package net.voidarkana.marvelous_menagerie.common.entity.ai.goals;
 
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Tiktaalik;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.ISittingAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.TamableMarvelousAnimal;
 
 public class RandomlySitUpOrDownGoal extends Goal {
     private final PathfinderMob mob;
     private int nextMove;
-    final int sittingUpInterval;
+    final int standingUpInterval;
     final int sittingDownInterval;
 
     public RandomlySitUpOrDownGoal(PathfinderMob mob, int interval) {
@@ -20,7 +18,7 @@ public class RandomlySitUpOrDownGoal extends Goal {
 
     public RandomlySitUpOrDownGoal(PathfinderMob mob, int gettingUpInterval, int sittingDownInterval) {
         this.mob = mob;
-        this.sittingUpInterval = gettingUpInterval;
+        this.standingUpInterval = gettingUpInterval;
         this.sittingDownInterval = sittingDownInterval;
         this.resetInterval();
     }
@@ -45,10 +43,12 @@ public class RandomlySitUpOrDownGoal extends Goal {
                 return false;
             }
 
-            if (this.mob instanceof IEggLayer eggLayer){
-                if (eggLayer.isPregnant()){
-                    return animal.isSitting();
-                }
+            if (animal.hasToStandUpInstantly()){
+                return false;
+            }
+
+            if (this.mob instanceof IEggLayer eggLayer && eggLayer.isPregnant()){
+                return false;
             }
 
             if (this.mob instanceof TamableMarvelousAnimal tamable){
@@ -57,23 +57,17 @@ public class RandomlySitUpOrDownGoal extends Goal {
                 }
             }
 
-            this.nextMove--;
-
-
             if (this.nextMove > 0){
+                this.nextMove--;
                 if (this.mob.getRandom().nextInt(0, this.nextMove) == 0 ) {
                     this.resetInterval();
-                    return !animal.hasToStandUpInstantly();
+                     return true;
                 }else {
                     return false;
                 }
             }else {
-                if (animal.hasToStandUpInstantly()){
-                    return false;
-                }else {
-                    this.resetInterval();
-                    return true;
-                }
+                this.resetInterval();
+                return true;
             }
         }
         return false;
@@ -81,15 +75,10 @@ public class RandomlySitUpOrDownGoal extends Goal {
 
     private void resetInterval() {
         if (this.mob instanceof ISittingAnimal animal){
-            if (animal.canSit()){
-                if (this.mob.level().isNight()){
-                    this.nextMove = animal.isSitting() ? sittingUpInterval*2 : sittingDownInterval/2;
-                }else {
-                    this.nextMove = animal.isSitting() ? sittingUpInterval : sittingDownInterval;
-                }
-            }
-            else{
-                this.nextMove = 0;
+            if (this.mob.level().isNight()){
+                this.nextMove = animal.isSitting() ? standingUpInterval *2 : sittingDownInterval/2;
+            }else {
+                this.nextMove = animal.isSitting() ? standingUpInterval : sittingDownInterval;
             }
         }else {
             this.nextMove = 0;

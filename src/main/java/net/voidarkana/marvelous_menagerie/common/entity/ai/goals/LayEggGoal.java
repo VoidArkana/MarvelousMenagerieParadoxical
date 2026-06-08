@@ -5,11 +5,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.common.block.custom.FourEggsBlock;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 
@@ -20,6 +23,7 @@ public class LayEggGoal extends MoveToBlockGoal {
     private final TagKey<Block> nestBlock;
     private final Supplier<Block> eggBlock;
     private final double acceptedDistance;
+    boolean hasReachedGoal;
 
     public LayEggGoal(MarvelousAnimal pEggLayer, double pSpeedModifier, TagKey<Block> pNestBlock, Supplier<Block> pEgg, double acceptedDistance) {
         super(pEggLayer, pSpeedModifier, 16);
@@ -27,6 +31,13 @@ public class LayEggGoal extends MoveToBlockGoal {
         this.nestBlock = pNestBlock;
         this.eggBlock = pEgg;
         this.acceptedDistance = acceptedDistance;
+    }
+
+    @Override
+    public void start() {
+        super.start();
+        this.animal.level().broadcastEntityEvent(this.animal, (byte)10);
+        this.hasReachedGoal = false;
     }
 
     public boolean canUse() {
@@ -44,38 +55,62 @@ public class LayEggGoal extends MoveToBlockGoal {
     }
 
     public void tick() {
-        super.tick();
-        BlockPos blockpos = this.animal.blockPosition();
-        if (!this.animal.isInWater() && this.animal instanceof IEggLayer eggLayer && this.isReachedTarget()) {
+        if (this.animal.isSitting())
+            this.animal.standUp();
+        BlockPos position = this.animal.blockPosition();
+        Level level = this.animal.level();
+        BlockPos blockpos = this.getMoveToTarget();
+        if ((blockpos.closerToCenterThan(this.mob.position(), this.acceptedDistance()) || this.isValidTarget(level, position.below()))
+        && level.getBlockState(position).isAir()) {
+            if (!this.animal.isInWater() && this.animal instanceof IEggLayer eggLayer) {
+                this.hasReachedGoal = true;
+                if (this.animal.getNavigation().getPath() != null) {
+                    this.animal.getNavigation().stop();
+                }
 
-            if (eggLayer.getLayEggCounter() < 1) {
-                eggLayer.setLayingEgg(true);
-            } else if (eggLayer.getLayEggCounter() > this.adjustedTickDelay(50)) {
-                Level level = this.animal.level();
-                level.playSound(null, blockpos, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
-                BlockPos blockpos1 = this.blockPos.above();
-                BlockState blockstate = eggBlock.get().defaultBlockState();
-                level.setBlock(blockpos1, blockstate, 3);
-                level.gameEvent(GameEvent.BLOCK_PLACE, blockpos1, GameEvent.Context.of(this.animal, blockstate));
-                eggLayer.setPregnant(false);
-                eggLayer.setLayingEgg(false);
-                eggLayer.onEggLaid();
-                this.animal.setInLoveTime(600);
+                if (eggLayer.getLayEggCounter() < 1) {
+                    eggLayer.setLayingEgg(true);
+                } else if (eggLayer.getLayEggCounter() > 50) {
+                    level.playSound(null, position, SoundEvents.TURTLE_LAY_EGG, SoundSource.BLOCKS, 0.3F, 0.9F + level.random.nextFloat() * 0.2F);
+                    BlockState blockstate = eggBlock.get().defaultBlockState();
+                    if (level.getBlockState(position.below()).isAir()){
+                        position = position.below();
+                    }
+                    if (blockstate.is(MMBlocks.LYSTRO_EGG.get())){
+                        int eggAmount = this.mob.getRandom().nextInt(1, 5);
+                        level.setBlock(position, blockstate.setValue(FourEggsBlock.EGGS, eggAmount), 3);
+                    }else {
+                        level.setBlock(position, blockstate, 3);
+                    }
+                    level.gameEvent(GameEvent.BLOCK_PLACE, position, GameEvent.Context.of(this.animal, blockstate));
+                    eggLayer.setPregnant(false);
+                    eggLayer.setLayingEgg(false);
+                    eggLayer.onEggLaid();
+                    this.animal.setInLoveTime(600);
+                }
+
+                if (eggLayer.isLayingEgg()) {
+                    int prevLayEggCounter = eggLayer.getLayEggCounter();
+                    eggLayer.setLayEggCounter(++prevLayEggCounter);
+                }
             }
 
-            if (eggLayer.isLayingEgg()) {
-                int prevLayEggCounter = eggLayer.getLayEggCounter();
-                eggLayer.setLayEggCounter(++prevLayEggCounter);
-            }
+            --this.tryTicks;
+        } else {
+            if (this.hasReachedGoal)
+                this.hasReachedGoal = false;
+            ++this.tryTicks;
         }
-
+        if (!this.hasReachedGoal) {
+            this.mob.getNavigation().moveTo((double)((float)blockpos.getX()) + 0.5D, (double)blockpos.getY(), (double)((float)blockpos.getZ()) + 0.5D, this.speedModifier);
+        }
     }
 
-    protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
+    public boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
         return pLevel.isEmptyBlock(pPos.above()) && pLevel.getBlockState(pPos).is(nestBlock);
     }
 
     public double acceptedDistance() {
-        return acceptedDistance;
+        return this.mob.getBbWidth() + 0.5D;
     }
 }

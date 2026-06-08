@@ -321,8 +321,13 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
         }
     }
 
+    public boolean standsWhenHurt(){
+        return true;
+    }
+
     protected void actuallyHurt(DamageSource pDamageSource, float pDamageAmount) {
-        this.standUpInstantly();
+        if (this.standsWhenHurt())
+            this.standUpInstantly();
         super.actuallyHurt(pDamageSource, pDamageAmount);
     }
 
@@ -636,6 +641,9 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
     }
 
     public boolean isSitting() {
+        if (!this.canSit()){
+            return false;
+        }
         return this.entityData.get(LAST_POSE_CHANGE_TICK) < 0L;
     }
 
@@ -661,7 +669,7 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
     }
 
     public void sitDown() {
-        if (!this.isSitting()) {
+        if (this.canSit() && !this.isSitting()){
             this.setPose(Pose.SITTING);
             this.resetLastPoseChangeTick(-this.level().getGameTime());
             this.refreshDimensions();
@@ -669,7 +677,7 @@ public abstract class MarvelousWaterAnimal extends WaterAnimal implements ISitti
     }
 
     public void standUp() {
-        if (this.isSitting()) {
+        if (this.isSitting()){
             this.setPose(Pose.STANDING);
             this.resetLastPoseChangeTick(this.level().getGameTime());
             if (this.isVehicle()){
