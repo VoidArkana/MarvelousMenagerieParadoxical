@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.item;
 
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -146,12 +147,18 @@ public class MMItems {
     //Inostrancevia
     public static final RegistryObject<Item> GORGON_FOSSIL = ITEMS.register("gorgon_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> INOSTRANCEVIA_SPAWN_EGG = ITEMS.register("inostrancevia_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.INOSTRANCEVIA, 0x6e6e55, 0x30301b, new Item.Properties()));
 
     //Lystrosaurus
     public static final RegistryObject<Item> LYSTRO_FOSSIL = ITEMS.register("lystro_fossil",
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LYSTROSAURUS_SPAWN_EGG = ITEMS.register("lystro_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.LYSTRO, 0x6f394b, 0xe3d69d, new Item.Properties()));
+    public static final RegistryObject<Item> LYSTRO_CHOP = ITEMS.register("lystro_chop",
+            ()-> new Item(new Item.Properties().food(Foods.PORKCHOP)));
+    public static final RegistryObject<Item> COOKED_LYSTRO_CHOP = ITEMS.register("cooked_lystro_chop",
+            ()-> new Item(new Item.Properties().food(Foods.COOKED_PORKCHOP)));
 
     //Sniffer
     public static final RegistryObject<Item> SNIFFER_FOSSIL = ITEMS.register("sniffer_fossil",

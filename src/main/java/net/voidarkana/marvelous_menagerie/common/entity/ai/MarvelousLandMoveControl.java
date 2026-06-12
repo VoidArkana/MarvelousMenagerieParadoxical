@@ -28,13 +28,13 @@ public class MarvelousLandMoveControl extends MoveControl {
 
     public void tick() {
         if (this.animal instanceof ISittingAnimal pAnimal){
-            if (pAnimal.refuseToMove() && this.operation == Operation.MOVE_TO
-                    && this.animal instanceof PathfinderMob mob && !mob.isLeashed()
-                    && pAnimal.isSitting() && !pAnimal.isInPoseTransition()){
-                pAnimal.standUp();
-            }
+//            if (pAnimal.refuseToMove() && this.operation == Operation.MOVE_TO
+//                    && this.animal instanceof PathfinderMob mob && !mob.isLeashed()
+//                    && pAnimal.isSitting() && !pAnimal.isInPoseTransition()){
+//                pAnimal.standUp();
+//            }
 
-            if (this.operation == MoveControl.Operation.STRAFE) {
+            if (!pAnimal.refuseToMove() && this.operation == MoveControl.Operation.STRAFE) {
                 float f = (float)this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED);
                 float f1 = (float)this.speedModifier * f;
                 float f2 = this.strafeForwards;
@@ -60,7 +60,7 @@ public class MarvelousLandMoveControl extends MoveControl {
                 this.mob.setZza(this.strafeForwards);
                 this.mob.setXxa(this.strafeRight);
                 this.operation = MoveControl.Operation.WAIT;
-            } else if (this.operation == MoveControl.Operation.MOVE_TO) {
+            } else if (!pAnimal.refuseToMove() && this.operation == MoveControl.Operation.MOVE_TO) {
                 this.operation = MoveControl.Operation.WAIT;
                 double d0 = this.wantedX - this.mob.getX();
                 double d1 = this.wantedZ - this.mob.getZ();
@@ -81,7 +81,7 @@ public class MarvelousLandMoveControl extends MoveControl {
                     this.mob.getJumpControl().jump();
                     this.operation = MoveControl.Operation.JUMPING;
                 }
-            } else if (this.operation == MoveControl.Operation.JUMPING) {
+            } else if (!pAnimal.refuseToMove() && this.operation == MoveControl.Operation.JUMPING) {
                 this.mob.setSpeed((float)(this.speedModifier * this.mob.getAttributeValue(Attributes.MOVEMENT_SPEED)));
                 if (this.mob.onGround()) {
                     this.operation = MoveControl.Operation.WAIT;

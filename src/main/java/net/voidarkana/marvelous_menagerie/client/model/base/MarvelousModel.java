@@ -25,6 +25,14 @@ public abstract class MarvelousModel<E extends Entity> extends HierarchicalModel
         this(pYoungScaleFactor, pBodyYOffset, RenderType::entityCutoutNoCull);
     }
 
+    public MarvelousModel() {
+        this(1, 0, RenderType::entityCutoutNoCull);
+    }
+
+    public MarvelousModel(Function<ResourceLocation, RenderType> pRenderType) {
+        this(1, 0, pRenderType);
+    }
+
     public MarvelousModel(float pYoungScaleFactor, float pBodyYOffset, Function<ResourceLocation, RenderType> pRenderType) {
         super(pRenderType);
         this.bodyYOffset = pBodyYOffset;

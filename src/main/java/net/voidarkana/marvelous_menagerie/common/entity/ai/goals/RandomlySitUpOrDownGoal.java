@@ -39,6 +39,9 @@ public class RandomlySitUpOrDownGoal extends Goal {
     public boolean canUse() {
         if (this.mob instanceof ISittingAnimal animal){
 
+            if (this.mob.getTarget() != null)
+                return animal.isSitting();
+
             if (animal.isInPoseTransition() || !animal.canSit()){
                 return false;
             }
@@ -52,7 +55,7 @@ public class RandomlySitUpOrDownGoal extends Goal {
             }
 
             if (this.mob instanceof TamableMarvelousAnimal tamable){
-                if (tamable.isTame() && tamable.getCommand() != 0){
+                if (tamable.isTame() && !tamable.isWandering()){
                     return false;
                 }
             }

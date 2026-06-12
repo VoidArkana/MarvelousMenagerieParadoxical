@@ -980,5 +980,83 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.lystro_death"
+  },
+
+
+
+  "inostrancevia_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:inostrancevia_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_idle_3"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_idle_4"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_idle"
+  },
+  "inostrancevia_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:inostrancevia_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_hurt"
+  },
+  "inostrancevia_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:inostrancevia_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_death"
+  },
+  "inostrancevia_roar": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:inostrancevia_roar_1"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_roar_2"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_roar_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_roar"
+  },
+  "inostrancevia_bite": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:inostrancevia_bite_1"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_bite_2"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_bite_3"
+      },
+      {
+        "name": "marvelous_menagerie:inostrancevia_bite_4"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_bite"
   }
 }

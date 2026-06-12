@@ -4,7 +4,7 @@
   "link": "mobs/lystrosaurus.json",
   "indexes": [
     {
-      "index_name": "book.marvelous_menagerie.early_paleo"
+      "index_name": "book.marvelous_menagerie.permian"
     }
   ]
 }

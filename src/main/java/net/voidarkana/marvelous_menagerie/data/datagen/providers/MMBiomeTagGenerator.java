@@ -85,5 +85,6 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
         tag(MMTags.Biomes.TIKTAALIK_BIOMES).addTag(Tags.Biomes.IS_SWAMP);
 
         tag(MMTags.Biomes.LYSTRO_BIOMES).addTag(BiomeTags.IS_BADLANDS).addTag(Tags.Biomes.IS_DESERT);
+        tag(MMTags.Biomes.INOSTRANCEVIA_BIOMES).addTag(BiomeTags.IS_BADLANDS).addTag(Tags.Biomes.IS_DESERT);
     }
 }

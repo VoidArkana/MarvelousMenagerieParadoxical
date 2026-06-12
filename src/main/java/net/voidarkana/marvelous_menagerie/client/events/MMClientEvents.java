@@ -39,6 +39,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bi
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.ElephantBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.BabyFlubberModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber.FlubberModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.inostrancevia.BabyInostranceviaModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.inostrancevia.InostranceviaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.BabyJosephoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoartigasia.JosephoModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.lystro.BabyLystroModel;
@@ -169,6 +171,9 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.LYSTRO_LAYER, LystroModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_LYSTRO_LAYER, BabyLystroModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.INOSTRANCEVIA_LAYER, InostranceviaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_INOSTRANCEVIA_LAYER, BabyInostranceviaModel::createBodyLayer);
 
 
 

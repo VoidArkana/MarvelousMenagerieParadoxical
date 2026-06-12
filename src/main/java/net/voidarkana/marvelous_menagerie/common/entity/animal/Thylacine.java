@@ -71,7 +71,7 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 15.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.25)
-                .add(Attributes.ATTACK_DAMAGE, 2);
+                .add(Attributes.ATTACK_DAMAGE, 1);
     }
 
     @Override

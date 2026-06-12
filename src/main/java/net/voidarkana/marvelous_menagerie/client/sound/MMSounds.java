@@ -106,6 +106,12 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> LYSTRO_HURT = registerSoundEvents( "lystro_hurt");
     public static final RegistryObject<SoundEvent> LYSTRO_DEATH = registerSoundEvents("lystro_death");
 
+    public static final RegistryObject<SoundEvent> INOSTRANCEVIA_AMBIENT = registerSoundEvents("inostrancevia_idle");
+    public static final RegistryObject<SoundEvent> INOSTRANCEVIA_HURT = registerSoundEvents("inostrancevia_hurt");
+    public static final RegistryObject<SoundEvent> INOSTRANCEVIA_DEATH = registerSoundEvents("inostrancevia_death");
+    public static final RegistryObject<SoundEvent> INOSTRANCEVIA_ROAR = registerSoundEvents("inostrancevia_roar");
+    public static final RegistryObject<SoundEvent> INOSTRANCEVIA_BITE = registerSoundEvents("inostrancevia_bite");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

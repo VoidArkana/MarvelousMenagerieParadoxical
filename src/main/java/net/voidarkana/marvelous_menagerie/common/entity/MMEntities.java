@@ -206,6 +206,12 @@ public class MMEntities {
                             .sized(0.5F, 0.5F)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"lystrosaurus").toString()));
 
+    public static final RegistryObject<EntityType<Inostrancevia>> INOSTRANCEVIA =
+            ENTITY_TYPES.register("inostrancevia",
+                    () -> EntityType.Builder.of(Inostrancevia::new, MobCategory.CREATURE)
+                            .sized(1, 1.25f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"inostrancevia").toString()));
+
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
             ENTITY_TYPES.register("mm_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)

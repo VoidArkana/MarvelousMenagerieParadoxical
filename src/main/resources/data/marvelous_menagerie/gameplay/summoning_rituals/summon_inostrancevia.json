@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:bone"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:lystro_chop"
+  },
+  "input3": {
+    "item": "marvelous_menagerie:lystro_egg"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:gorgon_fossil"
+  },
+  "output": "marvelous_menagerie:inostrancevia"
+}

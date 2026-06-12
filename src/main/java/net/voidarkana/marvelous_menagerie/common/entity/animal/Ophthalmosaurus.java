@@ -58,9 +58,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackG
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.BabyPanicGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishFollowParentGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
-import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
+import net.voidarkana.marvelous_menagerie.common.entity.base.*;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import org.jetbrains.annotations.Nullable;
@@ -354,8 +352,13 @@ public class Ophthalmosaurus extends AbstractBasicFish implements OwnableEntity,
                 return false;
             } else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) {
                 return false;
+            } else if (pTarget instanceof OwnableEntity animal) {
+                return animal.getOwner() != this.getOwner();
             } else {
-                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
+                if (pTarget instanceof TamableAnimal) {
+                    ((TamableAnimal) pTarget).isTame();
+                }
+                return true;
             }
         } else {
             return false;

@@ -44,8 +44,6 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     public Josephoartigasia (EntityType<? extends TamableMarvelousAnimal> entityType, Level level) {
         super(entityType, level);
-        this.setMaxUpStep(1.0F);
-        this.reassessTameGoals();
     }
 
     int inWaterTicks;
@@ -91,7 +89,15 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(1, new CustomRideGoal(this, 1));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2, Ingredient.of(ItemTags.LEAVES), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.2, Ingredient.of(ItemTags.LEAVES), false){
+            @Override
+            public boolean canUse() {
+                if (Josephoartigasia.this.isTame() && Josephoartigasia.this.getCommand() == 2){
+                    return false;
+                }
+                return super.canUse();
+            }
+        });
         this.goalSelector.addGoal(3, new TameableFollowOwnerGoal(this, 1.2, 5.0F, 2.0F, false));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1f));
@@ -107,8 +113,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 return super.canUse() && (!Josephoartigasia.this.isVehicle() || !Josephoartigasia.this.isPassenger());
             }
         });
-        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 6000, 3000));
-        super.registerGoals();
+        this.goalSelector.addGoal(5, new RandomlySitUpOrDownGoal(this, 1200, 800));
     }
 
     @Override
@@ -312,11 +317,6 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             --this.headShakeAnimationTimeout;
         }
 
-    }
-
-    @Override
-    public boolean canSit() {
-        return true;
     }
 
     @Override

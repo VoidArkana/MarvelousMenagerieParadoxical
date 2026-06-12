@@ -39,7 +39,7 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.MYOTRAGUS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Myotragus::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.TIKTAALIK.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Tiktaalik::checkSurfaceWaterCreatureRules);
         SpawnPlacements.register(MMEntities.LYSTRO.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Lystrosaurus::checkAnimalSpawnRules);
-
+        SpawnPlacements.register(MMEntities.INOSTRANCEVIA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Inostrancevia::checkAnimalSpawnRules);
     }
 
 }

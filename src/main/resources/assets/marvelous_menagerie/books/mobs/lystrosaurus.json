@@ -118,28 +118,6 @@
       "x": 98,
       "y": 93,
       "scale": 1
-    },
-
-
-
-
-    {
-      "display_page" : 3,
-      "type": "crafting_recipe",
-      "recipe_id": "marvelous_menagerie:ophthalmo_armor",
-      "sepia": true,
-      "x": 55,
-      "y": 85,
-      "scale": 1
-    },
-    {
-      "display_page" : 5,
-      "type": "crafting_recipe",
-      "recipe_id": "marvelous_menagerie:anomalous_goggles",
-      "sepia": true,
-      "x": 55,
-      "y": 25,
-      "scale": 1
     }
   ]
 }

@@ -126,6 +126,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.FALCA_SPAWN_EGG.get());
                         output.accept(MMItems.FLUBBER_SPAWN_EGG.get());
                         output.accept(MMItems.HALLUCIGENIA_SPAWN_EGG.get());
+                        output.accept(MMItems.INOSTRANCEVIA_SPAWN_EGG.get());
                         output.accept(MMItems.JOSEPHO_SPAWN_EGG.get());
                         output.accept(MMItems.LEPTICTIDIUM_SPAWN_EGG.get());
                         output.accept(MMItems.LYSTROSAURUS_SPAWN_EGG.get());

@@ -11,6 +11,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.OldUsersConverter;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -75,8 +77,22 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
         this.entityData.set(COMMAND, command);
     }
 
+    public boolean isOrderedToSit(){
+        return this.getCommand() == 2;
+    }
+
+    public boolean isWandering(){
+        return this.getCommand()==0;
+    }
+
     public boolean canBeLeashed(Player pPlayer) {
-        return !this.isLeashed();
+        return !this.isLeashed() && super.canBeLeashed(pPlayer);
+    }
+
+    @Override
+    public void standUpInstantly() {
+        this.setCommand(1);
+        super.standUpInstantly();
     }
 
     protected void spawnTamingParticles(boolean pTamed) {
@@ -138,11 +154,6 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
         if (pPlayer instanceof ServerPlayer) {
             CriteriaTriggers.TAME_ANIMAL.trigger((ServerPlayer)pPlayer, this);
         }
-
-    }
-
-    public boolean canAttack(LivingEntity pTarget) {
-        return this.isOwnedBy(pTarget) ? false : super.canAttack(pTarget);
     }
 
     public boolean isOwnedBy(LivingEntity pEntity) {
@@ -205,5 +216,29 @@ public abstract class TamableMarvelousAnimal extends MarvelousAnimal implements 
 
     void followEntity(TamableAnimal tameable, LivingEntity owner, double followSpeed) {
         tameable.getNavigation().moveTo(owner, followSpeed);
+    }
+
+    @Override
+    public boolean canSit() {
+        return true;
+    }
+
+    public boolean canMate(Animal pOtherAnimal) {
+        if (pOtherAnimal == this) {
+            return false;
+        } else if (!this.isTame()) {
+            return false;
+        } else if (!(pOtherAnimal instanceof TamableMarvelousAnimal)) {
+            return false;
+        } else {
+            TamableMarvelousAnimal animal = (TamableMarvelousAnimal)pOtherAnimal;
+            if (!animal.isTame()) {
+                return false;
+            } else if (animal.isSitting()) {
+                return false;
+            } else {
+                return this.isInLove() && animal.isInLove();
+            }
+        }
     }
 }

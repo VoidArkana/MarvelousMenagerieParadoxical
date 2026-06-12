@@ -57,7 +57,8 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.FLUBBER.get())
                 .add(MMEntities.MYOTRAGUS.get())
                 .add(MMEntities.TIKTAALIK.get())
-                .add(MMEntities.LYSTRO.get());
+                .add(MMEntities.LYSTRO.get())
+                .add(MMEntities.INOSTRANCEVIA.get());
 
         this.tag(MMTags.EntityTypes.CANT_TRAMPLE)
                 .add(MMEntities.FRACTURE.get())

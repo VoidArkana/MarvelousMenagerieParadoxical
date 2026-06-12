@@ -122,7 +122,7 @@ public class AnimatedAttackGoal extends Goal {
             }
 
             if(isTimeToAttack()) {
-                performAttack(pEnemy);
+                this.performAttack(pEnemy);
                 if (this.mob instanceof IAnimatedAttacker attacker)
                     if (attacker.getAttackSound() != null)
                         this.mob.playSound(attacker.getAttackSound(), 0.75f, this.mob.getVoicePitch());

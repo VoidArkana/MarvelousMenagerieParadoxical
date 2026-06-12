@@ -26,6 +26,9 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Fox;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -89,10 +92,20 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimate
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0F));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5));
 
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, 6.0F, 1.25D, 1.25D,
+                e -> (e instanceof Inostrancevia)){
+            @Override
+            public void start() {
+                super.start();
+                if (Lystrosaurus.this.isSitting())
+                    Lystrosaurus.this.standUp();
+            }
+        });
+
         this.goalSelector.addGoal(2, new EggLayerBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new LystroLayEggGoal(this, 1.0D, MMBlocks.LYSTRO_EGG, 0.5D));
 
-        this.goalSelector.addGoal(3, new LystroTemptGoal(this, 1.25D, false));
+        this.goalSelector.addGoal(3, new PredicateTemptGoal(this, 1.25D, false, (itemstack)-> itemstack.isEdible() && !itemstack.is(Items.POISONOUS_POTATO)));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25, Ingredient.of(Items.BEETROOT), false));
 
         this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 1.0D));
@@ -489,103 +502,6 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimate
                 return pLevel.isEmptyBlock(pPos.above()) && pLevel.getBlockState(pPos).is(Blocks.COARSE_DIRT);
             else
                 return super.isValidTarget(pLevel, pPos);
-        }
-    }
-
-    class LystroTemptGoal extends Goal {
-        private static final TargetingConditions TEMP_TARGETING = TargetingConditions.forNonCombat().range(10.0D).ignoreLineOfSight();
-        private final TargetingConditions targetingConditions;
-        protected final Lystrosaurus mob;
-        private final double speedModifier;
-        private double px;
-        private double py;
-        private double pz;
-        private double pRotX;
-        private double pRotY;
-        @javax.annotation.Nullable
-        protected Player player;
-        private int calmDown;
-        private boolean isRunning;
-        private final boolean canScare;
-
-        public LystroTemptGoal(Lystrosaurus pMob, double pSpeedModifier, boolean pCanScare) {
-            this.mob = pMob;
-            this.speedModifier = pSpeedModifier;
-            this.canScare = pCanScare;
-            this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
-            this.targetingConditions = TEMP_TARGETING.copy().selector(this::shouldFollow);
-        }
-
-        public boolean canUse() {
-            if (this.calmDown > 0) {
-                --this.calmDown;
-                return false;
-            } else {
-                this.player = this.mob.level().getNearestPlayer(this.targetingConditions, this.mob);
-                return this.player != null;
-            }
-        }
-
-        private boolean shouldFollow(LivingEntity entity) {
-            return (entity.getMainHandItem().isEdible() || entity.getOffhandItem().isEdible()) && !entity.getMainHandItem().is(Items.POISONOUS_POTATO)
-                    && !entity.getOffhandItem().is(Items.POISONOUS_POTATO);
-        }
-
-        public boolean canContinueToUse() {
-            if (this.canScare()) {
-                if (this.mob.distanceToSqr(this.player) < 36.0D) {
-                    if (this.player.distanceToSqr(this.px, this.py, this.pz) > 0.010000000000000002D) {
-                        return false;
-                    }
-
-                    if (Math.abs((double) this.player.getXRot() - this.pRotX) > 5.0D || Math.abs((double) this.player.getYRot() - this.pRotY) > 5.0D) {
-                        return false;
-                    }
-                } else {
-                    this.px = this.player.getX();
-                    this.py = this.player.getY();
-                    this.pz = this.player.getZ();
-                }
-
-                this.pRotX = (double) this.player.getXRot();
-                this.pRotY = (double) this.player.getYRot();
-            }
-
-            return this.canUse();
-        }
-
-        protected boolean canScare() {
-            return this.canScare;
-        }
-
-        public void start() {
-            if (mob.isSitting())
-                mob.standUp();
-            this.px = this.player.getX();
-            this.py = this.player.getY();
-            this.pz = this.player.getZ();
-            this.isRunning = true;
-        }
-
-        public void stop() {
-            this.player = null;
-            this.mob.getNavigation().stop();
-            this.calmDown = reducedTickDelay(100);
-            this.isRunning = false;
-        }
-
-        public void tick() {
-            this.mob.getLookControl().setLookAt(this.player, (float) (this.mob.getMaxHeadYRot() + 20), (float) this.mob.getMaxHeadXRot());
-            if (this.mob.distanceToSqr(this.player) < 6.25D) {
-                this.mob.getNavigation().stop();
-            } else {
-                this.mob.getNavigation().moveTo(this.player, this.speedModifier);
-            }
-
-        }
-
-        public boolean isRunning() {
-            return this.isRunning;
         }
     }
 

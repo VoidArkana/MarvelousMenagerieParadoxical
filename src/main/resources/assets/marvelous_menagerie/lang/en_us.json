@@ -262,12 +262,15 @@
 
   "entity.marvelous_menagerie.inostrancevia": "Inostrancevia",
   "item.marvelous_menagerie.gorgon_fossil": "Inostrancevia Fossil",
+  "item.marvelous_menagerie.inostrancevia_spawn_egg": "Inostrancevia Spawn Egg",
 
   "entity.marvelous_menagerie.lystrosaurus": "Lystrosaurus",
   "item.marvelous_menagerie.lystro_fossil": "Lystrosaurus Fossil",
   "item.marvelous_menagerie.lystro_spawn_egg": "Lystrosaurus Spawn Egg",
   "block.marvelous_menagerie.lystro_egg": "Lystrosaurus Egg",
-  "block.marvelous_menagerie.lystro_egg_fragments": "Lystrosaurus Egg Shell Fragments",
+  "item.marvelous_menagerie.lystro_chop": "Lystro Chop",
+  "item.marvelous_menagerie.cooked_lystro_chop": "Cooked Lystro Chop",
+  "item.marvelous_menagerie.lystro_egg_fragments": "Lystrosaurus Egg Shell Fragments",
   "marvelous_menagerie.sound.subtitle.lystro_idle": "Lystrosaurus grumbles",
   "marvelous_menagerie.sound.subtitle.lystro_hurt": "Lystrosaurus hurts",
   "marvelous_menagerie.sound.subtitle.lystro_death": "Lystrosaurus dies",
@@ -775,6 +778,8 @@
   "advancements.marvelous_menagerie.tiktaalik.description" : "Bear witness to Tikaalik, one of the first fish to be able to go on land",
   "advancements.marvelous_menagerie.lystrosaurus.title" : "Invincible",
   "advancements.marvelous_menagerie.lystrosaurus.description" : "Encounter a Lystrosaurus, an extremely resilient creature capable of reproducing on its own",
+  "advancements.marvelous_menagerie.inostrancevia.title" : "The Evil Gorgonopsid!",
+  "advancements.marvelous_menagerie.inostrancevia.description" : "Face an Inostrancevia, a ferocious creature from the permian with a poisonous bite whose might can be used for your own benefit",
 
   "advancements.marvelous_menagerie.warning.title" : "Flashing Lights Warning!",
   "advancements.marvelous_menagerie.warning.description" : "Interacting with Hallucigenia might cause bright flashes in your screen. Proceed with caution!",

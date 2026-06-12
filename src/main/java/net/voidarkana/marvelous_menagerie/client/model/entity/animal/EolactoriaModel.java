@@ -5,20 +5,15 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal;// Made wi
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.AgeableHierarchicalModel;
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.EolactoriaAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.FalcatusAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.SlovenicusAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Eolactoria;
 
 public class EolactoriaModel<T extends Eolactoria> extends MarvelousModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 
 	private final ModelPart root;
 	private final ModelPart swim_rot;

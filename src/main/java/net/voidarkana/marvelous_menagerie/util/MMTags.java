@@ -63,6 +63,7 @@ public class MMTags {
         public static final TagKey<Biome> MYOTRAGUS_BIOMES = create("is_myotragus_biome");
         public static final TagKey<Biome> TIKTAALIK_BIOMES = create("is_tiktaalik_biome");
         public static final TagKey<Biome> LYSTRO_BIOMES = create("is_lystro_biome");
+        public static final TagKey<Biome> INOSTRANCEVIA_BIOMES = create("is_inostrancevia_biome");
 
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MOD_ID, pName));

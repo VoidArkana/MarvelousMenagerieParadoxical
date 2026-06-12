@@ -45,7 +45,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     protected MarvelousAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.moveControl = new MarvelousLandMoveControl(this, this.getMaxYRot());
-//        this.lookControl = new SmoothSwimmingLookControl(this, this.getMaxYRot());
+        this.lookControl = new SmoothSwimmingLookControl(this, this.getMaxYRot());
         this.setMaxUpStep(1);
     }
 
@@ -220,6 +220,7 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
 
     public void sitDown() {
         if (this.canSit() && !this.isSitting()){
+            this.getNavigation().stop();
             this.setPose(Pose.SITTING);
             this.resetLastPoseChangeTick(-this.level().getGameTime());
             this.refreshDimensions();

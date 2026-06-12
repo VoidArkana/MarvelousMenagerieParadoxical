@@ -83,7 +83,7 @@ public class BabyLystroModel<T extends Lystrosaurus> extends MarvelousModel<T> {
 		this.animate(entity.headTurnAnimationState, BabyLystroAnims.HEAD_TURN, ageInTicks, 1);
 
 		this.animateWalk(BabyLystroAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getSprintingMultiplier())*(1-entity.getInWaterMultiplier()));
-		this.animateWalk(BabyLystroAnims.RUN, limbSwing, limbSwingAmount*4f, 2, entity.getSprintingMultiplier()*2.5f*(1-entity.getInWaterMultiplier()));
+		this.animateWalk(BabyLystroAnims.RUN, limbSwing/2, limbSwingAmount*4f, 2, entity.getSprintingMultiplier()*2.5f*(1-entity.getInWaterMultiplier()));
 
 		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
 

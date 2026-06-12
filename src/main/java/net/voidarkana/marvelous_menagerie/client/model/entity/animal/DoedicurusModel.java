@@ -127,8 +127,8 @@ public class DoedicurusModel<T extends Doedicurus> extends MarvelousModel<T> {
 		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
 		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
 
-		this.head.xRot = headPitch * ((float)Math.PI / 180F);
-		this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.head.xRot += headPitch * ((float)Math.PI / 180F);
+		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F);
 	}
 
 	@Override
