@@ -54,6 +54,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.HALLUCIGENIC_SLIME.get());
                         output.accept(MMItems.MAGIC_ROLL.get());
 
+                        output.accept(MMItems.LYSTRO_CHOP.get());
+                        output.accept(MMItems.COOKED_LYSTRO_CHOP.get());
                         output.accept(MMBlocks.LYSTRO_EGG_FRAGMENTS.get());
                         output.accept(MMBlocks.LYSTRO_EGG.get());
 

@@ -10,8 +10,8 @@ import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.BabyThylacineModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.ThylacineModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ThylacineHaloLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ThylacineHandkerchiefLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.thylacine.ThylacineHaloLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.thylacine.ThylacineHandkerchiefLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;
 
 public class ThylacineRenderer<T extends Thylacine> extends MobRenderer<T, MarvelousModel<T>> {

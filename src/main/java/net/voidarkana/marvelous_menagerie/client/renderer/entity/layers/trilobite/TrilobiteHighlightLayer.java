@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers;
+package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.trilobite;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,13 +17,13 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.T
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
 
 @OnlyIn(Dist.CLIENT)
-public class TrilobiteSecondLayer extends RenderLayer<Trilobite, MarvelousModel<Trilobite>> {
+public class TrilobiteHighlightLayer extends RenderLayer<Trilobite, MarvelousModel<Trilobite>> {
 
     private final TrilobiteIttyModel<Trilobite> triloIttyModel;
     private final TrilobiteMidModel<Trilobite> triloMidModel;
     private final TrilobiteFatModel<Trilobite> triloFatModel;
 
-    public TrilobiteSecondLayer(RenderLayerParent<Trilobite, MarvelousModel<Trilobite>> pRenderer, EntityRendererProvider.Context pContext) {
+    public TrilobiteHighlightLayer(RenderLayerParent<Trilobite, MarvelousModel<Trilobite>> pRenderer, EntityRendererProvider.Context pContext) {
         super(pRenderer);
         this.triloIttyModel = new TrilobiteIttyModel<>(pContext.bakeLayer(MMModelLayers.TRILO_ITTY_LAYER_SECOND));
         this.triloMidModel = new TrilobiteMidModel<>(pContext.bakeLayer(MMModelLayers.TRILO_MID_LAYER_SECOND));
@@ -33,22 +33,16 @@ public class TrilobiteSecondLayer extends RenderLayer<Trilobite, MarvelousModel<
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, Trilobite entity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
 
-        if (!entity.isLGBTrilo() && !entity.isInvisible()){
+        if (!entity.isLGBTrilo() && !entity.isInvisible() && entity.getHasHighlight()){
             Object object;
-            ResourceLocation texture;
-            switch (entity.getVariantModel()){
-                case 0,1,2,3,4 :
-                    object = triloMidModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/mid_second/mid_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
-                    break;
-                case 5 :
-                    object = triloIttyModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/itty/second/itty_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
-                    break;
-                default :
-                    object = triloFatModel;
-                    texture = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/trilobite/fat/second/fat_second_"+Trilobite.getColorName(entity.getVariantSecondColor())+".png");
-                    break;
+            ResourceLocation texture = new ResourceLocation(MarvelousMenagerie.MOD_ID,
+                    "textures/entity/animal/trilobite/"+Trilobite.getModelName(entity.getVariantModel())+"/highlight/"+
+                            Trilobite.getModelName(entity.getVariantModel())+"_highlight_"+Trilobite.getColorName(entity.getHighlightColor())+".png");
+
+            object = switch (entity.getVariantModel()) {
+                case 0, 1, 2, 3, 4 -> triloMidModel;
+                case 5 -> triloIttyModel;
+                default -> triloFatModel;
             };
 
             MarvelousModel<Trilobite> entitymodel = (MarvelousModel<Trilobite>)object;

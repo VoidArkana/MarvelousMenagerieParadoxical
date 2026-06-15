@@ -5,15 +5,14 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.CreeperPowerLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia.BabyHallucigeniaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia.HallucigeniaModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.HallucigeniaEyesLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.HallucigeniaPupilsLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.hallucigenia.HallucigeniaEyesLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.hallucigenia.HallucigeniaPupilsLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;
 import org.jetbrains.annotations.Nullable;
 

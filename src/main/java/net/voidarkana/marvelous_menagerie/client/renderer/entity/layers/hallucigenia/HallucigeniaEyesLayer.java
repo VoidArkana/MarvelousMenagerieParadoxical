@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers;
+package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.hallucigenia;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -14,7 +14,6 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia.HallucigeniaModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.rendertypes.MMRenderTypes;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;
 
 public class HallucigeniaEyesLayer<T extends Hallucigenia> extends RenderLayer<T, MarvelousModel<T>> {

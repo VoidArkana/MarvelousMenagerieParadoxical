@@ -88,10 +88,7 @@ public class BabyInostranceviaModel<T extends Inostrancevia> extends MarvelousMo
 		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGLESS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
 		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier())-Math.abs(limbSwingAmount)));
 
-		if (entity.isEvil())
-			this.animate(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f);
-		else
-			this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
 
 		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
 

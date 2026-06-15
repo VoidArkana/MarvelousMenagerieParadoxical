@@ -74,7 +74,8 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 
 		PartDefinition eyebrows_r2 = head.addOrReplaceChild("eyebrows_r2", CubeListBuilder.create().texOffs(69, 82).addBox(0.0F, -1.5F, -3.0F, 0.0F, 3.0F, 6.0F, new CubeDeformation(0.001F)), PartPose.offsetAndRotation(3.0F, -2.25F, -4.5F, 0.3927F, 0.7854F, 0.0F));
 
-		PartDefinition jaw = head.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(57, 49).addBox(-1.0F, -3.5F, -13.5F, 2.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
+		PartDefinition jaw = head.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(57, 49)
+		.addBox(-1.0F, -3.5F, -13.5F, 2.0F, 7.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(50, 65).addBox(-2.5F, -1.5F, -5.5F, 5.0F, 3.0F, 7.0F, new CubeDeformation(0.0F))
 		.texOffs(68, 65).addBox(-2.5F, 0.0F, -5.5F, 5.0F, 0.0F, 5.0F, new CubeDeformation(0.001F))
 		.texOffs(28, 26).addBox(-1.0F, 0.0F, -13.5F, 2.0F, 0.0F, 8.0F, new CubeDeformation(0.001F)), PartPose.offset(0.0F, 3.5F, 0.75F));
@@ -103,6 +104,8 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 		this.animate(entity.attackAnimationState2, InostranceviaAnims.ATTACK_2, ageInTicks, 1F);
 		this.animate(entity.attackAnimationState3, InostranceviaAnims.ATTACK_3, ageInTicks, 1F);
 
+		this.animate(entity.eatingAnimationState, InostranceviaAnims.EAT, ageInTicks, 1F);
+
 		this.animateIdle(entity.yawnAnimationState, InostranceviaAnims.MOUTH_OPEN, ageInTicks, 1, 1-entity.getInWaterMultiplier());
 		this.animate(entity.shakeAnimationState, InostranceviaAnims.SHAKE, ageInTicks, 1);
 		this.animate(entity.roarAnimationState, InostranceviaAnims.ROAR, ageInTicks, 1);
@@ -117,10 +120,7 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 		if (!entity.isTame())
 			this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_JAW, ageInTicks, 1.0f, 1);
 
-		if (entity.isEvil())
-			this.animate(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f);
-		else
-			this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
 
 		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
 

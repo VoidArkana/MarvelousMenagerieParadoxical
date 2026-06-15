@@ -4,6 +4,7 @@ import com.mojang.datafixers.DataFixUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,6 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ByIdMap;
+import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -39,6 +41,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -356,10 +359,6 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimate
     public void tick() {
         super.tick();
 
-        if (this.isEating()){
-            int prev = this.getEatingTicks();
-            this.setEatingTicks(prev-1);
-        }
 
         if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
             List<? extends Animal> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
@@ -380,12 +379,54 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimate
 
         super.aiStep();
 
+        if (this.isEating()) {
+            int prevTime = this.getEatingTicks();
+            this.setEatingTicks(prevTime - 1);
+
+            if (prevTime == 25 || prevTime == 20 || prevTime == 10){
+                this.playSound(SoundEvents.GENERIC_EAT, this.getSoundVolume(), this.getVoicePitch());
+            }
+
+            if (this.random.nextFloat() <= 0.4f && this.getMainHandItem() != ItemStack.EMPTY) {
+                this.level().addParticle(
+                        new ItemParticleOption(ParticleTypes.ITEM, this.getMainHandItem()),
+                        this.getHeadPos(true, 0.4f).x,
+                        this.getHeadBlockPos().getY() + 0.5f,
+                        this.getHeadPos(true, 0.4f).z,
+                        0.0, 0.0, 0.0
+                );
+            }
+        }
+
+        if ((this.isEating() && this.getMainHandItem().isEmpty()) || (!this.isEating() && !this.getMainHandItem().isEmpty())){
+            this.setEatingTicks(0);
+            this.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        }
+
         if (this.isAlive() && this.isLayingEgg() && this.layEggCounter >= 1 && this.layEggCounter % 5 == 0) {
             BlockPos blockpos = this.blockPosition();
             if (this.level().getBlockState(blockpos.below()).is(MMTags.Blocks.DINOSAUR_NEST)) {
                 this.level().levelEvent(2001, blockpos, Block.getId(this.level().getBlockState(blockpos.below())));
             }
         }
+    }
+
+    public Vec3 getHeadPos(boolean random, float randomValue) {
+        final float angle = (0.0174532925F * this.yBodyRot);
+        final float headX = 1.25F * getScale() * Mth.sin(Mth.PI + angle);
+        final float headZ = 1.25F * getScale() * Mth.cos(angle);
+
+        if (random) {
+            return new Vec3(this.getRandomX(randomValue) + headX, this.getRandomY(), this.getRandomZ(randomValue) + headZ);
+        } else return new Vec3(this.getX() + headX, this.getBlockY(), this.getZ() + headZ);
+    }
+
+    public BlockPos getHeadBlockPos() {
+        final float angle = (0.0174532925F * this.yBodyRot);
+        final double headX = 1.25F * getScale() * Mth.sin(Mth.PI + angle);
+        final double headZ = 1.25F * getScale() * Mth.cos(angle);
+
+        return new BlockPos((int)(this.getX() + headX), this.getBlockY(), (int)(this.getZ() + headZ));
     }
 
     public int getMaxYRot(){
@@ -515,6 +556,8 @@ public class Lystrosaurus extends MarvelousAnimal implements IEggLayer, IAnimate
             super.start();
 
             BlockPos blockpos = this.mob.blockPosition().below();
+            BlockState state = this.mob.level().getBlockState(blockpos);
+            Lystrosaurus.this.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(state.getBlock()));
             if (this.level.getBlockState(blockpos).is(Blocks.DIRT) || this.level.getBlockState(blockpos).is(Blocks.PODZOL) || this.level.getBlockState(blockpos).is(Blocks.ROOTED_DIRT)) {
                 Lystrosaurus.this.setDigging(true);
             }

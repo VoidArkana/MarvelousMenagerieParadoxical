@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers;
+package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.elephant_bird;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

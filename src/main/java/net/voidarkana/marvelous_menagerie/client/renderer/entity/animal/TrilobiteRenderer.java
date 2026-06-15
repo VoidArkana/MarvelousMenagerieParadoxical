@@ -13,8 +13,8 @@ import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteFatModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteIttyModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.TrilobiteMidModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.TrilobiteHighlightLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.TrilobiteSecondLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.trilobite.TrilobiteHighlightLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.trilobite.TrilobiteSecondLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Trilobite;
 import org.jetbrains.annotations.Nullable;
 

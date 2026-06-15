@@ -11,8 +11,8 @@ import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.BabyElephantBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.elephant_bird.ElephantBirdModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.EleBirdChestLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.EleBirdSwagLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.elephant_bird.EleBirdChestLayer;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.elephant_bird.EleBirdSwagLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.ElephantBird;
 import org.jetbrains.annotations.Nullable;
 

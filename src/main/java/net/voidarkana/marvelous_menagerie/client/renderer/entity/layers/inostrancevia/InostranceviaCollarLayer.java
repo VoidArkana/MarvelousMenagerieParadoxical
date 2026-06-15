@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers;
+package net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.inostrancevia;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,7 +19,7 @@ public class InostranceviaCollarLayer<T extends Inostrancevia, M extends Marvelo
     }
 
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        if (pLivingEntity.isTame() && !pLivingEntity.isInvisible()) {
+        if (pLivingEntity.isTame()) {
             ResourceLocation collarLocation = new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/animal/inostrancevia/"
                     + (pLivingEntity.isBaby() ? "baby_" : "")  + "inostrancevia_collar.png");
             float[] afloat = pLivingEntity.getCollarColor().getTextureDiffuseColors();

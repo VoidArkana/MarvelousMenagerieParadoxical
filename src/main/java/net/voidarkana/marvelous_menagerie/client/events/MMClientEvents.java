@@ -173,7 +173,9 @@ public class MMClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_LYSTRO_LAYER, BabyLystroModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.INOSTRANCEVIA_LAYER, InostranceviaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.INOSTRANCEVIA_PATTERN_LAYER, InostranceviaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_INOSTRANCEVIA_LAYER, BabyInostranceviaModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_INOSTRANCEVIA_PATTERN_LAYER, BabyInostranceviaModel::createBodyLayer);
 
 
 
