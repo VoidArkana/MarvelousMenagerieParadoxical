@@ -9,6 +9,7 @@ import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -24,6 +25,7 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.worldgen.features.CalamitesFeature;
 import net.voidarkana.marvelous_menagerie.common.worldgen.features.HugePrototaxitesFeature;
+import net.voidarkana.marvelous_menagerie.common.worldgen.features.OtozamitesFeature;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaFoliagePlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaTrunkPlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaFoliagePlacer;
@@ -44,6 +46,9 @@ public class ModConfiguredFeatures {
     public static final RegistryObject<Feature<CalamitesFeatureConfiguration>> CALAMITES_FEATURE =
             register_feature("calamites_feature", () -> new CalamitesFeature(CalamitesFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> OTOZAMITES_FEATURE =
+            register_feature("otozamites_feature", () -> new OtozamitesFeature(NoneFeatureConfiguration.CODEC));
+
     //plants
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_KEY = registerKey("sigillaria");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_HUGE = registerKey("sigillaria_huge");
@@ -51,6 +56,7 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PROTOTAXITES_KEY = registerKey("prototaxites");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CALAMITES_KEY = registerKey("calamites");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OTOZAMITES_KEY = registerKey("otozamites");
 
     //fossils
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHALE_KEY = registerKey("shale");
@@ -119,6 +125,8 @@ public class ModConfiguredFeatures {
 
         register(context, CALAMITES_KEY, ModConfiguredFeatures.CALAMITES_FEATURE.get(), new CalamitesFeatureConfiguration(
                 BlockStateProvider.simple(MMBlocks.CALAMITES_LOG.get()), BlockStateProvider.simple(MMBlocks.CALAMITES_BRANCH.get()),12, 15));
+
+        register(context, OTOZAMITES_KEY, ModConfiguredFeatures.OTOZAMITES_FEATURE.get(), new NoneFeatureConfiguration());
 
         //fossils
         register(context, SHALE_KEY, Feature.ORE, new OreConfiguration(deepslateReplaceables,

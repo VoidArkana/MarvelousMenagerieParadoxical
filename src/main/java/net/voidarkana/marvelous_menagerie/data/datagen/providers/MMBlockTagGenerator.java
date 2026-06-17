@@ -637,6 +637,9 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.PERMAFROST_FOSSIL_BLOCK.get()
         );
 
+        this.tag(BlockTags.DIRT)
+                .add(MMBlocks.OTOZAMITES_BUSH.get());
+
         this.tag(MMTags.Blocks.DINOSAUR_NEST)
                 .addTag(BlockTags.DIRT)
                 .addTag(Tags.Blocks.GRAVEL)

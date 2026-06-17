@@ -289,6 +289,7 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
                 block -> createLeavesDrops(MMBlocks.SIGILLARIA_LEAVES.get(), MMBlocks.SIGILLARIA_SAPLING.get(), 0.15f));
 
         this.dropSelf(MMBlocks.COOKSONIA.get());
+        this.dropSelf(MMBlocks.OTOZAMITES_BUSH.get());
 
         this.dropSelf(MMBlocks.PROTOTAXITES.get());
         this.add(MMBlocks.POTTED_PROTOTAXITES.get(),

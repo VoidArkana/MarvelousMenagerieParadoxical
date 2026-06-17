@@ -155,10 +155,12 @@ public class MMCreativeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
 
                         output.accept(MMBlocks.CHARNIA.get());
-                        output.accept(MMBlocks.COOKSONIA.get());
                         output.accept(MMBlocks.DICKINSONIA.get());
                         output.accept(MMBlocks.HERPETOGASTER.get());
                         output.accept(MMBlocks.WIWAXIA.get());
+
+                        output.accept(MMBlocks.COOKSONIA.get());
+                        output.accept(MMBlocks.OTOZAMITES_BUSH.get());
 
                         output.accept(MMBlocks.CALAMITES_LOG.get());
                         output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
@@ -191,7 +193,6 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.CALAMITES_BOAT.get());
                         output.accept(MMItems.CALAMITES_CHEST_BOAT.get());
-
 
                         output.accept(MMBlocks.PROTOTAXITES_PLANKS.get());
 

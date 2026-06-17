@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "marvelous_menagerie:block/otozamites_individual"
+    },
+    "age=1": {
+      "model": "marvelous_menagerie:block/otozamites_trunk"
+    },
+    "age=2": {
+      "model": "marvelous_menagerie:block/otozamites_top_mid"
+    },
+    "age=3,facing=north": {
+      "model": "marvelous_menagerie:block/otozamites_top_side"
+    },
+    "age=3,facing=east": {
+      "model": "marvelous_menagerie:block/otozamites_top_side",
+      "y": 90
+    },
+    "age=3,facing=south": {
+      "model": "marvelous_menagerie:block/otozamites_top_side",
+      "y": 180
+    },
+    "age=3,facing=west": {
+      "model": "marvelous_menagerie:block/otozamites_top_side",
+      "y": 270
+    },
+    "age=4,facing=north": {
+      "model": "marvelous_menagerie:block/otozamites_top_corner"
+    },
+    "age=4,facing=east": {
+      "model": "marvelous_menagerie:block/otozamites_top_corner",
+      "y": 90
+    },
+    "age=4,facing=south": {
+      "model": "marvelous_menagerie:block/otozamites_top_corner",
+      "y": 180
+    },
+    "age=4,facing=west": {
+      "model": "marvelous_menagerie:block/otozamites_top_corner",
+      "y": 270
+    }
+  }
+}

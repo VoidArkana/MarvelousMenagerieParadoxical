@@ -1,8 +1,10 @@
 package net.voidarkana.marvelous_menagerie.common.block.custom.plant;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.SegmentedAnglePrecision;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -117,5 +120,12 @@ public class CalamitesBranchBlock extends Block implements SimpleWaterloggedBloc
             }
         }
         super.onRemove(pState,pLevel,pPos,pNewState,pMovedByPiston);
+    }
+
+    public void onProjectileHit(Level pLevel, BlockState pState, BlockHitResult pHit, Projectile pProjectile) {
+        BlockPos blockpos = pHit.getBlockPos();
+        if (!pLevel.isClientSide && pProjectile.mayInteract(pLevel, blockpos) && pProjectile.getType().is(EntityTypeTags.IMPACT_PROJECTILES)) {
+            pLevel.destroyBlock(blockpos, true, pProjectile);
+        }
     }
 }

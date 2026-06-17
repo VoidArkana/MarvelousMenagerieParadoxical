@@ -334,6 +334,9 @@ public class MMBlocks {
                     .noOcclusion().sound(SoundType.SLIME_BLOCK).instabreak().noCollission()
                     .lightLevel((pState) -> {return 6;})));
 
+    //Otozamites
+    public static final RegistryObject<Block> OTOZAMITES_BUSH = registerBlock("otozamites_bush",
+            ()-> new OtozamitesBush(BlockBehaviour.Properties.copy(Blocks.AZALEA), ModConfiguredFeatures.OTOZAMITES_KEY));
 
     //April Fools
     public static final RegistryObject<Block> CHUD_BLOCK = registerBlock("chud_block",

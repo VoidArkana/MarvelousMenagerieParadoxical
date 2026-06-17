@@ -168,7 +168,7 @@ public class PrototaxitesBlock extends Block implements IPlantable, Bonemealable
 
         if (blockstate.is(this) && size <= 4) {
             return true;
-        } else return blockstate.is(BlockTags.DIRT);
+        } else return blockstate.is(BlockTags.DIRT) && !blockstate.is(MMBlocks.OTOZAMITES_BUSH.get());
 
     }
 
