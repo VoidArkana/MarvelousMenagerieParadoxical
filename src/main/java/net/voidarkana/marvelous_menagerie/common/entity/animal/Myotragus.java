@@ -33,11 +33,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousLandMoveControl;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.brains.MMMemoryModuleTypes;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.brains.MyotragusAI;
 import net.voidarkana.marvelous_menagerie.common.entity.base.ISittingAnimal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 

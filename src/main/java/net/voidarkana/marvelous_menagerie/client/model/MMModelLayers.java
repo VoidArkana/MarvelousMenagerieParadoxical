@@ -169,6 +169,11 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_INOSTRANCEVIA_PATTERN_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_inostrancevia_pattern"), "main");
 
+    public static final ModelLayerLocation ANUROGNATHUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "anurognathus"), "main");
+    public static final ModelLayerLocation BABY_ANUROGNATHUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_anurognathus"), "main");
+
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

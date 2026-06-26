@@ -252,17 +252,14 @@
   "marvelous_menagerie.sound.subtitle.doedicurus_hurt": "Doedicurus hurts",
   "marvelous_menagerie.sound.subtitle.doedicurus_death": "Doedicurus dies",
 
-  "entity.marvelous_menagerie.myotragus": "Myotragus",
-  "item.marvelous_menagerie.myotragus_fossil": "Myotragus Fossil",
-  "item.marvelous_menagerie.myotragus_spawn_egg": "Myotragus Spawn Egg",
-
-  "entity.marvelous_menagerie.tiktaalik": "Tiktaalik",
-  "item.marvelous_menagerie.tiktaalik_fossil": "Tiktaalik Fossil",
-  "item.marvelous_menagerie.tiktaalik_spawn_egg": "Tiktaalik Spawn Egg",
-
   "entity.marvelous_menagerie.inostrancevia": "Inostrancevia",
   "item.marvelous_menagerie.gorgon_fossil": "Inostrancevia Fossil",
   "item.marvelous_menagerie.inostrancevia_spawn_egg": "Inostrancevia Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.inostrancevia_idle": "Inostrancevia growls",
+  "marvelous_menagerie.sound.subtitle.inostrancevia_hurt": "Inostrancevia hurts",
+  "marvelous_menagerie.sound.subtitle.inostrancevia_death": "Inostrancevia dies",
+  "marvelous_menagerie.sound.subtitle.inostrancevia_roar": "Inostrancevia roars",
+  "marvelous_menagerie.sound.subtitle.inostrancevia_bite": "Inostrancevia bites",
 
   "entity.marvelous_menagerie.lystrosaurus": "Lystrosaurus",
   "item.marvelous_menagerie.lystro_fossil": "Lystrosaurus Fossil",
@@ -286,6 +283,19 @@
 
   "entity.marvelous_menagerie.kelenken": "Kelenken",
   "item.marvelous_menagerie.kelenken_fossil": "Kelenken Fossil",
+
+  "entity.marvelous_menagerie.myotragus": "Myotragus",
+  "item.marvelous_menagerie.myotragus_fossil": "Myotragus Fossil",
+  "item.marvelous_menagerie.myotragus_spawn_egg": "Myotragus Spawn Egg",
+
+  "entity.marvelous_menagerie.tiktaalik": "Tiktaalik",
+  "item.marvelous_menagerie.tiktaalik_fossil": "Tiktaalik Fossil",
+  "item.marvelous_menagerie.tiktaalik_bucket": "Bucket of Tiktaalik",
+  "item.marvelous_menagerie.tiktaalik_spawn_egg": "Tiktaalik Spawn Egg",
+
+  "entity.marvelous_menagerie.anurognathus": "Anurognathus",
+  "item.marvelous_menagerie.anuro_fossil": "Anurognathus Fossil",
+  "item.marvelous_menagerie.anurognathus_spawn_egg": "Anurognathus Spawn Egg",
 
   "entity.marvelous_menagerie.tameable.command_0": "%s is wandering",
   "entity.marvelous_menagerie.tameable.command_1": "%s is following",

@@ -22,8 +22,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousLandMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousSwimmingMoveControl;
 
 public abstract class AbstractAmphibianCreature extends MarvelousAnimal{
 

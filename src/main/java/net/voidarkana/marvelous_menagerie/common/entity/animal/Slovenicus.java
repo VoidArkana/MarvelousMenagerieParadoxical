@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousSwimmingMoveControl;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FishBreedGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractBasicFish;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousWaterAnimal;

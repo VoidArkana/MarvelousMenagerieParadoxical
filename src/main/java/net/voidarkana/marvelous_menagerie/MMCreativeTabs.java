@@ -81,6 +81,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.TRILO_BITE.get());
 
                         output.accept(MMItems.CARIS_FOSSIL.get());
+                        output.accept(MMItems.ANURO_FOSSIL.get());
                         output.accept(MMItems.ROACH_FOSSIL.get());
                         output.accept(MMItems.ARANDASPIS_FOSSIL.get());
                         output.accept(MMItems.PELTA_FOSSIL.get());
@@ -114,6 +115,7 @@ public class MMCreativeTabs {
 
 
                         output.accept(MMItems.CARIS_SPAWN_EGG.get());
+                        output.accept(MMItems.ANURO_SPAWN_EGG.get());
                         output.accept(MMItems.ROACH_SPAWN_EGG.get());
                         output.accept(MMItems.ARANDASPIS_SPAWN_EGG.get());
                         output.accept(MMItems.BOREALO_SPAWN_EGG.get());

@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.common.entity.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai.movement;
 
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Mob;

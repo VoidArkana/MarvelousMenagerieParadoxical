@@ -24,6 +24,8 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.Molten
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.AnomalocarisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.BabyAnomalocarisModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anurognathus.AnurognathusModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anurognathus.BabyAnurognathusModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.ArandaspisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.BabyArandaspisModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.BabyBorealopeltaModel;
@@ -177,6 +179,8 @@ public class MMClientEvents {
         event.registerLayerDefinition(MMModelLayers.BABY_INOSTRANCEVIA_LAYER, BabyInostranceviaModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_INOSTRANCEVIA_PATTERN_LAYER, BabyInostranceviaModel::createBodyLayer);
 
+        event.registerLayerDefinition(MMModelLayers.ANUROGNATHUS_LAYER, AnurognathusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ANUROGNATHUS_LAYER, BabyAnurognathusModel::createBodyLayer);
 
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);

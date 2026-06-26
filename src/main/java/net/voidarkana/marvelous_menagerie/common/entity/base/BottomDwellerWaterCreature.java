@@ -14,8 +14,8 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousLandMoveControl;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousLandMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousSwimmingMoveControl;
 
 
 public abstract class BottomDwellerWaterCreature extends MarvelousWaterAnimal {

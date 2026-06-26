@@ -325,6 +325,12 @@ public class MMItems {
             () -> new FishBucketItem(MMEntities.TIKTAALIK, () -> Fluids.WATER, Items.BUCKET, false,
                     (new Item.Properties()).stacksTo(1)));
 
+    //Anurognathus
+    public static final RegistryObject<Item> ANURO_FOSSIL = ITEMS.register("anuro_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ANURO_SPAWN_EGG = ITEMS.register("anurognathus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.ANUROGNATHUS, 0x714f49, 0xffee77, new Item.Properties()));
+
     //Plants
 
     //Sigillaria

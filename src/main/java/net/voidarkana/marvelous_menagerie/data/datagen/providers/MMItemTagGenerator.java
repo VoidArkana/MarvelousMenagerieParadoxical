@@ -63,7 +63,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.FLUBBER_FOSSIL.get(),
                 MMItems.DIPLOCAULUS_FOSSIL.get(),
                 MMItems.MYOTRAGUS_FOSSIL.get(),
-                MMItems.TIKTAALIK_FOSSIL.get()
+                MMItems.TIKTAALIK_FOSSIL.get(),
+                MMItems.ANURO_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.PALEONOMICON_INGREDIENTS).add(
@@ -100,7 +101,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.BEHOLDER_MANDIBLE.get(),
                 MMItems.CHUD_FLESH.get(),
                 MMItems.TIKTAALIK_FOSSIL.get(),
-                MMItems.MYOTRAGUS_FOSSIL.get()
+                MMItems.MYOTRAGUS_FOSSIL.get(),
+                MMItems.ANURO_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(

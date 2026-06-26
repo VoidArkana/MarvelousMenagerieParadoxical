@@ -212,6 +212,13 @@ public class MMEntities {
                             .sized(1, 1.25f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"inostrancevia").toString()));
 
+    public static final RegistryObject<EntityType<Anurognathus>> ANUROGNATHUS =
+            ENTITY_TYPES.register("anurognathus",
+                    () -> EntityType.Builder.of(Anurognathus::new, MobCategory.CREATURE)
+                            .sized(0.5f, 0.25f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"anurognathus").toString()));
+
+
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
             ENTITY_TYPES.register("mm_boat", () -> EntityType.Builder.<MMBoatEntity>of(MMBoatEntity::new, MobCategory.MISC)

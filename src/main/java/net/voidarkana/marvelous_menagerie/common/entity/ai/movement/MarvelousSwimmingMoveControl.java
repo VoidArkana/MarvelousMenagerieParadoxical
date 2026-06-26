@@ -1,8 +1,7 @@
-package net.voidarkana.marvelous_menagerie.common.entity.ai;
+package net.voidarkana.marvelous_menagerie.common.entity.ai.movement;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.voidarkana.marvelous_menagerie.common.entity.base.ISittingAnimal;
 

@@ -37,7 +37,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.eventbus.api.Cancelable;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.MarvelousSwimmingMoveControl;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.movement.MarvelousSwimmingMoveControl;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.config.CommonConfig;
 

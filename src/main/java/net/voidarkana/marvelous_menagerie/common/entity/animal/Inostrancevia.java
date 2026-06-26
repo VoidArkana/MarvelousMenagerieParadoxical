@@ -747,13 +747,15 @@ public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob,
         Inostrancevia baby = MMEntities.INOSTRANCEVIA.get().create(pLevel);
         Inostrancevia otherParent = (Inostrancevia) pOtherParent;
         if (baby != null) {
-            UUID uuid = this.getOwnerUUID();
-            if (uuid != null) {
-                baby.setOwnerUUID(uuid);
-                baby.setTame(true);
+            if (this.isTame()){
+                UUID uuid = this.getOwnerUUID();
+                if (uuid != null) {
+                    baby.setOwnerUUID(uuid);
+                    baby.setTame(true);
+                }
             }
-            int baseColor = this.getRandom().nextBoolean() ? otherParent.getVariant()/10 : this.getVariant()/10;
-            int pattern = this.getRandom().nextBoolean() ? otherParent.getVariant()%10 : this.getVariant()%10;
+            int baseColor = this.getRandom().nextBoolean() ? Util.getRandom(InostranceviaColor.values(), this.getRandom()).id() : this.getRandom().nextBoolean() ? otherParent.getVariant()/10 : this.getVariant()/10;
+            int pattern = this.getRandom().nextBoolean() ? Util.getRandom(InostranceviaPattern.values(), this.getRandom()).id() :  this.getRandom().nextBoolean() ? otherParent.getVariant()%10 : this.getVariant()%10;
             baby.setVariant((baseColor*10)+pattern);
         }
 
