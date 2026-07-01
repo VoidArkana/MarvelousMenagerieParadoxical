@@ -112,6 +112,12 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> INOSTRANCEVIA_ROAR = registerSoundEvents("inostrancevia_roar");
     public static final RegistryObject<SoundEvent> INOSTRANCEVIA_BITE = registerSoundEvents("inostrancevia_bite");
 
+    public static final RegistryObject<SoundEvent> ANUROGNATHUS_IDLE = registerSoundEvents( "anurognathus_idle");
+    public static final RegistryObject<SoundEvent> ANUROGNATHUS_HURT = registerSoundEvents( "anurognathus_hurt");
+    public static final RegistryObject<SoundEvent> ANUROGNATHUS_DEATH = registerSoundEvents("anurognathus_death");
+    public static final RegistryObject<SoundEvent> ANURO_BUCKET_CATCH = registerSoundEvents("anuro_bucket_catch");
+    public static final RegistryObject<SoundEvent> ANURO_BUCKET_RELEASE = registerSoundEvents("anuro_bucket_release");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

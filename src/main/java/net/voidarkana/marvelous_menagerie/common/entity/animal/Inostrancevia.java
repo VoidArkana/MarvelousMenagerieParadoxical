@@ -60,7 +60,6 @@ import java.util.UUID;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
-//TODO: hunger
 public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob, IAnimatedAttacker {
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);

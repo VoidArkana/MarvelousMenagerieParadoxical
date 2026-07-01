@@ -1058,5 +1058,62 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.inostrancevia_bite"
+  },
+
+
+
+  "anurognathus_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:anurognathus_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:anurognathus_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:anurognathus_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.anurognathus_idle"
+  },
+  "anurognathus_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:anurognathus_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:anurognathus_hurt_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.anurognathus_hurt"
+  },
+  "anurognathus_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:anurognathus_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.anurognathus_death"
+  },
+  "anuro_bucket_catch": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:anuro_bucket_catch"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.anuro_bucket_catch"
+  },
+  "anuro_bucket_release": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:anuro_bucket_release"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.anuro_bucket_release"
   }
 }

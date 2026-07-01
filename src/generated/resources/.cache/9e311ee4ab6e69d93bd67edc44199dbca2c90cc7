@@ -1,10 +1,11 @@
-// 1.20.1	2026-06-20T11:29:05.3384946	Item Models: marvelous_menagerie
+// 1.20.1	2026-07-01T10:02:09.1696481	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/anomalocaris_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/anurognathus_spawn_egg.json
 60e9e1f43aac76fce4be51c403f139327ce2e273 assets/marvelous_menagerie/models/item/anuro_fossil.json
+273ce04a1b2a9a82d79dd844546aad95bd48da3a assets/marvelous_menagerie/models/item/anuro_pot.json
 478d01819bbec98e6f7c0d656f310df1423a26d2 assets/marvelous_menagerie/models/item/arandaspis_bucket.json
 b3f6f2a6d2c27f207199979b3b929967e7f90e5d assets/marvelous_menagerie/models/item/arandaspis_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/arandaspis_spawn_egg.json

@@ -181,6 +181,8 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.ANUROGNATHUS_LAYER, AnurognathusModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_ANUROGNATHUS_LAYER, BabyAnurognathusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.ANUROGNATHUS_PATTERN_LAYER, AnurognathusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ANUROGNATHUS_PATTERN_LAYER, BabyAnurognathusModel::createBodyLayer);
 
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);

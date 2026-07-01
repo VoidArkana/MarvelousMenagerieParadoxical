@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:anurognathus",
+  "icon": "marvelous_menagerie:anuro_fossil",
+  "link": "mobs/anurognathus.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.jurassic"
+    }
+  ]
+}

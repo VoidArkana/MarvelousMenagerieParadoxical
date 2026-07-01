@@ -1,64 +1,68 @@
 package net.voidarkana.marvelous_menagerie.common.entity.animal;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import com.mojang.serialization.Codec;
+import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.FlyAndAttachGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.RandomFlyGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.AbstractFlyingAnimal;
+import net.voidarkana.marvelous_menagerie.common.entity.base.FlyingAttachableAnimal;
+import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import org.jetbrains.annotations.Nullable;
 
-public class Anurognathus extends AbstractFlyingAnimal {
+import java.util.Optional;
+import java.util.function.IntFunction;
+
+public class Anurognathus extends FlyingAttachableAnimal implements Bucketable {
 
     public final AnimationState idleLookState1 = new AnimationState();
     public final AnimationState idleLookState2 = new AnimationState();
     public final AnimationState idleAttachedState = new AnimationState();
     private int idleStateTimeout = this.random.nextInt(180) + 60;
 
-    private float attachProgress;
-    private float prevAttachProgress;
-
-    private static final EntityDataAccessor<Boolean> WANTS_TO_ATTACH = SynchedEntityData.defineId(Anurognathus.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Direction> ATTACHED_DIRECTION = SynchedEntityData.defineId(Anurognathus.class, EntityDataSerializers.DIRECTION);
-    int prevTicksAttached;
-    @Nullable
-    BlockPos attachmentPos;
+    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Anurognathus.class, EntityDataSerializers.INT);
 
     public Anurognathus(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+    @Override
+    public boolean isFood(ItemStack pStack) {
+        return Ingredient.of(Items.SPIDER_EYE, Items.HONEY_BOTTLE).test(pStack);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.MAX_HEALTH, 3)
                 .add(Attributes.FOLLOW_RANGE, 52);
-    }
-
-    @Override
-    public boolean isFood(ItemStack pStack) {
-        return Ingredient.of(Items.SPIDER_EYE, Items.HONEY_BOTTLE).test(pStack);
     }
 
     protected void registerGoals() {
@@ -81,54 +85,59 @@ public class Anurognathus extends AbstractFlyingAnimal {
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
-//        this.goalSelector.addGoal(5, new AttachToWallGoal(this));
     }
-
+    
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(WANTS_TO_ATTACH, false);
-        this.entityData.define(ATTACHED_DIRECTION, Direction.DOWN);
+        this.entityData.define(VARIANT, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("WantsToAttach", this.wantsToAttach());
-        compound.putInt("AttachedDirection", this.getAttachedDirection().get3DDataValue());
+        compound.putInt("Variant", this.getVariant());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setWantsToAttach(compound.getBoolean("WantsToAttach"));
-        this.setAttachedDirection(Direction.from3DDataValue(compound.getInt("AttachedDirection")));
+        this.setVariant(compound.getInt("Variant"));
     }
 
-    public float getAttachedProgress(float partialTick) {
-        return (prevAttachProgress + (attachProgress - prevAttachProgress) * partialTick) * 0.2F;
+    public String getBaseColor(){
+        int colorID = this.getVariant() / 10;
+        AnurognathusBase color = AnurognathusBase.byId(colorID);
+        return color.getSerializedName();
     }
 
-    public boolean wantsToAttach() {
-        return this.entityData.get(WANTS_TO_ATTACH);
+    public static String getBaseColor(int variant){
+        int colorID = variant / 10;
+        AnurognathusBase color = AnurognathusBase.byId(colorID);
+        return color.getSerializedName();
     }
 
-    public void setWantsToAttach(boolean wantsToAttach) {
-        this.entityData.set(WANTS_TO_ATTACH, wantsToAttach);
+    @Nullable
+    public String getPattern(){
+        int patternID = this.getVariant() % 10;
+        if (patternID == 0)
+            return null;
+        AnurognathusPattern pattern = AnurognathusPattern.byId(patternID);
+        return pattern.getSerializedName();
     }
 
-    public Direction getAttachedDirection() {
-        return this.entityData.get(ATTACHED_DIRECTION);
+    public static String getPattern(int variant){
+        int patternID = variant % 10;
+        if (patternID == 0)
+            return null;
+        AnurognathusPattern pattern = AnurognathusPattern.byId(patternID);
+        return pattern.getSerializedName();
+    }
+    
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
     }
 
-    public void setAttachedDirection(Direction direction) {
-//        System.out.println(direction);
-
-        this.entityData.set(ATTACHED_DIRECTION, direction);
-    }
-
-    public boolean isAttached(){
-        if (this.isFlying())
-            return false;
-        return this.getAttachedDirection()!=Direction.DOWN;
+    public void setVariant(int variant) {
+        this.entityData.set(VARIANT, variant);
     }
 
     @Override
@@ -143,46 +152,7 @@ public class Anurognathus extends AbstractFlyingAnimal {
         if (this.isInWaterOrBubble() && !this.isFlying()) {
             this.setFlying(true);
         }
-
-        if (this.isAttached() && this.isFlying()){
-            this.setFlying(false);
-        }
-
         super.tick();
-
-        prevAttachProgress = attachProgress;
-
-        if (isFlying() && attachProgress < 5F) {
-            attachProgress++;
-            this.refreshDimensions();
-        }
-        if (!isFlying() && attachProgress > 0F) {
-            attachProgress--;
-            this.refreshDimensions();
-        }
-
-        if (this.isFlying() && this.getRandom().nextInt(250)==0 && !this.wantsToAttach()){
-            this.setWantsToAttach(true);
-        }
-
-        if (!this.level().isClientSide()){
-            if (this.isAttached() && this.wantsToAttach() && this.isInWater()){
-                this.detach();
-            }
-
-            if (this.isAttached() && this.getRandom().nextInt(500)==0){
-                this.detach();
-            }
-        }
-    }
-
-    public void detach(){
-        if (this.isAttached())
-            this.setDeltaMovement(new Vec3(this.getAttachedDirection().getOpposite().getStepX()/4D, 0, -this.getAttachedDirection().getOpposite().getStepZ()/4D));
-
-        this.setWantsToAttach(false);
-        this.setFlying(true);
-        this.setAttachedDirection(Direction.DOWN);
     }
 
     @Override
@@ -204,63 +174,6 @@ public class Anurognathus extends AbstractFlyingAnimal {
         }
     }
 
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-
-        if ((this.isFlying() || (!this.onGround())) && this.horizontalCollision){
-            this.addDeltaMovement(new Vec3(0, -0.01, 0));
-            if (this.horizontalCollision && this.tickCount % 20 == 0){
-                BlockPos pos = this.blockPosition().offset(this.getDirection().getNormal());
-                if (this.canAttachTo(pos, this.level().getBlockState(pos), this.getDirection().getOpposite())){
-                    this.setAttachedDirection(this.getDirection());
-                    this.setFlying(false);
-                }
-            }
-        }
-
-        if (this.isAttached() && !this.level().isClientSide){
-            BlockPos blockStuckTo = this.blockPosition().relative(this.getAttachedDirection());
-            BlockState stateStuckTo = this.level().getBlockState(blockStuckTo);
-            if (!(stateStuckTo.isFaceSturdy(this.level(), blockStuckTo, this.getAttachedDirection()) || stateStuckTo.is(Blocks.GLASS))){
-                Direction newDirection = this.getAttachedDirection();
-                int counter = 0;
-                for (int x = 0; x < 4; x++){
-                    BlockPos newPos = this.blockPosition().relative(newDirection.getOpposite());
-
-                    BlockState blockstate = this.level().getBlockState(newPos);
-                    if (blockstate.isFaceSturdy(this.level(), newPos, newDirection) || blockstate.is(Blocks.GLASS)){
-
-                        this.setAttachedDirection(newDirection.getOpposite());
-                        break;
-                    }else{
-                        counter++;
-                    }
-                    newDirection = newDirection.getClockWise();
-                }
-
-                if (counter >= 4){
-                    this.detach();
-                }
-            }
-            this.yBodyRot = this.getAttachedDirection().toYRot();
-            this.yHeadRot = this.getAttachedDirection().toYRot();
-
-            this.setDeltaMovement(new Vec3(this.getAttachedDirection().getStepX()/16D, 0, this.getAttachedDirection().getStepZ()/16D));
-        }
-
-
-        if ((!this.wantsToAttach() || this.isInWater()) && this.isAttached() && !this.level().isClientSide){
-            this.detach();
-        }
-    }
-
-    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
-        this.refreshDimensions();
-        super.onSyncedDataUpdated(pKey);
-    }
-
     @Override
     public SoundEvent getFlapSound() {
         return SoundEvents.PARROT_FLY;
@@ -273,7 +186,15 @@ public class Anurognathus extends AbstractFlyingAnimal {
 
     @Override
     public @Nullable AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob pOtherParent) {
-        return MMEntities.ANUROGNATHUS.get().create(pLevel);
+        Anurognathus baby = MMEntities.ANUROGNATHUS.get().create(pLevel);
+        Anurognathus otherParent = (Anurognathus) pOtherParent;
+        if (baby != null) {
+            int baseColor = this.getRandom().nextBoolean() ? Util.getRandom(AnurognathusBase.values(), this.getRandom()).id() : this.getRandom().nextBoolean() ? otherParent.getVariant()/10 : this.getVariant()/10;
+            int pattern = this.getRandom().nextBoolean() ? Util.getRandom(AnurognathusPattern.values(), this.getRandom()).id() :  this.getRandom().nextBoolean() ? otherParent.getVariant()%10 : this.getVariant()%10;
+            baby.setVariant((baseColor*10)+pattern);
+        }
+
+        return baby;
     }
 
     @Override
@@ -288,123 +209,156 @@ public class Anurognathus extends AbstractFlyingAnimal {
     }
 
     @Override
-    public boolean isImmobile() {
-        return this.isAttached() || super.isImmobile();
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        int baseColor = Util.getRandom(AnurognathusBase.values(), this.getRandom()).id();
+        int pattern = Util.getRandom(AnurognathusPattern.values(), this.getRandom()).id();
+
+        this.setVariant((baseColor*10)+pattern);
+
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
 
     @Override
-    public boolean isPushable() {
-        return super.isPushable() && !this.isAttached();
+    protected @Nullable SoundEvent getAmbientSound() {
+        return MMSounds.ANUROGNATHUS_IDLE.get();
     }
 
-    public boolean canAttachTo(BlockPos pos, BlockState state, Direction direction) {
-        return state.isFaceSturdy(level(), pos, direction) && level().isEmptyBlock(pos.offset(direction.getNormal()));
+    @Override
+    protected @Nullable SoundEvent getHurtSound(DamageSource pDamageSource) {
+        return MMSounds.ANUROGNATHUS_HURT.get();
     }
 
-    class AttachToWallGoal extends MoveToBlockGoal{
+    @Override
+    protected @Nullable SoundEvent getDeathSound() {
+        return MMSounds.ANUROGNATHUS_DEATH.get();
+    }
 
-        static Anurognathus anurognathus;
-        Direction direction;
+    public int getAmbientSoundInterval() {
+        return this.getRandom().nextInt(300, 500);
+    }
 
-        public AttachToWallGoal(Anurognathus pMob) {
-            super(pMob, 1, 16, 8);
-            anurognathus = pMob;
+    @Override
+    public boolean fromBucket() {
+        return false;
+    }
+
+    @Override
+    public void setFromBucket(boolean pFromBucket) {}
+
+    @Override
+    public void saveToBucketTag(ItemStack bucket) {
+        Bucketable.saveDefaultDataToBucketTag(this, bucket);
+        CompoundTag compoundnbt = bucket.getOrCreateTag();
+        compoundnbt.putInt("Age", this.getAge());
+        compoundnbt.putInt("Variant", this.getVariant());
+        if (this.hasCustomName()) {
+            bucket.setHoverName(this.getCustomName());
         }
+    }
 
-        @Override
-        public boolean canUse() {
-            return anurognathus.wantsToAttach() && this.findNearestBlock();
+    @Override
+    public void loadFromBucketTag(CompoundTag pTag) {
+        Bucketable.loadDefaultDataFromBucketTag(this, pTag);
+        if (pTag.contains("Variant")){
+            this.setVariant(pTag.getInt("Variant"));
         }
-
-        @Override
-        public void start() {
-            anurognathus.setFlying(true);
-            anurognathus.addDeltaMovement(new Vec3(0, 0.1, 0));
-            anurognathus.switchNavigator(false);
-
-            super.start();
+        if (pTag.contains("Age")) {
+            this.setAge(pTag.getInt("Age"));
         }
+    }
 
-        @Override
-        public boolean canContinueToUse() {
-            return !anurognathus.isAttached() && super.canContinueToUse() && anurognathus.wantsToAttach();
-        }
+    @Override
+    public ItemStack getBucketItemStack() {
+        return new ItemStack(MMItems.ANURO_BUCKET.get());
+    }
 
-        protected int nextStartTick(PathfinderMob creature) {
-            return 60;
-        }
+    @Override
+    public InteractionResult interactAt(Player pPlayer, Vec3 pVec, InteractionHand pHand) {
+        return pickupAnurognathus(pPlayer, pHand, this).orElse(super.mobInteract(pPlayer, pHand));
+    }
 
-        @Override
-        protected boolean isValidTarget(LevelReader pLevel, BlockPos pPos) {
-            Direction pDirection;
-            BlockPos otherPos;
-            for (int x = -1; x < 1; x++){
-                for (int z = -1; z < 1; z++){
-                    if (x == 0 || z == 0){
-                        pDirection = Direction.fromDelta(x, 0, z);
-                        if (pDirection != null){
-                            otherPos = pPos.relative(pDirection);
-
-                            BlockState blockstate = pLevel.getBlockState(otherPos);
-                            if ((blockstate.isFaceSturdy(pLevel, otherPos, pDirection) || blockstate.is(Blocks.GLASS))
-                                    && pLevel.getBlockState(pPos).getFluidState().isEmpty()){
-                                this.direction = pDirection;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
-        protected BlockPos getMoveToTarget() {
-            return this.blockPos;
-        }
-
-        @Override
-        public void tick() {
-
-            if (this.shouldRecalculatePath()){
-                this.mob.getNavigation().moveTo((double)((float)this.blockPos.getX()),
-                        (double)this.blockPos.getY(),
-                        (double)((float)this.blockPos.getZ()) + 0.5D, 1.25);
-
+    static <T extends LivingEntity & Bucketable> Optional<InteractionResult> pickupAnurognathus(Player pPlayer, InteractionHand pHand, T pEntity) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        if (itemstack.getItem() == Items.FLOWER_POT && pEntity.isAlive()) {
+            pEntity.playSound(pEntity.getPickupSound(), 1.0F, 1.0F);
+            ItemStack itemstack1 = pEntity.getBucketItemStack();
+            pEntity.saveToBucketTag(itemstack1);
+            ItemStack itemstack2 = ItemUtils.createFilledResult(itemstack, pPlayer, itemstack1, false);
+            pPlayer.setItemInHand(pHand, itemstack2);
+            Level level = pEntity.level();
+            if (!level.isClientSide) {
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)pPlayer, itemstack1);
             }
 
-            if (this.isReachedTarget() || anurognathus.horizontalCollision){
-                anurognathus.setAttachedDirection(Direction.fromYRot(Math.round(anurognathus.yHeadRot / 90.0) * 90));
-                anurognathus.setXRot(0);
-                anurognathus.setDeltaMovement(Vec3.ZERO);
-                this.stop();
-            }else{
-                this.mob.getLookControl().setLookAt((double)((float)this.blockPos.getX()) + 0.5D, (double)this.blockPos.getY(), (double)((float)this.blockPos.getZ()) + 0.5D);
-            }
+            pEntity.discard();
+            return Optional.of(InteractionResult.sidedSuccess(level.isClientSide));
+        } else {
+            return Optional.empty();
+        }
+    }
 
-            super.tick();
+    @Override
+    public SoundEvent getPickupSound() {
+        return MMSounds.ANURO_BUCKET_CATCH.get();
+    }
+
+    public enum AnurognathusPattern implements StringRepresentable {
+        PLAIN(0, ""),
+        STRIPES(1, "stripes"),
+        EYES(2, "eyes"),
+        DOTTED(3, "dotted"),
+        STARS(4, "stars");
+
+        private static final IntFunction<AnurognathusPattern> BY_ID = ByIdMap.sparse(AnurognathusPattern::id, values(), PLAIN);
+        public static final Codec<AnurognathusPattern> CODEC = StringRepresentable.fromEnum(AnurognathusPattern::values);
+        final int id;
+        private final String name;
+
+        AnurognathusPattern(int pId, String pName) {
+            this.id = pId;
+            this.name = pName;
         }
 
-        @Override
-        protected boolean findNearestBlock() {
-            int i = 16;
-            int j = 8;
-            BlockPos blockpos = this.mob.blockPosition();
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        public String getSerializedName() {
+            return this.name;
+        }
 
-            for(int k = j; k >= -j; k--) {
-                for(int l = 0; l < i; ++l) {
-                    for(int i1 = 0; i1 <= l; i1 = i1 > 0 ? -i1 : 1 - i1) {
-                        for(int j1 = i1 < l && i1 > -l ? l : 0; j1 <= l; j1 = j1 > 0 ? -j1 : 1 - j1) {
-                            blockpos$mutableblockpos.setWithOffset(blockpos, i1, k, j1);
-                            if (this.mob.isWithinRestriction(blockpos$mutableblockpos) && this.isValidTarget(this.mob.level(), blockpos$mutableblockpos)) {
-                                this.blockPos = blockpos$mutableblockpos;
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-            return false;
+        public int id() {
+            return this.id;
+        }
+
+        public static AnurognathusPattern byId(int pId) {
+            return BY_ID.apply(pId);
+        }
+    }
+
+    public enum AnurognathusBase implements StringRepresentable {
+        BROWN(0, "brown"),
+        BLACK(1, "black"),
+        GOLDEN(2, "golden"),
+        ORANGE(3, "orange"),
+        WHITE(4, "white");
+
+        private static final IntFunction<AnurognathusBase> BY_ID = ByIdMap.sparse(AnurognathusBase::id, values(), BROWN);
+        public static final Codec<AnurognathusBase> CODEC = StringRepresentable.fromEnum(AnurognathusBase::values);
+        final int id;
+        private final String name;
+
+        AnurognathusBase(int pId, String pName) {
+            this.id = pId;
+            this.name = pName;
+        }
+
+        public String getSerializedName() {
+            return this.name;
+        }
+
+        public int id() {
+            return this.id;
+        }
+
+        public static AnurognathusBase byId(int pId) {
+            return BY_ID.apply(pId);
         }
     }
 }

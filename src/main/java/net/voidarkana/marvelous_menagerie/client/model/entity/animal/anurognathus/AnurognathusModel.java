@@ -120,7 +120,7 @@ public class AnurognathusModel<T extends Anurognathus> extends MarvelousModel<T>
 
 		animateWalk(AnurognathusAnims.WALK, limbSwing*3, groundMove, 4, 2.5f*(1-entity.getInWaterMultiplier()));
 
-		this.animateIdle(entity.idleAnimationState, AnurognathusAnims.FLYING, ageInTicks, 1.25f, Math.max(0, flyProgress));
+		this.animateIdle(entity.idleAnimationState, AnurognathusAnims.FLYING, ageInTicks, 1.25f, Math.max(0, flyProgress*1.5f));
 
 		if (entity.isAttached())
 			this.animateIdle(entity.idleAnimationState, AnurognathusAnims.WALL_IDLE, ageInTicks, 1.0f, 1);

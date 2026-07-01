@@ -2,8 +2,12 @@
   "input": ["marvelous_menagerie:limestone_fossil"],
   "entries": [
     {
-      "weight": 10,
+      "weight": 8,
       "item": "marvelous_menagerie:ophthalmo_fossil"
+    },
+    {
+      "weight": 12,
+      "item": "marvelous_menagerie:anuro_fossil"
     }
   ]
 }

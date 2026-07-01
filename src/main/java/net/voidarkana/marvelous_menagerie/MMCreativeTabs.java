@@ -28,6 +28,8 @@ public class MMCreativeTabs {
                         output.accept(MMItems.CARIS_SCUTE.get());
                         output.accept(MMItems.ANOMALOUS_GOGGLES.get());
 
+                        output.accept(MMItems.ANURO_BUCKET.get());
+
                         output.accept(MMItems.ARANDASPIS_BUCKET.get());
 
                         output.accept(MMBlocks.BOREALOPELTA_EGG.get());

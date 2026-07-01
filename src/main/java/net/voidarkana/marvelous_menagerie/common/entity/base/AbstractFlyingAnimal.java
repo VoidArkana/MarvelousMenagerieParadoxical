@@ -29,7 +29,7 @@ public abstract class AbstractFlyingAnimal extends MarvelousAnimal{
     private float prevFlightRoll = 0;
     private int animationTick;
     public int groundedFor = 0;
-    private boolean isLandNavigator;
+    public boolean isLandNavigator;
 
     protected AbstractFlyingAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

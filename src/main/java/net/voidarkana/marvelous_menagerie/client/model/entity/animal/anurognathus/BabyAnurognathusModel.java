@@ -152,7 +152,7 @@ public class BabyAnurognathusModel<T extends Anurognathus> extends MarvelousMode
 		}
 
 		this.fly_rot.z += Mth.lerp(entity.getAttachedProgress(partialTick), 0, 1f);
-		this.fly_rot.y += Mth.lerp(entity.getAttachedProgress(partialTick), this.fly_rot.y, -3f);
+		this.fly_rot.y += Mth.lerp(entity.getAttachedProgress(partialTick), 0, -3f);
 	}
 
 	@Override

@@ -6,22 +6,22 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Anurognathus;
+import net.voidarkana.marvelous_menagerie.common.entity.base.FlyingAttachableAnimal;
 
 import java.util.Random;
 
 public class FlyAndAttachGoal extends RandomFlyGoal{
-    private final Anurognathus entity;
+    private final FlyingAttachableAnimal entity;
     private boolean wantsToHang = false;
     private int hangCheckIn = 0;
     Direction direction;
 
-    public FlyAndAttachGoal(Anurognathus entity, float pSpeedModifier) {
+    public FlyAndAttachGoal(FlyingAttachableAnimal entity, float pSpeedModifier) {
         super(entity, pSpeedModifier);
         this.entity = entity;
     }
 
-    public FlyAndAttachGoal(Anurognathus entity) {
+    public FlyAndAttachGoal(FlyingAttachableAnimal entity) {
         this(entity, 1);
     }
 

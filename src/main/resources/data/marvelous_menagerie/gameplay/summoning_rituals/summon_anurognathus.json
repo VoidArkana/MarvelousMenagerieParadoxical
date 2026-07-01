@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:spider_eye"
+  },
+  "input2": {
+    "item": "minecraft:honey_bottle"
+  },
+  "input3": {
+    "item": "minecraft:flower_pot"
+  },
+  "input4": {
+    "item": "marvelous_menagerie:anuro_fossil"
+  },
+  "output": "marvelous_menagerie:anurognathus"
+}

@@ -9,6 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
@@ -330,6 +331,9 @@ public class MMItems {
             ()-> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ANURO_SPAWN_EGG = ITEMS.register("anurognathus_spawn_egg",
             ()-> new ForgeSpawnEggItem(MMEntities.ANUROGNATHUS, 0x714f49, 0xffee77, new Item.Properties()));
+    public static final RegistryObject<Item> ANURO_BUCKET = ITEMS.register("anuro_pot",
+            () -> new PatternedAnimalBucketItem(MMEntities.ANUROGNATHUS, () -> Fluids.EMPTY, Items.FLOWER_POT, MMSounds.ANURO_BUCKET_RELEASE.get(), true,
+                    (new Item.Properties()).stacksTo(1)));
 
     //Plants
 

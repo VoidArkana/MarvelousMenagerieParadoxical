@@ -229,6 +229,7 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.TIKTAALIK_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.ANURO_FOSSIL);
+        simpleItem(MMItems.ANURO_BUCKET);
         withExistingParent(MMItems.ANURO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         withExistingParent(MMItems.BEHOLDER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
