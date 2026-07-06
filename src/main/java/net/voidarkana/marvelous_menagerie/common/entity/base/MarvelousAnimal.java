@@ -33,14 +33,19 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     public final AnimationState sitPoseAnimationState = new AnimationState();
     int prevTicksInWater;
 
+    private float groundProgress = 5.0F;
+    private float prevGroundProgress = 5.0F;
+    private float inWaterProgress = 0;
+    private float prevInWaterProgress = 0;
+    private float sprintingProgress = 0;
+    private float prevSprintingProgress = 0;
+    private float sittingProgress = 0;
+    private float prevSittingProgress = 0;
+    private float aggroProgress = 0;
+    private float prevAggroProgress = 0;
+
     private static final EntityDataAccessor<Boolean> IS_INVENTORY = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Long> LAST_POSE_CHANGE_TICK = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.LONG);
-
-    public static final EntityDataAccessor<Integer> ON_GROUND_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> IN_WATER_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SITTING_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> SPRINTING_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Integer> AGGRO_TICKS = SynchedEntityData.defineId(MarvelousAnimal.class, EntityDataSerializers.INT);
 
     protected MarvelousAnimal(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -51,6 +56,26 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
 
     public int getMaxYRot(){
         return 25;
+    }
+
+    public float getOnGroundMultiplier(float partialTick) {
+        return (prevGroundProgress + (groundProgress - prevGroundProgress) * partialTick) * 0.2F;
+    }
+
+    public float getInWaterMultiplier(float partialTick) {
+        return (prevInWaterProgress + (inWaterProgress - prevInWaterProgress) * partialTick) * 0.2F;
+    }
+
+    public float getSprintingMultiplier(float partialTick) {
+        return (prevSprintingProgress + (sprintingProgress - prevSprintingProgress) * partialTick) * 0.2F;
+    }
+
+    public float getAggroMultiplier(float partialTick) {
+        return (prevAggroProgress + (aggroProgress - prevAggroProgress) * partialTick) * 0.2F;
+    }
+
+    public float getSittingMultiplier(float partialTick) {
+        return (prevSittingProgress + (sittingProgress - prevSittingProgress) * partialTick) * 0.2F;
     }
 
     protected BodyRotationControl createBodyControl() {
@@ -76,11 +101,6 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
         super.defineSynchedData();
         this.entityData.define(IS_INVENTORY, true);
         this.entityData.define(LAST_POSE_CHANGE_TICK, 0L);
-        this.entityData.define(AGGRO_TICKS, 0);
-        this.entityData.define(IN_WATER_TICKS, 0);
-        this.entityData.define(ON_GROUND_TICKS, 0);
-        this.entityData.define(SPRINTING_TICKS, 0);
-        this.entityData.define(SITTING_TICKS, 0);
     }
 
     public void addAdditionalSaveData(CompoundTag pCompound) {
@@ -102,84 +122,24 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
         this.resetLastPoseChangeTick(i);
     }
 
-    public int getInWaterTicks(){
-        return this.entityData.get(IN_WATER_TICKS);
-    }
-
-    public void setInWaterTicks(int ticks){
-        this.entityData.set(IN_WATER_TICKS, ticks);
-    }
-
     public int getInWaterTickBase(){
         return 5;
-    }
-
-    public float getInWaterMultiplier(){
-        return (float) this.getInWaterTicks() /this.getInWaterTickBase();
-    }
-
-    public int getonGroundTicks(){
-        return this.entityData.get(ON_GROUND_TICKS);
-    }
-
-    public void setonGroundTicks(int ticks){
-        this.entityData.set(ON_GROUND_TICKS, ticks);
     }
 
     public int getonGroundTickBase(){
         return 5;
     }
 
-    public float getOnGroundMultiplier(){
-        return (float) this.getonGroundTicks() /this.getonGroundTickBase();
-    }
-
-    public int getSprintingTicks(){
-        return this.entityData.get(SPRINTING_TICKS);
-    }
-
-    public void setSprintingTicks(int ticks){
-        this.entityData.set(SPRINTING_TICKS, ticks);
-    }
-
     public int getSprintingTickBase(){
         return 5;
-    }
-
-    public float getSprintingMultiplier(){
-        return (float) this.getSprintingTicks() /this.getSprintingTickBase();
-    }
-
-    public int getAggroTicks(){
-        return this.entityData.get(AGGRO_TICKS);
-    }
-
-    public void setAggroTicks(int ticks){
-        this.entityData.set(AGGRO_TICKS, ticks);
     }
 
     public int getAggroTickBase(){
         return 5;
     }
 
-    public float getAggroMultiplier(){
-        return (float) this.getAggroTicks() /this.getAggroTickBase();
-    }
-
-    public int getSittingTicks(){
-        return this.entityData.get(SITTING_TICKS);
-    }
-
-    public void setSittingTicks(int ticks){
-        this.entityData.set(SITTING_TICKS, ticks);
-    }
-
     public int getSittingTickBase(){
         return 5;
-    }
-
-    public float getSittingMultiplier(){
-        return (float) this.getSittingTicks() /this.getSittingTickBase();
     }
 
     public boolean canSit(){
@@ -258,15 +218,6 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
         return this.level().getGameTime() - Math.abs(this.entityData.get(LAST_POSE_CHANGE_TICK));
     }
 
-    public void travel(Vec3 pTravelVector) {
-//        if (this.refuseToMove() && this.onGround()) {
-//            this.setDeltaMovement(this.getDeltaMovement().multiply(0.0D, 1.0D, 0.0D));
-//            pTravelVector = pTravelVector.multiply(0.0D, 1.0D, 0.0D);
-//        }
-
-        super.travel(pTravelVector);
-    }
-
     protected void tickRidden(Player pPlayer, Vec3 pTravelVector) {
         super.tickRidden(pPlayer, pTravelVector);
         if (pPlayer.zza > 0.0F && !this.isInPoseTransition()) {
@@ -306,70 +257,50 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
     @Override
     public void tick() {
 
-        if (this.isInWaterOrBubble()){
-            if (this.getInWaterTicks()<this.getInWaterTickBase()){
-                int prevTicks = this.getInWaterTicks();
-                this.setInWaterTicks(prevTicks+1);
-            }
-        }else {
-            if (this.getInWaterTicks()>0){
-                int prevTicks = this.getInWaterTicks();
-                this.setInWaterTicks(prevTicks-1);
-            }
-        }
-
-        if (this.onGround()){
-            if (this.getonGroundTicks()<this.getonGroundTickBase()){
-                int prevTicks = this.getonGroundTicks();
-                this.setonGroundTicks(prevTicks+1);
-            }
-        }else {
-            if (this.getonGroundTicks()>0){
-                int prevTicks = this.getonGroundTicks();
-                this.setonGroundTicks(prevTicks-1);
-            }
-        }
-
-        if (this.isAggressive()){
-            if (this.getAggroTicks()<this.getAggroTickBase()){
-                int prevTicks = this.getAggroTicks();
-                this.setAggroTicks(prevTicks+1);
-            }
-        }else {
-            if (this.getAggroTicks()>0){
-                int prevTicks = this.getAggroTicks();
-                this.setAggroTicks(prevTicks-1);
-            }
-        }
-
-        if (this.isSitting()){
-            if (this.getSittingTicks()<this.getSittingTickBase()){
-                int prevTicks = this.getSittingTicks();
-                this.setSittingTicks(prevTicks+1);
-            }
-        }else {
-            if (this.getSittingTicks()>0){
-                int prevTicks = this.getSittingTicks();
-                this.setSittingTicks(prevTicks-1);
-            }
-        }
-
-        if (this.isSprinting()){
-            if (this.getSprintingTicks()<this.getSprintingTickBase()){
-                int prevTicks = this.getSprintingTicks();
-                this.setSprintingTicks(prevTicks+1);
-            }
-        }else {
-            if (this.getSprintingTicks()>0){
-                int prevTicks = this.getSprintingTicks();
-                this.setSprintingTicks(prevTicks-1);
-            }
-        }
-
         if (this.level().isClientSide()){
             this.setupAnimationStates();
         }
         super.tick();
+
+        prevGroundProgress = groundProgress;
+        if (onGround() && groundProgress < this.getonGroundTickBase()) {
+            groundProgress++;
+        }
+        if (!onGround() && groundProgress > 0F) {
+            groundProgress--;
+        }
+
+        prevInWaterProgress = inWaterProgress;
+        if (isInWaterOrBubble() && inWaterProgress < this.getInWaterTickBase()) {
+            inWaterProgress++;
+        }
+        if (!isInWaterOrBubble() && inWaterProgress > 0F) {
+            inWaterProgress--;
+        }
+
+        prevSittingProgress = sittingProgress;
+        if (isSitting() && sittingProgress < this.getSittingTickBase()) {
+            sittingProgress++;
+        }
+        if (!isSitting() && sittingProgress > 0F) {
+            sittingProgress--;
+        }
+
+        prevAggroProgress = aggroProgress;
+        if (isAggressive() && aggroProgress < this.getAggroTickBase()) {
+            aggroProgress++;
+        }
+        if (!isAggressive() && aggroProgress > 0F) {
+            aggroProgress--;
+        }
+
+        prevSprintingProgress = sprintingProgress;
+        if (isSprinting() && sprintingProgress < this.getSprintingTickBase()) {
+            sprintingProgress++;
+        }
+        if (!isSprinting() && sprintingProgress > 0F) {
+            sprintingProgress--;
+        }
 
         if (this.canSit()){
             if (this.refuseToMove()) {

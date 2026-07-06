@@ -73,11 +73,11 @@ public class DawnHorseModel<T extends DawnHorse> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		float partialTick = ageInTicks - entity.tickCount;
+		this.animateWalk(DawnHorseAnims.RUN, limbSwing, limbSwingAmount, 2f, 1*(1-entity.getInWaterMultiplier(partialTick)));
 
-		this.animateWalk(DawnHorseAnims.RUN, limbSwing, limbSwingAmount, 2f, 1*(1-entity.getInWaterMultiplier()));
-
-		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, DawnHorseAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
 		this.animate(entity.idleEarsState, DawnHorseAnims.IDLE_EARS, ageInTicks, 1.0F);
 

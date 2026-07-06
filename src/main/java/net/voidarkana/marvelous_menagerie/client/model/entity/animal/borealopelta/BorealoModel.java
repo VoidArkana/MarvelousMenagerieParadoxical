@@ -110,20 +110,20 @@ public class BorealoModel<T extends Borealopelta> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		this.animate(entity.standUpAnimationState, BorealoAnims.SIT_END, ageInTicks, 1);
 		this.animate(entity.sitAnimationState, BorealoAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, BorealoAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateWalk(BorealoAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier()));
+		this.animateWalk(BorealoAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick)));
 
 		this.animate(entity.attackAnimationState1, BorealoAnims.ATTACK_1, ageInTicks, 1F);
 		this.animate(entity.attackAnimationState2, BorealoAnims.ATTACK_2, ageInTicks, 1F);
 
-		this.animateIdle(entity.idleShakeState, BorealoAnims.SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleShakeState, BorealoAnims.SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier(partialTick));
 
-		this.animateIdle(entity.idleAnimationState, BorealoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
-		this.animateIdle(entity.idleAnimationState, BorealoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BorealoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
+		this.animateIdle(entity.idleAnimationState, BorealoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = headPitch * ((float)Math.PI / 180F)/4;
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F)/4;

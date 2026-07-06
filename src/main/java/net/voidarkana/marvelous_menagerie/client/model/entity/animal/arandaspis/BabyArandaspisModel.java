@@ -49,17 +49,12 @@ public class BabyArandaspisModel<T extends Arandaspis> extends MarvelousModel<T>
 	@Override
 	public void setupAnim(Arandaspis entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
+		float partialTick = ageInTicks - entity.tickCount;
+		this.animateWalk(ArandaspisAnims.SWIM, limbSwing, limbSwingAmount*2f*(entity.getInWaterMultiplier(partialTick)), 1.5f, 3f);
+		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier(partialTick)));
+		this.swim_rot.xRot = Mth.lerp(entity.getInWaterMultiplier(partialTick), 0, headPitch * ((float)Math.PI / 180F));
 
-		this.animateWalk(ArandaspisAnims.SWIM, limbSwing, limbSwingAmount*2f*(entity.getInWaterMultiplier()), 1.5f, 3f);
-		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, ArandaspisAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
-		this.swim_rot.xRot = Mth.lerp(entity.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
-
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override

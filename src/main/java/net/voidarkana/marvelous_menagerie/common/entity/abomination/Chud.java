@@ -1,19 +1,17 @@
 package net.voidarkana.marvelous_menagerie.common.entity.abomination;
 
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
-import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousMonster;
 
-public class Chud extends Abomination {
+public class Chud extends MarvelousMonster {
 
     public final AnimationState idleNoseState = new AnimationState();
     public final AnimationState rotateAnimationState = new AnimationState();
@@ -21,7 +19,7 @@ public class Chud extends Abomination {
     private int rotateAnimationTimeout = 0;
 
 
-    public Chud(EntityType<? extends Abomination> pEntityType, Level pLevel) {
+    public Chud(EntityType<? extends MarvelousMonster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 

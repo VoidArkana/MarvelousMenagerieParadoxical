@@ -127,18 +127,19 @@ public class AnomalocarisModel<T extends Anomalocaris> extends MarvelousModel<T>
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		float partialTick = ageInTicks - entity.tickCount;
 
-		this.animateWalk(AnomalocarisAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier());
+		this.animateWalk(AnomalocarisAnims.SWIM, limbSwing, limbSwingAmount*4f, 1.5f, 3f*entity.getInWaterMultiplier(partialTick));
 
 		this.animate(entity.shakeAnimationState, AnomalocarisAnims.SHAKE, ageInTicks, 1.0F);
 
 		this.animate(entity.attackAnimationState, AnomalocarisAnims.ATTACK, ageInTicks, 1.0F);
 
 
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, AnomalocarisAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier(partialTick)));
 
-		this.swim_control.xRot = Mth.lerp(entity.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
+		this.swim_control.xRot = Mth.lerp(entity.getInWaterMultiplier(partialTick), 0, headPitch * ((float)Math.PI / 180F));
 	}
 
 	@Override

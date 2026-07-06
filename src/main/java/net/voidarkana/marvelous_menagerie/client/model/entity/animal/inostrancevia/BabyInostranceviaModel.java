@@ -70,9 +70,9 @@ public class BabyInostranceviaModel<T extends Inostrancevia> extends MarvelousMo
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
-		animateWalk(BabyInostranceviaAnims.WALK, limbSwing/3, limbSwingAmount, 4, 2.5f*(1-entity.getInWaterMultiplier())*(1-entity.getSprintingMultiplier()));
-		animateWalk(BabyInostranceviaAnims.RUN,  limbSwing/3, limbSwingAmount, 4, 2.5f*(1-entity.getInWaterMultiplier())*(entity.getSprintingMultiplier()));
+		float partialTick = ageInTicks - entity.tickCount;
+		animateWalk(BabyInostranceviaAnims.WALK, limbSwing/3, limbSwingAmount, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSprintingMultiplier(partialTick)));
+		animateWalk(BabyInostranceviaAnims.RUN,  limbSwing/3, limbSwingAmount, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick))*(entity.getSprintingMultiplier(partialTick)));
 
 		this.animate(entity.attackAnimationState1, BabyInostranceviaAnims.ATTACK, ageInTicks, 1F);
 		this.animate(entity.attackAnimationState2, BabyInostranceviaAnims.ATTACK, ageInTicks, 1F);
@@ -85,12 +85,12 @@ public class BabyInostranceviaModel<T extends Inostrancevia> extends MarvelousMo
 		this.animate(entity.sitAnimationState, BabyInostranceviaAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, BabyInostranceviaAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGLESS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier())-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGLESS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.IDLE_LEGS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSittingMultiplier(partialTick))-Math.abs(limbSwingAmount)));
 
-		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier(partialTick)));
 
-		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BabyInostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
 		this.head.xRot += headPitch * ((float)Math.PI / 180F);
 		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F);

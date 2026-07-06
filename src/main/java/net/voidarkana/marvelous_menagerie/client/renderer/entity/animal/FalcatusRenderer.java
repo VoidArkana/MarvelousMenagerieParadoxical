@@ -28,6 +28,7 @@ public class FalcatusRenderer extends MobRenderer<Falcatus, FalcatusModel<Falcat
     @Override
     protected void setupRotations(Falcatus pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier()*(1-pEntityLiving.getOnGroundMultiplier()), 0, pEntityLiving.currentRoll*360/4)));
+        float partialTick = pAgeInTicks - pEntityLiving.tickCount;
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier(partialTick)*(1-pEntityLiving.getOnGroundMultiplier(partialTick)), 0, pEntityLiving.currentRoll*360/4)));
     }
 }

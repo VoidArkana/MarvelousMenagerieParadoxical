@@ -43,6 +43,8 @@ public class ArandaspisRenderer extends MobRenderer<Arandaspis, MarvelousModel<A
     @Override
     protected void setupRotations(Arandaspis pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier()*(1-pEntityLiving.getOnGroundMultiplier()), 0, pEntityLiving.currentRoll*360/4)));
+        float partialTick = pAgeInTicks - pEntityLiving.tickCount;
+
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier(partialTick)*(1-pEntityLiving.getOnGroundMultiplier(partialTick)), 0, pEntityLiving.currentRoll*360/4)));
     }
 }

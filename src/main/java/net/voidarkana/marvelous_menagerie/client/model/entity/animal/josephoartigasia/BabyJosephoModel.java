@@ -99,20 +99,20 @@ public class BabyJosephoModel<T extends Josephoartigasia> extends MarvelousModel
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		this.animate(entity.headShakeAnimationState, JosephoAnims.HEAD_SHAKE, ageInTicks, 1);
 		this.animate(entity.earsWiggleAnimationState, JosephoAnims.EAR_WIGGLE_BOTH, ageInTicks, 1);
 		this.animate(entity.leftEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_LEFT, ageInTicks, 1);
 		this.animate(entity.rightEarWiggleAnimationState, JosephoAnims.EAR_WIGGLE_RIGHT, ageInTicks, 1);
 
-		animateWalk(BabyJosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier()));
+		animateWalk(BabyJosephoAnims.WALK, limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSittingMultiplier(partialTick)));
 
 		this.animate(entity.standUpAnimationState, BabyJosephoAnims.SIT_END, ageInTicks, 1);
 		this.animate(entity.sitAnimationState, BabyJosephoAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, BabyJosephoAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyJosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
-		this.animateIdle(entity.idleAnimationState, BabyJosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyJosephoAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
+		this.animateIdle(entity.idleAnimationState, BabyJosephoAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
 		float prevHeadX = this.head.xRot;
 		float prevHeadY = this.head.yRot;

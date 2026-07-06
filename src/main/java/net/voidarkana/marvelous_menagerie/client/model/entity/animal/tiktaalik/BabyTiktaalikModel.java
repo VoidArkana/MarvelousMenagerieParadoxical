@@ -84,21 +84,21 @@ public class BabyTiktaalikModel<T extends Tiktaalik> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnims.idle, ageInTicks, 1.0f,
-				Mth.clamp(1-entity.getSittingMultiplier()*(1-(entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)),0, 1));
+				Mth.clamp(1-entity.getSittingMultiplier(partialTick)*(1-(entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount)),0, 1));
 
 		this.animateIdle(entity.idleAnimationState, BabyTiktaalikAnims.basking, ageInTicks, 1.0f,
-				Mth.clamp(entity.getSittingMultiplier()*(1-entity.getInWaterMultiplier()), 0, 1));
+				Mth.clamp(entity.getSittingMultiplier(partialTick)*(1-entity.getInWaterMultiplier(partialTick)), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, BabyTiktaalikAnims.BABY_SWIM_IDLE, ageInTicks, 1.0f,
-				Mth.clamp((entity.getInWaterMultiplier()*(1-entity.getSittingMultiplier())*(1-entity.getOnGroundMultiplier()))-Math.abs(limbSwingAmount), 0, 1));
+				Mth.clamp((entity.getInWaterMultiplier(partialTick)*(1-entity.getSittingMultiplier(partialTick))*(1-entity.getOnGroundMultiplier(partialTick)))-Math.abs(limbSwingAmount), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, BabyTiktaalikAnims.BABY_WATER_GROUND_IDLE, ageInTicks, 1.0f,
-				Mth.clamp((entity.getInWaterMultiplier()*(1-entity.getSittingMultiplier())*entity.getOnGroundMultiplier())-Math.abs(limbSwingAmount), 0, 1));
+				Mth.clamp((entity.getInWaterMultiplier(partialTick)*(1-entity.getSittingMultiplier(partialTick))*entity.getOnGroundMultiplier(partialTick))-Math.abs(limbSwingAmount), 0, 1));
 
 		this.animateIdle(entity.idleAnimationState, BabyTiktaalikAnims.WATER_OPEN_MOUTH_IDLE, ageInTicks, 1.0f,
-				entity.getSittingMultiplier()*entity.getInWaterMultiplier());
+				entity.getSittingMultiplier(partialTick)*entity.getInWaterMultiplier(partialTick));
 
 		this.animate(entity.attackAnimationState, TiktaalikAnims.attack, ageInTicks, 1.0F);
 
@@ -107,27 +107,27 @@ public class BabyTiktaalikModel<T extends Tiktaalik> extends MarvelousModel<T> {
 		this.animate(entity.sitPoseAnimationState, BabyTiktaalikAnims.BASK_POSE, ageInTicks);
 
 		this.animateWalk(BabyTiktaalikAnims.BABY_SWIM, limbSwing, limbSwingAmount, 1.5f,
-				2.5f*entity.getInWaterMultiplier()*(1-entity.getOnGroundMultiplier())*(1-entity.getSittingMultiplier()));
+				2.5f*entity.getInWaterMultiplier(partialTick)*(1-entity.getOnGroundMultiplier(partialTick))*(1-entity.getSittingMultiplier(partialTick)));
 
 		this.animateWalk(BabyTiktaalikAnims.SWIM_GROUND, limbSwing, limbSwingAmount, 1.5f,
-				2.5f*entity.getInWaterMultiplier()*entity.getOnGroundMultiplier()*(1-entity.getSittingMultiplier()));
+				2.5f*entity.getInWaterMultiplier(partialTick)*entity.getOnGroundMultiplier(partialTick)*(1-entity.getSittingMultiplier(partialTick)));
 
 		this.animateWalk(BabyTiktaalikAnims.BABY_WALK, limbSwing, limbSwingAmount*2f, 2,
-				2.5f*(1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier()));
+				2.5f*(1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSittingMultiplier(partialTick)));
 
 //		this.animateIdle(entity.fallAnimationState, TiktaalikAnimsExtra.FALL, ageInTicks, 1.0f,
-//				(1-this.getOnGroundMultiplier())*(1-this.getInWaterMultiplier()));
+//				(1-this.getOnGroundMultiplier(partialTick))*(1-this.getInWaterMultiplier(partialTick)));
 //
 //		this.animateIdle(entity.squashAnimationState, TiktaalikAnimsExtra.SQUASH, ageInTicks,
-//				1.0f, (1-this.getInWaterMultiplier()));
+//				1.0f, (1-this.getInWaterMultiplier(partialTick)));
 
 		this.animateIdle(entity.idleAnimationState, TiktaalikAnimsExtra.AGGRO, ageInTicks,
-				1.0f, entity.getAggroMultiplier());
+				1.0f, entity.getAggroMultiplier(partialTick));
 
-		this.head.xRot +=  Mth.lerp(entity.getInWaterMultiplier(), 0,  headPitch * ((float)Math.PI / 180F)/2);
-		this.head.yRot += Mth.lerp(entity.getInWaterMultiplier(), 0, netHeadYaw * ((float)Math.PI / 180F)/2);
+		this.head.xRot +=  Mth.lerp(entity.getInWaterMultiplier(partialTick), 0,  headPitch * ((float)Math.PI / 180F)/2);
+		this.head.yRot += Mth.lerp(entity.getInWaterMultiplier(partialTick), 0, netHeadYaw * ((float)Math.PI / 180F)/2);
 
-		this.swim_rot.xRot += Mth.lerp( entity.getInWaterMultiplier()*(1-entity.getOnGroundMultiplier()), 0,
+		this.swim_rot.xRot += Mth.lerp( entity.getInWaterMultiplier(partialTick)*(1-entity.getOnGroundMultiplier(partialTick)), 0,
 				headPitch * ((float)Math.PI / 180F)/2);
 	}
 

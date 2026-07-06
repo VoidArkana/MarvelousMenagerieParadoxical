@@ -105,7 +105,7 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		if (entity.isFromInventory()){
 			if (entity.isInWaterOrBubble())
 				this.applyStatic(FlubberAnimsIdle.SWIM_POSE);
@@ -113,8 +113,8 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 				this.applyStatic(FlubberAnimsIdle.IDLE_POSE);
 		}
 
-		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.LAND_IDLE, ageInTicks, 1.0f, Mth.clamp( (1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount*2f), 0, 1));
-		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.SWIM_IDLE, ageInTicks, 1.0f, Mth.clamp(entity.getInWaterMultiplier()-Math.abs(limbSwingAmount), 0, 1));
+		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.LAND_IDLE, ageInTicks, 1.0f, Mth.clamp( (1-entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount*2f), 0, 1));
+		this.animateIdle(entity.idleAnimationState, FlubberAnimsBasics.SWIM_IDLE, ageInTicks, 1.0f, Mth.clamp(entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount), 0, 1));
 
 		this.animate(entity.standUpAnimationState, FlubberAnimsIdle.ROLL_END, ageInTicks);
 		this.animate(entity.sitAnimationState, FlubberAnimsIdle.ROLL_START, ageInTicks);
@@ -122,10 +122,10 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 		this.animate(entity.bellyDrumAnimationState, FlubberAnimsIdle.BELLY_SLAP, ageInTicks);
 
 		this.animateWalk(FlubberAnimsBasics.SWIM, limbSwing, limbSwingAmount, 1.5f,
-				2.5f*entity.getInWaterMultiplier());
+				2.5f*entity.getInWaterMultiplier(partialTick));
 
 		this.animateWalk(FlubberAnimsBasics.WALK, limbSwing, limbSwingAmount*2f, 2,
-				2.5f*(1-entity.getSittingMultiplier())*(1-entity.getInWaterMultiplier()));
+				2.5f*(1-entity.getSittingMultiplier(partialTick))*(1-entity.getInWaterMultiplier(partialTick)));
 
 		this.animate(entity.landDanceAnimationState, FlubberAnimsBasics.CELEBRATION_LAND, ageInTicks);
 		this.animate(entity.waterDanceAnimationState1, FlubberAnimsBasics.CELEBRATION_WATER_1, ageInTicks);
@@ -141,7 +141,7 @@ public class FlubberModel<T extends Flubber> extends MarvelousModel<T> {
 		this.neck.xRot = prevHeadxRot + headPitch * ((float)Math.PI / 180F)/2;
 		this.neck.yRot = prevHeadyRot + netHeadYaw * ((float)Math.PI / 180F)/2;
 
-		this.swim_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(), 0, headPitch * ((float)Math.PI / 180F));
+		this.swim_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(partialTick), 0, headPitch * ((float)Math.PI / 180F));
 	}
 
 	@Override

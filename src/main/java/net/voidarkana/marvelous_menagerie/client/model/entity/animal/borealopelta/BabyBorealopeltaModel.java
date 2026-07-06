@@ -72,17 +72,17 @@ public class BabyBorealopeltaModel<T extends Borealopelta> extends MarvelousMode
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		float partialTick = ageInTicks - entity.tickCount;
+		this.animateWalk(BabyBorealopeltaAnims.WALK, limbSwing, limbSwingAmount*2f, 2, 2.5f*(1-entity.getInWaterMultiplier(partialTick)));
 
-		this.animateWalk(BabyBorealopeltaAnims.WALK, limbSwing, limbSwingAmount*2f, 2, 2.5f*(1-entity.getInWaterMultiplier()));
-
-		this.animateIdle(entity.idleShakeState, BabyBorealopeltaAnims.SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleShakeState, BabyBorealopeltaAnims.SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier(partialTick));
 
 		this.animate(entity.standUpAnimationState, BabyBorealopeltaAnims.SIT_END, ageInTicks, 1);
 		this.animate(entity.sitAnimationState, BabyBorealopeltaAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, BabyBorealopeltaAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
-		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1*(1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
+		this.animateIdle(entity.idleAnimationState, BabyBorealopeltaAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1*(1-entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount)));
 
 		this.neck.xRot = headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
