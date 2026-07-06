@@ -28,13 +28,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousMonster;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 
-public class Molten extends Abomination implements IAnimatedAttacker {
+public class Molten extends MarvelousMonster implements IAnimatedAttacker {
 
     public final AnimationState biteAttackAnimationState = new AnimationState();
     public final AnimationState slamAttackAnimationState = new AnimationState();

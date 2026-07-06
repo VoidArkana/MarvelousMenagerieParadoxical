@@ -155,12 +155,13 @@ public class MoltenModel<T extends Molten> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		float partialTick = ageInTicks - entity.tickCount;
 
 		if (entity.isFromInventory()){
 			this.applyStatic(MoltenAnimsExtra.POSE);
 		}
-		animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount*0.75f, 2f, entity.getSprintingMultiplier());
-		animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier()));
+		animateWalk(MoltenAnims.RUN,limbSwing, limbSwingAmount*0.75f, 2f, entity.getSprintingMultiplier(partialTick));
+		animateWalk(MoltenAnims.WALK,limbSwing, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier(partialTick)));
 
 		this.animateIdle(entity.idleAnimationState, MoltenAnims.IDLE, ageInTicks, 1.0f, 1-Math.abs(limbSwingAmount));
 

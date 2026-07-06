@@ -27,6 +27,7 @@ public class BeholderRenderer extends MobRenderer<Beholder, BeholderModel<Behold
     @Override
     protected void setupRotations(Beholder pEntityLiving, PoseStack pPoseStack, float pAgeInTicks, float pRotationYaw, float pPartialTicks) {
         super.setupRotations(pEntityLiving, pPoseStack, pAgeInTicks, pRotationYaw, pPartialTicks);
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier()*(1-pEntityLiving.getonGroundMultiplier()), pEntityLiving.currentRoll*360/4, 0)));
+        float partialTick = pAgeInTicks - pEntityLiving.tickCount;
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(pEntityLiving.getInWaterMultiplier(partialTick)*(1-pEntityLiving.getOnGroundMultiplier(partialTick)), pEntityLiving.currentRoll*360/4, 0)));
     }
 }

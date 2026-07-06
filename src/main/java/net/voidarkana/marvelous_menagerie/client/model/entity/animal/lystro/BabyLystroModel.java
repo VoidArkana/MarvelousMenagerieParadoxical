@@ -74,7 +74,7 @@ public class BabyLystroModel<T extends Lystrosaurus> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		this.animate(entity.standUpAnimationState, BabyLystroAnims.STAND_UP, ageInTicks, 1);
 		this.animate(entity.sitAnimationState, BabyLystroAnims.SIT_DOWN, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, BabyLystroAnims.LAYING_DOWN_POSE, ageInTicks, 1);
@@ -82,14 +82,14 @@ public class BabyLystroModel<T extends Lystrosaurus> extends MarvelousModel<T> {
 		this.animate(entity.sniffAnimationState, BabyLystroAnims.SNIFF, ageInTicks, 1);
 		this.animate(entity.headTurnAnimationState, BabyLystroAnims.HEAD_TURN, ageInTicks, 1);
 
-		this.animateWalk(BabyLystroAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getSprintingMultiplier())*(1-entity.getInWaterMultiplier()));
-		this.animateWalk(BabyLystroAnims.RUN, limbSwing/2, limbSwingAmount*4f, 2, entity.getSprintingMultiplier()*2.5f*(1-entity.getInWaterMultiplier()));
+		this.animateWalk(BabyLystroAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getSprintingMultiplier(partialTick))*(1-entity.getInWaterMultiplier(partialTick)));
+		this.animateWalk(BabyLystroAnims.RUN, limbSwing/2, limbSwingAmount*4f, 2, entity.getSprintingMultiplier(partialTick)*2.5f*(1-entity.getInWaterMultiplier(partialTick)));
 
-		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
-		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.RESTING, ageInTicks, 1.0f, Math.max(0, entity.getSittingMultiplier()-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.RESTING, ageInTicks, 1.0f, Math.max(0, entity.getSittingMultiplier(partialTick)-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
-		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getSittingMultiplier())*(1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyLystroAnims.IDLE, ageInTicks, 1.0f, Math.max(0, (1-entity.getSittingMultiplier(partialTick))*(1-entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount)));
 
 		this.animate(entity.eatAnimationState, BabyLystroAnims.EAT, ageInTicks, 1);
 		this.animate(entity.digAnimationState, BabyLystroAnims.DIG, ageInTicks, 1);

@@ -99,11 +99,11 @@ public class BabyThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		float partialTick = ageInTicks - entity.tickCount;
+		animateWalk(BabyThylacineAnims.RUN, limbSwing/2, limbSwingAmount, 1.5f, entity.getSprintingMultiplier(partialTick));
+		animateWalk(BabyThylacineAnims.WALK, limbSwing/2, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier(partialTick)));
 
-		animateWalk(BabyThylacineAnims.RUN, limbSwing/2, limbSwingAmount, 1.5f, entity.getSprintingMultiplier());
-		animateWalk(BabyThylacineAnims.WALK, limbSwing/2, limbSwingAmount, 2, 2.5f*(1-entity.getSprintingMultiplier()));
-
-		this.animateIdle(entity.yawnAnimationState, BabyThylacineAnims.YAWN, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.yawnAnimationState, BabyThylacineAnims.YAWN, ageInTicks, 1, 1-entity.getInWaterMultiplier(partialTick));
 
 		if (entity.isEndling()){
 			this.animateIdle(entity.idleAnimationState, ThylacineAnims.HALO, ageInTicks, 1.0f, 1);
@@ -112,8 +112,8 @@ public class BabyThylacineModel<T extends Thylacine> extends MarvelousModel<T> {
 		this.animate(entity.attackAnimationState1, BabyThylacineAnims.ATTACK_1, ageInTicks, 1);
 		this.animate(entity.attackAnimationState2, BabyThylacineAnims.ATTACK_2, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyThylacineAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, BabyThylacineAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, BabyThylacineAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyThylacineAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
 		float headX = this.head.xRot;
 		float headY = this.head.yRot;

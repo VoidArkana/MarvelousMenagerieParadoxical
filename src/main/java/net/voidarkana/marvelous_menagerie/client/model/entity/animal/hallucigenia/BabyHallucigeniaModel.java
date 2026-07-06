@@ -156,7 +156,7 @@ public class BabyHallucigeniaModel<T extends Hallucigenia> extends MarvelousMode
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		if (entity.isInWaterOrBubble()){
 			animateWalk(BabyHallucigeniaAnims.WALK, limbSwing*3, limbSwingAmount, 2.5f, 15);
 
@@ -164,19 +164,19 @@ public class BabyHallucigeniaModel<T extends Hallucigenia> extends MarvelousMode
 			this.animate(entity.admireState, BabyHallucigeniaAnims.ADMIRE, ageInTicks, 1);
 		}
 
-		this.head.xRot = Mth.lerp(entity.getInWaterMultiplier(),0, head.xRot + headPitch * ((float)Math.PI / 180F)/2);
-		this.head.yRot = Mth.lerp(entity.getInWaterMultiplier(),0,head.yRot + netHeadYaw * ((float)Math.PI / 180F)/2);
+		this.head.xRot = Mth.lerp(entity.getInWaterMultiplier(partialTick),0, head.xRot + headPitch * ((float)Math.PI / 180F)/2);
+		this.head.yRot = Mth.lerp(entity.getInWaterMultiplier(partialTick),0,head.yRot + netHeadYaw * ((float)Math.PI / 180F)/2);
 
-		this.neck.xRot = Mth.lerp(entity.getInWaterMultiplier(),0, neck.xRot + headPitch * ((float)Math.PI / 180F)/2 );
-		this.neck.yRot = Mth.lerp(entity.getInWaterMultiplier(),0, neck.yRot + netHeadYaw * ((float)Math.PI / 180F)/2);
+		this.neck.xRot = Mth.lerp(entity.getInWaterMultiplier(partialTick),0, neck.xRot + headPitch * ((float)Math.PI / 180F)/2 );
+		this.neck.yRot = Mth.lerp(entity.getInWaterMultiplier(partialTick),0, neck.yRot + netHeadYaw * ((float)Math.PI / 180F)/2);
 
 		this.animate(entity.stingAnimationState, HallucigeniaAnims.STING, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, BabyHallucigeniaAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, BabyHallucigeniaAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
 		this.animateIdle(entity.idleAnimationState,
 				entity.flopSide() ? BabyHallucigeniaAnims.BEACHED_L : BabyHallucigeniaAnims.BEACHED_R,
-				ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
+				ageInTicks, 1.0F, (1-entity.getInWaterMultiplier(partialTick)));
 	}
 
 	@Override

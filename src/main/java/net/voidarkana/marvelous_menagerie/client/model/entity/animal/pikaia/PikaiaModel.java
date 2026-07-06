@@ -82,22 +82,17 @@ public class PikaiaModel<T extends Pikaia> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		this.animateWalk(PikaiaAnims.SWIM, limbSwing, limbSwingAmount, 2f, 3f);
 
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier()));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.IDLE, ageInTicks, 1, Math.max(0, entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, PikaiaAnims.FLOP, ageInTicks, 1.0F, (1-entity.getInWaterMultiplier(partialTick)));
 
-		this.swim_control.xRot = Mth.lerp( entity.getInWaterMultiplier(), headPitch * ((float)Math.PI / 180F), 0);
+		this.swim_control.xRot = Mth.lerp( entity.getInWaterMultiplier(partialTick), headPitch * ((float)Math.PI / 180F), 0);
 
-		this.tail_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(), -entity.currentRoll, 0);
-		this.tail_tip_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(), -entity.currentRoll, 0);
+		this.tail_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(partialTick), -entity.currentRoll, 0);
+		this.tail_tip_rot.xRot = Mth.lerp( entity.getInWaterMultiplier(partialTick), -entity.currentRoll, 0);
 
-	}
-
-	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	@Override

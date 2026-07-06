@@ -96,23 +96,25 @@ public class RoachModel<T extends Apthoroblattina> extends MarvelousModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-		animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, Mth.lerp(entity.getSprintingMultiplier(), 2.5f, 5f));
+		float partialTick = ageInTicks - entity.tickCount;
 
-		this.animateIdle(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier());
+		animateWalk(RoachAnims.WALK, limbSwing, limbSwingAmount, 2, Mth.lerp(entity.getSprintingMultiplier(partialTick), 2.5f, 5f));
 
-		this.animateIdle(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier());
-		this.animateIdle(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier());
-		this.animateIdle(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleVibrateState, RoachAnims.IDLE_VIBRATE, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier(partialTick));
+
+		this.animateIdle(entity.idleRotBothState, RoachAnims.IDLE_ROT_BOTH, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier(partialTick));
+		this.animateIdle(entity.idleRotLeftState, RoachAnims.IDLE_ROT_LEFT, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier(partialTick));
+		this.animateIdle(entity.idleRotRightState, RoachAnims.IDLE_ROT_RIGHT, ageInTicks, 1.0F, 1-entity.getInWaterMultiplier(partialTick));
 
 		this.animate(entity.johnAnimationState, RoachAnims.JOHN, ageInTicks, 1.0F);
 
 		if (entity.isBaby()){
 			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-Math.abs(limbSwingAmount)));
 		}else {
-			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, entity.getOnGroundMultiplier()-Math.abs(limbSwingAmount)));
+			this.animateIdle(entity.idleAnimationState, RoachAnims.IDLE, ageInTicks, 1.0f, Math.max(0, entity.getOnGroundMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
 			this.animateIdle(entity.idleAnimationState, RoachAnims.FALL_FLY, ageInTicks, 1.0f,
-					Mth.clamp((1 - entity.getOnGroundMultiplier())*(1-entity.getInWaterMultiplier()), 0f,1f));
+					Mth.clamp((1 - entity.getOnGroundMultiplier(partialTick))*(1-entity.getInWaterMultiplier(partialTick)), 0f,1f));
 		}
 
 		if (this.young){

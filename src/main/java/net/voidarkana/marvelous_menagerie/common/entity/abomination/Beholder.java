@@ -35,14 +35,14 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
-import net.voidarkana.marvelous_menagerie.common.entity.base.Abomination;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousMonster;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.util.Mathf;
 import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import javax.annotation.Nullable;
 
-public class Beholder extends Abomination implements IAnimatedAttacker {
+public class Beholder extends MarvelousMonster implements IAnimatedAttacker {
 
     public Boolean hasJawsOpened;
     public Boolean hasJawsClosed;

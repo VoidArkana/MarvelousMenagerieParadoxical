@@ -112,20 +112,20 @@ public class DoedicurusModel<T extends Doedicurus> extends MarvelousModel<T> {
 	@Override
 	public void setupAnim(Doedicurus entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
+		float partialTick = ageInTicks - entity.tickCount;
 		if (this.young){
 			this.applyStatic(DoedicurusAnims.BABY);
 		}
 
-		animateWalk(DoedicurusAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier()));
+		animateWalk(DoedicurusAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick)));
 
 		this.animate(entity.attackAnimationState1, DoedicurusAnims.ATTACK_1, ageInTicks, 1F);
 		this.animate(entity.attackAnimationState2, DoedicurusAnims.ATTACK_2, ageInTicks, 1F);
 
-		this.animateIdle(entity.idleShakeState, DoedicurusAnims.IDLE_SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleShakeState, DoedicurusAnims.IDLE_SHAKE, ageInTicks, 1, 1-entity.getInWaterMultiplier(partialTick));
 
-		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, DoedicurusAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
 		this.head.xRot += headPitch * ((float)Math.PI / 180F);
 		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F);

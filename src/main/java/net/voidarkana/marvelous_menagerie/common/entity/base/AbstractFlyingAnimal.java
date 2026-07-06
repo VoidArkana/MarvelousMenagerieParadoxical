@@ -20,8 +20,7 @@ public abstract class AbstractFlyingAnimal extends MarvelousAnimal{
     private static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(AbstractFlyingAnimal.class, EntityDataSerializers.BOOLEAN);
     private float flyProgress;
     private float prevFlyProgress;
-    private float groundProgress = 5.0F;
-    private float prevGroundProgress = 5.0F;
+
     public int timeFlying = 0;
     private float flightPitch = 0;
     private float prevFlightPitch = 0;
@@ -62,10 +61,6 @@ public abstract class AbstractFlyingAnimal extends MarvelousAnimal{
         return (prevFlyProgress + (flyProgress - prevFlyProgress) * partialTick) * 0.2F;
     }
 
-    public float getGroundProgress(float partialTick) {
-        return (prevGroundProgress + (groundProgress - prevGroundProgress) * partialTick) * 0.2F;
-    }
-
     protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
     }
 
@@ -85,7 +80,6 @@ public abstract class AbstractFlyingAnimal extends MarvelousAnimal{
     public void tick() {
         super.tick();
         prevFlyProgress = flyProgress;
-        prevGroundProgress = groundProgress;
         prevFlightPitch = flightPitch;
         prevFlightRoll = flightRoll;
         if (isFlying() && flyProgress < 5F) {
@@ -93,12 +87,6 @@ public abstract class AbstractFlyingAnimal extends MarvelousAnimal{
         }
         if (!isFlying() && flyProgress > 0F) {
             flyProgress--;
-        }
-        if (onGround() && groundProgress < 5F) {
-            groundProgress++;
-        }
-        if (!onGround() && groundProgress > 0F) {
-            groundProgress--;
         }
         if (!level().isClientSide) {
             if (this.isFlying()) {

@@ -118,14 +118,14 @@ public class AnurognathusModel<T extends Anurognathus> extends MarvelousModel<T>
 		float rollAmount = entity.getFlightRoll(partialTick) / 57.295776F * flyProgress;
 		float flightPitchAmount = entity.getFlightPitch(partialTick) / 57.295776F * flyProgress;
 
-		animateWalk(AnurognathusAnims.WALK, limbSwing*3, groundMove, 4, 2.5f*(1-entity.getInWaterMultiplier()));
+		animateWalk(AnurognathusAnims.WALK, limbSwing*3, groundMove, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick)));
 
 		this.animateIdle(entity.idleAnimationState, AnurognathusAnims.FLYING, ageInTicks, 1.25f, Math.max(0, flyProgress*1.5f));
 
 		if (entity.isAttached())
 			this.animateIdle(entity.idleAnimationState, AnurognathusAnims.WALL_IDLE, ageInTicks, 1.0f, 1);
 		else
-			this.animateIdle(entity.idleAnimationState, AnurognathusAnims.GROUND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier()-Math.abs(limbSwingAmount)));
+			this.animateIdle(entity.idleAnimationState, AnurognathusAnims.GROUND_IDLE, ageInTicks, 1.0f, Math.max(0, 1-entity.getInWaterMultiplier(partialTick)-Math.abs(limbSwingAmount)));
 
 		this.animateIdle(entity.idleLookState1, AnurognathusAnims.GROUND_IDLE_1, ageInTicks, 1.0f, 1);
 		this.animateIdle(entity.idleLookState2, AnurognathusAnims.GROUND_IDLE_2, ageInTicks, 1.0f, 1);

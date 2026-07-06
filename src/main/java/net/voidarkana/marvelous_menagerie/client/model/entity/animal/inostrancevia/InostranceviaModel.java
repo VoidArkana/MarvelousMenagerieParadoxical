@@ -96,9 +96,9 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-
-		animateWalk(InostranceviaAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier())*(1-entity.getSprintingMultiplier()));
-		animateWalk(InostranceviaAnims.RUN, limbSwing/2, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier())*(entity.getSprintingMultiplier()));
+		float partialTick = ageInTicks - entity.tickCount;
+		animateWalk(InostranceviaAnims.WALK, limbSwing, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSprintingMultiplier(partialTick)));
+		animateWalk(InostranceviaAnims.RUN, limbSwing/2, limbSwingAmount*4f, 4, 2.5f*(1-entity.getInWaterMultiplier(partialTick))*(entity.getSprintingMultiplier(partialTick)));
 
 		this.animate(entity.attackAnimationState1, InostranceviaAnims.ATTACK_1, ageInTicks, 1F);
 		this.animate(entity.attackAnimationState2, InostranceviaAnims.ATTACK_2, ageInTicks, 1F);
@@ -106,7 +106,7 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 
 		this.animate(entity.eatingAnimationState, InostranceviaAnims.EAT, ageInTicks, 1F);
 
-		this.animateIdle(entity.yawnAnimationState, InostranceviaAnims.MOUTH_OPEN, ageInTicks, 1, 1-entity.getInWaterMultiplier());
+		this.animateIdle(entity.yawnAnimationState, InostranceviaAnims.MOUTH_OPEN, ageInTicks, 1, 1-entity.getInWaterMultiplier(partialTick));
 		this.animate(entity.shakeAnimationState, InostranceviaAnims.SHAKE, ageInTicks, 1);
 		this.animate(entity.roarAnimationState, InostranceviaAnims.ROAR, ageInTicks, 1);
 
@@ -114,15 +114,15 @@ public class InostranceviaModel<T extends Inostrancevia> extends MarvelousModel<
 		this.animate(entity.sitAnimationState, InostranceviaAnims.SIT_START, ageInTicks, 1);
 		this.animate(entity.sitPoseAnimationState, InostranceviaAnims.SIT_POSE, ageInTicks, 1);
 
-		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_LEGLESS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())-Math.abs(limbSwingAmount)));
-		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_LEGS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier())*(1-entity.getSittingMultiplier())-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_LEGLESS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier(partialTick))-Math.abs(limbSwingAmount)));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_LEGS, ageInTicks, 1.0f, Math.max(0, (1-entity.getInWaterMultiplier(partialTick))*(1-entity.getSittingMultiplier(partialTick))-Math.abs(limbSwingAmount)));
 
 		if (!entity.isTame())
 			this.animateIdle(entity.idleAnimationState, InostranceviaAnims.IDLE_JAW, ageInTicks, 1.0f, 1);
 
-		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier()));
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.AGGRO, ageInTicks, 1.0f, Math.max(0, entity.getAggroMultiplier(partialTick)));
 
-		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier());
+		this.animateIdle(entity.idleAnimationState, InostranceviaAnims.SWIM, ageInTicks, 1.0f, entity.getInWaterMultiplier(partialTick));
 
 		this.head.xRot += headPitch * ((float)Math.PI / 180F)/3;
 		this.head.yRot += netHeadYaw * ((float)Math.PI / 180F)/3;
