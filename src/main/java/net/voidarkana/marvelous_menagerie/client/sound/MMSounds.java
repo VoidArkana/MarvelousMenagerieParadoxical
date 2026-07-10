@@ -118,6 +118,12 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> ANURO_BUCKET_CATCH = registerSoundEvents("anuro_bucket_catch");
     public static final RegistryObject<SoundEvent> ANURO_BUCKET_RELEASE = registerSoundEvents("anuro_bucket_release");
 
+    public static final RegistryObject<SoundEvent> KELENKEN_AMBIENT = registerSoundEvents("kelenken_idle");
+    public static final RegistryObject<SoundEvent> KELENKEN_HURT = registerSoundEvents("kelenken_hurt");
+    public static final RegistryObject<SoundEvent> KELENKEN_DEATH = registerSoundEvents("kelenken_death");
+    public static final RegistryObject<SoundEvent> KELENKEN_ROAR = registerSoundEvents("kelenken_roar");
+    public static final RegistryObject<SoundEvent> KELENKEN_BITE = registerSoundEvents("kelenken_bite");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

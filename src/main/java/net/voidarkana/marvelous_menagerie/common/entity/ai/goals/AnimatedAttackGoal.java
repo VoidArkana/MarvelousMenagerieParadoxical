@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.entity.ai.goals;
 
+import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,18 +27,27 @@ public class AnimatedAttackGoal extends Goal {
     private int attackDelayStored; //7
     private int ticksUntilNextAttackStored; //13
     private boolean shouldCountTillNextAttack = false;
+    private boolean playsSoundAtStart;
 
-    public AnimatedAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen, int pAttackDelay, int pTicksUntilNextAttack) {
+
+    public AnimatedAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen, int pAttackDelay, int pTicksUntilNextAttack, boolean playsSoundAtStart) {
         this.mob = pMob;
         this.speedModifier = pSpeedModifier;
         this.followingTargetEvenIfNotSeen = pFollowingTargetEvenIfNotSeen;
         this.attackDelayStored = pAttackDelay;
         this.ticksUntilNextAttackStored = pTicksUntilNextAttack;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
+        this.playsSoundAtStart = playsSoundAtStart;
+    }
+
+    public AnimatedAttackGoal(PathfinderMob pMob, double pSpeedModifier, boolean pFollowingTargetEvenIfNotSeen, int pAttackDelay, int pTicksUntilNextAttack) {
+        this(pMob, pSpeedModifier, pFollowingTargetEvenIfNotSeen, pAttackDelay, pTicksUntilNextAttack, false);
     }
 
     public boolean canUse() {
         long i = this.mob.level().getGameTime();
+        if (this.mob.isVehicle())
+            return false;
         if (i - this.lastCanUseCheck < 20L) {
             return false;
         } else {
@@ -53,7 +63,7 @@ public class AnimatedAttackGoal extends Goal {
 
     public boolean canContinueToUse() {
         LivingEntity livingentity = this.mob.getTarget();
-        if (livingentity == null) {
+        if (livingentity == null || this.mob.isVehicle()) {
             return false;
         } else if (!livingentity.isAlive()) {
             return false;
@@ -81,7 +91,9 @@ public class AnimatedAttackGoal extends Goal {
             this.mob.setTarget(null);
         }
 
-        this.mob.setAggressive(false);
+        if (this.mob.getTarget() == null)
+            this.mob.setAggressive(false);
+
         this.mob.getNavigation().stop();
 
         if (this.mob instanceof IAnimatedAttacker attacker)
@@ -116,17 +128,19 @@ public class AnimatedAttackGoal extends Goal {
         if (isEnemyWithinAttackDistance(pEnemy, pDistToEnemySqr)) {
             shouldCountTillNextAttack = true;
 
-            if(isTimeToStartAttackAnimation()) {
-                if (this.mob instanceof IAnimatedAttacker attacker)
+            if (this.mob instanceof IAnimatedAttacker attacker){
+                if(isTimeToStartAttackAnimation()) {
                     attacker.setAttacking(true);
+                }
+                if(isTimeToAttack()) {
+                    this.performAttack(pEnemy);
+                    if (attacker.getAttackSound() != null && !this.playsSoundAtStart)
+                        this.mob.playSound(attacker.getAttackSound(), 0.75f, this.mob.getVoicePitch());
+                }
+                if (this.ticksUntilNextAttack == attackDelay && this.playsSoundAtStart && attacker.getAttackSound() != null)
+                    this.mob.playSound(attacker.getAttackSound(), 0.75f, this.mob.getVoicePitch());
             }
 
-            if(isTimeToAttack()) {
-                this.performAttack(pEnemy);
-                if (this.mob instanceof IAnimatedAttacker attacker)
-                    if (attacker.getAttackSound() != null)
-                        this.mob.playSound(attacker.getAttackSound(), 0.75f, this.mob.getVoicePitch());
-            }
         } else {
             resetAttackCooldown();
             shouldCountTillNextAttack = false;

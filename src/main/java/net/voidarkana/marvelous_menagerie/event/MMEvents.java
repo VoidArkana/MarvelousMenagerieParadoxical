@@ -54,7 +54,8 @@ public class MMEvents {
         event.put(MMEntities.TIKTAALIK.get(), Tiktaalik.createAttributes().build());
         event.put(MMEntities.LYSTRO.get(), Lystrosaurus.createAttributes().build());
         event.put(MMEntities.INOSTRANCEVIA.get(), Inostrancevia.createAttributes().build());
-        event.put(MMEntities.ANUROGNATHUS.get(), Inostrancevia.createAttributes().build());
+        event.put(MMEntities.ANUROGNATHUS.get(), Anurognathus.createAttributes().build());
+        event.put(MMEntities.KELENKEN.get(), Kelenken.createAttributes().build());
 
         event.put(MMEntities.FRACTURE.get(), Fracture.createAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());

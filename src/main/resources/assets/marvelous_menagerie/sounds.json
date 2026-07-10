@@ -1115,5 +1115,73 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.anuro_bucket_release"
+  },
+
+
+  "kelenken_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:kelenken_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_idle"
+  },
+  "kelenken_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:kelenken_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_hurt_2"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_hurt"
+  },
+  "kelenken_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:kelenken_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_death"
+  },
+  "kelenken_roar": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:kelenken_call_1"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_call_2"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_call_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_roar"
+  },
+  "kelenken_bite": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:kelenken_attack_1"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_attack_2"
+      },
+      {
+        "name": "marvelous_menagerie:kelenken_attack_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_bite"
   }
 }

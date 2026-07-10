@@ -61,6 +61,14 @@ public class DawnHorse extends MarvelousAnimal {
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.5F));
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Wolf.class, 6.0F, 1.0D, 1.2D));
         this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Cat.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.addGoal(0, new AvoidEntityGoal<>(this, Kelenken.class, 6.0F, 1.0D, 1.5D){
+            @Override
+            public void tick() {
+                super.tick();
+                if (DawnHorse.this.getRandom().nextInt(10)==0)
+                    DawnHorse.this.addParticlesAroundSelf(ParticleTypes.SPLASH);
+            }
+        });
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.GOLDEN_CARROT), false));

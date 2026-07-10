@@ -61,12 +61,13 @@ import java.util.function.IntFunction;
 import java.util.function.Predicate;
 
 public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob, IAnimatedAttacker {
+
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> DATA_COLLAR_COLOR = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Integer> HUNGER = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> EATING_TIME = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Byte> DATA_ID_FLAGS = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.BYTE);
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Inostrancevia.class, EntityDataSerializers.INT);
 
     public final AnimationState attackAnimationState1 = new AnimationState();
@@ -103,11 +104,11 @@ public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob,
             else
                return item.getFoodProperties(this).isMeat();
         });
+        this.goalSelector.addGoal(2, this.forFoodGoal);
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(0, new MarvelousSitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(1, new StoicPanicGoal(this, 1.4D));
         this.goalSelector.addGoal(2, new MarvelousBreedGoal(this, 1));
-        this.goalSelector.addGoal(2, this.forFoodGoal);
         this.goalSelector.addGoal(3, new PredicateTemptGoal(this, 1.1D, false, (itemstack)-> {
             if (itemstack.getFoodProperties(this) == null || itemstack.is(MMItems.LYSTRO_CHOP.get()))
                 return false;
@@ -269,11 +270,11 @@ public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob,
 
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(HUNGER, 10*20*60);
         this.entityData.define(DATA_COLLAR_COLOR, DyeColor.RED.getId());
         this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
         this.entityData.define(DATA_ID_FLAGS, (byte)0);
         this.entityData.define(IS_ATTACKING, false);
+        this.entityData.define(HUNGER, 10*20*60);
         this.entityData.define(EATING_TIME, 0);
         this.entityData.define(VARIANT, 0);
     }

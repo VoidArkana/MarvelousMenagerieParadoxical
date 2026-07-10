@@ -136,7 +136,7 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
 
     @Override
     public boolean isSaddleable() {
-        return this.isTame();
+        return this.isTame() && !this.isBaby();
     }
 
     @Override
@@ -172,8 +172,8 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
                 }
                 double moveY = pos.y;
 
-                if (this.isControlledByLocalInstance() && this.isInWater()){
-                    moveY = Minecraft.getInstance().options.keyJump.isDown() ? 5F : 0F;
+                if (this.isControlledByLocalInstance()){
+                    moveY = this.isInWaterOrBubble() ? 0.05F : 0F;
                 }
 
                 this.setSpeed(0.1F);
@@ -378,6 +378,10 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
         return baby;
     }
 
+    public int getMaxHeadYRot() {
+        return 30;
+    }
+
     protected void playStepSound(BlockPos p_28301_, BlockState p_28302_) {
         this.playSound(MMSounds.LARGE_STEPS.get());
     }
@@ -424,10 +428,6 @@ public class Josephoartigasia extends TamableMarvelousAnimal implements Saddleab
             return !this.childAnimal.isPassenger();
         }
 
-    }
-
-    public int getMaxHeadYRot() {
-        return 30;
     }
 
     static class DismountGoal extends Goal {

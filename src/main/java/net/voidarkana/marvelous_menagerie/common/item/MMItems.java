@@ -227,6 +227,8 @@ public class MMItems {
     //Kelenken
     public static final RegistryObject<Item> KELENKEN_FOSSIL = ITEMS.register("kelenken_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> KELENKEN_SPAWN_EGG = ITEMS.register("kelenken_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.KELENKEN, 0x341211, 0xece0d1, new Item.Properties()));
 
     //Josephoartigasia
     public static final RegistryObject<Item> JOSEPHO_FOSSIL = ITEMS.register("josepho_fossil",

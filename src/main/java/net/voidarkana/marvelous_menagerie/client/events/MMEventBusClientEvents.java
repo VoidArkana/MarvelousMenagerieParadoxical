@@ -12,10 +12,12 @@ import java.awt.event.KeyEvent;
 public class MMEventBusClientEvents {
 
     public static KeyMapping descendKey;
+    public static KeyMapping attackKey;
 
     @SubscribeEvent
     public static void registerKeyMappings(final RegisterKeyMappingsEvent event) {
         descendKey = create("ophthalmoSwimDown", KeyEvent.VK_X);
+        attackKey = create("mount_attack", KeyEvent.VK_G);
 
         event.register(descendKey);
     }

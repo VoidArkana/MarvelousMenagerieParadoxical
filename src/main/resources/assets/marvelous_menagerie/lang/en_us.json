@@ -283,6 +283,12 @@
 
   "entity.marvelous_menagerie.kelenken": "Kelenken",
   "item.marvelous_menagerie.kelenken_fossil": "Kelenken Fossil",
+  "item.marvelous_menagerie.kelenken_spawn_egg": "Kelenken Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.kelenken_idle":  "Kelenken caws",
+  "marvelous_menagerie.sound.subtitle.kelenken_hurt":  "Kelenken hurts",
+  "marvelous_menagerie.sound.subtitle.kelenken_death": "Kelenken dies",
+  "marvelous_menagerie.sound.subtitle.kelenken_roar":  "Kelenken screeches",
+  "marvelous_menagerie.sound.subtitle.kelenken_bite":  "Kelenken bites",
 
   "entity.marvelous_menagerie.myotragus": "Myotragus",
   "item.marvelous_menagerie.myotragus_fossil": "Myotragus Fossil",
@@ -656,6 +662,8 @@
   "marvelous_menagerie.sound.subtitle.caris_armor_unequip": "Pet armor gets unequipped",
 
   "key.marvelous_menagerie.ophthalmoSwimDown" : "Ophthalmosaurus Swim Downwards",
+  "key.marvelous_menagerie.mount_attack" : "Mount Attack",
+  "message.marvelous_menagerie.mount_attack" : "Press %s to Attack",
 
   "enchantment.marvelous_menagerie.cambrian_vision" : "Cambrian Vision",
   "enchantment.marvelous_menagerie.cambrian_vision.desc": "Gives night vision when underwater",
@@ -806,6 +814,10 @@
   "advancements.marvelous_menagerie.lystrosaurus.description" : "Encounter a Lystrosaurus, an extremely resilient creature capable of reproducing on its own",
   "advancements.marvelous_menagerie.inostrancevia.title" : "The Evil Gorgonopsid!",
   "advancements.marvelous_menagerie.inostrancevia.description" : "Face an Inostrancevia, a ferocious creature from the permian with a poisonous bite whose might can be used for your own benefit",
+  "advancements.marvelous_menagerie.anurognathus.title" : "Flying Frog",
+  "advancements.marvelous_menagerie.anurognathus.description" : "Encounter an Anurognathus, a curious looking pterosaur that loves hanging out in walls",
+  "advancements.marvelous_menagerie.kelenken.title" : "Bird Up!",
+  "advancements.marvelous_menagerie.kelenken.description" : "Face a Kelenken, a mighty bird that can be a great ally and a powerful mount",
 
   "advancements.marvelous_menagerie.warning.title" : "Flashing Lights Warning!",
   "advancements.marvelous_menagerie.warning.description" : "Interacting with Hallucigenia might cause bright flashes in your screen. Proceed with caution!",

@@ -218,6 +218,12 @@ public class MMEntities {
                             .sized(0.5f, 0.25f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"anurognathus").toString()));
 
+    public static final RegistryObject<EntityType<Kelenken>> KELENKEN =
+            ENTITY_TYPES.register("kelenken",
+                    () -> EntityType.Builder.of(Kelenken::new, MobCategory.CREATURE)
+                            .sized(1.15f, 2.4f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"kelenken").toString()));
+
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =

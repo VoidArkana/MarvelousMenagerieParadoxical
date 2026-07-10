@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.entity.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -388,5 +389,15 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
         if (this.canSit())
             return this.isInPoseTransition() || super.isImmobile();
         return super.isImmobile();
+    }
+
+    protected void addParticlesAroundSelf(ParticleOptions pParticleOption) {
+        for(int i = 0; i < 5; ++i) {
+            double d0 = this.random.nextGaussian() * 0.02D;
+            double d1 = this.random.nextGaussian() * 0.02D;
+            double d2 = this.random.nextGaussian() * 0.02D;
+            this.level().addParticle(pParticleOption, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), d0, d1, d2);
+        }
+
     }
 }

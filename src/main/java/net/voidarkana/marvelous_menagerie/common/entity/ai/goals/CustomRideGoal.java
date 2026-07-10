@@ -53,7 +53,6 @@ public class CustomRideGoal extends Goal {
         }
 
         if (this.shouldMoveForward() && this.tameableEntity.isVehicle()) {
-            this.tameableEntity.setSprinting(true);
             Vec3 lookVec = this.player.getLookAngle();
             if (this.shouldMoveBackwards()) {
                 lookVec = lookVec.yRot((float)Math.PI);
@@ -62,7 +61,7 @@ public class CustomRideGoal extends Goal {
             x += lookVec.x * (double)10.0F;
             z += lookVec.z * (double)10.0F;
             y += this.modifyYPosition(lookVec.y);
-            this.tameableEntity.getMoveControl().setWantedPosition(x, y, z, this.speed);
+            this.tameableEntity.getMoveControl().setWantedPosition(x, y, z, this.tameableEntity.getSpeed());
         } else {
             this.tameableEntity.setSprinting(false);
         }

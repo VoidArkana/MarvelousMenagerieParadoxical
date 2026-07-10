@@ -58,6 +58,21 @@ public class MMMessages {
                 SyncSummoningRituals::write,
                 SyncSummoningRituals::read,
                 SyncSummoningRituals::handle);
+
+        CHANNEL.registerMessage(id(), MountAttackMessage.class,
+                MountAttackMessage::write,
+                MountAttackMessage::read,
+                MountAttackMessage::handle);
+
+        CHANNEL.registerMessage(id(), MountSoundMessage.class,
+                MountSoundMessage::write,
+                MountSoundMessage::read,
+                MountSoundMessage::handle);
+
+        CHANNEL.registerMessage(id(), MountMessagePackage.class,
+                MountMessagePackage::write,
+                MountMessagePackage::read,
+                MountMessagePackage::handle);
     }
 
     public static <MSG> void sendToServer(MSG message) {

@@ -39,10 +39,13 @@ public class RandomlySitUpOrDownGoal extends Goal {
     public boolean canUse() {
         if (this.mob instanceof ISittingAnimal animal){
 
+            if (animal.isSitting() && mob.isVehicle())
+                return true;
+
             if (this.mob.getTarget() != null)
                 return animal.isSitting();
 
-            if (animal.isInPoseTransition() || !animal.canSit()){
+            if (animal.isInPoseTransition() || !animal.canSit() || mob.isVehicle()){
                 return false;
             }
 

@@ -14,6 +14,8 @@ public class StoicPanicGoal extends PanicGoal {
 
     @Override
     public boolean canUse() {
+        if (mob.isBaby())
+            return super.canUse();
         return this.mob.isFreezing() || this.mob.isOnFire();
     }
 }

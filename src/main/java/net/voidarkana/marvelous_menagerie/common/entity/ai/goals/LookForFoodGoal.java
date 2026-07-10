@@ -18,6 +18,8 @@ public class LookForFoodGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (base.isVehicle())
+            return false;
         if(base.canPickUpLoot()) {
             ItemEntity pos = itemPos();
             if (pos != null) {

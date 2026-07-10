@@ -1,15 +1,10 @@
-package net.voidarkana.marvelous_menagerie.client.animations;// Save this class in your mod and generate all required imports
+package net.voidarkana.marvelous_menagerie.client.animations;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
-/**
- * Made with Blockbench 5.0.4
- * Exported for Minecraft version 1.19 or later with Mojang mappings
- * @author Author
- */
 public class BabyStellerAnims {
 	public static final AnimationDefinition POSE = AnimationDefinition.Builder.withLength(0.0F)
 			.addAnimation("flipper_l", new AnimationChannel(AnimationChannel.Targets.ROTATION,
