@@ -64,6 +64,9 @@ public class MMTags {
         public static final TagKey<Biome> TIKTAALIK_BIOMES = create("is_tiktaalik_biome");
         public static final TagKey<Biome> LYSTRO_BIOMES = create("is_lystro_biome");
         public static final TagKey<Biome> INOSTRANCEVIA_BIOMES = create("is_inostrancevia_biome");
+        public static final TagKey<Biome> ANUROGNATHUS_BIOMES = create("is_anurognathus_biome");
+        public static final TagKey<Biome> KELENKEN_BIOMES = create("is_kelenken_biome");
+        public static final TagKey<Biome> ATROCIRAPTOR_BIOMES = create("is_atrociraptor_biome");
 
         private static TagKey<Biome> create(String pName) {
             return TagKey.create(Registries.BIOME, new ResourceLocation(MarvelousMenagerie.MOD_ID, pName));
@@ -161,6 +164,8 @@ public class MMTags {
         public static final TagKey<Item> FLUBBER_DIG_ITEM = tag("flubber_digs_item");
 
         public static final TagKey<Item> ANIMAL_BLOCKS_ITEM = tag("animal_blocks_item");
+
+        public static final TagKey<Item> ATROCIRAPTOR_FOOD = tag("atrociraptor_food");
 
         private static TagKey<Item> tag(String name){
             return ItemTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));

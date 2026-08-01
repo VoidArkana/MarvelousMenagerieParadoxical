@@ -21,12 +21,13 @@ public class MMRenderTypes extends RenderType {
 
     public static RenderType getBookWidget(ResourceLocation locationIn, boolean sepia) {
         if(sepia){
-            return create("book_widget", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, true, RenderType.CompositeState.builder()
+            return create("book_widget", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256,
+                    false, true, RenderType.CompositeState.builder()
                     .setShaderState(RENDERTYPE_SEPIA_SHADER)
                     .setCullState(NO_CULL)
                     .setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))
                     .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
-                    .setOverlayState(OVERLAY)
+                    .setOverlayState(NO_OVERLAY)
                     .createCompositeState(true));
         }else{
             return ForgeRenderTypes.getUnlitTranslucent(locationIn);

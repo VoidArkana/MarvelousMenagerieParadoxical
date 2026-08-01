@@ -14,8 +14,11 @@ import net.voidarkana.marvelous_menagerie.common.entity.abomination.Molten;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
+import net.voidarkana.marvelous_menagerie.common.entity.villager.Watcher;
 import net.voidarkana.marvelous_menagerie.data.manager.FossilCleaningManager;
 import net.voidarkana.marvelous_menagerie.data.manager.PikaiaCoralManager;
+
+import javax.smartcardio.ATR;
 
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MMEvents {
@@ -56,7 +59,9 @@ public class MMEvents {
         event.put(MMEntities.INOSTRANCEVIA.get(), Inostrancevia.createAttributes().build());
         event.put(MMEntities.ANUROGNATHUS.get(), Anurognathus.createAttributes().build());
         event.put(MMEntities.KELENKEN.get(), Kelenken.createAttributes().build());
+        event.put(MMEntities.ATROCIRAPTOR.get(), Atrociraptor.createAttributes().build());
 
+        event.put(MMEntities.WATCHER.get(), Watcher.createAttributes().build());
         event.put(MMEntities.FRACTURE.get(), Fracture.createAttributes().build());
         event.put(MMEntities.RIFT.get(), RiftEntity.createAttributes().build());
     }

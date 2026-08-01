@@ -1,4 +1,4 @@
-// 1.20.1	2026-07-07T10:39:30.5936937	Item Models: marvelous_menagerie
+// 1.20.1	2026-07-31T19:32:39.1384546	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -9,6 +9,8 @@ ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/
 478d01819bbec98e6f7c0d656f310df1423a26d2 assets/marvelous_menagerie/models/item/arandaspis_bucket.json
 b3f6f2a6d2c27f207199979b3b929967e7f90e5d assets/marvelous_menagerie/models/item/arandaspis_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/arandaspis_spawn_egg.json
+4a8629744e11ec6f4791d841a49d49a9c95f1eb3 assets/marvelous_menagerie/models/item/atrociraptor_fossil.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/atrociraptor_spawn_egg.json
 cb4f55b31b473c52dd4b3b95baf4ddadcdb3bc2a assets/marvelous_menagerie/models/item/baby_flubber_bucket.json
 6f0a489a87e4698d26e843231cdf9e35d87e69f7 assets/marvelous_menagerie/models/item/baby_ophthalmo_bucket.json
 55b0a0efa88ddda4ccfe2d5e0db2f6dadec9e635 assets/marvelous_menagerie/models/item/beholder_mandible.json
@@ -268,4 +270,5 @@ d5c19993f4cd1c5f201299404ee4fbdb78001b64 assets/marvelous_menagerie/models/item/
 e4ac8ba1c3ee03f909b84ecb3ec3b3fc559e8955 assets/marvelous_menagerie/models/item/trilo_bucket.json
 54f3b34f9e53be305dfcadad94b2eb8e41e1c34d assets/marvelous_menagerie/models/item/trilo_fossil.json
 d75fd3b022ac14b579c412cad6e46315b1d1f0b0 assets/marvelous_menagerie/models/item/warning.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/watcher_spawn_egg.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/zombie_dawn_horse_spawn_egg.json

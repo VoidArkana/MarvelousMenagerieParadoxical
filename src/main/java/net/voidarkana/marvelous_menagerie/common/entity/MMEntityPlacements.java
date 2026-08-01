@@ -42,6 +42,7 @@ public class MMEntityPlacements {
         SpawnPlacements.register(MMEntities.INOSTRANCEVIA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Inostrancevia::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.ANUROGNATHUS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Anurognathus::checkAnimalSpawnRules);
         SpawnPlacements.register(MMEntities.KELENKEN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Kelenken::checkAnimalSpawnRules);
+        SpawnPlacements.register(MMEntities.ATROCIRAPTOR.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Atrociraptor::checkAnimalSpawnRules);
     }
 
 }

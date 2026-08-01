@@ -58,7 +58,10 @@ public abstract class BookWidget {
         @SerializedName("item")
         ITEM(ItemWidget.class),
         @SerializedName("crafting_recipe")
-        CRAFTING_RECIPE(CraftingRecipeWidget.class);
+        CRAFTING_RECIPE(CraftingRecipeWidget.class),
+        @SerializedName("entity_profile")
+        ENTITY_PROFILE(EntityProfileWidget.class);
+
         private final Class<? extends BookWidget> widgetClass;
 
         Type(Class<? extends BookWidget> widgetClass) {

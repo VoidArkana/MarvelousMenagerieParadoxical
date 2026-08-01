@@ -64,7 +64,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.DIPLOCAULUS_FOSSIL.get(),
                 MMItems.MYOTRAGUS_FOSSIL.get(),
                 MMItems.TIKTAALIK_FOSSIL.get(),
-                MMItems.ANURO_FOSSIL.get()
+                MMItems.ANURO_FOSSIL.get(),
+                MMItems.ATROCIRAPTOR_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.PALEONOMICON_INGREDIENTS).add(
@@ -102,7 +103,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.CHUD_FLESH.get(),
                 MMItems.TIKTAALIK_FOSSIL.get(),
                 MMItems.MYOTRAGUS_FOSSIL.get(),
-                MMItems.ANURO_FOSSIL.get()
+                MMItems.ANURO_FOSSIL.get(),
+                MMItems.ATROCIRAPTOR_FOSSIL.get()
         );
 
         this.tag(MMTags.Items.NATURAL_FOSSILS).add(
@@ -291,6 +293,11 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.tag(MMTags.Items.OPHTHALMO_FOOD).add(
                 MMItems.SACABAMBASPIS.get(),
                 MMItems.TRILO_BITE.get());
+
+        this.tag(MMTags.Items.ATROCIRAPTOR_FOOD).add(
+                MMItems.RAW_DAWN_HORSE.get(),
+                Items.RABBIT,
+                Items.CHICKEN);
 
         this.copy(MMTags.Blocks.ANIMAL_BLOCKS, MMTags.Items.ANIMAL_BLOCKS_ITEM);
 

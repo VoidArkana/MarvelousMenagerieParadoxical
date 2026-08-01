@@ -318,6 +318,13 @@
   "translatable.marvelous_menagerie.anuro_pattern.dotted": "Dotted",
   "translatable.marvelous_menagerie.anuro_pattern.stars": "Starry",
 
+  "entity.marvelous_menagerie.atrociraptor": "Atrociraptor",
+  "item.marvelous_menagerie.atrociraptor_fossil": "Atrociraptor Fossil",
+  "item.marvelous_menagerie.atrociraptor_spawn_egg": "Atrociraptor Spawn Egg",
+  "marvelous_menagerie.sound.subtitle.atrociraptor_idle": "Atrociraptor cooes",
+  "marvelous_menagerie.sound.subtitle.atrociraptor_hurt": "Atrociraptor hurts",
+  "marvelous_menagerie.sound.subtitle.atrociraptor_death": "Atrociraptor dies",
+
   "entity.marvelous_menagerie.tameable.command_0": "%s is wandering",
   "entity.marvelous_menagerie.tameable.command_1": "%s is following",
   "entity.marvelous_menagerie.tameable.command_2": "%s is staying",
@@ -326,6 +333,9 @@
 
   "entity.marvelous_menagerie.rift": "Temporal Rift",
   "entity.marvelous_menagerie.fracture": "Time Fracture",
+
+  "entity.marvelous_menagerie.watcher": "Watcher",
+  "item.marvelous_menagerie.watcher_spawn_egg": "Watcher Spawn Egg",
 
   "item.marvelous_menagerie.chud_spawn_egg": "Chud Spawn Egg",
   "entity.marvelous_menagerie.chud": "Chud",
@@ -696,6 +706,12 @@
   "book.marvelous_menagerie.paleontology.tutorial": "The Key to a Good Dig",
   "book.marvelous_menagerie.paleontology.paleo_table": "Identifying Fossils",
   "book.marvelous_menagerie.paleontology.misc": "Other Resources",
+
+  "book.marvelous_menagerie.health": "Health",
+  "book.marvelous_menagerie.attack": "Attack",
+  "book.marvelous_menagerie.defense": "Defense",
+  "book.marvelous_menagerie.diet": "Breedable",
+  "book.marvelous_menagerie.tame": "Tamable",
 
   "book.marvelous_menagerie.missing": "Missing Entry!",
 

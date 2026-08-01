@@ -13,7 +13,7 @@ import net.minecraft.util.RandomSource;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.events.ForgeClientEvents;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
-import net.voidarkana.marvelous_menagerie.client.model.entity.FractureModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.misc.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.FractureEmmissive;
 import net.voidarkana.marvelous_menagerie.client.renderer.rendertypes.MMRenderTypes;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;

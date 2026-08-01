@@ -1183,5 +1183,46 @@
       }
     ],
     "subtitle": "marvelous_menagerie.sound.subtitle.kelenken_bite"
+  },
+
+
+  "atrociraptor_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:atrociraptor_idle_1"
+      },
+      {
+        "name": "marvelous_menagerie:atrociraptor_idle_2"
+      },
+      {
+        "name": "marvelous_menagerie:atrociraptor_idle_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.atrociraptor_idle"
+  },
+  "atrociraptor_hurt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:atrociraptor_hurt_1"
+      },
+      {
+        "name": "marvelous_menagerie:atrociraptor_hurt_2"
+      },
+      {
+        "name": "marvelous_menagerie:atrociraptor_hurt_3"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.atrociraptor_hurt"
+  },
+  "atrociraptor_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "marvelous_menagerie:atrociraptor_death"
+      }
+    ],
+    "subtitle": "marvelous_menagerie.sound.subtitle.atrociraptor_death"
   }
 }

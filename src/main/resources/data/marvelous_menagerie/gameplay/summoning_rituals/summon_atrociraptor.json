@@ -1,0 +1,15 @@
+{
+  "input1": {
+    "item": "minecraft:feather"
+  },
+  "input2": {
+    "item": "marvelous_menagerie:atrociraptor_fossil"
+  },
+  "input3": {
+    "item": "minecraft:rabbit"
+  },
+  "input4": {
+    "item": "minecraft:chicken"
+  },
+  "output": "marvelous_menagerie:atrociraptor"
+}

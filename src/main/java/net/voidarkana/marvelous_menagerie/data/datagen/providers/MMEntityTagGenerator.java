@@ -58,7 +58,11 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.MYOTRAGUS.get())
                 .add(MMEntities.TIKTAALIK.get())
                 .add(MMEntities.LYSTRO.get())
-                .add(MMEntities.INOSTRANCEVIA.get());
+                .add(MMEntities.INOSTRANCEVIA.get())
+                .add(MMEntities.ANUROGNATHUS.get())
+                .add(MMEntities.KELENKEN.get())
+                .add(MMEntities.ATROCIRAPTOR.get())
+                .add(MMEntities.WATCHER.get());
 
         this.tag(MMTags.EntityTypes.CANT_TRAMPLE)
                 .add(MMEntities.FRACTURE.get())

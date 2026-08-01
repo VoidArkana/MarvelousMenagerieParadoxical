@@ -147,4 +147,9 @@ public abstract class MarvelousMonster extends Monster {
     public void setupAnimationStates() {
         this.idleAnimationState.animateWhen(this.isAlive(), this.tickCount);
     }
+
+    @Override
+    public float getRestrictRadius() {
+        return this.getBbWidth()+1;
+    }
 }

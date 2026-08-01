@@ -184,6 +184,15 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_KELENKEN_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_kelenken"), "main");
 
+    public static final ModelLayerLocation ATROCIRAPTOR_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "atrociraptor"), "main");
+    public static final ModelLayerLocation BABY_ATROCIRAPTOR_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_atrociraptor"), "main");
+
+
+
+    public static final ModelLayerLocation WHISPERER_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "whisperer"), "main");
 
     public static final ModelLayerLocation FRACTURE_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "fracture"), "main");

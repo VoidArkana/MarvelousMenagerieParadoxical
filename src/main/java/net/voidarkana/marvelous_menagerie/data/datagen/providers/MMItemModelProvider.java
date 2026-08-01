@@ -233,6 +233,11 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.ANURO_BUCKET);
         withExistingParent(MMItems.ANURO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
+        simpleItem(MMItems.ATROCIRAPTOR_FOSSIL);
+        withExistingParent(MMItems.ATROCIRAPTOR_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
+        withExistingParent(MMItems.WATCHER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         withExistingParent(MMItems.BEHOLDER_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(MMItems.CHUD_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(MMItems.MOLTEN_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

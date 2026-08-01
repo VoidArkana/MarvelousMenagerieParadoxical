@@ -398,6 +398,10 @@ public abstract class MarvelousAnimal extends Animal implements ISittingAnimal{
             double d2 = this.random.nextGaussian() * 0.02D;
             this.level().addParticle(pParticleOption, this.getRandomX(1.0D), this.getRandomY() + 1.0D, this.getRandomZ(1.0D), d0, d1, d2);
         }
+    }
 
+    @Override
+    public float getRestrictRadius() {
+        return this.getBbWidth()+1;
     }
 }

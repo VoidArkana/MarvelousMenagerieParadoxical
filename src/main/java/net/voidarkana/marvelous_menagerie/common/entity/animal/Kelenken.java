@@ -113,8 +113,8 @@ public class Kelenken extends TamableMarvelousAnimal implements Saddleable, IAni
                 || entitytype == MMEntities.LEPTICTIDIUM.get();
     };
 
-    public final Predicate<LivingEntity> STARVED_PREY_SELECTOR = (p_289448_) -> {
-        return true;
+    public final Predicate<LivingEntity> STARVED_PREY_SELECTOR = (entity) -> {
+        return entity.getType() != this.getType();
     };
     
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
@@ -995,7 +995,7 @@ public class Kelenken extends TamableMarvelousAnimal implements Saddleable, IAni
     }
 
     protected void executeRidersJump(float pPlayerJumpPendingScale, Vec3 pTravelVector) {
-        double d0 = (this.onGround() ? 0.85 : 0.3) * (double)pPlayerJumpPendingScale * (double)this.getBlockJumpFactor();
+        double d0 = (this.onGround() ? 0.85 : 0.275) * (double)pPlayerJumpPendingScale * (double)this.getBlockJumpFactor();
 
         double d1 = d0 + (double)this.getJumpBoostPower();
         Vec3 vec3 = this.getDeltaMovement();

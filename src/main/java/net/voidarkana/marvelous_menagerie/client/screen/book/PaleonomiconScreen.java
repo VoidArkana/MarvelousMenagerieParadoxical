@@ -66,6 +66,7 @@ public class PaleonomiconScreen extends Screen {
     int homeButtonEndY=185+36;
 
     protected String currentItemTooltip;
+    protected boolean isTooltipSummoning;
 
     private boolean incrementingPage;
     private boolean decrementingPage;
@@ -262,6 +263,9 @@ public class PaleonomiconScreen extends Screen {
         if (this.currentItemTooltip != null) {
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(-5, 10, 550);
+//            if (this.isTooltipSummoning){
+//                guiGraphics.pose().translate(-this.leftPos-30, -this.topPos-30, 0);
+//            }
             guiGraphics.renderTooltip(font, Minecraft.getInstance().font.split(Component.translatable(currentItemTooltip),
                     Math.max(this.width / 2 - 43, 170)), mouseX, mouseY);
             currentItemTooltip = null;
@@ -317,8 +321,9 @@ public class PaleonomiconScreen extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean prev = super.mouseClicked(mouseX, mouseY, button);
+        System.out.println(mouseX);
+        System.out.println(mouseY);
         if (!prev) {
-
 
             if(currentEntry != null && currentEntry.consumeMouseClick(this)){
                 return true;
@@ -404,7 +409,12 @@ public class PaleonomiconScreen extends Screen {
     }
 
     public void setCurrentItemTooltip(String hoverText) {
+        this.setCurrentItemTooltip(hoverText, false);
+    }
+
+    public void setCurrentItemTooltip(String hoverText, boolean pIsTooltipSummoning) {
         this.currentItemTooltip = hoverText;
+        this.isTooltipSummoning = pIsTooltipSummoning;
     }
 
     protected int getBindingColor() {

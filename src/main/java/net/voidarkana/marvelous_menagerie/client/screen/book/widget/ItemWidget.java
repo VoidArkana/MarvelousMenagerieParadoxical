@@ -72,33 +72,12 @@ public class ItemWidget extends BookWidget {
             }
         }
         float scale = 16.0F * getScale();
-
-//        this.isHovered = mouseX >= this.getX() && mouseY >= this.getY() && mouseX < this.getX() + 18 && mouseY < this.getY() + 18;
-
         poseStack.pushPose();
         poseStack.translate(getX(), getY(), 0);
         poseStack.translate(0, 0, 50);
         renderItem(actualItem, poseStack, bufferSource, sepia, scale);
         poseStack.popPose();
 
-    }
-
-    public void mouseOver(PaleonomiconScreen screen, int page, float mouseX, float mouseY, boolean rightPage){
-        boolean hoverFlag = false;
-        screen.unlockTooltip = false;
-
-        this.isHovered = false;
-
-        float itemStartsX = rightPage ? screen.leftPos+175-8 : screen.leftPos+20;
-        float itemStartsY = screen.topPos + 15;
-        float wordStartAt = itemStartsX;
-        float wordEndAt = wordStartAt + 16F * 0.9f;
-        float wordTopAt = itemStartsY;
-        float wordBottomAt = wordTopAt + 16F;
-
-        if(mouseX > wordStartAt && mouseX < wordEndAt && mouseY > wordTopAt && mouseY < wordBottomAt){
-            this.isHovered = true;
-        }
     }
 
     public static void renderItem(ItemStack itemStack, PoseStack poseStack, MultiBufferSource.BufferSource bufferSource, boolean sepia, float scale){

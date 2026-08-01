@@ -89,8 +89,8 @@ public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob,
         return entitytype == EntityType.SHEEP || entitytype == EntityType.PIG || entitytype == MMEntities.LYSTRO.get();
     };
 
-    public final Predicate<LivingEntity> STARVED_PREY_SELECTOR = (p_289448_) -> {
-        return true;
+    public final Predicate<LivingEntity> STARVED_PREY_SELECTOR = (entity) -> {
+        return entity.getType() != this.getType();
     };
 
     @Override

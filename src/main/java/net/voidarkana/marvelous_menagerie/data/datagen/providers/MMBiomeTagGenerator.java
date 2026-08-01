@@ -85,6 +85,13 @@ public class MMBiomeTagGenerator extends BiomeTagsProvider {
         tag(MMTags.Biomes.TIKTAALIK_BIOMES).addTag(Tags.Biomes.IS_SWAMP);
 
         tag(MMTags.Biomes.LYSTRO_BIOMES).addTag(BiomeTags.IS_BADLANDS).addTag(Tags.Biomes.IS_DESERT);
+
         tag(MMTags.Biomes.INOSTRANCEVIA_BIOMES).addTag(BiomeTags.IS_BADLANDS).addTag(Tags.Biomes.IS_DESERT);
+
+        tag(MMTags.Biomes.KELENKEN_BIOMES).addTag(BiomeTags.IS_SAVANNA).add(Biomes.PLAINS).add(Biomes.SUNFLOWER_PLAINS);
+
+        tag(MMTags.Biomes.ANUROGNATHUS_BIOMES).addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_TAIGA);
+
+        tag(MMTags.Biomes.ATROCIRAPTOR_BIOMES).addTag(BiomeTags.IS_FOREST).addTag(Tags.Biomes.IS_SWAMP);
     }
 }

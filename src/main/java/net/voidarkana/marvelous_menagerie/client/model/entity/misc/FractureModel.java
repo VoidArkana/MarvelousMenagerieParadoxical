@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.model.entity;// Made with Blockbench 4.12.2
+package net.voidarkana.marvelous_menagerie.client.model.entity.misc;// Made with Blockbench 4.12.2
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
@@ -9,9 +9,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
-import org.joml.Vector3f;
 
 public class FractureModel<T extends Fracture> extends EntityModel<T> {
 

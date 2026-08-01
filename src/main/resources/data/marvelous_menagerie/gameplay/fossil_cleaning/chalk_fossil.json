@@ -12,6 +12,9 @@
     {
       "weight": 13,
       "item": "marvelous_menagerie:pelta_fossil"
+    }, {
+      "weight": 15,
+      "item": "marvelous_menagerie:atrociraptor_fossil"
     }
   ]
 }

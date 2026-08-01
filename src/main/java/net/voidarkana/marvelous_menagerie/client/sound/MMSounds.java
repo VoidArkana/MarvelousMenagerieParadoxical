@@ -124,6 +124,10 @@ public class MMSounds {
     public static final RegistryObject<SoundEvent> KELENKEN_ROAR = registerSoundEvents("kelenken_roar");
     public static final RegistryObject<SoundEvent> KELENKEN_BITE = registerSoundEvents("kelenken_bite");
 
+    public static final RegistryObject<SoundEvent> ATROCIRAPTOR_AMBIENT = registerSoundEvents("atrociraptor_idle");
+    public static final RegistryObject<SoundEvent> ATROCIRAPTOR_HURT = registerSoundEvents("atrociraptor_hurt");
+    public static final RegistryObject<SoundEvent> ATROCIRAPTOR_DEATH = registerSoundEvents("atrociraptor_death");
+
     public static final RegistryObject<SoundEvent> EGG_ARMOR = registerSoundEvents("egg_armor");
 
     private static RegistryObject<SoundEvent> registerSoundEvents(String name) {

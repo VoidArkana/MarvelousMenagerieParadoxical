@@ -1,0 +1,10 @@
+{
+  "entity_name": "marvelous_menagerie:atrociraptor",
+  "icon": "marvelous_menagerie:atrociraptor_fossil",
+  "link": "mobs/atrociraptor.json",
+  "indexes": [
+    {
+      "index_name": "book.marvelous_menagerie.cretaceous"
+    }
+  ]
+}

@@ -13,12 +13,12 @@ import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.armor.*;
 import net.voidarkana.marvelous_menagerie.client.model.block.*;
-import net.voidarkana.marvelous_menagerie.client.model.entity.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.abomination.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anomalocaris.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.anurognathus.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.arandaspis.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.atrociraptor.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.borealopelta.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.dawn_horse.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.diplocaulus.*;
@@ -38,6 +38,9 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.*
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.tiktaalik.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.misc.FractureModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.misc.RiftModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.misc.WhispererModel;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.*;
 import org.jetbrains.annotations.Nullable;
@@ -156,6 +159,11 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.KELENKEN_LAYER, TerrorBirdModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_KELENKEN_LAYER, BabyTerrorBirdModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.ATROCIRAPTOR_LAYER, AtrociraptorModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_ATROCIRAPTOR_LAYER, BabyAtrociraptorModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.WHISPERER_LAYER, WhispererModel::createBodyLayer);
 
 
         event.registerLayerDefinition(MMModelLayers.GOGGLES_LAYER, AnomalousGogglesModel::createArmorLayer);

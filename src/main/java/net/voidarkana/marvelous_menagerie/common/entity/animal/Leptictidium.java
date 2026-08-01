@@ -18,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.ChaseGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.StrollOrSprintAvoidingWaterGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IChaserAnimal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import org.jetbrains.annotations.Nullable;
@@ -62,7 +63,7 @@ public class Leptictidium extends MarvelousAnimal implements IChaserAnimal {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.25D, Ingredient.of(Items.SPIDER_EYE), false));
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1D));
+        this.goalSelector.addGoal(4, new StrollOrSprintAvoidingWaterGoal(this, 1.0D, 1.25));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F){
             @Override
             public boolean canUse() {

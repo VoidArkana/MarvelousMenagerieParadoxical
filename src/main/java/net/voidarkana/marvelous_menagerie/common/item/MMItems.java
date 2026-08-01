@@ -337,6 +337,16 @@ public class MMItems {
             () -> new PatternedAnimalBucketItem(MMEntities.ANUROGNATHUS, () -> Fluids.EMPTY, Items.FLOWER_POT, MMSounds.ANURO_BUCKET_RELEASE.get(), true,
                     (new Item.Properties()).stacksTo(1)));
 
+    //Atrociraptor
+    public static final RegistryObject<Item> ATROCIRAPTOR_FOSSIL = ITEMS.register("atrociraptor_fossil",
+            ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ATROCIRAPTOR_SPAWN_EGG = ITEMS.register("atrociraptor_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.ATROCIRAPTOR, 0x325577, 0x8c9b68, new Item.Properties()));
+
+    //Watcher
+    public static final RegistryObject<Item> WATCHER_SPAWN_EGG = ITEMS.register("watcher_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.WATCHER, 0x2a2f42, 0x158ed7, new Item.Properties()));
+
     //Plants
 
     //Sigillaria

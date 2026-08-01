@@ -31,6 +31,7 @@ import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.RiftRender
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.BeholderRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.ChudRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.animal.*;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.WhispererRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.item.CustomArmorRenderProperties;
 import net.voidarkana.marvelous_menagerie.client.screen.book.PaleonomiconScreen;
 import net.voidarkana.marvelous_menagerie.client.screen.fossil.FossilMinigameScreen;
@@ -101,6 +102,8 @@ public class ClientProxy extends CommonProxy{
         EntityRenderers.register(MMEntities.INOSTRANCEVIA.get(), InostranceviaRenderer::new);
         EntityRenderers.register(MMEntities.ANUROGNATHUS.get(), AnurognathusRenderer::new);
         EntityRenderers.register(MMEntities.KELENKEN.get(), KelenkenRenderer::new);
+        EntityRenderers.register(MMEntities.ATROCIRAPTOR.get(), AtrociraptorRenderer::new);
+        EntityRenderers.register(MMEntities.WATCHER.get(), WhispererRenderer::new);
 
         BlockEntityRenderers.register(MMBlockEntities.PEDESTAL_ENTITY.get(), PedestalRenderer::new);
         BlockEntityRenderers.register(MMBlockEntities.ALTAR_ENTITY.get(), AltarRenderer::new);

@@ -31,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.AnimatedAttackGoal;
+import net.voidarkana.marvelous_menagerie.common.entity.ai.goals.StrollOrSprintAvoidingWaterGoal;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
@@ -80,7 +81,7 @@ public class Thylacine extends MarvelousAnimal implements IAnimatedAttacker {
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new StrollOrSprintAvoidingWaterGoal(this, 1.0D, 1.25));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 

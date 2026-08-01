@@ -1,18 +1,16 @@
 package net.voidarkana.marvelous_menagerie.client.screen.book;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.voidarkana.marvelous_menagerie.client.screen.BookLink;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.BookWidget;
+import net.voidarkana.marvelous_menagerie.client.screen.book.widget.EntityProfileWidget;
 import net.voidarkana.marvelous_menagerie.client.screen.book.widget.ItemWidget;
-import org.joml.Matrix4f;
 
 public class PaleonomiconPage {
 
@@ -81,17 +79,74 @@ public class PaleonomiconPage {
                 if (widget.getDisplayPage() == pgNumber) {
                     widget.render(poseStack, bufferSource, partialTicks, isLeftPage, mouseX, mouseY);
 
-                    int k = screen.leftPos + 38;
-                    int l = screen.topPos + 18;
-                    float scale = 0.85f;
+                    int k = screen.leftPos;
+                    int l = screen.topPos;
+                    float scale = widget.getScale();
 
                     if (widget instanceof ItemWidget itemWidget &&
-                            (mouseX >= (k + widget.getX())*scale && mouseY >= (l + widget.getY())*scale
-                                    && mouseX < (k + widget.getX() + (16*widget.getScale()))*scale && mouseY < (l + widget.getY() + (16*widget.getScale()))*scale )){
-
-
+                                    (  mouseX >= (k + (widget.getX()*scale + 23*scale)*0.85f)
+                                    && mouseY >= (l + (widget.getY()*scale + 12*scale)*0.85f)
+                                    && mouseX <= (k + (widget.getX()*scale + 43*scale)*0.85f)
+                                    && mouseY <= (l + (widget.getY()*scale + 30*scale)*0.85f) )){
                         screen.setCurrentItemTooltip(itemWidget.getItemName());
+                    }else if (widget instanceof EntityProfileWidget summoningRecipeWidget){
 
+                        float minX = k + 40;
+                        float maxX = k + 125;
+                        float minY = l + 40;
+                        float maxY = l + 125;
+                        float trueMaxY = l + 150;
+
+                        if (mouseX >= minX && mouseX <= maxX && mouseY >= minY && mouseY <= trueMaxY){
+
+                            int index = -1;
+
+                            if(mouseX >= minX && mouseX <= minX+16 && mouseY >= minY && mouseY <= minY+16){
+                                index = 0;
+                            }
+                            if(mouseX >= maxX-16 && mouseX <= maxX && mouseY >= minY && mouseY <= minY+16){
+                                index = 1;
+                            }
+                            if(mouseX >= minX && mouseX <= minX+16 && mouseY >= maxY-16 && mouseY <= maxY){
+                                index = 2;
+                            }
+                            if(mouseX >= maxX-16 && mouseX <= maxX && mouseY >= maxY-16 && mouseY <= maxY){
+                                index = 3;
+                            }
+
+                            if(summoningRecipeWidget.getHearts() > 0 &&
+                                    mouseX >= minX && mouseX <= minX+26
+                                    && mouseY >= maxY+5 && mouseY <= maxY+12){
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.health");
+                            }
+
+                            if(summoningRecipeWidget.getAttack() > 0 &&
+                                    mouseX >= minX+30 && mouseX <= minX+26+30
+                                    && mouseY >= maxY+5 && mouseY <= maxY+12){
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.attack");
+                            }
+
+                            if(summoningRecipeWidget.getShields() > 0 &&
+                                    mouseX >= minX+35+30 && mouseX <= minX+26+35+30
+                                    && mouseY >= maxY+5 && mouseY <= maxY+12){
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.defense");
+                            }
+
+                            if(summoningRecipeWidget.getTame() &&
+                                    mouseX >= minX && mouseX <= minX+12
+                                    && mouseY >= maxY+12 && mouseY <= maxY+12+12){
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.tame");
+                            }
+
+                            if(summoningRecipeWidget.getDiet() &&
+                                    mouseX >= minX+30 && mouseX <= minX+30+12
+                                    && mouseY >= maxY+12 && mouseY <= maxY+12+12){
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.diet");
+                            }
+
+                            if (index > -1)
+                                screen.setCurrentItemTooltip(summoningRecipeWidget.getItemName(index));
+                        }
                     }
                 }
             }

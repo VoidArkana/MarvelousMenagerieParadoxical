@@ -1,0 +1,59 @@
+{
+  "parent": "cretaceous/index.json",
+  "text": "animals/atrociraptor.txt",
+  "title": "entity.marvelous_menagerie.atrociraptor",
+  "widgets": [
+
+    {
+      "display_page" : 1,
+      "type": "entity_profile",
+      "entity_id": "marvelous_menagerie:atrociraptor",
+      "sepia": true,
+      "x": 0,
+      "y": 0,
+      "scale": 1,
+      "hearts": 10,
+      "attack": 1,
+      "shields": 30,
+      "diet": "true",
+      "tame": "false"
+    },
+
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:pikaia_fossil",
+      "sepia": true,
+      "x": 35,
+      "y": 150,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "marvelous_menagerie:raw_dawn_horse",
+      "sepia": true,
+      "x": 70,
+      "y": 150,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:rabbit",
+      "sepia": true,
+      "x": 85,
+      "y": 150,
+      "scale": 1
+    },
+    {
+      "display_page" : 1,
+      "type": "item",
+      "item": "minecraft:chicken",
+      "sepia": true,
+      "x": 100,
+      "y": 150,
+      "scale": 1
+    }
+  ]
+}

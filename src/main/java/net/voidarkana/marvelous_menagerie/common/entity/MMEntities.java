@@ -17,6 +17,7 @@ import net.voidarkana.marvelous_menagerie.common.entity.misc.Fracture;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.MMBoatEntity;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.MMChestBoatEntity;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
+import net.voidarkana.marvelous_menagerie.common.entity.villager.Watcher;
 
 public class MMEntities {
 
@@ -214,7 +215,7 @@ public class MMEntities {
 
     public static final RegistryObject<EntityType<Anurognathus>> ANUROGNATHUS =
             ENTITY_TYPES.register("anurognathus",
-                    () -> EntityType.Builder.of(Anurognathus::new, MobCategory.CREATURE)
+                    () -> EntityType.Builder.of(Anurognathus::new, MobCategory.AMBIENT)
                             .sized(0.5f, 0.25f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"anurognathus").toString()));
 
@@ -224,6 +225,18 @@ public class MMEntities {
                             .sized(1.15f, 2.4f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"kelenken").toString()));
 
+    public static final RegistryObject<EntityType<Atrociraptor>> ATROCIRAPTOR =
+            ENTITY_TYPES.register("atrociraptor",
+                    () -> EntityType.Builder.of(Atrociraptor::new, MobCategory.CREATURE)
+                            .sized(0.9f, 0.8f)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"atrociraptor").toString()));
+
+
+    public static final RegistryObject<EntityType<Watcher>> WATCHER =
+            ENTITY_TYPES.register("watcher",
+                    () -> EntityType.Builder.of(Watcher::new, MobCategory.MISC)
+                            .sized(1.25f, 4f)
+                            .build("watcher"));
 
 
     public static final RegistryObject<EntityType<MMBoatEntity>> MM_BOAT =
@@ -242,8 +255,10 @@ public class MMEntities {
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "rift").toString()));
 
     public static final RegistryObject<EntityType<Fracture>> FRACTURE =
-            ENTITY_TYPES.register("fracture", () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)
-                    .sized(1.5f, 1.5f).build("fracture"));
+            ENTITY_TYPES.register("fracture",
+                    () -> EntityType.Builder.<Fracture>of(Fracture::new, MobCategory.MISC)
+                    .sized(1.5f, 1.5f)
+                            .build("fracture"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

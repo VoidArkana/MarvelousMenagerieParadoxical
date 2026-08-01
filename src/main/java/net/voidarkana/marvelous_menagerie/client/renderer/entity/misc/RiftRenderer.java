@@ -2,21 +2,16 @@ package net.voidarkana.marvelous_menagerie.client.renderer.entity.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Camera;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.block.Rotation;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
-import net.voidarkana.marvelous_menagerie.client.model.entity.RiftModel;
+import net.voidarkana.marvelous_menagerie.client.model.entity.misc.RiftModel;
 import net.voidarkana.marvelous_menagerie.common.entity.misc.RiftEntity;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Quaternionf;
 
 public class RiftRenderer extends LivingEntityRenderer<RiftEntity, RiftModel<RiftEntity>> {
 
