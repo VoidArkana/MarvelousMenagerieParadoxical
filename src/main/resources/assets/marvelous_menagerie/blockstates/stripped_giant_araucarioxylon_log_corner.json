@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "axis=y,type=top_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner"
+    },
+    "axis=y,type=top_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner",
+      "y": 90
+    },
+    "axis=y,type=bottom_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner",
+      "y": 180
+    },
+    "axis=y,type=bottom_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner",
+      "y": 270
+    },
+
+    "axis=z,type=top_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "y":180
+    },
+    "axis=z,type=top_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal"
+    },
+    "axis=z,type=bottom_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "x": 180
+    },
+    "axis=z,type=bottom_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "x": 180,
+      "y":180
+    },
+
+    "axis=x,type=top_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "y":90
+    },
+    "axis=x,type=top_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "y":270
+    },
+    "axis=x,type=bottom_right": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "x": 180,
+      "y":270
+    },
+    "axis=x,type=bottom_left": {
+      "model": "marvelous_menagerie:block/stripped_giant_araucarioxylon_log_corner_horizontal",
+      "x": 180,
+      "y":90
+    }
+  }
+}

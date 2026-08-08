@@ -85,4 +85,20 @@ public abstract class MarvelousModel<E extends Entity> extends HierarchicalModel
     public void setupAnim(E pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         this.root().getAllParts().forEach(ModelPart::resetPose);
     }
+
+    public float mathAnim(float base, float ageInTicks, float timeMultiplier, float offset, float multiplier, boolean sin, boolean rot){
+        if (rot){
+            if (sin)
+                return (float) Math.toRadians(base + Math.sin(ageInTicks * timeMultiplier + offset) * multiplier);
+            else
+                return (float) Math.toRadians(base + Math.cos(ageInTicks * timeMultiplier + offset) * multiplier);
+        }
+        else {
+            if (sin)
+                return (float) (base + Math.sin(ageInTicks * timeMultiplier + offset) * multiplier);
+            else
+                return (float) (base + Math.cos(ageInTicks * timeMultiplier + offset) * multiplier);
+
+        }
+    }
 }

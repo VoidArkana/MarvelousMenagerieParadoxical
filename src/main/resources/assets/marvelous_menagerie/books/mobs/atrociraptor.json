@@ -22,7 +22,7 @@
     {
       "display_page" : 1,
       "type": "item",
-      "item": "marvelous_menagerie:pikaia_fossil",
+      "item": "marvelous_menagerie:raw_dawn_horse",
       "sepia": true,
       "x": 35,
       "y": 150,
@@ -31,18 +31,9 @@
     {
       "display_page" : 1,
       "type": "item",
-      "item": "marvelous_menagerie:raw_dawn_horse",
-      "sepia": true,
-      "x": 70,
-      "y": 150,
-      "scale": 1
-    },
-    {
-      "display_page" : 1,
-      "type": "item",
       "item": "minecraft:rabbit",
       "sepia": true,
-      "x": 85,
+      "x": 50,
       "y": 150,
       "scale": 1
     },
@@ -51,7 +42,7 @@
       "type": "item",
       "item": "minecraft:chicken",
       "sepia": true,
-      "x": 100,
+      "x": 65,
       "y": 150,
       "scale": 1
     }

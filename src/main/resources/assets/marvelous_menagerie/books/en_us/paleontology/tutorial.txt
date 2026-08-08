@@ -3,12 +3,8 @@
 
 
 
-    Once you have gotten your hands on a
-§lPaleontology §lToolkit,
-it's time to start digging!
-    With a Paleontology Toolkit in hand, by
-    interacting with a §lFossil block§r an
-excavation will be started.
+    Once you have gotten your hands on a §lPaleontology §lToolkit, it's time to start digging!
+    With a Paleontology Toolkit in hand, by interacting with a §lFossil block§r an excavation will be started.
     One must be careful, however, as starting an excavation wears off your paleontology kit even if nothing is uncovered or dug.
 
 

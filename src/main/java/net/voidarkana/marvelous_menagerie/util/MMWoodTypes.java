@@ -11,4 +11,6 @@ public class MMWoodTypes {
 
     public static final WoodType CALAMITES = WoodType.register(new WoodType(MarvelousMenagerie.MOD_ID + ":calamites", BlockSetType.OAK));
 
+    public static final WoodType ARAUCARIOXYLON = WoodType.register(new WoodType(MarvelousMenagerie.MOD_ID + ":araucarioxylon", BlockSetType.OAK));
+
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "marvelous_menagerie:block/giant_log_side_horizontal",
+  "textures": {
+    "inside": "marvelous_menagerie:block/stripped_araucarioxylon_log",
+    "top": "marvelous_menagerie:block/giant_araucarioxylon_log_side_top",
+    "side": "marvelous_menagerie:block/araucarioxylon_log"
+  }
+}

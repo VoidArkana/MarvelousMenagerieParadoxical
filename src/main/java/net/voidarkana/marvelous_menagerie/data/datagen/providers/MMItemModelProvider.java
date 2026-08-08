@@ -38,9 +38,6 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleBlockItem(MMBlocks.SIGILLARIA_DOOR);
 
-//        simpleBlockItem(MMBlocks.SIGILLARIA_SAPLING);
-//        simpleBlockItem(MMBlocks.COOKSONIA);
-
         trapdoorItem(MMBlocks.SIGILLARIA_TRAPDOOR);
 
         evenSimplerBlockItem(MMBlocks.SIGILLARIA_STAIRS);
@@ -59,8 +56,6 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.SIGILLARIA_BOAT);
         simpleItem(MMItems.SIGILLARIA_CHEST_BOAT);
 
-//        saplingItem(MMBlocks.SIGILLARIA_SAPLING);
-//        saplingItem(MMBlocks.COOKSONIA);
 
         simpleBlockItem(MMBlocks.PROTOTAXITES_DOOR);
         trapdoorItem(MMBlocks.PROTOTAXITES_TRAPDOOR);
@@ -100,6 +95,28 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleItem(MMItems.CALAMITES_BOAT);
         simpleItem(MMItems.CALAMITES_CHEST_BOAT);
+
+
+        simpleBlockItem(MMBlocks.ARAUCARIOXYLON_DOOR);
+
+        trapdoorItem(MMBlocks.ARAUCARIOXYLON_TRAPDOOR);
+
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_STAIRS);
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS);
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_SLAB);
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB);
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_FENCE_GATE);
+        evenSimplerBlockItem(MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE);
+
+        fenceItem(MMBlocks.ARAUCARIOXYLON_FENCE, MMBlocks.ARAUCARIOXYLON_PLANKS);
+        buttonItem(MMBlocks.ARAUCARIOXYLON_BUTTON, MMBlocks.ARAUCARIOXYLON_PLANKS);
+
+        simpleItem(MMItems.ARAUCARIOXYLON_SIGN);
+        simpleItem(MMItems.ARAUCARIOXYLON_HANGING_SIGN);
+
+        simpleItem(MMItems.ARAUCARIOXYLON_BOAT);
+        simpleItem(MMItems.ARAUCARIOXYLON_CHEST_BOAT);
+
 
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);

@@ -3,11 +3,9 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.misc;// Made with
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.villager.Watcher;
 
@@ -155,8 +153,8 @@ public class WhispererModel<T extends Watcher> extends MarvelousModel<T> {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		ageInTicks *= 0.0015f;
 
-		this.rightFinger2.zRot += (float) Math.toRadians(10 + Math.sin(ageInTicks * 180 + 90) * 20)/2;
-		this.rightFinger2.y += (float) -1 + Math.sin(ageInTicks * 180) * -1/2;
+		this.rightFinger2.zRot += this.mathAnim(10, ageInTicks, 180, 90, 10, true, true);
+		this.rightFinger2.y += this.mathAnim(-1, ageInTicks, 180, 0, -0.5f, true, false);
 
 		this.rightFinger1.zRot += (float) Math.toRadians(10 + Math.sin(ageInTicks * 180) * 20)/2;
 		this.rightFinger1.y += (float) -1 + Math.sin(ageInTicks * 180 - 90) * -1/2;

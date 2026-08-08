@@ -171,6 +171,37 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.COOKSONIA.get());
                         output.accept(MMBlocks.OTOZAMITES_BUSH.get());
 
+                        output.accept(MMBlocks.ARAUCARIOXYLON_PLANKS.get());
+
+                        output.accept(MMBlocks.ARAUCARIOXYLON_LOG.get());
+                        output.accept(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK.get());
+                        output.accept(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
+                        output.accept(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
+                        output.accept(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
+                        output.accept(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
+
+                        output.accept(MMBlocks.ARAUCARIOXYLON_STAIRS.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_SLAB.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_FENCE.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_DOOR.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_BUTTON.get());
+
+                        output.accept(MMBlocks.ARAUCARIOXYLON_MOSAIC.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get());
+                        output.accept(MMItems.ARAUCARIOXYLON_SIGN.get());
+                        output.accept(MMItems.ARAUCARIOXYLON_HANGING_SIGN.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_LEAVES.get());
+//                        output.accept(MMBlocks.ARAUCARIOXYLON_SAPLING.get());
+
+                        output.accept(MMItems.ARAUCARIOXYLON_BOAT.get());
+                        output.accept(MMItems.ARAUCARIOXYLON_CHEST_BOAT.get());
+
                         output.accept(MMBlocks.CALAMITES_LOG.get());
                         output.accept(MMBlocks.STRIPPED_CALAMITES_LOG.get());
                         output.accept(MMBlocks.CALAMITES_BARK.get());

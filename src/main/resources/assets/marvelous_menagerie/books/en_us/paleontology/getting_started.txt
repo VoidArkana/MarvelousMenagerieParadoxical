@@ -3,25 +3,10 @@
 
 
 
-    The first step to
-get into the world of
-paleontology is to get
-yourself a good guide
-that can fill you with
-the knowledge you need.
-Congratulations! You've
-already taken that
-step by reading this.
+    The first step to get into the world of paleontology is to get yourself a good guide that can fill you with the knowledge you need. Congratulations! You've already taken that step by reading this.
 
-    Across the overworld,
-especially underground,
-you will notice that
-particular deposits
-of rocks are laid
-across the overworld.
-   Each sediment type
-will represent different
-eras;
+    Across the overworld, especially underground, you will notice that particular deposits of rocks are laid across the overworld.
+   Each sediment type will represent different eras;
 
     {Shale|early_paleo/index.json}
     {Siltstone|carboniferous/index.json}

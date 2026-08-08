@@ -219,4 +219,9 @@ public class MMModelLayers {
     public static final ModelLayerLocation CALAMITES_CHEST_BOAT_LAYER = new ModelLayerLocation(
             new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/calamites"), "main");
 
+    public static final ModelLayerLocation ARAUCARIOXYLON_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/araucarioxylon"), "main");
+    public static final ModelLayerLocation ARAUCARIOXYLON_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/araucarioxylon"), "main");
+
 }

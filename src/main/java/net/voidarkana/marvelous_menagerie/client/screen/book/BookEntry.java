@@ -107,16 +107,23 @@ public class BookEntry {
             List<String> readIn = IOUtils.readLines(bufferedreader);
             int currentLineCount = 0;
             for (String readString : readIn) {
+                //looks for the {} symbols that would indicate a link
                 Matcher m = pattern.matcher(readString);
                 boolean skipLineEntirely = false;
+                //dictates if the sentence would overflow the page
                 boolean noOverflow = false;
+                //if the matcher finds any patterns then it goes through them all
                 while (m.find()) {
+                    //it looks for the split in the string...
                     String[] found = m.group().split("\\|");
+                    //if it's been found...
                     if (found.length >= 1) {
                         String linkTo = found[1].substring(0, found[1].length() - 1);
                         String display = found[0].substring(1);
                         bookLinks.add(new BookLink(currentLineCount, m.start(), display, linkTo, true));
                         readString = m.replaceFirst(display);
+                        //if there's a space found then it marks it as not overflowing
+                        //under what conditions is it marking it as not overflowing?
                         noOverflow = true;
                     }
                 }
@@ -124,24 +131,44 @@ public class BookEntry {
                     strings.add(readString);
                     currentLineCount++;
                 }
+                maxLineSize = 30;
                 while (font.width(readString) > maxLineSize) {
                     int spaceScanIndex = 0;
                     int lastSpace = -1;
+                    int secondToLastSpace = -1;
+                    //0, length; while the spaceScanIndex is less than the length of the string
+                    //scans and looks for a space to break the paragraph up
                     while(spaceScanIndex < readString.length()){
-                        if(readString.charAt(spaceScanIndex) == ' ' && font.width(readString.substring(0, spaceScanIndex)) > 92){
+                        //if there's a space at spaceScanIndex AND the width of the string in pixels at the current position is greater than...
+                        if(readString.charAt(spaceScanIndex) == ' ' && font.width(readString.substring(0, spaceScanIndex)) > 90){
                             lastSpace = noOverflow ? readString.length() : spaceScanIndex;
                             break;
                         }
+                        if (readString.charAt(spaceScanIndex) == ' '){
+                            secondToLastSpace = noOverflow ? readString.length() : spaceScanIndex;
+                        }
                         spaceScanIndex++;
                     }
+
+                    //marks where the cut should happen; if no cut is needed then it gives the length of the string or the max line size, otherwise it returns where the last space was
                     int cutIndex = lastSpace == -1 ? Math.min(maxLineSize, readString.length()) : lastSpace;
-                    strings.add(readString.substring(0, cutIndex));
+
+                    String substring = readString.substring(0, cutIndex);
+
+                    if (font.width(substring) > 120){
+                        cutIndex = secondToLastSpace == -1 ? Math.min(maxLineSize, readString.length()) : secondToLastSpace;
+                        substring = readString.substring(0, cutIndex);
+                    }
+
+                    //adds a line; shouldn't be longer than 30 characters...
+                    strings.add(substring);
                     currentLineCount++;
                     readString = readString.substring(cutIndex);
                     if (readString.startsWith(" ")) {
                         readString = readString.substring(1);
                     }
                 }
+                //adds whatever was cut off AFTER a line change
                 if(!readString.isEmpty()){
                     strings.add(readString);
                     currentLineCount++;

@@ -132,16 +132,16 @@ public class PaleonomiconPage {
                                 screen.setCurrentItemTooltip("book.marvelous_menagerie.defense");
                             }
 
-                            if(summoningRecipeWidget.getTame() &&
+                            if(summoningRecipeWidget.getDiet() &&
                                     mouseX >= minX && mouseX <= minX+12
                                     && mouseY >= maxY+12 && mouseY <= maxY+12+12){
-                                screen.setCurrentItemTooltip("book.marvelous_menagerie.tame");
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.diet");
                             }
 
-                            if(summoningRecipeWidget.getDiet() &&
+                            if(summoningRecipeWidget.getTame() &&
                                     mouseX >= minX+30 && mouseX <= minX+30+12
                                     && mouseY >= maxY+12 && mouseY <= maxY+12+12){
-                                screen.setCurrentItemTooltip("book.marvelous_menagerie.diet");
+                                screen.setCurrentItemTooltip("book.marvelous_menagerie.tame");
                             }
 
                             if (index > -1)

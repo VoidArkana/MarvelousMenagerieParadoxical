@@ -8,5 +8,4 @@
     This fracture will be tied to the altar and will disappear if the altar is broken, but will remain even if pedestals are not around.
     For one to successfully summon a creature, one must fill all four pedestals with the correct components and then interact with the altar using a §lChronotite§r §lWatch§r.
     Only when all four pedestals are full will one be able to go through with the summoning process.
-    If one were to activate the altar with the wrong components, however, one will find themselves with a §lTemporal§r
-§lAbomination§r in their hands instead of the desire creature, making the process of summoning a risky one.
+    If one were to activate the altar with the wrong components, however, one will find themselves with a §lTemporal§r §lAbomination§r in their hands instead of the desire creature, making the process of summoning a risky one.

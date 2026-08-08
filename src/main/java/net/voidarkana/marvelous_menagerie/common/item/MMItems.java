@@ -382,6 +382,18 @@ public class MMItems {
     public static final RegistryObject<Item> CALAMITES_CHEST_BOAT = ITEMS.register("calamites_chest_boat",
             () -> new MMBoatItem(true, MMBoatEntity.Type.CALAMITES, new Item.Properties()));
 
+
+    //Araucarioxylon
+    public static final RegistryObject<Item> ARAUCARIOXYLON_SIGN = ITEMS.register("araucarioxylon_sign",
+            ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.ARAUCARIOXYLON_SIGN.get(), MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get()));
+    public static final RegistryObject<Item> ARAUCARIOXYLON_HANGING_SIGN = ITEMS.register("araucarioxylon_hanging_sign",
+            ()-> new HangingSignItem(MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(), MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> ARAUCARIOXYLON_BOAT = ITEMS.register("araucarioxylon_boat",
+            () -> new MMBoatItem(false, MMBoatEntity.Type.ARAUCARIOXYLON, new Item.Properties()));
+    public static final RegistryObject<Item> ARAUCARIOXYLON_CHEST_BOAT = ITEMS.register("araucarioxylon_chest_boat",
+            () -> new MMBoatItem(true, MMBoatEntity.Type.ARAUCARIOXYLON, new Item.Properties()));
+
     //Fossils
     //Early Paleo
     public static final RegistryObject<Item> SHALE_FOSSIL = ITEMS.register("shale_fossil",

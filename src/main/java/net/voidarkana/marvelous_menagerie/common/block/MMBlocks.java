@@ -246,7 +246,7 @@ public class MMBlocks {
     public static final RegistryObject<Block> STRIPPED_CALAMITES_BARK = registerBlock ("stripped_calamites_bark",
             () -> new CalamitesLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
 
-    //Woodset
+    //Calamites Woodset
     public static final RegistryObject<Block> CALAMITES_BUNDLE = registerBlock("calamites_bundle",
             () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.BAMBOO_WOOD)));
     public static final RegistryObject<Block> CALAMITES_BUNDLED_BARK = registerBlock("calamites_bundled_bark",
@@ -315,6 +315,80 @@ public class MMBlocks {
     public static final RegistryObject<Block> CALAMITES_MOSAIC_SLAB = registerBlock("calamites_mosaic_slab",
             () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.BAMBOO_WOOD).ignitedByLava()));
 
+
+    //Araucarioxylon plank blocks
+    public static final RegistryObject<Block> ARAUCARIOXYLON_PLANKS = registerBlock("araucarioxylon_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_STAIRS = registerBlock("araucarioxylon_stairs",
+            () -> new StairBlock(() -> MMBlocks.ARAUCARIOXYLON_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)
+                    .ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_SLAB = registerBlock("araucarioxylon_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_BUTTON = registerBlock("araucarioxylon_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).ignitedByLava()
+                    , BlockSetType.CRIMSON, 25, true));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_PRESSURE_PLATE = registerBlock("araucarioxylon_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy
+                    (Blocks.OAK_PRESSURE_PLATE).ignitedByLava(), BlockSetType.CRIMSON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_FENCE = registerBlock("araucarioxylon_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_FENCE_GATE = registerBlock("araucarioxylon_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).ignitedByLava(),
+                    SoundEvents.FENCE_GATE_OPEN, SoundEvents.FENCE_GATE_CLOSE));
+
+
+    //Araucarioxylon Door and Trapdoor
+    public static final RegistryObject<Block> ARAUCARIOXYLON_DOOR = registerBlock("araucarioxylon_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.CRIMSON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_TRAPDOOR = registerBlock("araucarioxylon_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).noOcclusion(), BlockSetType.CRIMSON));
+
+    //Araucarioxylon signs
+    public static final RegistryObject<Block> ARAUCARIOXYLON_SIGN = BLOCKS.register("araucarioxylon_sign",
+            () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_SIGN), MMWoodTypes.ARAUCARIOXYLON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_WALL_SIGN = BLOCKS.register("araucarioxylon_wall_sign",
+            () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_SIGN), MMWoodTypes.ARAUCARIOXYLON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_HANGING_SIGN = BLOCKS.register("araucarioxylon_hanging_sign",
+            () -> new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_HANGING_SIGN), MMWoodTypes.ARAUCARIOXYLON));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_WALL_HANGING_SIGN = BLOCKS.register("araucarioxylon_wall_hanging_sign",
+            () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN), MMWoodTypes.ARAUCARIOXYLON));
+
+    //Araucarioxylon Mosaic Blocks
+    public static final RegistryObject<Block> ARAUCARIOXYLON_MOSAIC = registerBlock("araucarioxylon_mosaic",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_MOSAIC_STAIRS = registerBlock("araucarioxylon_mosaic_stairs",
+            () -> new StairBlock(() -> MMBlocks.ARAUCARIOXYLON_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).ignitedByLava()));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_MOSAIC_SLAB = registerBlock("araucarioxylon_mosaic_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).ignitedByLava()));
+
+    //Araucarioxylon logs and wood
+    public static final RegistryObject<Block> ARAUCARIOXYLON_LOG = registerBlock("araucarioxylon_log",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> GIANT_ARAUCARIOXYLON_LOG_SIDE = registerBlock("giant_araucarioxylon_log_side",
+            () -> new GiantLogSide(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE = registerBlock("stripped_giant_araucarioxylon_log_side",
+            () -> new GiantLogSide(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> GIANT_ARAUCARIOXYLON_LOG_CORNER = registerBlock("giant_araucarioxylon_log_corner",
+            () -> new GiantLogCorner(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER = registerBlock("stripped_giant_araucarioxylon_log_corner",
+            () -> new GiantLogCorner(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> ARAUCARIOXYLON_BARK = registerBlock("araucarioxylon_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> STRIPPED_ARAUCARIOXYLON_LOG = registerBlock("stripped_araucarioxylon_log",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> STRIPPED_ARAUCARIOXYLON_BARK = registerBlock("stripped_araucarioxylon_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.WOOD)));
+
+    //Araucarioxylon Leaves
+    public static final RegistryObject<Block> ARAUCARIOXYLON_LEAVES = registerBlock("araucarioxylon_leaves",
+            () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
+
+    //Araucarioxylon Sapling Blocks
+//    public static final RegistryObject<Block> ARAUCARIOXYLON_SAPLING = registerBlock("araucarioxylon_sapling",
+//            () -> new SaplingBlock(new AraucarioxylonTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
+//    public static final RegistryObject<Block> POTTED_ARAUCARIOXYLON_SAPLING = registerBlock("potted_araucarioxylon_sapling",
+//            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.ARAUCARIOXYLON_SAPLING,
+//                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
 
     //Wiwaxia
     public static final RegistryObject<Block> WIWAXIA = registerBlock("wiwaxia",

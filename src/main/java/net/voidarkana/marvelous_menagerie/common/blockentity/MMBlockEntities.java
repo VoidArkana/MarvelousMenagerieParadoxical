@@ -1,6 +1,7 @@
 package net.voidarkana.marvelous_menagerie.common.blockentity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.HangingSignBlockEntity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -36,7 +37,9 @@ public class MMBlockEntities {
                             MMBlocks.SIGILLARIA_SIGN.get(),
                             MMBlocks.SIGILLARIA_WALL_SIGN.get(),
                             MMBlocks.CALAMITES_SIGN.get(),
-                            MMBlocks.CALAMITES_WALL_SIGN.get())
+                            MMBlocks.CALAMITES_WALL_SIGN.get(),
+                            MMBlocks.ARAUCARIOXYLON_SIGN.get(),
+                            MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get())
                             .build(null));
 
     public static final RegistryObject<BlockEntityType<ModHangingSignBlockEntity>> MOD_HANGING_SIGN =
@@ -47,7 +50,9 @@ public class MMBlockEntities {
                             MMBlocks.SIGILLARIA_HANGING_SIGN.get(),
                             MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
                             MMBlocks.CALAMITES_HANGING_SIGN.get(),
-                            MMBlocks.CALAMITES_WALL_HANGING_SIGN.get())
+                            MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
+                            MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(),
+                            MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get())
                             .build(null));
 
     public static final RegistryObject<BlockEntityType<CharniaBlockEntity>> CHARNIA_BLOCK_ENTITY =

@@ -5,121 +5,48 @@
   "widgets": [
     {
       "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/ophthalmo_book.png",
+      "type": "entity_profile",
+      "entity_id": "marvelous_menagerie:ophthalmo",
       "sepia": true,
-      "x": 64,
-      "y": 60,
-      "scale": 0.6,
-      "u0": 0,
-      "v0": 0,
-      "u1": 128,
-      "v1": 128,
-      "width": 128,
-      "height": 128
+      "x": 0,
+      "y": 0,
+      "scale": 1,
+      "hearts": 10,
+      "attack": 1,
+      "shields": 30,
+      "diet": "true",
+      "tame": "true"
     },
-
-
-
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 30,
-      "y": 26,
-      "scale": 1.2,
-      "u0": 0,
-      "v0": 0,
-      "u1": 26,
-      "v1": 20,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 98,
-      "y": 26,
-      "scale": 1.2,
-      "u0": 0,
-      "v0": 0,
-      "u1": 26,
-      "v1": 20,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 30,
-      "y": 94,
-      "scale": 1.2,
-      "u0": 0,
-      "v0": 0,
-      "u1": 26,
-      "v1": 20,
-      "width": 32,
-      "height": 32
-    },
-    {
-      "display_page" : 1,
-      "type": "image",
-      "image": "marvelous_menagerie:textures/gui/book/gui_pedestal.png",
-      "sepia": true,
-      "x": 98,
-      "y": 94,
-      "scale": 1.2,
-      "u0": 0,
-      "v0": 0,
-      "u1": 26,
-      "v1": 20,
-      "width": 32,
-      "height": 32
-    },
-
 
     {
       "display_page" : 1,
       "type": "item",
-      "item": "marvelous_menagerie:ophthalmo_fossil",
+      "item": "marvelous_menagerie:raw_saca",
       "sepia": true,
-      "x": 30,
-      "y": 25,
+      "x": 35,
+      "y": 150,
       "scale": 1
     },
     {
       "display_page" : 1,
       "type": "item",
-      "item": "minecraft:water_bucket",
+      "item": "marvelous_menagerie:trilo_bite",
       "sepia": true,
-      "x": 98,
-      "y": 25,
+      "x": 50,
+      "y": 150,
       "scale": 1
     },
+
+
     {
       "display_page" : 1,
       "type": "item",
       "item": "marvelous_menagerie:golden_saca",
       "sepia": true,
-      "x": 30,
-      "y": 93,
+      "x": 70,
+      "y": 150,
       "scale": 1
     },
-    {
-      "display_page" : 1,
-      "type": "item",
-      "item": "marvelous_menagerie:anomalous_goggles",
-      "sepia": true,
-      "x": 98,
-      "y": 93,
-      "scale": 1
-    },
-
 
 
     {

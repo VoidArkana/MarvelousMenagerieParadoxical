@@ -16,4 +16,12 @@ public class ModHangingSignBlockEntity extends SignBlockEntity {
     public BlockEntityType<?> getType() {
         return MMBlockEntities.MOD_HANGING_SIGN.get();
     }
+
+    public int getTextLineHeight() {
+        return 9;
+    }
+
+    public int getMaxTextLineWidth() {
+        return 60;
+    }
 }

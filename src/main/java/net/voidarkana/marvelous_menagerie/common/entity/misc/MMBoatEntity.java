@@ -38,6 +38,7 @@ public class MMBoatEntity extends Boat {
             case SIGILLARIA -> MMItems.SIGILLARIA_BOAT.get();
             case PROTOTAXITES -> MMItems.PROTOTAXITES_BOAT.get();
             case CALAMITES -> MMItems.CALAMITES_BOAT.get();
+            case ARAUCARIOXYLON -> MMItems.ARAUCARIOXYLON_BOAT.get();
         };
     }
 
@@ -67,7 +68,8 @@ public class MMBoatEntity extends Boat {
     public enum Type implements StringRepresentable {
         SIGILLARIA(MMBlocks.SIGILLARIA_PLANKS.get(), "sigillaria"),
         PROTOTAXITES(MMBlocks.PROTOTAXITES_PLANKS.get(), "prototaxites"),
-        CALAMITES(MMBlocks.CALAMITES_PLANKS.get(), "calamites");
+        CALAMITES(MMBlocks.CALAMITES_PLANKS.get(), "calamites"),
+        ARAUCARIOXYLON(MMBlocks.ARAUCARIOXYLON_PLANKS.get(), "araucarioxylon");
 
         private final String name;
         private final Block planks;

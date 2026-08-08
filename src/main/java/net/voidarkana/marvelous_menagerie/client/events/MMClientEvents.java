@@ -1,11 +1,19 @@
 package net.voidarkana.marvelous_menagerie.client.events;
 
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.util.FastColor;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -43,7 +51,10 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.misc.RiftModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.misc.WhispererModel;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.client.particles.custom.*;
+import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.event.KeyEvent;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = MarvelousMenagerie.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -176,6 +187,9 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.CALAMITES_BOAT_LAYER, BoatModel::createBodyModel);
         event.registerLayerDefinition(MMModelLayers.CALAMITES_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+
+        event.registerLayerDefinition(MMModelLayers.ARAUCARIOXYLON_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.ARAUCARIOXYLON_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
     }
 
     @SubscribeEvent
@@ -183,6 +197,21 @@ public class MMClientEvents {
         event.registerSpriteSet(MMParticles.TIME_SHARD.get(), TimeShardParticle.Provider::new);
         event.registerSpriteSet(MMParticles.RIFT.get(), RiftParticle.Provider::new);
         event.registerSpriteSet(MMParticles.ITEM_MORPH.get(), ItemMorphParticle.Provider::new);
+    }
+
+    @SubscribeEvent
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
+        event.getBlockColors().register((state, level, pos, tintIndex) ->
+                FoliageColor.getEvergreenColor(), MMBlocks.ARAUCARIOXYLON_LEAVES.get());
+    }
+
+    @SubscribeEvent
+    public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
+
+        event.getItemColors().register((stack, tintIndex) -> {
+                    BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
+                    return FastColor.ABGR32.opaque(event.getBlockColors().getColor(blockstate, null, null, tintIndex));},
+                MMBlocks.ARAUCARIOXYLON_LEAVES.get());
     }
 
     public static ShaderInstance GLOWING_SHADER, SEPIA_SHADER;

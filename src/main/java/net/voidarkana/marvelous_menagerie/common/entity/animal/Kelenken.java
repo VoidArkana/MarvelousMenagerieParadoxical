@@ -46,6 +46,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
+import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
 import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
@@ -647,8 +648,6 @@ public class Kelenken extends TamableMarvelousAnimal implements Saddleable, IAni
             } else {
                 this.level().broadcastEntityEvent(this, (byte) 6);
             }
-
-            System.out.println(this.isTame());
 
             return InteractionResult.SUCCESS;
 

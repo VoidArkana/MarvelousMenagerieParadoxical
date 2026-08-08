@@ -80,6 +80,8 @@ public class MMTags {
 
         public static final TagKey<Block> SIGILLARIA_LOG_BLOCK = tag("sigillaria_log_block");
 
+        public static final TagKey<Block> ARAUCARIOXYLON_LOG_BLOCK = tag("araucarioxylon_log_block");
+
         public static final TagKey<Block> CALAMITES_LOG_BLOCK = tag("calamites_log_block");
         public static final TagKey<Block> CALAMITES_BUNDLE_BLOCK = tag("calamites_bundle_block");
 
@@ -132,6 +134,7 @@ public class MMTags {
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
         public static final TagKey<Item> CALAMITES_LOG_ITEM = tag("calamites_log_item");
         public static final TagKey<Item> CALAMITES_BUNDLE_ITEM = tag("calamites_bundle_item");
+        public static final TagKey<Item> ARAUCARIOXYLON_LOG_ITEM = tag("araucarioxylon_log_item");
 
         public static final TagKey<Item> MYOTRAGUS_INGREDIENT = tag("myotragus_ingredient");
 

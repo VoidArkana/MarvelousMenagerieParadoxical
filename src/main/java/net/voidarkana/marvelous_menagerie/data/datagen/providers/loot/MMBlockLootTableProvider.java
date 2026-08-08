@@ -373,6 +373,51 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.add(MMBlocks.POTTED_CALAMITES_SAPLING.get(),
                 createPotFlowerItemTable(MMBlocks.CALAMITES_SAPLING.get()));
 
+
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_PLANKS.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_STAIRS.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_FENCE.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_BUTTON.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get());
+
+        this.add(MMBlocks.ARAUCARIOXYLON_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.ARAUCARIOXYLON_SLAB.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_DOOR.get(),
+                block -> createDoorTable(MMBlocks.ARAUCARIOXYLON_DOOR.get()));
+
+        this.add(MMBlocks.ARAUCARIOXYLON_SIGN.get(),
+                block -> createSingleItemTable(MMItems.ARAUCARIOXYLON_SIGN.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get(),
+                block -> createSingleItemTable(MMItems.ARAUCARIOXYLON_SIGN.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.ARAUCARIOXYLON_HANGING_SIGN.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.ARAUCARIOXYLON_HANGING_SIGN.get()));
+
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_MOSAIC.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get());
+
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_LOG.get());
+        this.dropSelf(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get());
+        this.dropSelf(MMBlocks.ARAUCARIOXYLON_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK.get());
+
+//        this.dropSelf(MMBlocks.ARAUCARIOXYLON_SAPLING.get());
+//        this.add(MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING.get(),
+//                createPotFlowerItemTable(MMBlocks.ARAUCARIOXYLON_SAPLING.get()));
+
+        this.add(MMBlocks.ARAUCARIOXYLON_LEAVES.get(),
+                block -> createLeavesDrops(MMBlocks.ARAUCARIOXYLON_LEAVES.get(), MMBlocks.SIGILLARIA_SAPLING.get(), 0.15f));
+
+        this.dropSelf(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
+        this.dropSelf(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
+        this.dropSelf(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
+        this.dropSelf(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
+
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));
 

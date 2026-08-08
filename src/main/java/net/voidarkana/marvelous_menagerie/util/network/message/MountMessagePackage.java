@@ -5,6 +5,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.network.NetworkEvent;
+import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
 import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Kelenken;
 

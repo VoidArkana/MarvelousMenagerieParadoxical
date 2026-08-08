@@ -60,15 +60,6 @@ public class MMBlockStateProvider extends BlockStateProvider {
 
         leavesBlock(MMBlocks.SIGILLARIA_LEAVES);
 
-//        simpleBlockWithItem(MMBlocks.SIGILLARIA_SAPLING.get(), models().cross(blockTexture(MMBlocks.SIGILLARIA_SAPLING.get()).getPath(),
-//                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
-
-//        simpleBlockWithItem(MMBlocks.POTTED_SIGILLARIA_SAPLING.get(), models().singleTexture("potted_sigillaria_sapling", new ResourceLocation("flower_pot_cross"), "plant",
-//                blockTexture(MMBlocks.SIGILLARIA_SAPLING.get())).renderType("cutout"));
-
-//        simpleBlockWithItem(MMBlocks.COOKSONIA.get(), models().cross(blockTexture(MMBlocks.COOKSONIA.get()).getPath(),
-//                blockTexture(MMBlocks.COOKSONIA.get())).renderType("cutout"));
-
         //prototaxites woodset
         blockWithItem(MMBlocks.PROTOTAXITES_PLANKS);
         stairsBlock(((StairBlock) MMBlocks.PROTOTAXITES_STAIRS.get()), blockTexture(MMBlocks.PROTOTAXITES_PLANKS.get()));
@@ -122,6 +113,40 @@ public class MMBlockStateProvider extends BlockStateProvider {
         blockItem(MMBlocks.CALAMITES_BUNDLED_BARK);
         blockItem(MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK);
 
+        //Araucarioxylon
+        blockWithItem(MMBlocks.ARAUCARIOXYLON_PLANKS);
+        stairsBlock(((StairBlock) MMBlocks.ARAUCARIOXYLON_STAIRS.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        slabBlock(((SlabBlock) MMBlocks.ARAUCARIOXYLON_SLAB.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        buttonBlock(((ButtonBlock) MMBlocks.ARAUCARIOXYLON_BUTTON.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        pressurePlateBlock(((PressurePlateBlock) MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        fenceBlock(((FenceBlock) MMBlocks.ARAUCARIOXYLON_FENCE.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        fenceGateBlock(((FenceGateBlock) MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) MMBlocks.ARAUCARIOXYLON_DOOR.get()), modLoc("block/araucarioxylon_door_bottom"), modLoc("block/araucarioxylon_door_top"), "cutout");
+        trapdoorBlockWithRenderType(((TrapDoorBlock) MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get()), modLoc("block/araucarioxylon_trapdoor"), true, "cutout");
+
+        blockWithItem(MMBlocks.ARAUCARIOXYLON_MOSAIC);
+        stairsBlock(((StairBlock) MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_MOSAIC.get()));
+        slabBlock(((SlabBlock) MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_MOSAIC.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_MOSAIC.get()));
+
+        signBlock(((StandingSignBlock) MMBlocks.ARAUCARIOXYLON_SIGN.get()), ((WallSignBlock) MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get()),
+                blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+        hangingSignBlock(MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(), MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get(),
+                blockTexture(MMBlocks.ARAUCARIOXYLON_PLANKS.get()));
+
+        logBlock(((RotatedPillarBlock) MMBlocks.ARAUCARIOXYLON_LOG.get()));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()), blockTexture(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()),
+                new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_araucarioxylon_log_top"));
+        blockItem(MMBlocks.ARAUCARIOXYLON_LOG);
+        blockItem(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG);
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.ARAUCARIOXYLON_BARK.get()), blockTexture(MMBlocks.ARAUCARIOXYLON_LOG.get()),
+                blockTexture(MMBlocks.ARAUCARIOXYLON_LOG.get()));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK.get()), blockTexture(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()),
+                blockTexture(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()));
+        blockItem(MMBlocks.ARAUCARIOXYLON_BARK);
+        blockItem(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK);
+        leavesBlock(MMBlocks.ARAUCARIOXYLON_LEAVES);
 
         //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),

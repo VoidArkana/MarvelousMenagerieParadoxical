@@ -6,17 +6,14 @@
     Many resources relating to time can be made and found.
     §lChronotite§r is a curious metal present in the bodies of time abominations, and has mysterious latent temporal properties.
 
-    Combining it with §lOpal§r in a crafting table will allow us to create a §lChronotite§r §lWatch§r, a tool that will allow us to pinpoint a moment in time and recall
-creatures from a bygone age.
+    Combining it with §lOpal§r in a crafting table will allow us to create a §lChronotite§r §lWatch§r, a tool that will allow us to pinpoint a moment in time and recall creatures from a bygone age.
 
 
 
 
 
 
-    §lChronotite§r
-§lPedestals§r and
-§lChronotite§r §lAltars§r are blocks that will aid us in bringing creatures from the past.
+    §lChronotite§r §lPedestals§r and §lChronotite§r §lAltars§r are blocks that will aid us in bringing creatures from the past.
     Pedestals can also be used to display items in a fanciful way.
 
 

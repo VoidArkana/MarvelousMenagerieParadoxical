@@ -616,8 +616,6 @@ public class Inostrancevia extends TamableMarvelousAnimal implements NeutralMob,
                 this.level().broadcastEntityEvent(this, (byte) 6);
             }
 
-            System.out.println(this.isTame());
-
             return InteractionResult.SUCCESS;
 
         } else if (hand == InteractionHand.MAIN_HAND && this.isTame() && this.isOwnedBy(player)

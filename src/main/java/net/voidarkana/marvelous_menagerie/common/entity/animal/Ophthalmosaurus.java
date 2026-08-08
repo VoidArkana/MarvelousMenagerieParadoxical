@@ -49,6 +49,7 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.Vec3;
+import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
 import net.voidarkana.marvelous_menagerie.client.events.MMEventBusClientEvents;
 import net.voidarkana.marvelous_menagerie.client.sound.MMSounds;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;

@@ -186,11 +186,11 @@ public class EntityProfileWidget extends BookWidget {
             if (shields > 0){
                 renderIcon(SHIELD, poseStack, bufferSource, 2, shields);
             }
-            if (tame){
-                renderIcon(TAME, poseStack, bufferSource, 3, 0);
-            }
             if (diet){
-                renderIcon(DIET, poseStack, bufferSource, 4, 0);
+                renderIcon(DIET, poseStack, bufferSource, 3, 0);
+            }
+            if (tame){
+                renderIcon(TAME, poseStack, bufferSource, 4, 0);
             }
 
             poseStack.popPose();
