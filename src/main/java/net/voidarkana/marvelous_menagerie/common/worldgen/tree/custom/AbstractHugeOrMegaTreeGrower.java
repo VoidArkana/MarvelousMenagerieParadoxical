@@ -16,19 +16,24 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nullable;
 
-public abstract class AbstractHugeTreeGrower extends AbstractTreeGrower {
+public abstract class AbstractHugeOrMegaTreeGrower extends AbstractTreeGrower {
 
     public boolean growTree(ServerLevel pLevel, ChunkGenerator pGenerator, BlockPos pPos, BlockState pState, RandomSource pRandom) {
         for(int i = 1; i >= -1; --i) {
             for(int j = 1; j >= -1; --j) {
                 if (isThreeByThreeSapling(pState, pLevel, pPos, i, j)) {
                     return this.placeHumongous(pLevel, pGenerator, pPos, pState, pRandom, i, j);
+                }else if (isTwoByTwoSapling(pState, pLevel, pPos, i, j)) {
+                    return this.placeMega(pLevel, pGenerator, pPos, pState, pRandom, i, j);
                 }
             }
         }
 
         return super.growTree(pLevel, pGenerator, pPos, pState, pRandom);
     }
+
+    @Nullable
+    protected abstract ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource pRandom);
 
     @Nullable
     protected abstract ResourceKey<ConfiguredFeature<?, ?>> getConfiguredHugeFeature(RandomSource pRandom);
@@ -81,6 +86,37 @@ public abstract class AbstractHugeTreeGrower extends AbstractTreeGrower {
         }
     }
 
+    public boolean placeMega(ServerLevel pLevel, ChunkGenerator pGenerator, BlockPos pPos, BlockState pState, RandomSource pRandom, int pBranchX, int pBranchY) {
+        ResourceKey<ConfiguredFeature<?, ?>> resourcekey = this.getConfiguredMegaFeature(pRandom);
+        if (resourcekey == null) {
+            return false;
+        } else {
+            Holder<ConfiguredFeature<?, ?>> holder = pLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolder(resourcekey).orElse((Holder.Reference<ConfiguredFeature<?, ?>>)null);
+            var event = net.minecraftforge.event.ForgeEventFactory.blockGrowFeature(pLevel, pRandom, pPos, holder);
+            holder = event.getFeature();
+            if (event.getResult() == net.minecraftforge.eventbus.api.Event.Result.DENY) return false;
+            if (holder == null) {
+                return false;
+            } else {
+                ConfiguredFeature<?, ?> configuredfeature = holder.value();
+                BlockState blockstate = Blocks.AIR.defaultBlockState();
+                pLevel.setBlock(pPos.offset(pBranchX, 0, pBranchY), blockstate, 4);
+                pLevel.setBlock(pPos.offset(pBranchX + 1, 0, pBranchY), blockstate, 4);
+                pLevel.setBlock(pPos.offset(pBranchX, 0, pBranchY + 1), blockstate, 4);
+                pLevel.setBlock(pPos.offset(pBranchX + 1, 0, pBranchY + 1), blockstate, 4);
+                if (configuredfeature.place(pLevel, pGenerator, pRandom, pPos.offset(pBranchX, 0, pBranchY))) {
+                    return true;
+                } else {
+                    pLevel.setBlock(pPos.offset(pBranchX, 0, pBranchY), pState, 4);
+                    pLevel.setBlock(pPos.offset(pBranchX + 1, 0, pBranchY), pState, 4);
+                    pLevel.setBlock(pPos.offset(pBranchX, 0, pBranchY + 1), pState, 4);
+                    pLevel.setBlock(pPos.offset(pBranchX + 1, 0, pBranchY + 1), pState, 4);
+                    return false;
+                }
+            }
+        }
+    }
+
     public static boolean isThreeByThreeSapling(BlockState pBlockUnder, BlockGetter pLevel, BlockPos pPos, int pXOffset, int pZOffset) {
         Block block = pBlockUnder.getBlock();
         return pLevel.getBlockState(pPos.offset(pXOffset, 0, pZOffset+1)).is(block)
@@ -92,6 +128,13 @@ public abstract class AbstractHugeTreeGrower extends AbstractTreeGrower {
                 && pLevel.getBlockState(pPos.offset(pXOffset - 1, 0, pZOffset - 1)).is(block)
                 && pLevel.getBlockState(pPos.offset(pXOffset - 1, 0, pZOffset)).is(block)
                 && pLevel.getBlockState(pPos.offset(pXOffset - 1, 0, pZOffset + 1)).is(block);
+    }
 
+    public static boolean isTwoByTwoSapling(BlockState pBlockUnder, BlockGetter pLevel, BlockPos pPos, int pXOffset, int pZOffset) {
+        Block block = pBlockUnder.getBlock();
+        return pLevel.getBlockState(pPos.offset(pXOffset, 0, pZOffset)).is(block)
+                && pLevel.getBlockState(pPos.offset(pXOffset + 1, 0, pZOffset)).is(block)
+                && pLevel.getBlockState(pPos.offset(pXOffset, 0, pZOffset + 1)).is(block)
+                && pLevel.getBlockState(pPos.offset(pXOffset + 1, 0, pZOffset + 1)).is(block);
     }
 }

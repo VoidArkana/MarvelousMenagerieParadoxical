@@ -775,6 +775,87 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .requires(Blocks.CHEST)
                 .unlockedBy(getHasName(MMBlocks.CALAMITES_PLANKS.get()), has(MMBlocks.CALAMITES_PLANKS.get()))
                 .save(consumer);
+
+
+        //Araucarioxylon woodset
+        makePlanks(MMBlocks.ARAUCARIOXYLON_PLANKS, MMTags.Items.ARAUCARIOXYLON_LOG_ITEM).save(consumer);
+        makeWood(MMBlocks.ARAUCARIOXYLON_BARK, MMBlocks.ARAUCARIOXYLON_LOG).save(consumer);
+        makeWood(MMBlocks.ARAUCARIOXYLON_BARK, MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE).save(consumer, this.name("araucarioxylon_bark_from_side"));
+        makeWood(MMBlocks.ARAUCARIOXYLON_BARK, MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER).save(consumer, this.name("araucarioxylon_bark_from_corner"));
+        makeWood(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK, MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG).save(consumer);
+        makeWood(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK, MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE).save(consumer, this.name("stripped_araucarioxylon_bark_from_side"));
+        makeWood(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK, MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER).save(consumer, this.name("stripped_araucarioxylon_bark_from_corner"));
+        makeStairs(MMBlocks.ARAUCARIOXYLON_PLANKS, MMBlocks.ARAUCARIOXYLON_STAIRS).save(consumer);
+        makeStairs(MMBlocks.ARAUCARIOXYLON_MOSAIC, MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS).save(consumer);
+        makeSlab(MMBlocks.ARAUCARIOXYLON_PLANKS, MMBlocks.ARAUCARIOXYLON_SLAB).save(consumer);
+        makeSlab(MMBlocks.ARAUCARIOXYLON_MOSAIC, MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB).save(consumer);
+        makeFence(MMBlocks.ARAUCARIOXYLON_FENCE, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+        makeFenceGate(MMBlocks.ARAUCARIOXYLON_FENCE_GATE, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+        makeDoor(MMBlocks.ARAUCARIOXYLON_DOOR, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+        makeTrapdoor(MMBlocks.ARAUCARIOXYLON_TRAPDOOR, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+        makeButton(MMBlocks.ARAUCARIOXYLON_BUTTON, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+        makePressurePlate(MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE, MMBlocks.ARAUCARIOXYLON_PLANKS).save(consumer);
+
+        //Araucarioxylon mosaic
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.ARAUCARIOXYLON_MOSAIC.get(), 1)
+                .pattern("S")
+                .pattern("S")
+                .define('S', MMBlocks.ARAUCARIOXYLON_SLAB.get())
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_LOG.get()), has(MMBlocks.ARAUCARIOXYLON_LOG.get()))
+                .save(consumer);
+
+        //Araucarioxylon sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.ARAUCARIOXYLON_SIGN.get(), 3)
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern(" # ")
+                .define('S', MMBlocks.ARAUCARIOXYLON_PLANKS.get())
+                .define('#', Tags.Items.RODS_WOODEN)
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_LOG.get()), has(MMBlocks.ARAUCARIOXYLON_LOG.get()))
+                .save(consumer);
+
+        //Araucarioxylon hanging sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.ARAUCARIOXYLON_HANGING_SIGN.get(), 6)
+                .pattern("# #")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('#', Items.CHAIN)
+                .define('S', MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get())
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_LOG.get()), has(MMBlocks.ARAUCARIOXYLON_LOG.get()))
+                .save(consumer);
+
+        //Araucarioxylon boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, MMItems.ARAUCARIOXYLON_BOAT.get(), 1)
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', MMBlocks.ARAUCARIOXYLON_PLANKS.get())
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_PLANKS.get()), has(MMBlocks.ARAUCARIOXYLON_PLANKS.get()))
+                .save(consumer);
+
+        //Araucarioxylon chest boat
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, MMItems.ARAUCARIOXYLON_CHEST_BOAT.get(), 1)
+                .requires(MMItems.ARAUCARIOXYLON_BOAT.get())
+                .requires(Blocks.CHEST)
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_PLANKS.get()), has(MMBlocks.ARAUCARIOXYLON_PLANKS.get()))
+                .save(consumer);
+
+        //Giant Araucarioxylon log side
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get(), 2)
+                .pattern("B")
+                .pattern("W")
+                .define('B', MMBlocks.ARAUCARIOXYLON_BARK.get())
+                .define('W', MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get())
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_BARK.get()), has(MMBlocks.ARAUCARIOXYLON_BARK.get()))
+                .save(consumer);
+
+        //Giant Araucarioxylon log corner
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get(), 4)
+                .pattern("BB")
+                .pattern("BW")
+                .define('B', MMBlocks.ARAUCARIOXYLON_BARK.get())
+                .define('W', MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get())
+                .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_BARK.get()), has(MMBlocks.ARAUCARIOXYLON_BARK.get()))
+                .save(consumer);
     }
 
     public ShapelessRecipeBuilder makePlanks(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {

@@ -1,5 +1,6 @@
 package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -12,6 +13,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
+
+import java.util.function.Supplier;
 
 public class MMItemModelProvider extends ItemModelProvider {
 
@@ -116,7 +119,9 @@ public class MMItemModelProvider extends ItemModelProvider {
 
         simpleItem(MMItems.ARAUCARIOXYLON_BOAT);
         simpleItem(MMItems.ARAUCARIOXYLON_CHEST_BOAT);
+        simpleBlockItem(MMBlocks.ARAUCARIOXYLON_SAPLING);
 
+        simpleBlockItemBlockTexture(MMBlocks.FERN_SPROUTS);
 
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);
@@ -386,6 +391,12 @@ public class MMItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(MMBlocks.PERMAFROST_BRICKS_STAIRS);
         wallItem(MMBlocks.PERMAFROST_BRICKS_WALL, MMBlocks.PERMAFROST_BRICKS);
 
+    }
+
+    private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(MarvelousMenagerie.MOD_ID,"block/" + item.getId().getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){

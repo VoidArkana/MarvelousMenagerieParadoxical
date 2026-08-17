@@ -140,6 +140,10 @@ public class MarvelousMenagerie
             ComposterBlock.COMPOSTABLES.put(MMBlocks.CALAMITES_BRANCH.get().asItem(), 0.4F);
 
             ComposterBlock.COMPOSTABLES.put(MMBlocks.OTOZAMITES_BUSH.get().asItem(), 0.35F);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.ARAUCARIOXYLON_SAPLING.getId(), MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.ARAUCARIOXYLON_SAPLING.get().asItem(), 0.8F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.ARAUCARIOXYLON_SAPLING.get().asItem(), 0.4F);
         });
     }
 

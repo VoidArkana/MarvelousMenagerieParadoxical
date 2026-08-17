@@ -228,6 +228,11 @@ public class Apthoroblattina extends MarvelousAnimal {
         }
     }
 
+    @Override
+    public boolean isImmobile() {
+        return super.isImmobile() || this.isJohn();
+    }
+
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource pDamageSource) {

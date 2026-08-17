@@ -4,6 +4,9 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -406,17 +409,24 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.ARAUCARIOXYLON_BARK.get());
         this.dropSelf(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK.get());
 
-//        this.dropSelf(MMBlocks.ARAUCARIOXYLON_SAPLING.get());
-//        this.add(MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING.get(),
-//                createPotFlowerItemTable(MMBlocks.ARAUCARIOXYLON_SAPLING.get()));
+        this.add(MMBlocks.ARAUCARIOXYLON_SAPLING.get(),
+                block -> this.createSinglePropConditionTable(MMBlocks.ARAUCARIOXYLON_SAPLING.get(), DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+        this.add(MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING.get(),
+                createPotFlowerItemTable(MMBlocks.ARAUCARIOXYLON_SAPLING.get()));
 
         this.add(MMBlocks.ARAUCARIOXYLON_LEAVES.get(),
-                block -> createLeavesDrops(MMBlocks.ARAUCARIOXYLON_LEAVES.get(), MMBlocks.SIGILLARIA_SAPLING.get(), 0.15f));
+                block -> createLeavesDrops(MMBlocks.ARAUCARIOXYLON_LEAVES.get(), MMBlocks.ARAUCARIOXYLON_SAPLING.get(), 0.07f));
 
         this.dropSelf(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
         this.dropSelf(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get());
         this.dropSelf(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
         this.dropSelf(MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get());
+
+        this.dropSelf(MMBlocks.MESOZOIL.get());
+        this.otherWhenSilkTouch(MMBlocks.MESOZOIC_PODZOL.get(), MMBlocks.MESOZOIL.get());
+        this.otherWhenSilkTouch(MMBlocks.MOSSY_MESOZOIL.get(), MMBlocks.MESOZOIL.get());
+        this.otherWhenSilkTouch(MMBlocks.SPARCE_MOSSY_MESOZOIL.get(), MMBlocks.MESOZOIL.get());
+        this.add(MMBlocks.FERN_SPROUTS.get(), block -> createShearsOnlyDrop(MMBlocks.FERN_SPROUTS.get()));
 
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));

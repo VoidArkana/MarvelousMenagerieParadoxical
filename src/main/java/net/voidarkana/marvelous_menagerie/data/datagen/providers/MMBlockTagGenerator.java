@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -24,6 +25,14 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+
+        this.tag(BlockTags.REPLACEABLE_BY_TREES).add(
+                MMBlocks.ARAUCARIOXYLON_SAPLING.get()
+        );
+
+        this.tag(BlockTags.SWORD_EFFICIENT).add(
+                MMBlocks.FERN_SPROUTS.get()
+        );
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
 
@@ -226,7 +235,12 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.PERMAFROST_MOSAIC_STAIRS.get(),
                 MMBlocks.PERMAFROST_MOSAIC_SLAB.get(),
                 MMBlocks.CHISELED_PERMAFROST.get(),
-                MMBlocks.PERMAFROST_FOSSIL_BLOCK.get()
+                MMBlocks.PERMAFROST_FOSSIL_BLOCK.get(),
+
+                MMBlocks.MESOZOIL.get(),
+                MMBlocks.MESOZOIC_PODZOL.get(),
+                MMBlocks.SPARCE_MOSSY_MESOZOIL.get(),
+                MMBlocks.MOSSY_MESOZOIL.get()
         );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(
@@ -320,9 +334,10 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get(),
                 MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get(),
                 MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get(),
-                MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get(),
                 MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get(),
-                MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get()
+                MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get(),
+
+                MMBlocks.FERN_SPROUTS.get()
         );
 
         this.tag(BlockTags.PLANKS).add(
@@ -695,7 +710,15 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.PERMAFROST_FOSSIL_BLOCK.get()
         );
 
+        this.tag(MMTags.Blocks.MEZOSOIL_SPREADABLE)
+                .add(MMBlocks.MOSSY_MESOZOIL.get(),
+                        MMBlocks.SPARCE_MOSSY_MESOZOIL.get());
+
         this.tag(BlockTags.DIRT)
+                .add(MMBlocks.MESOZOIC_PODZOL.get())
+                .add(MMBlocks.MESOZOIL.get())
+                .add(MMBlocks.SPARCE_MOSSY_MESOZOIL.get())
+                .add(MMBlocks.MOSSY_MESOZOIL.get())
                 .add(MMBlocks.OTOZAMITES_BUSH.get());
 
         this.tag(MMTags.Blocks.DINOSAUR_NEST)

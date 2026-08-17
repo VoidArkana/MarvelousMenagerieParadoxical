@@ -171,6 +171,13 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.COOKSONIA.get());
                         output.accept(MMBlocks.OTOZAMITES_BUSH.get());
 
+                        output.accept(MMBlocks.FERN_SPROUTS.get());
+
+                        output.accept(MMBlocks.MESOZOIL.get());
+                        output.accept(MMBlocks.MOSSY_MESOZOIL.get());
+                        output.accept(MMBlocks.SPARCE_MOSSY_MESOZOIL.get());
+                        output.accept(MMBlocks.MESOZOIC_PODZOL.get());
+
                         output.accept(MMBlocks.ARAUCARIOXYLON_PLANKS.get());
 
                         output.accept(MMBlocks.ARAUCARIOXYLON_LOG.get());
@@ -197,7 +204,7 @@ public class MMCreativeTabs {
                         output.accept(MMItems.ARAUCARIOXYLON_SIGN.get());
                         output.accept(MMItems.ARAUCARIOXYLON_HANGING_SIGN.get());
                         output.accept(MMBlocks.ARAUCARIOXYLON_LEAVES.get());
-//                        output.accept(MMBlocks.ARAUCARIOXYLON_SAPLING.get());
+                        output.accept(MMBlocks.ARAUCARIOXYLON_SAPLING.get());
 
                         output.accept(MMItems.ARAUCARIOXYLON_BOAT.get());
                         output.accept(MMItems.ARAUCARIOXYLON_CHEST_BOAT.get());

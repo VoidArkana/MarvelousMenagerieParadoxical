@@ -113,6 +113,8 @@ public class MMTags {
 
         public static final TagKey<Block> FOSSIL_BLOCKS = tag("fossil_blocks");
 
+        public static final TagKey<Block> MEZOSOIL_SPREADABLE = tag("mezosoil_spreadable");
+
         private static TagKey<Block> tag(String name){
             return BlockTags.create(new ResourceLocation(MarvelousMenagerie.MOD_ID, name));
         }

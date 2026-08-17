@@ -21,6 +21,7 @@ import net.voidarkana.marvelous_menagerie.common.block.custom.plant.*;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.AraucarioxylonTreeGrower;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.CalamitesTreeGrower;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
@@ -383,12 +384,12 @@ public class MMBlocks {
     public static final RegistryObject<Block> ARAUCARIOXYLON_LEAVES = registerBlock("araucarioxylon_leaves",
             () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES)));
 
-    //Araucarioxylon Sapling Blocks
-//    public static final RegistryObject<Block> ARAUCARIOXYLON_SAPLING = registerBlock("araucarioxylon_sapling",
-//            () -> new SaplingBlock(new AraucarioxylonTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING).noOcclusion().noCollission()));
-//    public static final RegistryObject<Block> POTTED_ARAUCARIOXYLON_SAPLING = registerBlock("potted_araucarioxylon_sapling",
-//            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.ARAUCARIOXYLON_SAPLING,
-//                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+//    Araucarioxylon Sapling Blocks
+    public static final RegistryObject<Block> ARAUCARIOXYLON_SAPLING = registerBlock("araucarioxylon_sapling",
+            () -> new TallSaplingBlock(new AraucarioxylonTreeGrower(), BlockBehaviour.Properties.copy(Blocks.SPRUCE_SAPLING).noOcclusion().noCollission()));
+    public static final RegistryObject<Block> POTTED_ARAUCARIOXYLON_SAPLING = registerBlock("potted_araucarioxylon_sapling",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.ARAUCARIOXYLON_SAPLING,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_SPRUCE_SAPLING).noOcclusion()));
 
     //Wiwaxia
     public static final RegistryObject<Block> WIWAXIA = registerBlock("wiwaxia",
@@ -411,6 +412,21 @@ public class MMBlocks {
     //Otozamites
     public static final RegistryObject<Block> OTOZAMITES_BUSH = registerBlock("otozamites_bush",
             ()-> new OtozamitesBush(BlockBehaviour.Properties.copy(Blocks.AZALEA), ModConfiguredFeatures.OTOZAMITES_KEY));
+
+    //Mesozoil
+    public static final RegistryObject<Block> MESOZOIL = registerBlock("mesozoil",
+            ()-> new SpreadableDirtBlock(BlockBehaviour.Properties.copy(Blocks.DIRT), MMTags.Blocks.MEZOSOIL_SPREADABLE));
+    public static final RegistryObject<Block> SPARCE_MOSSY_MESOZOIL = registerBlock("sparce_mossy_mesozoil",
+            ()-> new NyliumLikeGrassyBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).sound(SoundType.MOSS),
+                    MMBlocks.MESOZOIL.get(), ModConfiguredFeatures.MESOZOIL_VEGETATION_BONEMEAL));
+    public static final RegistryObject<Block> MOSSY_MESOZOIL = registerBlock("mossy_mesozoil",
+            ()-> new NyliumLikeGrassyBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).sound(SoundType.MOSS),
+                    MMBlocks.MESOZOIL.get(), ModConfiguredFeatures.MESOZOIL_VEGETATION_BONEMEAL));
+    public static final RegistryObject<Block> MESOZOIC_PODZOL = registerBlock("mesozoic_podzol",
+            ()-> new Block(BlockBehaviour.Properties.copy(Blocks.PODZOL)));
+    public static final RegistryObject<Block> FERN_SPROUTS = registerBlock("fern_sprouts",
+            ()-> new CustomTallGrassBlock(BlockBehaviour.Properties.copy(Blocks.FERN), Blocks.FERN));
+
 
     //April Fools
     public static final RegistryObject<Block> CHUD_BLOCK = registerBlock("chud_block",

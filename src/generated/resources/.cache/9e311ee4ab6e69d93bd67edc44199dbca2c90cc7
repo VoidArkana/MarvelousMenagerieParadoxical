@@ -1,4 +1,4 @@
-// 1.20.1	2026-08-07T10:47:05.7015639	Item Models: marvelous_menagerie
+// 1.20.1	2026-08-08T11:25:05.3446936	Item Models: marvelous_menagerie
 f1beaaba90d54436c7df39f75ea0f9de1d59a9b2 assets/marvelous_menagerie/models/item/anomalocaris_bucket.json
 ddfa6dc18fe3f43748810cd2165d1457615eadce assets/marvelous_menagerie/models/item/anomalocaris_lens.json
 3e5c34eef2c4542ebd3921dff7736e25beeb1329 assets/marvelous_menagerie/models/item/anomalocaris_scute.json
@@ -19,6 +19,7 @@ c96af79cf7c6ad81b55c4347c1879039ef02157f assets/marvelous_menagerie/models/item/
 27ddaf7955ec71f6feda8b8d1144e1d06c65ff4a assets/marvelous_menagerie/models/item/araucarioxylon_mosaic_slab.json
 009afb0eeda8cee5e224b298e071751f03fec3ab assets/marvelous_menagerie/models/item/araucarioxylon_mosaic_stairs.json
 0ab51267b5611cae95f80ceff18e4efe15b17fd4 assets/marvelous_menagerie/models/item/araucarioxylon_pressure_plate.json
+a5b939cab3ef9b59ddc18f68f6990ad17f0bb21c assets/marvelous_menagerie/models/item/araucarioxylon_sapling.json
 4aa811c77ff66897ca1717933d0da367944812db assets/marvelous_menagerie/models/item/araucarioxylon_sign.json
 f4ea23e9ee44f20a0ea1a617a4186da64307ffce assets/marvelous_menagerie/models/item/araucarioxylon_slab.json
 9bf6f9a19a377b7b81fc7739c69673537f0332b5 assets/marvelous_menagerie/models/item/araucarioxylon_stairs.json
@@ -106,6 +107,7 @@ d3e4dc76bec5d4bb3e55c1c4c54067a38b9b5d45 assets/marvelous_menagerie/models/item/
 0f37697742955c74cc2167b063bd2c8160c892f5 assets/marvelous_menagerie/models/item/falcatus_bucket.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/falcatus_spawn_egg.json
 1cb99d0e9f2e528e2edec7abad521c347f4cf1e1 assets/marvelous_menagerie/models/item/falca_fossil.json
+0d78aa628d7d3a036aa633f3844feeffef8992e1 assets/marvelous_menagerie/models/item/fern_sprouts.json
 38fc5c6d9b014f217ec0737fb2480368675e32f4 assets/marvelous_menagerie/models/item/flubber_fossil.json
 63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/marvelous_menagerie/models/item/flubber_spawn_egg.json
 d2b08f2cbc1194d56279c762fe3c0a1c5ec0c8a9 assets/marvelous_menagerie/models/item/gabbro_bricks_slab.json

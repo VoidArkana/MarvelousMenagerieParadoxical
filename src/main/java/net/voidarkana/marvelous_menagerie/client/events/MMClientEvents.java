@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -203,6 +204,10 @@ public class MMClientEvents {
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event){
         event.getBlockColors().register((state, level, pos, tintIndex) ->
                 FoliageColor.getEvergreenColor(), MMBlocks.ARAUCARIOXYLON_LEAVES.get());
+
+        event.getBlockColors().register((state, level, pos, tintIndex) -> {
+            return level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor();
+        }, MMBlocks.FERN_SPROUTS.get());
     }
 
     @SubscribeEvent
@@ -211,7 +216,8 @@ public class MMClientEvents {
         event.getItemColors().register((stack, tintIndex) -> {
                     BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
                     return FastColor.ABGR32.opaque(event.getBlockColors().getColor(blockstate, null, null, tintIndex));},
-                MMBlocks.ARAUCARIOXYLON_LEAVES.get());
+                MMBlocks.ARAUCARIOXYLON_LEAVES.get(),
+                MMBlocks.FERN_SPROUTS.get());
     }
 
     public static ShaderInstance GLOWING_SHADER, SEPIA_SHADER;

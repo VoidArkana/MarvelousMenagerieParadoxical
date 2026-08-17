@@ -3,13 +3,16 @@ package net.voidarkana.marvelous_menagerie.data.datagen.providers;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
+import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 public class MMBlockStateProvider extends BlockStateProvider {
 
@@ -147,6 +150,22 @@ public class MMBlockStateProvider extends BlockStateProvider {
         blockItem(MMBlocks.ARAUCARIOXYLON_BARK);
         blockItem(MMBlocks.STRIPPED_ARAUCARIOXYLON_BARK);
         leavesBlock(MMBlocks.ARAUCARIOXYLON_LEAVES);
+        this.doublePlantBlockBlock(((DoublePlantBlock) MMBlocks.ARAUCARIOXYLON_SAPLING.get()), modLoc("block/araucarioxylon_sapling_bottom"),
+                modLoc("block/araucarioxylon_sapling_top"));
+
+
+        //mesozoil
+        blockWithItem(MMBlocks.MESOZOIL);
+        nonRotateablePillarBlock(MMBlocks.SPARCE_MOSSY_MESOZOIL,
+                "sparce_mossy_mesozoil_top", "mesozoil", "sparce_mossy_mesozoil_side");
+        nonRotateablePillarBlock(MMBlocks.MOSSY_MESOZOIL,
+                "mossy_mesozoil_top", "mesozoil", "mossy_mesozoil_side");
+        nonRotateablePillarBlockPathSpecific(MMBlocks.MESOZOIC_PODZOL,
+                "block/podzol_top", "marvelous_menagerie:block/mesozoil", "marvelous_menagerie:block/mesozoic_podzol_side");
+
+        simpleBlockWithItem(MMBlocks.FERN_SPROUTS.get(),
+                models().withExistingParent(MMBlocks.FERN_SPROUTS.getId().getPath(), mcLoc("block/tinted_cross"))
+                        .texture("cross", modLoc("block/fern_sprouts")).renderType("cutout"));
 
         //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),
@@ -358,6 +377,36 @@ public class MMBlockStateProvider extends BlockStateProvider {
 
         simpleBlockWithItem(blockRegistryObject.get(),
                 models().cubeBottomTop(name(blockRegistryObject.get()), rSide, rBottom, rTop));
+    }
+
+    private void nonRotateablePillarBlockPathSpecific(RegistryObject<Block> blockRegistryObject, String top, String bottom, String side){
+        ResourceLocation rSide = new ResourceLocation(side);
+        ResourceLocation rTop = new ResourceLocation(top);
+        ResourceLocation rBottom = new ResourceLocation(bottom);
+
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().cubeBottomTop(name(blockRegistryObject.get()), rSide, rBottom, rTop));
+    }
+
+    private void doublePlantBlockBlock(DoublePlantBlock block, ResourceLocation pBottom, ResourceLocation pTop) {
+        ModelFile bottom = models().cross(key(block).toString() + "_bottom", pBottom).renderType("cutout");
+        ModelFile top = models().cross(key(block).toString() + "_top", pTop).renderType("cutout");
+        this.doublePlantBlockBlockStates(block, bottom, top);
+    }
+
+    public void doublePlantBlockBlockStates(DoublePlantBlock block, ModelFile bottom, ModelFile top) {
+        getVariantBuilder(block).forAllStates(state -> {
+            boolean lower = state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.LOWER;
+
+            ModelFile model = null;
+            if (lower) {
+                model = bottom;
+            } else {
+                model = top;
+            }
+
+            return ConfiguredModel.builder().modelFile(model).build();
+        });
     }
 
     private String name(Block block) {

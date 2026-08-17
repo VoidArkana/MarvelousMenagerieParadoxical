@@ -6,6 +6,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.CornerGiantTrunkPlacer;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeAraucarioxylonTrunkPlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaTrunkPlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaTrunkPlacer;
 
@@ -18,6 +20,12 @@ public class ModTrunkPlacerTypes {
 
     public static final RegistryObject<TrunkPlacerType<HugeSigillariaTrunkPlacer>> HUGE_SIGILLARIA_TRUNK_PLACER =
             TRUNK_PLACER.register("huge_sigillaria_trunk_placer", ()-> new TrunkPlacerType<>(HugeSigillariaTrunkPlacer.CODEC));
+
+    public static final RegistryObject<TrunkPlacerType<CornerGiantTrunkPlacer>> MEGA_ARAUCARIOXYLON_TRUNK_PLACER =
+            TRUNK_PLACER.register("mega_araucarioxylon_trunk_placer", ()-> new TrunkPlacerType<>(CornerGiantTrunkPlacer.CODEC));
+
+    public static final RegistryObject<TrunkPlacerType<HugeAraucarioxylonTrunkPlacer>> HUGE_ARAUCARIOXYLON_TRUNK_PLACER =
+            TRUNK_PLACER.register("huge_araucarioxylon_trunk_placer", ()-> new TrunkPlacerType<>(HugeAraucarioxylonTrunkPlacer.CODEC));
 
     public static void register(IEventBus eventBus){
         TRUNK_PLACER.register(eventBus);

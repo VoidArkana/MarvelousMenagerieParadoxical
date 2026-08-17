@@ -1,39 +1,58 @@
 package net.voidarkana.marvelous_menagerie.common.worldgen;
 
+import com.google.common.collect.ImmutableList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.valueproviders.IntProviderType;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.VegetationPatchFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
-import net.voidarkana.marvelous_menagerie.common.worldgen.features.CalamitesFeature;
-import net.voidarkana.marvelous_menagerie.common.worldgen.features.HugePrototaxitesFeature;
-import net.voidarkana.marvelous_menagerie.common.worldgen.features.OtozamitesFeature;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaFoliagePlacer;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeSigillariaTrunkPlacer;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaFoliagePlacer;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.SigillariaTrunkPlacer;
+import net.voidarkana.marvelous_menagerie.common.worldgen.features.*;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.*;
 import net.voidarkana.marvelous_menagerie.common.worldgen.util.CalamitesFeatureConfiguration;
 import net.voidarkana.marvelous_menagerie.common.worldgen.util.HugePrototaxitesFeatureConfiguration;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class ModConfiguredFeatures {
@@ -49,6 +68,9 @@ public class ModConfiguredFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> OTOZAMITES_FEATURE =
             register_feature("otozamites_feature", () -> new OtozamitesFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_PATCH = registerKey("mesozoil_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_DECORATION = registerKey("mesozoil_decoration");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_VEGETATION_BONEMEAL = registerKey("mesozoil_vegetation_bonemeal");
     //plants
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_KEY = registerKey("sigillaria");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SIGILLARIA_HUGE = registerKey("sigillaria_huge");
@@ -57,6 +79,10 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CALAMITES_KEY = registerKey("calamites");
     public static final ResourceKey<ConfiguredFeature<?, ?>> OTOZAMITES_KEY = registerKey("otozamites");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_KEY =  registerKey("araucarioxlyon");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_MEGA = registerKey("araucarioxlyon_mega");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_HUGE = registerKey("araucarioxlyon_huge");
 
     //fossils
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHALE_KEY = registerKey("shale");
@@ -88,6 +114,13 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> PERMAFROST_FOSSIL_KEY = registerKey("permafrost_fossil");
 
 
+    public static final RegistryObject<Feature<HugeTreeConfiguration>> HUGE_TREE =
+            register_feature("huge_tree", () -> new HugeTreeFeature(HugeTreeConfiguration.CODEC));
+
+    public static final RegistryObject<Feature<VegetationPatchConfiguration>> VEGETATION_CIRCLES_FEATURE =
+            register_feature("vegetation_circles_feature", () -> new VegetationCirclesFeatures(VegetationPatchConfiguration.CODEC));
+
+
 
     public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
 
@@ -105,6 +138,8 @@ public class ModConfiguredFeatures {
         RuleTest brecciaReplaceables = new BlockMatchTest(MMBlocks.BRECCIA.get());
         RuleTest diatomiteReplaceables = new BlockMatchTest(MMBlocks.DIATOMITE.get());
         RuleTest permafrostReplaceables = new BlockMatchTest(MMBlocks.PERMAFROST.get());
+
+        HolderGetter<ConfiguredFeature<?, ?>> holdergetter = context.lookup(Registries.CONFIGURED_FEATURE);
 
         register(context, SIGILLARIA_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(MMBlocks.SIGILLARIA_STEM.get()),
@@ -128,6 +163,73 @@ public class ModConfiguredFeatures {
 
         register(context, OTOZAMITES_KEY, ModConfiguredFeatures.OTOZAMITES_FEATURE.get(), new NoneFeatureConfiguration());
 
+        //soil
+
+        WeightedStateProvider mesozoilDecoWSP = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                .add(MMBlocks.FERN_SPROUTS.get().defaultBlockState(), 3)
+                .add(Blocks.FERN.defaultBlockState(), 2)
+                .add(Blocks.LARGE_FERN.defaultBlockState(), 1));
+
+        register(context, MESOZOIL_DECORATION, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(mesozoilDecoWSP));
+
+        WeightedStateProvider mesozoilWSP = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                .add(MMBlocks.MESOZOIL.get().defaultBlockState(), 8)
+                .add(MMBlocks.SPARCE_MOSSY_MESOZOIL.get().defaultBlockState(), 6)
+                .add(MMBlocks.MOSSY_MESOZOIL.get().defaultBlockState(), 4)
+                .add(MMBlocks.MESOZOIC_PODZOL.get().defaultBlockState(), 2));
+
+        register(context, MESOZOIL_PATCH, VEGETATION_CIRCLES_FEATURE.get(),
+                new VegetationPatchConfiguration(BlockTags.DIRT,
+                        mesozoilWSP,
+                        PlacementUtils.inlinePlaced(holdergetter.getOrThrow(MESOZOIL_DECORATION)),
+                        CaveSurface.FLOOR,
+                        ConstantInt.of(2),
+                        0.5f,
+                        3,
+                        0.15f,
+                        UniformInt.of(2, 5),
+                        0.15F));
+
+        register(context, MESOZOIL_VEGETATION_BONEMEAL, Feature.NETHER_FOREST_VEGETATION,
+                new NetherForestVegetationConfig(mesozoilWSP, 6, 2));
+
+        register(context, ARAUCARIOXYLON_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LOG.get()),
+                new StraightTrunkPlacer(8, 1, 4),
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LEAVES.get()),
+                new AraucarioxylonFoliagePlacer(UniformInt.of(1, 3), UniformInt.of(0, 1),
+                        UniformInt.of(3, 6)),
+                new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build());
+
+        register(context, ARAUCARIOXYLON_MEGA, HUGE_TREE.get(), new HugeTreeConfiguration.HugeTreeConfigurationBuilder(
+                BlockStateProvider.simple(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()),
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LOG.get()),
+                BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get()),
+                BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get()),
+                new CornerGiantTrunkPlacer(13, 2, 12),
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LEAVES.get()),
+                new MegaAraucarioxylonFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0),
+                        UniformInt.of(8, 12)),
+                new TwoLayersFeatureSize(1, 1, 2),
+                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(MESOZOIL_PATCH)),
+                UniformInt.of(1, 5))
+                .build());
+
+        register(context, ARAUCARIOXYLON_HUGE, HUGE_TREE.get(), new HugeTreeConfiguration.HugeTreeConfigurationBuilder(
+                BlockStateProvider.simple(MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get()),
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LOG.get()),
+                BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get()),
+                BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get()),
+                new HugeAraucarioxylonTrunkPlacer(20, 1, 12),
+                BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LEAVES.get()),
+                new HugeAraucarioxylonFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0),
+                        UniformInt.of(15, 20)),
+                new TwoLayersFeatureSize(2, 0, 2),
+                PlacementUtils.inlinePlaced(holdergetter.getOrThrow(MESOZOIL_PATCH)),
+                UniformInt.of(2, 7))
+                .ignoreVines().build());
+        
         //fossils
         register(context, SHALE_KEY, Feature.ORE, new OreConfiguration(deepslateReplaceables,
                 MMBlocks.SHALE.get().defaultBlockState(), 64));
