@@ -428,6 +428,21 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.otherWhenSilkTouch(MMBlocks.SPARCE_MOSSY_MESOZOIL.get(), MMBlocks.MESOZOIL.get());
         this.add(MMBlocks.FERN_SPROUTS.get(), block -> createShearsOnlyDrop(MMBlocks.FERN_SPROUTS.get()));
 
+        this.dropSelf(MMBlocks.MESOZOIC_MOSS_CARPET.get());
+        this.add(MMBlocks.CREEPING_MESOZOIC_MOSS.get(), block -> createShearsOnlyDrop(MMBlocks.FERN_SPROUTS.get()));
+
+        this.dropSelf(MMBlocks.POLLENPUFF.get());
+        this.add(MMBlocks.POTTED_POLLENPUFF.get(),
+                createPotFlowerItemTable(MMBlocks.POLLENPUFF.get()));
+
+        this.dropSelf(MMBlocks.POUCHWEED.get());
+        this.add(MMBlocks.POTTED_POUCHWEED.get(),
+                createPotFlowerItemTable(MMBlocks.POUCHWEED.get()));
+
+        this.dropSelf(MMBlocks.DAWN_PETAL.get());
+        this.add(MMBlocks.POTTED_DAWN_PETAL.get(),
+                createPotFlowerItemTable(MMBlocks.DAWN_PETAL.get()));
+
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));
 

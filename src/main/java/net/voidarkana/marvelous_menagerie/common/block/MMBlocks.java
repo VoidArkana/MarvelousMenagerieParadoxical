@@ -2,6 +2,7 @@ package net.voidarkana.marvelous_menagerie.common.block;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -426,6 +427,32 @@ public class MMBlocks {
             ()-> new Block(BlockBehaviour.Properties.copy(Blocks.PODZOL)));
     public static final RegistryObject<Block> FERN_SPROUTS = registerBlock("fern_sprouts",
             ()-> new CustomTallGrassBlock(BlockBehaviour.Properties.copy(Blocks.FERN), Blocks.FERN));
+
+    public static final RegistryObject<Block> CREEPING_MESOZOIC_MOSS = registerBlock("creeping_mesozoic_moss",
+            ()-> new GlowLichenBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission()
+                    .strength(0.2F).sound(SoundType.GLOW_LICHEN).ignitedByLava().pushReaction(PushReaction.DESTROY)));
+
+    public static final RegistryObject<Block> MESOZOIC_MOSS_CARPET = registerBlock("mesozoic_moss_carpet",
+            () -> new BonemealableCarpet(BlockBehaviour.Properties.copy(Blocks.MOSS_CARPET).noOcclusion()));
+
+    public static final RegistryObject<Block> POLLENPUFF = registerBlock("pollenpuff",
+            ()-> new Pollenpuff(MobEffects.HEALTH_BOOST, 6, BlockBehaviour.Properties.copy(Blocks.POPPY).randomTicks()));
+    public static final RegistryObject<Block> POTTED_POLLENPUFF = registerBlock("potted_pollenpuff",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.POLLENPUFF,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_POPPY).noOcclusion()));
+
+    public static final RegistryObject<Block> POUCHWEED = registerBlock("pouchweed",
+            ()-> new FlowerBlock(MobEffects.MOVEMENT_SLOWDOWN, 6, BlockBehaviour.Properties.copy(Blocks.POPPY)));
+    public static final RegistryObject<Block> POTTED_POUCHWEED = registerBlock("potted_pouchweed",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.POUCHWEED,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_POPPY).noOcclusion()));
+
+    public static final RegistryObject<Block> DAWN_PETAL = registerBlock("dawn_petal",
+            ()-> new FlowerBlock(MobEffects.GLOWING, 6, BlockBehaviour.Properties.copy(Blocks.POPPY)
+                    .lightLevel((blockState) -> 5)));
+    public static final RegistryObject<Block> POTTED_DAWN_PETAL = registerBlock("potted_dawn_petal",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.DAWN_PETAL,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_POPPY).lightLevel((blockState)-> 2).noOcclusion()));
 
 
     //April Fools

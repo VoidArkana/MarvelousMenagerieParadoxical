@@ -478,14 +478,24 @@
   "item.marvelous_menagerie.araucarioxylon_boat": "Araucarioxylon Boat",
   "item.marvelous_menagerie.araucarioxylon_chest_boat": "Araucarioxylon Boat with Chest",
 
-  "block.marvelous_menagerie.mesozoil": "Mesozoil",
-  "block.marvelous_menagerie.mossy_mesozoil": "Mossy Mesozoil",
-  "block.marvelous_menagerie.sparce_mossy_mesozoil": "Sparce Mossy Mesozoil",
-  "block.marvelous_menagerie.mesozoic_podzol": "Mesozoic Podzol",
   "block.marvelous_menagerie.fern_sprouts": "Fern Sprouts",
+
+  "block.marvelous_menagerie.mesozoil": "Mesozoil",
+  "block.marvelous_menagerie.mesozoic_podzol": "Mesozoic Podzol",
+  "block.marvelous_menagerie.sparce_mossy_mesozoil": "Sparce Mossy Mesozoil",
+  "block.marvelous_menagerie.mossy_mesozoil": "Mossy Mesozoil",
+  "block.marvelous_menagerie.mesozoic_moss_carpet": "Mesozoic Moss Carpet",
+  "block.marvelous_menagerie.creeping_mesozoic_moss": "Creeping Mesozoic Moss",
 
   "block.marvelous_menagerie.cooksonia": "Cooksonia",
   "block.marvelous_menagerie.otozamites_bush": "Otozamites Bush",
+
+  "block.marvelous_menagerie.pollenpuff": "Pollenpuff",
+  "block.marvelous_menagerie.potted_pollenpuff": "Potted Pollenpuff",
+  "block.marvelous_menagerie.pouchweed": "Pouchweed",
+  "block.marvelous_menagerie.potted_pouchweed": "Potted Pouchweed",
+  "block.marvelous_menagerie.dawn_petal": "Dawn Petal",
+  "block.marvelous_menagerie.potted_dawn_petal": "Potted Dawn Petal",
 
   "block.marvelous_menagerie.dickinsonia": "Dickinsonia",
   "block.marvelous_menagerie.wiwaxia": "Wiwaxia",

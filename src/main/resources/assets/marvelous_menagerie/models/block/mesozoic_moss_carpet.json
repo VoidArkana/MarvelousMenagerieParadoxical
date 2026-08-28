@@ -1,0 +1,7 @@
+{
+  "parent": "marvelous_menagerie:block/overhanging_carpet_base",
+  "textures": {
+    "side": "marvelous_menagerie:block/mesozoic_moss_side",
+    "top": "marvelous_menagerie:block/mesozoic_moss_top"
+  }
+}

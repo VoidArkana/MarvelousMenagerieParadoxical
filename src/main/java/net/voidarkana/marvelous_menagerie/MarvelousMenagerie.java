@@ -143,7 +143,20 @@ public class MarvelousMenagerie
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.ARAUCARIOXYLON_SAPLING.getId(), MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING);
             ComposterBlock.COMPOSTABLES.put(MMBlocks.ARAUCARIOXYLON_SAPLING.get().asItem(), 0.8F);
-            ComposterBlock.COMPOSTABLES.put(MMBlocks.ARAUCARIOXYLON_SAPLING.get().asItem(), 0.4F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.ARAUCARIOXYLON_LEAVES.get().asItem(), 0.4F);
+
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.FERN_SPROUTS.get().asItem(), 0.15F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.MESOZOIC_MOSS_CARPET.get().asItem(), 0.25F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.CREEPING_MESOZOIC_MOSS.get().asItem(), 0.25F);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.POLLENPUFF.getId(), MMBlocks.POTTED_POLLENPUFF);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.POLLENPUFF.get().asItem(), 0.3F);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.POUCHWEED.getId(), MMBlocks.POTTED_POUCHWEED);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.POUCHWEED.get().asItem(), 0.3F);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.DAWN_PETAL.getId(), MMBlocks.POTTED_DAWN_PETAL);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.DAWN_PETAL.get().asItem(), 0.3F);
         });
     }
 

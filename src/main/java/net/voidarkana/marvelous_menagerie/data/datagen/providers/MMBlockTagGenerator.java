@@ -27,7 +27,8 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         this.tag(BlockTags.REPLACEABLE_BY_TREES).add(
-                MMBlocks.ARAUCARIOXYLON_SAPLING.get()
+                MMBlocks.ARAUCARIOXYLON_SAPLING.get(),
+                MMBlocks.CREEPING_MESOZOIC_MOSS.get()
         );
 
         this.tag(BlockTags.SWORD_EFFICIENT).add(
@@ -396,7 +397,9 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.SIGILLARIA_LEAVES.get(),
                 MMBlocks.PROTOTAXITES.get(),
                 MMBlocks.CALAMITES_BRANCH.get(),
-                MMBlocks.ARAUCARIOXYLON_LEAVES.get()
+                MMBlocks.ARAUCARIOXYLON_LEAVES.get(),
+                MMBlocks.CREEPING_MESOZOIC_MOSS.get(),
+                MMBlocks.MESOZOIC_MOSS_CARPET.get()
         );
 
         this.tag(BlockTags.LEAVES).add(
@@ -751,5 +754,19 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .addTag(BlockTags.GOATS_SPAWNABLE_ON)
                 .addTag(BlockTags.DIRT)
                 .addTag(BlockTags.TERRACOTTA);
+
+        this.tag(BlockTags.SMALL_FLOWERS)
+                .add(MMBlocks.POLLENPUFF.get())
+                .add(MMBlocks.POUCHWEED.get())
+                .add(MMBlocks.DAWN_PETAL.get());
+
+        this.tag(BlockTags.FLOWER_POTS)
+                .add(MMBlocks.POTTED_ARAUCARIOXYLON_SAPLING.get())
+                .add(MMBlocks.POTTED_CALAMITES_SAPLING.get())
+                .add(MMBlocks.POTTED_PROTOTAXITES.get())
+                .add(MMBlocks.POTTED_SIGILLARIA_SAPLING.get())
+                .add(MMBlocks.POTTED_POLLENPUFF.get())
+                .add(MMBlocks.POTTED_POUCHWEED.get())
+                .add(MMBlocks.POTTED_DAWN_PETAL.get());
     }
 }

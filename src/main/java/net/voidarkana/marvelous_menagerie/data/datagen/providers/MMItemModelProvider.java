@@ -121,7 +121,12 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.ARAUCARIOXYLON_CHEST_BOAT);
         simpleBlockItem(MMBlocks.ARAUCARIOXYLON_SAPLING);
 
-        simpleBlockItemBlockTexture(MMBlocks.FERN_SPROUTS);
+        evenSimplerBlockItem(MMBlocks.MESOZOIC_MOSS_CARPET);
+        simpleBlockItemBlockTexture(MMBlocks.CREEPING_MESOZOIC_MOSS, "block/mesozoic_moss_top");
+
+        simpleBlockItem(MMBlocks.POLLENPUFF);
+        simpleBlockItemBlockTexture(MMBlocks.POUCHWEED);
+        simpleBlockItemBlockTexture(MMBlocks.DAWN_PETAL);
 
         evenSimplerBlockItem(MMBlocks.CHRONOTITE);
         simpleItem(MMItems.CHRONOTITE);
@@ -391,6 +396,12 @@ public class MMItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(MMBlocks.PERMAFROST_BRICKS_STAIRS);
         wallItem(MMBlocks.PERMAFROST_BRICKS_WALL, MMBlocks.PERMAFROST_BRICKS);
 
+    }
+
+    private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item, String texture) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(MarvelousMenagerie.MOD_ID,texture));
     }
 
     private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> item) {

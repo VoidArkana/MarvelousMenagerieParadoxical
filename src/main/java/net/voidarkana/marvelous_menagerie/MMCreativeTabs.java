@@ -174,9 +174,11 @@ public class MMCreativeTabs {
                         output.accept(MMBlocks.FERN_SPROUTS.get());
 
                         output.accept(MMBlocks.MESOZOIL.get());
-                        output.accept(MMBlocks.MOSSY_MESOZOIL.get());
-                        output.accept(MMBlocks.SPARCE_MOSSY_MESOZOIL.get());
                         output.accept(MMBlocks.MESOZOIC_PODZOL.get());
+                        output.accept(MMBlocks.SPARCE_MOSSY_MESOZOIL.get());
+                        output.accept(MMBlocks.MOSSY_MESOZOIL.get());
+                        output.accept(MMBlocks.MESOZOIC_MOSS_CARPET.get());
+                        output.accept(MMBlocks.CREEPING_MESOZOIC_MOSS.get());
 
                         output.accept(MMBlocks.ARAUCARIOXYLON_PLANKS.get());
 

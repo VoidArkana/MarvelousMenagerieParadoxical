@@ -1,0 +1,6 @@
+{
+  "parent": "marvelous_menagerie:block/creeping_moss_base",
+  "textures": {
+    "texture": "marvelous_menagerie:block/mesozoic_moss_top"
+  }
+}

@@ -198,6 +198,10 @@ public class MMClientEvents {
         event.registerSpriteSet(MMParticles.TIME_SHARD.get(), TimeShardParticle.Provider::new);
         event.registerSpriteSet(MMParticles.RIFT.get(), RiftParticle.Provider::new);
         event.registerSpriteSet(MMParticles.ITEM_MORPH.get(), ItemMorphParticle.Provider::new);
+
+        event.registerSpriteSet(MMParticles.POLLEN.get(), MMSuspendedParticle.PollenProvider::new);
+        event.registerSpriteSet(MMParticles.POLLEN_CHARGE.get(), MMExplodeParticle.PollenChargeProvider::new);
+        event.registerSpriteSet(MMParticles.POLLEN_CLOUD.get(), MMSmokeParticle.PollenCloudProvider::new);
     }
 
     @SubscribeEvent

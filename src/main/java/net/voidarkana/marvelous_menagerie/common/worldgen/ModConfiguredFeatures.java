@@ -1,45 +1,33 @@
 package net.voidarkana.marvelous_menagerie.common.worldgen;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.util.valueproviders.IntProviderType;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlowLichenBlock;
+import net.minecraft.world.level.block.MultifaceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.VegetationPatchFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.MegaPineFoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.NoiseProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
-import net.minecraft.world.level.levelgen.feature.treedecorators.AlterGroundDecorator;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.GiantTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
-import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -52,7 +40,6 @@ import net.voidarkana.marvelous_menagerie.common.worldgen.util.CalamitesFeatureC
 import net.voidarkana.marvelous_menagerie.common.worldgen.util.HugePrototaxitesFeatureConfiguration;
 
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class ModConfiguredFeatures {
@@ -83,6 +70,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_KEY =  registerKey("araucarioxlyon");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_MEGA = registerKey("araucarioxlyon_mega");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_HUGE = registerKey("araucarioxlyon_huge");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CREEPING_MESOZOIC_MOSS = registerKey("creeping_mesozoic_moss");
 
     //fossils
     public static final ResourceKey<ConfiguredFeature<?, ?>> SHALE_KEY = registerKey("shale");
@@ -119,6 +108,9 @@ public class ModConfiguredFeatures {
 
     public static final RegistryObject<Feature<VegetationPatchConfiguration>> VEGETATION_CIRCLES_FEATURE =
             register_feature("vegetation_circles_feature", () -> new VegetationCirclesFeatures(VegetationPatchConfiguration.CODEC));
+
+    public static final RegistryObject<Feature<NetherForestVegetationConfig>> VEGETATION_BONEMEAL_PATCH =
+            register_feature("vegetation_bonemeal_patch", () -> new VegetationBonemealPatchFeature(NetherForestVegetationConfig.CODEC));
 
 
 
@@ -163,10 +155,21 @@ public class ModConfiguredFeatures {
 
         register(context, OTOZAMITES_KEY, ModConfiguredFeatures.OTOZAMITES_FEATURE.get(), new NoneFeatureConfiguration());
 
-        //soil
+        register(context, CREEPING_MESOZOIC_MOSS, Feature.MULTIFACE_GROWTH,
+                new MultifaceGrowthConfiguration((MultifaceBlock) MMBlocks.CREEPING_MESOZOIC_MOSS.get(),
+                        20, false, false, true, 0.85F,
+                        HolderSet.direct(Block::builtInRegistryHolder,
+                                MMBlocks.ARAUCARIOXYLON_LOG.get(),
+                                MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get(),
+                                MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get(),
+                                MMBlocks.MESOZOIL.get(),
+                                MMBlocks.MESOZOIC_PODZOL.get())));
 
+        //soil
         WeightedStateProvider mesozoilDecoWSP = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                .add(MMBlocks.FERN_SPROUTS.get().defaultBlockState(), 3)
+                .add(MMBlocks.FERN_SPROUTS.get().defaultBlockState(), 4)
+                .add(MMBlocks.MESOZOIC_MOSS_CARPET.get().defaultBlockState(), 2)
+                .add(MMBlocks.CREEPING_MESOZOIC_MOSS.get().defaultBlockState().trySetValue(GlowLichenBlock.getFaceProperty(Direction.DOWN), true), 2)
                 .add(Blocks.FERN.defaultBlockState(), 2)
                 .add(Blocks.LARGE_FERN.defaultBlockState(), 1));
 
@@ -191,8 +194,8 @@ public class ModConfiguredFeatures {
                         UniformInt.of(2, 5),
                         0.15F));
 
-        register(context, MESOZOIL_VEGETATION_BONEMEAL, Feature.NETHER_FOREST_VEGETATION,
-                new NetherForestVegetationConfig(mesozoilWSP, 6, 2));
+        register(context, MESOZOIL_VEGETATION_BONEMEAL, VEGETATION_BONEMEAL_PATCH.get(),
+                new NetherForestVegetationConfig(mesozoilDecoWSP, 6, 2));
 
         register(context, ARAUCARIOXYLON_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LOG.get()),
@@ -221,7 +224,8 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LOG.get()),
                 BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get()),
                 BlockStateProvider.simple(MMBlocks.GIANT_ARAUCARIOXYLON_LOG_SIDE.get()),
-                new HugeAraucarioxylonTrunkPlacer(20, 1, 12),
+                new HugeAraucarioxylonTrunkPlacer(20, 1, 12,
+                        PlacementUtils.inlinePlaced(holdergetter.getOrThrow(CREEPING_MESOZOIC_MOSS))),
                 BlockStateProvider.simple(MMBlocks.ARAUCARIOXYLON_LEAVES.get()),
                 new HugeAraucarioxylonFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0),
                         UniformInt.of(15, 20)),

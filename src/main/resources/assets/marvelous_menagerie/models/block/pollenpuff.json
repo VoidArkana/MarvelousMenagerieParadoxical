@@ -1,0 +1,8 @@
+{
+  "parent": "marvelous_menagerie:block/sniffer_flower_1",
+  "textures": {
+    "stem": "marvelous_menagerie:block/pollenpuff_stem",
+    "leaves": "marvelous_menagerie:block/pollenpuff_leaves",
+    "petals": "marvelous_menagerie:block/pollenpuff_petals"
+  }
+}

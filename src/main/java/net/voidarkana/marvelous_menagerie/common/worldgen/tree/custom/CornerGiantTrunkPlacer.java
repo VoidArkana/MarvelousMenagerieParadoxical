@@ -32,11 +32,6 @@ public class CornerGiantTrunkPlacer extends TrunkPlacer {
     }
 
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, int pFreeTreeHeight, BlockPos pPos, TreeConfiguration pConfig) {
-        BlockPos blockpos = pPos.below();
-//        setDirtAt(pLevel, pBlockSetter, pRandom, blockpos, pConfig);
-//        setDirtAt(pLevel, pBlockSetter, pRandom, blockpos.east(), pConfig);
-//        setDirtAt(pLevel, pBlockSetter, pRandom, blockpos.south(), pConfig);
-//        setDirtAt(pLevel, pBlockSetter, pRandom, blockpos.south().east(), pConfig);
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
         if (pConfig instanceof HugeTreeConfiguration configuration)

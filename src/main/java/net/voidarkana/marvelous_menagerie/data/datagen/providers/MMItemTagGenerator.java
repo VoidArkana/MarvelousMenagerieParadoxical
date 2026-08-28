@@ -324,5 +324,10 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.tag(MMTags.Items.MYOTRAGUS_INGREDIENT)
                 .add(Items.GOAT_HORN)
                 .addOptional(new ResourceLocation("myxinis_mobs:dudpowder"));
+
+        this.tag(ItemTags.SMALL_FLOWERS)
+                .add(MMBlocks.POLLENPUFF.get().asItem())
+                .add(MMBlocks.POUCHWEED.get().asItem())
+                .add(MMBlocks.DAWN_PETAL.get().asItem());
     }
 }

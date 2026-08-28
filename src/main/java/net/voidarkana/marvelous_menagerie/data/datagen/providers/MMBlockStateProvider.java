@@ -167,6 +167,11 @@ public class MMBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(MMBlocks.FERN_SPROUTS.getId().getPath(), mcLoc("block/tinted_cross"))
                         .texture("cross", modLoc("block/fern_sprouts")).renderType("cutout"));
 
+        simpleBlockWithItem(MMBlocks.POUCHWEED.get(), models().cross(blockTexture(MMBlocks.POUCHWEED.get()).getPath(),
+                blockTexture(MMBlocks.POUCHWEED.get())).renderType("cutout"));
+        simpleBlockWithItem(MMBlocks.DAWN_PETAL.get(), models().cross(blockTexture(MMBlocks.DAWN_PETAL.get()).getPath(),
+                blockTexture(MMBlocks.DAWN_PETAL.get())).renderType("cutout"));
+
         //Chronotite
         axisBlock((RotatedPillarBlock) MMBlocks.CHRONOTITE.get(),
                 new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/chronotite_block_side"),
@@ -342,6 +347,12 @@ public class MMBlockStateProvider extends BlockStateProvider {
         slabBlock(((SlabBlock) MMBlocks.PERMAFROST_MOSAIC_SLAB.get()), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()));
         wallBlock((WallBlock) MMBlocks.PERMAFROST_MOSAIC_WALL.get(), blockTexture(MMBlocks.PERMAFROST_MOSAIC.get()));
         blockWithItem(MMBlocks.CHISELED_PERMAFROST);
+    }
+
+    private void overhangingCarpetBlock(RegistryObject<Block> blockRegistryObject, String side, String top) {
+        simpleBlockWithItem(blockRegistryObject.get(),
+                models().withExistingParent(blockRegistryObject.getId().getPath(), modLoc("block/overhanging_carpet_base"))
+                        .texture("side", modLoc(side)).texture("top", modLoc(top)).renderType("cutout"));
     }
 
     private void leavesBlock(RegistryObject<Block> blockRegistryObject) {

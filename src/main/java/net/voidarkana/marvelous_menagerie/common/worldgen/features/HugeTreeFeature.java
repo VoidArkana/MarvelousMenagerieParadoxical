@@ -28,6 +28,7 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.shapes.BitSetDiscreteVoxelShape;
 import net.minecraft.world.phys.shapes.DiscreteVoxelShape;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeAraucarioxylonTrunkPlacer;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.custom.HugeTreeConfiguration;
 
 import java.util.*;
@@ -63,7 +64,7 @@ public class HugeTreeFeature extends Feature<HugeTreeConfiguration> {
         });
     }
 
-    private boolean doPlace(WorldGenLevel pLevel, RandomSource pRandom, BlockPos pPos, BiConsumer<BlockPos, BlockState> pRootBlockSetter, BiConsumer<BlockPos, BlockState> pTrunkBlockSetter, FoliagePlacer.FoliageSetter pFoliageBlockSetter, HugeTreeConfiguration pConfig) {
+    private boolean doPlace(WorldGenLevel pLevel, RandomSource pRandom, BlockPos pPos, BiConsumer<BlockPos, BlockState> pRootBlockSetter, BiConsumer<BlockPos, BlockState> pTrunkBlockSetter, FoliagePlacer.FoliageSetter pFoliageBlockSetter, HugeTreeConfiguration pConfig, FeaturePlaceContext<HugeTreeConfiguration> pContext) {
         int i = pConfig.trunkPlacer.getTreeHeight(pRandom);
         int j = pConfig.foliagePlacer.foliageHeight(pRandom, i, pConfig);
         int k = i - j;
@@ -80,7 +81,13 @@ public class HugeTreeFeature extends Feature<HugeTreeConfiguration> {
                 if (pConfig.rootPlacer.isPresent() && !pConfig.rootPlacer.get().placeRoots(pLevel, pRootBlockSetter, pRandom, pPos, blockpos, pConfig)) {
                     return false;
                 } else {
-                    List<FoliagePlacer.FoliageAttachment> list = pConfig.trunkPlacer.placeTrunk(pLevel, pTrunkBlockSetter, pRandom, k1, blockpos, pConfig);
+                    List<FoliagePlacer.FoliageAttachment> list;
+
+                    if (pConfig.trunkPlacer instanceof HugeAraucarioxylonTrunkPlacer placer){
+                        list = placer.placeTrunk(pLevel, pTrunkBlockSetter, pRandom, k1, blockpos, pConfig, pContext);
+                    }else {
+                        list = pConfig.trunkPlacer.placeTrunk(pLevel, pTrunkBlockSetter, pRandom, k1, blockpos, pConfig);
+                    }
 
                     list.forEach((p_272582_) -> {
                         pConfig.foliagePlacer.createFoliage(pLevel, pFoliageBlockSetter, pRandom, pConfig, k1, p_272582_, j, l);
@@ -173,7 +180,7 @@ public class HugeTreeFeature extends Feature<HugeTreeConfiguration> {
             set3.add(p_160543_.immutable());
             worldgenlevel.setBlock(p_160543_, p_160544_, 19);
         };
-        boolean flag = this.doPlace(worldgenlevel, randomsource, blockpos, biconsumer, biconsumer1, foliageplacer$foliagesetter, hugeTreeConfiguration);
+        boolean flag = this.doPlace(worldgenlevel, randomsource, blockpos, biconsumer, biconsumer1, foliageplacer$foliagesetter, hugeTreeConfiguration, pContext);
         if (flag && (!set1.isEmpty() || !set2.isEmpty())) {
             if (!hugeTreeConfiguration.decorators.isEmpty()) {
                 TreeDecorator.Context treedecorator$context = new TreeDecorator.Context(worldgenlevel, biconsumer2, randomsource, set1, set2, set);

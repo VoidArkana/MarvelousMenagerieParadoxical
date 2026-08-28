@@ -19,6 +19,10 @@ public class MMParticles {
 
     public static final RegistryObject<SimpleParticleType> ITEM_MORPH = register("item_morph", false);
 
+    public static final RegistryObject<SimpleParticleType> POLLEN_CHARGE = register("pollen_charge", false);
+    public static final RegistryObject<SimpleParticleType> POLLEN_CLOUD = register("pollen_cloud", false);
+    public static final RegistryObject<SimpleParticleType> POLLEN = register("pollen", false);
+
     private static RegistryObject<SimpleParticleType> register(String id, boolean flag) {
         return PARTICLES.register(id, () -> new SimpleParticleType(flag));
     }
