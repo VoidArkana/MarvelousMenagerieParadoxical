@@ -13,13 +13,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.events.ForgeClientEvents;
+import net.voidarkana.marvelous_menagerie.event.client.ForgeClientEvents;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
-import net.voidarkana.marvelous_menagerie.client.model.block.CharniaModel;
 import net.voidarkana.marvelous_menagerie.client.model.block.HerpetogasterModel;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.CharniaBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.plant.HerpetogasterBlock;
-import net.voidarkana.marvelous_menagerie.common.blockentity.custom.CharniaBlockEntity;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.HerpetogasterBlockEntity;
 
 @OnlyIn(Dist.CLIENT)

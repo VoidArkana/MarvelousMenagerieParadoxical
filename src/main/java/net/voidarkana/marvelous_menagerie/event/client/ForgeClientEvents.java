@@ -1,5 +1,7 @@
-package net.voidarkana.marvelous_menagerie.client.events;
+package net.voidarkana.marvelous_menagerie.event.client;
 
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
@@ -9,6 +11,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MMEntityAccess;
 import net.voidarkana.marvelous_menagerie.util.ClientProxy;
 
 @OnlyIn(Dist.CLIENT)
@@ -38,6 +41,18 @@ public class ForgeClientEvents {
                 event.setCanceled(true);
             }
             ClientProxy.blockedEntityRenders.remove(event.getEntity().getUUID());
+        }
+    }
+
+    @SubscribeEvent
+    public static void livingEntityRenderer(RenderLivingEvent<LivingEntity, EntityModel<LivingEntity>> event) {
+        LivingEntity entity = event.getEntity();
+        if (entity instanceof MMEntityAccess entityAccess){
+            float partialTicks = event.getPartialTick();
+            if (entityAccess.getSummonedProgress(partialTicks)>0){
+                float scale = 1-(Math.max(0, entityAccess.getSummonedProgress(partialTicks)));
+                event.getPoseStack().scale(scale, scale, scale);
+            }
         }
     }
 }

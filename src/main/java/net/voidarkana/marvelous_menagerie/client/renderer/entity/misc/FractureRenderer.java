@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.events.ForgeClientEvents;
+import net.voidarkana.marvelous_menagerie.event.client.ForgeClientEvents;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.entity.misc.FractureModel;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.FractureEmmissive;
@@ -33,16 +33,17 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
                 (fracture, v, v1) -> {return 1.0F;}));
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
                 new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture_glow.png"),
-                (fracture, v, v1) -> {
-                return  (float) (50-fracture.getOpeningTime())/30;}));
+                (fracture, partialTicks, v1) -> {
+                return  (float) (50-fracture.getOpeningProgress(partialTicks))/30;}));
         this.addLayer(new FractureEmmissive<>(this, new FractureModel<>(pContext.bakeLayer(MMModelLayers.FRACTURE_EMMISSIVE)),
                 new ResourceLocation(MarvelousMenagerie.MOD_ID, "textures/entity/fracture/fracture_glow.png"),
-                (fracture, v, v1) -> {
-                    return fracture.getSummoningTime()>30 && fracture.getSummoningTime()<=40 ?
-                                    (float)(fracture.getSummoningTime()-30)/10 :
+                (fracture, partialTicks, v1) -> {
+                    float summonProgress = fracture.getSummoningProgress(partialTicks);
+                    return summonProgress >30 && summonProgress<=40 ?
+                                    (summonProgress-30) /10 :
 
-                            fracture.getSummoningTime()>40 && fracture.getSummoningTime()<=60 ?
-                                    (float)((60-fracture.getSummoningTime()))/20 : 0;}));
+                            summonProgress>40 && summonProgress<=60 ?
+                                    (60-summonProgress) /20 : 0;}));
     }
 
     @Override
@@ -65,10 +66,11 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         float f2 = pEntity.oRot + f1 * pPartialTicks;
 
         float summonRot;
-        if (pEntity.getSummoningTime()>0 && pEntity.getSummoningTime()<=40){
-            summonRot = (float) pEntity.getSummoningTime() /40;
-        }else if (pEntity.getSummoningTime()>40){
-            summonRot = (float) (80 - pEntity.getSummoningTime()) /40;
+        float summonProgress = pEntity.getSummoningProgress(pPartialTicks);
+        if (summonProgress>0 && summonProgress<=40){
+            summonRot = summonProgress /40;
+        }else if (summonProgress>40){
+            summonRot = (80 - summonProgress) /40;
         }else {
             summonRot = 0;
         }
@@ -84,33 +86,34 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
         pPoseStack.translate(0.0F, -1.1F + Mth.sin(f * 0.1F) * 0.01F, 0.0F);
 
 
-        if (pEntity.getClosingTime()>0){
-            scaleClosing = 1 + ((float) (20 - pEntity.getClosingTime()) /30);
-            pPoseStack.mulPose(Axis.YP.rotationDegrees(((f2)*scaleClosing)*(20 - pEntity.getClosingTime())));
-            pPoseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.sin(f2*50)*scaleClosing)*(20 - pEntity.getClosingTime())/2));
-            pPoseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.cos(f2*50)*scaleClosing)*(20 - pEntity.getClosingTime())/2));
+        float closingProgress = pEntity.getClosingProgress(pPartialTicks);
+        if (closingProgress>0){
+            scaleClosing = 1 + ((float) (20 - closingProgress) /30);
+            pPoseStack.mulPose(Axis.YP.rotationDegrees(((f2)*scaleClosing)*(20 - closingProgress)));
+            pPoseStack.mulPose(Axis.ZP.rotationDegrees((float) (Math.sin(f2*50)*scaleClosing)*(20 - closingProgress)/2));
+            pPoseStack.mulPose(Axis.XP.rotationDegrees((float) (Math.cos(f2*50)*scaleClosing)*(20 - closingProgress)/2));
         } else {
             scaleClosing = 1;
         }
 
-        if (pEntity.getOpeningTime()>19 && pEntity.getOpeningTime()<50){
+        if (pEntity.getOpeningProgress(pPartialTicks)>19 && pEntity.getOpeningProgress(pPartialTicks)<50){
             if (pEntity.isNatural()){
-                scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
+                scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningProgress(pPartialTicks)-20)/12.5))*1.5);
             }else {
-                scaleOpening = (float) (f2 * (Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/12.5))*1.5);
+                scaleOpening = (float) (f2 * (Math.sin(Math.max(0 ,(double) pEntity.getOpeningProgress(pPartialTicks)-20)/12.5))*1.5);
             }
-        }else if (pEntity.getOpeningTime()<20){
+        }else if (pEntity.getOpeningProgress(pPartialTicks)<20){
             scaleOpening = 0;
         }else {
             scaleOpening = 1;
         }
 
-        //scaleOpening = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTime()-20)/13)));
-        scaleOpeningLag = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningTimeLag()-20)/13)));
+        scaleOpeningLag = (float) ((Math.sin(Math.max(0 ,(double) pEntity.getOpeningLagProgress(pPartialTicks)-20)/13)));
 
         pPoseStack.scale(scaleOpening * scaleClosing * 0.85f,
                 scaleOpening * scaleClosing* 0.85f,
                 scaleOpening * scaleClosing* 0.85f);
+        pPoseStack.scale(1+summonRot*summonRot/2, 1+summonRot*summonRot/2, 1+summonRot*summonRot/2);
         pPoseStack.scale(1+summonRot*summonRot/2, 1+summonRot*summonRot/2, 1+summonRot*summonRot/2);
 
         pPoseStack.scale(1+pEntity.shakeAmount/2, 1+pEntity.shakeAmount/2, 1+pEntity.shakeAmount/2);
@@ -127,8 +130,8 @@ public class FractureRenderer extends LivingEntityRenderer<Fracture, FractureMod
             pPoseStack.scale(scaleOpeningLag, scaleOpeningLag, scaleOpeningLag);
             pPoseStack.scale(1+summonRot*summonRot/2, 1+summonRot*summonRot/2, 1+summonRot*summonRot/2);
 
-            if (pEntity.getClosingTime()>0)
-                pPoseStack.mulPose(Axis.YP.rotationDegrees(((f2)*scaleClosing)*(20 - pEntity.getClosingTime())*5));
+            if (closingProgress>0)
+                pPoseStack.mulPose(Axis.YP.rotationDegrees(((f2)*scaleClosing)*(20 - closingProgress)*5));
 
             float rotation = ForgeClientEvents.getClientTicks() / 300;
 

@@ -1,9 +1,8 @@
 {
-	"format_version": "1.21.11",
+	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "marvelous_menagerie:block/williamsonia_log",
-		"particle": ""
+		"2": "marvelous_menagerie:block/williamsonia_log"
 	},
 	"elements": [
 		{

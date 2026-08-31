@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.events;
+package net.voidarkana.marvelous_menagerie.event.client;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;

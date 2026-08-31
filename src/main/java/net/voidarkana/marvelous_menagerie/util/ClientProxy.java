@@ -21,8 +21,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.client.events.ClientEvents;
-import net.voidarkana.marvelous_menagerie.client.events.MMClientEvents;
+import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.ClientLayerRegistry;
+import net.voidarkana.marvelous_menagerie.event.client.ClientEvents;
+import net.voidarkana.marvelous_menagerie.event.client.MMClientEvents;
 import net.voidarkana.marvelous_menagerie.client.renderer.block.*;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.abomination.MoltenRenderer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.misc.FractureRenderer;
@@ -56,6 +57,8 @@ public class ClientProxy extends CommonProxy{
     }
 
     public void clientInit() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
         Sheets.addWoodType(MMWoodTypes.SIGILLARIA);
         Sheets.addWoodType(MMWoodTypes.PROTOTAXITES);
         Sheets.addWoodType(MMWoodTypes.CALAMITES);
@@ -63,12 +66,11 @@ public class ClientProxy extends CommonProxy{
 
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
 
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
         MarvelousMenagerie.CALLBACKS.forEach(Runnable::run);
         MarvelousMenagerie.CALLBACKS.clear();
 
         bus.addListener(this::registerShaders);
+        bus.addListener(ClientLayerRegistry::addLayers);
 
         EntityRenderers.register(MMEntities.CHUD.get(), ChudRenderer::new);
         EntityRenderers.register(MMEntities.SACABAMBASPIS.get(), SacaRenderer::new);

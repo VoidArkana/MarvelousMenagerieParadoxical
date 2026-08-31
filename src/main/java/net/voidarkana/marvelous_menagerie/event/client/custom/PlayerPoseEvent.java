@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.events.custom;
+package net.voidarkana.marvelous_menagerie.event.client.custom;
 
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;

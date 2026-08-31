@@ -11,9 +11,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,9 +27,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import net.voidarkana.marvelous_menagerie.client.particles.MMParticles;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
+import net.voidarkana.marvelous_menagerie.common.entity.base.MMEntityAccess;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
@@ -37,8 +37,13 @@ import java.util.function.Predicate;
 public class Fracture extends Mob {
 
     private static final Predicate<LivingEntity> PLAYER = (entity) -> {
-        return entity instanceof Player;
+        return entity instanceof Player player && !player.isSpectator();
     };
+
+    private float prevOpeningTime;
+    private float prevOpeningTimeLag;
+    private float prevClosingTime;
+    private float prevSummoningTime;
 
     static final TargetingConditions targetingConditions = TargetingConditions.forNonCombat().ignoreInvisibilityTesting().ignoreLineOfSight().selector(PLAYER);
 
@@ -173,8 +178,29 @@ public class Fracture extends Mob {
         return this.getClosingTime()<=0 && this.getOpeningTime()>=50 && this.getSummoningTime()<=0;
     }
 
+    public float getOpeningProgress(float partialTick){
+        return (prevOpeningTime + (this.getOpeningTime() - prevOpeningTime) * partialTick);
+    }
+
+    public float getOpeningLagProgress(float partialTick){
+        return (prevOpeningTimeLag + (this.getOpeningTimeLag() - prevOpeningTimeLag) * partialTick);
+    }
+
+    public float getClosingProgress(float partialTick){
+        return (prevClosingTime + (this.getClosingTime() - prevClosingTime) * partialTick);
+    }
+
+    public float getSummoningProgress(float partialTick){
+        return (prevSummoningTime + (this.getSummoningTime() - prevSummoningTime) * partialTick);
+    }
+
     @Override
     public void tick() {
+
+        this.prevOpeningTime = this.getOpeningTime();
+        this.prevOpeningTimeLag = this.getOpeningTimeLag();
+        this.prevClosingTime = this.getClosingTime();
+        this.prevSummoningTime = this.getSummoningTime();
 
         if (this.getRandom().nextInt(100) == 0) {
             this.level().playLocalSound((double)this.blockPosition().getX() + (double)0.5F,
@@ -426,7 +452,6 @@ public class Fracture extends Mob {
     public void spawnCreature(){
         Player player = this.level().getNearestPlayer(this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), 15.0D, false);
 
-
         if (entityType==null){
             entityType = MMEntities.CHUD.get();
         }else {
@@ -435,11 +460,20 @@ public class Fracture extends Mob {
             }
         }
 
-        entityType.spawn((ServerLevel) this.level(),
-                new BlockPos(this.blockPosition().getX() + (this.isNatural() ? this.getRandom().nextInt(3) : 0),
-                        this.blockPosition().getY()+1,
-                        this.blockPosition().getZ() + (this.isNatural() ? this.getRandom().nextInt(3) : 0)),
-                MobSpawnType.TRIGGERED);
+        Entity entity = entityType.create((ServerLevel) this.level(), null, null,
+                new BlockPos(this.blockPosition().getX(),
+                        this.blockPosition().getY(),
+                        this.blockPosition().getZ()),
+                MobSpawnType.TRIGGERED, false, false);
+
+        if (entity != null){
+            if (entity instanceof MMEntityAccess access)
+                access.setSummonedTime(20);
+            if (entity instanceof LivingEntity living)
+                living.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1, 0, false, false));
+
+            ((ServerLevel) this.level()).addFreshEntityWithPassengers(entity);
+        }
 
         this.level().gameEvent(null, GameEvent.ENTITY_PLACE, this.blockPosition());
     }
