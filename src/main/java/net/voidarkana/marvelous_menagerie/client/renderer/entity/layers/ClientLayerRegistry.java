@@ -39,7 +39,7 @@ public class ClientLayerRegistry {
 
     private static void addLayerIfApplicable(EntityType<? extends LivingEntity> entityType, EntityRenderersEvent.AddLayers event) {
         LivingEntityRenderer renderer = null;
-        if (entityType != EntityType.ENDER_DRAGON || entityType != MMEntities.FRACTURE.get() || entityType != MMEntities.RIFT.get()) {
+        if (entityType != EntityType.ENDER_DRAGON && entityType != MMEntities.FRACTURE.get() && entityType != MMEntities.RIFT.get()) {
             try {
                 renderer = event.getRenderer(entityType);
             } catch (Exception e) {

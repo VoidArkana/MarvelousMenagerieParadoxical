@@ -469,8 +469,10 @@ public class Fracture extends Mob {
         if (entity != null){
             if (entity instanceof MMEntityAccess access)
                 access.setSummonedTime(20);
-            if (entity instanceof LivingEntity living)
+            if (entity instanceof LivingEntity living){
+                living.setInvisible(true);
                 living.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 1, 0, false, false));
+            }
 
             ((ServerLevel) this.level()).addFreshEntityWithPassengers(entity);
         }
