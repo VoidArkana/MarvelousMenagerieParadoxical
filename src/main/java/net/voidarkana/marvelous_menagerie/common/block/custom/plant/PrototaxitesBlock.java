@@ -208,7 +208,7 @@ public class PrototaxitesBlock extends Block implements IPlantable, Bonemealable
     @Override
     public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         BlockState soil = pLevel.getBlockState(pPos.below());
-        return !soil.is(this);// && CommonConfig.BONEMEAL_PROTO.get();
+        return !soil.is(this);
     }
 
     @Override

@@ -7,24 +7,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.voidarkana.marvelous_menagerie.common.block.custom.GiantLogCorner;
-import net.voidarkana.marvelous_menagerie.common.block.custom.GiantLogSide;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.GiantLogCorner;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.GiantLogSide;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 

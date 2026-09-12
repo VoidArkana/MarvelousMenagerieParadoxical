@@ -89,13 +89,14 @@ public class MarvelousMenagerie
 
         MMMemoryModuleTypes.MEMORY_MODULE_TYPES.register(modEventBus);
         MMEntities.register(modEventBus);
-        MMVillagerProfessions.register(modEventBus);
         MMParticles.register(modEventBus);
 
-        MMBlocks.registerBlocks(modEventBus);
         MMBlocks.registerPaintings(modEventBus);
-        MMBlockEntities.register(modEventBus);
+        MMBlocks.registerBlocks(modEventBus);
         MMItems.register(modEventBus);
+        MMBlockEntities.register(modEventBus);
+
+        MMVillagerProfessions.register(modEventBus);
 
         MMMenuTypes.register(modEventBus);
         MMCreativeTabs.register(modEventBus);
@@ -167,6 +168,12 @@ public class MarvelousMenagerie
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.DAWN_PETAL.getId(), MMBlocks.POTTED_DAWN_PETAL);
             ComposterBlock.COMPOSTABLES.put(MMBlocks.DAWN_PETAL.get().asItem(), 0.3F);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MMBlocks.WILLIAMSONIA_LEAVES.getId(), MMBlocks.POTTED_WILLIAMSONIA_LEAVES);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.WILLIAMSONIA_PLANT.get().asItem(), 0.45F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.STRIPPED_WILLIAMSONIA_PLANT.get().asItem(), 0.45F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.WILLIAMSONIA_LEAVES.get().asItem(), 0.45F);
+            ComposterBlock.COMPOSTABLES.put(MMBlocks.STRIPPED_WILLIAMSONIA_LEAVES.get().asItem(), 0.45F);
         });
     }
 

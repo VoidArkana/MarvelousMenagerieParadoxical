@@ -63,6 +63,7 @@ public class ClientProxy extends CommonProxy{
         Sheets.addWoodType(MMWoodTypes.PROTOTAXITES);
         Sheets.addWoodType(MMWoodTypes.CALAMITES);
         Sheets.addWoodType(MMWoodTypes.ARAUCARIOXYLON);
+        Sheets.addWoodType(MMWoodTypes.WILLIAMSONIA);
 
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
 

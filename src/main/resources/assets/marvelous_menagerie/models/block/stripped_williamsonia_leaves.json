@@ -1,0 +1,6 @@
+{
+	"parent": "marvelous_menagerie:block/williamsonia_leaves_base",
+	"textures": {
+		"log": "marvelous_menagerie:block/stripped_williamsonia_bark"
+	}
+}

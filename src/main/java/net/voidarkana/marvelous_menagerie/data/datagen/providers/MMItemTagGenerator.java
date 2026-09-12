@@ -127,6 +127,9 @@ public class MMItemTagGenerator extends ItemTagsProvider {
         this.copy(MMTags.Blocks.CALAMITES_LOG_BLOCK, MMTags.Items.CALAMITES_LOG_ITEM);
         this.copy(MMTags.Blocks.CALAMITES_BUNDLE_BLOCK, MMTags.Items.CALAMITES_BUNDLE_ITEM);
 
+        this.copy(MMTags.Blocks.WILLIAMSONIA_LOG_BLOCK, MMTags.Items.WILLIAMSONIA_LOG_ITEM);
+        this.copy(MMTags.Blocks.WILLIAMSONIA_BUNDLE_BLOCK, MMTags.Items.WILLIAMSONIA_BUNDLE_ITEM);
+
         this.copy(MMTags.Blocks.ARAUCARIOXYLON_LOG_BLOCK, MMTags.Items.ARAUCARIOXYLON_LOG_ITEM);
 
         this.copy(MMTags.Blocks.DYE_DEPOT_AMBER_WOOL, MMTags.Items.DYE_DEPOT_AMBER_WOOL_ITEM);
@@ -168,6 +171,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 .addTag(MMTags.Items.SIGILLARIA_LOG_ITEM)
                 .addTag(MMTags.Items.CALAMITES_LOG_ITEM)
                 .addTag(MMTags.Items.CALAMITES_BUNDLE_ITEM)
+                .addTag(MMTags.Items.WILLIAMSONIA_LOG_ITEM)
+                .addTag(MMTags.Items.WILLIAMSONIA_BUNDLE_ITEM)
                 .addTag(MMTags.Items.ARAUCARIOXYLON_LOG_ITEM);
 
         this.tag(ItemTags.PLANKS).add(
@@ -177,6 +182,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.SIGILLARIA_MOSAIC.get().asItem(),
                 MMBlocks.CALAMITES_PLANKS.get().asItem(),
                 MMBlocks.CALAMITES_MOSAIC.get().asItem(),
+                MMBlocks.WILLIAMSONIA_PLANKS.get().asItem(),
+                MMBlocks.WILLIAMSONIA_MOSAIC.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_PLANKS.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_MOSAIC.get().asItem()
         );
@@ -191,12 +198,14 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.PROTOTAXITES_FENCE.get().asItem(),
                 MMBlocks.SIGILLARIA_FENCE.get().asItem(),
                 MMBlocks.CALAMITES_FENCE.get().asItem(),
+                MMBlocks.WILLIAMSONIA_FENCE.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_FENCE.get().asItem()
         );
         this.tag(ItemTags.FENCE_GATES).add(
                 MMBlocks.PROTOTAXITES_FENCE_GATE.get().asItem(),
                 MMBlocks.SIGILLARIA_FENCE_GATE.get().asItem(),
                 MMBlocks.CALAMITES_FENCE_GATE.get().asItem(),
+                MMBlocks.WILLIAMSONIA_FENCE_GATE.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get().asItem()
         );
 
@@ -204,6 +213,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.PROTOTAXITES_DOOR.get().asItem(),
                 MMBlocks.SIGILLARIA_DOOR.get().asItem(),
                 MMBlocks.CALAMITES_DOOR.get().asItem(),
+                MMBlocks.WILLIAMSONIA_DOOR.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_DOOR.get().asItem()
         );
 
@@ -211,6 +221,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.PROTOTAXITES_TRAPDOOR.get().asItem(),
                 MMBlocks.SIGILLARIA_TRAPDOOR.get().asItem(),
                 MMBlocks.CALAMITES_TRAPDOOR.get().asItem(),
+                MMBlocks.WILLIAMSONIA_TRAPDOOR.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get().asItem()
         );
 
@@ -221,6 +232,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.SIGILLARIA_MOSAIC_STAIRS.get().asItem(),
                 MMBlocks.CALAMITES_STAIRS.get().asItem(),
                 MMBlocks.CALAMITES_MOSAIC_STAIRS.get().asItem(),
+                MMBlocks.WILLIAMSONIA_STAIRS.get().asItem(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_STAIRS.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get().asItem()
         );
@@ -231,6 +244,8 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.SIGILLARIA_MOSAIC_SLAB.get().asItem(),
                 MMBlocks.CALAMITES_SLAB.get().asItem(),
                 MMBlocks.CALAMITES_MOSAIC_SLAB.get().asItem(),
+                MMBlocks.WILLIAMSONIA_SLAB.get().asItem(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_SLAB.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get().asItem()
         );
@@ -238,12 +253,14 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMBlocks.PROTOTAXITES_BUTTON.get().asItem(),
                 MMBlocks.SIGILLARIA_BUTTON.get().asItem(),
                 MMBlocks.CALAMITES_BUTTON.get().asItem(),
+                MMBlocks.WILLIAMSONIA_BUTTON.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_BUTTON.get().asItem()
         );
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(
                 MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get().asItem(),
                 MMBlocks.SIGILLARIA_PRESSURE_PLATE.get().asItem(),
                 MMBlocks.CALAMITES_PRESSURE_PLATE.get().asItem(),
+                MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get().asItem()
         );
 
@@ -251,6 +268,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.PROTOTAXITES_SIGN.get(),
                 MMItems.SIGILLARIA_SIGN.get(),
                 MMItems.CALAMITES_SIGN.get(),
+                MMItems.WILLIAMSONIA_SIGN.get(),
                 MMItems.ARAUCARIOXYLON_SIGN.get()
         );
 
@@ -258,6 +276,7 @@ public class MMItemTagGenerator extends ItemTagsProvider {
                 MMItems.PROTOTAXITES_HANGING_SIGN.get(),
                 MMItems.SIGILLARIA_HANGING_SIGN.get(),
                 MMItems.CALAMITES_HANGING_SIGN.get(),
+                MMItems.WILLIAMSONIA_HANGING_SIGN.get(),
                 MMItems.ARAUCARIOXYLON_HANGING_SIGN.get()
         );
 

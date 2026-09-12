@@ -338,7 +338,34 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get(),
                 MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_CORNER.get(),
 
-                MMBlocks.FERN_SPROUTS.get()
+                MMBlocks.WILLIAMSONIA_PLANKS.get(),
+                MMBlocks.WILLIAMSONIA_PLANT.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_PLANT.get(),
+                MMBlocks.WILLIAMSONIA_LEAVES.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_LEAVES.get(),
+                MMBlocks.WILLIAMSONIA_STAIRS.get(),
+                MMBlocks.WILLIAMSONIA_SLAB.get(),
+                MMBlocks.WILLIAMSONIA_BUTTON.get(),
+                MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get(),
+                MMBlocks.WILLIAMSONIA_FENCE.get(),
+                MMBlocks.WILLIAMSONIA_FENCE_GATE.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get(),
+                MMBlocks.WILLIAMSONIA_DOOR.get(),
+                MMBlocks.WILLIAMSONIA_TRAPDOOR.get(),
+                MMBlocks.WILLIAMSONIA_LOG.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get(),
+                MMBlocks.WILLIAMSONIA_BARK.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get(),
+                MMBlocks.WILLIAMSONIA_BUNDLE.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get(),
+                MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get(),
+                MMBlocks.WILLIAMSONIA_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_WALL_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_HANGING_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.PLANKS).add(
@@ -349,7 +376,9 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.CALAMITES_PLANKS.get(),
                 MMBlocks.CALAMITES_MOSAIC.get(),
                 MMBlocks.ARAUCARIOXYLON_PLANKS.get(),
-                MMBlocks.ARAUCARIOXYLON_MOSAIC.get()
+                MMBlocks.ARAUCARIOXYLON_MOSAIC.get(),
+                MMBlocks.WILLIAMSONIA_PLANKS.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC.get()
         );
 
         this.tag(MMTags.Blocks.SIGILLARIA_LOG_BLOCK).add(
@@ -373,6 +402,20 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.STRIPPED_CALAMITES_BUNDLED_BARK.get()
         );
 
+        this.tag(MMTags.Blocks.WILLIAMSONIA_LOG_BLOCK).add(
+                MMBlocks.WILLIAMSONIA_LOG.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get(),
+                MMBlocks.WILLIAMSONIA_BARK.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get()
+        );
+
+        this.tag(MMTags.Blocks.WILLIAMSONIA_BUNDLE_BLOCK).add(
+                MMBlocks.WILLIAMSONIA_BUNDLE.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get(),
+                MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get()
+        );
+
         this.tag(MMTags.Blocks.ARAUCARIOXYLON_LOG_BLOCK).add(
                 MMBlocks.ARAUCARIOXYLON_LOG.get(),
                 MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get(),
@@ -384,11 +427,17 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.STRIPPED_GIANT_ARAUCARIOXYLON_LOG_SIDE.get()
         );
 
+        this.tag(MMTags.Blocks.THIN_LOGS)
+                .addTag(MMTags.Blocks.CALAMITES_LOG_BLOCK)
+                .addTag(MMTags.Blocks.WILLIAMSONIA_LOG_BLOCK);
+
         this.tag(BlockTags.LOGS_THAT_BURN)
                 .addTag(MMTags.Blocks.SIGILLARIA_LOG_BLOCK)
                 .addTag(MMTags.Blocks.CALAMITES_LOG_BLOCK)
                 .addTag(MMTags.Blocks.CALAMITES_BUNDLE_BLOCK)
                 .addTag(MMTags.Blocks.ARAUCARIOXYLON_LOG_BLOCK)
+                .addTag(MMTags.Blocks.WILLIAMSONIA_LOG_BLOCK)
+                .addTag(MMTags.Blocks.WILLIAMSONIA_BUNDLE_BLOCK)
         ;
 
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(
@@ -397,6 +446,8 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.SIGILLARIA_LEAVES.get(),
                 MMBlocks.PROTOTAXITES.get(),
                 MMBlocks.CALAMITES_BRANCH.get(),
+                MMBlocks.WILLIAMSONIA_LEAVES.get(),
+                MMBlocks.STRIPPED_WILLIAMSONIA_LEAVES.get(),
                 MMBlocks.ARAUCARIOXYLON_LEAVES.get(),
                 MMBlocks.CREEPING_MESOZOIC_MOSS.get(),
                 MMBlocks.MESOZOIC_MOSS_CARPET.get()
@@ -411,28 +462,32 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.SIGILLARIA_FENCE.get(),
                 MMBlocks.PROTOTAXITES_FENCE.get(),
                 MMBlocks.CALAMITES_FENCE.get(),
-                MMBlocks.ARAUCARIOXYLON_FENCE.get()
+                MMBlocks.ARAUCARIOXYLON_FENCE.get(),
+                MMBlocks.WILLIAMSONIA_FENCE.get()
         );
 
         this.tag(BlockTags.FENCE_GATES).add(
                 MMBlocks.SIGILLARIA_FENCE_GATE.get(),
                 MMBlocks.PROTOTAXITES_FENCE_GATE.get(),
                 MMBlocks.CALAMITES_FENCE_GATE.get(),
-                MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get()
+                MMBlocks.ARAUCARIOXYLON_FENCE_GATE.get(),
+                MMBlocks.WILLIAMSONIA_FENCE_GATE.get()
         );
 
         this.tag(BlockTags.WOODEN_DOORS).add(
                 MMBlocks.SIGILLARIA_DOOR.get(),
                 MMBlocks.PROTOTAXITES_DOOR.get(),
                 MMBlocks.CALAMITES_DOOR.get(),
-                MMBlocks.ARAUCARIOXYLON_DOOR.get()
+                MMBlocks.ARAUCARIOXYLON_DOOR.get(),
+                MMBlocks.WILLIAMSONIA_DOOR.get()
         );
 
         this.tag(BlockTags.WOODEN_TRAPDOORS).add(
                 MMBlocks.SIGILLARIA_TRAPDOOR.get(),
                 MMBlocks.PROTOTAXITES_TRAPDOOR.get(),
                 MMBlocks.CALAMITES_TRAPDOOR.get(),
-                MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get()
+                MMBlocks.ARAUCARIOXYLON_TRAPDOOR.get(),
+                MMBlocks.WILLIAMSONIA_TRAPDOOR.get()
         );
 
         this.tag(BlockTags.WOODEN_STAIRS).add(
@@ -443,7 +498,9 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.CALAMITES_STAIRS.get(),
                 MMBlocks.CALAMITES_MOSAIC_STAIRS.get(),
                 MMBlocks.ARAUCARIOXYLON_STAIRS.get(),
-                MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get()
+                MMBlocks.ARAUCARIOXYLON_MOSAIC_STAIRS.get(),
+                MMBlocks.WILLIAMSONIA_STAIRS.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get()
         );
 
         this.tag(BlockTags.WOODEN_SLABS).add(
@@ -454,49 +511,57 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 MMBlocks.CALAMITES_SLAB.get(),
                 MMBlocks.CALAMITES_MOSAIC_SLAB.get(),
                 MMBlocks.ARAUCARIOXYLON_SLAB.get(),
-                MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get()
+                MMBlocks.ARAUCARIOXYLON_MOSAIC_SLAB.get(),
+                MMBlocks.WILLIAMSONIA_SLAB.get(),
+                MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get()
         );
 
         this.tag(BlockTags.WOODEN_BUTTONS).add(
                 MMBlocks.SIGILLARIA_BUTTON.get(),
                 MMBlocks.PROTOTAXITES_BUTTON.get(),
                 MMBlocks.CALAMITES_BUTTON.get(),
-                MMBlocks.ARAUCARIOXYLON_BUTTON.get()
+                MMBlocks.ARAUCARIOXYLON_BUTTON.get(),
+                MMBlocks.WILLIAMSONIA_BUTTON.get()
         );
 
         this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(
                 MMBlocks.SIGILLARIA_PRESSURE_PLATE.get(),
                 MMBlocks.PROTOTAXITES_PRESSURE_PLATE.get(),
                 MMBlocks.CALAMITES_PRESSURE_PLATE.get(),
-                MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get()
+                MMBlocks.ARAUCARIOXYLON_PRESSURE_PLATE.get(),
+                MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get()
         );
 
         this.tag(BlockTags.SIGNS).add(
                 MMBlocks.SIGILLARIA_SIGN.get(),
                 MMBlocks.PROTOTAXITES_SIGN.get(),
                 MMBlocks.CALAMITES_SIGN.get(),
-                MMBlocks.ARAUCARIOXYLON_SIGN.get()
+                MMBlocks.ARAUCARIOXYLON_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_SIGN.get()
         );
 
         this.tag(BlockTags.WALL_SIGNS).add(
                 MMBlocks.SIGILLARIA_WALL_SIGN.get(),
                 MMBlocks.PROTOTAXITES_WALL_SIGN.get(),
                 MMBlocks.CALAMITES_WALL_SIGN.get(),
-                MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get()
+                MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_WALL_SIGN.get()
         );
 
         this.tag(BlockTags.CEILING_HANGING_SIGNS).add(
                 MMBlocks.SIGILLARIA_HANGING_SIGN.get(),
                 MMBlocks.PROTOTAXITES_HANGING_SIGN.get(),
                 MMBlocks.CALAMITES_HANGING_SIGN.get(),
-                MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get()
+                MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.WALL_HANGING_SIGNS).add(
                 MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
                 MMBlocks.PROTOTAXITES_WALL_HANGING_SIGN.get(),
                 MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
-                MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get()
+                MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get(),
+                MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get()
         );
 
         this.tag(BlockTags.SMALL_FLOWERS).add(
@@ -767,6 +832,7 @@ public class MMBlockTagGenerator extends BlockTagsProvider {
                 .add(MMBlocks.POTTED_SIGILLARIA_SAPLING.get())
                 .add(MMBlocks.POTTED_POLLENPUFF.get())
                 .add(MMBlocks.POTTED_POUCHWEED.get())
-                .add(MMBlocks.POTTED_DAWN_PETAL.get());
+                .add(MMBlocks.POTTED_DAWN_PETAL.get())
+                .add(MMBlocks.POTTED_WILLIAMSONIA_LEAVES.get());
     }
 }

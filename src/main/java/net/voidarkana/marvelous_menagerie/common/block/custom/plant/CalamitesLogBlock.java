@@ -9,7 +9,9 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -33,6 +35,10 @@ public class CalamitesLogBlock extends ThinLogBlock{
     public static final BooleanProperty SOUTHEAST = PSOUTHEAST;
     public static final BooleanProperty SOUTHWEST = PSOUTHWEST;
     public static final BooleanProperty NORTHWEST = PNORTHWEST;
+    public static final BooleanProperty NORTH = PipeBlock.NORTH;
+    public static final BooleanProperty EAST = PipeBlock.EAST;
+    public static final BooleanProperty SOUTH = PipeBlock.SOUTH;
+    public static final BooleanProperty WEST = PipeBlock.WEST;
 
     protected static final Map<Direction, BooleanProperty> PROPERTY_BY_DIRECTION
             = PipeBlock.PROPERTY_BY_DIRECTION.entrySet().stream().filter((p_52346_) -> {
@@ -186,5 +192,34 @@ public class CalamitesLogBlock extends ThinLogBlock{
             }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
+    }
+
+
+    public BlockState rotate(BlockState pState, Rotation pRot) {
+        return switch (pRot) {
+            case CLOCKWISE_180 ->
+                    pState.setValue(NORTH, pState.getValue(SOUTH)).setValue(EAST, pState.getValue(WEST)).setValue(SOUTH, pState.getValue(NORTH)).setValue(WEST, pState.getValue(EAST));
+            case COUNTERCLOCKWISE_90 ->
+                    pState.setValue(NORTH, pState.getValue(EAST)).setValue(EAST, pState.getValue(SOUTH)).setValue(SOUTH, pState.getValue(WEST)).setValue(WEST, pState.getValue(NORTH));
+            case CLOCKWISE_90 -> switch (pState.getValue(AXIS)) {
+                case X ->
+                        pState.setValue(AXIS, Direction.Axis.Z).setValue(NORTH, pState.getValue(WEST)).setValue(EAST, pState.getValue(NORTH)).setValue(SOUTH, pState.getValue(EAST)).setValue(WEST, pState.getValue(SOUTH));
+                case Z ->
+                        pState.setValue(AXIS, Direction.Axis.X).setValue(NORTH, pState.getValue(WEST)).setValue(EAST, pState.getValue(NORTH)).setValue(SOUTH, pState.getValue(EAST)).setValue(WEST, pState.getValue(SOUTH));
+                default ->
+                        pState.setValue(NORTH, pState.getValue(WEST)).setValue(EAST, pState.getValue(NORTH)).setValue(SOUTH, pState.getValue(EAST)).setValue(WEST, pState.getValue(SOUTH));
+            };
+            default -> pState;
+        };
+    }
+
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return switch (pMirror) {
+            case LEFT_RIGHT ->
+                    pState.setValue(NORTH, pState.getValue(SOUTH)).setValue(SOUTH, pState.getValue(NORTH));
+            case FRONT_BACK ->
+                    pState.setValue(EAST, pState.getValue(WEST)).setValue(WEST, pState.getValue(EAST));
+            default -> super.mirror(pState, pMirror);
+        };
     }
 }

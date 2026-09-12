@@ -11,7 +11,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
-import net.voidarkana.marvelous_menagerie.common.block.custom.GiantLogCorner;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.GiantLogCorner;
 import net.voidarkana.marvelous_menagerie.common.worldgen.tree.ModTrunkPlacerTypes;
 
 import java.util.List;

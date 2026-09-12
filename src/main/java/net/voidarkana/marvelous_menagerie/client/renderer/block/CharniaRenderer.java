@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.block.CharniaModel;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.CharniaBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.animal.CharniaBlock;
 import net.voidarkana.marvelous_menagerie.common.blockentity.custom.CharniaBlockEntity;
 import net.voidarkana.marvelous_menagerie.event.client.ForgeClientEvents;
 

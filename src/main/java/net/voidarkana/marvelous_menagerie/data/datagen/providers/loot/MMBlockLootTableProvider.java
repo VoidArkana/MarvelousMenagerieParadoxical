@@ -4,7 +4,6 @@ import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -15,7 +14,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
-import net.voidarkana.marvelous_menagerie.common.block.custom.plant.CharniaBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.animal.CharniaBlock;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 
 import java.util.Set;
@@ -442,6 +441,52 @@ public class MMBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MMBlocks.DAWN_PETAL.get());
         this.add(MMBlocks.POTTED_DAWN_PETAL.get(),
                 createPotFlowerItemTable(MMBlocks.DAWN_PETAL.get()));
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_LOG.get());
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get());
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_PLANKS.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_STAIRS.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_FENCE.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_FENCE_GATE.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_BUTTON.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_TRAPDOOR.get());
+
+        this.add(MMBlocks.WILLIAMSONIA_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.WILLIAMSONIA_SLAB.get()));
+        this.add(MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get(),
+                block -> createSlabItemTable(MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get()));
+        this.add(MMBlocks.WILLIAMSONIA_DOOR.get(),
+                block -> createDoorTable(MMBlocks.WILLIAMSONIA_DOOR.get()));
+
+        this.add(MMBlocks.WILLIAMSONIA_SIGN.get(),
+                block -> createSingleItemTable(MMItems.WILLIAMSONIA_SIGN.get()));
+        this.add(MMBlocks.WILLIAMSONIA_WALL_SIGN.get(),
+                block -> createSingleItemTable(MMItems.WILLIAMSONIA_SIGN.get()));
+        this.add(MMBlocks.WILLIAMSONIA_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.WILLIAMSONIA_HANGING_SIGN.get()));
+        this.add(MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get(),
+                block -> createSingleItemTable(MMItems.WILLIAMSONIA_HANGING_SIGN.get()));
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_MOSAIC.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get());
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_BUNDLE.get());
+        this.dropSelf(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get());
+        this.dropSelf(MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get());
+        this.dropSelf(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get());
+
+        this.dropSelf(MMBlocks.WILLIAMSONIA_LEAVES.get());
+        this.dropSelf(MMBlocks.STRIPPED_WILLIAMSONIA_LEAVES.get());
+        this.add(MMBlocks.POTTED_WILLIAMSONIA_LEAVES.get(),
+                createPotFlowerItemTable(MMBlocks.WILLIAMSONIA_LEAVES.get()));
+
+        this.otherWhenSilkTouch(MMBlocks.WILLIAMSONIA_PLANT.get(), MMBlocks.WILLIAMSONIA_LOG.get());
+        this.otherWhenSilkTouch(MMBlocks.STRIPPED_WILLIAMSONIA_PLANT.get(), MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get());
 
         this.add(MMBlocks.CHARNIA.get(),
                 block -> createCharniaDrops(MMBlocks.CHARNIA.get()));

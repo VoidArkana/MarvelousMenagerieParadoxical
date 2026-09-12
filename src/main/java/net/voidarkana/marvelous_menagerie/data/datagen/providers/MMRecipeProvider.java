@@ -856,6 +856,77 @@ public class MMRecipeProvider extends RecipeProvider implements IConditionBuilde
                 .define('W', MMBlocks.STRIPPED_ARAUCARIOXYLON_LOG.get())
                 .unlockedBy(getHasName(MMBlocks.ARAUCARIOXYLON_BARK.get()), has(MMBlocks.ARAUCARIOXYLON_BARK.get()))
                 .save(consumer);
+
+        //Williamsonia woodset
+        makePlanks(MMBlocks.WILLIAMSONIA_PLANKS, MMTags.Items.WILLIAMSONIA_BUNDLE_ITEM).save(consumer);
+        makePlanksFromThinLog(MMBlocks.WILLIAMSONIA_PLANKS, MMTags.Items.WILLIAMSONIA_LOG_ITEM).save(consumer, "williamsonia_planks_from_thin_log");
+        makeWood(MMBlocks.WILLIAMSONIA_BUNDLED_BARK, MMBlocks.WILLIAMSONIA_BUNDLE).save(consumer);
+        makeWood(MMBlocks.WILLIAMSONIA_BARK, MMBlocks.WILLIAMSONIA_LOG).save(consumer);
+        makeWood(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK, MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE).save(consumer);
+        makeWood(MMBlocks.STRIPPED_WILLIAMSONIA_BARK, MMBlocks.STRIPPED_WILLIAMSONIA_LOG).save(consumer);
+        makeStairs(MMBlocks.WILLIAMSONIA_PLANKS, MMBlocks.WILLIAMSONIA_STAIRS).save(consumer);
+        makeStairs(MMBlocks.WILLIAMSONIA_MOSAIC, MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS).save(consumer);
+        makeSlab(MMBlocks.WILLIAMSONIA_PLANKS, MMBlocks.WILLIAMSONIA_SLAB).save(consumer);
+        makeSlab(MMBlocks.WILLIAMSONIA_MOSAIC, MMBlocks.WILLIAMSONIA_MOSAIC_SLAB).save(consumer);
+        makeFence(MMBlocks.WILLIAMSONIA_FENCE, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+        makeFenceGate(MMBlocks.WILLIAMSONIA_FENCE_GATE, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+        makeDoor(MMBlocks.WILLIAMSONIA_DOOR, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+        makeTrapdoor(MMBlocks.WILLIAMSONIA_TRAPDOOR, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+        makeButton(MMBlocks.WILLIAMSONIA_BUTTON, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+        makePressurePlate(MMBlocks.WILLIAMSONIA_PRESSURE_PLATE, MMBlocks.WILLIAMSONIA_PLANKS).save(consumer);
+
+        make4IngotToBlock(MMBlocks.WILLIAMSONIA_BUNDLE.get(), MMBlocks.WILLIAMSONIA_LOG.get()).save(consumer, "williamsonia_log_to_bundle");
+        make4IngotToBlock(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get(), MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get()).save(consumer, "williamsonia_stripped_log_to_bundle");
+        make4IngotToBlock(MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get(), MMBlocks.WILLIAMSONIA_BARK.get()).save(consumer, "williamsonia_bark_to_bundle");
+        make4IngotToBlock(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get(), MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get()).save(consumer, "williamsonia_stripped_bark_to_bundle");
+
+        makeBlockTo4Ingot(MMBlocks.WILLIAMSONIA_LOG.get(), MMBlocks.WILLIAMSONIA_BUNDLE.get()).save(consumer, "williamsonia_bundle_to_log");
+        makeBlockTo4Ingot(MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get(), MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get()).save(consumer, "williamsonia_stripped_bundle_to_log");
+        makeBlockTo4Ingot(MMBlocks.WILLIAMSONIA_BARK.get(), MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get()).save(consumer, "williamsonia_bundle_to_bark");
+        makeBlockTo4Ingot(MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get(), MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get()).save(consumer, "williamsonia_bundle_to_stripped_bark");
+
+        //Williamsonia mosaic
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMBlocks.WILLIAMSONIA_MOSAIC.get(), 1)
+                .pattern("S")
+                .pattern("S")
+                .define('S', MMBlocks.WILLIAMSONIA_SLAB.get())
+                .unlockedBy(getHasName(MMBlocks.WILLIAMSONIA_BUNDLE.get()), has(MMBlocks.WILLIAMSONIA_BUNDLE.get()))
+                .save(consumer);
+
+        //Williamsonia sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.WILLIAMSONIA_SIGN.get(), 3)
+                .pattern("SSS")
+                .pattern("SSS")
+                .pattern(" # ")
+                .define('S', MMBlocks.WILLIAMSONIA_PLANKS.get())
+                .define('#', Tags.Items.RODS_WOODEN)
+                .unlockedBy(getHasName(MMBlocks.WILLIAMSONIA_BUNDLE.get()), has(MMBlocks.WILLIAMSONIA_BUNDLE.get()))
+                .save(consumer);
+
+        //Williamsonia hanging sign
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MMItems.WILLIAMSONIA_HANGING_SIGN.get(), 6)
+                .pattern("# #")
+                .pattern("SSS")
+                .pattern("SSS")
+                .define('#', Items.CHAIN)
+                .define('S', MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get())
+                .unlockedBy(getHasName(MMBlocks.WILLIAMSONIA_BUNDLE.get()), has(MMBlocks.WILLIAMSONIA_BUNDLE.get()))
+                .save(consumer);
+
+        //Williamsonia boat
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, MMItems.WILLIAMSONIA_BOAT.get(), 1)
+                .pattern("S S")
+                .pattern("SSS")
+                .define('S', MMBlocks.WILLIAMSONIA_PLANKS.get())
+                .unlockedBy(getHasName(MMBlocks.WILLIAMSONIA_PLANKS.get()), has(MMBlocks.WILLIAMSONIA_PLANKS.get()))
+                .save(consumer);
+
+        //Williamsonia chest boat
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TRANSPORTATION, MMItems.WILLIAMSONIA_CHEST_BOAT.get(), 1)
+                .requires(MMItems.WILLIAMSONIA_BOAT.get())
+                .requires(Blocks.CHEST)
+                .unlockedBy(getHasName(MMBlocks.WILLIAMSONIA_PLANKS.get()), has(MMBlocks.WILLIAMSONIA_PLANKS.get()))
+                .save(consumer);
     }
 
     public ShapelessRecipeBuilder makePlanks(Supplier<? extends Block> plankOut, TagKey<Item> logIn) {

@@ -85,6 +85,11 @@ public class MMTags {
         public static final TagKey<Block> CALAMITES_LOG_BLOCK = tag("calamites_log_block");
         public static final TagKey<Block> CALAMITES_BUNDLE_BLOCK = tag("calamites_bundle_block");
 
+        public static final TagKey<Block> WILLIAMSONIA_LOG_BLOCK = tag("williamsonia_log_block");
+        public static final TagKey<Block> WILLIAMSONIA_BUNDLE_BLOCK = tag("williamsonia_bundle_block");
+
+        public static final TagKey<Block> THIN_LOGS = tag("thin_logs");
+
         public static final TagKey<Block> DYE_DEPOT_WOOL = tag("dye_depot_wool");
 
         public static final TagKey<Block> FLUBBER_DIG = tag("flubber_dig_results");
@@ -134,9 +139,14 @@ public class MMTags {
         public static final TagKey<Item> PALEONOMICON_INGREDIENTS = tag("paleonomicon_ingredients");
 
         public static final TagKey<Item> SIGILLARIA_LOG_ITEM = tag("sigillaria_log_item");
+
         public static final TagKey<Item> CALAMITES_LOG_ITEM = tag("calamites_log_item");
         public static final TagKey<Item> CALAMITES_BUNDLE_ITEM = tag("calamites_bundle_item");
+
         public static final TagKey<Item> ARAUCARIOXYLON_LOG_ITEM = tag("araucarioxylon_log_item");
+
+        public static final TagKey<Item> WILLIAMSONIA_LOG_ITEM = tag("williamsonia_log_item");
+        public static final TagKey<Item> WILLIAMSONIA_BUNDLE_ITEM = tag("williamsonia_bundle_item");
 
         public static final TagKey<Item> MYOTRAGUS_INGREDIENT = tag("myotragus_ingredient");
 

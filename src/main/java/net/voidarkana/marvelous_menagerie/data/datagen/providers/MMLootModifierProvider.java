@@ -23,7 +23,7 @@ public class MMLootModifierProvider extends GlobalLootModifierProvider {
         }, List.of(MMBlocks.CALAMITES_SAPLING.get().asItem(), MMBlocks.SIGILLARIA_SAPLING.get().asItem(),
                 MMBlocks.PROTOTAXITES.get().asItem(), MMBlocks.COOKSONIA.get().asItem(), MMBlocks.OTOZAMITES_BUSH.get().asItem(),
                 MMBlocks.ARAUCARIOXYLON_SAPLING.get().asItem(), MMBlocks.POLLENPUFF.get().asItem(), MMBlocks.DAWN_PETAL.get().asItem(),
-                MMBlocks.POUCHWEED.get().asItem()),
+                MMBlocks.POUCHWEED.get().asItem(), MMBlocks.WILLIAMSONIA_LEAVES.get().asItem()),
                 0.5f));
     }
 }

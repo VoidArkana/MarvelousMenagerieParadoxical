@@ -5,14 +5,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
-import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.voidarkana.marvelous_menagerie.common.block.MMBlocks;
-import net.voidarkana.marvelous_menagerie.common.block.custom.FourEggsBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.animal.FourEggsBlock;
 import net.voidarkana.marvelous_menagerie.common.entity.base.IEggLayer;
 import net.voidarkana.marvelous_menagerie.common.entity.base.MarvelousAnimal;
 

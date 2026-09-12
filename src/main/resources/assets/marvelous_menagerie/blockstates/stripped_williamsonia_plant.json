@@ -1,0 +1,88 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_center",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "axis": "x"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_center"
+      },
+      "when": {
+        "axis": "y"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_center",
+        "x": 90
+      },
+      "when": {
+        "axis": "z"
+      }
+    },
+
+
+
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_top",
+        "x": 90
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_top",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_bottom",
+        "x": 90
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_bottom",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_top"
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "marvelous_menagerie:block/stripped_williamsonia_bottom"
+      },
+      "when": {
+        "down": "true"
+      }
+    }
+  ]
+}

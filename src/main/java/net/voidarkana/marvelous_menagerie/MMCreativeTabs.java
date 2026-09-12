@@ -295,6 +295,40 @@ public class MMCreativeTabs {
 
                         output.accept(MMItems.SIGILLARIA_BOAT.get());
                         output.accept(MMItems.SIGILLARIA_CHEST_BOAT.get());
+
+                        output.accept(MMBlocks.WILLIAMSONIA_LEAVES.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_LEAVES.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_PLANT.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_PLANT.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_LOG.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_LOG.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_BARK.get());
+
+                        output.accept(MMBlocks.WILLIAMSONIA_PLANKS.get());
+
+                        output.accept(MMBlocks.WILLIAMSONIA_BUNDLE.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get());
+                        output.accept(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get());
+
+                        output.accept(MMBlocks.WILLIAMSONIA_STAIRS.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_SLAB.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_FENCE.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_FENCE_GATE.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_DOOR.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_TRAPDOOR.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_BUTTON.get());
+
+                        output.accept(MMBlocks.WILLIAMSONIA_MOSAIC.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get());
+                        output.accept(MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get());
+                        output.accept(MMItems.WILLIAMSONIA_SIGN.get());
+                        output.accept(MMItems.WILLIAMSONIA_HANGING_SIGN.get());
+
+                        output.accept(MMItems.WILLIAMSONIA_BOAT.get());
+                        output.accept(MMItems.WILLIAMSONIA_CHEST_BOAT.get());
                     })
                     .build());
 

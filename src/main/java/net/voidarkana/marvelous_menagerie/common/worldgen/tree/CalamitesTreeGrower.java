@@ -15,9 +15,4 @@ public class CalamitesTreeGrower extends AbstractTreeGrower {
     protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource pRandom, boolean pHasFlowers) {
         return ModConfiguredFeatures.CALAMITES_KEY;
     }
-
-//    @Override
-//    protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource pRandom) {
-//        return ModConfiguredFeatures.SIGILLARIA_HUGE;
-//    }
 }

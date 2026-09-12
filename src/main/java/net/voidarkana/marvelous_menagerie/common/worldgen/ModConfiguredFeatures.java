@@ -55,6 +55,9 @@ public class ModConfiguredFeatures {
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> OTOZAMITES_FEATURE =
             register_feature("otozamites_feature", () -> new OtozamitesFeature(NoneFeatureConfiguration.CODEC));
 
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> WILLIAMSONIA_FEATURE =
+            register_feature("williamsonia_feature", () -> new WilliamsoniaFeature(NoneFeatureConfiguration.CODEC));
+
     public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_PATCH = registerKey("mesozoil_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_DECORATION = registerKey("mesozoil_decoration");
     public static final ResourceKey<ConfiguredFeature<?, ?>> MESOZOIL_VEGETATION_BONEMEAL = registerKey("mesozoil_vegetation_bonemeal");
@@ -70,6 +73,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_KEY =  registerKey("araucarioxlyon");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_MEGA = registerKey("araucarioxlyon_mega");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ARAUCARIOXYLON_HUGE = registerKey("araucarioxlyon_huge");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> WILLIAMSONIA_KEY =  registerKey("williamsonia");
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> CREEPING_MESOZOIC_MOSS = registerKey("creeping_mesozoic_moss");
 
@@ -164,6 +169,8 @@ public class ModConfiguredFeatures {
                                 MMBlocks.GIANT_ARAUCARIOXYLON_LOG_CORNER.get(),
                                 MMBlocks.MESOZOIL.get(),
                                 MMBlocks.MESOZOIC_PODZOL.get())));
+
+        register(context, WILLIAMSONIA_KEY, ModConfiguredFeatures.WILLIAMSONIA_FEATURE.get(), new NoneFeatureConfiguration());
 
         //soil
         WeightedStateProvider mesozoilDecoWSP = new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()

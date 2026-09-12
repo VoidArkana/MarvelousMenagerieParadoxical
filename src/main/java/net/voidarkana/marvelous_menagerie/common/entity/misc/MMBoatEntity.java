@@ -39,6 +39,7 @@ public class MMBoatEntity extends Boat {
             case PROTOTAXITES -> MMItems.PROTOTAXITES_BOAT.get();
             case CALAMITES -> MMItems.CALAMITES_BOAT.get();
             case ARAUCARIOXYLON -> MMItems.ARAUCARIOXYLON_BOAT.get();
+            case WILLIAMSONIA -> MMItems.WILLIAMSONIA_BOAT.get();
         };
     }
 
@@ -69,7 +70,8 @@ public class MMBoatEntity extends Boat {
         SIGILLARIA(MMBlocks.SIGILLARIA_PLANKS.get(), "sigillaria"),
         PROTOTAXITES(MMBlocks.PROTOTAXITES_PLANKS.get(), "prototaxites"),
         CALAMITES(MMBlocks.CALAMITES_PLANKS.get(), "calamites"),
-        ARAUCARIOXYLON(MMBlocks.ARAUCARIOXYLON_PLANKS.get(), "araucarioxylon");
+        ARAUCARIOXYLON(MMBlocks.ARAUCARIOXYLON_PLANKS.get(), "araucarioxylon"),
+        WILLIAMSONIA(MMBlocks.WILLIAMSONIA_PLANKS.get(), "williamsonia");
 
         private final String name;
         private final Block planks;

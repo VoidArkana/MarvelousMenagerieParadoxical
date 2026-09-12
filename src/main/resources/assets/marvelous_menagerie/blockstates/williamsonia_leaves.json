@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "face=floor": {
+      "model": "marvelous_menagerie:block/williamsonia_leaves"
+    },
+    "face=wall,facing=east": {
+      "model": "marvelous_menagerie:block/williamsonia_leaves_side",
+      "y": 90
+    },
+    "face=wall,facing=north": {
+      "model": "marvelous_menagerie:block/williamsonia_leaves_side"
+    },
+    "face=wall,facing=south": {
+      "model": "marvelous_menagerie:block/williamsonia_leaves_side",
+      "y": 180
+    },
+    "face=wall,facing=west": {
+      "model": "marvelous_menagerie:block/williamsonia_leaves_side",
+      "y": 270
+    }
+  }
+}

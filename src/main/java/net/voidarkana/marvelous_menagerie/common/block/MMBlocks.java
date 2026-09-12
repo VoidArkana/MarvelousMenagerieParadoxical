@@ -17,14 +17,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.common.block.custom.*;
-import net.voidarkana.marvelous_menagerie.common.block.custom.flammable.FlammableWoodLogBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.animal.*;
+import net.voidarkana.marvelous_menagerie.common.block.custom.plant.flammable.FlammableWoodLogBlock;
 import net.voidarkana.marvelous_menagerie.common.block.custom.plant.*;
 import net.voidarkana.marvelous_menagerie.common.entity.MMEntities;
 import net.voidarkana.marvelous_menagerie.common.item.MMItems;
 import net.voidarkana.marvelous_menagerie.common.worldgen.ModConfiguredFeatures;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.AraucarioxylonTreeGrower;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.CalamitesTreeGrower;
-import net.voidarkana.marvelous_menagerie.common.worldgen.tree.SigillariaTreeGrower;
+import net.voidarkana.marvelous_menagerie.common.worldgen.tree.*;
 import net.voidarkana.marvelous_menagerie.util.MMTags;
 import net.voidarkana.marvelous_menagerie.util.MMWoodTypes;
 
@@ -454,6 +453,85 @@ public class MMBlocks {
             () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.DAWN_PETAL,
                     BlockBehaviour.Properties.copy(Blocks.POTTED_POPPY).lightLevel((blockState)-> 2).noOcclusion()));
 
+    //Williamsonia
+    public static final RegistryObject<Block> WILLIAMSONIA_LEAVES = registerBlock("williamsonia_leaves",
+            () -> new WilliamsoniaLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.NETHER_WOOD),
+                    ModConfiguredFeatures.WILLIAMSONIA_KEY));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_LEAVES = registerBlock("stripped_williamsonia_leaves",
+            () -> new WilliamsoniaLeaves(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.NETHER_WOOD)));
+    public static final RegistryObject<Block> POTTED_WILLIAMSONIA_LEAVES = registerBlock("potted_williamsonia_leaves",
+            () -> new FlowerPotBlock(() -> ((FlowerPotBlock) Blocks.FLOWER_POT), MMBlocks.WILLIAMSONIA_LEAVES,
+                    BlockBehaviour.Properties.copy(Blocks.POTTED_ALLIUM).noOcclusion()));
+
+    public static final RegistryObject<Block> WILLIAMSONIA_PLANT = registerBlock("williamsonia_plant",
+            () -> new BranchingTrunkBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_PLANT = registerBlock("stripped_williamsonia_plant",
+            () -> new BranchingTrunkBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD)));
+
+    public static final RegistryObject<Block> WILLIAMSONIA_LOG = registerBlock ("williamsonia_log",
+            () -> new ThinLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_LOG = registerBlock ("stripped_williamsonia_log",
+            () -> new ThinLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_BARK = registerBlock ("williamsonia_bark",
+            () -> new ThinLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_BARK = registerBlock ("stripped_williamsonia_bark",
+            () -> new ThinLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+
+    //Williamsonia Woodset
+    public static final RegistryObject<Block> WILLIAMSONIA_BUNDLE = registerBlock("williamsonia_bundle",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD)));
+    public static final RegistryObject<Block> WILLIAMSONIA_BUNDLED_BARK = registerBlock("williamsonia_bundled_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LOG).sound(SoundType.NETHER_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_BUNDLE = registerBlock("stripped_williamsonia_bundle",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.NETHER_WOOD)));
+    public static final RegistryObject<Block> STRIPPED_WILLIAMSONIA_BUNDLED_BARK = registerBlock("stripped_williamsonia_bundled_bark",
+            () -> new FlammableWoodLogBlock(BlockBehaviour.Properties.copy(Blocks.STRIPPED_OAK_LOG).sound(SoundType.NETHER_WOOD)));
+
+    public static final RegistryObject<Block> WILLIAMSONIA_PLANKS = registerBlock("williamsonia_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_STAIRS = registerBlock("williamsonia_stairs",
+            () -> new StairBlock(() -> MMBlocks.WILLIAMSONIA_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_SLAB = registerBlock("williamsonia_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_BUTTON = registerBlock("williamsonia_button",
+            () -> new ButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON).sound(SoundType.NETHER_WOOD).ignitedByLava(),
+                    BlockSetType.CRIMSON, 25, true));
+    public static final RegistryObject<Block> WILLIAMSONIA_PRESSURE_PLATE = registerBlock("williamsonia_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE).sound(SoundType.NETHER_WOOD).ignitedByLava(),
+                    BlockSetType.CRIMSON));
+    public static final RegistryObject<Block> WILLIAMSONIA_FENCE = registerBlock("williamsonia_fence",
+            () -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_FENCE_GATE = registerBlock("williamsonia_fence_gate",
+            () -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE).sound(SoundType.NETHER_WOOD).ignitedByLava(),
+                    SoundEvents.NETHER_WOOD_FENCE_GATE_OPEN, SoundEvents.NETHER_WOOD_FENCE_GATE_CLOSE));
+
+
+    //Williamsonia Door and Trapdoor
+    public static final RegistryObject<Block> WILLIAMSONIA_DOOR = registerBlock("williamsonia_door",
+            () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.BAMBOO));
+    public static final RegistryObject<Block> WILLIAMSONIA_TRAPDOOR = registerBlock("williamsonia_trapdoor",
+            () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).noOcclusion(), BlockSetType.BAMBOO));
+
+    //Williamsonia signs
+    public static final RegistryObject<Block> WILLIAMSONIA_SIGN = BLOCKS.register("williamsonia_sign",
+            () -> new ModStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_SIGN), MMWoodTypes.WILLIAMSONIA));
+    public static final RegistryObject<Block> WILLIAMSONIA_WALL_SIGN = BLOCKS.register("williamsonia_wall_sign",
+            () -> new ModWallSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_SIGN), MMWoodTypes.WILLIAMSONIA));
+    public static final RegistryObject<Block> WILLIAMSONIA_HANGING_SIGN = BLOCKS.register("williamsonia_hanging_sign",
+            () -> new ModHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_HANGING_SIGN), MMWoodTypes.WILLIAMSONIA));
+    public static final RegistryObject<Block> WILLIAMSONIA_WALL_HANGING_SIGN = BLOCKS.register("williamsonia_wall_hanging_sign",
+            () -> new ModWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WALL_HANGING_SIGN), MMWoodTypes.WILLIAMSONIA));
+
+    //Williamsonia Mosaic Blocks
+    public static final RegistryObject<Block> WILLIAMSONIA_MOSAIC = registerBlock("williamsonia_mosaic",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_MOSAIC_STAIRS = registerBlock("williamsonia_mosaic_stairs",
+            () -> new StairBlock(() -> MMBlocks.WILLIAMSONIA_PLANKS.get().defaultBlockState(),
+                    BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
+    public static final RegistryObject<Block> WILLIAMSONIA_MOSAIC_SLAB = registerBlock("williamsonia_mosaic_slab",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).sound(SoundType.NETHER_WOOD).ignitedByLava()));
 
     //April Fools
     public static final RegistryObject<Block> CHUD_BLOCK = registerBlock("chud_block",

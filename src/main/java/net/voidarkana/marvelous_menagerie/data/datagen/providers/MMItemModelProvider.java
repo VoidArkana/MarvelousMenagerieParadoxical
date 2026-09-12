@@ -121,6 +121,27 @@ public class MMItemModelProvider extends ItemModelProvider {
         simpleItem(MMItems.ARAUCARIOXYLON_CHEST_BOAT);
         simpleBlockItem(MMBlocks.ARAUCARIOXYLON_SAPLING);
 
+
+
+        simpleBlockItem(MMBlocks.WILLIAMSONIA_DOOR);
+        trapdoorItem(MMBlocks.WILLIAMSONIA_TRAPDOOR);
+
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_STAIRS);
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS);
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_SLAB);
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_MOSAIC_SLAB);
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_FENCE_GATE);
+        evenSimplerBlockItem(MMBlocks.WILLIAMSONIA_PRESSURE_PLATE);
+
+        fenceItem(MMBlocks.WILLIAMSONIA_FENCE, MMBlocks.WILLIAMSONIA_PLANKS);
+        buttonItem(MMBlocks.WILLIAMSONIA_BUTTON, MMBlocks.WILLIAMSONIA_PLANKS);
+
+        simpleItem(MMItems.WILLIAMSONIA_SIGN);
+        simpleItem(MMItems.WILLIAMSONIA_HANGING_SIGN);
+
+        simpleItem(MMItems.WILLIAMSONIA_BOAT);
+        simpleItem(MMItems.WILLIAMSONIA_CHEST_BOAT);
+
         evenSimplerBlockItem(MMBlocks.MESOZOIC_MOSS_CARPET);
         simpleBlockItemBlockTexture(MMBlocks.CREEPING_MESOZOIC_MOSS, "block/mesozoic_moss_top");
 

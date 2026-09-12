@@ -224,4 +224,9 @@ public class MMModelLayers {
     public static final ModelLayerLocation ARAUCARIOXYLON_CHEST_BOAT_LAYER = new ModelLayerLocation(
             new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/araucarioxylon"), "main");
 
+    public static final ModelLayerLocation WILLIAMSONIA_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/williamsonia"), "main");
+    public static final ModelLayerLocation WILLIAMSONIA_CHEST_BOAT_LAYER = new ModelLayerLocation(
+            new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/williamsonia"), "main");
+
 }

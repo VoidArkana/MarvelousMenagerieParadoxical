@@ -1,7 +1,6 @@
 package net.voidarkana.marvelous_menagerie.common.blockentity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.HangingSignBlockEntity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,6 +37,8 @@ public class MMBlockEntities {
                             MMBlocks.SIGILLARIA_WALL_SIGN.get(),
                             MMBlocks.CALAMITES_SIGN.get(),
                             MMBlocks.CALAMITES_WALL_SIGN.get(),
+                            MMBlocks.WILLIAMSONIA_SIGN.get(),
+                            MMBlocks.WILLIAMSONIA_WALL_SIGN.get(),
                             MMBlocks.ARAUCARIOXYLON_SIGN.get(),
                             MMBlocks.ARAUCARIOXYLON_WALL_SIGN.get())
                             .build(null));
@@ -51,6 +52,8 @@ public class MMBlockEntities {
                             MMBlocks.SIGILLARIA_WALL_HANGING_SIGN.get(),
                             MMBlocks.CALAMITES_HANGING_SIGN.get(),
                             MMBlocks.CALAMITES_WALL_HANGING_SIGN.get(),
+                            MMBlocks.WILLIAMSONIA_HANGING_SIGN.get(),
+                            MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get(),
                             MMBlocks.ARAUCARIOXYLON_HANGING_SIGN.get(),
                             MMBlocks.ARAUCARIOXYLON_WALL_HANGING_SIGN.get())
                             .build(null));

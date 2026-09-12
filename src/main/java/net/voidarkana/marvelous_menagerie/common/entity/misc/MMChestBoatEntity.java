@@ -39,6 +39,9 @@ public class MMChestBoatEntity extends ChestBoat {
             case CALAMITES -> {
                 return MMItems.CALAMITES_CHEST_BOAT.get();
             }
+            case WILLIAMSONIA -> {
+                return MMItems.WILLIAMSONIA_CHEST_BOAT.get();
+            }
             case ARAUCARIOXYLON -> {
                 return MMItems.ARAUCARIOXYLON_CHEST_BOAT.get();
             }

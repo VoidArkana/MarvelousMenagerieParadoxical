@@ -2,21 +2,15 @@ package net.voidarkana.marvelous_menagerie.util.network.message;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
-import net.voidarkana.marvelous_menagerie.common.entity.base.IAnimatedAttacker;
-import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import java.util.function.Supplier;
 

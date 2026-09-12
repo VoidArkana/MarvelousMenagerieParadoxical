@@ -382,6 +382,16 @@ public class MMItems {
     public static final RegistryObject<Item> CALAMITES_CHEST_BOAT = ITEMS.register("calamites_chest_boat",
             () -> new MMBoatItem(true, MMBoatEntity.Type.CALAMITES, new Item.Properties()));
 
+    //Williamsonia
+    public static final RegistryObject<Item> WILLIAMSONIA_SIGN = ITEMS.register("williamsonia_sign",
+            ()-> new SignItem(new Item.Properties().stacksTo(16), MMBlocks.WILLIAMSONIA_SIGN.get(), MMBlocks.WILLIAMSONIA_WALL_SIGN.get()));
+    public static final RegistryObject<Item> WILLIAMSONIA_HANGING_SIGN = ITEMS.register("williamsonia_hanging_sign",
+            ()-> new HangingSignItem(MMBlocks.WILLIAMSONIA_HANGING_SIGN.get(), MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get(),new Item.Properties().stacksTo(16)));
+
+    public static final RegistryObject<Item> WILLIAMSONIA_BOAT = ITEMS.register("williamsonia_boat",
+            () -> new MMBoatItem(false, MMBoatEntity.Type.WILLIAMSONIA, new Item.Properties()));
+    public static final RegistryObject<Item> WILLIAMSONIA_CHEST_BOAT = ITEMS.register("williamsonia_chest_boat",
+            () -> new MMBoatItem(true, MMBoatEntity.Type.WILLIAMSONIA, new Item.Properties()));
 
     //Araucarioxylon
     public static final RegistryObject<Item> ARAUCARIOXYLON_SIGN = ITEMS.register("araucarioxylon_sign",

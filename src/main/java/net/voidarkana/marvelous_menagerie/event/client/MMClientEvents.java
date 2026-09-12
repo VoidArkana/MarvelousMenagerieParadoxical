@@ -187,6 +187,9 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.ARAUCARIOXYLON_BOAT_LAYER, BoatModel::createBodyModel);
         event.registerLayerDefinition(MMModelLayers.ARAUCARIOXYLON_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
+
+        event.registerLayerDefinition(MMModelLayers.WILLIAMSONIA_BOAT_LAYER, BoatModel::createBodyModel);
+        event.registerLayerDefinition(MMModelLayers.WILLIAMSONIA_CHEST_BOAT_LAYER, ChestBoatModel::createBodyModel);
     }
 
     @SubscribeEvent

@@ -153,6 +153,36 @@ public class MMBlockStateProvider extends BlockStateProvider {
         this.doublePlantBlockBlock(((DoublePlantBlock) MMBlocks.ARAUCARIOXYLON_SAPLING.get()), modLoc("block/araucarioxylon_sapling_bottom"),
                 modLoc("block/araucarioxylon_sapling_top"));
 
+        //Williamsonia
+        blockWithItem(MMBlocks.WILLIAMSONIA_PLANKS);
+        stairsBlock(((StairBlock) MMBlocks.WILLIAMSONIA_STAIRS.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        slabBlock(((SlabBlock) MMBlocks.WILLIAMSONIA_SLAB.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        buttonBlock(((ButtonBlock) MMBlocks.WILLIAMSONIA_BUTTON.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        pressurePlateBlock(((PressurePlateBlock) MMBlocks.WILLIAMSONIA_PRESSURE_PLATE.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        fenceBlock(((FenceBlock) MMBlocks.WILLIAMSONIA_FENCE.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        fenceGateBlock(((FenceGateBlock) MMBlocks.WILLIAMSONIA_FENCE_GATE.get()), blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+
+        doorBlockWithRenderType(((DoorBlock) MMBlocks.WILLIAMSONIA_DOOR.get()), modLoc("block/williamsonia_door_bottom"), modLoc("block/williamsonia_door_top"), "cutout");
+        trapdoorBlockWithRenderType(((TrapDoorBlock) MMBlocks.WILLIAMSONIA_TRAPDOOR.get()), modLoc("block/williamsonia_trapdoor"), true, "cutout");
+
+        blockWithItem(MMBlocks.WILLIAMSONIA_MOSAIC);
+        stairsBlock(((StairBlock) MMBlocks.WILLIAMSONIA_MOSAIC_STAIRS.get()), blockTexture(MMBlocks.WILLIAMSONIA_MOSAIC.get()));
+        slabBlock(((SlabBlock) MMBlocks.WILLIAMSONIA_MOSAIC_SLAB.get()), blockTexture(MMBlocks.WILLIAMSONIA_MOSAIC.get()), blockTexture(MMBlocks.WILLIAMSONIA_MOSAIC.get()));
+
+        signBlock(((StandingSignBlock) MMBlocks.WILLIAMSONIA_SIGN.get()), ((WallSignBlock) MMBlocks.WILLIAMSONIA_WALL_SIGN.get()),
+                blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+        hangingSignBlock(MMBlocks.WILLIAMSONIA_HANGING_SIGN.get(), MMBlocks.WILLIAMSONIA_WALL_HANGING_SIGN.get(),
+                blockTexture(MMBlocks.WILLIAMSONIA_PLANKS.get()));
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.WILLIAMSONIA_BUNDLE.get()), blockTexture(MMBlocks.WILLIAMSONIA_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/williamsonia_bundle_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get()), blockTexture(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_williamsonia_bundle_top"));
+        blockItem(MMBlocks.WILLIAMSONIA_BUNDLE);
+        blockItem(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE);
+
+        axisBlock(((RotatedPillarBlock) MMBlocks.WILLIAMSONIA_BUNDLED_BARK.get()), blockTexture(MMBlocks.WILLIAMSONIA_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/williamsonia_bundled_bark_top"));
+        axisBlock(((RotatedPillarBlock) MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK.get()), blockTexture(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLE.get()), new ResourceLocation(MarvelousMenagerie.MOD_ID, "block/stripped_williamsonia_bundled_bark_top"));
+        blockItem(MMBlocks.WILLIAMSONIA_BUNDLED_BARK);
+        blockItem(MMBlocks.STRIPPED_WILLIAMSONIA_BUNDLED_BARK);
 
         //mesozoil
         blockWithItem(MMBlocks.MESOZOIL);

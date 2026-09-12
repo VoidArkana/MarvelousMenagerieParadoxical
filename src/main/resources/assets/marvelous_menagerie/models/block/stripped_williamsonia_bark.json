@@ -1,0 +1,7 @@
+{
+  "parent": "marvelous_menagerie:block/thin_log",
+  "textures": {
+    "texture": "marvelous_menagerie:block/stripped_williamsonia_bark",
+    "particle": "marvelous_menagerie:block/stripped_williamsonia_bundle"
+  }
+}

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
-import net.voidarkana.marvelous_menagerie.common.block.custom.FossilBlock;
+import net.voidarkana.marvelous_menagerie.common.block.custom.animal.FossilBlock;
 import net.voidarkana.marvelous_menagerie.util.advancements.MMCriterion;
 
 import java.util.function.Supplier;
