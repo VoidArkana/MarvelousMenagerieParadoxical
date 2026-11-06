@@ -1,7 +1,7 @@
 package net.voidarkana.marvelous_menagerie.client.model.entity.animal.inostrancevia;
 
 import net.minecraft.client.model.geom.ModelPart;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyInostranceviaAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyInostranceviaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.InostranceviaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Inostrancevia;

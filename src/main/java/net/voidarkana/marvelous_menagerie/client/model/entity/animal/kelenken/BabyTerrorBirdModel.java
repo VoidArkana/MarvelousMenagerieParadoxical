@@ -4,6 +4,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.*;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyTerrorBirdAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Kelenken;
 import net.minecraft.client.model.geom.PartPose;

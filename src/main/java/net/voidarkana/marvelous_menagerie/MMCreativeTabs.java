@@ -110,9 +110,9 @@ public class MMCreativeTabs {
                         output.accept(MMItems.SLOV_FOSSIL.get());
                         output.accept(MMItems.SNIFFER_FOSSIL.get());
                         output.accept(MMItems.STELLER_FOSSIL.get());
-                        output.accept(MMItems.TIKTAALIK_FOSSIL.get());
                         output.accept(MMItems.THERI_FOSSIL.get());
                         output.accept(MMItems.THYLACINE_FOSSIL.get());
+                        output.accept(MMItems.TIKTAALIK_FOSSIL.get());
                         output.accept(MMItems.TLATO_FOSSIL.get());
                         output.accept(MMItems.TRILO_FOSSIL.get());
 
@@ -145,8 +145,9 @@ public class MMCreativeTabs {
                         output.accept(MMItems.SACA_SPAWN_EGG.get());
                         output.accept(MMItems.SLOVENICUS_SPAWN_EGG.get());
                         output.accept(MMItems.STELLER_SPAWN_EGG.get());
-                        output.accept(MMItems.TIKTAALIK_SPAWN_EGG.get());
                         output.accept(MMItems.THYLA_SPAWN_EGG.get());
+                        output.accept(MMItems.TIKTAALIK_SPAWN_EGG.get());
+                        output.accept(MMItems.TLATOLOPHUS_SPAWN_EGG.get());
                         output.accept(MMItems.TRILOBITE_SPAWN_EGG.get());
 
                         output.accept(MMItems.BEHOLDER_SPAWN_EGG.get());

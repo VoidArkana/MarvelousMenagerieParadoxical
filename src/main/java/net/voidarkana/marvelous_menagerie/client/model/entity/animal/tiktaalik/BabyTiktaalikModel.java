@@ -2,7 +2,7 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal.tiktaalik;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyTiktaalikAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyTiktaalikAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.TiktaalikAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.TiktaalikAnimsExtra;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;

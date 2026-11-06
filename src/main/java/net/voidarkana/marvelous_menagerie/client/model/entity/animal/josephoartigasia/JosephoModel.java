@@ -3,12 +3,9 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal.josephoart
 // Paste this class into your mod and generate all required imports
 
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyJosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.JosephoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Josephoartigasia;

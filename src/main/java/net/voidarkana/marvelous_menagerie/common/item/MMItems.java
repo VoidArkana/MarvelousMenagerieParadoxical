@@ -184,6 +184,8 @@ public class MMItems {
     //Tlatolophus
     public static final RegistryObject<Item> TLATO_FOSSIL = ITEMS.register("tlato_fossil",
             ()-> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> TLATOLOPHUS_SPAWN_EGG = ITEMS.register("tlatolophus_spawn_egg",
+            ()-> new ForgeSpawnEggItem(MMEntities.TLATOLOPHUS, 0x5e666e, 0xede7cd, new Item.Properties()));
 
     //Borealopelta
     public static final RegistryObject<Item> PELTA_FOSSIL = ITEMS.register("pelta_fossil",

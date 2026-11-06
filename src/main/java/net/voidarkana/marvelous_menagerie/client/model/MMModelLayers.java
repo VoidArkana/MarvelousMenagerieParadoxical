@@ -189,6 +189,13 @@ public class MMModelLayers {
     public static final ModelLayerLocation BABY_ATROCIRAPTOR_LAYER =
             new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_atrociraptor"), "main");
 
+    public static final ModelLayerLocation TLATOLOPHUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tlatolophus"), "main");
+    public static final ModelLayerLocation BABY_TLATOLOPHUS_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "baby_tlatolophus"), "main");
+    public static final ModelLayerLocation TLATOLOPHUS_ALPHA_LAYER =
+            new ModelLayerLocation(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tlatolophus_alpha"), "main");
+
 
 
     public static final ModelLayerLocation WHISPERER_LAYER =
@@ -228,5 +235,4 @@ public class MMModelLayers {
             new ResourceLocation(MarvelousMenagerie.MOD_ID, "boat/williamsonia"), "main");
     public static final ModelLayerLocation WILLIAMSONIA_CHEST_BOAT_LAYER = new ModelLayerLocation(
             new ResourceLocation(MarvelousMenagerie.MOD_ID, "chest_boat/williamsonia"), "main");
-
 }

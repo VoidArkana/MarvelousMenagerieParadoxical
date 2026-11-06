@@ -7,7 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyThylacineAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyThylacineAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.ThylacineAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Thylacine;

@@ -1,4 +1,4 @@
-package net.voidarkana.marvelous_menagerie.client.animations;
+package net.voidarkana.marvelous_menagerie.client.animations.baby;
 
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;

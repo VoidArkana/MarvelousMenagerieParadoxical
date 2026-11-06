@@ -231,6 +231,11 @@ public class MMEntities {
                             .sized(0.9f, 0.8f)
                             .build(new ResourceLocation(MarvelousMenagerie.MOD_ID,"atrociraptor").toString()));
 
+    public static final RegistryObject<EntityType<Tlatolophus>> TLATOLOPHUS =
+            ENTITY_TYPES.register("tlatolophus",
+                    () -> EntityType.Builder.of(Tlatolophus::new, MobCategory.CREATURE)
+                            .sized(2F, 2.8F)
+                            .build(new ResourceLocation(MarvelousMenagerie.MOD_ID, "tlatolophus").toString()));
 
     public static final RegistryObject<EntityType<Watcher>> WATCHER =
             ENTITY_TYPES.register("watcher",

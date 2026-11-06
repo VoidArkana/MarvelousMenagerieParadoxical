@@ -10,16 +10,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.voidarkana.marvelous_menagerie.MarvelousMenagerie;
 import net.voidarkana.marvelous_menagerie.client.model.MMModelLayers;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.inostrancevia.BabyInostranceviaModel;
-import net.voidarkana.marvelous_menagerie.client.model.entity.animal.inostrancevia.InostranceviaModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.kelenken.BabyTerrorBirdModel;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.kelenken.TerrorBirdModel;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.JosephoSaddleLayer;
 import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.KelenkenSaddleLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.inostrancevia.InostranceviaCollarLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.inostrancevia.InostranceviaEyesLayer;
-import net.voidarkana.marvelous_menagerie.client.renderer.entity.layers.inostrancevia.InostranceviaPatternLayer;
-import net.voidarkana.marvelous_menagerie.common.entity.animal.Inostrancevia;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Kelenken;
 
 @OnlyIn(Dist.CLIENT)

@@ -4,13 +4,11 @@ package net.voidarkana.marvelous_menagerie.client.model.entity.animal.flubber;//
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.datafixers.kinds.IdF;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyFlubberAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsBasics;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyFlubberAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.FlubberAnimsIdle;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Flubber;

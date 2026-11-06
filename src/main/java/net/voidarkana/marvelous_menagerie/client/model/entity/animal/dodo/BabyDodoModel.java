@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyDodoAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyDodoAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Dodo;
 

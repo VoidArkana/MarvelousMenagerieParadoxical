@@ -62,6 +62,7 @@ public class MMEntityTagGenerator extends EntityTypeTagsProvider {
                 .add(MMEntities.ANUROGNATHUS.get())
                 .add(MMEntities.KELENKEN.get())
                 .add(MMEntities.ATROCIRAPTOR.get())
+                .add(MMEntities.TLATOLOPHUS.get())
                 .add(MMEntities.WATCHER.get());
 
         this.tag(MMTags.EntityTypes.CANT_TRAMPLE)

@@ -4,7 +4,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyLystroAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyLystroAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Lystrosaurus;
 

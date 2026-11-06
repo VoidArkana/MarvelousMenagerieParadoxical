@@ -6,7 +6,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AnurognathusAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyAnurognathusAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyAnurognathusAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Anurognathus;
 

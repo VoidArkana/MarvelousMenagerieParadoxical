@@ -1,12 +1,10 @@
 package net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyHallucigeniaAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyHallucigeniaAnims;
 import net.voidarkana.marvelous_menagerie.client.animations.HallucigeniaAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Hallucigenia;

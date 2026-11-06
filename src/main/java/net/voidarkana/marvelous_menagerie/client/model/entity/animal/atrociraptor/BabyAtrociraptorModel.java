@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.voidarkana.marvelous_menagerie.client.animations.AtrociraptorAnims;
-import net.voidarkana.marvelous_menagerie.client.animations.BabyAtrociraptorAnims;
+import net.voidarkana.marvelous_menagerie.client.animations.baby.BabyAtrociraptorAnims;
 import net.voidarkana.marvelous_menagerie.client.model.base.MarvelousModel;
 import net.voidarkana.marvelous_menagerie.common.entity.animal.Atrociraptor;
 

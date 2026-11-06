@@ -208,7 +208,9 @@ public class MMItemModelProvider extends ItemModelProvider {
         withExistingParent(MMItems.OPHTHALMO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.THERI_FOSSIL);
+
         simpleItem(MMItems.TLATO_FOSSIL);
+        withExistingParent(MMItems.TLATOLOPHUS_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         simpleItem(MMItems.PELTA_FOSSIL);
         withExistingParent(MMItems.BOREALO_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));

@@ -43,6 +43,7 @@ import net.voidarkana.marvelous_menagerie.client.model.entity.animal.sacabambasp
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.steller_sea_cow.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.thylacine.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.tiktaalik.*;
+import net.voidarkana.marvelous_menagerie.client.model.entity.animal.tlatolophus.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.trilobite.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.animal.hallucigenia.*;
 import net.voidarkana.marvelous_menagerie.client.model.entity.misc.FractureModel;
@@ -170,6 +171,10 @@ public class MMClientEvents {
 
         event.registerLayerDefinition(MMModelLayers.ATROCIRAPTOR_LAYER, AtrociraptorModel::createBodyLayer);
         event.registerLayerDefinition(MMModelLayers.BABY_ATROCIRAPTOR_LAYER, BabyAtrociraptorModel::createBodyLayer);
+
+        event.registerLayerDefinition(MMModelLayers.TLATOLOPHUS_LAYER, TlatolophusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.BABY_TLATOLOPHUS_LAYER, BabyTlatolophusModel::createBodyLayer);
+        event.registerLayerDefinition(MMModelLayers.TLATOLOPHUS_ALPHA_LAYER, TlatolophusModel::createBodyLayer);
 
         event.registerLayerDefinition(MMModelLayers.WHISPERER_LAYER, WhispererModel::createBodyLayer);
 

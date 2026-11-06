@@ -60,6 +60,7 @@ public class MMEvents {
         event.put(MMEntities.ANUROGNATHUS.get(), Anurognathus.createAttributes().build());
         event.put(MMEntities.KELENKEN.get(), Kelenken.createAttributes().build());
         event.put(MMEntities.ATROCIRAPTOR.get(), Atrociraptor.createAttributes().build());
+        event.put(MMEntities.TLATOLOPHUS.get(), Tlatolophus.createAttributes().build());
 
         event.put(MMEntities.WATCHER.get(), Watcher.createAttributes().build());
         event.put(MMEntities.FRACTURE.get(), Fracture.createAttributes().build());
