@@ -27,11 +27,14 @@ public class TlatolophusAlphaLayer<T extends Tlatolophus, M extends EntityModel<
     }
 
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        this.getParentModel().copyPropertiesTo(this.model);
-        this.model.prepareMobModel(pLivingEntity, pLimbSwing, pLimbSwingAmount, pPartialTicks);
-        this.model.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-        VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucentEmissive(this.textureLocation));
-        this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, this.alphaFunction.apply(pLivingEntity));
+        if (!pLivingEntity.isBaby()){
+            this.getParentModel().copyPropertiesTo(this.model);
+            this.model.prepareMobModel(pLivingEntity, pLimbSwing, pLimbSwingAmount, pPartialTicks);
+            this.model.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+            VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(this.textureLocation));
+            this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, this.alphaFunction.apply(pLivingEntity));
+
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

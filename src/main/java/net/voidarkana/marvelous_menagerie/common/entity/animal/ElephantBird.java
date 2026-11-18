@@ -299,9 +299,7 @@ public class ElephantBird extends MarvelousAnimal implements ContainerListener, 
             this.setSMH((int) (20*1.5));
             this.playSound(MMSounds.ELE_GRUMBLE.get());
 
-            for(int j = 0; j < 5; ++j) {
-                this.level().addParticle(ParticleTypes.SMOKE, this.getRandomX(2.0), this.getRandomY() + 0.5, this.getRandomZ(2.0), 0.0, 0.0, 0.0);
-            }
+            this.addParticlesAroundSelf(ParticleTypes.SMOKE);
 
             return InteractionResult.SUCCESS;
         }else if (!this.isVehicle() && !this.isBaby()) {

@@ -123,6 +123,11 @@ public class TlatolophusModel<T extends Tlatolophus> extends MarvelousModel<T> {
 		this.animate(entity.sitAnimationState, TlatolophusAnims.SIT_START, ageInTicks);
 		this.animate(entity.sitPoseAnimationState, TlatolophusAnims.SIT_POSE, ageInTicks);
 
+		this.animate(entity.standState, TlatolophusAnims.STAND, ageInTicks);
+		this.animate(entity.callState, TlatolophusAnims.CALL, ageInTicks);
+		this.animate(entity.surveyState, TlatolophusAnims.SURVEY, ageInTicks);
+		this.animate(entity.shakeState, TlatolophusAnims.DEFEAT, ageInTicks);
+
 		this.neck.xRot = headPitch * ((float)Math.PI / 180F);
 		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
 	}

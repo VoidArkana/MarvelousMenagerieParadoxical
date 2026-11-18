@@ -22,7 +22,7 @@ public class TlatolophusRenderer <T extends Tlatolophus> extends MobRenderer<T, 
     private final BabyTlatolophusModel<T> babyModel;
 
     public TlatolophusRenderer(EntityRendererProvider.Context pContext) {
-        super(pContext, new TlatolophusModel<>(pContext.bakeLayer(MMModelLayers.TLATOLOPHUS_LAYER)), 1.85f);
+        super(pContext, new TlatolophusModel<>(pContext.bakeLayer(MMModelLayers.TLATOLOPHUS_LAYER)), 1.5f);
 
         this.addLayer(new TlatolophusDarkPatternLayer<>(this, pContext));
         this.addLayer(new TlatolophusLightPatternLayer<>(this, pContext));
@@ -47,10 +47,14 @@ public class TlatolophusRenderer <T extends Tlatolophus> extends MobRenderer<T, 
     @Override
     public void render(T pEntity, float pEntityYaw, float pPartialTicks, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
-        if (pEntity.isBaby())
+        if (pEntity.isBaby()){
             this.model = babyModel;
-        else
+            this.shadowRadius = 0.75f;
+        }
+        else{
             this.model = adultModel;
+            this.shadowRadius = 1.5f;
+        }
 
         super.render(pEntity, pEntityYaw, pPartialTicks, pPoseStack, pBuffer, pPackedLight);
     }
